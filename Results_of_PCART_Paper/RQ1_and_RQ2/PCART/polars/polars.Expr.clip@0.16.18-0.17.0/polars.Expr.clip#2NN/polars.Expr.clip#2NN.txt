@@ -1,0 +1,48 @@
+Run Command: python  clipNN.py
+Total File Number: 1
+Total Polars Invoked API Number: 2
+Not Covered Polars Invoked API Number: 0/2
+Covered Polars Invoked API Number: 2/2
+
+Compatible Polars Invoked API Number: 1/2
+Unknown Compatible Polars Invoked API Number: 0/2
+
+Incompatible Polars Invoked API Number: 1/2
+-> Successfully Repaired Polars Invoked API number: 1/1
+-> Failed to Repair Polars Invoked API Number: 0/1
+-> Unknown Repair Status Polars Invoked API Number: 0/1
+
+===============================================================================================================================================================================
+|                                                     File #1: polars.Expr.clip#2NN/clipNN.py has 2 Polars-Invoked API(s)                                                     |
+===============================================================================================================================================================================
+| Invoked API #1: pl.col('a')                                                                                                                                                 |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.Expr.clip#2NN/clipNN.py                                                                                                                       |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                     |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                      |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: pl.col('a').clip(1, max_val=10)                                                                                                                             |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.Expr.clip#2NN/clipNN.py                                                                                                                       |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (min_val: 'int | float', max_val: 'int | float') -> 'Self'                                                                                   |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (lower_bound: 'int | float', upper_bound: 'int | float') -> 'Self'                                                                            |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Successful>: pl.col('a').clip(1, upper_bound=10)                                                                                                                    |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

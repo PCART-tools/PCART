@@ -1,0 +1,48 @@
+Run Command: python  is_betweenNN.py
+Total File Number: 1
+Total Polars Invoked API Number: 2
+Not Covered Polars Invoked API Number: 0/2
+Covered Polars Invoked API Number: 2/2
+
+Compatible Polars Invoked API Number: 1/2
+Unknown Compatible Polars Invoked API Number: 0/2
+
+Incompatible Polars Invoked API Number: 1/2
+-> Successfully Repaired Polars Invoked API number: 1/1
+-> Failed to Repair Polars Invoked API Number: 0/1
+-> Unknown Repair Status Polars Invoked API Number: 0/1
+
+===============================================================================================================================================================================
+|                                               File #1: polars.Expr.is_between#2NN/is_betweenNN.py has 2 Polars-Invoked API(s)                                               |
+===============================================================================================================================================================================
+| Invoked API #1: pl.col('num')                                                                                                                                               |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.Expr.is_between#2NN/is_betweenNN.py                                                                                                           |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                     |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                      |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: pl.col('num').is_between(2, end=4)                                                                                                                          |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.Expr.is_between#2NN/is_betweenNN.py                                                                                                           |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (start: 'IntoExpr', end: 'IntoExpr', closed: 'ClosedInterval' = 'both') -> 'Self'                                                            |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (lower_bound: 'IntoExpr', upper_bound: 'IntoExpr', closed: 'ClosedInterval' = 'both') -> 'Self'                                               |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Successful>: pl.col('num').is_between(2, upper_bound=4)                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

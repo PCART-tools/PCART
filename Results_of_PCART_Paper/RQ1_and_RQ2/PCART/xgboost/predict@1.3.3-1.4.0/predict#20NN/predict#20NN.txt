@@ -1,0 +1,64 @@
+Run Command: python  predictNN.py
+Total File Number: 1
+Total Xgboost Invoked API Number: 3
+Not Covered Xgboost Invoked API Number: 0/3
+Covered Xgboost Invoked API Number: 3/3
+
+Compatible Xgboost Invoked API Number: 2/3
+Unknown Compatible Xgboost Invoked API Number: 0/3
+
+Incompatible Xgboost Invoked API Number: 1/3
+-> Successfully Repaired Xgboost Invoked API number: 1/1
+-> Failed to Repair Xgboost Invoked API Number: 0/1
+-> Unknown Repair Status Xgboost Invoked API Number: 0/1
+
+===============================================================================================================================================================================
+|                                                       File #1: predict#20NN/predictNN.py has 3 Xgboost-Invoked API(s)                                                       |
+===============================================================================================================================================================================
+| Invoked API #1: xgb.XGBClassifier(max_depth=3, n_estimators=100, learning_rate=0.1, objective='binary:logistic', eval_metric='logloss')                                     |
+|                                                                                                                                                                             |
+| Location: At Line 6 in predict#20NN/predictNN.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @1.3.3 <dynamic>: (*, objective='binary:logistic', use_label_encoder=True, **kwargs)                                                                             |
+|                                                                                                                                                                             |
+| Definition @1.4.0 <dynamic>: (*, objective='binary:logistic', use_label_encoder=True, **kwargs)                                                                             |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: model.fit(X_train, y_train)                                                                                                                                 |
+|                                                                                                                                                                             |
+| Location: At Line 7 in predict#20NN/predictNN.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @1.3.3 <dynamic>: (X, y, *, sample_weight=None, base_margin=None, eval_set=None, eval_metric=None, early_stopping_rounds=None, verbose=True, xgb_model=None, sam |
+| ple_weight_eval_set=None, feature_weights=None, callbacks=None)                                                                                                             |
+|                                                                                                                                                                             |
+| Definition @1.4.0 <dynamic>: (X, y, *, sample_weight=None, base_margin=None, eval_set=None, eval_metric=None, early_stopping_rounds=None, verbose=True, xgb_model=None, sam |
+| ple_weight_eval_set=None, base_margin_eval_set=None, feature_weights=None, callbacks=None)                                                                                  |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #3: model.predict(data=X_test, output_margin=False, ntree_limit=None, validate_features=True, base_margin=None)                                                 |
+|                                                                                                                                                                             |
+| Location: At Line 8 in predict#20NN/predictNN.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @1.3.3 <dynamic>: (data, output_margin=False, ntree_limit=None, validate_features=True, base_margin=None)                                                        |
+|                                                                                                                                                                             |
+| Definition @1.4.0 <dynamic>: (X, output_margin=False, ntree_limit=None, validate_features=True, base_margin=None, iteration_range: Union[Tuple[int, int], NoneType] = None) |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Successful>: model.predict(X=X_test, output_margin=False, ntree_limit=None, validate_features=True, base_margin=None)                                               |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

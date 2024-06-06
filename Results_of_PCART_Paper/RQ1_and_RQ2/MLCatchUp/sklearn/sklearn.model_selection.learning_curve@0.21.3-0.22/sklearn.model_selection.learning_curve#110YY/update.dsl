@@ -1,0 +1,1 @@
+add_parameter return_times with_value False for learning_curve

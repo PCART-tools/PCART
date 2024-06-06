@@ -1,0 +1,122 @@
+Run Command: python  train_fastext.py --epochs=1  --corpus=data/corpus_100k
+Total File Number: 9
+Total Gensim Invoked API Number: 4
+Not Covered Gensim Invoked API Number: 0/4
+Covered Gensim Invoked API Number: 4/4
+
+Compatible Gensim Invoked API Number: 3/4
+Unknown Compatible Gensim Invoked API Number: 0/4
+
+Incompatible Gensim Invoked API Number: 1/4
+-> Successfully Repaired Gensim Invoked API number: 1/1
+-> Failed to Repair Gensim Invoked API Number: 0/1
+-> Unknown Repair Status Gensim Invoked API Number: 0/1
+
+===============================================================================================================================================================================
+|                                                        File #1: allnews/train_fastext.py has 4 Gensim-Invoked API(s)                                                        |
+===============================================================================================================================================================================
+| Invoked API #1: gensim.models.word2vec.LineSentence(args.corpus)                                                                                                            |
+|                                                                                                                                                                             |
+| Location: At Line 16 in allnews/train_fastext.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @3.8.3 <dynamic>: (source, max_sentence_length=10000, limit=None)                                                                                                |
+|                                                                                                                                                                             |
+| Definition @4.0.0 <dynamic>: (source, max_sentence_length=10000, limit=None)                                                                                                |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: gensim.models.fasttext.FastText(sentences=sentences, size=int(args.size), window=int(args.window), min_count=int(args.min_count), workers=int(args.workers) |
+| , alpha=float(args.alpha), sample=float(args.subsample), negative=int(args.negative), sorted_vocab=True, min_n=3, max_n=6, iter=int(args.epochs))                           |
+|                                                                                                                                                                             |
+| Location: At Line 32 in allnews/train_fastext.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @3.8.3 <dynamic>: (sentences=None, corpus_file=None, sg=0, hs=0, size=100, alpha=0.025, window=5, min_count=5, max_vocab_size=None, word_ngrams=1, sample=0.001, |
+|  seed=1, workers=3, min_alpha=0.0001, negative=5, ns_exponent=0.75, cbow_mean=1, hashfxn=<built-in function hash>, iter=5, null_word=0, min_n=3, max_n=6, sorted_vocab=1, b |
+| ucket=2000000, trim_rule=None, batch_words=10000, callbacks=(), compatible_hash=True)                                                                                       |
+|                                                                                                                                                                             |
+| Definition @4.0.0 <dynamic>: (sentences=None, corpus_file=None, sg=0, hs=0, vector_size=100, alpha=0.025, window=5, min_count=5, max_vocab_size=None, word_ngrams=1, sample |
+| =0.001, seed=1, workers=3, min_alpha=0.0001, negative=5, ns_exponent=0.75, cbow_mean=1, hashfxn=<built-in function hash>, epochs=5, null_word=0, min_n=3, max_n=6, sorted_v |
+| ocab=1, bucket=2000000, trim_rule=None, batch_words=10000, callbacks=(), max_final_vocab=None)                                                                              |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Successful>: gensim.models.fasttext.FastText(sentences=sentences, vector_size=int(args.size), window=int(args.window), min_count=int(args.min_count), workers=int(a |
+| rgs.workers), alpha=float(args.alpha), sample=float(args.subsample), negative=int(args.negative), sorted_vocab=True, min_n=3, max_n=6, epochs=int(args.epochs))             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #3: my_model.save(os.path.join(file_dir, 'models/', args.model_name))                                                                                           |
+|                                                                                                                                                                             |
+| Location: At Line 46 in allnews/train_fastext.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @3.8.3 <dynamic>: (*args, **kwargs)                                                                                                                              |
+|                                                                                                                                                                             |
+| Definition @4.0.0 <dynamic>: (*args, **kwargs)                                                                                                                              |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #4: my_model.wv.evaluate_word_analogies(analogy_file)                                                                                                           |
+|                                                                                                                                                                             |
+| Location: At Line 50 in allnews/train_fastext.py                                                                                                                            |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @3.8.3 <dynamic>: (analogies, restrict_vocab=300000, case_insensitive=True, dummy4unknown=False)                                                                 |
+|                                                                                                                                                                             |
+| Definition @4.0.0 <dynamic>: (analogies, restrict_vocab=300000, case_insensitive=True, dummy4unknown=False)                                                                 |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
+===============================================================================================================================================================================
+|                                                    File #2: allnews/allnews_am/processing.py has 0 Gensim-Invoked API(s)                                                    |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                                        File #3: allnews/allnews_am/db.py has 0 Gensim-Invoked API(s)                                                        |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                                     File #4: allnews/allnews_am/__init__.py has 0 Gensim-Invoked API(s)                                                     |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                                  File #5: allnews/allnews_am/NER_models/ner.py has 0 Gensim-Invoked API(s)                                                  |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                           File #6: allnews/allnews_am/wikiextractor/WikiExtractor.py has 0 Gensim-Invoked API(s)                                            |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                           File #7: allnews/allnews_am/wikiextractor/cirrus-extract.py has 0 Gensim-Invoked API(s)                                           |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                               File #8: allnews/allnews_am/tokenizer/tokenizer.py has 0 Gensim-Invoked API(s)                                                |
+===============================================================================================================================================================================
+
+
+===============================================================================================================================================================================
+|                                                File #9: allnews/allnews_am/tokenizer/__init__.py has 0 Gensim-Invoked API(s)                                                |
+===============================================================================================================================================================================
+
+

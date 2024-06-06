@@ -1,0 +1,1 @@
+add_parameter restore_best_weights with_value False for EarlyStopping

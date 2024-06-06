@@ -1,0 +1,2208 @@
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/abc.py----------------------------------------
+A:aiohttp.abc.self._loop->get_running_loop(loop)
+aiohttp.abc.AbstractAccessLogger(self,logger:logging.Logger,log_format:str)
+aiohttp.abc.AbstractAccessLogger.log(self,request:BaseRequest,response:StreamResponse,time:float)->None
+aiohttp.abc.AbstractCookieJar(self,*,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.abc.AbstractCookieJar.clear(self)->None
+aiohttp.abc.AbstractCookieJar.filter_cookies(self,request_url:URL)->'BaseCookie[str]'
+aiohttp.abc.AbstractCookieJar.update_cookies(self,cookies:LooseCookies,response_url:URL=URL())->None
+aiohttp.abc.AbstractMatchInfo(ABC)
+aiohttp.abc.AbstractMatchInfo.add_app(self,app:Application)->None
+aiohttp.abc.AbstractMatchInfo.apps(self)->Tuple[Application, ...]
+aiohttp.abc.AbstractMatchInfo.expect_handler(self)->Callable[[Request], Awaitable[None]]
+aiohttp.abc.AbstractMatchInfo.freeze(self)->None
+aiohttp.abc.AbstractMatchInfo.get_info(self)->Dict[str, Any]
+aiohttp.abc.AbstractMatchInfo.handler(self)->Callable[[Request], Awaitable[StreamResponse]]
+aiohttp.abc.AbstractMatchInfo.http_exception(self)->Optional[HTTPException]
+aiohttp.abc.AbstractResolver(ABC)
+aiohttp.abc.AbstractRouter(self)
+aiohttp.abc.AbstractRouter.freeze(self)->None
+aiohttp.abc.AbstractRouter.frozen(self)->bool
+aiohttp.abc.AbstractRouter.post_init(self,app:Application)->None
+aiohttp.abc.AbstractStreamWriter(ABC)
+aiohttp.abc.AbstractStreamWriter.enable_chunking(self)->None
+aiohttp.abc.AbstractStreamWriter.enable_compression(self,encoding:str='deflate')->None
+aiohttp.abc.AbstractView(self,request:Request)
+aiohttp.abc.AbstractView.__await__(self)->Generator[Any, None, StreamResponse]
+aiohttp.abc.AbstractView.request(self)->Request
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/http_websocket.py----------------------------------------
+A:aiohttp.http_websocket._WSMessageBase->collections.namedtuple('_WSMessageBase', ['type', 'data', 'extra'])
+A:aiohttp.http_websocket.WS_CLOSED_MESSAGE->WSMessage(WSMsgType.CLOSED, None, None)
+A:aiohttp.http_websocket.WS_CLOSING_MESSAGE->WSMessage(WSMsgType.CLOSING, None, None)
+A:aiohttp.http_websocket.data[::4]->data[::4].translate(a).translate(a)
+A:aiohttp.http_websocket.data[1::4]->data[1::4].translate(b).translate(b)
+A:aiohttp.http_websocket.data[2::4]->data[2::4].translate(c).translate(c)
+A:aiohttp.http_websocket.data[3::4]->data[3::4].translate(d).translate(d)
+A:aiohttp.http_websocket._WS_DEFLATE_TRAILING->bytes([0, 0, 255, 255])
+A:aiohttp.http_websocket._WS_EXT_RE->re.compile('^(?:;\\s*(?:(server_no_context_takeover)|(client_no_context_takeover)|(server_max_window_bits(?:=(\\d+))?)|(client_max_window_bits(?:=(\\d+))?)))*$')
+A:aiohttp.http_websocket._WS_EXT_RE_SPLIT->re.compile('permessage-deflate([^,]+)?')
+A:aiohttp.http_websocket.defext->ext.group(1)
+A:aiohttp.http_websocket.match->re.compile('^(?:;\\s*(?:(server_no_context_takeover)|(client_no_context_takeover)|(server_max_window_bits(?:=(\\d+))?)|(client_max_window_bits(?:=(\\d+))?)))*$').match(defext)
+A:aiohttp.http_websocket.compress->int(match.group(6))
+A:aiohttp.http_websocket.self._partial->bytearray()
+A:aiohttp.http_websocket.self._frame_payload->bytearray()
+A:aiohttp.http_websocket.self._decompressobj->zlib.decompressobj(wbits=-zlib.MAX_WBITS)
+A:aiohttp.http_websocket.close_message->payload[2:].decode('utf-8')
+A:aiohttp.http_websocket.msg->WSMessage(WSMsgType.CLOSE, 0, '')
+A:aiohttp.http_websocket.payload_merged->bytes(self._partial)
+A:aiohttp.http_websocket.left->len(self._decompressobj.unconsumed_tail)
+A:aiohttp.http_websocket.text->bytes(self._partial).decode('utf-8')
+A:aiohttp.http_websocket.buf_length->len(buf)
+A:aiohttp.http_websocket.self._frame_fin->bool(fin)
+A:aiohttp.http_websocket.self._has_mask->bool(has_mask)
+A:aiohttp.http_websocket.compressobj->zlib.compressobj(wbits=-compress)
+A:aiohttp.http_websocket.self._compressobj->zlib.compressobj(wbits=-self.compress)
+A:aiohttp.http_websocket.message->message.encode('utf-8').encode('utf-8')
+A:aiohttp.http_websocket.msg_length->len(message)
+A:aiohttp.http_websocket.header->PACK_LEN3(128 | rsv | opcode, 127 | mask_bit, msg_length)
+A:aiohttp.http_websocket.mask->mask.to_bytes(4, 'big').to_bytes(4, 'big')
+aiohttp.http_websocket.WSCloseCode(IntEnum)
+aiohttp.http_websocket.WSHandshakeError(Exception)
+aiohttp.http_websocket.WSMessage(_WSMessageBase)
+aiohttp.http_websocket.WSMessage.json(self,*,loads:Callable[[Any],Any]=json.loads)->None
+aiohttp.http_websocket.WSMsgType(IntEnum)
+aiohttp.http_websocket.WSParserState(IntEnum)
+aiohttp.http_websocket.WebSocketError(self,code:int,message:str)
+aiohttp.http_websocket.WebSocketReader(self,queue:DataQueue[WSMessage],max_msg_size:int,compress:bool=True)
+aiohttp.http_websocket.WebSocketReader._feed_data(self,data:bytes)->Tuple[bool, bytes]
+aiohttp.http_websocket.WebSocketReader.feed_data(self,data:bytes)->Tuple[bool, bytes]
+aiohttp.http_websocket.WebSocketReader.feed_eof(self)->None
+aiohttp.http_websocket.WebSocketReader.parse_frame(self,buf:bytes)->List[Tuple[bool, Optional[int], bytearray, Optional[bool]]]
+aiohttp.http_websocket.WebSocketWriter(self,protocol:BaseProtocol,transport:asyncio.Transport,*,use_mask:bool=False,limit:int=DEFAULT_LIMIT,random:Any=random.Random(),compress:int=0,notakeover:bool=False)
+aiohttp.http_websocket._websocket_mask_python(mask:bytes,data:bytearray)->None
+aiohttp.http_websocket.ws_ext_gen(compress:int=15,isserver:bool=False,server_notakeover:bool=False)->str
+aiohttp.http_websocket.ws_ext_parse(extstr:str,isserver:bool=False)->Tuple[int, bool]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_server.py----------------------------------------
+A:aiohttp.web_server.self._loop->get_running_loop(loop)
+aiohttp.web_server.Server(self,handler:_RequestHandler,*,request_factory:Optional[_RequestFactory]=None,loop:Optional[asyncio.AbstractEventLoop]=None,**kwargs:Any)
+aiohttp.web_server.Server._make_request(self,message:RawRequestMessage,payload:StreamReader,protocol:RequestHandler,writer:AbstractStreamWriter,task:'asyncio.Task[None]')->BaseRequest
+aiohttp.web_server.Server.connection_lost(self,handler:RequestHandler,exc:Optional[BaseException]=None)->None
+aiohttp.web_server.Server.connection_made(self,handler:RequestHandler,transport:asyncio.Transport)->None
+aiohttp.web_server.Server.connections(self)->List[RequestHandler]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/tracing.py----------------------------------------
+A:aiohttp.tracing.self._on_request_start->Signal(self)
+A:aiohttp.tracing.self._on_request_chunk_sent->Signal(self)
+A:aiohttp.tracing.self._on_response_chunk_received->Signal(self)
+A:aiohttp.tracing.self._on_request_end->Signal(self)
+A:aiohttp.tracing.self._on_request_exception->Signal(self)
+A:aiohttp.tracing.self._on_request_redirect->Signal(self)
+A:aiohttp.tracing.self._on_connection_queued_start->Signal(self)
+A:aiohttp.tracing.self._on_connection_queued_end->Signal(self)
+A:aiohttp.tracing.self._on_connection_create_start->Signal(self)
+A:aiohttp.tracing.self._on_connection_create_end->Signal(self)
+A:aiohttp.tracing.self._on_connection_reuseconn->Signal(self)
+A:aiohttp.tracing.self._on_dns_resolvehost_start->Signal(self)
+A:aiohttp.tracing.self._on_dns_resolvehost_end->Signal(self)
+A:aiohttp.tracing.self._on_dns_cache_hit->Signal(self)
+A:aiohttp.tracing.self._on_dns_cache_miss->Signal(self)
+A:aiohttp.tracing.method->attr.ib(type=str)
+A:aiohttp.tracing.url->attr.ib(type=URL)
+A:aiohttp.tracing.headers->attr.ib(type='CIMultiDict[str]')
+A:aiohttp.tracing.chunk->attr.ib(type=bytes)
+A:aiohttp.tracing.response->attr.ib(type=ClientResponse)
+A:aiohttp.tracing.exception->attr.ib(type=BaseException)
+A:aiohttp.tracing.host->attr.ib(type=str)
+aiohttp.TraceConfig(self,trace_config_ctx_factory:Type[SimpleNamespace]=SimpleNamespace)
+aiohttp.TraceConfig.freeze(self)->None
+aiohttp.TraceConfig.on_connection_create_end(self)->_Signal
+aiohttp.TraceConfig.on_connection_create_start(self)->_Signal
+aiohttp.TraceConfig.on_connection_queued_end(self)->_Signal
+aiohttp.TraceConfig.on_connection_queued_start(self)->_Signal
+aiohttp.TraceConfig.on_connection_reuseconn(self)->_Signal
+aiohttp.TraceConfig.on_dns_cache_hit(self)->_Signal
+aiohttp.TraceConfig.on_dns_cache_miss(self)->_Signal
+aiohttp.TraceConfig.on_dns_resolvehost_end(self)->_Signal
+aiohttp.TraceConfig.on_dns_resolvehost_start(self)->_Signal
+aiohttp.TraceConfig.on_request_chunk_sent(self)->_Signal
+aiohttp.TraceConfig.on_request_end(self)->_Signal
+aiohttp.TraceConfig.on_request_exception(self)->_Signal
+aiohttp.TraceConfig.on_request_redirect(self)->_Signal
+aiohttp.TraceConfig.on_request_start(self)->_Signal
+aiohttp.TraceConfig.on_response_chunk_received(self)->_Signal
+aiohttp.TraceConfig.trace_config_ctx(self,trace_request_ctx:SimpleNamespace=None)->SimpleNamespace
+aiohttp.TraceConnectionCreateEndParams
+aiohttp.TraceConnectionCreateStartParams
+aiohttp.TraceConnectionQueuedEndParams
+aiohttp.TraceConnectionQueuedStartParams
+aiohttp.TraceConnectionReuseconnParams
+aiohttp.TraceDnsCacheHitParams
+aiohttp.TraceDnsCacheMissParams
+aiohttp.TraceDnsResolveHostEndParams
+aiohttp.TraceDnsResolveHostStartParams
+aiohttp.TraceRequestChunkSentParams
+aiohttp.TraceRequestEndParams
+aiohttp.TraceRequestExceptionParams
+aiohttp.TraceRequestRedirectParams
+aiohttp.TraceRequestStartParams
+aiohttp.TraceResponseChunkReceivedParams
+aiohttp.tracing.Trace(self,session:'ClientSession',trace_config:TraceConfig,trace_config_ctx:SimpleNamespace)
+aiohttp.tracing.TraceConfig(self,trace_config_ctx_factory:Type[SimpleNamespace]=SimpleNamespace)
+aiohttp.tracing.TraceConfig.freeze(self)->None
+aiohttp.tracing.TraceConfig.on_connection_create_end(self)->_Signal
+aiohttp.tracing.TraceConfig.on_connection_create_start(self)->_Signal
+aiohttp.tracing.TraceConfig.on_connection_queued_end(self)->_Signal
+aiohttp.tracing.TraceConfig.on_connection_queued_start(self)->_Signal
+aiohttp.tracing.TraceConfig.on_connection_reuseconn(self)->_Signal
+aiohttp.tracing.TraceConfig.on_dns_cache_hit(self)->_Signal
+aiohttp.tracing.TraceConfig.on_dns_cache_miss(self)->_Signal
+aiohttp.tracing.TraceConfig.on_dns_resolvehost_end(self)->_Signal
+aiohttp.tracing.TraceConfig.on_dns_resolvehost_start(self)->_Signal
+aiohttp.tracing.TraceConfig.on_request_chunk_sent(self)->_Signal
+aiohttp.tracing.TraceConfig.on_request_end(self)->_Signal
+aiohttp.tracing.TraceConfig.on_request_exception(self)->_Signal
+aiohttp.tracing.TraceConfig.on_request_redirect(self)->_Signal
+aiohttp.tracing.TraceConfig.on_request_start(self)->_Signal
+aiohttp.tracing.TraceConfig.on_response_chunk_received(self)->_Signal
+aiohttp.tracing.TraceConfig.trace_config_ctx(self,trace_request_ctx:SimpleNamespace=None)->SimpleNamespace
+aiohttp.tracing.TraceConnectionCreateEndParams
+aiohttp.tracing.TraceConnectionCreateStartParams
+aiohttp.tracing.TraceConnectionQueuedEndParams
+aiohttp.tracing.TraceConnectionQueuedStartParams
+aiohttp.tracing.TraceConnectionReuseconnParams
+aiohttp.tracing.TraceDnsCacheHitParams
+aiohttp.tracing.TraceDnsCacheMissParams
+aiohttp.tracing.TraceDnsResolveHostEndParams
+aiohttp.tracing.TraceDnsResolveHostStartParams
+aiohttp.tracing.TraceRequestChunkSentParams
+aiohttp.tracing.TraceRequestEndParams
+aiohttp.tracing.TraceRequestExceptionParams
+aiohttp.tracing.TraceRequestRedirectParams
+aiohttp.tracing.TraceRequestStartParams
+aiohttp.tracing.TraceResponseChunkReceivedParams
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/worker.py----------------------------------------
+A:aiohttp.worker.self.loop->asyncio.new_event_loop()
+A:aiohttp.worker.self._task->self.loop.create_task(self._run())
+A:aiohttp.worker.runner->aiohttp.web.AppRunner(app, logger=self.log, keepalive_timeout=self.cfg.keepalive, access_log=access_log, access_log_format=self._get_valid_log_format(self.cfg.access_log_format))
+A:aiohttp.worker.site->aiohttp.web.SockSite(runner, sock, ssl_context=ctx, shutdown_timeout=self.cfg.graceful_timeout / 100 * 95)
+A:aiohttp.worker.pid->os.getpid()
+A:aiohttp.worker.self._notify_waiterwaiter->loop.create_future()
+A:aiohttp.worker.ctx->ssl.SSLContext(cfg.ssl_version)
+aiohttp.GunicornUVLoopWebWorker(GunicornWebWorker)
+aiohttp.GunicornUVLoopWebWorker.init_process(self)->None
+aiohttp.GunicornWebWorker(self,*args:Any,**kw:Any)
+aiohttp.GunicornWebWorker._create_ssl_context(cfg:Any)->'SSLContext'
+aiohttp.GunicornWebWorker._get_valid_log_format(self,source_format:str)->str
+aiohttp.GunicornWebWorker._notify_waiter_done(self,waiter:'asyncio.Future[bool]'=None)->None
+aiohttp.GunicornWebWorker._wait_next_notify(self)->'asyncio.Future[bool]'
+aiohttp.GunicornWebWorker.handle_abort(self,sig:int,frame:FrameType)->None
+aiohttp.GunicornWebWorker.handle_quit(self,sig:int,frame:FrameType)->None
+aiohttp.GunicornWebWorker.init_process(self)->None
+aiohttp.GunicornWebWorker.init_signals(self)->None
+aiohttp.GunicornWebWorker.run(self)->None
+aiohttp.worker.GunicornTokioWebWorker(GunicornWebWorker)
+aiohttp.worker.GunicornTokioWebWorker.init_process(self)->None
+aiohttp.worker.GunicornUVLoopWebWorker(GunicornWebWorker)
+aiohttp.worker.GunicornUVLoopWebWorker.init_process(self)->None
+aiohttp.worker.GunicornWebWorker(self,*args:Any,**kw:Any)
+aiohttp.worker.GunicornWebWorker._create_ssl_context(cfg:Any)->'SSLContext'
+aiohttp.worker.GunicornWebWorker._get_valid_log_format(self,source_format:str)->str
+aiohttp.worker.GunicornWebWorker._notify_waiter_done(self,waiter:'asyncio.Future[bool]'=None)->None
+aiohttp.worker.GunicornWebWorker._wait_next_notify(self)->'asyncio.Future[bool]'
+aiohttp.worker.GunicornWebWorker.handle_abort(self,sig:int,frame:FrameType)->None
+aiohttp.worker.GunicornWebWorker.handle_quit(self,sig:int,frame:FrameType)->None
+aiohttp.worker.GunicornWebWorker.init_process(self)->None
+aiohttp.worker.GunicornWebWorker.init_signals(self)->None
+aiohttp.worker.GunicornWebWorker.run(self)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_fileresponse.py----------------------------------------
+A:aiohttp.web_fileresponse.NOSENDFILE->bool(os.environ.get('AIOHTTP_NOSENDFILE'))
+A:aiohttp.web_fileresponse.self._offset->fobj.tell()
+A:aiohttp.web_fileresponse.self._in_fd->fobj.fileno()
+A:aiohttp.web_fileresponse.n->os.sendfile(out_fd, self._in_fd, self._offset, self._count)
+A:aiohttp.web_fileresponse.out_socket->self.transport.get_extra_info('socket').dup()
+A:aiohttp.web_fileresponse.out_fd->self.transport.get_extra_info('socket').dup().fileno()
+A:aiohttp.web_fileresponse.data->b''.join(self._sendfile_buffer)
+A:aiohttp.web_fileresponse.fut->asyncio.get_event_loop().create_future()
+A:aiohttp.web_fileresponse.path->pathlib.Path(path)
+A:aiohttp.web_fileresponse.writer->SendfileStreamWriter(request.protocol, request._loop, fobj, count)
+A:aiohttp.web_fileresponse.loop->asyncio.get_event_loop()
+A:aiohttp.web_fileresponse.gzip_path->filepath.with_name(filepath.name + '.gz')
+A:aiohttp.web_fileresponse.(ct, encoding)->mimetypes.guess_type(str(filepath))
+A:aiohttp.web_fileresponse.self.headers[hdrs.CONTENT_RANGE]->'bytes {0}-{1}/{2}'.format(real_start, real_start + count - 1, file_size)
+A:aiohttp.web_fileresponse.real_start->cast(int, start)
+aiohttp.web_fileresponse.FileResponse(self,path:Union[str,pathlib.Path],chunk_size:int=256*1024,status:int=200,reason:Optional[str]=None,headers:Optional[LooseHeaders]=None)
+aiohttp.web_fileresponse.SendfileStreamWriter(self,protocol:BaseProtocol,loop:asyncio.AbstractEventLoop,fobj:IO[Any],count:int,on_chunk_sent:_T_OnChunkSent=None)
+aiohttp.web_fileresponse.SendfileStreamWriter._do_sendfile(self,out_fd:int)->bool
+aiohttp.web_fileresponse.SendfileStreamWriter._done_fut(self,out_fd:int,fut:'asyncio.Future[None]')->None
+aiohttp.web_fileresponse.SendfileStreamWriter._sendfile_cb(self,fut:'asyncio.Future[None]',out_fd:int)->None
+aiohttp.web_fileresponse.SendfileStreamWriter._write(self,chunk:bytes)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/payload_streamer.py----------------------------------------
+A:aiohttp.payload_streamer.self.coro->asyncio.coroutine(coro)
+aiohttp.payload_streamer.StreamPayload(self,value:Any,*args:Any,**kwargs:Any)
+aiohttp.payload_streamer.StreamWrapperPayload(Payload)
+aiohttp.payload_streamer._stream_wrapper(self,coro:Callable[...,Awaitable[None]],args:Tuple[Any,...],kwargs:Dict[str,Any])
+aiohttp.payload_streamer.streamer(self,coro:Callable[...,Awaitable[None]])
+aiohttp.streamer(self,coro:Callable[...,Awaitable[None]])
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/multipart.py----------------------------------------
+A:aiohttp.multipart.(disptype, *parts)->header.split(';')
+A:aiohttp.multipart.item->parts.pop(0)
+A:aiohttp.multipart.(key, value)->parts.pop(0).split('=', 1)
+A:aiohttp.multipart.key->key.lower().strip().lower().strip()
+A:aiohttp.multipart.value->''.join(parts)
+A:aiohttp.multipart.(encoding, _, value)->''.join(parts).split("'", 2)
+A:aiohttp.multipart.fnparams->sorted(((key, value) for (key, value) in params.items() if key.startswith(name_suf)))
+A:aiohttp.multipart.(_, tail)->key.lower().strip().lower().strip().split('*', 1)
+A:aiohttp.multipart.length->self.headers.get(CONTENT_LENGTH, None)
+A:aiohttp.multipart.self._unread->deque()
+A:aiohttp.multipart.data->urlencode(obj, doseq=True)
+A:aiohttp.multipart.chunk_size->min(size, self._length - self._read_bytes)
+A:aiohttp.multipart.idx->window.find(sub, max(0, len(self._prev_chunk) - len(sub)))
+A:aiohttp.multipart.line->self._unread.popleft()
+A:aiohttp.multipart.sline->self._unread.popleft().rstrip(b'\r\n')
+A:aiohttp.multipart.real_encoding->self.get_charset(default='utf-8')
+A:aiohttp.multipart.encoding->get_payload(obj, headers=headers).headers.get(CONTENT_ENCODING, '').lower()
+A:aiohttp.multipart.ctype->'multipart/{}; boundary={}'.format(subtype, self._boundary_value)
+A:aiohttp.multipart.mimetype->parse_mimetype(self.headers[CONTENT_TYPE])
+A:aiohttp.multipart.(_, params)->parse_content_disposition(self.headers.get(CONTENT_DISPOSITION))
+A:aiohttp.multipart.self._boundary->boundary.encode('ascii')
+A:aiohttp.multipart.obj->list(obj.items())
+A:aiohttp.multipart.chunk->self._compress.compress(chunk)
+A:aiohttp.multipart.parser->HeadersParser()
+A:aiohttp.multipart.(headers, raw_headers)->HeadersParser().parse_headers(lines)
+A:aiohttp.multipart._valid_tchar_regex->re.compile(b"\\A[!#$%&'*+\\-.^_`|~\\w]+\\Z")
+A:aiohttp.multipart._invalid_qdtext_char_regex->re.compile(b'[\\x00-\\x08\\x0A-\\x1F\\x7F]')
+A:aiohttp.multipart.quoted_value_content->quoted_value_content.replace(b'"', b'\\"').replace(b'"', b'\\"')
+A:aiohttp.multipart.headers->CIMultiDict()
+A:aiohttp.multipart.payload->get_payload(obj, headers=headers)
+A:aiohttp.multipart.te_encoding->get_payload(obj, headers=headers).headers.get(CONTENT_TRANSFER_ENCODING, '').lower()
+A:aiohttp.multipart.payload.headers[CONTENT_LENGTH]->str(size)
+A:aiohttp.multipart.w->MultipartPayloadWriter(writer)
+A:aiohttp.multipart.self._encoding_buffer->bytearray()
+A:aiohttp.multipart.self._compress->zlib.compressobj(wbits=zlib_mode)
+A:aiohttp.multipart.(div, mod)->divmod(len(buf), 3)
+A:aiohttp.multipart.b64chunk->base64.b64encode(enc_chunk)
+aiohttp.BadContentDispositionHeader(RuntimeWarning)
+aiohttp.BadContentDispositionParam(RuntimeWarning)
+aiohttp.BodyPartReader(self,boundary:bytes,headers:Mapping[str,Optional[str]],content:StreamReader)
+aiohttp.BodyPartReader.__aiter__(self)->'BodyPartReader'
+aiohttp.BodyPartReader._decode_content(self,data:bytes)->bytes
+aiohttp.BodyPartReader._decode_content_transfer(self,data:bytes)->bytes
+aiohttp.BodyPartReader.at_eof(self)->bool
+aiohttp.BodyPartReader.decode(self,data:bytes)->bytes
+aiohttp.BodyPartReader.filename(self)->Optional[str]
+aiohttp.BodyPartReader.get_charset(self,default:str)->str
+aiohttp.BodyPartReader.name(self)->Optional[str]
+aiohttp.BodyPartReaderPayload(self,value:BodyPartReader,*args:Any,**kwargs:Any)
+aiohttp.MultipartReader(self,headers:Mapping[str,str],content:StreamReader)
+aiohttp.MultipartReader.__aiter__(self)->'MultipartReader'
+aiohttp.MultipartReader._get_boundary(self)->str
+aiohttp.MultipartReader._get_part_reader(self,headers:'CIMultiDictProxy[str]')->Any
+aiohttp.MultipartReader.at_eof(self)->bool
+aiohttp.MultipartReader.from_response(cls,response:'ClientResponse')->Any
+aiohttp.MultipartWriter(self,subtype:str='mixed',boundary:Optional[str]=None)
+aiohttp.MultipartWriter.__enter__(self)->'MultipartWriter'
+aiohttp.MultipartWriter.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+aiohttp.MultipartWriter.__iter__(self)->Iterator[_Part]
+aiohttp.MultipartWriter.__len__(self)->int
+aiohttp.MultipartWriter._boundary_value(self)->str
+aiohttp.MultipartWriter.append(self,obj:Any,headers:Optional['MultiMapping[str]']=None)->Payload
+aiohttp.MultipartWriter.append_form(self,obj:Union[Sequence[Tuple[str,str]],Mapping[str,str]],headers:Optional['MultiMapping[str]']=None)->Payload
+aiohttp.MultipartWriter.append_json(self,obj:Any,headers:Optional['MultiMapping[str]']=None)->Payload
+aiohttp.MultipartWriter.append_payload(self,payload:Payload)->Payload
+aiohttp.MultipartWriter.boundary(self)->str
+aiohttp.MultipartWriter.size(self)->Optional[int]
+aiohttp.content_disposition_filename(params:Mapping[str,str],name:str='filename')->Optional[str]
+aiohttp.multipart.BadContentDispositionHeader(RuntimeWarning)
+aiohttp.multipart.BadContentDispositionParam(RuntimeWarning)
+aiohttp.multipart.BodyPartReader(self,boundary:bytes,headers:Mapping[str,Optional[str]],content:StreamReader)
+aiohttp.multipart.BodyPartReader.__aiter__(self)->'BodyPartReader'
+aiohttp.multipart.BodyPartReader._decode_content(self,data:bytes)->bytes
+aiohttp.multipart.BodyPartReader._decode_content_transfer(self,data:bytes)->bytes
+aiohttp.multipart.BodyPartReader.at_eof(self)->bool
+aiohttp.multipart.BodyPartReader.decode(self,data:bytes)->bytes
+aiohttp.multipart.BodyPartReader.filename(self)->Optional[str]
+aiohttp.multipart.BodyPartReader.get_charset(self,default:str)->str
+aiohttp.multipart.BodyPartReader.name(self)->Optional[str]
+aiohttp.multipart.BodyPartReaderPayload(self,value:BodyPartReader,*args:Any,**kwargs:Any)
+aiohttp.multipart.MultipartPayloadWriter(self,writer:Any)
+aiohttp.multipart.MultipartPayloadWriter.enable_compression(self,encoding:str='deflate')->None
+aiohttp.multipart.MultipartPayloadWriter.enable_encoding(self,encoding:str)->None
+aiohttp.multipart.MultipartReader(self,headers:Mapping[str,str],content:StreamReader)
+aiohttp.multipart.MultipartReader.__aiter__(self)->'MultipartReader'
+aiohttp.multipart.MultipartReader._get_boundary(self)->str
+aiohttp.multipart.MultipartReader._get_part_reader(self,headers:'CIMultiDictProxy[str]')->Any
+aiohttp.multipart.MultipartReader.at_eof(self)->bool
+aiohttp.multipart.MultipartReader.from_response(cls,response:'ClientResponse')->Any
+aiohttp.multipart.MultipartResponseWrapper(self,resp:'ClientResponse',stream:Any)
+aiohttp.multipart.MultipartResponseWrapper.__aiter__(self)->'MultipartResponseWrapper'
+aiohttp.multipart.MultipartResponseWrapper.at_eof(self)->bool
+aiohttp.multipart.MultipartWriter(self,subtype:str='mixed',boundary:Optional[str]=None)
+aiohttp.multipart.MultipartWriter.__enter__(self)->'MultipartWriter'
+aiohttp.multipart.MultipartWriter.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+aiohttp.multipart.MultipartWriter.__iter__(self)->Iterator[_Part]
+aiohttp.multipart.MultipartWriter.__len__(self)->int
+aiohttp.multipart.MultipartWriter._boundary_value(self)->str
+aiohttp.multipart.MultipartWriter.append(self,obj:Any,headers:Optional['MultiMapping[str]']=None)->Payload
+aiohttp.multipart.MultipartWriter.append_form(self,obj:Union[Sequence[Tuple[str,str]],Mapping[str,str]],headers:Optional['MultiMapping[str]']=None)->Payload
+aiohttp.multipart.MultipartWriter.append_json(self,obj:Any,headers:Optional['MultiMapping[str]']=None)->Payload
+aiohttp.multipart.MultipartWriter.append_payload(self,payload:Payload)->Payload
+aiohttp.multipart.MultipartWriter.boundary(self)->str
+aiohttp.multipart.MultipartWriter.size(self)->Optional[int]
+aiohttp.multipart.content_disposition_filename(params:Mapping[str,str],name:str='filename')->Optional[str]
+aiohttp.multipart.parse_content_disposition(header:Optional[str])->Tuple[Optional[str], Dict[str, str]]
+aiohttp.parse_content_disposition(header:Optional[str])->Tuple[Optional[str], Dict[str, str]]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/base_protocol.py----------------------------------------
+A:aiohttp.base_protocol.tr->cast(asyncio.Transport, transport)
+A:aiohttp.base_protocol.waiter->self._loop.create_future()
+aiohttp.base_protocol.BaseProtocol(self,loop:asyncio.AbstractEventLoop)
+aiohttp.base_protocol.BaseProtocol.connection_lost(self,exc:Optional[BaseException])->None
+aiohttp.base_protocol.BaseProtocol.connection_made(self,transport:asyncio.BaseTransport)->None
+aiohttp.base_protocol.BaseProtocol.pause_reading(self)->None
+aiohttp.base_protocol.BaseProtocol.pause_writing(self)->None
+aiohttp.base_protocol.BaseProtocol.resume_reading(self)->None
+aiohttp.base_protocol.BaseProtocol.resume_writing(self)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/signals.py----------------------------------------
+aiohttp.Signal(self,owner)
+aiohttp.Signal.__repr__(self)
+aiohttp.signals.Signal(self,owner)
+aiohttp.signals.Signal.__repr__(self)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/signals.pyi----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/formdata.py----------------------------------------
+A:aiohttp.formdata.self._writer->multipart.MultipartWriter('form-data')
+A:aiohttp.formdata.fields->list(fields.items())
+A:aiohttp.formdata.type_options->MultiDict({'name': name})
+A:aiohttp.formdata.filename->guess_filename(value, name)
+A:aiohttp.formdata.to_add->list(fields)
+A:aiohttp.formdata.rec->list(fields).pop(0)
+A:aiohttp.formdata.k->guess_filename(rec, 'unknown')
+A:aiohttp.formdata.part->payload.get_payload(value, headers=headers, encoding=self._charset)
+aiohttp.FormData(self,fields:Iterable[Any]=(),quote_fields:bool=True,charset:Optional[str]=None)
+aiohttp.FormData._gen_form_data(self)->multipart.MultipartWriter
+aiohttp.FormData._gen_form_urlencoded(self)->payload.BytesPayload
+aiohttp.FormData.add_field(self,name:str,value:Any,*,content_type:Optional[str]=None,filename:Optional[str]=None,content_transfer_encoding:Optional[str]=None)->None
+aiohttp.FormData.add_fields(self,*fields:Any)->None
+aiohttp.FormData.is_multipart(self)->bool
+aiohttp.formdata.FormData(self,fields:Iterable[Any]=(),quote_fields:bool=True,charset:Optional[str]=None)
+aiohttp.formdata.FormData._gen_form_data(self)->multipart.MultipartWriter
+aiohttp.formdata.FormData._gen_form_urlencoded(self)->payload.BytesPayload
+aiohttp.formdata.FormData.add_field(self,name:str,value:Any,*,content_type:Optional[str]=None,filename:Optional[str]=None,content_transfer_encoding:Optional[str]=None)->None
+aiohttp.formdata.FormData.add_fields(self,*fields:Any)->None
+aiohttp.formdata.FormData.is_multipart(self)->bool
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/payload.py----------------------------------------
+A:aiohttp.payload.self._headers->CIMultiDict()
+A:aiohttp.payload.self._headers[hdrs.CONTENT_DISPOSITION]->content_disposition_header(disptype, quote_fields=quote_fields, **params)
+A:aiohttp.payload.self._size->len(value)
+A:aiohttp.payload.mimetype->parse_mimetype(content_type)
+A:aiohttp.payload.real_encoding->parse_mimetype(content_type).parameters.get('charset', 'utf-8')
+A:aiohttp.payload.kwargs['filename']->guess_filename(value)
+A:aiohttp.payload.loop->asyncio.get_event_loop()
+A:aiohttp.payload.encoding->parse_mimetype(content_type).parameters.get('charset', 'utf-8')
+A:aiohttp.payload.position->self._value.tell()
+A:aiohttp.payload.end->self._value.seek(0, os.SEEK_END)
+A:aiohttp.payload.self._iter->value.__aiter__()
+A:aiohttp.payload.PAYLOAD_REGISTRY->PayloadRegistry()
+aiohttp.AsyncIterablePayload(self,value:_AsyncIterable,*args:Any,**kwargs:Any)
+aiohttp.BufferedReaderPayload(IOBasePayload)
+aiohttp.BufferedReaderPayload.size(self)->Optional[int]
+aiohttp.BytesIOPayload(IOBasePayload)
+aiohttp.BytesIOPayload.size(self)->int
+aiohttp.BytesPayload(self,value:ByteString,*args:Any,**kwargs:Any)
+aiohttp.IOBasePayload(self,value:IO[Any],disposition:str='attachment',*args:Any,**kwargs:Any)
+aiohttp.JsonPayload(self,value:Any,encoding:str='utf-8',content_type:str='application/json',dumps:JSONEncoder=json.dumps,*args:Any,**kwargs:Any)
+aiohttp.Payload(self,value:Any,headers:Optional[Union[_CIMultiDict,Dict[str,str],Iterable[Tuple[str,str]]]]=None,content_type:Optional[str]=sentinel,filename:Optional[str]=None,encoding:Optional[str]=None,**kwargs:Any)
+aiohttp.Payload._binary_headers(self)->bytes
+aiohttp.Payload.content_type(self)->str
+aiohttp.Payload.encoding(self)->Optional[str]
+aiohttp.Payload.filename(self)->Optional[str]
+aiohttp.Payload.headers(self)->_CIMultiDict
+aiohttp.Payload.set_content_disposition(self,disptype:str,quote_fields:bool=True,**params:Any)->None
+aiohttp.Payload.size(self)->Optional[int]
+aiohttp.PayloadRegistry(self)
+aiohttp.PayloadRegistry.get(self,data:Any,*args:Any,_CHAIN:Any=chain,**kwargs:Any)->'Payload'
+aiohttp.PayloadRegistry.register(self,factory:Type['Payload'],type:Any,*,order:Order=Order.normal)->None
+aiohttp.StringIOPayload(self,value:IO[str],*args:Any,**kwargs:Any)
+aiohttp.StringPayload(self,value:Text,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
+aiohttp.TextIOPayload(self,value:TextIO,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
+aiohttp.TextIOPayload.size(self)->Optional[int]
+aiohttp.get_payload(data:Any,*args:Any,**kwargs:Any)->'Payload'
+aiohttp.payload.AsyncIterablePayload(self,value:_AsyncIterable,*args:Any,**kwargs:Any)
+aiohttp.payload.BufferedReaderPayload(IOBasePayload)
+aiohttp.payload.BufferedReaderPayload.size(self)->Optional[int]
+aiohttp.payload.BytesIOPayload(IOBasePayload)
+aiohttp.payload.BytesIOPayload.size(self)->int
+aiohttp.payload.BytesPayload(self,value:ByteString,*args:Any,**kwargs:Any)
+aiohttp.payload.IOBasePayload(self,value:IO[Any],disposition:str='attachment',*args:Any,**kwargs:Any)
+aiohttp.payload.JsonPayload(self,value:Any,encoding:str='utf-8',content_type:str='application/json',dumps:JSONEncoder=json.dumps,*args:Any,**kwargs:Any)
+aiohttp.payload.LookupError(Exception)
+aiohttp.payload.Order(str,enum.Enum)
+aiohttp.payload.Payload(self,value:Any,headers:Optional[Union[_CIMultiDict,Dict[str,str],Iterable[Tuple[str,str]]]]=None,content_type:Optional[str]=sentinel,filename:Optional[str]=None,encoding:Optional[str]=None,**kwargs:Any)
+aiohttp.payload.Payload._binary_headers(self)->bytes
+aiohttp.payload.Payload.content_type(self)->str
+aiohttp.payload.Payload.encoding(self)->Optional[str]
+aiohttp.payload.Payload.filename(self)->Optional[str]
+aiohttp.payload.Payload.headers(self)->_CIMultiDict
+aiohttp.payload.Payload.set_content_disposition(self,disptype:str,quote_fields:bool=True,**params:Any)->None
+aiohttp.payload.Payload.size(self)->Optional[int]
+aiohttp.payload.PayloadRegistry(self)
+aiohttp.payload.PayloadRegistry.get(self,data:Any,*args:Any,_CHAIN:Any=chain,**kwargs:Any)->'Payload'
+aiohttp.payload.PayloadRegistry.register(self,factory:Type['Payload'],type:Any,*,order:Order=Order.normal)->None
+aiohttp.payload.StreamReaderPayload(self,value:StreamReader,*args:Any,**kwargs:Any)
+aiohttp.payload.StringIOPayload(self,value:IO[str],*args:Any,**kwargs:Any)
+aiohttp.payload.StringPayload(self,value:Text,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
+aiohttp.payload.TextIOPayload(self,value:TextIO,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
+aiohttp.payload.TextIOPayload.size(self)->Optional[int]
+aiohttp.payload.get_payload(data:Any,*args:Any,**kwargs:Any)->'Payload'
+aiohttp.payload.payload_type(self,type:Any,*,order:Order=Order.normal)
+aiohttp.payload.register_payload(factory:Type['Payload'],type:Any,*,order:Order=Order.normal)->None
+aiohttp.payload_type(self,type:Any,*,order:Order=Order.normal)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/http_exceptions.py----------------------------------------
+A:aiohttp.http_exceptions.hdr->hdr.decode('utf-8', 'surrogateescape').decode('utf-8', 'surrogateescape')
+A:aiohttp.http_exceptions.line->repr(line)
+aiohttp.http_exceptions.BadHttpMessage(self,message:str,*,headers:Optional[_CIMultiDict]=None)
+aiohttp.http_exceptions.BadStatusLine(self,line:str='')
+aiohttp.http_exceptions.ContentEncodingError(PayloadEncodingError)
+aiohttp.http_exceptions.ContentLengthError(PayloadEncodingError)
+aiohttp.http_exceptions.HttpBadRequest(BadHttpMessage)
+aiohttp.http_exceptions.HttpProcessingError(self,*,code:Optional[int]=None,message:str='',headers:Optional[_CIMultiDict]=None)
+aiohttp.http_exceptions.InvalidHeader(self,hdr:Union[bytes,str])
+aiohttp.http_exceptions.InvalidURLError(BadHttpMessage)
+aiohttp.http_exceptions.LineTooLong(self,line:str,limit:str='Unknown',actual_size:str='Unknown')
+aiohttp.http_exceptions.PayloadEncodingError(BadHttpMessage)
+aiohttp.http_exceptions.TransferEncodingError(PayloadEncodingError)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/frozenlist.py----------------------------------------
+A:aiohttp.frozenlist.items->list(items)
+aiohttp.frozenlist.FrozenList(self,items=None)
+aiohttp.frozenlist.FrozenList.__delitem__(self,index)
+aiohttp.frozenlist.FrozenList.__eq__(self,other)
+aiohttp.frozenlist.FrozenList.__getitem__(self,index)
+aiohttp.frozenlist.FrozenList.__iter__(self)
+aiohttp.frozenlist.FrozenList.__le__(self,other)
+aiohttp.frozenlist.FrozenList.__len__(self)
+aiohttp.frozenlist.FrozenList.__repr__(self)
+aiohttp.frozenlist.FrozenList.__reversed__(self)
+aiohttp.frozenlist.FrozenList.__setitem__(self,index,value)
+aiohttp.frozenlist.FrozenList.freeze(self)
+aiohttp.frozenlist.FrozenList.frozen(self)
+aiohttp.frozenlist.FrozenList.insert(self,pos,item)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/frozenlist.pyi----------------------------------------
+aiohttp.frozenlist.FrozenList.__ge__(self,other:FrozenList[_T])->bool
+aiohttp.frozenlist.FrozenList.__gt__(self,other:FrozenList[_T])->bool
+aiohttp.frozenlist.FrozenList.__lt__(self,other:FrozenList[_T])->bool
+aiohttp.frozenlist.FrozenList.__ne__(self,other:object)->bool
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/log.py----------------------------------------
+A:aiohttp.log.access_logger->logging.getLogger('aiohttp.access')
+A:aiohttp.log.client_logger->logging.getLogger('aiohttp.client')
+A:aiohttp.log.internal_logger->logging.getLogger('aiohttp.internal')
+A:aiohttp.log.server_logger->logging.getLogger('aiohttp.server')
+A:aiohttp.log.web_logger->logging.getLogger('aiohttp.web')
+A:aiohttp.log.ws_logger->logging.getLogger('aiohttp.websocket')
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/tcp_helpers.py----------------------------------------
+A:aiohttp.tcp_helpers.sock->transport.get_extra_info('socket')
+A:aiohttp.tcp_helpers.value->bool(value)
+aiohttp.tcp_helpers.tcp_cork(transport:asyncio.Transport,value:bool)->None
+aiohttp.tcp_helpers.tcp_nodelay(transport:asyncio.Transport,value:bool)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_response.py----------------------------------------
+A:aiohttp.web_response.self._cookies->SimpleCookie()
+A:aiohttp.web_response.self._headers->CIMultiDict()
+A:aiohttp.web_response.self._status->int(status)
+A:aiohttp.web_response.old->self._cookies.get(name)
+A:aiohttp.web_response.c['max-age']->str(max_age)
+A:aiohttp.web_response.value->int(value)
+A:aiohttp.web_response.self._headers[hdrs.CONTENT_LENGTH]->str(len(body_out))
+A:aiohttp.web_response.self._content_type->str(value)
+A:aiohttp.web_response.self._content_dict['charset']->str(value).lower()
+A:aiohttp.web_response.httpdate->self._headers.get(hdrs.LAST_MODIFIED)
+A:aiohttp.web_response.timetuple->parsedate(httpdate)
+A:aiohttp.web_response.self._headers[hdrs.LAST_MODIFIED]->time.strftime('%a, %d %b %Y %H:%M:%S GMT', value.utctimetuple())
+A:aiohttp.web_response.params->'; '.join(('{}={}'.format(k, v) for (k, v) in self._content_dict.items()))
+A:aiohttp.web_response.accept_encoding->request.headers.get(hdrs.ACCEPT_ENCODING, '').lower()
+A:aiohttp.web_response.status_line->'HTTP/{}.{} {} {}'.format(version[0], version[1], self._status, self._reason)
+A:aiohttp.web_response.info->'{} {} '.format(self._req.method, self._req.path)
+A:aiohttp.web_response.real_headers->CIMultiDict(headers)
+A:aiohttp.web_response.body->dumps(data).encode(charset)
+A:aiohttp.web_response.self._bodybody->cast(Payload, body).PAYLOAD_REGISTRY.get(body)
+A:aiohttp.web_response.headers[CONTENT_LENGTH]->str(size)
+A:aiohttp.web_response.self._body->dumps(data).encode(self.charset)
+A:aiohttp.web_response.payload->cast(Payload, body)
+A:aiohttp.web_response.compressobj->zlib.compressobj(wbits=zlib_mode)
+A:aiohttp.web_response.text->dumps(data)
+aiohttp.web_response.ContentCoding(enum.Enum)
+aiohttp.web_response.Response(self,*,body:Any=None,status:int=200,reason:Optional[str]=None,text:Optional[str]=None,headers:Optional[LooseHeaders]=None,content_type:Optional[str]=None,charset:Optional[str]=None,zlib_executor_size:Optional[int]=None,zlib_executor:Executor=None)
+aiohttp.web_response.Response._compress_body(self,zlib_mode:int)->None
+aiohttp.web_response.Response.body(self)->Optional[Union[bytes, Payload]]
+aiohttp.web_response.Response.body(self,body:bytes,CONTENT_TYPE:istr=hdrs.CONTENT_TYPE,CONTENT_LENGTH:istr=hdrs.CONTENT_LENGTH)->None
+aiohttp.web_response.Response.content_length(self)->Optional[int]
+aiohttp.web_response.Response.content_length(self,value:Optional[int])->None
+aiohttp.web_response.Response.text(self)->Optional[str]
+aiohttp.web_response.Response.text(self,text:str)->None
+aiohttp.web_response.StreamResponse(self,*,status:int=200,reason:Optional[str]=None,headers:Optional[LooseHeaders]=None)
+aiohttp.web_response.StreamResponse.__delitem__(self,key:str)->None
+aiohttp.web_response.StreamResponse.__eq__(self,other:object)->bool
+aiohttp.web_response.StreamResponse.__getitem__(self,key:str)->Any
+aiohttp.web_response.StreamResponse.__hash__(self)->int
+aiohttp.web_response.StreamResponse.__iter__(self)->Iterator[str]
+aiohttp.web_response.StreamResponse.__len__(self)->int
+aiohttp.web_response.StreamResponse.__repr__(self)->str
+aiohttp.web_response.StreamResponse.__setitem__(self,key:str,value:Any)->None
+aiohttp.web_response.StreamResponse._generate_content_type_header(self,CONTENT_TYPE:istr=hdrs.CONTENT_TYPE)->None
+aiohttp.web_response.StreamResponse.body_length(self)->int
+aiohttp.web_response.StreamResponse.charset(self)->Optional[str]
+aiohttp.web_response.StreamResponse.charset(self,value:Optional[str])->None
+aiohttp.web_response.StreamResponse.chunked(self)->bool
+aiohttp.web_response.StreamResponse.compression(self)->bool
+aiohttp.web_response.StreamResponse.content_length(self)->Optional[int]
+aiohttp.web_response.StreamResponse.content_length(self,value:Optional[int])->None
+aiohttp.web_response.StreamResponse.content_type(self)->str
+aiohttp.web_response.StreamResponse.content_type(self,value:str)->None
+aiohttp.web_response.StreamResponse.cookies(self)->SimpleCookie
+aiohttp.web_response.StreamResponse.del_cookie(self,name:str,*,domain:Optional[str]=None,path:str='/')->None
+aiohttp.web_response.StreamResponse.enable_chunked_encoding(self,chunk_size:Optional[int]=None)->None
+aiohttp.web_response.StreamResponse.enable_compression(self,force:Optional[Union[bool,ContentCoding]]=None)->None
+aiohttp.web_response.StreamResponse.force_close(self)->None
+aiohttp.web_response.StreamResponse.headers(self)->'CIMultiDict[str]'
+aiohttp.web_response.StreamResponse.keep_alive(self)->Optional[bool]
+aiohttp.web_response.StreamResponse.last_modified(self)->Optional[datetime.datetime]
+aiohttp.web_response.StreamResponse.last_modified(self,value:Optional[Union[int,float,datetime.datetime,str]])->None
+aiohttp.web_response.StreamResponse.output_length(self)->int
+aiohttp.web_response.StreamResponse.prepared(self)->bool
+aiohttp.web_response.StreamResponse.reason(self)->str
+aiohttp.web_response.StreamResponse.set_cookie(self,name:str,value:str,*,expires:Optional[str]=None,domain:Optional[str]=None,max_age:Optional[Union[int,str]]=None,path:str='/',secure:Optional[str]=None,httponly:Optional[str]=None,version:Optional[str]=None)->None
+aiohttp.web_response.StreamResponse.set_status(self,status:int,reason:Optional[str]=None,_RESPONSES:Mapping[int,Tuple[str,str]]=RESPONSES)->None
+aiohttp.web_response.StreamResponse.status(self)->int
+aiohttp.web_response.StreamResponse.task(self)->'asyncio.Task[None]'
+aiohttp.web_response.json_response(data:Any=sentinel,*,text:str=None,body:bytes=None,status:int=200,reason:Optional[str]=None,headers:LooseHeaders=None,content_type:str='application/json',dumps:JSONEncoder=json.dumps)->Response
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/client_ws.py----------------------------------------
+A:aiohttp.client_ws.self._heartbeat_cb->call_later(self._send_heartbeat, self._heartbeat, self._loop)
+A:aiohttp.client_ws.self._pong_response_cb->call_later(self._pong_not_received, self._pong_heartbeat, self._loop)
+A:aiohttp.client_ws.self._exception->asyncio.TimeoutError()
+A:aiohttp.client_ws.self._waiting->self._loop.create_future()
+aiohttp.client_ws.ClientWebSocketResponse(self,reader:'FlowControlDataQueue[WSMessage]',writer:WebSocketWriter,protocol:Optional[str],response:ClientResponse,timeout:float,autoclose:bool,autoping:bool,loop:asyncio.AbstractEventLoop,*,receive_timeout:Optional[float]=None,heartbeat:Optional[float]=None,compress:int=0,client_notakeover:bool=False)
+aiohttp.client_ws.ClientWebSocketResponse.__aiter__(self)->'ClientWebSocketResponse'
+aiohttp.client_ws.ClientWebSocketResponse._cancel_heartbeat(self)->None
+aiohttp.client_ws.ClientWebSocketResponse._pong_not_received(self)->None
+aiohttp.client_ws.ClientWebSocketResponse._reset_heartbeat(self)->None
+aiohttp.client_ws.ClientWebSocketResponse._send_heartbeat(self)->None
+aiohttp.client_ws.ClientWebSocketResponse.client_notakeover(self)->bool
+aiohttp.client_ws.ClientWebSocketResponse.close_code(self)->Optional[int]
+aiohttp.client_ws.ClientWebSocketResponse.closed(self)->bool
+aiohttp.client_ws.ClientWebSocketResponse.compress(self)->int
+aiohttp.client_ws.ClientWebSocketResponse.exception(self)->Optional[BaseException]
+aiohttp.client_ws.ClientWebSocketResponse.get_extra_info(self,name:str,default:Any=None)->Any
+aiohttp.client_ws.ClientWebSocketResponse.protocol(self)->Optional[str]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/client_exceptions.py----------------------------------------
+A:aiohttp.client_exceptions.cert_errors->tuple()
+A:aiohttp.client_exceptions.ssl_errors->tuple()
+aiohttp.client_exceptions.ClientConnectionError(ClientError)
+aiohttp.client_exceptions.ClientConnectorCertificateError(self,connection_key:ConnectionKey,certificate_error:Exception)
+aiohttp.client_exceptions.ClientConnectorCertificateError.__str__(self)->str
+aiohttp.client_exceptions.ClientConnectorCertificateError.certificate_error(self)->Exception
+aiohttp.client_exceptions.ClientConnectorCertificateError.host(self)->str
+aiohttp.client_exceptions.ClientConnectorCertificateError.port(self)->Optional[int]
+aiohttp.client_exceptions.ClientConnectorCertificateError.ssl(self)->bool
+aiohttp.client_exceptions.ClientConnectorError(self,connection_key:ConnectionKey,os_error:OSError)
+aiohttp.client_exceptions.ClientConnectorError.__str__(self)->str
+aiohttp.client_exceptions.ClientConnectorError.host(self)->str
+aiohttp.client_exceptions.ClientConnectorError.os_error(self)->OSError
+aiohttp.client_exceptions.ClientConnectorError.port(self)->Optional[int]
+aiohttp.client_exceptions.ClientConnectorError.ssl(self)->Union[SSLContext, None, bool, 'Fingerprint']
+aiohttp.client_exceptions.ClientConnectorSSLError(*ssl_error_bases)
+aiohttp.client_exceptions.ClientError(Exception)
+aiohttp.client_exceptions.ClientHttpProxyError(ClientResponseError)
+aiohttp.client_exceptions.ClientOSError(ClientConnectionError,OSError)
+aiohttp.client_exceptions.ClientPayloadError(ClientError)
+aiohttp.client_exceptions.ClientProxyConnectionError(ClientConnectorError)
+aiohttp.client_exceptions.ClientResponseError(self,request_info:RequestInfo,history:Tuple[ClientResponse,...],*,code:Optional[int]=None,status:Optional[int]=None,message:str='',headers:Optional[_CIMultiDict]=None)
+aiohttp.client_exceptions.ClientResponseError.code(self)->int
+aiohttp.client_exceptions.ClientResponseError.code(self,value:int)->None
+aiohttp.client_exceptions.ClientSSLError(ClientConnectorError)
+aiohttp.client_exceptions.ContentTypeError(ClientResponseError)
+aiohttp.client_exceptions.InvalidURL(self,url:Any)
+aiohttp.client_exceptions.InvalidURL.__repr__(self)->str
+aiohttp.client_exceptions.InvalidURL.url(self)->Any
+aiohttp.client_exceptions.ServerConnectionError(ClientConnectionError)
+aiohttp.client_exceptions.ServerDisconnectedError(self,message:Optional[str]=None)
+aiohttp.client_exceptions.ServerFingerprintMismatch(self,expected:bytes,got:bytes,host:str,port:int)
+aiohttp.client_exceptions.ServerFingerprintMismatch.__repr__(self)->str
+aiohttp.client_exceptions.ServerTimeoutError(ServerConnectionError,asyncio.TimeoutError)
+aiohttp.client_exceptions.TooManyRedirects(ClientResponseError)
+aiohttp.client_exceptions.WSServerHandshakeError(ClientResponseError)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/test_utils.py----------------------------------------
+A:aiohttp.test_utils.s->socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+A:aiohttp.test_utils.self._ssl->kwargs.pop('ssl', None)
+A:aiohttp.test_utils._sock->get_port_socket(self.host, self.port)
+A:aiohttp.test_utils.site->SockSite(self.runner, sock=_sock, ssl_context=self._ssl)
+A:aiohttp.test_utils.self._root->URL('{}://{}:{}'.format(self.scheme, self.host, self.port))
+A:aiohttp.test_utils.url->URL(path)
+A:aiohttp.test_utils.srv->Server(self._handler, loop=self._loop, debug=debug, **kwargs)
+A:aiohttp.test_utils.cookie_jar->aiohttp.CookieJar(unsafe=True, loop=loop)
+A:aiohttp.test_utils.self._session->ClientSession(loop=loop, cookie_jar=cookie_jar, **kwargs)
+A:aiohttp.test_utils.self.loop->setup_test_loop()
+A:aiohttp.test_utils.self.app->self.loop.run_until_complete(self.get_application())
+A:aiohttp.test_utils.self.server->self.loop.run_until_complete(self.get_server(self.app))
+A:aiohttp.test_utils.self.client->self.loop.run_until_complete(self.get_client(self.server))
+A:aiohttp.test_utils.loop->unittest.mock.Mock()
+A:aiohttp.test_utils.policy->asyncio.get_event_loop_policy()
+A:aiohttp.test_utils.watcher->asyncio.SafeChildWatcher()
+A:aiohttp.test_utils.closed->unittest.mock.Mock().is_closed()
+A:aiohttp.test_utils.app->_create_app_mock()
+A:aiohttp.test_utils.app.on_response_prepare->Signal(app)
+A:aiohttp.test_utils.transport->_create_transport(sslcontext)
+A:aiohttp.test_utils.task->unittest.mock.Mock()
+A:aiohttp.test_utils.headers->CIMultiDictProxy(CIMultiDict())
+A:aiohttp.test_utils.raw_hdrs->tuple(((k.encode('utf-8'), v.encode('utf-8')) for (k, v) in headers.items()))
+A:aiohttp.test_utils.message->RawRequestMessage(method, path, version, headers, raw_hdrs, closing, False, False, chunked, URL(path))
+A:aiohttp.test_utils.protocol->unittest.mock.Mock()
+A:aiohttp.test_utils.writer->unittest.mock.Mock()
+A:aiohttp.test_utils.writer.write_headers->make_mocked_coro(None)
+A:aiohttp.test_utils.writer.write->make_mocked_coro(None)
+A:aiohttp.test_utils.writer.write_eof->make_mocked_coro(None)
+A:aiohttp.test_utils.writer.drain->make_mocked_coro(None)
+A:aiohttp.test_utils.payload->unittest.mock.Mock()
+A:aiohttp.test_utils.req->Request(message, payload, protocol, writer, task, loop, client_max_size=client_max_size)
+A:aiohttp.test_utils.match_info->UrlMappingMatchInfo({} if match_info is sentinel else match_info, mock.Mock())
+aiohttp.test_utils.AioHTTPTestCase(unittest.TestCase)
+aiohttp.test_utils.AioHTTPTestCase.get_app(self)->Application
+aiohttp.test_utils.AioHTTPTestCase.setUp(self)->None
+aiohttp.test_utils.AioHTTPTestCase.tearDown(self)->None
+aiohttp.test_utils.BaseTestServer(self,*,scheme:Union[str,object]=sentinel,loop:Optional[asyncio.AbstractEventLoop]=None,host:str='127.0.0.1',port:Optional[int]=None,skip_url_asserts:bool=False,**kwargs:Any)
+aiohttp.test_utils.BaseTestServer.__enter__(self)->None
+aiohttp.test_utils.BaseTestServer.__exit__(self,exc_type:Optional[Type[BaseException]],exc_value:Optional[BaseException],traceback:Optional[TracebackType])->None
+aiohttp.test_utils.BaseTestServer.closed(self)->bool
+aiohttp.test_utils.BaseTestServer.handler(self)->Server
+aiohttp.test_utils.BaseTestServer.make_url(self,path:str)->URL
+aiohttp.test_utils.BaseTestServer.started(self)->bool
+aiohttp.test_utils.RawTestServer(self,handler:_RequestHandler,*,scheme:Union[str,object]=sentinel,host:str='127.0.0.1',port:Optional[int]=None,**kwargs:Any)
+aiohttp.test_utils.TestClient(self,server:BaseTestServer,*,cookie_jar:Optional[AbstractCookieJar]=None,loop:Optional[asyncio.AbstractEventLoop]=None,**kwargs:Any)
+aiohttp.test_utils.TestClient.__enter__(self)->None
+aiohttp.test_utils.TestClient.__exit__(self,exc_type:Optional[Type[BaseException]],exc:Optional[BaseException],tb:Optional[TracebackType])->None
+aiohttp.test_utils.TestClient.app(self)->Application
+aiohttp.test_utils.TestClient.delete(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.get(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.head(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.host(self)->str
+aiohttp.test_utils.TestClient.make_url(self,path:str)->URL
+aiohttp.test_utils.TestClient.options(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.patch(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.port(self)->Optional[int]
+aiohttp.test_utils.TestClient.post(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.put(self,path:str,**kwargs:Any)->_RequestContextManager
+aiohttp.test_utils.TestClient.server(self)->BaseTestServer
+aiohttp.test_utils.TestClient.session(self)->ClientSession
+aiohttp.test_utils.TestClient.ws_connect(self,path:str,**kwargs:Any)->_WSRequestContextManager
+aiohttp.test_utils.TestServer(self,app:Application,*,scheme:Union[str,object]=sentinel,host:str='127.0.0.1',port:Optional[int]=None,**kwargs:Any)
+aiohttp.test_utils._create_app_mock()->mock.MagicMock
+aiohttp.test_utils._create_transport(sslcontext:Optional[SSLContext]=None)->mock.Mock
+aiohttp.test_utils.get_port_socket(host:str,port:int)->socket.socket
+aiohttp.test_utils.get_unused_port_socket(host:str)->socket.socket
+aiohttp.test_utils.loop_context(loop_factory:_LOOP_FACTORY=asyncio.new_event_loop,fast:bool=False)->Iterator[asyncio.AbstractEventLoop]
+aiohttp.test_utils.make_mocked_coro(return_value:Any=sentinel,raise_exception:Any=sentinel)->Any
+aiohttp.test_utils.make_mocked_request(method:str,path:str,headers:Any=None,*,match_info:Any=sentinel,version:HttpVersion=HttpVersion(1,1),closing:bool=False,app:Any=None,writer:Any=sentinel,protocol:Any=sentinel,transport:Any=sentinel,payload:Any=sentinel,sslcontext:Optional[SSLContext]=None,client_max_size:int=1024**2,loop:Any=...)->Any
+aiohttp.test_utils.setup_test_loop(loop_factory:_LOOP_FACTORY=asyncio.new_event_loop)->asyncio.AbstractEventLoop
+aiohttp.test_utils.teardown_test_loop(loop:asyncio.AbstractEventLoop,fast:bool=False)->None
+aiohttp.test_utils.unittest_run_loop(func:Any,*args:Any,**kwargs:Any)->Any
+aiohttp.test_utils.unused_port()->int
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_runner.py----------------------------------------
+A:aiohttp.web_runner.loop->asyncio.get_event_loop()
+A:aiohttp.web_runner.name->str(URL.build(scheme=scheme, host=host, port=port))
+aiohttp.web_runner.AppRunner(self,app:Application,*,handle_signals:bool=False,**kwargs:Any)
+aiohttp.web_runner.AppRunner.app(self)->Application
+aiohttp.web_runner.BaseRunner(self,*,handle_signals:bool=False,**kwargs:Any)
+aiohttp.web_runner.BaseRunner._check_site(self,site:BaseSite)->None
+aiohttp.web_runner.BaseRunner._reg_site(self,site:BaseSite)->None
+aiohttp.web_runner.BaseRunner._unreg_site(self,site:BaseSite)->None
+aiohttp.web_runner.BaseRunner.addresses(self)->List[str]
+aiohttp.web_runner.BaseRunner.server(self)->Optional[Server]
+aiohttp.web_runner.BaseRunner.sites(self)->Set[BaseSite]
+aiohttp.web_runner.BaseSite(self,runner:'BaseRunner',*,shutdown_timeout:float=60.0,ssl_context:Optional[SSLContext]=None,backlog:int=128)
+aiohttp.web_runner.BaseSite.name(self)->str
+aiohttp.web_runner.GracefulExit(SystemExit)
+aiohttp.web_runner.ServerRunner(self,web_server:Server,*,handle_signals:bool=False,**kwargs:Any)
+aiohttp.web_runner.SockSite(self,runner:'BaseRunner',sock:socket.socket,*,shutdown_timeout:float=60.0,ssl_context:Optional[SSLContext]=None,backlog:int=128)
+aiohttp.web_runner.SockSite.name(self)->str
+aiohttp.web_runner.TCPSite(self,runner:'BaseRunner',host:str=None,port:int=None,*,shutdown_timeout:float=60.0,ssl_context:Optional[SSLContext]=None,backlog:int=128,reuse_address:Optional[bool]=None,reuse_port:Optional[bool]=None)
+aiohttp.web_runner.TCPSite.name(self)->str
+aiohttp.web_runner.UnixSite(self,runner:'BaseRunner',path:str,*,shutdown_timeout:float=60.0,ssl_context:Optional[SSLContext]=None,backlog:int=128)
+aiohttp.web_runner.UnixSite.name(self)->str
+aiohttp.web_runner._raise_graceful_exit()->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_ws.py----------------------------------------
+A:aiohttp.web_ws.ok->attr.ib(type=bool)
+A:aiohttp.web_ws.protocol->attr.ib(type=Optional[str])
+A:aiohttp.web_ws.self._heartbeat_cb->call_later(self._send_heartbeat, self._heartbeat, self._loop)
+A:aiohttp.web_ws.self._pong_response_cb->call_later(self._pong_not_received, self._pong_heartbeat, self._loop)
+A:aiohttp.web_ws.self._exception->asyncio.TimeoutError()
+A:aiohttp.web_ws.(protocol, writer)->self._pre_start(request)
+A:aiohttp.web_ws.version->headers.get(hdrs.SEC_WEBSOCKET_VERSION, '')
+A:aiohttp.web_ws.key->headers.get(hdrs.SEC_WEBSOCKET_KEY)
+A:aiohttp.web_ws.accept_val->base64.b64encode(hashlib.sha1(key.encode() + WS_KEY).digest()).decode()
+A:aiohttp.web_ws.response_headers->CIMultiDict({hdrs.UPGRADE: 'websocket', hdrs.CONNECTION: 'upgrade', hdrs.TRANSFER_ENCODING: 'chunked', hdrs.SEC_WEBSOCKET_ACCEPT: accept_val})
+A:aiohttp.web_ws.extensions->headers.get(hdrs.SEC_WEBSOCKET_EXTENSIONS)
+A:aiohttp.web_ws.(compress, notakeover)->ws_ext_parse(extensions, isserver=True)
+A:aiohttp.web_ws.enabledext->ws_ext_gen(compress=compress, isserver=True, server_notakeover=notakeover)
+A:aiohttp.web_ws.(headers, protocol, compress, notakeover)->self._handshake(request)
+A:aiohttp.web_ws.writer->WebSocketWriter(request._protocol, transport, compress=compress, notakeover=notakeover)
+A:aiohttp.web_ws.self._reader->FlowControlDataQueue(request._protocol, limit=2 ** 16, loop=loop)
+A:aiohttp.web_ws.(_, protocol, _, _)->self._handshake(request)
+A:aiohttp.web_ws.self._waiting->loop.create_future()
+aiohttp.web_ws.WebSocketReady
+aiohttp.web_ws.WebSocketReady.__bool__(self)->bool
+aiohttp.web_ws.WebSocketResponse(self,*,timeout:float=10.0,receive_timeout:Optional[float]=None,autoclose:bool=True,autoping:bool=True,heartbeat:Optional[float]=None,protocols:Iterable[str]=(),compress:bool=True,max_msg_size:int=4*1024*1024)
+aiohttp.web_ws.WebSocketResponse.__aiter__(self)->'WebSocketResponse'
+aiohttp.web_ws.WebSocketResponse._cancel_heartbeat(self)->None
+aiohttp.web_ws.WebSocketResponse._handshake(self,request:BaseRequest)->Tuple['CIMultiDict[str]', str, bool, bool]
+aiohttp.web_ws.WebSocketResponse._pong_not_received(self)->None
+aiohttp.web_ws.WebSocketResponse._post_start(self,request:BaseRequest,protocol:str,writer:WebSocketWriter)->None
+aiohttp.web_ws.WebSocketResponse._pre_start(self,request:BaseRequest)->Tuple[str, WebSocketWriter]
+aiohttp.web_ws.WebSocketResponse._reset_heartbeat(self)->None
+aiohttp.web_ws.WebSocketResponse._send_heartbeat(self)->None
+aiohttp.web_ws.WebSocketResponse.can_prepare(self,request:BaseRequest)->WebSocketReady
+aiohttp.web_ws.WebSocketResponse.close_code(self)->Optional[int]
+aiohttp.web_ws.WebSocketResponse.closed(self)->bool
+aiohttp.web_ws.WebSocketResponse.compress(self)->bool
+aiohttp.web_ws.WebSocketResponse.exception(self)->Optional[BaseException]
+aiohttp.web_ws.WebSocketResponse.ws_protocol(self)->Optional[str]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_app.py----------------------------------------
+A:aiohttp.web_a.ATTRS->frozenset(['logger', '_debug', '_router', '_loop', '_handler_args', '_middlewares', '_middlewares_handlers', '_run_middlewares', '_state', '_frozen', '_pre_frozen', '_subapps', '_on_response_prepare', '_on_startup', '_on_shutdown', '_on_cleanup', '_client_max_size', '_cleanup_ctx'])
+A:aiohttp.web_a.router->UrlDispatcher()
+A:aiohttp.web_a.self._middlewares->FrozenList(middlewares)
+A:aiohttp.web_a.self._on_response_prepare->Signal(self)
+A:aiohttp.web_a.self._on_startup->Signal(self)
+A:aiohttp.web_a.self._on_shutdown->Signal(self)
+A:aiohttp.web_a.self._on_cleanup->Signal(self)
+A:aiohttp.web_a.self._cleanup_ctx->CleanupContext()
+A:aiohttp.web_a.loop->asyncio.get_event_loop()
+A:aiohttp.web_a.self._debug->asyncio.get_event_loop().get_debug()
+A:aiohttp.web_a.self._middlewares_handlers->tuple(self._prepare_middleware())
+A:aiohttp.web_a.subsig->getattr(subapp, signame)
+A:aiohttp.web_a.appsig->getattr(self, signame)
+A:aiohttp.web_a.prefix->prefix.rstrip('/').rstrip('/')
+A:aiohttp.web_a.factory->partial(MatchedSubAppResource, rule, subapp)
+A:aiohttp.web_a.resource->resource_factory()
+A:aiohttp.web_a.rule->Domain(domain)
+A:aiohttp.web_a.debug->asyncio.get_event_loop().get_debug()
+A:aiohttp.web_a.expect->request.headers.get(hdrs.EXPECT)
+A:aiohttp.web_a.handler->partial(m, handler=handler)
+A:aiohttp.web_a.it->cb(app).__aiter__()
+aiohttp.web_a.Application(self,*,logger:logging.Logger=web_logger,router:Optional[UrlDispatcher]=None,middlewares:Sequence[_Middleware]=(),handler_args:Mapping[str,Any]=None,client_max_size:int=1024**2,loop:Optional[asyncio.AbstractEventLoop]=None,debug:Any=...)
+aiohttp.web_a.Application.__delitem__(self,key:str)->None
+aiohttp.web_a.Application.__eq__(self,other:object)->bool
+aiohttp.web_a.Application.__getitem__(self,key:str)->Any
+aiohttp.web_a.Application.__init_subclass__(cls:Type['Application'])->None
+aiohttp.web_a.Application.__iter__(self)->Iterator[str]
+aiohttp.web_a.Application.__len__(self)->int
+aiohttp.web_a.Application.__repr__(self)->str
+aiohttp.web_a.Application.__setitem__(self,key:str,value:Any)->None
+aiohttp.web_a.Application._add_subapp(self,resource_factory:Callable[[],AbstractResource],subapp:'Application')->AbstractResource
+aiohttp.web_a.Application._check_frozen(self)->None
+aiohttp.web_a.Application._make_handler(self,*,loop:Optional[asyncio.AbstractEventLoop]=None,access_log_class:Type[AbstractAccessLogger]=AccessLogger,**kwargs:Any)->Server
+aiohttp.web_a.Application._make_request(self,message:RawRequestMessage,payload:StreamReader,protocol:RequestHandler,writer:AbstractStreamWriter,task:'asyncio.Task[None]',_cls:Type[Request]=Request)->Request
+aiohttp.web_a.Application._prepare_middleware(self)->Iterator[Tuple[_Middleware, bool]]
+aiohttp.web_a.Application._reg_subapp_signals(self,subapp:'Application')->None
+aiohttp.web_a.Application._set_loop(self,loop:Optional[asyncio.AbstractEventLoop])->None
+aiohttp.web_a.Application.add_domain(self,domain:str,subapp:'Application')->AbstractResource
+aiohttp.web_a.Application.add_routes(self,routes:Iterable[AbstractRouteDef])->None
+aiohttp.web_a.Application.add_subapp(self,prefix:str,subapp:'Application')->AbstractResource
+aiohttp.web_a.Application.cleanup_ctx(self)->'CleanupContext'
+aiohttp.web_a.Application.debug(self)->bool
+aiohttp.web_a.Application.freeze(self)->None
+aiohttp.web_a.Application.frozen(self)->bool
+aiohttp.web_a.Application.loop(self)->asyncio.AbstractEventLoop
+aiohttp.web_a.Application.make_handler(self,*,loop:Optional[asyncio.AbstractEventLoop]=None,access_log_class:Type[AbstractAccessLogger]=AccessLogger,**kwargs:Any)->Server
+aiohttp.web_a.Application.middlewares(self)->_Middlewares
+aiohttp.web_a.Application.on_cleanup(self)->_AppSignal
+aiohttp.web_a.Application.on_response_prepare(self)->_RespPrepareSignal
+aiohttp.web_a.Application.on_shutdown(self)->_AppSignal
+aiohttp.web_a.Application.on_startup(self)->_AppSignal
+aiohttp.web_a.Application.pre_freeze(self)->None
+aiohttp.web_a.Application.pre_frozen(self)->bool
+aiohttp.web_a.Application.router(self)->UrlDispatcher
+aiohttp.web_a.CleanupContext(self)
+aiohttp.web_a.CleanupError(RuntimeError)
+aiohttp.web_a.CleanupError.exceptions(self)->List[BaseException]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_routedef.py----------------------------------------
+A:aiohttp.web_routedef.method->attr.ib(type=str)
+A:aiohttp.web_routedef.path->attr.ib()
+A:aiohttp.web_routedef.handler->attr.ib()
+A:aiohttp.web_routedef.kwargs->attr.ib(type=Dict[str, Any])
+A:aiohttp.web_routedef.reg->getattr(router, 'add_' + self.method.lower())
+A:aiohttp.web_routedef.prefix->attr.ib(type=str)
+aiohttp.web_routedef.AbstractRouteDef(abc.ABC)
+aiohttp.web_routedef.AbstractRouteDef.register(self,router:UrlDispatcher)->None
+aiohttp.web_routedef.RouteDef(AbstractRouteDef)
+aiohttp.web_routedef.RouteDef.__repr__(self)->str
+aiohttp.web_routedef.RouteDef.register(self,router:UrlDispatcher)->None
+aiohttp.web_routedef.RouteTableDef(self)
+aiohttp.web_routedef.RouteTableDef.__contains__(self,item:object)->bool
+aiohttp.web_routedef.RouteTableDef.__getitem__(self,index)
+aiohttp.web_routedef.RouteTableDef.__getitem__(self,index:int)->AbstractRouteDef
+aiohttp.web_routedef.RouteTableDef.__getitem__(self,index:slice)->List[AbstractRouteDef]
+aiohttp.web_routedef.RouteTableDef.__iter__(self)->Iterator[AbstractRouteDef]
+aiohttp.web_routedef.RouteTableDef.__len__(self)->int
+aiohttp.web_routedef.RouteTableDef.__repr__(self)->str
+aiohttp.web_routedef.RouteTableDef.delete(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.get(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.head(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.patch(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.post(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.put(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.route(self,method:str,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.RouteTableDef.static(self,prefix:str,path:PathLike,**kwargs:Any)->None
+aiohttp.web_routedef.RouteTableDef.view(self,path:str,**kwargs:Any)->_Deco
+aiohttp.web_routedef.StaticDef(AbstractRouteDef)
+aiohttp.web_routedef.StaticDef.__repr__(self)->str
+aiohttp.web_routedef.StaticDef.register(self,router:UrlDispatcher)->None
+aiohttp.web_routedef.delete(path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.get(path:str,handler:_HandlerType,*,name:Optional[str]=None,allow_head:bool=True,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.head(path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.options(path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.patch(path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.post(path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.put(path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.route(method:str,path:str,handler:_HandlerType,**kwargs:Any)->RouteDef
+aiohttp.web_routedef.static(prefix:str,path:PathLike,**kwargs:Any)->StaticDef
+aiohttp.web_routedef.view(path:str,handler:AbstractView,**kwargs:Any)->RouteDef
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_middlewares.py----------------------------------------
+A:aiohttp.web_middlewares._Func->TypeVar('_Func')
+A:aiohttp.web_middlewares.alt_request->request.clone(rel_url=path)
+A:aiohttp.web_middlewares.(path, query)->request.raw_path.split('?', 1)
+A:aiohttp.web_middlewares.merged_slashes->re.sub('//+', '/', path)
+aiohttp.web_middlewares._fix_request_current_app(app:'Application')->_Middleware
+aiohttp.web_middlewares.middleware(f:_Func)->_Func
+aiohttp.web_middlewares.normalize_path_middleware(*,append_slash:bool=True,remove_slash:bool=False,merge_slashes:bool=True,redirect_class:Type[_HTTPMove]=HTTPMovedPermanently)->_Middleware
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/locks.py----------------------------------------
+A:aiohttp.locks.self._event->asyncio.Event(loop=loop)
+A:aiohttp.locks.self._waiters->collections.deque()
+A:aiohttp.locks.waiter->self._loop.create_task(self._event.wait())
+aiohttp.locks.EventResultOrError(self,loop:asyncio.AbstractEventLoop)
+aiohttp.locks.EventResultOrError.cancel(self)->None
+aiohttp.locks.EventResultOrError.set(self,exc:Optional[BaseException]=None)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/connector.py----------------------------------------
+A:aiohttp.connector.self._source_traceback->traceback.extract_stack(sys._getframe(1))
+A:aiohttp.connector.loop->get_running_loop(loop)
+A:aiohttp.connector.self._acquired->set()
+A:aiohttp.connector.self._acquired_per_host->defaultdict(set)
+A:aiohttp.connector.self._keepalive_timeout->cast(float, keepalive_timeout)
+A:aiohttp.connector.self._waiters->defaultdict(deque)
+A:aiohttp.connector.self._factory->functools.partial(ResponseHandler, loop=loop)
+A:aiohttp.connector.self.cookies->SimpleCookie()
+A:aiohttp.connector.now->self._loop.time()
+A:aiohttp.connector.self._cleanup_handle->helpers.weakref_handle(self, '_cleanup', self._keepalive_timeout, self._loop)
+A:aiohttp.connector.self._cleanup_closed_handle->helpers.weakref_handle(self, '_cleanup_closed', self._cleanup_closed_period, self._loop)
+A:aiohttp.connector.acquired->self._acquired_per_host.get(key)
+A:aiohttp.connector.available->self._available_connections(key)
+A:aiohttp.connector.fut->self._loop.create_future()
+A:aiohttp.connector.proto->self._get(key)
+A:aiohttp.connector.placeholder->cast(ResponseHandler, _TransportPlaceholder())
+A:aiohttp.connector.t1->self._loop.time()
+A:aiohttp.connector.(proto, t0)->self._conns.get(key).pop()
+A:aiohttp.connector.queues->list(self._waiters.keys())
+A:aiohttp.connector.waiter->waiters.popleft()
+A:aiohttp.connector.conns->self._conns.get(key)
+A:aiohttp.connector.self._timestamps[key]->monotonic()
+A:aiohttp.connector.addrs->list(islice(loop, length))
+A:aiohttp.connector.self._ssl->_merge_ssl_params(ssl, verify_ssl, ssl_context, fingerprint)
+A:aiohttp.connector.resolver->DefaultResolver(loop=self._loop)
+A:aiohttp.connector.self._cached_hosts->_DNSCacheTable(ttl=ttl_dns_cache)
+A:aiohttp.connector.self._throttle_dns_events[key]->EventResultOrError(self._loop)
+A:aiohttp.connector.sslcontext->self._get_ssl_context(req)
+A:aiohttp.connector.fingerprint->self._get_fingerprint(req)
+A:aiohttp.connector.proxy_req->ClientRequest(hdrs.METH_GET, url, headers=headers, auth=req.proxy_auth, loop=self._loop, ssl=req.ssl)
+A:aiohttp.connector.auth->ClientRequest(hdrs.METH_GET, url, headers=headers, auth=req.proxy_auth, loop=self._loop, ssl=req.ssl).headers.pop(hdrs.AUTHORIZATION, None)
+A:aiohttp.connector.key->attr.evolve(req.connection_key, proxy=None, proxy_auth=None, proxy_headers_hash=None)
+A:aiohttp.connector.conn->Connection(self, key, proto, self._loop)
+A:aiohttp.connector.rawsock->rawsock.dup().dup()
+aiohttp.connector.BaseConnector(self,*,keepalive_timeout:Union[object,None,float]=sentinel,force_close:bool=False,limit:int=100,limit_per_host:int=0,enable_cleanup_closed:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.connector.BaseConnector.__del__(self,_warnings:Any=warnings)->None
+aiohttp.connector.BaseConnector.__enter__(self)->'BaseConnector'
+aiohttp.connector.BaseConnector.__exit__(self,*exc:Any)->None
+aiohttp.connector.BaseConnector._available_connections(self,key:'ConnectionKey')->int
+aiohttp.connector.BaseConnector._cleanup(self)->None
+aiohttp.connector.BaseConnector._cleanup_closed(self)->None
+aiohttp.connector.BaseConnector._close(self)->None
+aiohttp.connector.BaseConnector._drop_acquired_per_host(self,key:'ConnectionKey',val:ResponseHandler)->None
+aiohttp.connector.BaseConnector._get(self,key:'ConnectionKey')->Optional[ResponseHandler]
+aiohttp.connector.BaseConnector._release(self,key:'ConnectionKey',protocol:ResponseHandler,*,should_close:bool=False)->None
+aiohttp.connector.BaseConnector._release_acquired(self,key:'ConnectionKey',proto:ResponseHandler)->None
+aiohttp.connector.BaseConnector._release_waiter(self)->None
+aiohttp.connector.BaseConnector.close(self)->Awaitable[None]
+aiohttp.connector.BaseConnector.closed(self)->bool
+aiohttp.connector.BaseConnector.force_close(self)->bool
+aiohttp.connector.BaseConnector.limit(self)->int
+aiohttp.connector.BaseConnector.limit_per_host(self)->int
+aiohttp.connector.Connection(self,connector:'BaseConnector',key:'ConnectionKey',protocol:ResponseHandler,loop:asyncio.AbstractEventLoop)
+aiohttp.connector.Connection.__del__(self,_warnings:Any=warnings)->None
+aiohttp.connector.Connection.__repr__(self)->str
+aiohttp.connector.Connection._notify_release(self)->None
+aiohttp.connector.Connection.add_callback(self,callback:Callable[[],None])->None
+aiohttp.connector.Connection.close(self)->None
+aiohttp.connector.Connection.closed(self)->bool
+aiohttp.connector.Connection.loop(self)->asyncio.AbstractEventLoop
+aiohttp.connector.Connection.protocol(self)->Optional[ResponseHandler]
+aiohttp.connector.Connection.release(self)->None
+aiohttp.connector.Connection.transport(self)->Optional[asyncio.Transport]
+aiohttp.connector.TCPConnector(self,*,verify_ssl:bool=True,fingerprint:Optional[bytes]=None,use_dns_cache:bool=True,ttl_dns_cache:int=10,family:int=0,ssl_context:Optional[SSLContext]=None,ssl:Union[None,bool,Fingerprint,SSLContext]=None,local_addr:Optional[str]=None,resolver:Optional[AbstractResolver]=None,keepalive_timeout:Union[None,float,object]=sentinel,force_close:bool=False,limit:int=100,limit_per_host:int=0,enable_cleanup_closed:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.connector.TCPConnector._get_fingerprint(self,req:'ClientRequest')->Optional['Fingerprint']
+aiohttp.connector.TCPConnector._get_ssl_context(self,req:'ClientRequest')->Optional[SSLContext]
+aiohttp.connector.TCPConnector._make_ssl_context(verified:bool)->SSLContext
+aiohttp.connector.TCPConnector.clear_dns_cache(self,host:Optional[str]=None,port:Optional[int]=None)->None
+aiohttp.connector.TCPConnector.close(self)->Awaitable[None]
+aiohttp.connector.TCPConnector.family(self)->int
+aiohttp.connector.TCPConnector.use_dns_cache(self)->bool
+aiohttp.connector.UnixConnector(self,path:str,force_close:bool=False,keepalive_timeout:Union[object,float,None]=sentinel,limit:int=100,limit_per_host:int=0,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.connector.UnixConnector.path(self)->str
+aiohttp.connector._DNSCacheTable(self,ttl:Optional[float]=None)
+aiohttp.connector._DNSCacheTable.__contains__(self,host:object)->bool
+aiohttp.connector._DNSCacheTable.add(self,key:Tuple[str,int],addrs:List[Dict[str,Any]])->None
+aiohttp.connector._DNSCacheTable.clear(self)->None
+aiohttp.connector._DNSCacheTable.expired(self,key:Tuple[str,int])->bool
+aiohttp.connector._DNSCacheTable.next_addrs(self,key:Tuple[str,int])->List[Dict[str, Any]]
+aiohttp.connector._DNSCacheTable.remove(self,key:Tuple[str,int])->None
+aiohttp.connector._DeprecationWaiter(self,awaitable:Awaitable[Any])
+aiohttp.connector._DeprecationWaiter.__await__(self)->Any
+aiohttp.connector._DeprecationWaiter.__del__(self)->None
+aiohttp.connector._TransportPlaceholder
+aiohttp.connector._TransportPlaceholder.close(self)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_log.py----------------------------------------
+A:aiohttp.web_log.KeyMethod->namedtuple('KeyMethod', 'key method')
+A:aiohttp.web_log.FORMAT_RE->re.compile('%(\\{([A-Za-z0-9\\-_]+)\\}([ioe])|[atPrsbOD]|Tf?)')
+A:aiohttp.web_log.CLEANUP_RE->re.compile('(%[^s])')
+A:aiohttp.web_log._compiled_format->self.compile_format(log_format)
+A:aiohttp.web_log.methods->list()
+A:aiohttp.web_log.m->getattr(AccessLogger, '_format_%s' % atom[2])
+A:aiohttp.web_log.key_method->KeyMethod(format_key2, functools.partial(m, atom[1]))
+A:aiohttp.web_log.log_format->self.CLEANUP_RE.sub('%\\1', log_format)
+A:aiohttp.web_log.now->datetime.datetime.utcnow()
+A:aiohttp.web_log.fmt_info->self._format_line(request, response, time)
+A:aiohttp.web_log.values->list()
+A:aiohttp.web_log.extra->dict()
+A:aiohttp.web_log.dct->dict().get(k1, {})
+aiohttp.web_log.AccessLogger(self,logger:logging.Logger,log_format:str=LOG_FORMAT)
+aiohttp.web_log.AccessLogger._format_D(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_P(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_T(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_Tf(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_a(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_b(request:BaseRequest,response:StreamResponse,time:float)->int
+aiohttp.web_log.AccessLogger._format_i(key:str,request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_line(self,request:BaseRequest,response:StreamResponse,time:float)->Iterable[Tuple[str, Callable[[BaseRequest, StreamResponse, float], str]]]
+aiohttp.web_log.AccessLogger._format_o(key:str,request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_r(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger._format_s(request:BaseRequest,response:StreamResponse,time:float)->int
+aiohttp.web_log.AccessLogger._format_t(request:BaseRequest,response:StreamResponse,time:float)->str
+aiohttp.web_log.AccessLogger.compile_format(self,log_format:str)->Tuple[str, List[KeyMethod]]
+aiohttp.web_log.AccessLogger.log(self,request:BaseRequest,response:StreamResponse,time:float)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/pytest_plugin.py----------------------------------------
+A:aiohttp.pytest_plugin._loop->request.getfixturevalue('loop')
+A:aiohttp.pytest_plugin.gen->func(*args, **kwargs)
+A:aiohttp.pytest_plugin.loop->setup_test_loop()
+A:aiohttp.pytest_plugin.fast->pyfuncitem.config.getoption('--aiohttp-fast')
+A:aiohttp.pytest_plugin.existing_loop->pyfuncitem.funcargs.get('loop', None)
+A:aiohttp.pytest_plugin.name->name.strip(' ?').strip(' ?')
+A:aiohttp.pytest_plugin.policy->loop_factory()
+A:aiohttp.pytest_plugin.server->TestServer(__param, loop=loop, **server_kwargs)
+A:aiohttp.pytest_plugin.__param->__param(loop, *args, **kwargs)
+A:aiohttp.pytest_plugin.client->TestClient(__param, loop=loop, **kwargs)
+aiohttp.pytest_plugin._passthrough_loop_context(loop,fast=False)
+aiohttp.pytest_plugin._runtime_warning_context()
+aiohttp.pytest_plugin.aiohttp_client(loop)
+aiohttp.pytest_plugin.aiohttp_raw_server(loop)
+aiohttp.pytest_plugin.aiohttp_server(loop)
+aiohttp.pytest_plugin.aiohttp_unused_port()
+aiohttp.pytest_plugin.fast(request)
+aiohttp.pytest_plugin.loop(loop_factory,fast,loop_debug)
+aiohttp.pytest_plugin.loop_debug(request)
+aiohttp.pytest_plugin.pytest_addoption(parser)
+aiohttp.pytest_plugin.pytest_fixture_setup(fixturedef)
+aiohttp.pytest_plugin.pytest_generate_tests(metafunc)
+aiohttp.pytest_plugin.pytest_pycollect_makeitem(collector,name,obj)
+aiohttp.pytest_plugin.pytest_pyfunc_call(pyfuncitem)
+aiohttp.pytest_plugin.raw_test_server(aiohttp_raw_server)
+aiohttp.pytest_plugin.test_client(aiohttp_client)
+aiohttp.pytest_plugin.test_server(aiohttp_server)
+aiohttp.pytest_plugin.unused_port(aiohttp_unused_port)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_exceptions.py----------------------------------------
+A:aiohttp.web_exceptions.self.text->'{}: {}'.format(self.status, self.reason)
+A:aiohttp.web_exceptions.self.headers['Location']->str(location)
+A:aiohttp.web_exceptions.allow->','.join(sorted(allowed_methods))
+A:aiohttp.web_exceptions.self.allowed_methods->set(allowed_methods)
+A:aiohttp.web_exceptions.self.method->method.upper()
+aiohttp.web_exceptions.HTTPAccepted(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPBadGateway(HTTPServerError)
+aiohttp.web_exceptions.HTTPBadRequest(HTTPClientError)
+aiohttp.web_exceptions.HTTPClientError(HTTPError)
+aiohttp.web_exceptions.HTTPConflict(HTTPClientError)
+aiohttp.web_exceptions.HTTPCreated(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPError(HTTPException)
+aiohttp.web_exceptions.HTTPException(self,*,headers:Optional[LooseHeaders]=None,reason:Optional[str]=None,body:Any=None,text:Optional[str]=None,content_type:Optional[str]=None)
+aiohttp.web_exceptions.HTTPException.__bool__(self)->bool
+aiohttp.web_exceptions.HTTPExpectationFailed(HTTPClientError)
+aiohttp.web_exceptions.HTTPFailedDependency(HTTPClientError)
+aiohttp.web_exceptions.HTTPForbidden(HTTPClientError)
+aiohttp.web_exceptions.HTTPFound(_HTTPMove)
+aiohttp.web_exceptions.HTTPGatewayTimeout(HTTPServerError)
+aiohttp.web_exceptions.HTTPGone(HTTPClientError)
+aiohttp.web_exceptions.HTTPInsufficientStorage(HTTPServerError)
+aiohttp.web_exceptions.HTTPInternalServerError(HTTPServerError)
+aiohttp.web_exceptions.HTTPLengthRequired(HTTPClientError)
+aiohttp.web_exceptions.HTTPMethodNotAllowed(self,method:str,allowed_methods:Iterable[str],*,headers:Optional[LooseHeaders]=None,reason:Optional[str]=None,body:Any=None,text:Optional[str]=None,content_type:Optional[str]=None)
+aiohttp.web_exceptions.HTTPMisdirectedRequest(HTTPClientError)
+aiohttp.web_exceptions.HTTPMovedPermanently(_HTTPMove)
+aiohttp.web_exceptions.HTTPMultipleChoices(_HTTPMove)
+aiohttp.web_exceptions.HTTPNetworkAuthenticationRequired(HTTPServerError)
+aiohttp.web_exceptions.HTTPNoContent(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPNonAuthoritativeInformation(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPNotAcceptable(HTTPClientError)
+aiohttp.web_exceptions.HTTPNotExtended(HTTPServerError)
+aiohttp.web_exceptions.HTTPNotFound(HTTPClientError)
+aiohttp.web_exceptions.HTTPNotImplemented(HTTPServerError)
+aiohttp.web_exceptions.HTTPNotModified(HTTPRedirection)
+aiohttp.web_exceptions.HTTPOk(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPPartialContent(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPPaymentRequired(HTTPClientError)
+aiohttp.web_exceptions.HTTPPermanentRedirect(_HTTPMove)
+aiohttp.web_exceptions.HTTPPreconditionFailed(HTTPClientError)
+aiohttp.web_exceptions.HTTPPreconditionRequired(HTTPClientError)
+aiohttp.web_exceptions.HTTPProxyAuthenticationRequired(HTTPClientError)
+aiohttp.web_exceptions.HTTPRedirection(HTTPException)
+aiohttp.web_exceptions.HTTPRequestEntityTooLarge(self,max_size:float,actual_size:float,**kwargs:Any)
+aiohttp.web_exceptions.HTTPRequestHeaderFieldsTooLarge(HTTPClientError)
+aiohttp.web_exceptions.HTTPRequestRangeNotSatisfiable(HTTPClientError)
+aiohttp.web_exceptions.HTTPRequestTimeout(HTTPClientError)
+aiohttp.web_exceptions.HTTPRequestURITooLong(HTTPClientError)
+aiohttp.web_exceptions.HTTPResetContent(HTTPSuccessful)
+aiohttp.web_exceptions.HTTPSeeOther(_HTTPMove)
+aiohttp.web_exceptions.HTTPServerError(HTTPError)
+aiohttp.web_exceptions.HTTPServiceUnavailable(HTTPServerError)
+aiohttp.web_exceptions.HTTPSuccessful(HTTPException)
+aiohttp.web_exceptions.HTTPTemporaryRedirect(_HTTPMove)
+aiohttp.web_exceptions.HTTPTooManyRequests(HTTPClientError)
+aiohttp.web_exceptions.HTTPUnauthorized(HTTPClientError)
+aiohttp.web_exceptions.HTTPUnavailableForLegalReasons(self,link:str,*,headers:Optional[LooseHeaders]=None,reason:Optional[str]=None,body:Any=None,text:Optional[str]=None,content_type:Optional[str]=None)
+aiohttp.web_exceptions.HTTPUnprocessableEntity(HTTPClientError)
+aiohttp.web_exceptions.HTTPUnsupportedMediaType(HTTPClientError)
+aiohttp.web_exceptions.HTTPUpgradeRequired(HTTPClientError)
+aiohttp.web_exceptions.HTTPUseProxy(_HTTPMove)
+aiohttp.web_exceptions.HTTPVariantAlsoNegotiates(HTTPServerError)
+aiohttp.web_exceptions.HTTPVersionNotSupported(HTTPServerError)
+aiohttp.web_exceptions._HTTPMove(self,location:StrOrURL,*,headers:Optional[LooseHeaders]=None,reason:Optional[str]=None,body:Any=None,text:Optional[str]=None,content_type:Optional[str]=None)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/cookiejar.py----------------------------------------
+A:aiohttp.cookiejar.DATE_TOKENS_RE->re.compile('[\\x09\\x20-\\x2F\\x3B-\\x40\\x5B-\\x60\\x7B-\\x7E]*(?P<token>[\\x00-\\x08\\x0A-\\x1F\\d:a-zA-Z\\x7F-\\xFF]+)')
+A:aiohttp.cookiejar.DATE_HMS_TIME_RE->re.compile('(\\d{1,2}):(\\d{1,2}):(\\d{1,2})')
+A:aiohttp.cookiejar.DATE_DAY_OF_MONTH_RE->re.compile('(\\d{1,2})')
+A:aiohttp.cookiejar.DATE_MONTH_RE->re.compile('(jan)|(feb)|(mar)|(apr)|(may)|(jun)|(jul)|(aug)|(sep)|(oct)|(nov)|(dec)', re.I)
+A:aiohttp.cookiejar.DATE_YEAR_RE->re.compile('(\\d{2,4})')
+A:aiohttp.cookiejar.self._cookies->pickle.load(f)
+A:aiohttp.cookiejar.self._host_only_cookies->set()
+A:aiohttp.cookiejar.self._next_expiration->min(self._next_expiration, iwhen)
+A:aiohttp.cookiejar.file_path->pathlib.Path(file_path)
+A:aiohttp.cookiejar.now->self._loop.time()
+A:aiohttp.cookiejar.next_expiration->min(next_expiration, when)
+A:aiohttp.cookiejar.iwhen->int(when)
+A:aiohttp.cookiejar.cookies->cookies.items().items()
+A:aiohttp.cookiejar.tmp->SimpleCookie()
+A:aiohttp.cookiejar.delta_seconds->int(max_age)
+A:aiohttp.cookiejar.expire_time->self._parse_date(expires)
+A:aiohttp.cookiejar.request_url->URL(request_url)
+A:aiohttp.cookiejar.filtered->SimpleCookie()
+A:aiohttp.cookiejar.mrsl_val->cast('Morsel[str]', cookie.get(cookie.key, Morsel()))
+A:aiohttp.cookiejar.token->token_match.group('token')
+A:aiohttp.cookiejar.time_match->cls.DATE_HMS_TIME_RE.match(token)
+A:aiohttp.cookiejar.day_match->cls.DATE_DAY_OF_MONTH_RE.match(token)
+A:aiohttp.cookiejar.day->int(day_match.group())
+A:aiohttp.cookiejar.month_match->cls.DATE_MONTH_RE.match(token)
+A:aiohttp.cookiejar.year_match->cls.DATE_YEAR_RE.match(token)
+A:aiohttp.cookiejar.year->int(year_match.group())
+aiohttp.CookieJar(self,*,unsafe:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.CookieJar.__iter__(self)->'Iterator[Morsel[str]]'
+aiohttp.CookieJar.__len__(self)->int
+aiohttp.CookieJar._do_expiration(self)->None
+aiohttp.CookieJar._expire_cookie(self,when:float,domain:str,name:str)->None
+aiohttp.CookieJar._is_domain_match(domain:str,hostname:str)->bool
+aiohttp.CookieJar._is_path_match(req_path:str,cookie_path:str)->bool
+aiohttp.CookieJar._parse_date(cls,date_str:str)->Optional[datetime.datetime]
+aiohttp.CookieJar.clear(self)->None
+aiohttp.CookieJar.filter_cookies(self,request_url:URL=URL())->'BaseCookie[str]'
+aiohttp.CookieJar.load(self,file_path:PathLike)->None
+aiohttp.CookieJar.save(self,file_path:PathLike)->None
+aiohttp.CookieJar.update_cookies(self,cookies:LooseCookies,response_url:URL=URL())->None
+aiohttp.DummyCookieJar(self,*,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.DummyCookieJar.__iter__(self)->'Iterator[Morsel[str]]'
+aiohttp.DummyCookieJar.__len__(self)->int
+aiohttp.DummyCookieJar.clear(self)->None
+aiohttp.DummyCookieJar.filter_cookies(self,request_url:URL)->'BaseCookie[str]'
+aiohttp.DummyCookieJar.update_cookies(self,cookies:LooseCookies,response_url:URL=URL())->None
+aiohttp.cookiejar.CookieJar(self,*,unsafe:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.cookiejar.CookieJar.__iter__(self)->'Iterator[Morsel[str]]'
+aiohttp.cookiejar.CookieJar.__len__(self)->int
+aiohttp.cookiejar.CookieJar._do_expiration(self)->None
+aiohttp.cookiejar.CookieJar._expire_cookie(self,when:float,domain:str,name:str)->None
+aiohttp.cookiejar.CookieJar._is_domain_match(domain:str,hostname:str)->bool
+aiohttp.cookiejar.CookieJar._is_path_match(req_path:str,cookie_path:str)->bool
+aiohttp.cookiejar.CookieJar._parse_date(cls,date_str:str)->Optional[datetime.datetime]
+aiohttp.cookiejar.CookieJar.clear(self)->None
+aiohttp.cookiejar.CookieJar.filter_cookies(self,request_url:URL=URL())->'BaseCookie[str]'
+aiohttp.cookiejar.CookieJar.load(self,file_path:PathLike)->None
+aiohttp.cookiejar.CookieJar.save(self,file_path:PathLike)->None
+aiohttp.cookiejar.CookieJar.update_cookies(self,cookies:LooseCookies,response_url:URL=URL())->None
+aiohttp.cookiejar.DummyCookieJar(self,*,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.cookiejar.DummyCookieJar.__iter__(self)->'Iterator[Morsel[str]]'
+aiohttp.cookiejar.DummyCookieJar.__len__(self)->int
+aiohttp.cookiejar.DummyCookieJar.clear(self)->None
+aiohttp.cookiejar.DummyCookieJar.filter_cookies(self,request_url:URL)->'BaseCookie[str]'
+aiohttp.cookiejar.DummyCookieJar.update_cookies(self,cookies:LooseCookies,response_url:URL=URL())->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/resolver.py----------------------------------------
+A:aiohttp.resolver.self._loop->get_running_loop(loop)
+A:aiohttp.resolver.self._resolver->aiodns.DNSResolver(*args, loop=loop, **kwargs)
+aiohttp.AsyncResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None,*args:Any,**kwargs:Any)
+aiohttp.ThreadedResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.resolver.AsyncResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None,*args:Any,**kwargs:Any)
+aiohttp.resolver.ThreadedResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/streams.py----------------------------------------
+A:aiohttp.streams._T->TypeVar('_T')
+A:aiohttp.streams.loop->asyncio.get_event_loop()
+A:aiohttp.streams.self._buffer->collections.deque()
+A:aiohttp.streams.self._eof_waiter->self._loop.create_future()
+A:aiohttp.streams.waiterself._waiter->self._loop.create_future()
+A:aiohttp.streams.data->self._buffer.popleft()
+A:aiohttp.streams.partial->b''.join(blocks)
+A:aiohttp.streams.chunk->self._read_nowait_chunk(n)
+A:aiohttp.streams.EMPTY_PAYLOAD->EmptyStreamReader()
+A:aiohttp.streams.self._waiter->self._loop.create_future()
+A:aiohttp.streams.(data, size)->self._buffer.popleft()
+aiohttp.DataQueue(self,loop:asyncio.AbstractEventLoop)
+aiohttp.DataQueue.__aiter__(self)->AsyncStreamIterator[_T]
+aiohttp.DataQueue.__len__(self)->int
+aiohttp.DataQueue.at_eof(self)->bool
+aiohttp.DataQueue.exception(self)->Optional[BaseException]
+aiohttp.DataQueue.feed_data(self,data:_T,size:int=0)->None
+aiohttp.DataQueue.feed_eof(self)->None
+aiohttp.DataQueue.is_eof(self)->bool
+aiohttp.DataQueue.set_exception(self,exc:BaseException)->None
+aiohttp.EofStream(Exception)
+aiohttp.FlowControlDataQueue(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,loop:asyncio.AbstractEventLoop)
+aiohttp.FlowControlDataQueue.feed_data(self,data:_T,size:int=0)->None
+aiohttp.StreamReader(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,timer:Optional[BaseTimerContext]=None,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.StreamReader.__repr__(self)->str
+aiohttp.StreamReader._read_nowait(self,n:int)->bytes
+aiohttp.StreamReader._read_nowait_chunk(self,n:int)->bytes
+aiohttp.StreamReader.at_eof(self)->bool
+aiohttp.StreamReader.begin_http_chunk_receiving(self)->None
+aiohttp.StreamReader.end_http_chunk_receiving(self)->None
+aiohttp.StreamReader.exception(self)->Optional[BaseException]
+aiohttp.StreamReader.feed_data(self,data:bytes,size:int=0)->None
+aiohttp.StreamReader.feed_eof(self)->None
+aiohttp.StreamReader.is_eof(self)->bool
+aiohttp.StreamReader.on_eof(self,callback:Callable[[],None])->None
+aiohttp.StreamReader.read_nowait(self,n:int=-1)->bytes
+aiohttp.StreamReader.set_exception(self,exc:BaseException)->None
+aiohttp.StreamReader.unread_data(self,data:bytes)->None
+aiohttp.streams.AsyncStreamIterator(self,read_func:Callable[[],Awaitable[_T]])
+aiohttp.streams.AsyncStreamIterator.__aiter__(self)->'AsyncStreamIterator[_T]'
+aiohttp.streams.AsyncStreamReaderMixin
+aiohttp.streams.AsyncStreamReaderMixin.__aiter__(self)->AsyncStreamIterator[bytes]
+aiohttp.streams.AsyncStreamReaderMixin.iter_any(self)->AsyncStreamIterator[bytes]
+aiohttp.streams.AsyncStreamReaderMixin.iter_chunked(self,n:int)->AsyncStreamIterator[bytes]
+aiohttp.streams.AsyncStreamReaderMixin.iter_chunks(self)->ChunkTupleAsyncStreamIterator
+aiohttp.streams.ChunkTupleAsyncStreamIterator(self,stream:'StreamReader')
+aiohttp.streams.ChunkTupleAsyncStreamIterator.__aiter__(self)->'ChunkTupleAsyncStreamIterator'
+aiohttp.streams.DataQueue(self,loop:asyncio.AbstractEventLoop)
+aiohttp.streams.DataQueue.__aiter__(self)->AsyncStreamIterator[_T]
+aiohttp.streams.DataQueue.__len__(self)->int
+aiohttp.streams.DataQueue.at_eof(self)->bool
+aiohttp.streams.DataQueue.exception(self)->Optional[BaseException]
+aiohttp.streams.DataQueue.feed_data(self,data:_T,size:int=0)->None
+aiohttp.streams.DataQueue.feed_eof(self)->None
+aiohttp.streams.DataQueue.is_eof(self)->bool
+aiohttp.streams.DataQueue.set_exception(self,exc:BaseException)->None
+aiohttp.streams.EmptyStreamReader(AsyncStreamReaderMixin)
+aiohttp.streams.EmptyStreamReader.at_eof(self)->bool
+aiohttp.streams.EmptyStreamReader.exception(self)->Optional[BaseException]
+aiohttp.streams.EmptyStreamReader.feed_data(self,data:bytes,n:int=0)->None
+aiohttp.streams.EmptyStreamReader.feed_eof(self)->None
+aiohttp.streams.EmptyStreamReader.is_eof(self)->bool
+aiohttp.streams.EmptyStreamReader.on_eof(self,callback:Callable[[],None])->None
+aiohttp.streams.EmptyStreamReader.read_nowait(self)->bytes
+aiohttp.streams.EmptyStreamReader.set_exception(self,exc:BaseException)->None
+aiohttp.streams.EofStream(Exception)
+aiohttp.streams.FlowControlDataQueue(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,loop:asyncio.AbstractEventLoop)
+aiohttp.streams.FlowControlDataQueue.feed_data(self,data:_T,size:int=0)->None
+aiohttp.streams.StreamReader(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,timer:Optional[BaseTimerContext]=None,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.streams.StreamReader.__repr__(self)->str
+aiohttp.streams.StreamReader._read_nowait(self,n:int)->bytes
+aiohttp.streams.StreamReader._read_nowait_chunk(self,n:int)->bytes
+aiohttp.streams.StreamReader.at_eof(self)->bool
+aiohttp.streams.StreamReader.begin_http_chunk_receiving(self)->None
+aiohttp.streams.StreamReader.end_http_chunk_receiving(self)->None
+aiohttp.streams.StreamReader.exception(self)->Optional[BaseException]
+aiohttp.streams.StreamReader.feed_data(self,data:bytes,size:int=0)->None
+aiohttp.streams.StreamReader.feed_eof(self)->None
+aiohttp.streams.StreamReader.is_eof(self)->bool
+aiohttp.streams.StreamReader.on_eof(self,callback:Callable[[],None])->None
+aiohttp.streams.StreamReader.read_nowait(self,n:int=-1)->bytes
+aiohttp.streams.StreamReader.set_exception(self,exc:BaseException)->None
+aiohttp.streams.StreamReader.unread_data(self,data:bytes)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/typedefs.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/client_proto.py----------------------------------------
+A:aiohttp.client_proto.uncompleted->self._parser.feed_eof()
+A:aiohttp.client_proto.exc->ServerTimeoutError('Timeout on reading data from socket')
+A:aiohttp.client_proto.self._parser->HttpResponseParser(self, self._loop, timer=timer, payload_exception=ClientPayloadError, read_until_eof=read_until_eof, auto_decompress=auto_decompress)
+A:aiohttp.client_proto.self._read_timeout_handle->self._loop.call_later(timeout, self._on_read_timeout)
+A:aiohttp.client_proto.(eof, tail)->self._payload_parser.feed_data(data)
+A:aiohttp.client_proto.(messages, upgraded, tail)->self._parser.feed_data(data)
+aiohttp.client_proto.ResponseHandler(self,loop:asyncio.AbstractEventLoop)
+aiohttp.client_proto.ResponseHandler._drop_timeout(self)->None
+aiohttp.client_proto.ResponseHandler._on_read_timeout(self)->None
+aiohttp.client_proto.ResponseHandler._reschedule_timeout(self)->None
+aiohttp.client_proto.ResponseHandler.close(self)->None
+aiohttp.client_proto.ResponseHandler.connection_lost(self,exc:Optional[BaseException])->None
+aiohttp.client_proto.ResponseHandler.data_received(self,data:bytes)->None
+aiohttp.client_proto.ResponseHandler.eof_received(self)->None
+aiohttp.client_proto.ResponseHandler.force_close(self)->None
+aiohttp.client_proto.ResponseHandler.is_connected(self)->bool
+aiohttp.client_proto.ResponseHandler.pause_reading(self)->None
+aiohttp.client_proto.ResponseHandler.resume_reading(self)->None
+aiohttp.client_proto.ResponseHandler.set_exception(self,exc:BaseException)->None
+aiohttp.client_proto.ResponseHandler.set_parser(self,parser:Any,payload:Any)->None
+aiohttp.client_proto.ResponseHandler.set_response_params(self,*,timer:BaseTimerContext=None,skip_payload:bool=False,read_until_eof:bool=False,auto_decompress:bool=True,read_timeout:Optional[float]=None)->None
+aiohttp.client_proto.ResponseHandler.should_close(self)->bool
+aiohttp.client_proto.ResponseHandler.upgraded(self)->bool
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/http.py----------------------------------------
+A:aiohttp.htt.SERVER_SOFTWARE->'Python/{0[0]}.{0[1]} aiohttp/{1}'.format(sys.version_info, __version__)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_urldispatcher.py----------------------------------------
+A:aiohttp.web_urldispatcher.HTTP_METHOD_RE->re.compile("^[0-9A-Za-z!#\\$%&'\\*\\+\\-\\.\\^_`\\|~]+$")
+A:aiohttp.web_urldispatcher.ROUTE_RE->re.compile('(\\{[_a-zA-Z][^{}]*(?:\\{[^{}]*\\}[^{}]*)*\\})')
+A:aiohttp.web_urldispatcher.PATH_SEP->re.escape('/')
+A:aiohttp.web_urldispatcher.method->getattr(self, self.request.method.lower(), None)
+A:aiohttp.web_urldispatcher.result->old_handler(request)
+A:aiohttp.web_urldispatcher.expect->request.headers.get(hdrs.EXPECT)
+A:aiohttp.web_urldispatcher.route_obj->ResourceRoute(method, handler, self, expect_handler=expect_handler)
+A:aiohttp.web_urldispatcher.allowed_methods->set()
+A:aiohttp.web_urldispatcher.match_dict->self._match(request.rel_url.raw_path)
+A:aiohttp.web_urldispatcher.DYN->re.compile('\\{(?P<var>[_a-zA-Z][_a-zA-Z0-9]*)\\}')
+A:aiohttp.web_urldispatcher.DYN_WITH_RE->re.compile('\\{(?P<var>[_a-zA-Z][_a-zA-Z0-9]*):(?P<re>.+)\\}')
+A:aiohttp.web_urldispatcher.match->self._pattern.fullmatch(path)
+A:aiohttp.web_urldispatcher.compiled->re.compile(pattern)
+A:aiohttp.web_urldispatcher.self._pattern->re.compile(re.escape(prefix) + self._pattern.pattern)
+A:aiohttp.web_urldispatcher.url->yarl.URL.build(path=path)
+A:aiohttp.web_urldispatcher.directory->directory.resolve().resolve()
+A:aiohttp.web_urldispatcher.filename->Path(rel_url)
+A:aiohttp.web_urldispatcher.filepath->self._directory.joinpath(filename).resolve()
+A:aiohttp.web_urldispatcher.file_bytes->f.read()
+A:aiohttp.web_urldispatcher.h->self._get_file_hash(file_bytes)
+A:aiohttp.web_urldispatcher.m->hashlib.sha256()
+A:aiohttp.web_urldispatcher.b64->base64.urlsafe_b64encode(m.digest())
+A:aiohttp.web_urldispatcher.self._routes['OPTIONS']->ResourceRoute('OPTIONS', handler, self, expect_handler=self._expect_handler)
+A:aiohttp.web_urldispatcher.relative_path_to_dir->self._directory.joinpath(filename).resolve().relative_to(self._directory).as_posix()
+A:aiohttp.web_urldispatcher.index_of->'Index of /{}'.format(relative_path_to_dir)
+A:aiohttp.web_urldispatcher.h1->'<h1>{}</h1>'.format(index_of)
+A:aiohttp.web_urldispatcher.dir_index->self._directory.joinpath(filename).resolve().iterdir()
+A:aiohttp.web_urldispatcher.rel_path->_file.relative_to(self._directory).as_posix()
+A:aiohttp.web_urldispatcher.file_name->'{}/'.format(_file.name)
+A:aiohttp.web_urldispatcher.ul->'<ul>\n{}\n</ul>'.format('\n'.join(index_list))
+A:aiohttp.web_urldispatcher.body->'<body>\n{}\n{}\n</body>'.format(h1, ul)
+A:aiohttp.web_urldispatcher.head_str->'<head>\n<title>{}</title>\n</head>'.format(index_of)
+A:aiohttp.web_urldispatcher.html->'<html>\n{}\n{}\n</html>'.format(head_str, body)
+A:aiohttp.web_urldispatcher.methods->set()
+A:aiohttp.web_urldispatcher.re_part->re.compile('(?!-)[a-z\\d\\*-]{1,63}(?<!-)')
+A:aiohttp.web_urldispatcher.self._domain->self.validation(domain)
+A:aiohttp.web_urldispatcher.domain->domain.rstrip('.').lower().rstrip('.').lower()
+A:aiohttp.web_urldispatcher.host->request.headers.get(hdrs.HOST)
+A:aiohttp.web_urldispatcher.mask->self._domain.replace('.', '\\.').replace('*', '.*')
+A:aiohttp.web_urldispatcher.self._mask->re.compile(mask)
+A:aiohttp.web_urldispatcher.NAME_SPLIT_RE->re.compile('[.:-]')
+A:aiohttp.web_urldispatcher.parts->self.NAME_SPLIT_RE.split(name)
+A:aiohttp.web_urldispatcher.resource->self.add_resource(path, name=name)
+aiohttp.web_urldispatcher.AbstractResource(self,*,name:Optional[str]=None)
+aiohttp.web_urldispatcher.AbstractResource.add_prefix(self,prefix:str)->None
+aiohttp.web_urldispatcher.AbstractResource.canonical(self)->str
+aiohttp.web_urldispatcher.AbstractResource.freeze(self)->None
+aiohttp.web_urldispatcher.AbstractResource.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.AbstractResource.name(self)->Optional[str]
+aiohttp.web_urldispatcher.AbstractResource.raw_match(self,path:str)->bool
+aiohttp.web_urldispatcher.AbstractResource.url_for(self,**kwargs:str)->URL
+aiohttp.web_urldispatcher.AbstractRoute(self,method:str,handler:Union[_WebHandler,AbstractView],*,expect_handler:_ExpectHandler=None,resource:AbstractResource=None)
+aiohttp.web_urldispatcher.AbstractRoute.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.AbstractRoute.handler(self)->_WebHandler
+aiohttp.web_urldispatcher.AbstractRoute.method(self)->str
+aiohttp.web_urldispatcher.AbstractRoute.name(self)->Optional[str]
+aiohttp.web_urldispatcher.AbstractRoute.resource(self)->Optional[AbstractResource]
+aiohttp.web_urldispatcher.AbstractRoute.url_for(self,*args:str,**kwargs:str)->URL
+aiohttp.web_urldispatcher.AbstractRuleMatching(abc.ABC)
+aiohttp.web_urldispatcher.AbstractRuleMatching.canonical(self)->str
+aiohttp.web_urldispatcher.AbstractRuleMatching.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.Domain(self,domain:str)
+aiohttp.web_urldispatcher.Domain.canonical(self)->str
+aiohttp.web_urldispatcher.Domain.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.Domain.match_domain(self,host:str)->bool
+aiohttp.web_urldispatcher.Domain.validation(self,domain:str)->str
+aiohttp.web_urldispatcher.DynamicResource(self,path:str,*,name:Optional[str]=None)
+aiohttp.web_urldispatcher.DynamicResource.__repr__(self)->str
+aiohttp.web_urldispatcher.DynamicResource._match(self,path:str)->Optional[Dict[str, str]]
+aiohttp.web_urldispatcher.DynamicResource.add_prefix(self,prefix:str)->None
+aiohttp.web_urldispatcher.DynamicResource.canonical(self)->str
+aiohttp.web_urldispatcher.DynamicResource.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.DynamicResource.raw_match(self,path:str)->bool
+aiohttp.web_urldispatcher.DynamicResource.url_for(self,**parts:str)->URL
+aiohttp.web_urldispatcher.MaskDomain(self,domain:str)
+aiohttp.web_urldispatcher.MaskDomain.canonical(self)->str
+aiohttp.web_urldispatcher.MaskDomain.match_domain(self,host:str)->bool
+aiohttp.web_urldispatcher.MatchInfoError(self,http_exception:HTTPException)
+aiohttp.web_urldispatcher.MatchInfoError.__repr__(self)->str
+aiohttp.web_urldispatcher.MatchInfoError.http_exception(self)->HTTPException
+aiohttp.web_urldispatcher.MatchedSubAppResource(self,rule:AbstractRuleMatching,app:'Application')
+aiohttp.web_urldispatcher.MatchedSubAppResource.__repr__(self)->str
+aiohttp.web_urldispatcher.MatchedSubAppResource.canonical(self)->str
+aiohttp.web_urldispatcher.MatchedSubAppResource.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.PlainResource(self,path:str,*,name:Optional[str]=None)
+aiohttp.web_urldispatcher.PlainResource.__repr__(self)->str
+aiohttp.web_urldispatcher.PlainResource._match(self,path:str)->Optional[Dict[str, str]]
+aiohttp.web_urldispatcher.PlainResource.add_prefix(self,prefix:str)->None
+aiohttp.web_urldispatcher.PlainResource.canonical(self)->str
+aiohttp.web_urldispatcher.PlainResource.freeze(self)->None
+aiohttp.web_urldispatcher.PlainResource.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.PlainResource.raw_match(self,path:str)->bool
+aiohttp.web_urldispatcher.PlainResource.url_for(self)->URL
+aiohttp.web_urldispatcher.PrefixResource(self,prefix:str,*,name:Optional[str]=None)
+aiohttp.web_urldispatcher.PrefixResource.add_prefix(self,prefix:str)->None
+aiohttp.web_urldispatcher.PrefixResource.canonical(self)->str
+aiohttp.web_urldispatcher.PrefixResource.raw_match(self,prefix:str)->bool
+aiohttp.web_urldispatcher.PrefixedSubAppResource(self,prefix:str,app:'Application')
+aiohttp.web_urldispatcher.PrefixedSubAppResource.__iter__(self)->Iterator[AbstractRoute]
+aiohttp.web_urldispatcher.PrefixedSubAppResource.__len__(self)->int
+aiohttp.web_urldispatcher.PrefixedSubAppResource.__repr__(self)->str
+aiohttp.web_urldispatcher.PrefixedSubAppResource.add_prefix(self,prefix:str)->None
+aiohttp.web_urldispatcher.PrefixedSubAppResource.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.PrefixedSubAppResource.url_for(self,*args:str,**kwargs:str)->URL
+aiohttp.web_urldispatcher.Resource(self,*,name:Optional[str]=None)
+aiohttp.web_urldispatcher.Resource.__iter__(self)->Iterator[AbstractRoute]
+aiohttp.web_urldispatcher.Resource.__len__(self)->int
+aiohttp.web_urldispatcher.Resource._match(self,path:str)->Optional[Dict[str, str]]
+aiohttp.web_urldispatcher.Resource.add_route(self,method:str,handler:Union[AbstractView,_WebHandler],*,expect_handler:Optional[_ExpectHandler]=None)->'ResourceRoute'
+aiohttp.web_urldispatcher.Resource.register_route(self,route:'ResourceRoute')->None
+aiohttp.web_urldispatcher.ResourceRoute(self,method:str,handler:Union[_WebHandler,AbstractView],resource:AbstractResource,*,expect_handler:Optional[_ExpectHandler]=None)
+aiohttp.web_urldispatcher.ResourceRoute.__repr__(self)->str
+aiohttp.web_urldispatcher.ResourceRoute.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.ResourceRoute.name(self)->Optional[str]
+aiohttp.web_urldispatcher.ResourceRoute.url_for(self,*args:str,**kwargs:str)->URL
+aiohttp.web_urldispatcher.ResourcesView(self,resources:List[AbstractResource])
+aiohttp.web_urldispatcher.ResourcesView.__contains__(self,resource:object)->bool
+aiohttp.web_urldispatcher.ResourcesView.__iter__(self)->Iterator[AbstractResource]
+aiohttp.web_urldispatcher.ResourcesView.__len__(self)->int
+aiohttp.web_urldispatcher.RoutesView(self,resources:List[AbstractResource])
+aiohttp.web_urldispatcher.RoutesView.__contains__(self,route:object)->bool
+aiohttp.web_urldispatcher.RoutesView.__iter__(self)->Iterator[AbstractRoute]
+aiohttp.web_urldispatcher.RoutesView.__len__(self)->int
+aiohttp.web_urldispatcher.StaticResource(self,prefix:str,directory:PathLike,*,name:Optional[str]=None,expect_handler:Optional[_ExpectHandler]=None,chunk_size:int=256*1024,show_index:bool=False,follow_symlinks:bool=False,append_version:bool=False)
+aiohttp.web_urldispatcher.StaticResource.__iter__(self)->Iterator[AbstractRoute]
+aiohttp.web_urldispatcher.StaticResource.__len__(self)->int
+aiohttp.web_urldispatcher.StaticResource.__repr__(self)->str
+aiohttp.web_urldispatcher.StaticResource._directory_as_html(self,filepath:Path)->str
+aiohttp.web_urldispatcher.StaticResource._get_file_hash(byte_array:bytes)->str
+aiohttp.web_urldispatcher.StaticResource.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.StaticResource.set_options_route(self,handler:_WebHandler)->None
+aiohttp.web_urldispatcher.StaticResource.url_for(self,*,filename:Union[str,Path],append_version:Optional[bool]=None)->URL
+aiohttp.web_urldispatcher.SystemRoute(self,http_exception:HTTPException)
+aiohttp.web_urldispatcher.SystemRoute.__repr__(self)->str
+aiohttp.web_urldispatcher.SystemRoute.get_info(self)->Dict[str, Any]
+aiohttp.web_urldispatcher.SystemRoute.name(self)->Optional[str]
+aiohttp.web_urldispatcher.SystemRoute.reason(self)->str
+aiohttp.web_urldispatcher.SystemRoute.status(self)->int
+aiohttp.web_urldispatcher.SystemRoute.url_for(self,*args:str,**kwargs:str)->URL
+aiohttp.web_urldispatcher.UrlDispatcher(self)
+aiohttp.web_urldispatcher.UrlDispatcher.__contains__(self,resource:object)->bool
+aiohttp.web_urldispatcher.UrlDispatcher.__getitem__(self,name:str)->AbstractResource
+aiohttp.web_urldispatcher.UrlDispatcher.__iter__(self)->Iterator[str]
+aiohttp.web_urldispatcher.UrlDispatcher.__len__(self)->int
+aiohttp.web_urldispatcher.UrlDispatcher.add_delete(self,path:str,handler:_WebHandler,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_get(self,path:str,handler:_WebHandler,*,name:Optional[str]=None,allow_head:bool=True,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_head(self,path:str,handler:_WebHandler,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_options(self,path:str,handler:_WebHandler,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_patch(self,path:str,handler:_WebHandler,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_post(self,path:str,handler:_WebHandler,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_put(self,path:str,handler:_WebHandler,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_resource(self,path:str,*,name:Optional[str]=None)->Resource
+aiohttp.web_urldispatcher.UrlDispatcher.add_route(self,method:str,path:str,handler:Union[_WebHandler,AbstractView],*,name:Optional[str]=None,expect_handler:Optional[_ExpectHandler]=None)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.add_routes(self,routes:Iterable[AbstractRouteDef])->None
+aiohttp.web_urldispatcher.UrlDispatcher.add_static(self,prefix:str,path:PathLike,*,name:Optional[str]=None,expect_handler:Optional[_ExpectHandler]=None,chunk_size:int=256*1024,show_index:bool=False,follow_symlinks:bool=False,append_version:bool=False)->AbstractResource
+aiohttp.web_urldispatcher.UrlDispatcher.add_view(self,path:str,handler:AbstractView,**kwargs:Any)->AbstractRoute
+aiohttp.web_urldispatcher.UrlDispatcher.freeze(self)->None
+aiohttp.web_urldispatcher.UrlDispatcher.named_resources(self)->Mapping[str, AbstractResource]
+aiohttp.web_urldispatcher.UrlDispatcher.register_resource(self,resource:AbstractResource)->None
+aiohttp.web_urldispatcher.UrlDispatcher.resources(self)->ResourcesView
+aiohttp.web_urldispatcher.UrlDispatcher.routes(self)->RoutesView
+aiohttp.web_urldispatcher.UrlMappingMatchInfo(self,match_dict:Dict[str,str],route:AbstractRoute)
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.__repr__(self)->str
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.add_app(self,app:'Application')->None
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.apps(self)->Tuple['Application', ...]
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.current_app(self)->'Application'
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.expect_handler(self)->_ExpectHandler
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.freeze(self)->None
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.get_info(self)->Dict[str, str]
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.handler(self)->_WebHandler
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.http_exception(self)->Optional[HTTPException]
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.route(self)->AbstractRoute
+aiohttp.web_urldispatcher.UrlMappingMatchInfo.set_current_app(self,app:'Application')->Generator[None, None, None]
+aiohttp.web_urldispatcher.View(AbstractView)
+aiohttp.web_urldispatcher.View.__await__(self)->Generator[Any, None, StreamResponse]
+aiohttp.web_urldispatcher.View._raise_allowed_methods(self)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/helpers.py----------------------------------------
+A:aiohttp.helpers.tasks->list(asyncio.Task.all_tasks(loop))
+A:aiohttp.helpers.all_tasks->getattr(asyncio, 'all_tasks')
+A:aiohttp.helpers._T->TypeVar('_T')
+A:aiohttp.helpers.sentinel->object()
+A:aiohttp.helpers.NO_EXTENSIONS->bool(os.environ.get('AIOHTTP_NO_EXTENSIONS'))
+A:aiohttp.helpers.CHAR->set((chr(i) for i in range(0, 128)))
+A:aiohttp.helpers.(auth_type, encoded_credentials)->auth_header.split(' ', 1)
+A:aiohttp.helpers.decoded->base64.b64decode(encoded_credentials.encode('ascii'), validate=True).decode(encoding)
+A:aiohttp.helpers.(username, password)->base64.b64decode(encoded_credentials.encode('ascii'), validate=True).decode(encoding).split(':', 1)
+A:aiohttp.helpers.creds->('%s:%s' % (self.login, self.password)).encode(self.encoding)
+A:aiohttp.helpers.auth->BasicAuth(cast(str, login), cast(str, password))
+A:aiohttp.helpers.netrc_env->os.environ.get('NETRC')
+A:aiohttp.helpers.netrc_path->Path(netrc_env)
+A:aiohttp.helpers.home_dir->pathlib.Path.home()
+A:aiohttp.helpers.proxy->attr.ib(type=URL)
+A:aiohttp.helpers.proxy_auth->attr.ib(type=Optional[BasicAuth])
+A:aiohttp.helpers.netrc_obj->netrc_from_env()
+A:aiohttp.helpers.auth_from_netrc->netrc_from_env().authenticators(proxy.host)
+A:aiohttp.helpers.ret[proto]->ProxyInfo(proxy, auth)
+A:aiohttp.helpers.loop->asyncio.get_event_loop()
+A:aiohttp.helpers.func->getattr(inspect, 'isasyncgenfunction', None)
+A:aiohttp.helpers.type->attr.ib(type=str)
+A:aiohttp.helpers.subtype->attr.ib(type=str)
+A:aiohttp.helpers.suffix->attr.ib(type=str)
+A:aiohttp.helpers.parameters->attr.ib(type=MultiDictProxy)
+A:aiohttp.helpers.parts->mimetype.split(';')
+A:aiohttp.helpers.params->MultiDict()
+A:aiohttp.helpers.(key, value)->cast(Tuple[str, str], item.split('=', 1) if '=' in item else (item, ''))
+A:aiohttp.helpers.fulltype->parts[0].strip().lower()
+A:aiohttp.helpers.name->getattr(obj, 'name', None)
+A:aiohttp.helpers.sparams->'; '.join(('='.join(pair) for pair in lparams))
+A:aiohttp.helpers.value->'; '.join((value, sparams))
+A:aiohttp.helpers.val->self.wrapped(inst)
+A:aiohttp.helpers._ipv4_regex->re.compile(_ipv4_pattern)
+A:aiohttp.helpers._ipv6_regex->re.compile(_ipv6_pattern, flags=re.IGNORECASE)
+A:aiohttp.helpers._ipv4_regexb->re.compile(_ipv4_pattern.encode('ascii'))
+A:aiohttp.helpers._ipv6_regexb->re.compile(_ipv6_pattern.encode('ascii'), flags=re.IGNORECASE)
+A:aiohttp.helpers.is_ipv4_address->functools.partial(_is_ip_address, _ipv4_regex, _ipv4_regexb)
+A:aiohttp.helpers.is_ipv6_address->functools.partial(_is_ip_address, _ipv6_regex, _ipv6_regexb)
+A:aiohttp.helpers.now->int(time.time())
+A:aiohttp.helpers.(year, month, day, hh, mm, ss, wd, y, z)->time.gmtime(now)
+A:aiohttp.helpers.ob->ref()
+A:aiohttp.helpers.when->ceil(loop.time() + timeout)
+A:aiohttp.helpers.at->ceil(self._loop.time() + self._timeout)
+A:aiohttp.helpers.timer->TimerContext(self._loop)
+A:aiohttp.helpers.task->current_task(loop=self._loop)
+A:aiohttp.helpers.self._task->current_task(loop=self._loop)
+A:aiohttp.helpers.self._cancel_handler->self._loop.call_at(ceil(self._loop.time() + self._timeout), self._cancel_task)
+A:aiohttp.helpers.ATTRS->frozenset(['_content_type', '_content_dict', '_stored_content_type'])
+A:aiohttp.helpers.(self._content_type, self._content_dict)->cgi.parse_header(raw)
+A:aiohttp.helpers.raw->self._headers.get(hdrs.CONTENT_TYPE)
+A:aiohttp.helpers.content_length->self._headers.get(hdrs.CONTENT_LENGTH)
+A:aiohttp.helpers.self._maps->tuple(maps)
+A:aiohttp.helpers.content->', '.join(map(repr, self._maps))
+aiohttp.BasicAuth(cls,login:str,password:str='',encoding:str='latin1')
+aiohttp.BasicAuth.decode(cls,auth_header:str,encoding:str='latin1')->'BasicAuth'
+aiohttp.BasicAuth.encode(self)->str
+aiohttp.BasicAuth.from_url(cls,url:URL,*,encoding:str='latin1')->Optional['BasicAuth']
+aiohttp.ChainMapProxy(self,maps:Iterable[Mapping[str,Any]])
+aiohttp.ChainMapProxy.__bool__(self)->bool
+aiohttp.ChainMapProxy.__contains__(self,key:object)->bool
+aiohttp.ChainMapProxy.__getitem__(self,key:str)->Any
+aiohttp.ChainMapProxy.__init_subclass__(cls)->None
+aiohttp.ChainMapProxy.__iter__(self)->Iterator[str]
+aiohttp.ChainMapProxy.__len__(self)->int
+aiohttp.ChainMapProxy.__repr__(self)->str
+aiohttp.ChainMapProxy.get(self,key:str,default:Any=None)->Any
+aiohttp.helpers.BaseTimerContext(ContextManager['BaseTimerContext'])
+aiohttp.helpers.BasicAuth(cls,login:str,password:str='',encoding:str='latin1')
+aiohttp.helpers.BasicAuth.decode(cls,auth_header:str,encoding:str='latin1')->'BasicAuth'
+aiohttp.helpers.BasicAuth.encode(self)->str
+aiohttp.helpers.BasicAuth.from_url(cls,url:URL,*,encoding:str='latin1')->Optional['BasicAuth']
+aiohttp.helpers.CeilTimeout(async_timeout.timeout)
+aiohttp.helpers.CeilTimeout.__enter__(self)->async_timeout.timeout
+aiohttp.helpers.ChainMapProxy(self,maps:Iterable[Mapping[str,Any]])
+aiohttp.helpers.ChainMapProxy.__bool__(self)->bool
+aiohttp.helpers.ChainMapProxy.__contains__(self,key:object)->bool
+aiohttp.helpers.ChainMapProxy.__getitem__(self,key:str)->Any
+aiohttp.helpers.ChainMapProxy.__init_subclass__(cls)->None
+aiohttp.helpers.ChainMapProxy.__iter__(self)->Iterator[str]
+aiohttp.helpers.ChainMapProxy.__len__(self)->int
+aiohttp.helpers.ChainMapProxy.__repr__(self)->str
+aiohttp.helpers.ChainMapProxy.get(self,key:str,default:Any=None)->Any
+aiohttp.helpers.HeadersMixin
+aiohttp.helpers.HeadersMixin._parse_content_type(self,raw:str)->None
+aiohttp.helpers.HeadersMixin.charset(self)->Optional[str]
+aiohttp.helpers.HeadersMixin.content_length(self)->Optional[int]
+aiohttp.helpers.HeadersMixin.content_type(self)->str
+aiohttp.helpers.MimeType
+aiohttp.helpers.ProxyInfo
+aiohttp.helpers.TimeoutHandle(self,loop:asyncio.AbstractEventLoop,timeout:Optional[float])
+aiohttp.helpers.TimeoutHandle.close(self)->None
+aiohttp.helpers.TimeoutHandle.register(self,callback:Callable[...,None],*args:Any,**kwargs:Any)->None
+aiohttp.helpers.TimeoutHandle.start(self)->Optional[asyncio.Handle]
+aiohttp.helpers.TimeoutHandle.timer(self)->'BaseTimerContext'
+aiohttp.helpers.TimerContext(self,loop:asyncio.AbstractEventLoop)
+aiohttp.helpers.TimerContext.__enter__(self)->BaseTimerContext
+aiohttp.helpers.TimerContext.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->Optional[bool]
+aiohttp.helpers.TimerContext.timeout(self)->None
+aiohttp.helpers.TimerNoop(BaseTimerContext)
+aiohttp.helpers.TimerNoop.__enter__(self)->BaseTimerContext
+aiohttp.helpers.TimerNoop.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->Optional[bool]
+aiohttp.helpers._is_ip_address(regex:Pattern[str],regexb:Pattern[bytes],host:Optional[Union[str,bytes]])->bool
+aiohttp.helpers._weakref_handle(info)
+aiohttp.helpers.all_tasks(loop:Optional[asyncio.AbstractEventLoop]=None)->Set['asyncio.Task[Any]']
+aiohttp.helpers.call_later(cb,timeout,loop)
+aiohttp.helpers.content_disposition_header(disptype:str,quote_fields:bool=True,**params:str)->str
+aiohttp.helpers.current_task(loop:Optional[asyncio.AbstractEventLoop]=None)->asyncio.Task
+aiohttp.helpers.get_running_loop(loop:Optional[asyncio.AbstractEventLoop]=None)->asyncio.AbstractEventLoop
+aiohttp.helpers.guess_filename(obj:Any,default:Optional[str]=None)->Optional[str]
+aiohttp.helpers.is_ip_address(host:Optional[Union[str,bytes,bytearray,memoryview]])->bool
+aiohttp.helpers.isasyncgenfunction(obj:Any)->bool
+aiohttp.helpers.netrc_from_env()->Optional[netrc.netrc]
+aiohttp.helpers.noop(*args,**kwargs)
+aiohttp.helpers.parse_mimetype(mimetype:str)->MimeType
+aiohttp.helpers.proxies_from_env()->Dict[str, ProxyInfo]
+aiohttp.helpers.reify(self,wrapped:Callable[...,Any])
+aiohttp.helpers.reify.__get__(self,inst:Any,owner:Any)->Any
+aiohttp.helpers.reify.__set__(self,inst:Any,value:Any)->None
+aiohttp.helpers.rfc822_formatted_time()->str
+aiohttp.helpers.set_exception(fut:'asyncio.Future[_T]',exc:BaseException)->None
+aiohttp.helpers.set_result(fut:'asyncio.Future[_T]',result:_T)->None
+aiohttp.helpers.strip_auth_from_url(url:URL)->Tuple[URL, Optional[BasicAuth]]
+aiohttp.helpers.weakref_handle(ob,name,timeout,loop,ceil_timeout=True)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web.py----------------------------------------
+A:aiohttp.web.app->func(extra_argv)
+A:aiohttp.web.runner->AppRunner(app, handle_signals=handle_signals, access_log_class=access_log_class, access_log_format=access_log_format, access_log=access_log)
+A:aiohttp.web.names->sorted((str(s.name) for s in runner.sites))
+A:aiohttp.web.to_cancel->all_tasks(loop)
+A:aiohttp.web.loop->asyncio.get_event_loop()
+A:aiohttp.web.arg_parser->ArgumentParser(description='aiohttp.web Application server', prog='aiohttp.web')
+A:aiohttp.web.(args, extra_argv)->ArgumentParser(description='aiohttp.web Application server', prog='aiohttp.web').parse_known_args(argv)
+A:aiohttp.web.(mod_str, _, func_str)->args.entry_func.partition(':')
+A:aiohttp.web.module->import_module(mod_str)
+A:aiohttp.web.func->getattr(module, func_str)
+aiohttp.web._cancel_all_tasks(loop:asyncio.AbstractEventLoop)->None
+aiohttp.web.main(argv:List[str])->None
+aiohttp.web.run_app(app:Union[Application,Awaitable[Application]],*,host:Optional[str]=None,port:Optional[int]=None,path:Optional[str]=None,sock:Optional[socket.socket]=None,shutdown_timeout:float=60.0,ssl_context:Optional[SSLContext]=None,print:Callable[...,None]=print,backlog:int=128,access_log_class:Type[AbstractAccessLogger]=AccessLogger,access_log_format:str=AccessLogger.LOG_FORMAT,access_log:logging.Logger=access_logger,handle_signals:bool=True,reuse_address:Optional[bool]=None,reuse_port:Optional[bool]=None)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/http_parser.py----------------------------------------
+A:aiohttp.http_parser.ASCIISET->set(string.printable)
+A:aiohttp.http_parser.METHRE->re.compile("[!#$%&'*+\\-.^_`|~0-9A-Za-z]+")
+A:aiohttp.http_parser.VERSRE->re.compile('HTTP/(\\d+).(\\d+)')
+A:aiohttp.http_parser.HDRRE->re.compile(b'[\\x00-\\x1F\\x7F()<>@,;:\\[\\]={} \\t\\\\\\\\\\"]')
+A:aiohttp.http_parser.RawRequestMessage->collections.namedtuple('RawRequestMessage', ['method', 'path', 'version', 'headers', 'raw_headers', 'should_close', 'compression', 'upgrade', 'chunked', 'url'])
+A:aiohttp.http_parser.RawResponseMessage->collections.namedtuple('RawResponseMessage', ['version', 'code', 'reason', 'headers', 'raw_headers', 'should_close', 'compression', 'upgrade', 'chunked'])
+A:aiohttp.http_parser.headers->CIMultiDict()
+A:aiohttp.http_parser.line_count->len(lines)
+A:aiohttp.http_parser.(bname, bvalue)->lines[0].decode('utf-8', 'surrogateescape').split(b':', 1)
+A:aiohttp.http_parser.bname->bname.strip(b' \t').strip(b' \t')
+A:aiohttp.http_parser.bvalue->bvalue.strip().strip()
+A:aiohttp.http_parser.header_length->len(bvalue)
+A:aiohttp.http_parser.name->bname.strip(b' \t').strip(b' \t').decode('utf-8', 'surrogateescape')
+A:aiohttp.http_parser.value->bvalue.strip().strip().decode('utf-8', 'surrogateescape')
+A:aiohttp.http_parser.self._headers_parser->HeadersParser(max_line_size, max_headers, max_field_size)
+A:aiohttp.http_parser.data_len->len(data)
+A:aiohttp.http_parser.pos->self.decompressor.flush().find(SEP)
+A:aiohttp.http_parser.msg->self.parse_message(self._lines)
+A:aiohttp.http_parser.length->int(length)
+A:aiohttp.http_parser.method->getattr(msg, 'method', self.method)
+A:aiohttp.http_parser.payload->StreamReader(self.protocol, timer=self.timer, loop=loop)
+A:aiohttp.http_parser.payload_parser->HttpPayloadParser(payload, length=length, chunked=msg.chunked, method=method, compression=msg.compression, code=self.code, readall=True, response_with_body=self.response_with_body, auto_decompress=self._auto_decompress)
+A:aiohttp.http_parser.self._payload_parser->HttpPayloadParser(payload, method=msg.method, compression=msg.compression, readall=True, auto_decompress=self._auto_decompress)
+A:aiohttp.http_parser.(eof, data)->self._payload_parser.feed_data(data[start_pos:])
+A:aiohttp.http_parser.(headers, raw_headers)->self._headers_parser.parse_headers(lines)
+A:aiohttp.http_parser.conn->CIMultiDict().get(hdrs.CONNECTION)
+A:aiohttp.http_parser.v->CIMultiDict().get(hdrs.CONNECTION).lower()
+A:aiohttp.http_parser.enc->enc.lower().lower()
+A:aiohttp.http_parser.te->CIMultiDict().get(hdrs.TRANSFER_ENCODING)
+A:aiohttp.http_parser.line->lines[0].decode('utf-8', 'surrogateescape')
+A:aiohttp.http_parser.(method, path, version)->lines[0].decode('utf-8', 'surrogateescape').split(None, 2)
+A:aiohttp.http_parser.(n1, n2)->version[5:].split('.', 1)
+A:aiohttp.http_parser.version_o->HttpVersion(int(match.group(1)), int(match.group(2)))
+A:aiohttp.http_parser.(headers, raw_headers, close, compression, upgrade, chunked)->self.parse_headers(lines)
+A:aiohttp.http_parser.(version, status)->lines[0].decode('utf-8', 'surrogateescape').split(None, 1)
+A:aiohttp.http_parser.(status, reason)->status.split(None, 1)
+A:aiohttp.http_parser.match->re.compile('HTTP/(\\d+).(\\d+)').match(version)
+A:aiohttp.http_parser.status_i->int(status)
+A:aiohttp.http_parser.real_payload->DeflateBuffer(payload, compression)
+A:aiohttp.http_parser.chunk_len->len(chunk)
+A:aiohttp.http_parser.i->self.decompressor.flush().find(CHUNK_EXT, 0, pos)
+A:aiohttp.http_parser.size->int(bytes(size_b), 16)
+A:aiohttp.http_parser.exc->TransferEncodingError(chunk[:pos].decode('ascii', 'surrogateescape'))
+A:aiohttp.http_parser.self.decompressor->zlib.decompressobj()
+A:aiohttp.http_parser.chunk->self.decompressor.flush()
+aiohttp.http_parser.ChunkState(IntEnum)
+aiohttp.http_parser.DeflateBuffer(self,out:StreamReader,encoding:Optional[str])
+aiohttp.http_parser.DeflateBuffer.begin_http_chunk_receiving(self)->None
+aiohttp.http_parser.DeflateBuffer.end_http_chunk_receiving(self)->None
+aiohttp.http_parser.DeflateBuffer.feed_data(self,chunk:bytes,size:int)->None
+aiohttp.http_parser.DeflateBuffer.feed_eof(self)->None
+aiohttp.http_parser.DeflateBuffer.set_exception(self,exc:BaseException)->None
+aiohttp.http_parser.HeadersParser(self,max_line_size:int=8190,max_headers:int=32768,max_field_size:int=8190)
+aiohttp.http_parser.HeadersParser.parse_headers(self,lines:List[bytes])->Tuple['CIMultiDictProxy[str]', RawHeaders]
+aiohttp.http_parser.HttpParser(self,protocol:Optional[BaseProtocol]=None,loop:Optional[asyncio.AbstractEventLoop]=None,max_line_size:int=8190,max_headers:int=32768,max_field_size:int=8190,timer:Optional[BaseTimerContext]=None,code:Optional[int]=None,method:Optional[str]=None,readall:bool=False,payload_exception:Optional[Type[BaseException]]=None,response_with_body:bool=True,read_until_eof:bool=False,auto_decompress:bool=True)
+aiohttp.http_parser.HttpParser.feed_data(self,data:bytes,SEP:bytes=b'\r\n',EMPTY:bytes=b'',CONTENT_LENGTH:istr=hdrs.CONTENT_LENGTH,METH_CONNECT:str=hdrs.METH_CONNECT,SEC_WEBSOCKET_KEY1:istr=hdrs.SEC_WEBSOCKET_KEY1)->Tuple[List[Any], bool, bytes]
+aiohttp.http_parser.HttpParser.feed_eof(self)->Any
+aiohttp.http_parser.HttpParser.parse_headers(self,lines:List[bytes])->Tuple['CIMultiDictProxy[str]', RawHeaders, Optional[bool], Optional[str], bool, bool]
+aiohttp.http_parser.HttpParser.parse_message(self,lines:List[bytes])->Any
+aiohttp.http_parser.HttpPayloadParser(self,payload:StreamReader,length:Optional[int]=None,chunked:bool=False,compression:Optional[str]=None,code:Optional[int]=None,method:Optional[str]=None,readall:bool=False,response_with_body:bool=True,auto_decompress:bool=True)
+aiohttp.http_parser.HttpPayloadParser.feed_data(self,chunk:bytes,SEP:bytes=b'\r\n',CHUNK_EXT:bytes=b';')->Tuple[bool, bytes]
+aiohttp.http_parser.HttpPayloadParser.feed_eof(self)->None
+aiohttp.http_parser.HttpRequestParser(HttpParser)
+aiohttp.http_parser.HttpRequestParser.parse_message(self,lines:List[bytes])->Any
+aiohttp.http_parser.HttpResponseParser(HttpParser)
+aiohttp.http_parser.HttpResponseParser.parse_message(self,lines:List[bytes])->Any
+aiohttp.http_parser.ParseState(IntEnum)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/client.py----------------------------------------
+A:aiohttp.client.total->attr.ib(type=float, default=None)
+A:aiohttp.client.connect->attr.ib(type=float, default=None)
+A:aiohttp.client.sock_read->attr.ib(type=float, default=None)
+A:aiohttp.client.sock_connect->attr.ib(type=float, default=None)
+A:aiohttp.client.DEFAULT_TIMEOUT->ClientTimeout(total=5 * 60)
+A:aiohttp.client._RetType->TypeVar('_RetType')
+A:aiohttp.client.ATTRS->frozenset(['_source_traceback', '_connector', 'requote_redirect_url', '_loop', '_cookie_jar', '_connector_owner', '_default_auth', '_version', '_json_serialize', '_requote_redirect_url', '_timeout', '_raise_for_status', '_auto_decompress', '_trust_env', '_default_headers', '_skip_auto_headers', '_request_class', '_response_class', '_ws_response_class', '_trace_configs'])
+A:aiohttp.client.loop->get_running_loop(loop)
+A:aiohttp.client.connector->TCPConnector(loop=loop, force_close=True)
+A:aiohttp.client.self._source_traceback->traceback.extract_stack(sys._getframe(1))
+A:aiohttp.client.cookie_jar->CookieJar(loop=loop)
+A:aiohttp.client.self._timeout->attr.evolve(self._timeout, connect=conn_timeout)
+A:aiohttp.client.headers->CIMultiDict(headers)
+A:aiohttp.client.self._skip_auto_headers->frozenset()
+A:aiohttp.client.ssl->_merge_ssl_params(ssl, verify_ssl, ssl_context, fingerprint)
+A:aiohttp.client.data->payload.JsonPayload(json, dumps=self._json_serialize)
+A:aiohttp.client.proxy_headers->self._prepare_headers(proxy_headers)
+A:aiohttp.client.url->URL(str_or_url)
+A:aiohttp.client.skip_headers->set(self._skip_auto_headers)
+A:aiohttp.client.proxy->URL(proxy)
+A:aiohttp.client.real_timeout->ClientTimeout(total=timeout)
+A:aiohttp.client.tm->TimeoutHandle(self._loop, real_timeout.total)
+A:aiohttp.client.handle->TimeoutHandle(self._loop, real_timeout.total).start()
+A:aiohttp.client.timer->TimeoutHandle(self._loop, real_timeout.total).timer()
+A:aiohttp.client.(url, auth_from_url)->strip_auth_from_url(url)
+A:aiohttp.client.session_cookies->self._cookie_jar.filter_cookies(url)
+A:aiohttp.client.tmp_cookie_jar->CookieJar()
+A:aiohttp.client.req_cookies->CookieJar().filter_cookies(url)
+A:aiohttp.client.req->self._request_class(method, url, params=params, headers=headers, skip_auto_headers=skip_headers, data=data, cookies=cookies, auth=auth, version=version, compress=compress, chunked=chunked, expect100=expect100, loop=self._loop, response_class=self._response_class, proxy=proxy, proxy_auth=proxy_auth, timer=timer, session=self, ssl=ssl, proxy_headers=proxy_headers, traces=traces)
+A:aiohttp.client.r_url->URL(str_or_url).join(r_url)
+A:aiohttp.client.resp._history->tuple(history)
+A:aiohttp.client.real_headers->CIMultiDict(headers)
+A:aiohttp.client.sec_key->base64.b64encode(os.urandom(16))
+A:aiohttp.client.real_headers[hdrs.SEC_WEBSOCKET_KEY]->base64.b64encode(os.urandom(16)).decode()
+A:aiohttp.client.real_headers[hdrs.SEC_WEBSOCKET_PROTOCOL]->','.join(protocols)
+A:aiohttp.client.extstr->ws_ext_gen(compress=compress)
+A:aiohttp.client.key->resp.headers.get(hdrs.SEC_WEBSOCKET_ACCEPT, '')
+A:aiohttp.client.match->base64.b64encode(hashlib.sha1(sec_key + WS_KEY).digest()).decode()
+A:aiohttp.client.compress_hdrs->resp.headers.get(hdrs.SEC_WEBSOCKET_EXTENSIONS)
+A:aiohttp.client.(compress, notakeover)->ws_ext_parse(compress_hdrs)
+A:aiohttp.client.reader->FlowControlDataQueue(proto, limit=2 ** 16, loop=self._loop)
+A:aiohttp.client.writer->WebSocketWriter(proto, transport, use_mask=True, compress=compress, notakeover=notakeover)
+A:aiohttp.client.result->CIMultiDict(self._default_headers)
+A:aiohttp.client.added_names->set()
+A:aiohttp.client.ret->self._coro.__await__()
+A:aiohttp.client.session->ClientSession(loop=loop, cookies=cookies, version=version, timeout=timeout, connector=connector, connector_owner=connector_owner)
+aiohttp.ClientSession(self,*,connector:Optional[BaseConnector]=None,loop:Optional[asyncio.AbstractEventLoop]=None,cookies:Optional[LooseCookies]=None,headers:Optional[LooseHeaders]=None,skip_auto_headers:Optional[Iterable[str]]=None,auth:Optional[BasicAuth]=None,json_serialize:JSONEncoder=json.dumps,request_class:Type[ClientRequest]=ClientRequest,response_class:Type[ClientResponse]=ClientResponse,ws_response_class:Type[ClientWebSocketResponse]=ClientWebSocketResponse,version:HttpVersion=http.HttpVersion11,cookie_jar:Optional[AbstractCookieJar]=None,connector_owner:bool=True,raise_for_status:bool=False,read_timeout:Union[float,object]=sentinel,conn_timeout:Optional[float]=None,timeout:Union[object,ClientTimeout]=sentinel,auto_decompress:bool=True,trust_env:bool=False,requote_redirect_url:bool=True,trace_configs:Optional[List[TraceConfig]]=None)
+aiohttp.ClientSession.__del__(self,_warnings:Any=warnings)->None
+aiohttp.ClientSession.__enter__(self)->None
+aiohttp.ClientSession.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+aiohttp.ClientSession.__init_subclass__(cls:Type['ClientSession'])->None
+aiohttp.ClientSession._prepare_headers(self,headers:Optional[LooseHeaders])->'CIMultiDict[str]'
+aiohttp.ClientSession.closed(self)->bool
+aiohttp.ClientSession.connector(self)->Optional[BaseConnector]
+aiohttp.ClientSession.cookie_jar(self)->AbstractCookieJar
+aiohttp.ClientSession.delete(self,url:StrOrURL,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.detach(self)->None
+aiohttp.ClientSession.get(self,url:StrOrURL,*,allow_redirects:bool=True,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.head(self,url:StrOrURL,*,allow_redirects:bool=False,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.loop(self)->asyncio.AbstractEventLoop
+aiohttp.ClientSession.options(self,url:StrOrURL,*,allow_redirects:bool=True,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.patch(self,url:StrOrURL,*,data:Any=None,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.post(self,url:StrOrURL,*,data:Any=None,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.put(self,url:StrOrURL,*,data:Any=None,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.request(self,method:str,url:StrOrURL,**kwargs:Any)->'_RequestContextManager'
+aiohttp.ClientSession.requote_redirect_url(self)->bool
+aiohttp.ClientSession.requote_redirect_url(self,val:bool)->None
+aiohttp.ClientSession.version(self)->Tuple[int, int]
+aiohttp.ClientSession.ws_connect(self,url:StrOrURL,*,method:str=hdrs.METH_GET,protocols:Iterable[str]=(),timeout:float=10.0,receive_timeout:Optional[float]=None,autoclose:bool=True,autoping:bool=True,heartbeat:Optional[float]=None,auth:Optional[BasicAuth]=None,origin:Optional[str]=None,headers:Optional[LooseHeaders]=None,proxy:Optional[StrOrURL]=None,proxy_auth:Optional[BasicAuth]=None,ssl:Union[SSLContext,bool,None,Fingerprint]=None,verify_ssl:Optional[bool]=None,fingerprint:Optional[bytes]=None,ssl_context:Optional[SSLContext]=None,proxy_headers:Optional[LooseHeaders]=None,compress:int=0,max_msg_size:int=4*1024*1024)->'_WSRequestContextManager'
+aiohttp.ClientTimeout
+aiohttp.client.ClientSession(self,*,connector:Optional[BaseConnector]=None,loop:Optional[asyncio.AbstractEventLoop]=None,cookies:Optional[LooseCookies]=None,headers:Optional[LooseHeaders]=None,skip_auto_headers:Optional[Iterable[str]]=None,auth:Optional[BasicAuth]=None,json_serialize:JSONEncoder=json.dumps,request_class:Type[ClientRequest]=ClientRequest,response_class:Type[ClientResponse]=ClientResponse,ws_response_class:Type[ClientWebSocketResponse]=ClientWebSocketResponse,version:HttpVersion=http.HttpVersion11,cookie_jar:Optional[AbstractCookieJar]=None,connector_owner:bool=True,raise_for_status:bool=False,read_timeout:Union[float,object]=sentinel,conn_timeout:Optional[float]=None,timeout:Union[object,ClientTimeout]=sentinel,auto_decompress:bool=True,trust_env:bool=False,requote_redirect_url:bool=True,trace_configs:Optional[List[TraceConfig]]=None)
+aiohttp.client.ClientSession.__del__(self,_warnings:Any=warnings)->None
+aiohttp.client.ClientSession.__enter__(self)->None
+aiohttp.client.ClientSession.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+aiohttp.client.ClientSession.__init_subclass__(cls:Type['ClientSession'])->None
+aiohttp.client.ClientSession._prepare_headers(self,headers:Optional[LooseHeaders])->'CIMultiDict[str]'
+aiohttp.client.ClientSession.closed(self)->bool
+aiohttp.client.ClientSession.connector(self)->Optional[BaseConnector]
+aiohttp.client.ClientSession.cookie_jar(self)->AbstractCookieJar
+aiohttp.client.ClientSession.delete(self,url:StrOrURL,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.detach(self)->None
+aiohttp.client.ClientSession.get(self,url:StrOrURL,*,allow_redirects:bool=True,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.head(self,url:StrOrURL,*,allow_redirects:bool=False,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.loop(self)->asyncio.AbstractEventLoop
+aiohttp.client.ClientSession.options(self,url:StrOrURL,*,allow_redirects:bool=True,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.patch(self,url:StrOrURL,*,data:Any=None,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.post(self,url:StrOrURL,*,data:Any=None,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.put(self,url:StrOrURL,*,data:Any=None,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.request(self,method:str,url:StrOrURL,**kwargs:Any)->'_RequestContextManager'
+aiohttp.client.ClientSession.requote_redirect_url(self)->bool
+aiohttp.client.ClientSession.requote_redirect_url(self,val:bool)->None
+aiohttp.client.ClientSession.version(self)->Tuple[int, int]
+aiohttp.client.ClientSession.ws_connect(self,url:StrOrURL,*,method:str=hdrs.METH_GET,protocols:Iterable[str]=(),timeout:float=10.0,receive_timeout:Optional[float]=None,autoclose:bool=True,autoping:bool=True,heartbeat:Optional[float]=None,auth:Optional[BasicAuth]=None,origin:Optional[str]=None,headers:Optional[LooseHeaders]=None,proxy:Optional[StrOrURL]=None,proxy_auth:Optional[BasicAuth]=None,ssl:Union[SSLContext,bool,None,Fingerprint]=None,verify_ssl:Optional[bool]=None,fingerprint:Optional[bytes]=None,ssl_context:Optional[SSLContext]=None,proxy_headers:Optional[LooseHeaders]=None,compress:int=0,max_msg_size:int=4*1024*1024)->'_WSRequestContextManager'
+aiohttp.client.ClientTimeout
+aiohttp.client._BaseRequestContextManager(self,coro:Coroutine['asyncio.Future[Any]',None,_RetType])
+aiohttp.client._BaseRequestContextManager.__await__(self)->Generator[Any, None, _RetType]
+aiohttp.client._BaseRequestContextManager.__iter__(self)->Generator[Any, None, _RetType]
+aiohttp.client._BaseRequestContextManager.close(self)->None
+aiohttp.client._BaseRequestContextManager.send(self,arg:None)->'asyncio.Future[Any]'
+aiohttp.client._BaseRequestContextManager.throw(self,arg:BaseException)->None
+aiohttp.client._RequestContextManager(_BaseRequestContextManager[ClientResponse])
+aiohttp.client._SessionRequestContextManager(self,coro:Coroutine['asyncio.Future[Any]',None,ClientResponse],session:ClientSession)
+aiohttp.client._WSRequestContextManager(_BaseRequestContextManager[ClientWebSocketResponse])
+aiohttp.client.request(method:str,url:StrOrURL,*,params:Optional[Mapping[str,str]]=None,data:Any=None,json:Any=None,headers:LooseHeaders=None,skip_auto_headers:Optional[Iterable[str]]=None,auth:Optional[BasicAuth]=None,allow_redirects:bool=True,max_redirects:int=10,compress:Optional[str]=None,chunked:Optional[bool]=None,expect100:bool=False,raise_for_status:Optional[bool]=None,read_until_eof:bool=True,proxy:Optional[StrOrURL]=None,proxy_auth:Optional[BasicAuth]=None,timeout:Union[ClientTimeout,object]=sentinel,cookies:Optional[LooseCookies]=None,version:HttpVersion=http.HttpVersion11,connector:Optional[BaseConnector]=None,loop:Optional[asyncio.AbstractEventLoop]=None)->_SessionRequestContextManager
+aiohttp.request(method:str,url:StrOrURL,*,params:Optional[Mapping[str,str]]=None,data:Any=None,json:Any=None,headers:LooseHeaders=None,skip_auto_headers:Optional[Iterable[str]]=None,auth:Optional[BasicAuth]=None,allow_redirects:bool=True,max_redirects:int=10,compress:Optional[str]=None,chunked:Optional[bool]=None,expect100:bool=False,raise_for_status:Optional[bool]=None,read_until_eof:bool=True,proxy:Optional[StrOrURL]=None,proxy_auth:Optional[BasicAuth]=None,timeout:Union[ClientTimeout,object]=sentinel,cookies:Optional[LooseCookies]=None,version:HttpVersion=http.HttpVersion11,connector:Optional[BaseConnector]=None,loop:Optional[asyncio.AbstractEventLoop]=None)->_SessionRequestContextManager
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/http_writer.py----------------------------------------
+A:aiohttp.http_writer.HttpVersion->collections.namedtuple('HttpVersion', ['major', 'minor'])
+A:aiohttp.http_writer.HttpVersion10->HttpVersion(1, 0)
+A:aiohttp.http_writer.HttpVersion11->HttpVersion(1, 1)
+A:aiohttp.http_writer.self._compress->zlib.compressobj(wbits=zlib_mode)
+A:aiohttp.http_writer.size->len(chunk)
+A:aiohttp.http_writer.chunk->self._compress.compress(chunk)
+A:aiohttp.http_writer.chunk_len->('%x\r\n' % len(chunk)).encode('ascii')
+A:aiohttp.http_writer.chunk_len_pre->('%x\r\n' % len(chunk)).encode('ascii')
+A:aiohttp.http_writer.buf->_serialize_headers(status_line, headers)
+aiohttp.http_writer.StreamWriter(self,protocol:BaseProtocol,loop:asyncio.AbstractEventLoop,on_chunk_sent:_T_OnChunkSent=None)
+aiohttp.http_writer.StreamWriter._write(self,chunk:bytes)->None
+aiohttp.http_writer.StreamWriter.enable_chunking(self)->None
+aiohttp.http_writer.StreamWriter.enable_compression(self,encoding:str='deflate')->None
+aiohttp.http_writer.StreamWriter.protocol(self)->BaseProtocol
+aiohttp.http_writer.StreamWriter.transport(self)->Optional[asyncio.Transport]
+aiohttp.http_writer._py_serialize_headers(status_line:str,headers:'CIMultiDict[str]')->bytes
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/_helpers.pyi----------------------------------------
+aiohttp._helpers.reify(self,wrapped:Any)
+aiohttp._helpers.reify.__get__(self,inst:Any,owner:Any)->Any
+aiohttp._helpers.reify.__set__(self,inst:Any,value:Any)->None
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_request.py----------------------------------------
+A:aiohttp.web_request.name->attr.ib(type=str)
+A:aiohttp.web_request.filename->attr.ib(type=str)
+A:aiohttp.web_request.file->attr.ib(type=io.BufferedReader)
+A:aiohttp.web_request.content_type->field.headers.get(hdrs.CONTENT_TYPE)
+A:aiohttp.web_request.headers->attr.ib(type=CIMultiDictProxy)
+A:aiohttp.web_request._TOKEN->'[{tchar}]+'.format(tchar=_TCHAR)
+A:aiohttp.web_request._QDTEXT->'[{}]'.format(''.join((chr(c) for c in (9, 32, 33) + tuple(range(35, 127)))))
+A:aiohttp.web_request._QUOTED_STRING->'"(?:{quoted_pair}|{qdtext})*"'.format(qdtext=_QDTEXT, quoted_pair=_QUOTED_PAIR)
+A:aiohttp.web_request._FORWARDED_PAIR->'({token})=({token}|{quoted_string})(:\\d{{1,4}})?'.format(token=_TOKEN, quoted_string=_QUOTED_STRING)
+A:aiohttp.web_request._QUOTED_PAIR_REPLACE_RE->re.compile('\\\\([\\t !-~])')
+A:aiohttp.web_request._FORWARDED_PAIR_RE->re.compile(_FORWARDED_PAIR)
+A:aiohttp.web_request.self._transport_sslcontext->transport.get_extra_info('sslcontext')
+A:aiohttp.web_request.self._transport_peername->transport.get_extra_info('peername')
+A:aiohttp.web_request.new_url->URL(rel_url)
+A:aiohttp.web_request.dct['path']->str(new_url)
+A:aiohttp.web_request.dct['headers']->CIMultiDictProxy(CIMultiDict(headers))
+A:aiohttp.web_request.dct['raw_headers']->tuple(((k.encode('utf-8'), v.encode('utf-8')) for (k, v) in headers.items()))
+A:aiohttp.web_request.message->self._message._replace(**dct)
+A:aiohttp.web_request.length->len(field_value)
+A:aiohttp.web_request.match->re.compile(_FORWARDED_PAIR).match(field_value, pos)
+A:aiohttp.web_request.pos->field_value.find(',', pos)
+A:aiohttp.web_request.(name, value, port)->re.compile(_FORWARDED_PAIR).match(field_value, pos).groups()
+A:aiohttp.web_request.value->value.decode(charset).decode(charset)
+A:aiohttp.web_request.host->self._message.headers.get(hdrs.HOST)
+A:aiohttp.web_request.url->yarl.URL.build(scheme=self.scheme, host=self.host)
+A:aiohttp.web_request.timetuple->parsedate(_date_str)
+A:aiohttp.web_request.raw->self.headers.get(hdrs.COOKIE, '')
+A:aiohttp.web_request.parsed->SimpleCookie(raw)
+A:aiohttp.web_request.rng->self._headers.get(hdrs.RANGE)
+A:aiohttp.web_request.body->bytearray()
+A:aiohttp.web_request.body_size->len(body)
+A:aiohttp.web_request.self._read_bytes->bytes(body)
+A:aiohttp.web_request.self._post->MultiDictProxy(out)
+A:aiohttp.web_request.out->MultiDict()
+A:aiohttp.web_request.tmp->tempfile.TemporaryFile()
+A:aiohttp.web_request.chunk->field.decode(chunk)
+A:aiohttp.web_request.ff->FileField(field.name, field.filename, cast(io.BufferedReader, tmp), content_type, field.headers)
+A:aiohttp.web_request.charset->field.get_charset(default='utf-8')
+A:aiohttp.web_request.ascii_encodable_path->self.path.encode('ascii', 'backslashreplace').decode('ascii')
+A:aiohttp.web_request.ret->super().clone(method=method, rel_url=rel_url, headers=headers, scheme=scheme, host=host, remote=remote)
+A:aiohttp.web_request.new_ret->cast(Request, ret)
+A:aiohttp.web_request.idx->lst.index(app)
+A:aiohttp.web_request.sublist->list(reversed(lst[:idx + 1]))
+aiohttp.web_request.BaseRequest(self,message:RawRequestMessage,payload:StreamReader,protocol:'RequestHandler',payload_writer:AbstractStreamWriter,task:'asyncio.Task[None]',loop:asyncio.AbstractEventLoop,*,client_max_size:int=1024**2,state:Optional[Dict[str,Any]]=None,scheme:Optional[str]=None,host:Optional[str]=None,remote:Optional[str]=None)
+aiohttp.web_request.BaseRequest.__delitem__(self,key:str)->None
+aiohttp.web_request.BaseRequest.__eq__(self,other:object)->bool
+aiohttp.web_request.BaseRequest.__getitem__(self,key:str)->Any
+aiohttp.web_request.BaseRequest.__iter__(self)->Iterator[str]
+aiohttp.web_request.BaseRequest.__len__(self)->int
+aiohttp.web_request.BaseRequest.__repr__(self)->str
+aiohttp.web_request.BaseRequest.__setitem__(self,key:str,value:Any)->None
+aiohttp.web_request.BaseRequest._http_date(_date_str:str)->Optional[datetime.datetime]
+aiohttp.web_request.BaseRequest.body_exists(self)->bool
+aiohttp.web_request.BaseRequest.can_read_body(self)->bool
+aiohttp.web_request.BaseRequest.clone(self,*,method:str=sentinel,rel_url:StrOrURL=sentinel,headers:LooseHeaders=sentinel,scheme:str=sentinel,host:str=sentinel,remote:str=sentinel)->'BaseRequest'
+aiohttp.web_request.BaseRequest.content(self)->StreamReader
+aiohttp.web_request.BaseRequest.cookies(self)->Mapping[str, str]
+aiohttp.web_request.BaseRequest.forwarded(self)->Tuple[Mapping[str, str], ...]
+aiohttp.web_request.BaseRequest.has_body(self)->bool
+aiohttp.web_request.BaseRequest.headers(self)->'CIMultiDictProxy[str]'
+aiohttp.web_request.BaseRequest.host(self)->str
+aiohttp.web_request.BaseRequest.http_range(self)->slice
+aiohttp.web_request.BaseRequest.if_modified_since(self)->Optional[datetime.datetime]
+aiohttp.web_request.BaseRequest.if_range(self)->Optional[datetime.datetime]
+aiohttp.web_request.BaseRequest.if_unmodified_since(self)->Optional[datetime.datetime]
+aiohttp.web_request.BaseRequest.keep_alive(self)->bool
+aiohttp.web_request.BaseRequest.loop(self)->asyncio.AbstractEventLoop
+aiohttp.web_request.BaseRequest.message(self)->RawRequestMessage
+aiohttp.web_request.BaseRequest.method(self)->str
+aiohttp.web_request.BaseRequest.path(self)->str
+aiohttp.web_request.BaseRequest.path_qs(self)->str
+aiohttp.web_request.BaseRequest.protocol(self)->'RequestHandler'
+aiohttp.web_request.BaseRequest.query(self)->'MultiDictProxy[str]'
+aiohttp.web_request.BaseRequest.query_string(self)->str
+aiohttp.web_request.BaseRequest.raw_headers(self)->RawHeaders
+aiohttp.web_request.BaseRequest.raw_path(self)->str
+aiohttp.web_request.BaseRequest.rel_url(self)->URL
+aiohttp.web_request.BaseRequest.remote(self)->Optional[str]
+aiohttp.web_request.BaseRequest.scheme(self)->str
+aiohttp.web_request.BaseRequest.secure(self)->bool
+aiohttp.web_request.BaseRequest.task(self)->'asyncio.Task[None]'
+aiohttp.web_request.BaseRequest.transport(self)->Optional[asyncio.Transport]
+aiohttp.web_request.BaseRequest.url(self)->URL
+aiohttp.web_request.BaseRequest.version(self)->Tuple[int, int]
+aiohttp.web_request.BaseRequest.writer(self)->AbstractStreamWriter
+aiohttp.web_request.FileField
+aiohttp.web_request.Request(self,*args:Any,**kwargs:Any)
+aiohttp.web_request.Request.app(self)->'Application'
+aiohttp.web_request.Request.clone(self,*,method:str=sentinel,rel_url:StrOrURL=sentinel,headers:LooseHeaders=sentinel,scheme:str=sentinel,host:str=sentinel,remote:str=sentinel)->'Request'
+aiohttp.web_request.Request.config_dict(self)->ChainMapProxy
+aiohttp.web_request.Request.match_info(self)->'UrlMappingMatchInfo'
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/web_protocol.py----------------------------------------
+A:aiohttp.web_protocol.ERROR->RawRequestMessage('UNKNOWN', '/', HttpVersion10, {}, {}, True, False, False, False, yarl.URL('/'))
+A:aiohttp.web_protocol.self._lingering_time->float(lingering_time)
+A:aiohttp.web_protocol.self._messages->deque()
+A:aiohttp.web_protocol.self._request_parser->HttpRequestParser(self, loop, max_line_size=max_line_size, max_field_size=max_field_size, max_headers=max_headers, payload_exception=RequestPayloadError)
+A:aiohttp.web_protocol.self.access_logger->access_log_class(access_log, access_log_format)
+A:aiohttp.web_protocol.real_transport->cast(asyncio.Transport, transport)
+A:aiohttp.web_protocol.self._task_handler->self._loop.create_task(self.start())
+A:aiohttp.web_protocol.(messages, upgraded, tail)->self._request_parser.feed_data(data)
+A:aiohttp.web_protocol.self._error_handler->self._loop.create_task(self.handle_parse_error(StreamWriter(self, self._loop), 500, exc))
+A:aiohttp.web_protocol.(eof, tail)->self._payload_parser.feed_data(data)
+A:aiohttp.web_protocol.self._keepalive_handle->loop.call_at(now + keepalive_timeout, self._process_keepalive)
+A:aiohttp.web_protocol.self._waiter->loop.create_future()
+A:aiohttp.web_protocol.(message, payload)->self._messages.popleft()
+A:aiohttp.web_protocol.now->self._loop.time()
+A:aiohttp.web_protocol.writer->StreamWriter(self, loop)
+A:aiohttp.web_protocol.request->BaseRequest(ERROR, EMPTY_PAYLOAD, self, writer, current_task(), self._loop)
+A:aiohttp.web_protocol.task->self._loop.create_task(self._request_handler(request))
+A:aiohttp.web_protocol.resp->self.handle_error(request, status, exc, message)
+A:aiohttp.web_protocol.self._keepalive->bool(resp.keep_alive)
+A:aiohttp.web_protocol.title->'{0.value} {0.phrase}'.format(HTTPStatus.INTERNAL_SERVER_ERROR)
+A:aiohttp.web_protocol.tb->html_escape(tb)
+A:aiohttp.web_protocol.msg->'<h2>Traceback:</h2>\n<pre>{}</pre>'.format(tb)
+A:aiohttp.web_protocol.message->'<html><head><title>{title}</title></head><body>\n<h1>{title}</h1>\n{msg}\n</body></html>\n'.format(title=title, msg=msg)
+aiohttp.web_protocol.PayloadAccessError(Exception)
+aiohttp.web_protocol.RequestHandler(self,manager:'Server',*,loop:asyncio.AbstractEventLoop,keepalive_timeout:float=75.0,tcp_keepalive:bool=True,logger:Logger=server_logger,access_log_class:Type[AbstractAccessLogger]=AccessLogger,access_log:Logger=access_logger,access_log_format:str=AccessLogger.LOG_FORMAT,debug:bool=False,max_line_size:int=8190,max_headers:int=32768,max_field_size:int=8190,lingering_time:float=10.0)
+aiohttp.web_protocol.RequestHandler.__repr__(self)->str
+aiohttp.web_protocol.RequestHandler._process_keepalive(self)->None
+aiohttp.web_protocol.RequestHandler.close(self)->None
+aiohttp.web_protocol.RequestHandler.connection_lost(self,exc:Optional[BaseException])->None
+aiohttp.web_protocol.RequestHandler.connection_made(self,transport:asyncio.BaseTransport)->None
+aiohttp.web_protocol.RequestHandler.data_received(self,data:bytes)->None
+aiohttp.web_protocol.RequestHandler.eof_received(self)->None
+aiohttp.web_protocol.RequestHandler.force_close(self)->None
+aiohttp.web_protocol.RequestHandler.handle_error(self,request:BaseRequest,status:int=500,exc:Optional[BaseException]=None,message:Optional[str]=None)->StreamResponse
+aiohttp.web_protocol.RequestHandler.keep_alive(self,val:bool)->None
+aiohttp.web_protocol.RequestHandler.keepalive_timeout(self)->float
+aiohttp.web_protocol.RequestHandler.log_access(self,request:BaseRequest,response:StreamResponse,time:float)->None
+aiohttp.web_protocol.RequestHandler.log_debug(self,*args:Any,**kw:Any)->None
+aiohttp.web_protocol.RequestHandler.log_exception(self,*args:Any,**kw:Any)->None
+aiohttp.web_protocol.RequestHandler.set_parser(self,parser:Any)->None
+aiohttp.web_protocol.RequestPayloadError(Exception)
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/client_reqrep.py----------------------------------------
+A:aiohttp.client_reqre.json_re->re.compile('^application/(?:[\\w.+-]+?\\+)?json')
+A:aiohttp.client_reqre.type->attr.ib(type=str)
+A:aiohttp.client_reqre.parameters->attr.ib(type=MappingProxyType)
+A:aiohttp.client_reqre.filename->multipart.content_disposition_filename(params)
+A:aiohttp.client_reqre.url->url.with_query(q).with_query(q)
+A:aiohttp.client_reqre.method->attr.ib(type=str)
+A:aiohttp.client_reqre.headers->headers.items().items()
+A:aiohttp.client_reqre.real_url->attr.ib(type=URL)
+A:aiohttp.client_reqre.digestlen->len(fingerprint)
+A:aiohttp.client_reqre.hashfunc->self.HASHFUNC_BY_DIGESTLEN.get(digestlen)
+A:aiohttp.client_reqre.sslobj->transport.get_extra_info('ssl_object')
+A:aiohttp.client_reqre.cert->transport.get_extra_info('ssl_object').getpeercert(binary_form=True)
+A:aiohttp.client_reqre.got->self._hashfunc(cert).digest()
+A:aiohttp.client_reqre.(host, port, *_)->transport.get_extra_info('peername')
+A:aiohttp.client_reqre.SSL_ALLOWED_TYPES->type(None)
+A:aiohttp.client_reqre.ssl->attr.ib()
+A:aiohttp.client_reqre.host->attr.ib(type=str)
+A:aiohttp.client_reqre.port->attr.ib(type=int)
+A:aiohttp.client_reqre.is_ssl->attr.ib(type=bool)
+A:aiohttp.client_reqre.proxy->attr.ib()
+A:aiohttp.client_reqre.proxy_auth->attr.ib()
+A:aiohttp.client_reqre.proxy_headers_hash->attr.ib(type=int)
+A:aiohttp.client_reqre.ALL_METHODS->GET_METHODS.union(POST_METHODS).union({hdrs.METH_DELETE})
+A:aiohttp.client_reqre.loop->asyncio.get_event_loop()
+A:aiohttp.client_reqre.self._session->cast('ClientSession', session)
+A:aiohttp.client_reqre.q->MultiDict(url.query)
+A:aiohttp.client_reqre.url2->url.with_query(q).with_query(q).with_query(params)
+A:aiohttp.client_reqre.self.url->url.with_query(q).with_query(q).with_fragment(None)
+A:aiohttp.client_reqre.self.method->attr.ib(type=str).upper()
+A:aiohttp.client_reqre.self._source_traceback->traceback.extract_stack(sys._getframe(1))
+A:aiohttp.client_reqre.h->hash(tuple(((k, v) for (k, v) in proxy_headers.items())))
+A:aiohttp.client_reqre.self.auth->helpers.BasicAuth(username, password or '')
+A:aiohttp.client_reqre.version->http.HttpVersion(int(v[0]), int(v[1]))
+A:aiohttp.client_reqre.self.headers->CIMultiDict()
+A:aiohttp.client_reqre.netloc->'[{}]'.format(netloc)
+A:aiohttp.client_reqre.self.skip_auto_headers->CIMultiDict(((hdr, None) for hdr in sorted(skip_auto_headers)))
+A:aiohttp.client_reqre.used_headers->self.headers.copy()
+A:aiohttp.client_reqre.c->SimpleCookie()
+A:aiohttp.client_reqre.iter_cookies->cookies.items()
+A:aiohttp.client_reqre.mrsl_val->value.get(value.key, Morsel())
+A:aiohttp.client_reqre.self.headers[hdrs.COOKIE]->SimpleCookie().output(header='', sep=';').strip()
+A:aiohttp.client_reqre.enc->self.headers.get(hdrs.CONTENT_ENCODING, '').lower()
+A:aiohttp.client_reqre.te->self.headers.get(hdrs.TRANSFER_ENCODING, '').lower()
+A:aiohttp.client_reqre.self.headers[hdrs.CONTENT_LENGTH]->str(size)
+A:aiohttp.client_reqre.self.headers[hdrs.AUTHORIZATION]->auth.encode()
+A:aiohttp.client_reqre.body->FormData(body)()
+A:aiohttp.client_reqre.self._continue->self.loop.create_future()
+A:aiohttp.client_reqre.new_exc->ClientOSError(exc.errno, 'Can not write request body for %s' % self.url)
+A:aiohttp.client_reqre.path->str(self.url)
+A:aiohttp.client_reqre.writer->StreamWriter(protocol, self.loop, on_chunk_sent=self._on_chunk_request_sent)
+A:aiohttp.client_reqre.connection->self.headers.get(hdrs.CONNECTION)
+A:aiohttp.client_reqre.status_line->'{0} {1} HTTP/{2[0]}.{2[1]}'.format(self.method, path, self.version)
+A:aiohttp.client_reqre.self._writer->self.loop.create_task(self.write_bytes(writer, conn))
+A:aiohttp.client_reqre.self.response->response_class(self.method, self.original_url, writer=self._writer, continue100=self._continue, timer=self._timer, request_info=self.request_info, traces=self._traces, loop=self.loop, session=self._session)
+A:aiohttp.client_reqre.self.cookies->SimpleCookie()
+A:aiohttp.client_reqre.self._url->url.with_query(q).with_query(q).with_fragment(None)
+A:aiohttp.client_reqre.raw->self._headers.get(hdrs.CONTENT_DISPOSITION)
+A:aiohttp.client_reqre.(disposition_type, params_dct)->multipart.parse_content_disposition(raw)
+A:aiohttp.client_reqre.params->MappingProxyType(params_dct)
+A:aiohttp.client_reqre.out->io.StringIO()
+A:aiohttp.client_reqre.ascii_encodable_url->str(self.url)
+A:aiohttp.client_reqre.ascii_encodable_reason->self.reason.encode('ascii', 'backslashreplace').decode('ascii')
+A:aiohttp.client_reqre.links_str->', '.join(self.headers.getall('link', []))
+A:aiohttp.client_reqre.links->MultiDict()
+A:aiohttp.client_reqre.match->re.match('^\\s*(\\S*)\\s*=\\s*([\'\\"]?)(.*?)(\\2)\\s*$', param, re.M)
+A:aiohttp.client_reqre.(url, params_str)->re.match('^\\s*(\\S*)\\s*=\\s*([\'\\"]?)(.*?)(\\2)\\s*$', param, re.M).groups()
+A:aiohttp.client_reqre.link->MultiDict()
+A:aiohttp.client_reqre.(key, _, value, _)->re.match('^\\s*(\\S*)\\s*=\\s*([\'\\"]?)(.*?)(\\2)\\s*$', param, re.M).groups()
+A:aiohttp.client_reqre.key->MultiDict().get('rel', url)
+A:aiohttp.client_reqre.ctype->self.headers.get(hdrs.CONTENT_TYPE, '').lower()
+A:aiohttp.client_reqre.mimetype->helpers.parse_mimetype(ctype)
+A:aiohttp.client_reqre.encoding->self.get_encoding()
+A:aiohttp.client_reqre.stripped->self._body.strip()
+aiohttp.client_reqre.ClientRequest(self,method:str,url:URL,*,params:Optional[Mapping[str,str]]=None,headers:Optional[LooseHeaders]=None,skip_auto_headers:Iterable[str]=frozenset(),data:Any=None,cookies:Optional[LooseCookies]=None,auth:Optional[BasicAuth]=None,version:http.HttpVersion=http.HttpVersion11,compress:Optional[str]=None,chunked:Optional[bool]=None,expect100:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None,response_class:Optional[Type['ClientResponse']]=None,proxy:Optional[URL]=None,proxy_auth:Optional[BasicAuth]=None,timer:Optional[BaseTimerContext]=None,session:Optional['ClientSession']=None,ssl:Union[SSLContext,bool,Fingerprint,None]=None,proxy_headers:Optional[LooseHeaders]=None,traces:Optional[List['Trace']]=None)
+aiohttp.client_reqre.ClientRequest.connection_key(self)->ConnectionKey
+aiohttp.client_reqre.ClientRequest.host(self)->str
+aiohttp.client_reqre.ClientRequest.is_ssl(self)->bool
+aiohttp.client_reqre.ClientRequest.keep_alive(self)->bool
+aiohttp.client_reqre.ClientRequest.port(self)->Optional[int]
+aiohttp.client_reqre.ClientRequest.request_info(self)->RequestInfo
+aiohttp.client_reqre.ClientRequest.ssl(self)->Union['SSLContext', None, bool, Fingerprint]
+aiohttp.client_reqre.ClientRequest.terminate(self)->None
+aiohttp.client_reqre.ClientRequest.update_auth(self,auth:Optional[BasicAuth])->None
+aiohttp.client_reqre.ClientRequest.update_auto_headers(self,skip_auto_headers:Iterable[str])->None
+aiohttp.client_reqre.ClientRequest.update_body_from_data(self,body:Any)->None
+aiohttp.client_reqre.ClientRequest.update_content_encoding(self,data:Any)->None
+aiohttp.client_reqre.ClientRequest.update_cookies(self,cookies:Optional[LooseCookies])->None
+aiohttp.client_reqre.ClientRequest.update_expect_continue(self,expect:bool=False)->None
+aiohttp.client_reqre.ClientRequest.update_headers(self,headers:Optional[LooseHeaders])->None
+aiohttp.client_reqre.ClientRequest.update_host(self,url:URL)->None
+aiohttp.client_reqre.ClientRequest.update_proxy(self,proxy:Optional[URL],proxy_auth:Optional[BasicAuth],proxy_headers:Optional[LooseHeaders])->None
+aiohttp.client_reqre.ClientRequest.update_transfer_encoding(self)->None
+aiohttp.client_reqre.ClientRequest.update_version(self,version:Union[http.HttpVersion,str])->None
+aiohttp.client_reqre.ClientResponse(self,method:str,url:URL,*,writer:'asyncio.Task[None]',continue100:Optional['asyncio.Future[bool]'],timer:BaseTimerContext,request_info:RequestInfo,traces:List['Trace'],loop:asyncio.AbstractEventLoop,session:'ClientSession')
+aiohttp.client_reqre.ClientResponse.__del__(self,_warnings:Any=warnings)->None
+aiohttp.client_reqre.ClientResponse.__repr__(self)->str
+aiohttp.client_reqre.ClientResponse._cleanup_writer(self)->None
+aiohttp.client_reqre.ClientResponse._notify_content(self)->None
+aiohttp.client_reqre.ClientResponse._response_eof(self)->None
+aiohttp.client_reqre.ClientResponse.close(self)->None
+aiohttp.client_reqre.ClientResponse.closed(self)->bool
+aiohttp.client_reqre.ClientResponse.connection(self)->Optional['Connection']
+aiohttp.client_reqre.ClientResponse.content_disposition(self)->Optional[ContentDisposition]
+aiohttp.client_reqre.ClientResponse.get_encoding(self)->str
+aiohttp.client_reqre.ClientResponse.headers(self)->'CIMultiDictProxy[str]'
+aiohttp.client_reqre.ClientResponse.history(self)->Tuple['ClientResponse', ...]
+aiohttp.client_reqre.ClientResponse.host(self)->str
+aiohttp.client_reqre.ClientResponse.links(self)->'MultiDictProxy[MultiDictProxy[Union[str, URL]]]'
+aiohttp.client_reqre.ClientResponse.raise_for_status(self)->None
+aiohttp.client_reqre.ClientResponse.raw_headers(self)->RawHeaders
+aiohttp.client_reqre.ClientResponse.real_url(self)->URL
+aiohttp.client_reqre.ClientResponse.release(self)->Any
+aiohttp.client_reqre.ClientResponse.request_info(self)->RequestInfo
+aiohttp.client_reqre.ClientResponse.url(self)->URL
+aiohttp.client_reqre.ClientResponse.url_obj(self)->URL
+aiohttp.client_reqre.ConnectionKey
+aiohttp.client_reqre.ContentDisposition
+aiohttp.client_reqre.Fingerprint(self,fingerprint:bytes)
+aiohttp.client_reqre.Fingerprint.check(self,transport:asyncio.Transport)->None
+aiohttp.client_reqre.Fingerprint.fingerprint(self)->bytes
+aiohttp.client_reqre.RequestInfo
+aiohttp.client_reqre.RequestInfo.real_url_default(self)->URL
+aiohttp.client_reqre._is_expected_content_type(response_content_type:str,expected_content_type:str)->bool
+aiohttp.client_reqre._merge_ssl_params(ssl:Union['SSLContext',bool,Fingerprint,None],verify_ssl:Optional[bool],ssl_context:Optional['SSLContext'],fingerprint:Optional[bytes])->Union['SSLContext', bool, Fingerprint, None]
+
+
+----------------------------------------/home/zhang/Packages/aiohttp/aiohttp3.5.2/hdrs.py----------------------------------------
+A:aiohttp.hdrs.ACCEPT->istr('Accept')
+A:aiohttp.hdrs.ACCEPT_CHARSET->istr('Accept-Charset')
+A:aiohttp.hdrs.ACCEPT_ENCODING->istr('Accept-Encoding')
+A:aiohttp.hdrs.ACCEPT_LANGUAGE->istr('Accept-Language')
+A:aiohttp.hdrs.ACCEPT_RANGES->istr('Accept-Ranges')
+A:aiohttp.hdrs.ACCESS_CONTROL_MAX_AGE->istr('Access-Control-Max-Age')
+A:aiohttp.hdrs.ACCESS_CONTROL_ALLOW_CREDENTIALS->istr('Access-Control-Allow-Credentials')
+A:aiohttp.hdrs.ACCESS_CONTROL_ALLOW_HEADERS->istr('Access-Control-Allow-Headers')
+A:aiohttp.hdrs.ACCESS_CONTROL_ALLOW_METHODS->istr('Access-Control-Allow-Methods')
+A:aiohttp.hdrs.ACCESS_CONTROL_ALLOW_ORIGIN->istr('Access-Control-Allow-Origin')
+A:aiohttp.hdrs.ACCESS_CONTROL_EXPOSE_HEADERS->istr('Access-Control-Expose-Headers')
+A:aiohttp.hdrs.ACCESS_CONTROL_REQUEST_HEADERS->istr('Access-Control-Request-Headers')
+A:aiohttp.hdrs.ACCESS_CONTROL_REQUEST_METHOD->istr('Access-Control-Request-Method')
+A:aiohttp.hdrs.AGE->istr('Age')
+A:aiohttp.hdrs.ALLOW->istr('Allow')
+A:aiohttp.hdrs.AUTHORIZATION->istr('Authorization')
+A:aiohttp.hdrs.CACHE_CONTROL->istr('Cache-Control')
+A:aiohttp.hdrs.CONNECTION->istr('Connection')
+A:aiohttp.hdrs.CONTENT_DISPOSITION->istr('Content-Disposition')
+A:aiohttp.hdrs.CONTENT_ENCODING->istr('Content-Encoding')
+A:aiohttp.hdrs.CONTENT_LANGUAGE->istr('Content-Language')
+A:aiohttp.hdrs.CONTENT_LENGTH->istr('Content-Length')
+A:aiohttp.hdrs.CONTENT_LOCATION->istr('Content-Location')
+A:aiohttp.hdrs.CONTENT_MD5->istr('Content-MD5')
+A:aiohttp.hdrs.CONTENT_RANGE->istr('Content-Range')
+A:aiohttp.hdrs.CONTENT_TRANSFER_ENCODING->istr('Content-Transfer-Encoding')
+A:aiohttp.hdrs.CONTENT_TYPE->istr('Content-Type')
+A:aiohttp.hdrs.COOKIE->istr('Cookie')
+A:aiohttp.hdrs.DATE->istr('Date')
+A:aiohttp.hdrs.DESTINATION->istr('Destination')
+A:aiohttp.hdrs.DIGEST->istr('Digest')
+A:aiohttp.hdrs.ETAG->istr('Etag')
+A:aiohttp.hdrs.EXPECT->istr('Expect')
+A:aiohttp.hdrs.EXPIRES->istr('Expires')
+A:aiohttp.hdrs.FORWARDED->istr('Forwarded')
+A:aiohttp.hdrs.FROM->istr('From')
+A:aiohttp.hdrs.HOST->istr('Host')
+A:aiohttp.hdrs.IF_MATCH->istr('If-Match')
+A:aiohttp.hdrs.IF_MODIFIED_SINCE->istr('If-Modified-Since')
+A:aiohttp.hdrs.IF_NONE_MATCH->istr('If-None-Match')
+A:aiohttp.hdrs.IF_RANGE->istr('If-Range')
+A:aiohttp.hdrs.IF_UNMODIFIED_SINCE->istr('If-Unmodified-Since')
+A:aiohttp.hdrs.KEEP_ALIVE->istr('Keep-Alive')
+A:aiohttp.hdrs.LAST_EVENT_ID->istr('Last-Event-ID')
+A:aiohttp.hdrs.LAST_MODIFIED->istr('Last-Modified')
+A:aiohttp.hdrs.LINK->istr('Link')
+A:aiohttp.hdrs.LOCATION->istr('Location')
+A:aiohttp.hdrs.MAX_FORWARDS->istr('Max-Forwards')
+A:aiohttp.hdrs.ORIGIN->istr('Origin')
+A:aiohttp.hdrs.PRAGMA->istr('Pragma')
+A:aiohttp.hdrs.PROXY_AUTHENTICATE->istr('Proxy-Authenticate')
+A:aiohttp.hdrs.PROXY_AUTHORIZATION->istr('Proxy-Authorization')
+A:aiohttp.hdrs.RANGE->istr('Range')
+A:aiohttp.hdrs.REFERER->istr('Referer')
+A:aiohttp.hdrs.RETRY_AFTER->istr('Retry-After')
+A:aiohttp.hdrs.SEC_WEBSOCKET_ACCEPT->istr('Sec-WebSocket-Accept')
+A:aiohttp.hdrs.SEC_WEBSOCKET_VERSION->istr('Sec-WebSocket-Version')
+A:aiohttp.hdrs.SEC_WEBSOCKET_PROTOCOL->istr('Sec-WebSocket-Protocol')
+A:aiohttp.hdrs.SEC_WEBSOCKET_EXTENSIONS->istr('Sec-WebSocket-Extensions')
+A:aiohttp.hdrs.SEC_WEBSOCKET_KEY->istr('Sec-WebSocket-Key')
+A:aiohttp.hdrs.SEC_WEBSOCKET_KEY1->istr('Sec-WebSocket-Key1')
+A:aiohttp.hdrs.SERVER->istr('Server')
+A:aiohttp.hdrs.SET_COOKIE->istr('Set-Cookie')
+A:aiohttp.hdrs.TE->istr('TE')
+A:aiohttp.hdrs.TRAILER->istr('Trailer')
+A:aiohttp.hdrs.TRANSFER_ENCODING->istr('Transfer-Encoding')
+A:aiohttp.hdrs.UPGRADE->istr('Upgrade')
+A:aiohttp.hdrs.WEBSOCKET->istr('WebSocket')
+A:aiohttp.hdrs.URI->istr('URI')
+A:aiohttp.hdrs.USER_AGENT->istr('User-Agent')
+A:aiohttp.hdrs.VARY->istr('Vary')
+A:aiohttp.hdrs.VIA->istr('Via')
+A:aiohttp.hdrs.WANT_DIGEST->istr('Want-Digest')
+A:aiohttp.hdrs.WARNING->istr('Warning')
+A:aiohttp.hdrs.WWW_AUTHENTICATE->istr('WWW-Authenticate')
+A:aiohttp.hdrs.X_FORWARDED_FOR->istr('X-Forwarded-For')
+A:aiohttp.hdrs.X_FORWARDED_HOST->istr('X-Forwarded-Host')
+A:aiohttp.hdrs.X_FORWARDED_PROTO->istr('X-Forwarded-Proto')
+

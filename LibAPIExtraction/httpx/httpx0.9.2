@@ -1,0 +1,669 @@
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/multipart.py----------------------------------------
+A:httpx.multipart._HTML5_FORM_ENCODING_RE->re.compile('|'.join([re.escape(c) for c in _HTML5_FORM_ENCODING_REPLACEMENTS.keys()]))
+A:httpx.multipart.name->_format_param('name', self.name)
+A:httpx.multipart.self.content_type->self.guess_content_type()
+A:httpx.multipart.filename->_format_param('filename', self.filename)
+A:httpx.multipart.content_type->self.content_type.encode()
+A:httpx.multipart.content->self.file.read()
+A:httpx.multipart.body->BytesIO()
+A:httpx.multipart.boundary->binascii.hexlify(os.urandom(16))
+A:httpx.multipart.value->re.compile('|'.join([re.escape(c) for c in _HTML5_FORM_ENCODING_REPLACEMENTS.keys()])).sub(replacer, value)
+httpx.multipart.DataField(self,name:str,value:typing.Union[str,bytes])
+httpx.multipart.DataField.render_data(self)->bytes
+httpx.multipart.DataField.render_headers(self)->bytes
+httpx.multipart.Field
+httpx.multipart.Field.render_data(self)->bytes
+httpx.multipart.Field.render_headers(self)->bytes
+httpx.multipart.FileField(self,name:str,value:typing.Union[typing.IO[typing.AnyStr],tuple])
+httpx.multipart.FileField.guess_content_type(self)->typing.Optional[str]
+httpx.multipart.FileField.render_data(self)->bytes
+httpx.multipart.FileField.render_headers(self)->bytes
+httpx.multipart._format_param(name:str,value:typing.Union[str,bytes])->bytes
+httpx.multipart.iter_fields(data:dict,files:dict)->typing.Iterator[Field]
+httpx.multipart.multipart_encode(data:dict,files:dict)->typing.Tuple[bytes, str]
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/utils.py----------------------------------------
+A:httpx.utils._null->'\x00'.encode('ascii')
+A:httpx.utils.nullcount->sample.count(_null)
+A:httpx.utils.expanded_path->Path(file_path).expanduser()
+A:httpx.utils.self._netrc_info->netrc.netrc(str(expanded_path))
+A:httpx.utils.auth_info->self.netrc_info.authenticators(authority)
+A:httpx.utils.ssl_file->Path(os.environ['SSL_CERT_FILE'])
+A:httpx.utils.ssl_path->Path(os.environ['SSL_CERT_DIR'])
+A:httpx.utils.value->value.strip(replace_chars).strip(replace_chars)
+A:httpx.utils.(url, params)->val.split(';', 1)
+A:httpx.utils.(key, value)->param.split('=')
+A:httpx.utils.link[key.strip(replace_chars)]->value.strip(replace_chars).strip(replace_chars).strip(replace_chars)
+A:httpx.utils.v->to_bytes_or_str('[secure]', match_type_of=v)
+A:httpx.utils.log_level->os.environ.get('HTTPX_LOG_LEVEL', '').upper()
+A:httpx.utils.logger->logging.getLogger(name)
+A:httpx.utils.handler->logging.StreamHandler(sys.stderr)
+A:httpx.utils.no_proxy->getproxies().get('no')
+A:httpx.utils.name->re.escape(name)
+A:httpx.utils.self.start->perf_counter()
+A:httpx.utils.self.end->perf_counter()
+httpx.utils.ElapsedTimer(self)
+httpx.utils.ElapsedTimer.__enter__(self)->'ElapsedTimer'
+httpx.utils.ElapsedTimer.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.utils.ElapsedTimer.elapsed(self)->timedelta
+httpx.utils.Logger(logging.Logger)
+httpx.utils.Logger.trace(self,message:str,*args:typing.Any,**kwargs:typing.Any)->None
+httpx.utils.NetRCInfo(self,files:typing.Optional[typing.List[str]]=None)
+httpx.utils.NetRCInfo.get_credentials(self,authority:str)->typing.Optional[typing.Tuple[str, str]]
+httpx.utils.NetRCInfo.netrc_info(self)->typing.Optional[netrc.netrc]
+httpx.utils.flatten_queryparams(queryparams:typing.Mapping[str,typing.Union['PrimitiveData',typing.Sequence['PrimitiveData']]])->typing.List[typing.Tuple[str, 'PrimitiveData']]
+httpx.utils.get_ca_bundle_from_env()->typing.Optional[str]
+httpx.utils.get_environment_proxies()->typing.Dict[str, str]
+httpx.utils.get_logger(name:str)->Logger
+httpx.utils.guess_json_utf(data:bytes)->typing.Optional[str]
+httpx.utils.is_known_encoding(encoding:str)->bool
+httpx.utils.kv_format(**kwargs:typing.Any)->str
+httpx.utils.normalize_header_key(value:typing.AnyStr,encoding:str=None)->bytes
+httpx.utils.normalize_header_value(value:typing.AnyStr,encoding:str=None)->bytes
+httpx.utils.obfuscate_sensitive_headers(items:typing.Iterable[typing.Tuple[typing.AnyStr,typing.AnyStr]])->typing.Iterator[typing.Tuple[typing.AnyStr, typing.AnyStr]]
+httpx.utils.parse_header_links(value:str)->typing.List[typing.Dict[str, str]]
+httpx.utils.should_not_be_proxied(url:'URL')->bool
+httpx.utils.str_query_param(value:'PrimitiveData')->str
+httpx.utils.to_bytes(value:typing.Union[str,bytes],encoding:str='utf-8')->bytes
+httpx.utils.to_bytes_or_str(value:str,match_type_of:typing.AnyStr)->typing.AnyStr
+httpx.utils.to_str(value:typing.Union[str,bytes],encoding:str='utf-8')->str
+httpx.utils.unquote(value:str)->str
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/middleware.py----------------------------------------
+httpx.middleware.Middleware
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/config.py----------------------------------------
+A:httpx.config.DEFAULT_CIPHERS->':'.join(['ECDHE+AESGCM', 'ECDHE+CHACHA20', 'DHE+AESGCM', 'DHE+CHACHA20', 'ECDH+AESGCM', 'DH+AESGCM', 'ECDH+AES', 'DH+AES', 'RSA+AESGCM', 'RSA+AES', '!aNULL', '!eNULL', '!MD5', '!DSS'])
+A:httpx.config.logger->get_logger(__name__)
+A:httpx.config.UNSET->UnsetType()
+A:httpx.config.context->ssl.SSLContext(ssl.PROTOCOL_TLS)
+A:httpx.config.ca_bundle->get_ca_bundle_from_env()
+A:httpx.config.ca_bundle_path->Path(self.verify)
+A:httpx.config.keylogfile->os.environ.get('SSLKEYLOGFILE')
+A:httpx.config.DEFAULT_SSL_CONFIG->SSLConfig(cert=None, verify=True)
+A:httpx.config.DEFAULT_TIMEOUT_CONFIG->Timeout(timeout=5.0)
+A:httpx.config.DEFAULT_POOL_LIMITS->PoolLimits(soft_limit=10, hard_limit=100)
+A:httpx.config.DEFAULT_CA_BUNDLE_PATH->Path(certifi.where())
+httpx.PoolLimits(self,*,soft_limit:int=None,hard_limit:int=None)
+httpx.Timeout(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
+httpx.config.PoolLimits(self,*,soft_limit:int=None,hard_limit:int=None)
+httpx.config.PoolLimits.__eq__(self,other:typing.Any)->bool
+httpx.config.PoolLimits.__repr__(self)->str
+httpx.config.SSLConfig(self,*,cert:CertTypes=None,verify:VerifyTypes=True,trust_env:bool=None)
+httpx.config.SSLConfig.__eq__(self,other:typing.Any)->bool
+httpx.config.SSLConfig.__repr__(self)->str
+httpx.config.SSLConfig._create_default_ssl_context(self,http2:bool)->ssl.SSLContext
+httpx.config.SSLConfig._load_client_certs(self,ssl_context:ssl.SSLContext)->None
+httpx.config.SSLConfig.load_ssl_context(self,http2:bool=False)->ssl.SSLContext
+httpx.config.SSLConfig.load_ssl_context_no_verify(self,http2:bool=False)->ssl.SSLContext
+httpx.config.SSLConfig.load_ssl_context_verify(self,http2:bool=False)->ssl.SSLContext
+httpx.config.SSLConfig.with_overrides(self,cert:CertTypes=None,verify:VerifyTypes=None)->'SSLConfig'
+httpx.config.Timeout(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
+httpx.config.Timeout.__eq__(self,other:typing.Any)->bool
+httpx.config.Timeout.__repr__(self)->str
+httpx.config.UnsetType
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/decoders.py----------------------------------------
+A:httpx.decoders.self.decompressor->brotli.Decompressor()
+A:httpx.decoders.self.children->list(reversed(children))
+A:httpx.decoders.data->child.decode(data)
+A:httpx.decoders.self.detector->chardet.universaldetector.UniversalDetector()
+A:httpx.decoders.text->self.decoder.decode(bytes(self.buffer), False)
+A:httpx.decoders.self.decoder->codecs.getincrementaldecoder(self._detector_result())()
+A:httpx.decoders.num_chars->len(text)
+A:httpx.decoders.ACCEPT_ENCODING->', '.join([key for key in SUPPORTED_DECODERS.keys() if key != 'identity'])
+httpx.decoders.BrotliDecoder(self)
+httpx.decoders.BrotliDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.BrotliDecoder.flush(self)->bytes
+httpx.decoders.Decoder
+httpx.decoders.Decoder.decode(self,data:bytes)->bytes
+httpx.decoders.Decoder.flush(self)->bytes
+httpx.decoders.DeflateDecoder(self)
+httpx.decoders.DeflateDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.DeflateDecoder.flush(self)->bytes
+httpx.decoders.GZipDecoder(self)
+httpx.decoders.GZipDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.GZipDecoder.flush(self)->bytes
+httpx.decoders.IdentityDecoder(Decoder)
+httpx.decoders.IdentityDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.IdentityDecoder.flush(self)->bytes
+httpx.decoders.LineDecoder(self)
+httpx.decoders.LineDecoder.decode(self,text:str)->typing.List[str]
+httpx.decoders.LineDecoder.flush(self)->typing.List[str]
+httpx.decoders.MultiDecoder(self,children:typing.Sequence[Decoder])
+httpx.decoders.MultiDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.MultiDecoder.flush(self)->bytes
+httpx.decoders.TextDecoder(self,encoding:typing.Optional[str]=None)
+httpx.decoders.TextDecoder._detector_result(self)->str
+httpx.decoders.TextDecoder.decode(self,data:bytes)->str
+httpx.decoders.TextDecoder.flush(self)->str
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/api.py----------------------------------------
+A:httpx.api.client->Client(cert=cert, verify=verify, trust_env=trust_env)
+A:httpx.api.request->Request(method=method, url=url, params=params, data=data, files=files, json=json, headers=headers, cookies=cookies)
+httpx.api.stream(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->StreamContextManager
+httpx.stream(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->StreamContextManager
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/exceptions.py----------------------------------------
+httpx.ConnectTimeout(TimeoutException)
+httpx.ConnectionClosed(HTTPError)
+httpx.CookieConflict(HTTPError)
+httpx.DecodingError(HTTPError)
+httpx.HTTPError(self,*args:typing.Any,request:'Request'=None,response:'Response'=None)
+httpx.InvalidURL(HTTPError)
+httpx.NotRedirectResponse(RedirectError)
+httpx.PoolTimeout(TimeoutException)
+httpx.ProtocolError(HTTPError)
+httpx.ProxyError(HTTPError)
+httpx.ReadTimeout(TimeoutException)
+httpx.RedirectBodyUnavailable(RedirectError)
+httpx.RedirectLoop(RedirectError)
+httpx.ResponseClosed(StreamError)
+httpx.ResponseNotRead(StreamError)
+httpx.StreamConsumed(StreamError)
+httpx.TimeoutException(HTTPError)
+httpx.TooManyRedirects(RedirectError)
+httpx.WriteTimeout(TimeoutException)
+httpx.exceptions.ConnectTimeout(TimeoutException)
+httpx.exceptions.ConnectionClosed(HTTPError)
+httpx.exceptions.CookieConflict(HTTPError)
+httpx.exceptions.DecodingError(HTTPError)
+httpx.exceptions.HTTPError(self,*args:typing.Any,request:'Request'=None,response:'Response'=None)
+httpx.exceptions.InvalidURL(HTTPError)
+httpx.exceptions.NotRedirectResponse(RedirectError)
+httpx.exceptions.PoolTimeout(TimeoutException)
+httpx.exceptions.ProtocolError(HTTPError)
+httpx.exceptions.ProxyError(HTTPError)
+httpx.exceptions.ReadTimeout(TimeoutException)
+httpx.exceptions.RedirectBodyUnavailable(RedirectError)
+httpx.exceptions.RedirectError(HTTPError)
+httpx.exceptions.RedirectLoop(RedirectError)
+httpx.exceptions.ResponseClosed(StreamError)
+httpx.exceptions.ResponseNotRead(StreamError)
+httpx.exceptions.StreamConsumed(StreamError)
+httpx.exceptions.StreamError(HTTPError)
+httpx.exceptions.TimeoutException(HTTPError)
+httpx.exceptions.TooManyRedirects(RedirectError)
+httpx.exceptions.WriteTimeout(TimeoutException)
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/auth.py----------------------------------------
+A:httpx.auth.self.auth_header->self.build_auth_header(username, password)
+A:httpx.auth.userpass->b':'.join((to_bytes(username), to_bytes(password)))
+A:httpx.auth.token->b64encode(userpass).decode().strip()
+A:httpx.auth.self.username->to_bytes(username)
+A:httpx.auth.self.password->to_bytes(password)
+A:httpx.auth.challenge->DigestAuthChallenge.from_header(header)
+A:httpx.auth.request.headers['Authorization']->self._build_auth_header(request, challenge)
+A:httpx.auth.A1->b':'.join((self.username, challenge.realm, self.password))
+A:httpx.auth.path->request.url.full_path.encode('utf-8')
+A:httpx.auth.A2->b':'.join((request.method.encode(), path))
+A:httpx.auth.HA2->digest(A2)
+A:httpx.auth.cnonce->self._get_client_nonce(nonce_count, challenge.nonce)
+A:httpx.auth.HA1->digest(b':'.join((HA1, challenge.nonce, cnonce)))
+A:httpx.auth.qop->self._resolve_qop(challenge.qop)
+A:httpx.auth.key_digest->b':'.join(digest_data)
+A:httpx.auth.s->str(nonce_count).encode()
+A:httpx.auth.qops->re.split(b', ?', qop)
+A:httpx.auth.(scheme, _, fields)->header.partition(' ')
+A:httpx.auth.(key, value)->field.strip().split('=', 1)
+A:httpx.auth.header_dict[key]->unquote(value)
+A:httpx.auth.realm->header_dict['realm'].encode()
+A:httpx.auth.nonce->header_dict['nonce'].encode()
+A:httpx.auth.algorithm->header_dict.get('algorithm')
+httpx.BasicAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.DigestAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.BasicAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.BasicAuth.build_auth_header(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])->str
+httpx.auth.DigestAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.DigestAuth._build_auth_header(self,request:Request,challenge:'DigestAuthChallenge')->str
+httpx.auth.DigestAuth._get_client_nonce(self,nonce_count:int,nonce:bytes)->bytes
+httpx.auth.DigestAuth._get_header_value(self,header_fields:typing.Dict[str,bytes])->str
+httpx.auth.DigestAuth._resolve_qop(self,qop:typing.Optional[bytes])->typing.Optional[bytes]
+httpx.auth.DigestAuthChallenge(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
+httpx.auth.DigestAuthChallenge.from_header(cls,header:str)->'DigestAuthChallenge'
+httpx.auth.DigestAuthChallenge.from_header_dict(cls,header_dict:dict)->'DigestAuthChallenge'
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/models.py----------------------------------------
+A:httpx.models.self._uri_reference->self._uri_reference.copy_with(query=query_string)
+A:httpx.models.query_string->str(self)
+A:httpx.models.host->kwargs.pop('host', self.host)
+A:httpx.models.port->kwargs.pop('port', self.port)
+A:httpx.models.username->kwargs.pop('username', self.username)
+A:httpx.models.password->kwargs.pop('password', self.password)
+A:httpx.models.base_uri->self._uri_reference.copy_with(fragment=None)
+A:httpx.models.relative_url->URL(relative_url, allow_relative=True)
+A:httpx.models.url_str->rfc3986.urlparse(url_str).copy_with(userinfo=f'{self.username}:[secure]').unsplit()
+A:httpx.models.url->str(self.url)
+A:httpx.models.items->flatten_queryparams(value)
+A:httpx.models.params->QueryParams(params)
+A:httpx.models.(item, *extras)->QueryParams(params).getlist(param)
+A:httpx.models.self._list->list(headers.raw)
+A:httpx.models.get_header_key->key.lower().encode(self.encoding)
+A:httpx.models.headers->Headers(headers)
+A:httpx.models.normalized_key->key.lower().encode(self.encoding)
+A:httpx.models.set_key->key.lower().encode(self.encoding)
+A:httpx.models.set_value->self.get(name).encode(self.encoding)
+A:httpx.models.del_key->key.lower().encode(self.encoding)
+A:httpx.models.as_list->list(obfuscate_sensitive_headers(self.items()))
+A:httpx.models.as_dict->dict(as_list)
+A:httpx.models.self.method->method.upper()
+A:httpx.models.self.url->URL(url, params=params)
+A:httpx.models.self.headers->Headers(headers)
+A:httpx.models.self._cookies->Cookies()
+A:httpx.models.(content, content_type)->multipart_encode(data or {}, files)
+A:httpx.models.content->self.decoder.decode(raw_content)
+A:httpx.models.is_streaming->getattr(self, 'is_streaming', False)
+A:httpx.models.content_length->str(len(content)).encode()
+A:httpx.models.self.content->b''.join([part async for part in self.stream()])
+A:httpx.models.self._text->self.decoder.decode(raw_content).decode(encoding, errors='replace')
+A:httpx.models.content_type->self.headers.get('Content-Type')
+A:httpx.models.parsed->cgi.parse_header(content_type)
+A:httpx.models.values->self.headers.getlist('content-encoding', split_commas=True)
+A:httpx.models.value->self.get(name)
+A:httpx.models.self._decoder->IdentityDecoder()
+A:httpx.models.message->message.format(self, error_type='Server Error').format(self, error_type='Server Error')
+A:httpx.models.encoding->guess_json_utf(self.content)
+A:httpx.models.header->self.headers.get('link')
+A:httpx.models.links->parse_header_links(header)
+A:httpx.models.self._content->b''.join([part async for part in self.aiter_bytes()])
+A:httpx.models.decoder->LineDecoder()
+A:httpx.models.self.jar->CookieJar()
+A:httpx.models.urlib_response->self._CookieCompatResponse(response)
+A:httpx.models.urllib_request->self._CookieCompatRequest(request)
+A:httpx.models.cookie->Cookie(**kwargs)
+A:httpx.models.cookies->Cookies(cookies)
+A:httpx.models.info->email.message.Message()
+httpx.Cookies(self,cookies:CookieTypes=None)
+httpx.Headers(self,headers:HeaderTypes=None,encoding:str=None)
+httpx.Origin(self,url:URLTypes)
+httpx.QueryParams(self,*args:QueryParamTypes,**kwargs:typing.Any)
+httpx.Request(self,method:str,url:typing.Union[str,URL],*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None)
+httpx.Response(self,status_code:int,*,http_version:str=None,headers:HeaderTypes=None,content:ResponseContent=None,on_close:typing.Callable=None,request:Request=None,history:typing.List['Response']=None,elapsed:datetime.timedelta=None)
+httpx.URL(self,url:URLTypes,allow_relative:bool=False,params:QueryParamTypes=None)
+httpx.models.Cookies(self,cookies:CookieTypes=None)
+httpx.models.Cookies._CookieCompatRequest(self,request:Request)
+httpx.models.Cookies._CookieCompatRequest.add_unredirected_header(self,key:str,value:str)->None
+httpx.models.Cookies._CookieCompatResponse(self,response:Response)
+httpx.models.Cookies._CookieCompatResponse.info(self)->email.message.Message
+httpx.models.Cookies.__bool__(self)->bool
+httpx.models.Cookies.__delitem__(self,name:str)->None
+httpx.models.Cookies.__getitem__(self,name:str)->str
+httpx.models.Cookies.__iter__(self)->typing.Iterator[str]
+httpx.models.Cookies.__len__(self)->int
+httpx.models.Cookies.__setitem__(self,name:str,value:str)->None
+httpx.models.Cookies.clear(self,domain:str=None,path:str=None)->None
+httpx.models.Cookies.delete(self,name:str,domain:str=None,path:str=None)->None
+httpx.models.Cookies.extract_cookies(self,response:Response)->None
+httpx.models.Cookies.get(self,name:str,default:str=None,domain:str=None,path:str=None)->typing.Optional[str]
+httpx.models.Cookies.set(self,name:str,value:str,domain:str='',path:str='/')->None
+httpx.models.Cookies.set_cookie_header(self,request:Request)->None
+httpx.models.Cookies.update(self,cookies:CookieTypes=None)->None
+httpx.models.Headers(self,headers:HeaderTypes=None,encoding:str=None)
+httpx.models.Headers.__contains__(self,key:typing.Any)->bool
+httpx.models.Headers.__delitem__(self,key:str)->None
+httpx.models.Headers.__eq__(self,other:typing.Any)->bool
+httpx.models.Headers.__getitem__(self,key:str)->str
+httpx.models.Headers.__iter__(self)->typing.Iterator[typing.Any]
+httpx.models.Headers.__len__(self)->int
+httpx.models.Headers.__repr__(self)->str
+httpx.models.Headers.__setitem__(self,key:str,value:str)->None
+httpx.models.Headers.copy(self)->'Headers'
+httpx.models.Headers.encoding(self)->str
+httpx.models.Headers.encoding(self,value:str)->None
+httpx.models.Headers.get(self,key:str,default:typing.Any=None)->typing.Any
+httpx.models.Headers.getlist(self,key:str,split_commas:bool=False)->typing.List[str]
+httpx.models.Headers.items(self)->typing.List[typing.Tuple[str, str]]
+httpx.models.Headers.keys(self)->typing.List[str]
+httpx.models.Headers.raw(self)->typing.List[typing.Tuple[bytes, bytes]]
+httpx.models.Headers.update(self,headers:HeaderTypes=None)->None
+httpx.models.Headers.values(self)->typing.List[str]
+httpx.models.Origin(self,url:URLTypes)
+httpx.models.Origin.__eq__(self,other:typing.Any)->bool
+httpx.models.Origin.__hash__(self)->int
+httpx.models.Origin.__repr__(self)->str
+httpx.models.QueryParams(self,*args:QueryParamTypes,**kwargs:typing.Any)
+httpx.models.QueryParams.__contains__(self,key:typing.Any)->bool
+httpx.models.QueryParams.__eq__(self,other:typing.Any)->bool
+httpx.models.QueryParams.__getitem__(self,key:typing.Any)->str
+httpx.models.QueryParams.__iter__(self)->typing.Iterator[typing.Any]
+httpx.models.QueryParams.__len__(self)->int
+httpx.models.QueryParams.__repr__(self)->str
+httpx.models.QueryParams.__setitem__(self,key:str,value:str)->None
+httpx.models.QueryParams.__str__(self)->str
+httpx.models.QueryParams.get(self,key:typing.Any,default:typing.Any=None)->typing.Any
+httpx.models.QueryParams.getlist(self,key:typing.Any)->typing.List[str]
+httpx.models.QueryParams.items(self)->typing.ItemsView
+httpx.models.QueryParams.keys(self)->typing.KeysView
+httpx.models.QueryParams.multi_items(self)->typing.List[typing.Tuple[str, str]]
+httpx.models.QueryParams.update(self,params:QueryParamTypes=None)->None
+httpx.models.QueryParams.values(self)->typing.ValuesView
+httpx.models.Request(self,method:str,url:typing.Union[str,URL],*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None)
+httpx.models.Request.__repr__(self)->str
+httpx.models.Request.cookies(self)->'Cookies'
+httpx.models.Request.encode_data(self,data:dict=None,files:RequestFiles=None,json:typing.Any=None)->typing.Tuple[bytes, str]
+httpx.models.Request.prepare(self)->None
+httpx.models.Response(self,status_code:int,*,http_version:str=None,headers:HeaderTypes=None,content:ResponseContent=None,on_close:typing.Callable=None,request:Request=None,history:typing.List['Response']=None,elapsed:datetime.timedelta=None)
+httpx.models.Response.__repr__(self)->str
+httpx.models.Response.apparent_encoding(self)->typing.Optional[str]
+httpx.models.Response.charset_encoding(self)->typing.Optional[str]
+httpx.models.Response.content(self)->bytes
+httpx.models.Response.cookies(self)->'Cookies'
+httpx.models.Response.decoder(self)->Decoder
+httpx.models.Response.encoding(self)->str
+httpx.models.Response.encoding(self,value:str)->None
+httpx.models.Response.is_error(self)->bool
+httpx.models.Response.is_redirect(self)->bool
+httpx.models.Response.json(self,**kwargs:typing.Any)->typing.Union[dict, list]
+httpx.models.Response.links(self)->typing.Dict[typing.Optional[str], typing.Dict[str, str]]
+httpx.models.Response.raise_for_status(self)->None
+httpx.models.Response.raw(self)
+httpx.models.Response.reason_phrase(self)->str
+httpx.models.Response.stream(self)
+httpx.models.Response.text(self)->str
+httpx.models.Response.url(self)->typing.Optional[URL]
+httpx.models.URL(self,url:URLTypes,allow_relative:bool=False,params:QueryParamTypes=None)
+httpx.models.URL.__eq__(self,other:typing.Any)->bool
+httpx.models.URL.__hash__(self)->int
+httpx.models.URL.__repr__(self)->str
+httpx.models.URL.__str__(self)->str
+httpx.models.URL.authority(self)->str
+httpx.models.URL.copy_with(self,**kwargs:typing.Any)->'URL'
+httpx.models.URL.fragment(self)->str
+httpx.models.URL.full_path(self)->str
+httpx.models.URL.full_path(self,value:typing.Optional[str])->None
+httpx.models.URL.host(self)->str
+httpx.models.URL.is_absolute_url(self)->bool
+httpx.models.URL.is_relative_url(self)->bool
+httpx.models.URL.is_ssl(self)->bool
+httpx.models.URL.join(self,relative_url:URLTypes)->'URL'
+httpx.models.URL.origin(self)->'Origin'
+httpx.models.URL.password(self)->str
+httpx.models.URL.path(self)->str
+httpx.models.URL.port(self)->int
+httpx.models.URL.query(self)->str
+httpx.models.URL.scheme(self)->str
+httpx.models.URL.userinfo(self)->str
+httpx.models.URL.username(self)->str
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/status_codes.py----------------------------------------
+A:httpx.status_codes.obj->int.__new__(cls, value)
+httpx.StatusCode(cls,value:int,phrase:str='')
+httpx.status_codes.StatusCode(cls,value:int,phrase:str='')
+httpx.status_codes.StatusCode.__str__(self)->str
+httpx.status_codes.StatusCode.get_reason_phrase(cls,value:int)->str
+httpx.status_codes.StatusCode.is_client_error(cls,value:int)->bool
+httpx.status_codes.StatusCode.is_error(cls,value:int)->bool
+httpx.status_codes.StatusCode.is_redirect(cls,value:int)->bool
+httpx.status_codes.StatusCode.is_server_error(cls,value:int)->bool
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/client.py----------------------------------------
+A:httpx.client.logger->get_logger(__name__)
+A:httpx.client.dispatch->ConnectionPool(verify=verify, cert=cert, http2=http2, pool_limits=pool_limits, backend=backend, trust_env=trust_env, uds=uds)
+A:httpx.client.self.base_url->URL(base_url)
+A:httpx.client.self._params->QueryParams(params)
+A:httpx.client.self._headers->Headers(headers)
+A:httpx.client.self._cookies->Cookies(cookies)
+A:httpx.client.self.timeout->Timeout(timeout)
+A:httpx.client.self.netrc->NetRCInfo()
+A:httpx.client.proxies->typing.cast(ProxiesTypes, get_environment_proxies())
+A:httpx.client.request->self.build_redirect_request(request, response)
+A:httpx.client.url->URL(url)
+A:httpx.client.headers->Headers(request.headers)
+A:httpx.client.cookies->Cookies(self.cookies)
+A:httpx.client.params->self.merge_queryparams(params)
+A:httpx.client.merged_cookies->Cookies(self.cookies)
+A:httpx.client.merged_headers->Headers(self.headers)
+A:httpx.client.merged_queryparams->QueryParams(self.params)
+A:httpx.client.get_response->functools.partial(self.send_handling_redirects, verify=verify, cert=cert, timeout=timeout, allow_redirects=allow_redirects)
+A:httpx.client.auth->BasicAuth(username=credentials[0], password=credentials[1])
+A:httpx.client.credentials->self.netrc.get_credentials(request.url.authority)
+A:httpx.client.response.history->list(history)
+A:httpx.client.response.call_next->functools.partial(self.send_handling_redirects, request=request, verify=verify, cert=cert, timeout=timeout, allow_redirects=False, history=history)
+A:httpx.client.method->self.redirect_method(request, response)
+A:httpx.client.content->self.redirect_content(request, method)
+A:httpx.client.dispatcher->self.dispatcher_for_url(request.url)
+A:httpx.client.new_proxies[str(key)]->_proxy_from_url(dispatcher_or_url)
+httpx.Client(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:Dispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
+httpx.client.Client(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:Dispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
+httpx.client.Client.authenticate(self,request:Request,trust_env:bool,auth:AuthTypes=None)->'Request'
+httpx.client.Client.build_redirect_request(self,request:Request,response:Response)->Request
+httpx.client.Client.build_request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None)->Request
+httpx.client.Client.cookies(self)->Cookies
+httpx.client.Client.cookies(self,cookies:CookieTypes)->None
+httpx.client.Client.dispatcher_for_url(self,url:URL)->Dispatcher
+httpx.client.Client.headers(self)->Headers
+httpx.client.Client.headers(self,headers:HeaderTypes)->None
+httpx.client.Client.merge_cookies(self,cookies:CookieTypes=None)->typing.Optional[CookieTypes]
+httpx.client.Client.merge_headers(self,headers:HeaderTypes=None)->typing.Optional[HeaderTypes]
+httpx.client.Client.merge_queryparams(self,params:QueryParamTypes=None)->typing.Optional[QueryParamTypes]
+httpx.client.Client.merge_url(self,url:URLTypes)->URL
+httpx.client.Client.params(self)->QueryParams
+httpx.client.Client.params(self,params:QueryParamTypes)->None
+httpx.client.Client.redirect_content(self,request:Request,method:str)->bytes
+httpx.client.Client.redirect_headers(self,request:Request,url:URL,method:str)->Headers
+httpx.client.Client.redirect_method(self,request:Request,response:Response)->str
+httpx.client.Client.redirect_url(self,request:Request,response:Response)->URL
+httpx.client.Client.stream(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->'StreamContextManager'
+httpx.client.StreamContextManager(self,client:Client,request:Request,*,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET,close_client:bool=False)
+httpx.client._proxies_to_dispatchers(proxies:typing.Optional[ProxiesTypes],verify:VerifyTypes,cert:typing.Optional[CertTypes],http2:bool,pool_limits:PoolLimits,backend:typing.Union[str,ConcurrencyBackend],trust_env:bool)->typing.Dict[str, Dispatcher]
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/__version__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/http11.py----------------------------------------
+A:httpx.dispatch.http11.logger->get_logger(__name__)
+A:httpx.dispatch.http11.self.h11_state->h11.Connection(our_role=h11.CLIENT)
+A:httpx.dispatch.http11.self.timeout_flag->TimeoutFlag()
+A:httpx.dispatch.http11.content->self._receive_response_data(timeout)
+A:httpx.dispatch.http11.event->self.h11_state.next_event()
+A:httpx.dispatch.http11.method->request.method.encode('ascii')
+A:httpx.dispatch.http11.target->request.url.full_path.encode('ascii')
+A:httpx.dispatch.http11.bytes_to_send->self.h11_state.send(event)
+httpx.dispatch.http11.HTTP11Connection(self,socket:BaseSocketStream,on_release:typing.Optional[OnReleaseCallback]=None)
+httpx.dispatch.http11.HTTP11Connection.is_closed(self)->bool
+httpx.dispatch.http11.HTTP11Connection.is_connection_dropped(self)->bool
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/base.py----------------------------------------
+A:httpx.dispatch.base.request->Request(method, url, data=data, params=params, headers=headers)
+httpx.dispatch.base.Dispatcher
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/connection_pool.py----------------------------------------
+A:httpx.dispatch.connection_pool.logger->get_logger(__name__)
+A:httpx.dispatch.connection_pool.connection->self.keepalive_connections.pop_by_origin(origin)
+A:httpx.dispatch.connection_pool.self.keepalive_connections->ConnectionStore()
+A:httpx.dispatch.connection_pool.self.active_connections->ConnectionStore()
+A:httpx.dispatch.connection_pool.self.backend->lookup_backend(backend)
+A:httpx.dispatch.connection_pool.self._max_connections->self.backend.get_semaphore(self.pool_limits)
+A:httpx.dispatch.connection_pool.connections->list(self.keepalive_connections)
+httpx.dispatch.connection_pool.ConnectionPool(self,*,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto',uds:typing.Optional[str]=None)
+httpx.dispatch.connection_pool.ConnectionPool.max_connections(self)->BasePoolSemaphore
+httpx.dispatch.connection_pool.ConnectionPool.num_connections(self)->int
+httpx.dispatch.connection_pool.ConnectionPool.pop_connection(self,origin:Origin)->typing.Optional[HTTPConnection]
+httpx.dispatch.connection_pool.ConnectionStore(self)
+httpx.dispatch.connection_pool.ConnectionStore.__iter__(self)->typing.Iterator[HTTPConnection]
+httpx.dispatch.connection_pool.ConnectionStore.__len__(self)->int
+httpx.dispatch.connection_pool.ConnectionStore.add(self,connection:HTTPConnection)->None
+httpx.dispatch.connection_pool.ConnectionStore.clear(self)->None
+httpx.dispatch.connection_pool.ConnectionStore.pop_by_origin(self,origin:Origin,http2_only:bool=False)->typing.Optional[HTTPConnection]
+httpx.dispatch.connection_pool.ConnectionStore.remove(self,connection:HTTPConnection)->None
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/http2.py----------------------------------------
+A:httpx.dispatch.http2.logger->get_logger(__name__)
+A:httpx.dispatch.http2.self.backend->lookup_backend(backend)
+A:httpx.dispatch.http2.self.h2_state->h2.connection.H2Connection()
+A:httpx.dispatch.http2.self._initialization_complete->self.backend.create_event()
+A:httpx.dispatch.http2.self.timeout_flags[stream_id]->TimeoutFlag()
+A:httpx.dispatch.http2.self.window_update_received[stream_id]->self.backend.create_event()
+A:httpx.dispatch.http2.content->self.body_iter(stream_id, timeout)
+A:httpx.dispatch.http2.on_close->functools.partial(self.response_closed, stream_id=stream_id)
+A:httpx.dispatch.http2.self.h2_state.local_settings->Settings(client=True, initial_values={SettingCodes.ENABLE_PUSH: 0, SettingCodes.MAX_CONCURRENT_STREAMS: 100, SettingCodes.MAX_HEADER_LIST_SIZE: 65536})
+A:httpx.dispatch.http2.data_to_send->self.h2_state.data_to_send()
+A:httpx.dispatch.http2.stream_id->self.h2_state.get_next_available_stream_id()
+A:httpx.dispatch.http2.flow_control->self.h2_state.local_flow_control_window(stream_id)
+A:httpx.dispatch.http2.chunk_size->min(len(data), flow_control, self.h2_state.max_outbound_frame_size)
+A:httpx.dispatch.http2.status_code->int(v.decode('ascii', errors='ignore'))
+A:httpx.dispatch.http2.events->self.h2_state.receive_data(data)
+A:httpx.dispatch.http2.event_stream_id->getattr(event, 'stream_id', 0)
+httpx.dispatch.http2.HTTP2Connection(self,socket:BaseSocketStream,backend:typing.Union[str,ConcurrencyBackend]='auto',on_release:typing.Callable=None)
+httpx.dispatch.http2.HTTP2Connection.init_complete(self)->BaseEvent
+httpx.dispatch.http2.HTTP2Connection.is_closed(self)->bool
+httpx.dispatch.http2.HTTP2Connection.is_connection_dropped(self)->bool
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/asgi.py----------------------------------------
+A:httpx.dispatch.asgi.request_stream->request.stream()
+A:httpx.dispatch.asgi.headers->message.get('headers', [])
+A:httpx.dispatch.asgi.body->message.get('body', b'')
+A:httpx.dispatch.asgi.more_body->message.get('more_body', False)
+httpx.dispatch.ASGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
+httpx.dispatch.asgi.ASGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/connection.py----------------------------------------
+A:httpx.dispatch.connection.logger->get_logger(__name__)
+A:httpx.dispatch.connection.self.ssl->SSLConfig(cert=cert, verify=verify, trust_env=trust_env)
+A:httpx.dispatch.connection.self.backend->lookup_backend(backend)
+A:httpx.dispatch.connection.ssl->self.ssl.with_overrides(verify=verify, cert=cert)
+A:httpx.dispatch.connection.on_release->functools.partial(self.release_func, self)
+A:httpx.dispatch.connection.http_version->socket.get_http_version()
+A:httpx.dispatch.connection.self.h2_connection->HTTP2Connection(socket, self.backend, on_release=on_release)
+A:httpx.dispatch.connection.self.h11_connection->HTTP11Connection(socket, on_release=on_release)
+A:httpx.dispatch.connection.ssl_config->SSLConfig(cert=cert, verify=verify)
+httpx.dispatch.connection.HTTPConnection(self,origin:typing.Union[str,Origin],verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto',release_func:typing.Optional[ReleaseCallback]=None,uds:typing.Optional[str]=None)
+httpx.dispatch.connection.HTTPConnection.__repr__(self)->str
+httpx.dispatch.connection.HTTPConnection.is_closed(self)->bool
+httpx.dispatch.connection.HTTPConnection.is_connection_dropped(self)->bool
+httpx.dispatch.connection.HTTPConnection.is_http2(self)->bool
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/dispatch/proxy_http.py----------------------------------------
+A:httpx.dispatch.proxy_http.logger->get_logger(__name__)
+A:httpx.dispatch.proxy_http.self.proxy_url->url.copy_with(authority=authority)
+A:httpx.dispatch.proxy_http.self.proxy_headers->Headers(proxy_headers)
+A:httpx.dispatch.proxy_http.(credentials, _, authority)->url.authority.rpartition('@')
+A:httpx.dispatch.proxy_http.token->b64encode(b':'.join(userpass)).decode().strip()
+A:httpx.dispatch.proxy_http.connection->HTTPConnection(self.proxy_url.origin, verify=self.verify, cert=self.cert, backend=self.backend, http2=False, trust_env=self.trust_env, release_func=self.release_connection)
+A:httpx.dispatch.proxy_http.proxy_headers->self.proxy_headers.copy()
+A:httpx.dispatch.proxy_http.proxy_request->Request(method='CONNECT', url=self.proxy_url.copy_with(), headers=proxy_headers)
+A:httpx.dispatch.proxy_http.target_url->str(request.url)
+A:httpx.dispatch.proxy_http.request.url->self.proxy_url.copy_with()
+httpx.HTTPProxy(self,proxy_url:URLTypes,*,proxy_headers:HeaderTypes=None,proxy_mode:str='DEFAULT',verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto')
+httpx.HTTPProxyMode(enum.Enum)
+httpx.dispatch.proxy_http.HTTPProxy(self,proxy_url:URLTypes,*,proxy_headers:HeaderTypes=None,proxy_mode:str='DEFAULT',verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto')
+httpx.dispatch.proxy_http.HTTPProxy.__repr__(self)->str
+httpx.dispatch.proxy_http.HTTPProxy.build_auth_header(self,username:str,password:str)->str
+httpx.dispatch.proxy_http.HTTPProxy.should_forward_origin(self,origin:Origin)->bool
+httpx.dispatch.proxy_http.HTTPProxyMode(enum.Enum)
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/concurrency/asyncio.py----------------------------------------
+A:httpx.concurrency.asyncio.self.read_lock->asyncio.Lock()
+A:httpx.concurrency.asyncio.loop->asyncio.get_event_loop()
+A:httpx.concurrency.asyncio.stream_reader->asyncio.StreamReader()
+A:httpx.concurrency.asyncio.protocol->asyncio.StreamReaderProtocol(stream_reader)
+A:httpx.concurrency.asyncio.waiter->asyncio.get_event_loop().create_future()
+A:httpx.concurrency.asyncio.ssl_protocol->asyncio.sslproto.SSLProtocol(loop, protocol, sslcontext, waiter, server_side=False, server_hostname=server_hostname, call_connection_made=False)
+A:httpx.concurrency.asyncio.stream_writer->asyncio.StreamWriter(transport=transport, protocol=protocol, reader=stream_reader, loop=loop)
+A:httpx.concurrency.asyncio.ssl_stream->SocketStream(stream_reader, stream_writer, self.timeout)
+A:httpx.concurrency.asyncio.ssl_object->self.stream_writer.get_extra_info('ssl_object')
+A:httpx.concurrency.asyncio.ident->self.stream_writer.get_extra_info('ssl_object').selected_alpn_protocol()
+A:httpx.concurrency.asyncio.self._semaphore->asyncio.BoundedSemaphore(value=max_connections)
+A:httpx.concurrency.asyncio.self._loop->asyncio.new_event_loop()
+A:httpx.concurrency.asyncio.func->functools.partial(func, **kwargs)
+A:httpx.concurrency.asyncio.task1->self.loop.create_task(coroutine1(*args1))
+A:httpx.concurrency.asyncio.task2->self.loop.create_task(coroutine2(*args2))
+httpx.concurrency.asyncio.AsyncioBackend(self)
+httpx.concurrency.asyncio.AsyncioBackend.create_event(self)->BaseEvent
+httpx.concurrency.asyncio.AsyncioBackend.get_semaphore(self,limits:PoolLimits)->BasePoolSemaphore
+httpx.concurrency.asyncio.AsyncioBackend.loop(self)->asyncio.AbstractEventLoop
+httpx.concurrency.asyncio.AsyncioBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.asyncio.PoolSemaphore(self,pool_limits:PoolLimits)
+httpx.concurrency.asyncio.PoolSemaphore.release(self)->None
+httpx.concurrency.asyncio.PoolSemaphore.semaphore(self)->typing.Optional[asyncio.BoundedSemaphore]
+httpx.concurrency.asyncio.SocketStream(self,stream_reader:asyncio.StreamReader,stream_writer:asyncio.StreamWriter,timeout:Timeout)
+httpx.concurrency.asyncio.SocketStream.get_http_version(self)->str
+httpx.concurrency.asyncio.SocketStream.is_connection_dropped(self)->bool
+httpx.concurrency.asyncio.ssl_monkey_patch()->None
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/concurrency/base.py----------------------------------------
+httpx.concurrency.base.BaseEvent
+httpx.concurrency.base.BaseEvent.clear(self)->None
+httpx.concurrency.base.BaseEvent.is_set(self)->bool
+httpx.concurrency.base.BaseEvent.set(self)->None
+httpx.concurrency.base.BasePoolSemaphore
+httpx.concurrency.base.BasePoolSemaphore.release(self)->None
+httpx.concurrency.base.BaseSocketStream
+httpx.concurrency.base.BaseSocketStream.get_http_version(self)->str
+httpx.concurrency.base.BaseSocketStream.is_connection_dropped(self)->bool
+httpx.concurrency.base.ConcurrencyBackend
+httpx.concurrency.base.ConcurrencyBackend.create_event(self)->BaseEvent
+httpx.concurrency.base.ConcurrencyBackend.get_semaphore(self,limits:PoolLimits)->BasePoolSemaphore
+httpx.concurrency.base.ConcurrencyBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.base.TimeoutFlag(self)
+httpx.concurrency.base.TimeoutFlag.set_read_timeouts(self)->None
+httpx.concurrency.base.TimeoutFlag.set_write_timeouts(self)->None
+httpx.concurrency.base.lookup_backend(backend:typing.Union[str,'ConcurrencyBackend']='auto')->'ConcurrencyBackend'
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/concurrency/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/concurrency/trio.py----------------------------------------
+A:httpx.concurrency.trio.self.read_lock->trio.Lock()
+A:httpx.concurrency.trio.self.write_lock->trio.Lock()
+A:httpx.concurrency.trio.connect_timeout->_or_inf(timeout.connect_timeout)
+A:httpx.concurrency.trio.ssl_stream->trio.SSLStream(self.stream, ssl_context=ssl_context, server_hostname=hostname)
+A:httpx.concurrency.trio.ident->self.stream.selected_alpn_protocol()
+A:httpx.concurrency.trio.read_timeout->_or_inf(timeout.read_timeout if should_raise else 0.01)
+A:httpx.concurrency.trio.write_timeout->_or_inf(timeout.write_timeout)
+A:httpx.concurrency.trio.self._semaphore->trio.Semaphore(max_connections, max_value=max_connections)
+A:httpx.concurrency.trio.timeout->_or_inf(timeout)
+A:httpx.concurrency.trio.stream->trio.SSLStream(stream, ssl_context, server_hostname=hostname)
+A:httpx.concurrency.trio.self._event->trio.Event()
+httpx.concurrency.trio.Event(self)
+httpx.concurrency.trio.Event.clear(self)->None
+httpx.concurrency.trio.Event.is_set(self)->bool
+httpx.concurrency.trio.Event.set(self)->None
+httpx.concurrency.trio.PoolSemaphore(self,pool_limits:PoolLimits)
+httpx.concurrency.trio.PoolSemaphore.release(self)->None
+httpx.concurrency.trio.PoolSemaphore.semaphore(self)->typing.Optional[trio.Semaphore]
+httpx.concurrency.trio.SocketStream(self,stream:typing.Union[trio.SocketStream,trio.SSLStream],timeout:Timeout)
+httpx.concurrency.trio.SocketStream.get_http_version(self)->str
+httpx.concurrency.trio.SocketStream.is_connection_dropped(self)->bool
+httpx.concurrency.trio.TrioBackend(ConcurrencyBackend)
+httpx.concurrency.trio.TrioBackend.create_event(self)->BaseEvent
+httpx.concurrency.trio.TrioBackend.get_semaphore(self,limits:PoolLimits)->BasePoolSemaphore
+httpx.concurrency.trio.TrioBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.trio._or_inf(value:typing.Optional[float])->float
+
+
+----------------------------------------/home/zhang/Packages/httpx/httpx0.9.2/concurrency/auto.py----------------------------------------
+A:httpx.concurrency.auto.backend->sniffio.current_async_library()
+A:httpx.concurrency.auto.self._backend_implementation->lookup_backend(backend)
+httpx.concurrency.auto.AutoBackend(ConcurrencyBackend)
+httpx.concurrency.auto.AutoBackend.backend(self)->ConcurrencyBackend
+httpx.concurrency.auto.AutoBackend.create_event(self)->BaseEvent
+httpx.concurrency.auto.AutoBackend.get_semaphore(self,limits:PoolLimits)->BasePoolSemaphore
+

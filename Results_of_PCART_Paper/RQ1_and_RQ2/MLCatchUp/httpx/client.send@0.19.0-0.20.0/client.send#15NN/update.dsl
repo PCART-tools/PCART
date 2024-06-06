@@ -1,0 +1,3 @@
+remove_parameterallow_redirects for send
+remove_parametertimeout for send
+remove_parameterUseClientDefault] for send

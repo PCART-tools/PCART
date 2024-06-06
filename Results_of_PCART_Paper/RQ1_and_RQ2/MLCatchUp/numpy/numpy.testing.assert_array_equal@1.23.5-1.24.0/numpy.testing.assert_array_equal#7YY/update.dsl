@@ -1,0 +1,1 @@
+add_parameter strict with_value False for assert_array_equal

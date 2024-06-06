@@ -1,0 +1,1 @@
+add_parameter feature_names_out with_value None for FunctionTransformer

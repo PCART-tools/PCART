@@ -1,0 +1,1 @@
+add_parameter placeholder_url with_value None for image_url

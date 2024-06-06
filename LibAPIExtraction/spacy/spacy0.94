@@ -1,0 +1,265 @@
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/util.py----------------------------------------
+A:spacy.util.DATA_DIR->os.path.join(path.dirname(__file__), '..', 'data')
+A:spacy.util.tokenization->json.load(file_)
+A:spacy.util.prefix->read_prefix(data_dir)
+A:spacy.util.suffix->read_suffix(data_dir)
+A:spacy.util.infix->read_infix(data_dir)
+A:spacy.util.entries->file_.read().split('\n')
+A:spacy.util.expression->'|'.join([piece for piece in entries if piece.strip()])
+A:spacy.util.loc->os.path.join(DATA_DIR, lang, 'detokenize')
+A:spacy.util.seen->set()
+A:spacy.util.line->line.strip().strip()
+A:spacy.util.pieces->line.strip().strip().split()
+A:spacy.util.chunk->line.strip().strip().split().pop(0)
+A:spacy.util.queue->list(indices)
+A:spacy.util.string->string.replace(subtoks.replace('<SEP>', ' '), subtoks).replace(subtoks.replace('<SEP>', ' '), subtoks)
+A:spacy.util.subtoks->line.strip().strip().split().pop(0).split('<SEP>')
+spacy.util.align_tokens(ref,indices)
+spacy.util.detokenize(token_rules,words)
+spacy.util.read_detoken_rules(lang)
+spacy.util.read_infix(data_dir)
+spacy.util.read_lang_data(data_dir)
+spacy.util.read_prefix(data_dir)
+spacy.util.read_suffix(data_dir)
+spacy.util.read_tokenization(lang)
+spacy.util.utf8open(loc,mode='r')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/lemmatizer.py----------------------------------------
+A:spacy.lemmatizer.index[pos]->read_index(path.join(data_dir, 'wordnet', 'index.%s' % pos))
+A:spacy.lemmatizer.exc[pos]->read_exc(path.join(data_dir, 'wordnet', '%s.exc' % pos))
+A:spacy.lemmatizer.rules->json.load(open(path.join(data_dir, 'vocab', 'lemma_rules.json')))
+A:spacy.lemmatizer.lemmas->lemmatize(string, self.index.get(pos, {}), self.exc.get(pos, {}), self.rules.get(pos, []))
+A:spacy.lemmatizer.string->string.lower().lower()
+A:spacy.lemmatizer.index->set()
+A:spacy.lemmatizer.pieces->line.split()
+A:spacy.lemmatizer.exceptions[pieces[0]]->tuple(pieces[1:])
+spacy.lemmatizer.Lemmatizer(self,index,exceptions,rules)
+spacy.lemmatizer.Lemmatizer.adj(self,string)
+spacy.lemmatizer.Lemmatizer.from_dir(cls,data_dir)
+spacy.lemmatizer.Lemmatizer.noun(self,string)
+spacy.lemmatizer.Lemmatizer.punct(self,string)
+spacy.lemmatizer.Lemmatizer.verb(self,string)
+spacy.lemmatizer.lemmatize(string,index,exceptions,rules)
+spacy.lemmatizer.read_exc(loc)
+spacy.lemmatizer.read_index(loc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/language.py----------------------------------------
+A:spacy.language.data_dir->self.default_data_dir()
+A:spacy.language.get_lex_attr->cls.default_lex_attrs(data_dir)
+A:spacy.language.vocab->self.default_vocab(data_dir)
+A:spacy.language.tokenizer->self.default_tokenizer(vocab, data_dir=path.join(data_dir, 'tokenizer'))
+A:spacy.language.tagger->self.default_tagger(vocab, data_dir=path.join(data_dir, 'pos'))
+A:spacy.language.entity->self.default_entity(vocab, data_dir=path.join(data_dir, 'ner'))
+A:spacy.language.parser->self.default_parser(vocab, data_dir=path.join(data_dir, 'deps'))
+A:spacy.language.matcher->self.default_matcher(vocab, data_dir=data_dir)
+A:spacy.language.tokens->self.tokenizer(text)
+spacy.language.Language(self,data_dir=None,vocab=None,tokenizer=None,tagger=None,parser=None,entity=None,matcher=None,serializer=None,load_vectors=True)
+spacy.language.Language.cluster(string)
+spacy.language.Language.default_data_dir(cls)
+spacy.language.Language.default_dep_labels(cls)
+spacy.language.Language.default_entity(cls,vocab,data_dir)
+spacy.language.Language.default_lex_attrs(cls,data_dir=None)
+spacy.language.Language.default_matcher(cls,vocab,data_dir)
+spacy.language.Language.default_ner_labels(cls)
+spacy.language.Language.default_parser(cls,vocab,data_dir)
+spacy.language.Language.default_tagger(cls,vocab,data_dir)
+spacy.language.Language.default_tokenizer(cls,vocab,data_dir)
+spacy.language.Language.default_vocab(cls,data_dir=None,get_lex_attr=None)
+spacy.language.Language.end_training(self,data_dir=None)
+spacy.language.Language.is_alpha(string)
+spacy.language.Language.is_ascii(string)
+spacy.language.Language.is_digit(string)
+spacy.language.Language.is_lower(string)
+spacy.language.Language.is_punct(string)
+spacy.language.Language.is_space(string)
+spacy.language.Language.is_stop(string)
+spacy.language.Language.is_title(string)
+spacy.language.Language.is_upper(string)
+spacy.language.Language.like_email(string)
+spacy.language.Language.like_number(string)
+spacy.language.Language.like_url(string)
+spacy.language.Language.lower(string)
+spacy.language.Language.norm(string)
+spacy.language.Language.prefix(string)
+spacy.language.Language.prob(string)
+spacy.language.Language.shape(string)
+spacy.language.Language.suffix(string)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/_nn.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/multi_words.py----------------------------------------
+spacy.multi_words.RegexMerger(self,regexes)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/scorer.py----------------------------------------
+A:spacy.scorer.self.tokens->PRFScore()
+A:spacy.scorer.self.sbd->PRFScore()
+A:spacy.scorer.self.unlabelled->PRFScore()
+A:spacy.scorer.self.labelled->PRFScore()
+A:spacy.scorer.self.tags->PRFScore()
+A:spacy.scorer.self.ner->PRFScore()
+A:spacy.scorer.gold_deps->set()
+A:spacy.scorer.gold_tags->set()
+A:spacy.scorer.gold_ents->set(tags_to_entities([annot[-1] for annot in gold.orig_annot]))
+A:spacy.scorer.cand_deps->set()
+A:spacy.scorer.cand_tags->set()
+A:spacy.scorer.cand_ents->set()
+spacy.scorer.PRFScore(self)
+spacy.scorer.PRFScore.fscore(self)
+spacy.scorer.PRFScore.precision(self)
+spacy.scorer.PRFScore.recall(self)
+spacy.scorer.PRFScore.score_set(self,cand,gold)
+spacy.scorer.Scorer(self,eval_punct=False)
+spacy.scorer.Scorer.ents_f(self)
+spacy.scorer.Scorer.ents_p(self)
+spacy.scorer.Scorer.ents_r(self)
+spacy.scorer.Scorer.las(self)
+spacy.scorer.Scorer.score(self,tokens,gold,verbose=False)
+spacy.scorer.Scorer.tags_acc(self)
+spacy.scorer.Scorer.token_acc(self)
+spacy.scorer.Scorer.uas(self)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/munge/read_ontonotes.py----------------------------------------
+A:spacy.munge.read_ontonotes.docid_re->re.compile('<DOCID>([^>]+)</DOCID>')
+A:spacy.munge.read_ontonotes.doctype_re->re.compile('<DOCTYPE SOURCE="[^"]+">([^>]+)</DOCTYPE>')
+A:spacy.munge.read_ontonotes.datetime_re->re.compile('<DATETIME>([^>]+)</DATETIME>')
+A:spacy.munge.read_ontonotes.headline_re->re.compile('<HEADLINE>(.+)</HEADLINE>', re.DOTALL)
+A:spacy.munge.read_ontonotes.post_re->re.compile('<POST>(.+)</POST>', re.DOTALL)
+A:spacy.munge.read_ontonotes.poster_re->re.compile('<POSTER>(.+)</POSTER>')
+A:spacy.munge.read_ontonotes.postdate_re->re.compile('<POSTDATE>(.+)</POSTDATE>')
+A:spacy.munge.read_ontonotes.tag_re->re.compile('<[^>]+>[^>]+</[^>]+>')
+A:spacy.munge.read_ontonotes.matches->regex.search(text)
+spacy.munge.read_ontonotes._get_one(regex,text,required=False)
+spacy.munge.read_ontonotes._get_text(data)
+spacy.munge.read_ontonotes.sgml_extract(text_data)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/munge/read_conll.py----------------------------------------
+A:spacy.munge.read_conll.sent_text->sent_text.strip().strip()
+A:spacy.munge.read_conll.(word, tag, head, dep)->_parse_line(line)
+A:spacy.munge.read_conll.id_map[i]->len(words)
+A:spacy.munge.read_conll.pieces->line.split()
+spacy.munge.read_conll._is_bad_period(prev,period)
+spacy.munge.read_conll._parse_line(line)
+spacy.munge.read_conll.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_conll.split(text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/munge/align_raw.py----------------------------------------
+A:spacy.munge.align_raw.line->line.replace(find, replace).replace(find, replace)
+A:spacy.munge.align_raw.ptb_sec_dir->Path(ptb_sec_dir)
+A:spacy.munge.align_raw.text->file_.read()
+A:spacy.munge.align_raw.(words, brackets)->spacy.munge.read_ptb.parse(parse_str, strip_bad_periods=True)
+A:spacy.munge.align_raw.string->' '.join(words)
+A:spacy.munge.align_raw.tok->tok.replace("'T-", "'T").replace("'T-", "'T")
+A:spacy.munge.align_raw.raw_sents->_flatten(raw_by_para)
+A:spacy.munge.align_raw.ptb_sents->list(_flatten(ptb_by_file))
+A:spacy.munge.align_raw.alignment->align_chars(raw, ptb)
+A:spacy.munge.align_raw.length->len(raw)
+A:spacy.munge.align_raw.odc_loc->os.path.join(odc_dir, 'wsj%s.txt' % section)
+A:spacy.munge.align_raw.ptb_sec->os.path.join(ptb_dir, section)
+A:spacy.munge.align_raw.out_loc->os.path.join(out_dir, 'wsj%s.json' % section)
+A:spacy.munge.align_raw.aligned->get_alignment(raw_paragraphs, ptb_files)
+A:spacy.munge.align_raw.files->align_section(read_odc(odc_loc), read_ptb_sec(ptb_sec_dir))
+A:spacy.munge.align_raw.mapping->dict((line.split() for line in open(path.join(onto_dir, 'map.txt')) if len(line.split()) == 2))
+A:spacy.munge.align_raw.ptb_loc->os.path.join(onto_dir, annot_fn + '.parse')
+A:spacy.munge.align_raw.src_loc->os.path.join(src_dir, src_fn + '.sgm')
+A:spacy.munge.align_raw.src_doc->sgml_extract(open(src_loc).read())
+A:spacy.munge.align_raw.subdir->os.path.join(*directories)
+spacy.munge.align_raw._flatten(nested)
+spacy.munge.align_raw._reform_ptb_word(tok)
+spacy.munge.align_raw.align_chars(raw,ptb)
+spacy.munge.align_raw.align_section(raw_paragraphs,ptb_files)
+spacy.munge.align_raw.do_web(src_dir,onto_dir,out_dir)
+spacy.munge.align_raw.do_wsj(odc_dir,ptb_dir,out_dir)
+spacy.munge.align_raw.get_alignment(raw_by_para,ptb_by_file)
+spacy.munge.align_raw.get_sections(odc_dir,ptb_dir,out_dir)
+spacy.munge.align_raw.group_into_files(sents)
+spacy.munge.align_raw.group_into_paras(sents)
+spacy.munge.align_raw.main(odc_dir,onto_dir,out_dir)
+spacy.munge.align_raw.may_mkdir(parent,*subdirs)
+spacy.munge.align_raw.read_odc(section_loc)
+spacy.munge.align_raw.read_ptb_sec(ptb_sec_dir)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/munge/read_ner.py----------------------------------------
+A:spacy.munge.read_ner.string->string.replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain').replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain')
+A:spacy.munge.read_ner.substr->re.compile('<ENAMEXTYPE="[^"]+">').sub('', substr)
+A:spacy.munge.read_ner.(tag, open_tag)->_get_tag(substr, open_tag)
+A:spacy.munge.read_ner.tag_re->re.compile('<ENAMEXTYPE="[^"]+">')
+A:spacy.munge.read_ner.tags->re.compile('<ENAMEXTYPE="[^"]+">').findall(substr)
+A:spacy.munge.read_ner.tok->tok.replace('-AMP-', '&').replace('-AMP-', '&')
+spacy.munge.read_ner._fix_inner_entities(substr)
+spacy.munge.read_ner._get_tag(substr,tag)
+spacy.munge.read_ner._get_text(substr)
+spacy.munge.read_ner.parse(string,strip_bad_periods=False)
+spacy.munge.read_ner.reform_string(tok)
+spacy.munge.read_ner.split(text)
+spacy.munge.read_ner.tags_to_entities(tags)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/munge/read_ptb.py----------------------------------------
+A:spacy.munge.read_ptb.sent_text->sent_text.replace('((', '( (', 1).replace('((', '( (', 1)
+A:spacy.munge.read_ptb.bracketsRE->re.compile('(\\()([^\\s\\)\\(]+)|([^\\s\\)\\(]+)?(\\))')
+A:spacy.munge.read_ptb.(open_, label, text, close)->match.groups()
+A:spacy.munge.read_ptb.(label, start)->open_brackets.pop()
+A:spacy.munge.read_ptb.line->line.rstrip().rstrip()
+spacy.munge.read_ptb._is_bad_period(prev,period)
+spacy.munge.read_ptb.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_ptb.split(text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/munge/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/serialize/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/en/regexes.py----------------------------------------
+A:spacy.en.regexes.MW_PREPOSITIONS_RE->re.compile('|'.join(_mw_prepositions), flags=re.IGNORECASE)
+A:spacy.en.regexes.TIME_RE->re.compile('{colon_digits}|{colon_digits} ?{am_pm}?|{one_two_digits} ?({am_pm})'.format(colon_digits='[0-2]?[0-9]:[0-5][0-9](?::[0-5][0-9])?', one_two_digits='[0-2]?[0-9]', am_pm='[ap]\\.?m\\.?'))
+A:spacy.en.regexes.DATE_RE->re.compile('(?:this|last|next|the) (?:week|weekend|{days})'.format(days='Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday'))
+A:spacy.en.regexes.MONEY_RE->re.compile('\\$\\d+(?:\\.\\d+)?|\\d+ dollars(?: \\d+ cents)?')
+A:spacy.en.regexes.DAYS_RE->re.compile('Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/en/download.py----------------------------------------
+A:spacy.en.download.DEST_DIR->os.path.join(path.dirname(__file__), 'data')
+A:spacy.en.download.filename->download_file(url, dest_dir)
+A:spacy.en.download.t->tarfile.open(path.join(dest_dir, filename), mode=':gz')
+spacy.en.download.download_file(url,out)
+spacy.en.download.install_data(url,dest_dir)
+spacy.en.download.install_dep_vectors(url,dest_dir)
+spacy.en.download.install_parser_model(url,dest_dir)
+spacy.en.download.main(data_size='all')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/en/__init__.py----------------------------------------
+A:spacy.en.__init__.LOCAL_DATA_DIR->os.path.join(path.dirname(__file__), 'data')
+A:spacy.en.__init__.STOPWORDS->set((w for w in STOPWORDS.split() if w))
+spacy.en.__init__.English(Language)
+spacy.en.__init__.English.default_data_dir(cls)
+spacy.en.__init__.English.is_stop(string)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/syntax/util.py----------------------------------------
+spacy.syntax.util.Config(self,**kwargs)
+spacy.syntax.util.Config.get(self,attr,default=None)
+spacy.syntax.util.Config.read(cls,model_dir,name)
+spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/syntax/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.94/tokens/__init__.py----------------------------------------
+

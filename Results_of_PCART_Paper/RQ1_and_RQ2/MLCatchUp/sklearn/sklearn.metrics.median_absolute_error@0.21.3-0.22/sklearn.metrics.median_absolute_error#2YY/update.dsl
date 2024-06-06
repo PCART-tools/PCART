@@ -1,0 +1,1 @@
+add_parameter multioutput with_value 'uniform_average' for median_absolute_error

@@ -1,0 +1,2 @@
+add_parameter brightness_range with_value None for ImageDataGenerator
+add_parameter validation_split with_value 0.0 for ImageDataGenerator

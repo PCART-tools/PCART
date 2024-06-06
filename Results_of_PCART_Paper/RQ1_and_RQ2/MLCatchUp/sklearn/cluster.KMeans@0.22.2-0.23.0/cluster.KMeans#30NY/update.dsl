@@ -1,0 +1,10 @@
+positional_to_keyword position 2 keyword init for KMeans
+positional_to_keyword position 3 keyword n_init for KMeans
+positional_to_keyword position 4 keyword max_iter for KMeans
+positional_to_keyword position 5 keyword tol for KMeans
+positional_to_keyword position 6 keyword precompute_distances for KMeans
+positional_to_keyword position 7 keyword verbose for KMeans
+positional_to_keyword position 8 keyword random_state for KMeans
+positional_to_keyword position 9 keyword copy_x for KMeans
+positional_to_keyword position 10 keyword n_jobs for KMeans
+positional_to_keyword position 11 keyword algorithm for KMeans

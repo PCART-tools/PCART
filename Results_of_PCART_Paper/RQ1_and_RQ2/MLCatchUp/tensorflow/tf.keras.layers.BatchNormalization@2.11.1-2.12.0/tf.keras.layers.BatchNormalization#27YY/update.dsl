@@ -1,0 +1,1 @@
+add_parameter synchronized with_value False for BatchNormalization

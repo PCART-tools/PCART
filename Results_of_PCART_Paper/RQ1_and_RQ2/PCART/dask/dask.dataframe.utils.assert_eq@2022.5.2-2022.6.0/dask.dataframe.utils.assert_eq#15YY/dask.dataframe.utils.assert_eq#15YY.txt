@@ -1,0 +1,84 @@
+Run Command: python  assert_eqYY.py
+Total File Number: 1
+Total Dask Invoked API Number: 4
+Not Covered Dask Invoked API Number: 0/4
+Covered Dask Invoked API Number: 4/4
+
+Compatible Dask Invoked API Number: 4/4
+Unknown Compatible Dask Invoked API Number: 0/4
+
+Incompatible Dask Invoked API Number: 0/4
+-> Successfully Repaired Dask Invoked API number: 0/0
+-> Failed to Repair Dask Invoked API Number: 0/0
+-> Unknown Repair Status Dask Invoked API Number: 0/0
+
+===============================================================================================================================================================================
+|                                            File #1: dask.dataframe.utils.assert_eq#15YY/assert_eqYY.py has 4 Dask-Invoked API(s)                                            |
+===============================================================================================================================================================================
+| Invoked API #1: dd.from_pandas(pdf, npartitions=2)                                                                                                                          |
+|                                                                                                                                                                             |
+| Location: At Line 5 in dask.dataframe.utils.assert_eq#15YY/assert_eqYY.py                                                                                                   |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @2022.5.2 <dynamic>: (data: Union[pandas.core.frame.DataFrame, pandas.core.series.Series], npartitions: Union[int, NoneType] = None, chunksize: Union[int, NoneT |
+| ype] = None, sort: bool = True, name: Union[str, NoneType] = None) -> dask.dataframe.core.DataFrame                                                                         |
+|                                                                                                                                                                             |
+| Definition @2022.6.0 <dynamic>: (data: Union[pandas.core.frame.DataFrame, pandas.core.series.Series], npartitions: Union[int, NoneType] = None, chunksize: Union[int, NoneT |
+| ype] = None, sort: bool = True, name: Union[str, NoneType] = None) -> dask.dataframe.core.DataFrame                                                                         |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: ddf.groupby('A')                                                                                                                                            |
+|                                                                                                                                                                             |
+| Location: At Line 6 in dask.dataframe.utils.assert_eq#15YY/assert_eqYY.py                                                                                                   |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @2022.5.2 <dynamic>: (by=None, group_keys=True, sort=None, observed=None, dropna=None, **kwargs)                                                                 |
+|                                                                                                                                                                             |
+| Definition @2022.6.0 <dynamic>: (by=None, group_keys=True, sort=None, observed=None, dropna=None, **kwargs)                                                                 |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #3: ddf.groupby('A').sum()                                                                                                                                      |
+|                                                                                                                                                                             |
+| Location: At Line 6 in dask.dataframe.utils.assert_eq#15YY/assert_eqYY.py                                                                                                   |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @2022.5.2 <static>: {'dask.bag.core.Bag.sum': ['(self,split_every=None)'], 'dask.dataframe.groupby._GroupBy.sum': ['(self,split_every=None,split_out=1,min_count |
+| =None)'], 'dask.dataframe.core._Frame.sum': ['(self,axis=None,skipna=True,split_every=False,dtype=None,out=None,min_count=None,numeric_only=None)'], 'dask.dataframe.rollin |
+| g.Rolling.sum': ['(self)'], 'dask.dataframe.tseries.resample.Resampler.sum': ['(self)'], 'dask.array.core.Array.sum': ['(self,axis=None,dtype=None,keepdims=False,split_eve |
+| ry=None,out=None)'], 'dask.array.reductions.sum': ['(a,axis=None,dtype=None,keepdims=False,split_every=None,out=None)'], 'dask.array.sum': ['(a,axis=None,dtype=None,keepdi |
+| ms=False,split_every=None,out=None)']}                                                                                                                                      |
+|                                                                                                                                                                             |
+| Definition @2022.6.0 <static>: {'dask.bag.core.Bag.sum': ['(self,split_every=None)'], 'dask.dataframe.groupby._GroupBy.sum': ['(self,split_every=None,split_out=1,min_count |
+| =None)'], 'dask.dataframe.core._Frame.sum': ['(self,axis=None,skipna=True,split_every=False,dtype=None,out=None,min_count=None,numeric_only=None)'], 'dask.dataframe.rollin |
+| g.Rolling.sum': ['(self)'], 'dask.dataframe.tseries.resample.Resampler.sum': ['(self)'], 'dask.array.core.Array.sum': ['(self,axis=None,dtype=None,keepdims=False,split_eve |
+| ry=None,out=None)'], 'dask.array.reductions.sum': ['(a,axis=None,dtype=None,keepdims=False,split_every=None,out=None)'], 'dask.array.sum': ['(a,axis=None,dtype=None,keepdi |
+| ms=False,split_every=None,out=None)']}                                                                                                                                      |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #4: assert_eq(ddf_result, pdf_result, True, check_dtype=True, check_divisions=True)                                                                             |
+|                                                                                                                                                                             |
+| Location: At Line 8 in dask.dataframe.utils.assert_eq#15YY/assert_eqYY.py                                                                                                   |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @2022.5.2 <dynamic>: (a, b, check_names=True, check_dtype=True, check_divisions=True, check_index=True, scheduler='sync', **kwargs)                              |
+|                                                                                                                                                                             |
+| Definition @2022.6.0 <dynamic>: (a, b, check_names=True, check_dtype=True, check_divisions=True, check_index=True, sort_results=True, scheduler='sync', **kwargs)           |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

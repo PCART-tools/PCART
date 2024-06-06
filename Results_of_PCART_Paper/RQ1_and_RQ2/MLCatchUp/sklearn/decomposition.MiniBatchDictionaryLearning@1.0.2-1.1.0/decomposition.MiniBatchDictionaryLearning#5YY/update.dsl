@@ -1,0 +1,4 @@
+add_parameter max_iter with_value None for MiniBatchDictionaryLearning
+add_parameter callback with_value None for MiniBatchDictionaryLearning
+add_parameter tol with_value 0.001 for MiniBatchDictionaryLearning
+add_parameter max_no_improvement with_value 10 for MiniBatchDictionaryLearning

@@ -1,0 +1,2 @@
+rename_parameter expectedImage to expected_image for calculate_rms
+rename_parameter actualImage to actual_image for calculate_rms

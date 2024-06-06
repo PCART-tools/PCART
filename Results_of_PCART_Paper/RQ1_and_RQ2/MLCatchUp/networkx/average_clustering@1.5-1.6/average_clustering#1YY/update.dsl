@@ -1,0 +1,3 @@
+rename_parameter weighted to nodes for average_clustering
+add_parameter weight with_value None for average_clustering
+add_parameter count_zeros with_value True for average_clustering

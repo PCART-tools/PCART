@@ -1,0 +1,1 @@
+add_parameter force_finite with_value True for explained_variance_score

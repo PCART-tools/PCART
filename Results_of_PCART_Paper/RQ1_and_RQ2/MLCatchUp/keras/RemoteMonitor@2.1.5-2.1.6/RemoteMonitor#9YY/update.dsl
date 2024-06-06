@@ -1,0 +1,1 @@
+add_parameter send_as_json with_value False for RemoteMonitor

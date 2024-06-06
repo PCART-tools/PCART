@@ -1,0 +1,149 @@
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/util.py----------------------------------------
+A:spacy.util.DATA_DIR->os.path.join(path.dirname(__file__), '..', 'data')
+A:spacy.util.tokenization->json.load(file_)
+A:spacy.util.prefix->read_prefix(data_dir)
+A:spacy.util.suffix->read_suffix(data_dir)
+A:spacy.util.infix->read_infix(data_dir)
+A:spacy.util.entries->file_.read().split('\n')
+A:spacy.util.expression->'|'.join([piece for piece in entries if piece.strip()])
+A:spacy.util.loc->os.path.join(DATA_DIR, lang, 'detokenize')
+A:spacy.util.seen->set()
+A:spacy.util.line->line.strip().strip()
+A:spacy.util.pieces->line.strip().strip().split()
+A:spacy.util.chunk->line.strip().strip().split().pop(0)
+A:spacy.util.queue->list(indices)
+A:spacy.util.string->string.replace(subtoks.replace('<SEP>', ' '), subtoks).replace(subtoks.replace('<SEP>', ' '), subtoks)
+A:spacy.util.subtoks->line.strip().strip().split().pop(0).split('<SEP>')
+spacy.util.align_tokens(ref,indices)
+spacy.util.detokenize(token_rules,words)
+spacy.util.read_detoken_rules(lang)
+spacy.util.read_infix(data_dir)
+spacy.util.read_lang_data(data_dir)
+spacy.util.read_prefix(data_dir)
+spacy.util.read_suffix(data_dir)
+spacy.util.read_tokenization(lang)
+spacy.util.utf8open(loc,mode='r')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/multi_words.py----------------------------------------
+spacy.multi_words.RegexMerger(self,regexes)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/munge/read_ontonotes.py----------------------------------------
+A:spacy.munge.read_ontonotes.docid_re->re.compile('<DOCID>([^>]+)</DOCID>')
+A:spacy.munge.read_ontonotes.doctype_re->re.compile('<DOCTYPE SOURCE="[^"]+">([^>]+)</DOCTYPE>')
+A:spacy.munge.read_ontonotes.datetime_re->re.compile('<DATETIME>([^>]+)</DATETIME>')
+A:spacy.munge.read_ontonotes.headline_re->re.compile('<HEADLINE>(.+)</HEADLINE>', re.DOTALL)
+A:spacy.munge.read_ontonotes.post_re->re.compile('<POST>(.+)</POST>', re.DOTALL)
+A:spacy.munge.read_ontonotes.poster_re->re.compile('<POSTER>(.+)</POSTER>')
+A:spacy.munge.read_ontonotes.postdate_re->re.compile('<POSTDATE>(.+)</POSTDATE>')
+A:spacy.munge.read_ontonotes.tag_re->re.compile('<[^>]+>[^>]+</[^>]+>')
+A:spacy.munge.read_ontonotes.matches->regex.search(text)
+spacy.munge.read_ontonotes._get_one(regex,text,required=False)
+spacy.munge.read_ontonotes._get_text(data)
+spacy.munge.read_ontonotes.sgml_extract(text_data)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/munge/read_conll.py----------------------------------------
+A:spacy.munge.read_conll.sent_text->sent_text.strip().strip()
+A:spacy.munge.read_conll.(word, tag, head, dep)->_parse_line(line)
+A:spacy.munge.read_conll.id_map[i]->len(words)
+A:spacy.munge.read_conll.pieces->line.split()
+spacy.munge.read_conll._is_bad_period(prev,period)
+spacy.munge.read_conll._parse_line(line)
+spacy.munge.read_conll.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_conll.split(text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/munge/read_ner.py----------------------------------------
+A:spacy.munge.read_ner.string->string.replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain').replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain')
+A:spacy.munge.read_ner.substr->re.compile('<ENAMEXTYPE="[^"]+">').sub('', substr)
+A:spacy.munge.read_ner.(tag, open_tag)->_get_tag(substr, open_tag)
+A:spacy.munge.read_ner.tag_re->re.compile('<ENAMEXTYPE="[^"]+">')
+A:spacy.munge.read_ner.tags->re.compile('<ENAMEXTYPE="[^"]+">').findall(substr)
+A:spacy.munge.read_ner.tok->tok.replace('-AMP-', '&').replace('-AMP-', '&')
+spacy.munge.read_ner._fix_inner_entities(substr)
+spacy.munge.read_ner._get_tag(substr,tag)
+spacy.munge.read_ner._get_text(substr)
+spacy.munge.read_ner.parse(string,strip_bad_periods=False)
+spacy.munge.read_ner.reform_string(tok)
+spacy.munge.read_ner.split(text)
+spacy.munge.read_ner.tags_to_entities(tags)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/munge/read_ptb.py----------------------------------------
+A:spacy.munge.read_ptb.sent_text->sent_text.replace('((', '( (', 1).replace('((', '( (', 1)
+A:spacy.munge.read_ptb.bracketsRE->re.compile('(\\()([^\\s\\)\\(]+)|([^\\s\\)\\(]+)?(\\))')
+A:spacy.munge.read_ptb.(open_, label, text, close)->match.groups()
+A:spacy.munge.read_ptb.(label, start)->open_brackets.pop()
+A:spacy.munge.read_ptb.line->line.rstrip().rstrip()
+spacy.munge.read_ptb._is_bad_period(prev,period)
+spacy.munge.read_ptb.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_ptb.split(text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/munge/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/en/lemmatizer.py----------------------------------------
+A:spacy.en.lemmatizer.self.index[pos]->read_index(path.join(wn_dict_dir, 'index.%s' % pos))
+A:spacy.en.lemmatizer.self.exc[pos]->read_exc(path.join(wn_dict_dir, '%s.exc' % pos))
+A:spacy.en.lemmatizer.string->string.lower().lower()
+A:spacy.en.lemmatizer.index->set()
+A:spacy.en.lemmatizer.pieces->line.split()
+A:spacy.en.lemmatizer.exceptions[pieces[0]]->tuple(pieces[1:])
+spacy.en.lemmatizer.Lemmatizer(self,wn_dict_dir,noun_id,verb_id,adj_id)
+spacy.en.lemmatizer.Lemmatizer.adj(self,string)
+spacy.en.lemmatizer.Lemmatizer.noun(self,string)
+spacy.en.lemmatizer.Lemmatizer.verb(self,string)
+spacy.en.lemmatizer.lemmatize(string,index,exceptions,rules)
+spacy.en.lemmatizer.read_exc(loc)
+spacy.en.lemmatizer.read_index(loc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/en/regexes.py----------------------------------------
+A:spacy.en.regexes.MW_PREPOSITIONS_RE->re.compile('|'.join(_mw_prepositions), flags=re.IGNORECASE)
+A:spacy.en.regexes.TIME_RE->re.compile('{colon_digits}|{colon_digits} ?{am_pm}?|{one_two_digits} ?({am_pm})'.format(colon_digits='[0-2]?[0-9]:[0-5][0-9](?::[0-5][0-9])?', one_two_digits='[0-2]?[0-9]', am_pm='[ap]\\.?m\\.?'))
+A:spacy.en.regexes.DATE_RE->re.compile('(?:this|last|next|the) (?:week|weekend|{days})'.format(days='Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday'))
+A:spacy.en.regexes.MONEY_RE->re.compile('\\$\\d+(?:\\.\\d+)?|\\d+ dollars(?: \\d+ cents)?')
+A:spacy.en.regexes.DAYS_RE->re.compile('Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/en/download.py----------------------------------------
+A:spacy.en.download.DEST_DIR->os.path.join(path.dirname(__file__), 'data')
+A:spacy.en.download.filename->download_file(url, dest_dir)
+A:spacy.en.download.t->tarfile.open(path.join(dest_dir, filename), mode=':gz')
+spacy.en.download.download_file(url,out)
+spacy.en.download.install_data(url,dest_dir)
+spacy.en.download.install_dep_vectors(url,dest_dir)
+spacy.en.download.install_parser_model(url,dest_dir)
+spacy.en.download.main(data_size='all')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/en/__init__.py----------------------------------------
+A:spacy.en.__init__.LOCAL_DATA_DIR->os.path.join(path.dirname(__file__), 'data')
+A:spacy.en.__init__.self.vocab->Vocab(data_dir=path.join(data_dir, 'vocab') if data_dir else None, get_lex_props=get_lex_props, load_vectors=load_vectors, pos_tags=POS_TAGS)
+A:spacy.en.__init__.self.tokenizer->Tokenizer(self.vocab, path.join(data_dir, 'tokenizer'))
+A:spacy.en.__init__.self.tagger->Tagger(self.vocab.strings, data_dir)
+A:spacy.en.__init__.self.parser->Parser(self.vocab.strings, path.join(data_dir, 'deps'))
+A:spacy.en.__init__.self.entity->Entity(self.vocab.strings, path.join(data_dir, 'ner'))
+A:spacy.en.__init__.self.mwe_merger->RegexMerger([('IN', 'O', regexes.MW_PREPOSITIONS_RE), ('CD', 'TIME', regexes.TIME_RE), ('NNP', 'DATE', regexes.DAYS_RE), ('CD', 'MONEY', regexes.MONEY_RE)])
+A:spacy.en.__init__.tokens->self.tokenizer(text)
+spacy.en.__init__.English(self,data_dir=LOCAL_DATA_DIR,Tokenizer=Tokenizer.from_dir,Tagger=EnPosTagger,Parser=ParserFactory(ParserTransitionSystem),Entity=ParserFactory(EntityTransitionSystem),load_vectors=True)
+spacy.en.__init__.English.tags(self)
+spacy.en.__init__.get_lex_props(string)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/syntax/util.py----------------------------------------
+spacy.syntax.util.Config(self,**kwargs)
+spacy.syntax.util.Config.get(self,attr,default=None)
+spacy.syntax.util.Config.read(cls,model_dir,name)
+spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.88/syntax/__init__.py----------------------------------------
+

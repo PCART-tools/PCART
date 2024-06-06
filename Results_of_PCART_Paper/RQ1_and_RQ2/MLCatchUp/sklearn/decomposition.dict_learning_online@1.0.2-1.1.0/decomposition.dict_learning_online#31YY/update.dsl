@@ -1,0 +1,3 @@
+add_parameter max_iter with_value None for dict_learning_online
+add_parameter tol with_value 0.001 for dict_learning_online
+add_parameter max_no_improvement with_value 10 for dict_learning_online

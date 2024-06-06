@@ -1,0 +1,1 @@
+add_parameter digits with_value 2 for classification_report

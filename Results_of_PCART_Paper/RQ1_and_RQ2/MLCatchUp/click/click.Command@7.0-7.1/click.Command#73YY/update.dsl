@@ -1,0 +1,1 @@
+add_parameter no_args_is_help with_value False for Command

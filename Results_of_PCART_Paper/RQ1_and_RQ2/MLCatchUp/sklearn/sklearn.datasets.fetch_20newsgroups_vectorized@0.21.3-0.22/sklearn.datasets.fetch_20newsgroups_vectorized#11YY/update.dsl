@@ -1,0 +1,1 @@
+add_parameter normalize with_value True for fetch_20newsgroups_vectorized

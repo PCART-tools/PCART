@@ -1,0 +1,2 @@
+add_parameter warm_start with_value False for LogisticRegression
+add_parameter n_jobs with_value 1 for LogisticRegression

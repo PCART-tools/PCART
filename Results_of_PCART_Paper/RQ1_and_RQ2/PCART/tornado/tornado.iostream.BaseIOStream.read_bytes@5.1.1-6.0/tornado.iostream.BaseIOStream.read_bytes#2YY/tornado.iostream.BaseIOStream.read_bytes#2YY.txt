@@ -1,0 +1,107 @@
+Run Command: python  read_bytesYY.py
+Total File Number: 1
+Total Tornado Invoked API Number: 6
+Not Covered Tornado Invoked API Number: 0/6
+Covered Tornado Invoked API Number: 6/6
+
+Compatible Tornado Invoked API Number: 6/6
+Unknown Compatible Tornado Invoked API Number: 0/6
+
+Incompatible Tornado Invoked API Number: 0/6
+-> Successfully Repaired Tornado Invoked API number: 0/0
+-> Failed to Repair Tornado Invoked API Number: 0/0
+-> Unknown Repair Status Tornado Invoked API Number: 0/0
+
+===============================================================================================================================================================================
+|                                     File #1: tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py has 6 Tornado-Invoked API(s)                                      |
+===============================================================================================================================================================================
+| Invoked API #1: tornado.iostream.IOStream(s)                                                                                                                                |
+|                                                                                                                                                                             |
+| Location: At Line 8 in tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py                                                                                         |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.iostream.IOStream': ['(self,socket,*args,**kwargs)']}                                                                                 |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.iostream.IOStream': ['(self,socket:socket.socket,*args:Any,**kwargs:Any)']}                                                             |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: stream.connect(('httpbin.org', 80))                                                                                                                         |
+|                                                                                                                                                                             |
+| Location: At Line 9 in tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py                                                                                         |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.iostream.IOStream.connect': ['(self,address,callback=None,server_hostname=None)']}                                                    |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.iostream.IOStream.connect': ["(self:_IOStreamType,address:tuple,server_hostname:str=None)->'Future[_IOStreamType]'"]}                   |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #3: stream.write(b'GET /get HTTP/1.1\r\nHost: httpbin.org\r\n\r\n')                                                                                             |
+|                                                                                                                                                                             |
+| Location: At Line 10 in tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py                                                                                        |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.httputil.HTTPConnection.write': ['(self,chunk,callback=None)'], 'tornado.httputil.HTTPServerRequest.write': ['(self,chunk,callback=No |
+| ne)'], 'tornado.wsgi._WSGIConnection.write': ['(self,chunk,callback=None)'], 'tornado.web.RequestHandler.write': ['(self,chunk)'], 'tornado.iostream.BaseIOStream.write': [ |
+| '(self,data,callback=None)'], 'tornado.http1connection.HTTP1Connection.write': ['(self,chunk,callback=None)'], 'tornado.test.runtests.CountingStderr.write': ['(self,data)' |
+| ]}                                                                                                                                                                          |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.httputil.HTTPConnection.write': ["(self,chunk:bytes)->'Future[None]'"], 'tornado.web.RequestHandler.write': ['(self,chunk:Union[str,byt |
+| es,dict])->None'], 'tornado.iostream.BaseIOStream.write': ["(self,data:Union[bytes,memoryview])->'Future[None]'"], 'tornado.http1connection.HTTP1Connection.write': ["(self |
+| ,chunk:bytes)->'Future[None]'"], 'tornado.test.runtests.CountingStderr.write': ['(self,data)']}                                                                             |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #4: stream.read_bytes(num_bytes=10)                                                                                                                             |
+|                                                                                                                                                                             |
+| Location: At Line 11 in tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py                                                                                        |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.iostream.BaseIOStream.read_bytes': ['(self,num_bytes,callback=None,streaming_callback=None,partial=False)']}                          |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.iostream.BaseIOStream.read_bytes': ['(self,num_bytes:int,partial:bool=False)->Awaitable[bytes]']}                                       |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #5: tornado.ioloop.IOLoop.current()                                                                                                                             |
+|                                                                                                                                                                             |
+| Location: At Line 12 in tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py                                                                                        |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <dynamic>: (instance=True)                                                                                                                                |
+|                                                                                                                                                                             |
+| Definition @6.0 <dynamic>: (instance: bool = True) -> Union[ForwardRef('IOLoop'), NoneType]                                                                                 |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #6: tornado.ioloop.IOLoop.current().run_sync(read_bytes_from_stream)                                                                                            |
+|                                                                                                                                                                             |
+| Location: At Line 12 in tornado.iostream.BaseIOStream.read_bytes#2YY/read_bytesYY.py                                                                                        |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.ioloop.IOLoop.run_sync': ['(self,func,timeout=None)']}                                                                                |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.ioloop.IOLoop.run_sync': ['(self,func:Callable,timeout:float=None)->Any']}                                                              |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

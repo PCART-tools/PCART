@@ -1,0 +1,1 @@
+add_parameter return_X_y with_value False for fetch_20newsgroups

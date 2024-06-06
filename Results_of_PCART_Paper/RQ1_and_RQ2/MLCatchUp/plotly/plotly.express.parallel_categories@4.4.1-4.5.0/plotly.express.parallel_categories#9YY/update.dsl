@@ -1,0 +1,1 @@
+add_parameter dimensions_max_cardinality with_value 50 for parallel_categories

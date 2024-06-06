@@ -1,0 +1,3 @@
+add_parameter pattern_shape with_value None for bar_polar
+add_parameter pattern_shape_sequence with_value None for bar_polar
+add_parameter pattern_shape_map with_value None for bar_polar

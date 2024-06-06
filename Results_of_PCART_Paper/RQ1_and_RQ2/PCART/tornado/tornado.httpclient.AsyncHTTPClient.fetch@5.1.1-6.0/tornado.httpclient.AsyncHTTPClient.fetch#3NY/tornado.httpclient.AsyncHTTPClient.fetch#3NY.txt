@@ -1,0 +1,77 @@
+Run Command: python  fetchNY.py
+Total File Number: 1
+Total Tornado Invoked API Number: 4
+Not Covered Tornado Invoked API Number: 0/4
+Covered Tornado Invoked API Number: 4/4
+
+Compatible Tornado Invoked API Number: 3/4
+Unknown Compatible Tornado Invoked API Number: 0/4
+
+Incompatible Tornado Invoked API Number: 1/4
+-> Successfully Repaired Tornado Invoked API number: 0/1
+-> Failed to Repair Tornado Invoked API Number: 0/1
+-> Unknown Repair Status Tornado Invoked API Number: 1/1
+
+===============================================================================================================================================================================
+|                                        File #1: tornado.httpclient.AsyncHTTPClient.fetch#3NY/fetchNY.py has 4 Tornado-Invoked API(s)                                        |
+===============================================================================================================================================================================
+| Invoked API #1: tornado.httpclient.AsyncHTTPClient()                                                                                                                        |
+|                                                                                                                                                                             |
+| Location: At Line 5 in tornado.httpclient.AsyncHTTPClient.fetch#3NY/fetchNY.py                                                                                              |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <dynamic>: (force_instance=False, **kwargs)                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @6.0 <dynamic>: (force_instance: bool = False, **kwargs: Any) -> 'AsyncHTTPClient'                                                                               |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: http_client.fetch('http://example.com', None)                                                                                                               |
+|                                                                                                                                                                             |
+| Location: At Line 6 in tornado.httpclient.AsyncHTTPClient.fetch#3NY/fetchNY.py                                                                                              |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.httpclient.AsyncHTTPClient.fetch': ['(self,request,callback=None,raise_error=True,**kwargs)']}                                        |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.httpclient.AsyncHTTPClient.fetch': ["(self,request:Union[str,'HTTPRequest'],raise_error:bool=True,**kwargs:Any)->Awaitable['HTTPRespons |
+| e']"]}                                                                                                                                                                      |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Unknown>: http_client.fetch('http://example.com')                                                                                                                   |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #3: tornado.ioloop.IOLoop.current()                                                                                                                             |
+|                                                                                                                                                                             |
+| Location: At Line 7 in tornado.httpclient.AsyncHTTPClient.fetch#3NY/fetchNY.py                                                                                              |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <dynamic>: (instance=True)                                                                                                                                |
+|                                                                                                                                                                             |
+| Definition @6.0 <dynamic>: (instance: bool = True) -> Union[ForwardRef('IOLoop'), NoneType]                                                                                 |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #4: tornado.ioloop.IOLoop.current().run_sync(fetch_url)                                                                                                         |
+|                                                                                                                                                                             |
+| Location: At Line 7 in tornado.httpclient.AsyncHTTPClient.fetch#3NY/fetchNY.py                                                                                              |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @5.1.1 <static>: {'tornado.ioloop.IOLoop.run_sync': ['(self,func,timeout=None)']}                                                                                |
+|                                                                                                                                                                             |
+| Definition @6.0 <static>: {'tornado.ioloop.IOLoop.run_sync': ['(self,func:Callable,timeout:float=None)->Any']}                                                              |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

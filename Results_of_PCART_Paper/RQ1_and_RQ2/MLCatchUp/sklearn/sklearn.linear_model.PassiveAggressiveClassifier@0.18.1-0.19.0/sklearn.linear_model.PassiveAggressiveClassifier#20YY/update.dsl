@@ -1,0 +1,3 @@
+add_parameter max_iter with_value None for PassiveAggressiveClassifier
+add_parameter tol with_value None for PassiveAggressiveClassifier
+add_parameter average with_value False for PassiveAggressiveClassifier

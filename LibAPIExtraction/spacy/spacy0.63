@@ -1,0 +1,88 @@
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/util.py----------------------------------------
+A:spacy.util.DATA_DIR->os.path.join(path.dirname(__file__), '..', 'data')
+A:spacy.util.tokenization->json.load(file_)
+A:spacy.util.prefix->read_prefix(data_dir)
+A:spacy.util.suffix->read_suffix(data_dir)
+A:spacy.util.infix->read_infix(data_dir)
+A:spacy.util.entries->file_.read().split('\n')
+A:spacy.util.expression->'|'.join([piece for piece in entries if piece.strip()])
+A:spacy.util.loc->os.path.join(DATA_DIR, lang, 'detokenize')
+A:spacy.util.seen->set()
+A:spacy.util.line->line.strip().strip()
+A:spacy.util.pieces->line.strip().strip().split()
+A:spacy.util.chunk->line.strip().strip().split().pop(0)
+A:spacy.util.queue->list(indices)
+A:spacy.util.string->string.replace(subtoks.replace('<SEP>', ' '), subtoks).replace(subtoks.replace('<SEP>', ' '), subtoks)
+A:spacy.util.subtoks->line.strip().strip().split().pop(0).split('<SEP>')
+spacy.util.align_tokens(ref,indices)
+spacy.util.detokenize(token_rules,words)
+spacy.util.read_detoken_rules(lang)
+spacy.util.read_infix(data_dir)
+spacy.util.read_lang_data(data_dir)
+spacy.util.read_prefix(data_dir)
+spacy.util.read_suffix(data_dir)
+spacy.util.read_tokenization(lang)
+spacy.util.utf8open(loc,mode='r')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/en/lemmatizer.py----------------------------------------
+A:spacy.en.lemmatizer.self.index[pos]->read_index(path.join(wn_dict_dir, 'index.%s' % pos))
+A:spacy.en.lemmatizer.self.exc[pos]->read_exc(path.join(wn_dict_dir, '%s.exc' % pos))
+A:spacy.en.lemmatizer.string->string.lower().lower()
+A:spacy.en.lemmatizer.index->set()
+A:spacy.en.lemmatizer.pieces->line.split()
+A:spacy.en.lemmatizer.exceptions[pieces[0]]->tuple(pieces[1:])
+spacy.en.lemmatizer.Lemmatizer(self,wn_dict_dir,noun_id,verb_id,adj_id)
+spacy.en.lemmatizer.Lemmatizer.adj(self,string)
+spacy.en.lemmatizer.Lemmatizer.noun(self,string)
+spacy.en.lemmatizer.Lemmatizer.verb(self,string)
+spacy.en.lemmatizer.lemmatize(string,index,exceptions,rules)
+spacy.en.lemmatizer.read_exc(loc)
+spacy.en.lemmatizer.read_index(loc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/en/download.py----------------------------------------
+A:spacy.en.download.DEST_DIR->os.path.join(path.dirname(__file__), 'data')
+A:spacy.en.download.filename->download_file(url, dest_dir)
+A:spacy.en.download.t->tarfile.open(path.join(dest_dir, filename), mode=':gz')
+spacy.en.download.download_file(url,out)
+spacy.en.download.install_data(url,dest_dir)
+spacy.en.download.install_dep_vectors(url,dest_dir)
+spacy.en.download.install_parser_model(url,dest_dir)
+spacy.en.download.main(data_size='all')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/en/__init__.py----------------------------------------
+A:spacy.en.__init__.LOCAL_DATA_DIR->os.path.join(path.dirname(__file__), 'data')
+A:spacy.en.__init__.self.vocab->Vocab(data_dir=path.join(data_dir, 'vocab') if data_dir else None, get_lex_props=get_lex_props)
+A:spacy.en.__init__.tag_names->list(POS_TAGS.keys())
+A:spacy.en.__init__.tok_data_dir->os.path.join(data_dir, 'tokenizer')
+A:spacy.en.__init__.(tok_rules, prefix_re, suffix_re, infix_re)->read_lang_data(tok_data_dir)
+A:spacy.en.__init__.prefix_re->re.compile(prefix_re)
+A:spacy.en.__init__.suffix_re->re.compile(suffix_re)
+A:spacy.en.__init__.infix_re->re.compile(infix_re)
+A:spacy.en.__init__.self.has_parser_model->os.path.exists(path.join(self._data_dir, 'deps'))
+A:spacy.en.__init__.self.has_tagger_model->os.path.exists(path.join(self._data_dir, 'pos'))
+A:spacy.en.__init__.self.tokenizer->Tokenizer(self.vocab, tok_rules, prefix_re, suffix_re, infix_re, POS_TAGS, tag_names)
+A:spacy.en.__init__.self._tagger->EnPosTagger(self.vocab.strings, self._data_dir)
+A:spacy.en.__init__.self._parser->GreedyParser(path.join(self._data_dir, 'deps'))
+A:spacy.en.__init__.tokens->self.tokenizer(text)
+spacy.en.__init__.English(self,data_dir='')
+spacy.en.__init__.English.parser(self)
+spacy.en.__init__.English.tagger(self)
+spacy.en.__init__.English.tags(self)
+spacy.en.__init__.get_lex_props(string)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/syntax/util.py----------------------------------------
+spacy.syntax.util.Config(self,**kwargs)
+spacy.syntax.util.Config.read(cls,model_dir,name)
+spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy0.63/syntax/__init__.py----------------------------------------
+

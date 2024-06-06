@@ -1,0 +1,48 @@
+Run Command: python  reshapeNN.py
+Total File Number: 1
+Total Polars Invoked API Number: 2
+Not Covered Polars Invoked API Number: 0/2
+Covered Polars Invoked API Number: 2/2
+
+Compatible Polars Invoked API Number: 1/2
+Unknown Compatible Polars Invoked API Number: 0/2
+
+Incompatible Polars Invoked API Number: 1/2
+-> Successfully Repaired Polars Invoked API number: 1/1
+-> Failed to Repair Polars Invoked API Number: 0/1
+-> Unknown Repair Status Polars Invoked API Number: 0/1
+
+===============================================================================================================================================================================
+|                                                  File #1: polars.Expr.reshape#2NN/reshapeNN.py has 2 Polars-Invoked API(s)                                                  |
+===============================================================================================================================================================================
+| Invoked API #1: pl.col('foo')                                                                                                                                               |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.Expr.reshape#2NN/reshapeNN.py                                                                                                                 |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                     |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                      |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: pl.col('foo').reshape(dims=(3, 3))                                                                                                                          |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.Expr.reshape#2NN/reshapeNN.py                                                                                                                 |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (dims: 'tuple[int, ...]') -> 'Self'                                                                                                          |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (dimensions: 'tuple[int, ...]') -> 'Self'                                                                                                     |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Successful>: pl.col('foo').reshape(dimensions=(3, 3))                                                                                                               |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

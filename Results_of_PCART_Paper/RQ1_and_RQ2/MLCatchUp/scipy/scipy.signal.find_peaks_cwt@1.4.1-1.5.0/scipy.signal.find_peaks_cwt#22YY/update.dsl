@@ -1,0 +1,1 @@
+add_parameter window_size with_value None for find_peaks_cwt

@@ -1,0 +1,1 @@
+add_parameter root_path_in_servers with_value True for FastAPI

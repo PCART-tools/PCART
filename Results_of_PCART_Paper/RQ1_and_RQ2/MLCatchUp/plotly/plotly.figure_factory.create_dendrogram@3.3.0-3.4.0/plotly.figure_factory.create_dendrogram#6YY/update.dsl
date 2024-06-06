@@ -1,0 +1,1 @@
+add_parameter color_threshold with_value None for create_dendrogram

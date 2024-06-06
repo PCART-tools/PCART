@@ -1,0 +1,1 @@
+add_parameter exclude_empty_subplots with_value None for add_layout_image

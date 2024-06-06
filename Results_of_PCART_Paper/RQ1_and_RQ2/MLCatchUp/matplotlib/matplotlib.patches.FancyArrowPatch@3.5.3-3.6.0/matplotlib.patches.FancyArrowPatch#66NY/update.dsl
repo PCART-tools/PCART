@@ -1,0 +1,9 @@
+positional_to_keyword position 3 keyword path for FancyArrowPatch
+positional_to_keyword position 4 keyword arrowstyle for FancyArrowPatch
+positional_to_keyword position 5 keyword connectionstyle for FancyArrowPatch
+positional_to_keyword position 6 keyword patchA for FancyArrowPatch
+positional_to_keyword position 7 keyword patchB for FancyArrowPatch
+positional_to_keyword position 8 keyword shrinkA for FancyArrowPatch
+positional_to_keyword position 9 keyword shrinkB for FancyArrowPatch
+positional_to_keyword position 10 keyword mutation_scale for FancyArrowPatch
+positional_to_keyword position 11 keyword mutation_aspect for FancyArrowPatch

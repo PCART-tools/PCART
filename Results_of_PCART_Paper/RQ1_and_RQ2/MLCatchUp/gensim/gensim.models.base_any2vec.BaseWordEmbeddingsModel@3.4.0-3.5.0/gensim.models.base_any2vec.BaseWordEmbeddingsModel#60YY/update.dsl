@@ -1,0 +1,1 @@
+add_parameter ns_exponent with_value 0.75 for BaseWordEmbeddingsModel

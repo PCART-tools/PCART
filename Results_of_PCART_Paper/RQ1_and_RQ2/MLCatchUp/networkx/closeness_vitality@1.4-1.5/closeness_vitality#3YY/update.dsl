@@ -1,0 +1,1 @@
+rename_parameter weighted_edges to weight for closeness_vitality

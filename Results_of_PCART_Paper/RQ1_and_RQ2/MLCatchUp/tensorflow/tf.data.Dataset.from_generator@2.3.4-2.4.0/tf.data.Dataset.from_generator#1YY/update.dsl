@@ -1,0 +1,1 @@
+add_parameter output_signature with_value None for from_generator

@@ -1,0 +1,48 @@
+Run Command: python  arg_whereNN.py
+Total File Number: 1
+Total Polars Invoked API Number: 2
+Not Covered Polars Invoked API Number: 0/2
+Covered Polars Invoked API Number: 2/2
+
+Compatible Polars Invoked API Number: 1/2
+Unknown Compatible Polars Invoked API Number: 0/2
+
+Incompatible Polars Invoked API Number: 1/2
+-> Successfully Repaired Polars Invoked API number: 1/1
+-> Failed to Repair Polars Invoked API Number: 0/1
+-> Unknown Repair Status Polars Invoked API Number: 0/1
+
+===============================================================================================================================================================================
+|                                                  File #1: polars.arg_where#3NN/arg_whereNN.py has 2 Polars-Invoked API(s)                                                   |
+===============================================================================================================================================================================
+| Invoked API #1: pl.col('a')                                                                                                                                                 |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.arg_where#3NN/arg_whereNN.py                                                                                                                  |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                     |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (name: 'str | PolarsDataType | Iterable[str] | Iterable[PolarsDataType]', *more_names: 'str | PolarsDataType') -> 'Expr'                      |
+|                                                                                                                                                                             |
+| Compatible: Yes                                                                                                                                                             |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                                                             |
+| Invoked API #2: pl.arg_where(pl.col('a') % 2 == 0, False)                                                                                                                   |
+|                                                                                                                                                                             |
+| Location: At Line 2 in polars.arg_where#3NN/arg_whereNN.py                                                                                                                  |
+|                                                                                                                                                                             |
+| Coverage: Yes                                                                                                                                                               |
+|                                                                                                                                                                             |
+| Definition @0.16.18 <dynamic>: (condition: 'Expr | Series', eager: 'bool' = False) -> 'Expr | Series'                                                                       |
+|                                                                                                                                                                             |
+| Definition @0.17.0 <dynamic>: (condition: 'Expr | Series', *, eager: 'bool' = False) -> 'Expr | Series'                                                                     |
+|                                                                                                                                                                             |
+| Compatible: No                                                                                                                                                              |
+|                                                                                                                                                                             |
+| Repair <Successful>: pl.arg_where(pl.col('a') % 2 == 0, eager=False)                                                                                                        |
+|                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+

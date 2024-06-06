@@ -1,0 +1,1 @@
+add_parameter reset_metrics with_value True for train_on_batch

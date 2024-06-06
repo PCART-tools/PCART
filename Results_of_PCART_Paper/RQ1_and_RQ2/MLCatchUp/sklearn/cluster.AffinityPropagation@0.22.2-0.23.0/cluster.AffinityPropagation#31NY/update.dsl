@@ -1,0 +1,8 @@
+positional_to_keyword position 1 keyword damping for AffinityPropagation
+positional_to_keyword position 2 keyword max_iter for AffinityPropagation
+positional_to_keyword position 3 keyword convergence_iter for AffinityPropagation
+positional_to_keyword position 4 keyword copy for AffinityPropagation
+positional_to_keyword position 5 keyword preference for AffinityPropagation
+positional_to_keyword position 6 keyword affinity for AffinityPropagation
+positional_to_keyword position 7 keyword verbose for AffinityPropagation
+add_parameter random_state with_value 'warn' for AffinityPropagation

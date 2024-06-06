@@ -1,0 +1,2 @@
+add_parameter integrality with_value None for differential_evolution
+add_parameter vectorized with_value False for differential_evolution

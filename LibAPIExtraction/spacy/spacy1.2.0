@@ -1,0 +1,1336 @@
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/util.py----------------------------------------
+A:spacy.util.path->pathlib.Path(path)
+A:spacy.util.(name, version)->split_data_name(data_name.parts[-1])
+A:spacy.util.entries->file_.read().split('\n')
+A:spacy.util.expression->'|'.join([piece for piece in entries if piece.strip()])
+A:spacy.util.start->min(length, max(0, start))
+A:spacy.util.stop->min(length, max(start, stop))
+spacy.get_lang_class(name)
+spacy.set_lang_class(name,cls)
+spacy.util.check_renamed_kwargs(renamed,kwargs)
+spacy.util.compile_infix_regex(entries)
+spacy.util.compile_prefix_regex(entries)
+spacy.util.compile_suffix_regex(entries)
+spacy.util.constraint_match(constraint_string,version)
+spacy.util.get_data_path()
+spacy.util.get_lang_class(name)
+spacy.util.match_best_version(target_name,target_version,path)
+spacy.util.normalize_slice(length,start,stop,step=None)
+spacy.util.or_(val1,val2)
+spacy.util.read_regex(path)
+spacy.util.set_data_path(path)
+spacy.util.set_lang_class(name,cls)
+spacy.util.split_data_name(name)
+spacy.util.utf8open(loc,mode='r')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/lemmatizer.py----------------------------------------
+A:spacy.lemmatizer.index[pos]->set()
+A:spacy.lemmatizer.exc[pos]->read_exc(file_)
+A:spacy.lemmatizer.rules->ujson.load(file_)
+A:spacy.lemmatizer.lemmas->lemmatize(string, self.index.get(univ_pos, {}), self.exc.get(univ_pos, {}), self.rules.get(univ_pos, []))
+A:spacy.lemmatizer.string->string.lower().lower()
+A:spacy.lemmatizer.index->set()
+A:spacy.lemmatizer.pieces->line.split()
+A:spacy.lemmatizer.exceptions[pieces[0]]->tuple(pieces[1:])
+spacy.lemmatizer.Lemmatizer(self,index,exceptions,rules)
+spacy.lemmatizer.Lemmatizer.adj(self,string,**morphology)
+spacy.lemmatizer.Lemmatizer.is_base_form(self,univ_pos,**morphology)
+spacy.lemmatizer.Lemmatizer.load(cls,path)
+spacy.lemmatizer.Lemmatizer.noun(self,string,**morphology)
+spacy.lemmatizer.Lemmatizer.punct(self,string,**morphology)
+spacy.lemmatizer.Lemmatizer.verb(self,string,**morphology)
+spacy.lemmatizer.lemmatize(string,index,exceptions,rules)
+spacy.lemmatizer.read_exc(fileobj)
+spacy.lemmatizer.read_index(fileobj)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/about.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/deprecated.py----------------------------------------
+A:spacy.deprecated.lang->get_lang_class(name)
+A:spacy.deprecated.tokenization->package.load_json(('tokenizer', 'specials.json'))
+A:spacy.deprecated.queue->list(indices)
+A:spacy.deprecated.string->string.replace(subtoks.replace('<SEP>', ' '), subtoks).replace(subtoks.replace('<SEP>', ' '), subtoks)
+A:spacy.deprecated.subtoks->chunk.split('<SEP>')
+spacy.deprecated.align_tokens(ref,indices)
+spacy.deprecated.detokenize(token_rules,words)
+spacy.deprecated.get_package(data_dir)
+spacy.deprecated.get_package_by_name(name=None,via=None)
+spacy.deprecated.read_lang_data(package)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/language.py----------------------------------------
+A:spacy.language.lemmatizer->cls.create_lemmatizer(nlp)
+A:spacy.language.prefixes->tuple()
+A:spacy.language.suffixes->tuple()
+A:spacy.language.infixes->tuple()
+A:spacy.language.parser_features->get_templates('parser')
+A:spacy.language.entity_features->get_templates('ner')
+A:spacy.language.stop_words->set()
+A:spacy.language.path->pathlib.Path(path)
+A:spacy.language.gold_tuples->syntax.nonproj.PseudoProjectivity.preprocess_training_data(gold_tuples)
+A:spacy.language.parser_cfg['labels']->ArcEager.get_labels(gold_tuples)
+A:spacy.language.entity_cfg['labels']->BiluoPushDown.get_labels(gold_tuples)
+A:spacy.language.self->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False)
+A:spacy.language.self.vocab->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False).defaults.Vocab()
+A:spacy.language.self.tokenizer->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False).defaults.Tokenizer(self.vocab)
+A:spacy.language.self.tagger->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False).defaults.Tagger(self.vocab, **tagger_cfg)
+A:spacy.language.self.parser->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False).defaults.Parser(self.vocab, **parser_cfg)
+A:spacy.language.self.entity->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False).defaults.Entity(self.vocab, **entity_cfg)
+A:spacy.language.self.pipeline->overrides['create_pipeline'](self)
+A:spacy.language.self.make_doc->overrides['create_make_doc'](self)
+A:spacy.language.doc->cls(path=path, vocab=False, tokenizer=False, tagger=False, parser=False, entity=False, matcher=False, serializer=False, vectors=False, pipeline=False).make_doc(text)
+A:spacy.language.stream->proc.pipe(stream, n_threads=n_threads, batch_size=batch_size)
+A:spacy.language.tagger_freqs->list(self.tagger.freqs[TAG].items())
+A:spacy.language.dep_freqs->list(self.parser.moves.freqs[DEP].items())
+A:spacy.language.head_freqs->list(self.parser.moves.freqs[HEAD].items())
+A:spacy.language.entity_iob_freqs->list(self.entity.moves.freqs[ENT_IOB].items())
+A:spacy.language.entity_type_freqs->list(self.entity.moves.freqs[ENT_TYPE].items())
+spacy.language.BaseDefaults(object)
+spacy.language.BaseDefaults.add_vectors(cls,nlp=None)
+spacy.language.BaseDefaults.create_entity(cls,nlp=None)
+spacy.language.BaseDefaults.create_lemmatizer(cls,nlp=None)
+spacy.language.BaseDefaults.create_matcher(cls,nlp=None)
+spacy.language.BaseDefaults.create_parser(cls,nlp=None)
+spacy.language.BaseDefaults.create_pipeline(self,nlp=None)
+spacy.language.BaseDefaults.create_tagger(cls,nlp=None)
+spacy.language.BaseDefaults.create_tokenizer(cls,nlp=None)
+spacy.language.BaseDefaults.create_vocab(cls,nlp=None)
+spacy.language.Language(self,path=True,**overrides)
+spacy.language.Language.end_training(self,path=None)
+spacy.language.Language.pipe(self,texts,tag=True,parse=True,entity=True,n_threads=2,batch_size=1000)
+spacy.language.Language.train(cls,path,gold_tuples,*configs)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/multi_words.py----------------------------------------
+spacy.multi_words.RegexMerger(self,regexes)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/train.py----------------------------------------
+A:spacy.train.paragraph_tuples->merge_sents(paragraph_tuples)
+A:spacy.train.(raw_text, paragraph_tuples)->augment_data(raw_text, paragraph_tuples)
+A:spacy.train.docs->self.make_docs(raw_text, paragraph_tuples)
+A:spacy.train.golds->self.make_golds(docs, paragraph_tuples)
+A:spacy.train.scorer->Scorer()
+spacy.train.Trainer(self,nlp,gold_tuples)
+spacy.train.Trainer.epochs(self,nr_epoch,augment_data=None,gold_preproc=False)
+spacy.train.Trainer.evaluate(self,dev_sents,gold_preproc=False)
+spacy.train.Trainer.make_docs(self,raw_text,paragraph_tuples)
+spacy.train.Trainer.make_golds(self,docs,paragraph_tuples)
+spacy.train.Trainer.update(self,doc,gold)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/download.py----------------------------------------
+A:spacy.download.pkg->sputnik.package(about.__title__, about.__version__, about.__models__.get(lang, lang))
+A:spacy.download.package->sputnik.install(about.__title__, about.__version__, about.__models__.get(lang, lang))
+A:spacy.download.data_path->util.get_data_path()
+spacy.download.download(lang,force=False,fail_on_exist=True)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/scorer.py----------------------------------------
+A:spacy.scorer.self.tokens->PRFScore()
+A:spacy.scorer.self.sbd->PRFScore()
+A:spacy.scorer.self.unlabelled->PRFScore()
+A:spacy.scorer.self.labelled->PRFScore()
+A:spacy.scorer.self.tags->PRFScore()
+A:spacy.scorer.self.ner->PRFScore()
+A:spacy.scorer.gold_deps->set()
+A:spacy.scorer.gold_tags->set()
+A:spacy.scorer.gold_ents->set(tags_to_entities([annot[-1] for annot in gold.orig_annot]))
+A:spacy.scorer.cand_deps->set()
+A:spacy.scorer.cand_tags->set()
+A:spacy.scorer.cand_ents->set()
+spacy.scorer.PRFScore(self)
+spacy.scorer.PRFScore.fscore(self)
+spacy.scorer.PRFScore.precision(self)
+spacy.scorer.PRFScore.recall(self)
+spacy.scorer.PRFScore.score_set(self,cand,gold)
+spacy.scorer.Scorer(self,eval_punct=False)
+spacy.scorer.Scorer.ents_f(self)
+spacy.scorer.Scorer.ents_p(self)
+spacy.scorer.Scorer.ents_r(self)
+spacy.scorer.Scorer.las(self)
+spacy.scorer.Scorer.score(self,tokens,gold,verbose=False,punct_labels=('p','punct'))
+spacy.scorer.Scorer.scores(self)
+spacy.scorer.Scorer.tags_acc(self)
+spacy.scorer.Scorer.token_acc(self)
+spacy.scorer.Scorer.uas(self)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/__init__.py----------------------------------------
+A:spacy.__init__.(target_name, target_version)->util.split_data_name(name)
+A:spacy.__init__.data_path->overrides.get('path', util.get_data_path())
+A:spacy.__init__.vec_path->util.match_best_version('en_glove_cc_300_1m_vectors', None, data_path)
+A:spacy.__init__.path->util.match_best_version(target_name, target_version, data_path)
+A:spacy.__init__.cls->get_lang_class(target_name)
+spacy.__init__.load(name,**overrides)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/pt/language_data.py----------------------------------------
+A:spacy.pt.language_data.STOP_WORDS->set()
+A:spacy.pt.language_data.TOKENIZER_PREFIXES->map(re.escape, '\n,\n"\n(\n[\n{\n*\n<\n>\n$\n£\n„\n“\n\'\n``\n`\n#\nUS$\nC$\nA$\na-\n‘\n....\n...\n‚\n»\n_\n§\n'.strip().split('\n'))
+A:spacy.pt.language_data.TOKENIZER_SUFFIXES->'\n,\n\\"\n\\)\n\\]\n\\}\n\\*\n\\!\n\\?\n%\n\\$\n>\n:\n;\n\'\n”\n“\n«\n_\n\'\'\n\'s\n\'S\n’s\n’S\n’\n‘\n°\n€\n\\.\\.\n\\.\\.\\.\n\\.\\.\\.\\.\n(?<=[a-zäöüßÖÄÜ)\\]"\'´«‘’%\\)²“”])\\.\n\\-\\-\n´\n(?<=[0-9])km²\n(?<=[0-9])m²\n(?<=[0-9])cm²\n(?<=[0-9])mm²\n(?<=[0-9])km³\n(?<=[0-9])m³\n(?<=[0-9])cm³\n(?<=[0-9])mm³\n(?<=[0-9])ha\n(?<=[0-9])km\n(?<=[0-9])m\n(?<=[0-9])cm\n(?<=[0-9])mm\n(?<=[0-9])µm\n(?<=[0-9])nm\n(?<=[0-9])yd\n(?<=[0-9])in\n(?<=[0-9])ft\n(?<=[0-9])kg\n(?<=[0-9])g\n(?<=[0-9])mg\n(?<=[0-9])µg\n(?<=[0-9])t\n(?<=[0-9])lb\n(?<=[0-9])oz\n(?<=[0-9])m/s\n(?<=[0-9])km/h\n(?<=[0-9])mph\n(?<=[0-9])°C\n(?<=[0-9])°K\n(?<=[0-9])°F\n(?<=[0-9])hPa\n(?<=[0-9])Pa\n(?<=[0-9])mbar\n(?<=[0-9])mb\n(?<=[0-9])T\n(?<=[0-9])G\n(?<=[0-9])M\n(?<=[0-9])K\n(?<=[0-9])kb\n'.strip().split('\n')
+A:spacy.pt.language_data.TOKENIZER_INFIXES->'\\.\\.\\.+ (?<=[a-z])\\.(?=[A-Z]) (?<=[a-zA-Z])-(?=[a-zA-z]) (?<=[a-zA-Z])--(?=[a-zA-z]) (?<=[0-9])-(?=[0-9]) (?<=[A-Za-z]),(?=[A-Za-z])'.split()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/pt/__init__.py----------------------------------------
+A:spacy.pt.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.pt.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.pt.__init__.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
+A:spacy.pt.__init__.suffixes->tuple(language_data.TOKENIZER_SUFFIXES)
+A:spacy.pt.__init__.infixes->tuple(language_data.TOKENIZER_INFIXES)
+A:spacy.pt.__init__.tag_map->dict(language_data.TAG_MAP)
+A:spacy.pt.__init__.stop_words->set(language_data.STOP_WORDS)
+spacy.pt.__init__.Portuguese(Language)
+spacy.pt.__init__.Portuguese.Defaults(Language.Defaults)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/de/language_data.py----------------------------------------
+A:spacy.de.language_data.STOP_WORDS->set()
+A:spacy.de.language_data.TOKENIZER_PREFIXES->map(re.escape, '\n,\n"\n(\n[\n{\n*\n<\n>\n$\n£\n„\n“\n\'\n``\n`\n#\nUS$\nC$\nA$\na-\n‘\n....\n...\n‚\n»\n_\n§\n'.strip().split('\n'))
+A:spacy.de.language_data.TOKENIZER_SUFFIXES->'\n,\n\\"\n\\)\n\\]\n\\}\n\\*\n\\!\n\\?\n%\n\\$\n>\n:\n;\n\'\n”\n“\n«\n_\n\'\'\n\'s\n\'S\n’s\n’S\n’\n‘\n°\n€\n\\.\\.\n\\.\\.\\.\n\\.\\.\\.\\.\n(?<=[a-zäöüßÖÄÜ)\\]"\'´«‘’%\\)²“”])\\.\n\\-\\-\n´\n(?<=[0-9])km²\n(?<=[0-9])m²\n(?<=[0-9])cm²\n(?<=[0-9])mm²\n(?<=[0-9])km³\n(?<=[0-9])m³\n(?<=[0-9])cm³\n(?<=[0-9])mm³\n(?<=[0-9])ha\n(?<=[0-9])km\n(?<=[0-9])m\n(?<=[0-9])cm\n(?<=[0-9])mm\n(?<=[0-9])µm\n(?<=[0-9])nm\n(?<=[0-9])yd\n(?<=[0-9])in\n(?<=[0-9])ft\n(?<=[0-9])kg\n(?<=[0-9])g\n(?<=[0-9])mg\n(?<=[0-9])µg\n(?<=[0-9])t\n(?<=[0-9])lb\n(?<=[0-9])oz\n(?<=[0-9])m/s\n(?<=[0-9])km/h\n(?<=[0-9])mph\n(?<=[0-9])°C\n(?<=[0-9])°K\n(?<=[0-9])°F\n(?<=[0-9])hPa\n(?<=[0-9])Pa\n(?<=[0-9])mbar\n(?<=[0-9])mb\n(?<=[0-9])T\n(?<=[0-9])G\n(?<=[0-9])M\n(?<=[0-9])K\n(?<=[0-9])kb\n'.strip().split('\n')
+A:spacy.de.language_data.TOKENIZER_INFIXES->'\n\\.\\.\\.\n(?<=[a-z])\\.(?=[A-Z])\n(?<=[a-zöäüßA-ZÖÄÜ"]):(?=[a-zöäüßA-ZÖÄÜ])\n(?<=[a-zöäüßA-ZÖÄÜ"])>(?=[a-zöäüßA-ZÖÄÜ])\n(?<=[a-zöäüßA-ZÖÄÜ"])<(?=[a-zöäüßA-ZÖÄÜ])\n(?<=[a-zöäüßA-ZÖÄÜ"])=(?=[a-zöäüßA-ZÖÄÜ])\n'.strip().split('\n')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/de/download.py----------------------------------------
+spacy.de.download.main(data_size='all',force=False)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/de/__init__.py----------------------------------------
+A:spacy.de.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.de.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.de.__init__.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
+A:spacy.de.__init__.suffixes->tuple(language_data.TOKENIZER_SUFFIXES)
+A:spacy.de.__init__.infixes->tuple(language_data.TOKENIZER_INFIXES)
+A:spacy.de.__init__.tag_map->dict(language_data.TAG_MAP)
+A:spacy.de.__init__.stop_words->set(language_data.STOP_WORDS)
+spacy.de.__init__.German(Language)
+spacy.de.__init__.German.Defaults(Language.Defaults)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/test_pickle.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/prag_sbd.py----------------------------------------
+A:spacy.tests.prag_sbd.EN->English()
+A:spacy.tests.prag_sbd.tokens->EN(text)
+A:spacy.tests.prag_sbd.sents->get_sent_strings('Hello world.Today is Tuesday.Mr. Smith went to the store and bought 1,000.That is a lot.')
+spacy.tests.prag_sbd.get_sent_strings(text)
+spacy.tests.prag_sbd.test_gr1()
+spacy.tests.prag_sbd.test_gr10()
+spacy.tests.prag_sbd.test_gr11()
+spacy.tests.prag_sbd.test_gr12()
+spacy.tests.prag_sbd.test_gr13()
+spacy.tests.prag_sbd.test_gr14()
+spacy.tests.prag_sbd.test_gr15()
+spacy.tests.prag_sbd.test_gr16()
+spacy.tests.prag_sbd.test_gr17()
+spacy.tests.prag_sbd.test_gr18()
+spacy.tests.prag_sbd.test_gr19()
+spacy.tests.prag_sbd.test_gr2()
+spacy.tests.prag_sbd.test_gr20()
+spacy.tests.prag_sbd.test_gr21()
+spacy.tests.prag_sbd.test_gr22()
+spacy.tests.prag_sbd.test_gr23()
+spacy.tests.prag_sbd.test_gr24()
+spacy.tests.prag_sbd.test_gr25()
+spacy.tests.prag_sbd.test_gr26()
+spacy.tests.prag_sbd.test_gr27()
+spacy.tests.prag_sbd.test_gr28()
+spacy.tests.prag_sbd.test_gr29()
+spacy.tests.prag_sbd.test_gr3()
+spacy.tests.prag_sbd.test_gr30()
+spacy.tests.prag_sbd.test_gr31()
+spacy.tests.prag_sbd.test_gr32()
+spacy.tests.prag_sbd.test_gr33()
+spacy.tests.prag_sbd.test_gr34()
+spacy.tests.prag_sbd.test_gr35()
+spacy.tests.prag_sbd.test_gr36()
+spacy.tests.prag_sbd.test_gr37()
+spacy.tests.prag_sbd.test_gr38()
+spacy.tests.prag_sbd.test_gr39()
+spacy.tests.prag_sbd.test_gr4()
+spacy.tests.prag_sbd.test_gr40()
+spacy.tests.prag_sbd.test_gr41()
+spacy.tests.prag_sbd.test_gr42()
+spacy.tests.prag_sbd.test_gr43()
+spacy.tests.prag_sbd.test_gr44()
+spacy.tests.prag_sbd.test_gr45()
+spacy.tests.prag_sbd.test_gr46()
+spacy.tests.prag_sbd.test_gr47()
+spacy.tests.prag_sbd.test_gr48()
+spacy.tests.prag_sbd.test_gr49()
+spacy.tests.prag_sbd.test_gr5()
+spacy.tests.prag_sbd.test_gr50()
+spacy.tests.prag_sbd.test_gr51()
+spacy.tests.prag_sbd.test_gr52()
+spacy.tests.prag_sbd.test_gr6()
+spacy.tests.prag_sbd.test_gr7()
+spacy.tests.prag_sbd.test_gr8()
+spacy.tests.prag_sbd.test_gr9()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/test_docs.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/test_matcher.py----------------------------------------
+A:spacy.tests.test_matcher.doc->Doc(matcher.vocab, words='He said , " some words " ...'.split())
+spacy.tests.test_matcher.matcher()
+spacy.tests.test_matcher.test_compile(matcher)
+spacy.tests.test_matcher.test_match_end(matcher)
+spacy.tests.test_matcher.test_match_middle(matcher)
+spacy.tests.test_matcher.test_match_multi(matcher)
+spacy.tests.test_matcher.test_match_start(matcher)
+spacy.tests.test_matcher.test_match_zero(matcher)
+spacy.tests.test_matcher.test_match_zero_plus(matcher)
+spacy.tests.test_matcher.test_no_match(matcher)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/conftest.py----------------------------------------
+spacy.tests.conftest.DE()
+spacy.tests.conftest.EN()
+spacy.tests.conftest.pytest_addoption(parser)
+spacy.tests.conftest.pytest_runtest_setup(item)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/spans/test_times.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/spans/test_span.py----------------------------------------
+A:spacy.tests.spans.test_span.sents->list(doc.sents)
+A:spacy.tests.spans.test_span.doc->EN(text)
+A:spacy.tests.spans.test_span.heads->numpy.asarray([[1, 0, -1, -1, -1, 1, 0, -1, -1, -1, 2, 1, 0, -1]], dtype='int32')
+spacy.tests.spans.test_span.doc(EN)
+spacy.tests.spans.test_span.test_root(doc)
+spacy.tests.spans.test_span.test_root2(EN)
+spacy.tests.spans.test_span.test_sent(doc)
+spacy.tests.spans.test_span.test_sent_spans(doc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/spans/test_merge.py----------------------------------------
+A:spacy.tests.spans.test_merge.tokens->EN(u'Stewart Lee is a stand up comedian who lives in England and loves Joe Pasquale')
+A:spacy.tests.spans.test_merge.merged->EN(u'Stewart Lee is a stand up comedian who lives in England and loves Joe Pasquale').merge(start, end, label, lemma, label)
+A:spacy.tests.spans.test_merge.(sent1, sent2)->list(tokens.sents)
+A:spacy.tests.spans.test_merge.init_len->len(list(sent1.root.subtree))
+A:spacy.tests.spans.test_merge.init_len2->len(sent2)
+spacy.tests.spans.test_merge.test_entity_merge(EN)
+spacy.tests.spans.test_merge.test_issue_54(EN)
+spacy.tests.spans.test_merge.test_merge_heads(EN)
+spacy.tests.spans.test_merge.test_merge_tokens(EN)
+spacy.tests.spans.test_merge.test_np_merges(EN)
+spacy.tests.spans.test_merge.test_sentence_update_after_merge(EN)
+spacy.tests.spans.test_merge.test_subtree_size_check(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/spans/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/spans/conftest.py----------------------------------------
+spacy.tests.spans.conftest.en_nlp()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/print/test_print.py----------------------------------------
+A:spacy.tests.print.test_print.doc->EN(u'I sat down for coffee at the café')
+spacy.tests.print.test_print.test_print_doc(EN)
+spacy.tests.print.test_print.test_print_doc_unicode(EN)
+spacy.tests.print.test_print.test_print_span(EN)
+spacy.tests.print.test_print.test_print_span_unicode(EN)
+spacy.tests.print.test_print.test_print_token(EN)
+spacy.tests.print.test_print.test_print_token_unicode(EN)
+spacy.tests.print.test_print.test_repr_doc(EN)
+spacy.tests.print.test_print.test_repr_doc_unicode(EN)
+spacy.tests.print.test_print.test_repr_span(EN)
+spacy.tests.print.test_print.test_repr_span_unicode(EN)
+spacy.tests.print.test_print.test_repr_token(EN)
+spacy.tests.print.test_print.test_repr_token_unicode(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/print/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/munge/test_detokenize.py----------------------------------------
+A:spacy.tests.munge.test_detokenize.tokens->"I ca n't !".split()
+spacy.tests.munge.test_detokenize.test_contractions()
+spacy.tests.munge.test_detokenize.test_contractions_punct()
+spacy.tests.munge.test_detokenize.test_punct()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/munge/test_onto_ner.py----------------------------------------
+spacy.tests.munge.test_onto_ner.test_get_tag()
+spacy.tests.munge.test_onto_ner.test_get_text()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/munge/test_align.py----------------------------------------
+A:spacy.tests.munge.test_align.aligned->list(align_tokens(ref, indices))
+spacy.tests.munge.test_align.test_align_continue()
+spacy.tests.munge.test_align.test_hyphen_align()
+spacy.tests.munge.test_align.test_perfect_align()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/munge/test_lev_align.py----------------------------------------
+spacy.tests.munge.test_lev_align.test_align()
+spacy.tests.munge.test_lev_align.test_edit_path()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/munge/test_bad_periods.py----------------------------------------
+A:spacy.tests.munge.test_bad_periods.hongbin_example->'\n1       2.      0.      LS      _       24      meta    _       _       _\n2       .       .       .       _       1       punct   _       _       _\n3       Wang    wang    NNP     _       4       compound        _       _       _\n4       Hongbin hongbin NNP     _       16      nsubj   _       _       _\n5       ,       ,       ,       _       4       punct   _       _       _\n6       the     the     DT      _       11      det     _       _       _\n7       "       "       ``      _       11      punct   _       _       _\n8       communist       communist       JJ      _       11      amod    _       _       _\n9       trail   trail   NN      _       11      compound        _       _       _\n10      -       -       HYPH    _       11      punct   _       _       _\n11      blazer  blazer  NN      _       4       appos   _       _       _\n12      ,       ,       ,       _       16      punct   _       _       _\n13      "       "       \'\'      _       16      punct   _       _       _\n14      has     have    VBZ     _       16      aux     _       _       _\n15      not     not     RB      _       16      neg     _       _       _\n16      turned  turn    VBN     _       24      ccomp   _       _       _\n17      into    into    IN      syn=CLR 16      prep    _       _       _\n18      a       a       DT      _       19      det     _       _       _\n19      capitalist      capitalist      NN      _       17      pobj    _       _       _\n20      (       (       -LRB-   _       24      punct   _       _       _\n21      he      he      PRP     _       24      nsubj   _       _       _\n22      does    do      VBZ     _       24      aux     _       _       _\n23      n\'t     not     RB      _       24      neg     _       _       _\n24      have    have    VB      _       0       root    _       _       _\n25      any     any     DT      _       26      det     _       _       _\n26      shares  share   NNS     _       24      dobj    _       _       _\n27      ,       ,       ,       _       24      punct   _       _       _\n28      does    do      VBZ     _       30      aux     _       _       _\n29      n\'t     not     RB      _       30      neg     _       _       _\n30      have    have    VB      _       24      conj    _       _       _\n31      any     any     DT      _       32      det     _       _       _\n32      savings saving  NNS     _       30      dobj    _       _       _\n33      ,       ,       ,       _       30      punct   _       _       _\n34      does    do      VBZ     _       36      aux     _       _       _\n35      n\'t     not     RB      _       36      neg     _       _       _\n36      have    have    VB      _       30      conj    _       _       _\n37      his     his     PRP$    _       39      poss    _       _       _\n38      own     own     JJ      _       39      amod    _       _       _\n39      car     car     NN      _       36      dobj    _       _       _\n40      ,       ,       ,       _       36      punct   _       _       _\n41      and     and     CC      _       36      cc      _       _       _\n42      does    do      VBZ     _       44      aux     _       _       _\n43      n\'t     not     RB      _       44      neg     _       _       _\n44      have    have    VB      _       36      conj    _       _       _\n45      a       a       DT      _       46      det     _       _       _\n46      mansion mansion NN      _       44      dobj    _       _       _\n47      ;       ;       .       _       24      punct   _       _       _\n'.strip()
+A:spacy.tests.munge.test_bad_periods.(words, annot)->spacy.munge.read_conll.parse(hongbin_example, strip_bad_periods=True)
+spacy.tests.munge.test_bad_periods.test_hongbin()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/munge/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vectors/test_vectors.py----------------------------------------
+A:spacy.tests.vectors.test_vectors.doc->EN(u'apples orange juice')
+A:spacy.tests.vectors.test_vectors.(apples, oranges)->EN(u'apples oranges')
+A:spacy.tests.vectors.test_vectors.apples->EN(u'apples and apple pie')
+A:spacy.tests.vectors.test_vectors.oranges->EN(u'orange juice')
+spacy.tests.vectors.test_vectors.test_doc_doc_similarity(EN)
+spacy.tests.vectors.test_vectors.test_doc_vector(EN)
+spacy.tests.vectors.test_vectors.test_lexeme_doc_similarity(EN)
+spacy.tests.vectors.test_vectors.test_lexeme_lexeme_similarity(EN)
+spacy.tests.vectors.test_vectors.test_lexeme_span_similarity(EN)
+spacy.tests.vectors.test_vectors.test_lexeme_vector(EN)
+spacy.tests.vectors.test_vectors.test_span_doc_similarity(EN)
+spacy.tests.vectors.test_vectors.test_span_span_similarity(EN)
+spacy.tests.vectors.test_vectors.test_span_vector(EN)
+spacy.tests.vectors.test_vectors.test_token_doc_similarity(EN)
+spacy.tests.vectors.test_vectors.test_token_lexeme_similarity(EN)
+spacy.tests.vectors.test_vectors.test_token_span_similarity(EN)
+spacy.tests.vectors.test_vectors.test_token_token_similarity(EN)
+spacy.tests.vectors.test_vectors.test_token_vector(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vectors/test_similarity.py----------------------------------------
+A:spacy.tests.vectors.test_similarity.vocab->spacy.get_lang_class('en').Defaults.create_vocab()
+A:spacy.tests.vectors.test_similarity.apple_.vector->get_vector('ap')
+A:spacy.tests.vectors.test_similarity.orange_.vector->get_vector('or')
+spacy.tests.vectors.test_similarity.appleL(en_vocab)
+spacy.tests.vectors.test_similarity.appleT(apple_orange)
+spacy.tests.vectors.test_similarity.apple_orange(en_vocab)
+spacy.tests.vectors.test_similarity.en_vocab()
+spacy.tests.vectors.test_similarity.get_cosine(vec1,vec2)
+spacy.tests.vectors.test_similarity.get_vector(letters)
+spacy.tests.vectors.test_similarity.orangeL(en_vocab)
+spacy.tests.vectors.test_similarity.orangeT(apple_orange)
+spacy.tests.vectors.test_similarity.test_DS_sim(apple_orange,appleT)
+spacy.tests.vectors.test_similarity.test_LL_sim(appleL,orangeL)
+spacy.tests.vectors.test_similarity.test_TD_sim(apple_orange,appleT)
+spacy.tests.vectors.test_similarity.test_TS_sim(apple_orange,appleT)
+spacy.tests.vectors.test_similarity.test_TT_sim(appleT,orangeT)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vectors/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/serialize/test_io.py----------------------------------------
+A:spacy.tests.serialize.test_io.doc1->EN(u'This is a simple test. With a couple of sentences.')
+A:spacy.tests.serialize.test_io.doc2->EN(u'This is another test document.')
+A:spacy.tests.serialize.test_io.tmp_dir->tempfile.mkdtemp()
+A:spacy.tests.serialize.test_io.(bytes1, bytes2)->spacy.tokens.Doc.read_bytes(file_)
+A:spacy.tests.serialize.test_io.r1->Doc(EN.vocab).from_bytes(bytes1)
+A:spacy.tests.serialize.test_io.r2->Doc(EN.vocab).from_bytes(bytes2)
+A:spacy.tests.serialize.test_io.orig->EN(u'The geese are flying')
+A:spacy.tests.serialize.test_io.result->Doc(orig.vocab).from_bytes(orig.to_bytes())
+spacy.tests.serialize.test_io.test_left_right(EN)
+spacy.tests.serialize.test_io.test_lemmas(EN)
+spacy.tests.serialize.test_io.test_read_write(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/serialize/test_codecs.py----------------------------------------
+A:spacy.tests.serialize.test_codecs.codec->HuffmanCodec([(lex.orth, lex.prob) for lex in vocab])
+A:spacy.tests.serialize.test_codecs.bits->BitArray()
+A:spacy.tests.serialize.test_codecs.msg->numpy.array(ids, dtype=numpy.int32)
+A:spacy.tests.serialize.test_codecs.result->numpy.array(range(len(msg)), dtype=numpy.int32)
+A:spacy.tests.serialize.test_codecs.msg_list->list(msg)
+A:spacy.tests.serialize.test_codecs.vocab->Vocab()
+spacy.tests.serialize.test_codecs.test_attribute()
+spacy.tests.serialize.test_codecs.test_binary()
+spacy.tests.serialize.test_codecs.test_vocab_codec()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/serialize/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/serialize/test_huffman.py----------------------------------------
+A:spacy.tests.serialize.test_huffman.lo->heappop(heap)
+A:spacy.tests.serialize.test_huffman.hi->heappop(heap)
+A:spacy.tests.serialize.test_huffman.probs->numpy.zeros(shape=(10,), dtype=numpy.float32)
+A:spacy.tests.serialize.test_huffman.codec->HuffmanCodec([(w.orth, numpy.exp(w.prob)) for w in EN.vocab])
+A:spacy.tests.serialize.test_huffman.py_codes->list(py_codes.items())
+A:spacy.tests.serialize.test_huffman.strings->list(codec.strings)
+A:spacy.tests.serialize.test_huffman.codes->dict([(codec.leaves[i], codec.strings[i]) for i in range(len(codec.leaves))])
+A:spacy.tests.serialize.test_huffman.bits->HuffmanCodec([(w.orth, numpy.exp(w.prob)) for w in EN.vocab]).encode(message)
+A:spacy.tests.serialize.test_huffman.string->''.join(('{0:b}'.format(c).rjust(8, '0')[::-1] for c in bits.as_bytes()))
+A:spacy.tests.serialize.test_huffman.symb2freq->defaultdict(int)
+A:spacy.tests.serialize.test_huffman.by_freq->list(symb2freq.items())
+A:spacy.tests.serialize.test_huffman.py_codec->py_encode(symb2freq)
+A:spacy.tests.serialize.test_huffman.my_lengths->defaultdict(int)
+A:spacy.tests.serialize.test_huffman.py_lengths->defaultdict(int)
+A:spacy.tests.serialize.test_huffman.my_exp_len->sum((length * weight for (length, weight) in my_lengths.items()))
+A:spacy.tests.serialize.test_huffman.py_exp_len->sum((length * weight for (length, weight) in py_lengths.items()))
+spacy.tests.serialize.test_huffman.py_encode(symb2freq)
+spacy.tests.serialize.test_huffman.test1()
+spacy.tests.serialize.test_huffman.test_empty()
+spacy.tests.serialize.test_huffman.test_rosetta()
+spacy.tests.serialize.test_huffman.test_round_trip()
+spacy.tests.serialize.test_huffman.test_vocab(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/serialize/test_serialization.py----------------------------------------
+A:spacy.tests.serialize.test_serialization.doc1->EN(u'This is a test sentence.', tag=True, parse=True, entity=True)
+A:spacy.tests.serialize.test_serialization.doc2->Doc(EN.vocab).from_bytes(byte_string)
+A:spacy.tests.serialize.test_serialization.vocab->spacy.en.English.Defaults.create_vocab()
+A:spacy.tests.serialize.test_serialization.doc->EN(u'This is a sentence about pasta.')
+A:spacy.tests.serialize.test_serialization.packer->Packer(vocab, {})
+A:spacy.tests.serialize.test_serialization.b->Packer(vocab, {}).pack(doc)
+A:spacy.tests.serialize.test_serialization.loaded->Doc(vocab).from_bytes(b)
+A:spacy.tests.serialize.test_serialization.entity_recognizer->spacy.en.English.Defaults.create_entity()
+A:spacy.tests.serialize.test_serialization.byte_string->EN(u'This is a sentence about pasta.').to_bytes()
+spacy.tests.serialize.test_serialization.equal(doc1,doc2)
+spacy.tests.serialize.test_serialization.test_serialize_after_adding_entity()
+spacy.tests.serialize.test_serialization.test_serialize_after_adding_entity(EN)
+spacy.tests.serialize.test_serialization.test_serialize_empty_doc()
+spacy.tests.serialize.test_serialization.test_serialize_tokens(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_ner(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_ner_parse(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_parse(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_tags(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_tags_ner(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_tags_parse(EN)
+spacy.tests.serialize.test_serialization.test_serialize_tokens_tags_parse_ner(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/serialize/test_packer.py----------------------------------------
+A:spacy.tests.serialize.test_packer.path->spacy.util.match_best_version('en', None, path)
+A:spacy.tests.serialize.test_packer.vocab->spacy.en.English.Defaults.create_vocab()
+A:spacy.tests.serialize.test_packer.null_re->re.compile('!!!!!!!!!')
+A:spacy.tests.serialize.test_packer.tokenizer->Tokenizer(vocab, {}, null_re.search, null_re.search, null_re.finditer)
+A:spacy.tests.serialize.test_packer.packer->Packer(tokenizer.vocab, [])
+A:spacy.tests.serialize.test_packer.bits->Packer(tokenizer.vocab, []).pack(doc)
+A:spacy.tests.serialize.test_packer.byte_str->bytearray(b'the dog jumped')
+A:spacy.tests.serialize.test_packer.msg->tokenizer(u'the dog jumped')
+A:spacy.tests.serialize.test_packer.result->Doc(EN.vocab).from_bytes(byte_string)
+A:spacy.tests.serialize.test_packer.doc->EN(string)
+A:spacy.tests.serialize.test_packer.byte_string->EN(string).to_bytes()
+spacy.tests.serialize.test_packer.test_char_packer(vocab)
+spacy.tests.serialize.test_packer.test_packer_annotated(tokenizer)
+spacy.tests.serialize.test_packer.test_packer_bad_chars(EN)
+spacy.tests.serialize.test_packer.test_packer_bad_chars(tokenizer)
+spacy.tests.serialize.test_packer.test_packer_unannotated(tokenizer)
+spacy.tests.serialize.test_packer.tokenizer(vocab)
+spacy.tests.serialize.test_packer.vocab()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tagger/test_add_lemmas.py----------------------------------------
+A:spacy.tests.tagger.test_add_lemmas.tokens->u'Bananas in pyjamas are geese .'.split(' ')
+A:spacy.tests.tagger.test_add_lemmas.doc->EN.tokenizer.tokens_from_list(tokens)
+spacy.tests.tagger.test_add_lemmas.test_lemma_assignment(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tagger/test_lemmatizer.py----------------------------------------
+A:spacy.tests.tagger.test_lemmatizer.index->read_index(file_)
+A:spacy.tests.tagger.test_lemmatizer.exc->read_exc(file_)
+A:spacy.tests.tagger.test_lemmatizer.file_->io.BytesIO()
+A:spacy.tests.tagger.test_lemmatizer.loaded->pickle.load(file_)
+spacy.tests.tagger.test_lemmatizer.lemmatizer(path)
+spacy.tests.tagger.test_lemmatizer.path()
+spacy.tests.tagger.test_lemmatizer.test_base_form_dive(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_base_form_saw(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_noun_lemmas(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_pickle_lemmatizer(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_read_exc(path)
+spacy.tests.tagger.test_lemmatizer.test_read_index(path)
+spacy.tests.tagger.test_lemmatizer.test_smart_quotes(lemmatizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tagger/test_spaces.py----------------------------------------
+A:spacy.tests.tagger.test_spaces.tokens->EN(string)
+spacy.tests.tagger.test_spaces.tagged(EN)
+spacy.tests.tagger.test_spaces.test_return_char(EN)
+spacy.tests.tagger.test_spaces.test_spaces(tagged)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tagger/test_tag_names.py----------------------------------------
+A:spacy.tests.tagger.test_tag_names.tokens->EN(u'I ate pizzas with anchovies.', parse=False, tag=True)
+spacy.tests.tagger.test_tag_names.test_tag_names(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tagger/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tagger/test_morph_exceptions.py----------------------------------------
+A:spacy.tests.tagger.test_morph_exceptions.nlp->English()
+A:spacy.tests.tagger.test_morph_exceptions.tokens->nlp('I like his style.', tag=True, parse=False)
+spacy.tests.tagger.test_morph_exceptions.morph_exc()
+spacy.tests.tagger.test_morph_exceptions.test_load_exc(morph_exc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/website/test_api.py----------------------------------------
+A:spacy.tests.website.test_api.unprocessed_unicode->download_war_and_peace()
+A:spacy.tests.website.test_api.doc->nlp('I like New York in Autumn.')
+A:spacy.tests.website.test_api.tokens->nlp('apple apple orange banana')
+A:spacy.tests.website.test_api.ents->list(tokens.ents)
+A:spacy.tests.website.test_api.toks->nlp('I like New York in Autumn.')
+A:spacy.tests.website.test_api.(i, like, new, york, in_, autumn, dot)->range(len(toks))
+spacy.tests.website.test_api.autumn(toks)
+spacy.tests.website.test_api.dot(toks)
+spacy.tests.website.test_api.new(toks)
+spacy.tests.website.test_api.test_count_by(nlp)
+spacy.tests.website.test_api.test_entity_spans(nlp)
+spacy.tests.website.test_api.test_example_i_like_new_york1(nlp)
+spacy.tests.website.test_api.test_example_i_like_new_york2(toks)
+spacy.tests.website.test_api.test_example_i_like_new_york3(toks,new,york)
+spacy.tests.website.test_api.test_example_i_like_new_york4(toks,new,york)
+spacy.tests.website.test_api.test_example_i_like_new_york5(toks,autumn,dot)
+spacy.tests.website.test_api.test_example_war_and_peace(nlp)
+spacy.tests.website.test_api.test_main_entry_point(nlp)
+spacy.tests.website.test_api.test_navigating_the_parse_tree_lefts(doc)
+spacy.tests.website.test_api.test_navigating_the_parse_tree_rights(doc)
+spacy.tests.website.test_api.test_noun_chunk_spans(nlp)
+spacy.tests.website.test_api.test_read_bytes(nlp)
+spacy.tests.website.test_api.test_sentence_spans(nlp)
+spacy.tests.website.test_api.test_string_store(doc)
+spacy.tests.website.test_api.test_token_span(doc)
+spacy.tests.website.test_api.tok(toks,tok)
+spacy.tests.website.test_api.toks(nlp)
+spacy.tests.website.test_api.york(toks)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/website/test_home.py----------------------------------------
+A:spacy.tests.website.test_home.nlp->spacy.en.English()
+A:spacy.tests.website.test_home.doc->Doc(nlp.vocab)
+A:spacy.tests.website.test_home.sentence->next(doc.sents)
+A:spacy.tests.website.test_home.doc_array->Doc(nlp.vocab).to_array(attr_ids)
+A:spacy.tests.website.test_home.counts->defaultdict(defaultdict(int))
+A:spacy.tests.website.test_home.string->string.replace('\t', '    ').replace('\t', '    ')
+A:spacy.tests.website.test_home.byte_string->Doc(nlp.vocab).to_bytes()
+spacy.tests.website.test_home.test_calculate_inline_mark_up_on_original_string()
+spacy.tests.website.test_home.test_efficient_binary_serialization(doc)
+spacy.tests.website.test_home.test_export_to_numpy_arrays(nlp,doc)
+spacy.tests.website.test_home.test_get_and_set_string_views_and_flags(nlp,token)
+spacy.tests.website.test_home.test_get_tokens_and_sentences(doc)
+spacy.tests.website.test_home.test_load_resources_and_process_text()
+spacy.tests.website.test_home.test_multithreading(nlp)
+spacy.tests.website.test_home.test_named_entities()
+spacy.tests.website.test_home.test_part_of_speech_tags(nlp)
+spacy.tests.website.test_home.test_syntactic_dependencies()
+spacy.tests.website.test_home.test_use_integer_ids_for_any_strings(nlp,token)
+spacy.tests.website.test_home.test_word_vectors(nlp)
+spacy.tests.website.test_home.token(doc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/website/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/website/conftest.py----------------------------------------
+A:spacy.tests.website.conftest.data_dir->os.environ.get('SPACY_DATA')
+spacy.tests.website.conftest.doc(nlp)
+spacy.tests.website.conftest.nlp()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/morphology/test_morphology_pickle.py----------------------------------------
+A:spacy.tests.morphology.test_morphology_pickle.morphology->Morphology(StringStore(), {}, Lemmatizer({}, {}, {}))
+A:spacy.tests.morphology.test_morphology_pickle.file_->io.BytesIO()
+spacy.tests.morphology.test_morphology_pickle.test_pickle()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/morphology/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_conjuncts.py----------------------------------------
+spacy.tests.parser.test_conjuncts.orths(tokens)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_initial_actions_parse.py----------------------------------------
+A:spacy.tests.parser.test_initial_actions_parse.doc->EN.tokenizer(u'I ate the pizza with anchovies.')
+spacy.tests.parser.test_initial_actions_parse.test_initial(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_base_nps.py----------------------------------------
+A:spacy.tests.parser.test_base_nps.sent->EN(u'A phrase with another phrase occurs')
+spacy.tests.parser.test_base_nps.test_merge_pp(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_ner.py----------------------------------------
+A:spacy.tests.parser.test_ner.tokens->EN(u'Charity and other short-term aid have buoyed them so far, and a tax-relief bill working its way through Congress would help. But the September 11 Victim Compensation Fund, enacted by Congress to discourage people from filing lawsuits, will determine the shape of their lives for years to come.\n\n', entity=False)
+A:spacy.tests.parser.test_ner.ents->matcher(doc)
+A:spacy.tests.parser.test_ner.matcher->Matcher(EN.vocab, {'MemberNames': ('PERSON', {}, [[{LOWER: 'cal'}], [{LOWER: 'cal'}, {LOWER: 'henderson'}]])})
+A:spacy.tests.parser.test_ner.doc->EN(u'who is cal the manager of?')
+spacy.tests.parser.test_ner.test_consistency_bug(EN)
+spacy.tests.parser.test_ner.test_simple_types(EN)
+spacy.tests.parser.test_ner.test_unit_end_gazetteer(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_space_attachment.py----------------------------------------
+A:spacy.tests.parser.test_space_attachment.sent->sentstr.split(' ')
+A:spacy.tests.parser.test_space_attachment.doc->make_doc(EN, '\n \t \n\n \t')
+spacy.tests.parser.test_space_attachment.make_doc(EN,sentstr)
+spacy.tests.parser.test_space_attachment.test_sentence_space(EN)
+spacy.tests.parser.test_space_attachment.test_space_attachment(EN)
+spacy.tests.parser.test_space_attachment.test_space_attachment_intermediate_and_trailing_space(EN)
+spacy.tests.parser.test_space_attachment.test_space_attachment_leading_space(EN)
+spacy.tests.parser.test_space_attachment.test_space_attachment_one_space_sentence(EN)
+spacy.tests.parser.test_space_attachment.test_space_attachment_only_space_sentence(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_subtree.py----------------------------------------
+A:spacy.tests.parser.test_subtree.sent->EN('The four wheels on the bus turned quickly')
+spacy.tests.parser.test_subtree.test_subtrees(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_parse.py----------------------------------------
+A:spacy.tests.parser.test_parse.tokens->EN(u"i don't have other assistance")
+A:spacy.tests.parser.test_parse.doc->EN.tokenizer.tokens_from_list(['Hello'])
+A:spacy.tests.parser.test_parse.(move, label)->action_name.split('-')
+A:spacy.tests.parser.test_parse.example->EN.tokenizer.tokens_from_list(u'a b c d e'.split(' '))
+spacy.tests.parser.test_parse.apply_transition_sequence(model,doc,sequence)
+spacy.tests.parser.test_parse.test_arc_eager_finalize_state(EN)
+spacy.tests.parser.test_parse.test_one_word_sentence(EN)
+spacy.tests.parser.test_parse.test_root(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_nonproj.py----------------------------------------
+A:spacy.tests.parser.test_nonproj.slen->len(proj_heads)
+A:spacy.tests.parser.test_nonproj.sent->EN.tokenizer.tokens_from_list(['whatever'] * slen)
+A:spacy.tests.parser.test_nonproj.pairs->list(zip(rel_proj_heads, labelids))
+A:spacy.tests.parser.test_nonproj.parse->EN.tokenizer.tokens_from_list(['whatever'] * slen).to_array([HEAD, DEP])
+A:spacy.tests.parser.test_nonproj.np_arc->spacy.syntax.nonproj.PseudoProjectivity._get_smallest_nonproj_arc(nonproj_tree2)
+A:spacy.tests.parser.test_nonproj.(proj_heads, deco_labels)->spacy.syntax.nonproj.PseudoProjectivity.projectivize(nonproj_tree2, labels2)
+A:spacy.tests.parser.test_nonproj.(deproj_heads, undeco_labels)->deprojectivize(proj_heads, deco_labels, EN)
+spacy.tests.parser.test_nonproj.deprojectivize(proj_heads,deco_labels,EN)
+spacy.tests.parser.test_nonproj.test_ancestors()
+spacy.tests.parser.test_nonproj.test_contains_cycle()
+spacy.tests.parser.test_nonproj.test_is_nonproj_arc()
+spacy.tests.parser.test_nonproj.test_is_nonproj_tree()
+spacy.tests.parser.test_nonproj.test_pseudoprojectivity(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_sbd.py----------------------------------------
+A:spacy.tests.parser.test_sbd.words->EN(string, tag=False, parse=True)
+A:spacy.tests.parser.test_sbd.doc->EN(u' ')
+A:spacy.tests.parser.test_sbd.example->EN.tokenizer.tokens_from_list(u"I bought a couch from IKEA. It was n't very comfortable .".split(' '))
+A:spacy.tests.parser.test_sbd.example_serialized->Doc(EN.vocab).from_bytes(example.to_bytes())
+A:spacy.tests.parser.test_sbd.sents->list(doc.sents)
+spacy.tests.parser.test_sbd.apply_transition_sequence(model,doc,sequence)
+spacy.tests.parser.test_sbd.test_sbd_empty_string(EN)
+spacy.tests.parser.test_sbd.test_sbd_serialization_projective(EN)
+spacy.tests.parser.test_sbd.test_sentence_breaks(EN)
+spacy.tests.parser.test_sbd.test_single_exclamation(EN)
+spacy.tests.parser.test_sbd.test_single_no_period(EN)
+spacy.tests.parser.test_sbd.test_single_period(EN)
+spacy.tests.parser.test_sbd.test_single_question(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_parser_pickle.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/parser/test_parse_navigate.py----------------------------------------
+A:spacy.tests.parser.test_parse_navigate.text->file_.read()
+A:spacy.tests.parser.test_parse_navigate.tokens->EN(sun_text)
+A:spacy.tests.parser.test_parse_navigate.lefts[head.i]->set()
+A:spacy.tests.parser.test_parse_navigate.rights[head.i]->set()
+A:spacy.tests.parser.test_parse_navigate.subtree->list(token.subtree)
+A:spacy.tests.parser.test_parse_navigate.debug->'\t'.join((token.orth_, token.right_edge.orth_, subtree[-1].orth_, token.right_edge.head.orth_))
+spacy.tests.parser.test_parse_navigate.sun_text()
+spacy.tests.parser.test_parse_navigate.test_child_consistency(EN,sun_text)
+spacy.tests.parser.test_parse_navigate.test_consistency(EN,sun_text)
+spacy.tests.parser.test_parse_navigate.test_edges(EN,sun_text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_add_vectors.py----------------------------------------
+A:spacy.tests.vocab.test_add_vectors.vocab->spacy.en.English.Defaults.create_vocab()
+A:spacy.tests.vocab.test_add_vectors.lex.vector->numpy.ndarray((10,), dtype='float32')
+spacy.tests.vocab.test_add_vectors.test_add_vector()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_freeze_string_store.py----------------------------------------
+A:spacy.tests.vocab.test_freeze_string_store.strings->StringStore()
+spacy.tests.vocab.test_freeze_string_store.test_oov()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_lexeme_flags.py----------------------------------------
+A:spacy.tests.vocab.test_lexeme_flags.is_len4->en_vocab.add_flag(lambda string: len(string) == 4, flag_id=IS_DIGIT)
+spacy.tests.vocab.test_lexeme_flags.test_add_flag_auto_id(en_vocab)
+spacy.tests.vocab.test_lexeme_flags.test_add_flag_provided_id(en_vocab)
+spacy.tests.vocab.test_lexeme_flags.test_is_alpha(en_vocab)
+spacy.tests.vocab.test_lexeme_flags.test_is_digit(en_vocab)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_shape.py----------------------------------------
+spacy.tests.vocab.test_shape.test_capitalized()
+spacy.tests.vocab.test_shape.test_digits()
+spacy.tests.vocab.test_shape.test_mix()
+spacy.tests.vocab.test_shape.test_punct()
+spacy.tests.vocab.test_shape.test_punct_seq()
+spacy.tests.vocab.test_shape.test_space()
+spacy.tests.vocab.test_shape.test_truncate()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_flag_features.py----------------------------------------
+spacy.tests.vocab.test_flag_features.test_is_alpha(words)
+spacy.tests.vocab.test_flag_features.test_is_bracket(words)
+spacy.tests.vocab.test_flag_features.test_is_digit(words)
+spacy.tests.vocab.test_flag_features.test_is_left_bracket(words)
+spacy.tests.vocab.test_flag_features.test_is_quote(words)
+spacy.tests.vocab.test_flag_features.test_is_right_bracket(words)
+spacy.tests.vocab.test_flag_features.words()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_number.py----------------------------------------
+spacy.tests.vocab.test_number.test_comma()
+spacy.tests.vocab.test_number.test_digits()
+spacy.tests.vocab.test_number.test_fraction()
+spacy.tests.vocab.test_number.test_not_number()
+spacy.tests.vocab.test_number.test_period()
+spacy.tests.vocab.test_number.test_word()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_is_punct.py----------------------------------------
+spacy.tests.vocab.test_is_punct.test_comma()
+spacy.tests.vocab.test_is_punct.test_letter()
+spacy.tests.vocab.test_is_punct.test_space()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_lexeme.py----------------------------------------
+spacy.tests.vocab.test_lexeme.test_lexeme_eq(en_vocab)
+spacy.tests.vocab.test_lexeme.test_lexeme_hash(en_vocab)
+spacy.tests.vocab.test_lexeme.test_lexeme_lt(en_vocab)
+spacy.tests.vocab.test_lexeme.test_lexeme_neq(en_vocab)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_vocab.py----------------------------------------
+A:spacy.tests.vocab.test_vocab.file_->io.BytesIO()
+A:spacy.tests.vocab.test_vocab.loaded->pickle.load(file_)
+spacy.tests.vocab.test_vocab.test_case_neq(en_vocab)
+spacy.tests.vocab.test_vocab.test_contains(en_vocab)
+spacy.tests.vocab.test_vocab.test_eq(en_vocab)
+spacy.tests.vocab.test_vocab.test_neq(en_vocab)
+spacy.tests.vocab.test_vocab.test_pickle_vocab(en_vocab)
+spacy.tests.vocab.test_vocab.test_pickle_vocab_vectors(en_vocab)
+spacy.tests.vocab.test_vocab.test_punct_neq(en_vocab)
+spacy.tests.vocab.test_vocab.test_shape_attr(en_vocab)
+spacy.tests.vocab.test_vocab.test_symbols(en_vocab)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/conftest.py----------------------------------------
+spacy.tests.vocab.conftest.en_vocab(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_urlish.py----------------------------------------
+spacy.tests.vocab.test_urlish.test_basic_url()
+spacy.tests.vocab.test_urlish.test_close_enough()
+spacy.tests.vocab.test_urlish.test_non_match()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/vocab/test_intern.py----------------------------------------
+A:spacy.tests.vocab.test_intern.string_file->io.BytesIO()
+A:spacy.tests.vocab.test_intern.loaded->pickle.load(string_file)
+A:spacy.tests.vocab.test_intern.new_store->StringStore()
+spacy.tests.vocab.test_intern.sstore()
+spacy.tests.vocab.test_intern.test_254_string(sstore)
+spacy.tests.vocab.test_intern.test_255_string(sstore)
+spacy.tests.vocab.test_intern.test_256_string(sstore)
+spacy.tests.vocab.test_intern.test_dump_load(sstore)
+spacy.tests.vocab.test_intern.test_long_string(sstore)
+spacy.tests.vocab.test_intern.test_massive_strings(sstore)
+spacy.tests.vocab.test_intern.test_med_string(sstore)
+spacy.tests.vocab.test_intern.test_pickle_string_store(sstore)
+spacy.tests.vocab.test_intern.test_retrieve_id(sstore)
+spacy.tests.vocab.test_intern.test_save_bytes(sstore)
+spacy.tests.vocab.test_intern.test_save_unicode(sstore)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_emoticons.py----------------------------------------
+A:spacy.tests.tokenizer.test_emoticons.tokens->en_tokenizer(text)
+spacy.tests.tokenizer.test_emoticons.test_false_positive(en_tokenizer)
+spacy.tests.tokenizer.test_emoticons.test_tweebo_challenge(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_pre_punct.py----------------------------------------
+A:spacy.tests.tokenizer.test_pre_punct.tokens->en_tokenizer(string)
+spacy.tests.tokenizer.test_pre_punct.open_puncts()
+spacy.tests.tokenizer.test_pre_punct.test_open(open_puncts,en_tokenizer)
+spacy.tests.tokenizer.test_pre_punct.test_open_appostrophe(en_tokenizer)
+spacy.tests.tokenizer.test_pre_punct.test_three_same_open(open_puncts,en_tokenizer)
+spacy.tests.tokenizer.test_pre_punct.test_two_different_open(open_puncts,en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_wiki_sun.py----------------------------------------
+A:spacy.tests.tokenizer.test_wiki_sun.HERE->os.path.dirname(__file__)
+A:spacy.tests.tokenizer.test_wiki_sun.loc->os.path.join(HERE, '..', 'sun.txt')
+A:spacy.tests.tokenizer.test_wiki_sun.tokens->en_tokenizer(sun_txt)
+spacy.tests.tokenizer.test_wiki_sun.sun_txt()
+spacy.tests.tokenizer.test_wiki_sun.test_tokenize(sun_txt,en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_special_affix.py----------------------------------------
+spacy.tests.tokenizer.test_special_affix.test_even_wrap_interact(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_no_punct(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_no_special(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_prefix(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_prefix_interact(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_suffix(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_suffix_interact(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_uneven_wrap(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_uneven_wrap_interact(en_tokenizer)
+spacy.tests.tokenizer.test_special_affix.test_wrap(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_string_loading.py----------------------------------------
+A:spacy.tests.tokenizer.test_string_loading.tokens->en_tokenizer('Betty Botter bought a pound of butter.')
+A:spacy.tests.tokenizer.test_string_loading.tokens2->en_tokenizer('Betty also bought a pound of butter.')
+spacy.tests.tokenizer.test_string_loading.test_one(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_tokenizer.py----------------------------------------
+A:spacy.tests.tokenizer.test_tokenizer.tokens->en_tokenizer("Will this road take me to Puddleton?—No, you'll have to walk there.—Ariel.")
+spacy.tests.tokenizer.test_tokenizer.test_bracket_period(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_cnts1(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_cnts2(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_cnts3(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_cnts4(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_cnts5(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_cnts6(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_contraction(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_contraction_punct(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_digits(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_em_dash_infix(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_ie(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_mr(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_no_word(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_punct(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_sample(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_single_word(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_two_whitespace(en_tokenizer)
+spacy.tests.tokenizer.test_tokenizer.test_two_words(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_surround_punct.py----------------------------------------
+A:spacy.tests.tokenizer.test_surround_punct.tokens->en_tokenizer(string)
+spacy.tests.tokenizer.test_surround_punct.paired_puncts()
+spacy.tests.tokenizer.test_surround_punct.test_token(paired_puncts,en_tokenizer)
+spacy.tests.tokenizer.test_surround_punct.test_two_different(paired_puncts,en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_indices.py----------------------------------------
+A:spacy.tests.tokenizer.test_indices.tokens->en_tokenizer(text)
+spacy.tests.tokenizer.test_indices.test_complex_punct(en_tokenizer)
+spacy.tests.tokenizer.test_indices.test_simple_punct(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_post_punct.py----------------------------------------
+A:spacy.tests.tokenizer.test_post_punct.tokens->en_tokenizer(string)
+spacy.tests.tokenizer.test_post_punct.close_puncts()
+spacy.tests.tokenizer.test_post_punct.test_close(close_puncts,en_tokenizer)
+spacy.tests.tokenizer.test_post_punct.test_double_end_quote(en_tokenizer)
+spacy.tests.tokenizer.test_post_punct.test_three_same_close(close_puncts,en_tokenizer)
+spacy.tests.tokenizer.test_post_punct.test_two_different_close(close_puncts,en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_whitespace.py----------------------------------------
+A:spacy.tests.tokenizer.test_whitespace.tokens->en_tokenizer('hello \n possums')
+A:spacy.tests.tokenizer.test_whitespace.doc->en_tokenizer(u'   This is a cat.')
+spacy.tests.tokenizer.test_whitespace.test_double_space(en_tokenizer)
+spacy.tests.tokenizer.test_whitespace.test_leading_space_offsets(en_tokenizer)
+spacy.tests.tokenizer.test_whitespace.test_newline(en_tokenizer)
+spacy.tests.tokenizer.test_whitespace.test_newline_double_space(en_tokenizer)
+spacy.tests.tokenizer.test_whitespace.test_newline_space(en_tokenizer)
+spacy.tests.tokenizer.test_whitespace.test_newline_space_wrap(en_tokenizer)
+spacy.tests.tokenizer.test_whitespace.test_single_space(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_infix.py----------------------------------------
+A:spacy.tests.tokenizer.test_infix.tokens->en_tokenizer(u'Hello,world')
+spacy.tests.tokenizer.test_infix.test_big_ellipsis(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_double_hyphen(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_ellipsis(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_email(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_hyphen(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_infix_comma(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_numeric_range(en_tokenizer)
+spacy.tests.tokenizer.test_infix.test_period(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/conftest.py----------------------------------------
+spacy.tests.tokenizer.conftest.en_tokenizer(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_only_punct.py----------------------------------------
+spacy.tests.tokenizer.test_only_punct.test_only_pre1(en_tokenizer)
+spacy.tests.tokenizer.test_only_punct.test_only_pre2(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokenizer/test_contractions.py----------------------------------------
+A:spacy.tests.tokenizer.test_contractions.tokens->en_tokenizer("there'll")
+spacy.tests.tokenizer.test_contractions.test_LL(en_tokenizer)
+spacy.tests.tokenizer.test_contractions.test_aint(en_tokenizer)
+spacy.tests.tokenizer.test_contractions.test_apostrophe(en_tokenizer)
+spacy.tests.tokenizer.test_contractions.test_capitalized(en_tokenizer)
+spacy.tests.tokenizer.test_contractions.test_possess(en_tokenizer)
+spacy.tests.tokenizer.test_contractions.test_punct(en_tokenizer)
+spacy.tests.tokenizer.test_contractions.test_therell(en_tokenizer)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/matcher/test_entity_id.py----------------------------------------
+A:spacy.tests.matcher.test_entity_id.matcher->Matcher(en_vocab)
+A:spacy.tests.matcher.test_entity_id.entity->Matcher(en_vocab).get_entity('TestEntity2')
+A:spacy.tests.matcher.test_entity_id.matches->matcher(Doc(en_vocab, words=[u'Test', u'Entity']))
+A:spacy.tests.matcher.test_entity_id.attrs->Matcher(en_vocab).get_entity(ent_id)
+spacy.tests.matcher.test_entity_id.en_vocab()
+spacy.tests.matcher.test_entity_id.test_add_empty_entity(en_vocab)
+spacy.tests.matcher.test_entity_id.test_get_entity_attrs(en_vocab)
+spacy.tests.matcher.test_entity_id.test_get_entity_via_match(en_vocab)
+spacy.tests.matcher.test_entity_id.test_init_matcher(en_vocab)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/matcher/test_matcher_bugfixes.py----------------------------------------
+A:spacy.tests.matcher.test_matcher_bugfixes.doc->EN.tokenizer(u'how many points did lebron james score against the boston celtics last night')
+A:spacy.tests.matcher.test_matcher_bugfixes.matcher->Matcher(EN.vocab, {'BostonCeltics': ('ORG', {}, [[{LOWER: 'boston'}, {LOWER: 'celtics'}], [{LOWER: 'boston'}]])})
+A:spacy.tests.matcher.test_matcher_bugfixes.ents->list(doc.ents)
+A:spacy.tests.matcher.test_matcher_bugfixes.data_dir->os.environ.get('SPACY_DATA')
+A:spacy.tests.matcher.test_matcher_bugfixes.nlp->spacy.en.English(path=data_dir, tagger=False, parser=False, entity=False)
+A:spacy.tests.matcher.test_matcher_bugfixes.nlp.matcher->Matcher(nlp.vocab)
+spacy.tests.matcher.test_matcher_bugfixes.test_overlap_issue118(EN)
+spacy.tests.matcher.test_matcher_bugfixes.test_overlap_issue242()
+spacy.tests.matcher.test_matcher_bugfixes.test_overlap_prefix(EN)
+spacy.tests.matcher.test_matcher_bugfixes.test_overlap_prefix_reorder(EN)
+spacy.tests.matcher.test_matcher_bugfixes.test_overlap_reorder(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/matcher/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_token_api.py----------------------------------------
+A:spacy.tests.tokens.test_token_api.tokens->EN(u'Yesterday I saw a dog that barked loudly.')
+A:spacy.tests.tokens.test_token_api.(Hi, comma, my, email, is_, addr)->EN(u'Hi, my email is test@me.com')
+A:spacy.tests.tokens.test_token_api.(apples, oranges, oov)->EN(u'apples oranges ldskbjlsdkbflzdfbl')
+A:spacy.tests.tokens.test_token_api.(yesterday, i, saw, a, dog, that, barked, loudly, dot)->EN(u'Yesterday I saw a dog that barked loudly.')
+spacy.tests.tokens.test_token_api.test_ancestors(EN)
+spacy.tests.tokens.test_token_api.test_flags(EN)
+spacy.tests.tokens.test_token_api.test_head_setter(EN)
+spacy.tests.tokens.test_token_api.test_is_properties(EN)
+spacy.tests.tokens.test_token_api.test_single_token_string(EN)
+spacy.tests.tokens.test_token_api.test_str_builtin(EN)
+spacy.tests.tokens.test_token_api.test_strings(EN)
+spacy.tests.tokens.test_token_api.test_vectors(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_add_entities.py----------------------------------------
+A:spacy.tests.tokens.test_add_entities.doc->Doc(en_vocab, words=[u'this', u'is', u'a', u'lion'])
+spacy.tests.tokens.test_add_entities.animal(en_vocab)
+spacy.tests.tokens.test_add_entities.doc(en_vocab,entity_recognizer)
+spacy.tests.tokens.test_add_entities.en_vocab()
+spacy.tests.tokens.test_add_entities.entity_recognizer(en_vocab)
+spacy.tests.tokens.test_add_entities.test_set_ents_iob(doc)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_vec.py----------------------------------------
+spacy.tests.tokens.test_vec.test_capitalized(EN)
+spacy.tests.tokens.test_vec.test_vec(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_array.py----------------------------------------
+A:spacy.tests.tokens.test_array.tokens->EN(text)
+A:spacy.tests.tokens.test_array.feats_array->EN(text).to_array((attrs.ORTH, attrs.DEP))
+spacy.tests.tokens.test_array.test_attr_of_token(EN)
+spacy.tests.tokens.test_array.test_dep(EN)
+spacy.tests.tokens.test_array.test_tag(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_noun_chunks.py----------------------------------------
+A:spacy.tests.tokens.test_noun_chunks.nlp->English(parser=False, entity=False)
+A:spacy.tests.tokens.test_noun_chunks.sent->u'Peter has chronic command and control issues'.strip()
+A:spacy.tests.tokens.test_noun_chunks.tokens->nlp(sent)
+spacy.tests.tokens.test_noun_chunks.test_not_nested()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_token.py----------------------------------------
+A:spacy.tests.tokens.test_token.tokens->EN(u'Give it back', parse=False)
+spacy.tests.tokens.test_token.test_prob(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/test_tokens_api.py----------------------------------------
+A:spacy.tests.tokens.test_tokens_api.tokens->English(parser=False).tokenizer(u'I use goggle chrone to surf the web')
+A:spacy.tests.tokens.test_tokens_api.packed->English(parser=False).tokenizer(u'I use goggle chrone to surf the web').to_bytes()
+A:spacy.tests.tokens.test_tokens_api.new_tokens->Doc(EN.vocab).from_bytes(packed)
+A:spacy.tests.tokens.test_tokens_api.doc->EN(u'apple orange pear')
+A:spacy.tests.tokens.test_tokens_api.EN->English(parser=False)
+A:spacy.tests.tokens.test_tokens_api.heads->numpy.asarray([[0, 3, -1, -2, -4]], dtype='int32')
+A:spacy.tests.tokens.test_tokens_api.sents->list(doc.sents)
+spacy.tests.tokens.test_tokens_api.test_getitem(EN)
+spacy.tests.tokens.test_tokens_api.test_has_vector(EN)
+spacy.tests.tokens.test_tokens_api.test_merge(EN)
+spacy.tests.tokens.test_tokens_api.test_merge_children(EN)
+spacy.tests.tokens.test_tokens_api.test_merge_end_string(EN)
+spacy.tests.tokens.test_tokens_api.test_merge_hang()
+spacy.tests.tokens.test_tokens_api.test_right_edge(EN)
+spacy.tests.tokens.test_tokens_api.test_runtime_error(EN)
+spacy.tests.tokens.test_tokens_api.test_sents_empty_string(EN)
+spacy.tests.tokens.test_tokens_api.test_serialize(EN)
+spacy.tests.tokens.test_tokens_api.test_serialize_whitespace(EN)
+spacy.tests.tokens.test_tokens_api.test_set_ents(EN)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tests/tokens/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/es/language_data.py----------------------------------------
+A:spacy.es.language_data.STOP_WORDS->set()
+A:spacy.es.language_data.TOKENIZER_PREFIXES->map(re.escape, '\n,\n"\n(\n[\n{\n*\n<\n>\n$\n£\n„\n“\n\'\n``\n`\n#\nUS$\nC$\nA$\na-\n‘\n....\n...\n‚\n»\n_\n§\n'.strip().split('\n'))
+A:spacy.es.language_data.TOKENIZER_SUFFIXES->'\n,\n\\"\n\\)\n\\]\n\\}\n\\*\n\\!\n\\?\n%\n\\$\n>\n:\n;\n\'\n”\n“\n«\n_\n\'\'\n\'s\n\'S\n’s\n’S\n’\n‘\n°\n€\n\\.\\.\n\\.\\.\\.\n\\.\\.\\.\\.\n(?<=[a-zäöüßÖÄÜ)\\]"\'´«‘’%\\)²“”])\\.\n\\-\\-\n´\n(?<=[0-9])km²\n(?<=[0-9])m²\n(?<=[0-9])cm²\n(?<=[0-9])mm²\n(?<=[0-9])km³\n(?<=[0-9])m³\n(?<=[0-9])cm³\n(?<=[0-9])mm³\n(?<=[0-9])ha\n(?<=[0-9])km\n(?<=[0-9])m\n(?<=[0-9])cm\n(?<=[0-9])mm\n(?<=[0-9])µm\n(?<=[0-9])nm\n(?<=[0-9])yd\n(?<=[0-9])in\n(?<=[0-9])ft\n(?<=[0-9])kg\n(?<=[0-9])g\n(?<=[0-9])mg\n(?<=[0-9])µg\n(?<=[0-9])t\n(?<=[0-9])lb\n(?<=[0-9])oz\n(?<=[0-9])m/s\n(?<=[0-9])km/h\n(?<=[0-9])mph\n(?<=[0-9])°C\n(?<=[0-9])°K\n(?<=[0-9])°F\n(?<=[0-9])hPa\n(?<=[0-9])Pa\n(?<=[0-9])mbar\n(?<=[0-9])mb\n(?<=[0-9])T\n(?<=[0-9])G\n(?<=[0-9])M\n(?<=[0-9])K\n(?<=[0-9])kb\n'.strip().split('\n')
+A:spacy.es.language_data.TOKENIZER_INFIXES->'\\.\\.\\.+ (?<=[a-z])\\.(?=[A-Z]) (?<=[a-zA-Z])-(?=[a-zA-z]) (?<=[a-zA-Z])--(?=[a-zA-z]) (?<=[0-9])-(?=[0-9]) (?<=[A-Za-z]),(?=[A-Za-z])'.split()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/es/__init__.py----------------------------------------
+A:spacy.es.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.es.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.es.__init__.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
+A:spacy.es.__init__.suffixes->tuple(language_data.TOKENIZER_SUFFIXES)
+A:spacy.es.__init__.infixes->tuple(language_data.TOKENIZER_INFIXES)
+A:spacy.es.__init__.tag_map->dict(language_data.TAG_MAP)
+A:spacy.es.__init__.stop_words->set(language_data.STOP_WORDS)
+spacy.es.__init__.Spanish(Language)
+spacy.es.__init__.Spanish.Defaults(Language.Defaults)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/it/language_data.py----------------------------------------
+A:spacy.it.language_data.STOP_WORDS->set()
+A:spacy.it.language_data.TOKENIZER_PREFIXES->map(re.escape, '\n,\n"\n(\n[\n{\n*\n<\n>\n$\n£\n„\n“\n\'\n``\n`\n#\nUS$\nC$\nA$\na-\n‘\n....\n...\n‚\n»\n_\n§\n'.strip().split('\n'))
+A:spacy.it.language_data.TOKENIZER_SUFFIXES->'\n,\n\\"\n\\)\n\\]\n\\}\n\\*\n\\!\n\\?\n%\n\\$\n>\n:\n;\n\'\n”\n“\n«\n_\n\'\'\n\'s\n\'S\n’s\n’S\n’\n‘\n°\n€\n\\.\\.\n\\.\\.\\.\n\\.\\.\\.\\.\n(?<=[a-zäöüßÖÄÜ)\\]"\'´«‘’%\\)²“”])\\.\n\\-\\-\n´\n(?<=[0-9])km²\n(?<=[0-9])m²\n(?<=[0-9])cm²\n(?<=[0-9])mm²\n(?<=[0-9])km³\n(?<=[0-9])m³\n(?<=[0-9])cm³\n(?<=[0-9])mm³\n(?<=[0-9])ha\n(?<=[0-9])km\n(?<=[0-9])m\n(?<=[0-9])cm\n(?<=[0-9])mm\n(?<=[0-9])µm\n(?<=[0-9])nm\n(?<=[0-9])yd\n(?<=[0-9])in\n(?<=[0-9])ft\n(?<=[0-9])kg\n(?<=[0-9])g\n(?<=[0-9])mg\n(?<=[0-9])µg\n(?<=[0-9])t\n(?<=[0-9])lb\n(?<=[0-9])oz\n(?<=[0-9])m/s\n(?<=[0-9])km/h\n(?<=[0-9])mph\n(?<=[0-9])°C\n(?<=[0-9])°K\n(?<=[0-9])°F\n(?<=[0-9])hPa\n(?<=[0-9])Pa\n(?<=[0-9])mbar\n(?<=[0-9])mb\n(?<=[0-9])T\n(?<=[0-9])G\n(?<=[0-9])M\n(?<=[0-9])K\n(?<=[0-9])kb\n'.strip().split('\n')
+A:spacy.it.language_data.TOKENIZER_INFIXES->'\\.\\.\\.+ (?<=[a-z])\\.(?=[A-Z]) (?<=[a-zA-Z])-(?=[a-zA-z]) (?<=[a-zA-Z])--(?=[a-zA-z]) (?<=[0-9])-(?=[0-9]) (?<=[A-Za-z]),(?=[A-Za-z])'.split()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/it/__init__.py----------------------------------------
+A:spacy.it.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.it.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.it.__init__.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
+A:spacy.it.__init__.suffixes->tuple(language_data.TOKENIZER_SUFFIXES)
+A:spacy.it.__init__.infixes->tuple(language_data.TOKENIZER_INFIXES)
+A:spacy.it.__init__.tag_map->dict(language_data.TAG_MAP)
+A:spacy.it.__init__.stop_words->set(language_data.STOP_WORDS)
+spacy.it.__init__.Italian(Language)
+spacy.it.__init__.Italian.Defaults(Language.Defaults)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/zh/__init__.py----------------------------------------
+A:spacy.zh.__init__.words->list(jieba.cut(text, cut_all=True))
+spacy.zh.__init__.Chinese(Language)
+spacy.zh.__init__.Chinese.make_doc(self,text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/munge/read_ontonotes.py----------------------------------------
+A:spacy.munge.read_ontonotes.docid_re->re.compile('<DOCID>([^>]+)</DOCID>')
+A:spacy.munge.read_ontonotes.doctype_re->re.compile('<DOCTYPE SOURCE="[^"]+">([^>]+)</DOCTYPE>')
+A:spacy.munge.read_ontonotes.datetime_re->re.compile('<DATETIME>([^>]+)</DATETIME>')
+A:spacy.munge.read_ontonotes.headline_re->re.compile('<HEADLINE>(.+)</HEADLINE>', re.DOTALL)
+A:spacy.munge.read_ontonotes.post_re->re.compile('<POST>(.+)</POST>', re.DOTALL)
+A:spacy.munge.read_ontonotes.poster_re->re.compile('<POSTER>(.+)</POSTER>')
+A:spacy.munge.read_ontonotes.postdate_re->re.compile('<POSTDATE>(.+)</POSTDATE>')
+A:spacy.munge.read_ontonotes.tag_re->re.compile('<[^>]+>[^>]+</[^>]+>')
+A:spacy.munge.read_ontonotes.matches->regex.search(text)
+spacy.munge.read_ontonotes._get_one(regex,text,required=False)
+spacy.munge.read_ontonotes._get_text(data)
+spacy.munge.read_ontonotes.sgml_extract(text_data)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/munge/read_conll.py----------------------------------------
+A:spacy.munge.read_conll.sent_text->sent_text.strip().strip()
+A:spacy.munge.read_conll.(word, tag, head, dep)->_parse_line(line)
+A:spacy.munge.read_conll.id_map[i]->len(words)
+A:spacy.munge.read_conll.pieces->line.split()
+spacy.munge.read_conll._is_bad_period(prev,period)
+spacy.munge.read_conll._parse_line(line)
+spacy.munge.read_conll.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_conll.split(text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/munge/align_raw.py----------------------------------------
+A:spacy.munge.align_raw.line->line.replace(find, replace).replace(find, replace)
+A:spacy.munge.align_raw.ptb_sec_dir->Path(ptb_sec_dir)
+A:spacy.munge.align_raw.text->file_.read()
+A:spacy.munge.align_raw.(words, brackets)->spacy.munge.read_ptb.parse(parse_str, strip_bad_periods=True)
+A:spacy.munge.align_raw.string->' '.join(words)
+A:spacy.munge.align_raw.tok->tok.replace("'T-", "'T").replace("'T-", "'T")
+A:spacy.munge.align_raw.raw_sents->_flatten(raw_by_para)
+A:spacy.munge.align_raw.ptb_sents->list(_flatten(ptb_by_file))
+A:spacy.munge.align_raw.alignment->align_chars(raw, ptb)
+A:spacy.munge.align_raw.length->len(raw)
+A:spacy.munge.align_raw.odc_loc->os.path.join(odc_dir, 'wsj%s.txt' % section)
+A:spacy.munge.align_raw.ptb_sec->os.path.join(ptb_dir, section)
+A:spacy.munge.align_raw.out_loc->os.path.join(out_dir, 'wsj%s.json' % section)
+A:spacy.munge.align_raw.aligned->get_alignment(raw_paragraphs, ptb_files)
+A:spacy.munge.align_raw.files->align_section(read_odc(odc_loc), read_ptb_sec(ptb_sec_dir))
+A:spacy.munge.align_raw.mapping->dict((line.split() for line in open(path.join(onto_dir, 'map.txt')) if len(line.split()) == 2))
+A:spacy.munge.align_raw.ptb_loc->os.path.join(onto_dir, annot_fn + '.parse')
+A:spacy.munge.align_raw.src_loc->os.path.join(src_dir, src_fn + '.sgm')
+A:spacy.munge.align_raw.src_doc->sgml_extract(open(src_loc).read())
+A:spacy.munge.align_raw.subdir->os.path.join(*directories)
+spacy.munge.align_raw._flatten(nested)
+spacy.munge.align_raw._reform_ptb_word(tok)
+spacy.munge.align_raw.align_chars(raw,ptb)
+spacy.munge.align_raw.align_section(raw_paragraphs,ptb_files)
+spacy.munge.align_raw.do_web(src_dir,onto_dir,out_dir)
+spacy.munge.align_raw.do_wsj(odc_dir,ptb_dir,out_dir)
+spacy.munge.align_raw.get_alignment(raw_by_para,ptb_by_file)
+spacy.munge.align_raw.get_sections(odc_dir,ptb_dir,out_dir)
+spacy.munge.align_raw.group_into_files(sents)
+spacy.munge.align_raw.group_into_paras(sents)
+spacy.munge.align_raw.main(odc_dir,onto_dir,out_dir)
+spacy.munge.align_raw.may_mkdir(parent,*subdirs)
+spacy.munge.align_raw.read_odc(section_loc)
+spacy.munge.align_raw.read_ptb_sec(ptb_sec_dir)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/munge/read_ner.py----------------------------------------
+A:spacy.munge.read_ner.string->string.replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain').replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain')
+A:spacy.munge.read_ner.substr->re.compile('<ENAMEXTYPE="[^"]+">').sub('', substr)
+A:spacy.munge.read_ner.(tag, open_tag)->_get_tag(substr, open_tag)
+A:spacy.munge.read_ner.tag_re->re.compile('<ENAMEXTYPE="[^"]+">')
+A:spacy.munge.read_ner.tags->re.compile('<ENAMEXTYPE="[^"]+">').findall(substr)
+A:spacy.munge.read_ner.tok->tok.replace('-AMP-', '&').replace('-AMP-', '&')
+spacy.munge.read_ner._fix_inner_entities(substr)
+spacy.munge.read_ner._get_tag(substr,tag)
+spacy.munge.read_ner._get_text(substr)
+spacy.munge.read_ner.parse(string,strip_bad_periods=False)
+spacy.munge.read_ner.reform_string(tok)
+spacy.munge.read_ner.split(text)
+spacy.munge.read_ner.tags_to_entities(tags)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/munge/read_ptb.py----------------------------------------
+A:spacy.munge.read_ptb.sent_text->sent_text.replace('((', '( (', 1).replace('((', '( (', 1)
+A:spacy.munge.read_ptb.bracketsRE->re.compile('(\\()([^\\s\\)\\(]+)|([^\\s\\)\\(]+)?(\\))')
+A:spacy.munge.read_ptb.(open_, label, text, close)->match.groups()
+A:spacy.munge.read_ptb.(label, start)->open_brackets.pop()
+A:spacy.munge.read_ptb.line->line.rstrip().rstrip()
+spacy.munge.read_ptb._is_bad_period(prev,period)
+spacy.munge.read_ptb.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_ptb.split(text)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/munge/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/serialize/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/en/language_data.py----------------------------------------
+A:spacy.en.language_data.STOP_WORDS->set('\na about above across after afterwards again against all almost alone \nalong already also although always am among amongst amoungst amount \nan and another any anyhow anyone anything anyway anywhere are around \nas at back be became because become becomes becoming been before \nbeforehand behind being below beside besides between beyond bill \nboth bottom but by call can cannot cant co computer con could couldnt \ncry de describe detail did didn do does doesn doing don done down due \nduring each eg eight either eleven else elsewhere empty enough etc \neven ever every everyone everything everywhere except few fifteen\nfify fill find fire first five for former formerly forty found four \nfrom front full further get give go had has hasnt have he hence her \nhere hereafter hereby herein hereupon hers herself him himself his \nhow however hundred i ie if in inc indeed interest into is it its \nitself keep last latter latterly least less ltd just kg km made make \nmany may me meanwhile might mill mine more moreover most mostly move \nmuch must my myself name namely neither never nevertheless next nine \nno nobody none noone nor not nothing now nowhere of off often on once \none only onto or other others otherwise our ours ourselves out over \nown part per perhaps please put rather re quite rather really regarding \nsame say see seem seemed seeming seems serious several she should \nshow side  since sincere six sixty so some somehow someone something\nsometime sometimes somewhere still such system take ten than that the \ntheir them themselves then thence there thereafter thereby therefore \ntherein thereupon these they thick thin third this those though three \nthrough throughout thru thus to together too top toward towards twelve \ntwenty two un under until up unless upon us used using various very \nvery via was we well were what whatever when whence whenever where whereafter \nwhereas whereby wherein whereupon wherever whether which while whither \nwho whoever whole whom whose why will with within without would yet you\nyour yours yourself yourselves\n'.split())
+A:spacy.en.language_data.TOKENIZER_PREFIXES->', " ( [ { * < $ £ “ \' `` ` # US$ C$ A$ a- ‘ .... ...'.split()
+A:spacy.en.language_data.TOKENIZER_SUFFIXES->', \\" \\) \\] \\} \\* \\! \\? % \\$ > : ; \' ” \'\' \'s \'S ’s ’S ’\\.\\. \\.\\.\\. \\.\\.\\.\\. (?<=[a-z0-9)\\]”"\'%\\)])\\. (?<=[0-9])km'.strip().split()
+A:spacy.en.language_data.TOKENIZER_INFIXES->'\\.\\.\\.+ (?<=[a-z])\\.(?=[A-Z]) (?<=[a-zA-Z])-(?=[a-zA-z]) (?<=[a-zA-Z])--(?=[a-zA-z]) (?<=[0-9])-(?=[0-9]) (?<=[A-Za-z]),(?=[A-Za-z])'.split()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/en/regexes.py----------------------------------------
+A:spacy.en.regexes.MW_PREPOSITIONS_RE->re.compile('|'.join(_mw_prepositions), flags=re.IGNORECASE)
+A:spacy.en.regexes.TIME_RE->re.compile('{colon_digits}|{colon_digits} ?{am_pm}?|{one_two_digits} ?({am_pm})'.format(colon_digits='[0-2]?[0-9]:[0-5][0-9](?::[0-5][0-9])?', one_two_digits='[0-2]?[0-9]', am_pm='[ap]\\.?m\\.?'))
+A:spacy.en.regexes.DATE_RE->re.compile('(?:this|last|next|the) (?:week|weekend|{days})'.format(days='Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday'))
+A:spacy.en.regexes.MONEY_RE->re.compile('\\$\\d+(?:\\.\\d+)?|\\d+ dollars(?: \\d+ cents)?')
+A:spacy.en.regexes.DAYS_RE->re.compile('Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday')
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/en/uget.py----------------------------------------
+A:spacy.en.uget.self.start->time.time()
+A:spacy.en.uget.self.time_left->math.ceil(elapsed * total_size / bytes_read - elapsed)
+A:spacy.en.uget.percent->round(bytes_read * 100.0 / total_size, 2)
+A:spacy.en.uget.content_range->read_request(request, offset=size, console=console, progress_func=progress, write_func=write).headers.get('Content-Range', '').strip()
+A:spacy.en.uget.m->re.match('bytes (\\d+)-(\\d+)/(\\d+)', content_range)
+A:spacy.en.uget.r->urlopen(HeadRequest(url))
+A:spacy.en.uget.value->urlopen(HeadRequest(url)).headers.get(checksum_header)
+A:spacy.en.uget.response->read_request(request, offset=size, console=console, progress_func=progress, write_func=write)
+A:spacy.en.uget.(range_start, range_end, range_total)->get_content_range(response)
+A:spacy.en.uget.eta->TimeEstimator()
+A:spacy.en.uget.transfer_rate->RateSampler()
+A:spacy.en.uget.chunk->read_request(request, offset=size, console=console, progress_func=progress, write_func=write).read(CHUNK_SIZE)
+A:spacy.en.uget.path->os.path.abspath(path)
+A:spacy.en.uget.size->f.tell()
+A:spacy.en.uget.request->Request(url)
+A:spacy.en.uget.origin_checksum->get_url_meta(url, checksum_header).get('checksum')
+A:spacy.en.uget.meta->get_url_meta(url, checksum_header)
+spacy.en.uget.InvalidChecksumException(Exception)
+spacy.en.uget.InvalidOffsetException(Exception)
+spacy.en.uget.MissingChecksumHeader(Exception)
+spacy.en.uget.RateSampler(self,period=1)
+spacy.en.uget.RateSampler.__enter__(self)
+spacy.en.uget.RateSampler.__exit__(self,type,value,traceback)
+spacy.en.uget.RateSampler.format(self,unit='MB')
+spacy.en.uget.RateSampler.update(self,value)
+spacy.en.uget.TimeEstimator(self,cooldown=1)
+spacy.en.uget.TimeEstimator.format(self)
+spacy.en.uget.TimeEstimator.update(self,bytes_read,total_size)
+spacy.en.uget.UnknownContentLengthException(Exception)
+spacy.en.uget.UnsupportedHTTPCodeException(Exception)
+spacy.en.uget.download(url,path='.',checksum=None,checksum_header=None,headers=None,console=None)
+spacy.en.uget.format_bytes_read(bytes_read,unit='MB')
+spacy.en.uget.format_percent(bytes_read,total_size)
+spacy.en.uget.get_content_length(response)
+spacy.en.uget.get_content_range(response)
+spacy.en.uget.get_url_meta(url,checksum_header=None)
+spacy.en.uget.progress(console,bytes_read,total_size,transfer_rate,eta)
+spacy.en.uget.read_request(request,offset=0,console=None,progress_func=None,write_func=None)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/en/download.py----------------------------------------
+spacy.en.download.main(data_size='all',force=False)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/en/__init__.py----------------------------------------
+A:spacy.en.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.en.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.en.__init__.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
+A:spacy.en.__init__.suffixes->tuple(language_data.TOKENIZER_SUFFIXES)
+A:spacy.en.__init__.infixes->tuple(language_data.TOKENIZER_INFIXES)
+A:spacy.en.__init__.tag_map->dict(language_data.TAG_MAP)
+A:spacy.en.__init__.stop_words->set(language_data.STOP_WORDS)
+spacy.en.__init__.English(Language)
+spacy.en.__init__.English.Defaults(Language.Defaults)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/fr/language_data.py----------------------------------------
+A:spacy.fr.language_data.STOP_WORDS->set()
+A:spacy.fr.language_data.TOKENIZER_PREFIXES->map(re.escape, '\n,\n"\n(\n[\n{\n*\n<\n>\n$\n£\n„\n“\n\'\n``\n`\n#\nUS$\nC$\nA$\na-\n‘\n....\n...\n‚\n»\n_\n§\n'.strip().split('\n'))
+A:spacy.fr.language_data.TOKENIZER_SUFFIXES->'\n,\n\\"\n\\)\n\\]\n\\}\n\\*\n\\!\n\\?\n%\n\\$\n>\n:\n;\n\'\n”\n“\n«\n_\n\'\'\n\'s\n\'S\n’s\n’S\n’\n‘\n°\n€\n\\.\\.\n\\.\\.\\.\n\\.\\.\\.\\.\n(?<=[a-zäöüßÖÄÜ)\\]"\'´«‘’%\\)²“”])\\.\n\\-\\-\n´\n(?<=[0-9])km²\n(?<=[0-9])m²\n(?<=[0-9])cm²\n(?<=[0-9])mm²\n(?<=[0-9])km³\n(?<=[0-9])m³\n(?<=[0-9])cm³\n(?<=[0-9])mm³\n(?<=[0-9])ha\n(?<=[0-9])km\n(?<=[0-9])m\n(?<=[0-9])cm\n(?<=[0-9])mm\n(?<=[0-9])µm\n(?<=[0-9])nm\n(?<=[0-9])yd\n(?<=[0-9])in\n(?<=[0-9])ft\n(?<=[0-9])kg\n(?<=[0-9])g\n(?<=[0-9])mg\n(?<=[0-9])µg\n(?<=[0-9])t\n(?<=[0-9])lb\n(?<=[0-9])oz\n(?<=[0-9])m/s\n(?<=[0-9])km/h\n(?<=[0-9])mph\n(?<=[0-9])°C\n(?<=[0-9])°K\n(?<=[0-9])°F\n(?<=[0-9])hPa\n(?<=[0-9])Pa\n(?<=[0-9])mbar\n(?<=[0-9])mb\n(?<=[0-9])T\n(?<=[0-9])G\n(?<=[0-9])M\n(?<=[0-9])K\n(?<=[0-9])kb\n'.strip().split('\n')
+A:spacy.fr.language_data.TOKENIZER_INFIXES->'\\.\\.\\.+ (?<=[a-z])\\.(?=[A-Z]) (?<=[a-zA-Z])-(?=[a-zA-z]) (?<=[a-zA-Z])--(?=[a-zA-z]) (?<=[0-9])-(?=[0-9]) (?<=[A-Za-z]),(?=[A-Za-z])'.split()
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/fr/__init__.py----------------------------------------
+A:spacy.fr.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.fr.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.fr.__init__.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
+A:spacy.fr.__init__.suffixes->tuple(language_data.TOKENIZER_SUFFIXES)
+A:spacy.fr.__init__.infixes->tuple(language_data.TOKENIZER_INFIXES)
+A:spacy.fr.__init__.tag_map->dict(language_data.TAG_MAP)
+A:spacy.fr.__init__.stop_words->set(language_data.STOP_WORDS)
+spacy.fr.__init__.French(Language)
+spacy.fr.__init__.French.Defaults(Language.Defaults)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/syntax/util.py----------------------------------------
+spacy.syntax.util.Config(self,**kwargs)
+spacy.syntax.util.Config.get(self,attr,default=None)
+spacy.syntax.util.Config.read(cls,model_dir,name)
+spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/syntax/__init__.py----------------------------------------
+
+
+----------------------------------------/home/zhang/Packages/spacy/spacy1.2.0/tokens/__init__.py----------------------------------------
+

@@ -1,0 +1,1 @@
+add_parameter skip_auto_headers with_value None for ClientSession

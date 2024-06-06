@@ -1,0 +1,7 @@
+positional_to_keyword position 2 keyword svd_method for SpectralCoclustering
+positional_to_keyword position 3 keyword n_svd_vecs for SpectralCoclustering
+positional_to_keyword position 4 keyword mini_batch for SpectralCoclustering
+positional_to_keyword position 5 keyword init for SpectralCoclustering
+positional_to_keyword position 6 keyword n_init for SpectralCoclustering
+positional_to_keyword position 7 keyword n_jobs for SpectralCoclustering
+positional_to_keyword position 8 keyword random_state for SpectralCoclustering

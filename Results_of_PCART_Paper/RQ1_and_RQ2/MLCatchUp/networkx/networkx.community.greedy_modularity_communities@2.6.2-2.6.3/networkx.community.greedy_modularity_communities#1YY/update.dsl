@@ -1,0 +1,1 @@
+add_parameter n_communities with_value 1 for greedy_modularity_communities

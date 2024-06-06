@@ -1,0 +1,1 @@
+add_parameter initial_graph with_value None for barabasi_albert_graph
