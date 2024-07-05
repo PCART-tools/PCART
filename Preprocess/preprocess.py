@@ -223,14 +223,14 @@ def countSpace(s):
 
 def getImportLine(codeLst):
     #首先判断from import语句中是否含有特殊的__future__
-    index=0
+    index=-1
     for i in range(len(codeLst)):
         if 'import' in codeLst[i] and '__future__' in codeLst[i]:
             index=i
 
     #若没有future,再判断开头是否存在'"""'注释 
     count=0
-    if index==0 and '"""' in codeLst[0]:
+    if index==-1 and '"""' in codeLst[0]:
         for i in range(0,len(codeLst)):
             if '"""' in codeLst[i]:
                 index=i
@@ -238,8 +238,7 @@ def getImportLine(codeLst):
             if count==2 or i==5:
                 break
 
-    if index!=0:
-        index+=1
+    index+=1
     
     return index
 
