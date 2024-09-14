@@ -1,7 +1,7 @@
 ![image](overview.png)
 
 ## What is PCART?
-PCART is an automated tool designed to detect and repair Python API parameter compatibility issues. It is the first to achieve a fully automated process that includes `API extraction`, `code instrumentation`, `mapping`, `compatibility analysis`, and `repair and validation`. PCART specializes in addressing API compatibility issues arising from parameter `addition`, `removal`, `renaming`, `reordering`, and the `conversion of positional parameters to keyword parameters`.
+PCART is an automated tool designed to detect and repair Python API parameter compatibility issues. It is the first to achieve a fully automated process that includes `API extraction`, `code instrumentation`, `mapping`, `compatibility analysis`, and `repair and validation`. PCART specializes in addressing API compatibility issues arising from parameter `addition`, `removal`, `renaming`, `reordering`, and the `conversion of positional parameters to keyword parameters`. For detailed descriptions of PCART, please refer to our [ArXiv paper](https://doi.org/10.48550/arXiv.2406.03839).
 
 ## Prerequisites
 - Linux (tested on Ubuntu 18.04.1)
