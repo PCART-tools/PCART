@@ -235,7 +235,7 @@ def getImportLine(codeLst):
             if '"""' in codeLst[i]:
                 index=i
                 count+=1
-            if count==2 or i==5:
+            if count==2:
                 break
 
     index+=1
