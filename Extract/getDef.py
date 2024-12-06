@@ -152,10 +152,13 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
      
     if flagInit==1:
         para=f"({init})"
+        lst.append(f"{prefix}.{className}.__init__{para}")
     elif flagNew==1:#若class中不含init,再看是否有new
         para=f"({new})"
+        lst.append(f"{prefix}.{className}.__new__{para}")
     elif flagCall==1:
         para=f"({call})"
+        lst.append(f"{prefix}.{className}.__call__{para}")
     else: #若类中不含init,new,call,就将类的继承作为类的参数
         pattern=f"class {className}(\(.*?):" 
         codeText=ast.unparse(root)
@@ -222,14 +225,8 @@ def get_def_function(args):
             os.mkdir(f"LibAPIExtraction/{libName}") #多进程可能同时执行这句，所以这个结构需要修改
         except:
             pass
-    f=open(f'LibAPIExtraction/{libName}/{version}','w',encoding='UTF-8')
+    f=open(f'LibAPIExtraction/{libName}/{libName}{version}','w',encoding='UTF-8')
     
-    # if not os.path.exists(f"LibTest/{libName}"):
-    #     try:
-    #         os.mkdir(f"LibTest/{libName}")
-    #     except:
-    #         pass
-    # f=open(f'LibTest/{libName}/{libName}{version}','w',encoding='UTF-8')
     
     fileVisitLst=[]
     for file in filePath:
