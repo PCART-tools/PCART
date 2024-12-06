@@ -136,16 +136,7 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
                 lst.append(f"{prefix}.{className}.{funcName}({arg}){ret}")
                 #尝试缩短API路径
                 apiPath=[f"{prefix}.{className}.{funcName}"]
-                flag=0
-                if "click.types.Choice.convert" in apiPath:
-                    # print(apiPath, fileDict)
-                    flag=1
-                if flag:
-                    # print(apiPath)
-                    # shortenPath(apiPath,fileDict,1)
-                    flag=0
-                else:
-                    shortenPath(apiPath,fileDict)
+                shortenPath(apiPath,fileDict)
 
                 if apiPath[0]!=f"{prefix}.{className}.{funcName}":
                     lst.append(f"{apiPath[0]}({arg}){ret}")
