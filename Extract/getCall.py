@@ -1,5 +1,4 @@
 import ast
-
 from Extract.extractCall import *
 
 
@@ -43,6 +42,71 @@ def getSelfAPI(root,importDict,libName):
     return ansLst
 
 
+    
+#A=polars()
+#A=A.a(x)
+#A=A.b(y)
+#A=A.a(z)
+#A.a(z)-->A.b(y).a(z)-->A.a(x).b(y).a(z)-->polars.a(x).b(y).a(z)
+#存在的异常情况：中间函数的返回值可能会改变
+def modifyFirstName(prefix, callName, paraStr, codeLst):
+    name_parts=callName.split('.') #按.进行字段拆分
+    # print(callName)
+    #先通过赋值语句进行还原
+    #a=A(x)
+    #a.b(y) --> A(x).b(y)
+    firstModify=callName #此处考虑了第一个名字
+    index=-1 #此处改成直接从源码中按行查找 2023.6.15
+    for i in range(len(codeLst)):
+        #这个条件有点苛刻，因为这里是抽取源码中的API（目的是为了获取API在源码中的真实位置）
+        #但当源码中参数换行写的时候，这个条件就无法满足
+        if f"{prefix}({paraStr})".replace(' ','').replace("'",'').replace('"','') in codeLst[i].replace(' ','').replace("'",'').replace('"','').rstrip('\n'):
+            index=i
+            break
+    
+    if index==-1:
+        # print(f"{callName}({paraStr})")
+        for i in range(len(codeLst)):
+            if f"{prefix}(".replace(' ','') in codeLst[i].replace(' ','').rstrip('\n'):
+                # print(codeLst[i])
+                index=i
+                break
+    
+    modifyFlag=0
+    if index!=-1:
+        index-=1
+        while index>=0: #看是否能在前面找到相关的赋值语句
+            s=codeLst[index].replace(' ','').rstrip('\n')
+            if name_parts[0]!='self':
+                if f"{name_parts[0]}="==s[0:len(name_parts[0])+1]:
+                    pos=s.find('=')
+                    firstModify=s[pos+1:]+'.'+'.'.join(name_parts[1:])
+                    prefix=s[pos+1:]
+                    prefix=s[pos+1:].split('(',1)[0]
+                    paraStr=s[pos+1:].split('(',1)[-1].rstrip(')')
+                    modifyFlag=1
+                    break
+            
+            else: #self.a=A(), self.a.f() --> A.f()
+                if len(name_parts)>2 and f"{'.'.join(name_parts[0:2])}=" in s:
+                    pos=s.find('=')
+                    firstModify=s[pos+1:]+'.'+'.'.join(name_parts[2:])
+                    prefix=s[pos+1:].split('(',1)[0] #更新prefix
+                    paraStr=s[pos+1:].split('(',1)[-1].rstrip(')') #更新参数
+                    modifyFlag=1
+                    break
+            index-=1
+
+
+    if modifyFlag: #若找到了赋值语句，再试探一下赋值语句是否还有赋值语句
+        return modifyFirstName(prefix, firstModify, paraStr, codeLst)
+    else: #若没有找到赋值语句，则直接结束
+        return callName
+
+
+
+
+
 # 每次传进来一个.py文件，抽取所有的调用API
 # 返回值是一个字典，key是还原后的API+参数，value是还原前的API+参数
 def getCallFunction(filePath,libName):
@@ -50,6 +114,8 @@ def getCallFunction(filePath,libName):
         codeText=f.read()
         f.seek(0)
         codeLst=f.readlines()
+        # for it in codeLst:
+        #     print(it)
     try:
         root_node=ast.parse(codeText,filename='<unknown>',mode='exec')
 
@@ -68,42 +134,56 @@ def getCallFunction(filePath,libName):
         apiFormatDict={} #保存还原前的API后还原后的API的对应关系
         selfAPIs=[] #保存通过self调用的API
         for callName,paraStr,callState,lineno in all_func_calls:
+            # print(f"{callName}({paraStr})")
             name_parts=callName.split('.') #按.进行字段拆分
             if 'self' in name_parts[0]:
                 selfAPIs.append((callName,paraStr,callState,lineno))
-                # continue
+            #     # continue
             
-            #先通过赋值语句进行还原
-            #a=A(x)
-            #a.b(y) --> A(x).b(y)
-            firstModify=callName #此处只考虑了第一个名字
-            index=-1 #此处改成直接从源码中按行查找 2023.6.15
-            for i in range(len(codeLst)):
-                if f"{callName}({paraStr})".replace(' ','') in codeLst[i].replace(' ','').rstrip('\n'):
-                    index=i
-                    break
+            # #先通过赋值语句进行还原
+            # #a=A(x)
+            # #a.b(y) --> A(x).b(y)
+            # firstModify=callName #此处只考虑了第一个名字
+            # index=-1 #此处改成直接从源码中按行查找 2023.6.15
+            # for i in range(len(codeLst)):
+            #     #这个条件有点苛刻，因为这里是抽取源码中的API（目的是为了获取API在源码中的真实位置）
+            #     #但当源码中参数换行写的时候，这个条件就无法满足
+            #     if f"{callName}({paraStr})".replace(' ','') in codeLst[i].replace(' ','').rstrip('\n'):
+            #         index=i
+            #         break
             
-            if index!=-1:
-                index-=1
-                while index>=0:
-                    s=codeLst[index].replace(' ','').rstrip('\n')
-                    if name_parts[0]!='self':
-                        if f"{name_parts[0]}="==s[0:len(name_parts[0])+1]:
-                            pos=s.find('=')
-                            # print(f"{callName}({paraStr})")
-                            firstModify=s[pos+1:]+'.'+'.'.join(name_parts[1:])
-                            break
-                    else: #self.a=A(), self.a.f() --> A.f()
-                        if len(name_parts)>2 and f"{'.'.join(name_parts[0:2])}=" in s:
-                            pos=s.find('=')
-                            firstModify=s[pos+1:]+'.'+'.'.join(name_parts[2:])
-                            break
-                    index-=1
+            # if index==-1:
+            #     for i in range(len(codeLst)):
+            #         if f"{callName}(".replace(' ','') in codeLst[i].replace(' ','').rstrip('\n'):
+            #             index=i
+            #             break
+
+            
+            # if index!=-1:
+            #     index-=1
+            #     while index>=0:
+            #         s=codeLst[index].replace(' ','').rstrip('\n')
+            #         if name_parts[0]!='self':
+            #             # if callName=='df.to_latex':
+            #             #     print(11111)
+            #             if f"{name_parts[0]}="==s[0:len(name_parts[0])+1]:
+            #                 pos=s.find('=')
+            #                 # print(f"{callName}({paraStr})")
+            #                 firstModify=s[pos+1:]+'.'+'.'.join(name_parts[1:])
+            #                 break
+            #         else: #self.a=A(), self.a.f() --> A.f()
+            #             if len(name_parts)>2 and f"{'.'.join(name_parts[0:2])}=" in s:
+            #                 pos=s.find('=')
+            #                 firstModify=s[pos+1:]+'.'+'.'.join(name_parts[2:])
+            #                 break
+            #         index-=1
             
             
-            #再将import的别名还原成真名
-            #from faker import Fake as A
-            # A(x).b(y) --> faker.Fake(x).b(y)
+            # #再将import的别名还原成真名
+            # #from faker import Fake as A
+            # # A(x).b(y) --> faker.Fake(x).b(y)
+            firstModify=modifyFirstName(callName,callName,paraStr,codeLst)
+            # print(callName, '-->', firstModify) 
             secondModify=firstModify
             # if 'save' in firstModify:
             #     print(firstModify)

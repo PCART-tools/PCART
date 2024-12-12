@@ -718,6 +718,8 @@ def saveStructure(projPath,libName):
             print(f"saveStructure --> ast parse failed in {file}: {e}")
             continue
         newBody=[]
+        constantVar = []
+        nonConstantVar = [] 
         for node in root.body:
             # if isinstance(node,ast.Expr) or isinstance(node,ast.Assign) or isinstance(node,ast.If):
             #     continue
@@ -741,10 +743,54 @@ def saveStructure(projPath,libName):
             #     if flag==1:
             #         continue
             #     newBody.append(node) 
-
-
-
-
+            
+            #保留包含常量的赋值语句，例如:
+            #1.  a = 1
+            #2.  b = 1
+            #3.  c = a + b
+            #4.  c = func(a,b)
+            #仅保留1，2，3行代码
+            if isinstance(node,ast.Assign):
+                flag = 0
+                for n in ast.walk(node):
+                    if isinstance(n,ast.Assign):
+                        #print(ast.unparse(n))
+                        value = n.value
+                        valueAstContent = ast.dump(n.value)
+                        targetAstContent = ast.dump(n.targets[0])
+                        if isinstance(value, ast.Constant):
+                            pattern = r"id='([^']*)'"
+                            targetMatches = re.findall(pattern, targetAstContent)
+                            if targetMatches[0] in nonConstantVar:
+                                flag=1
+                                break
+                            else:   
+                                targets = n.targets
+                                if targets:
+                                    target = targets[0]
+                                    if isinstance(target, ast.Name):
+                                        constantVar.append(target.id)
+                        else:
+                            # 使用正则表达式匹配单引号包围的内容
+                            pattern = r"id='([^']*)'"
+                            valueMatches = re.findall(pattern, valueAstContent)
+                            targetMatches = re.findall(pattern, targetAstContent)
+                            #print(matches)
+                            if not len(valueMatches):
+                                if targetMatches[0] in nonConstantVar:
+                                    flag=1
+                                    break
+                            else:
+                                for match in valueMatches:
+                                    if match not in constantVar:
+                                        nonConstantVar.append(targetMatches[0])
+                                        flag=1
+                                        break
+             
+                if flag==1:
+                    continue
+                newBody.append(node)
+    
         root.body=newBody
         newFile=ast.unparse(root)
         with open(file,'w',encoding='utf-8') as fw:
