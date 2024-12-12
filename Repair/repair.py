@@ -338,7 +338,7 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
         apiWithValueFixed=ast.unparse(apiRoot)
         #1先通过动态运行,判断其是否修复成功
         result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand)
-        # print(result.stdout,result.stderr)
+        #print(result.stdout,result.stderr)
         if result==None:
             if fixedAPI not in repairCandidates:
                 repairCandidates.append(fixedAPI)
@@ -350,6 +350,11 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
                 fixFlag='Unknown'
                 if fixedAPI not in repairCandidates:
                     repairCandidates.append(fixedAPI)
+            elif validateByStr(fixedAPI,repairDict,targetPara,starFlag,twoStarFlag):
+                fixFlag='Unknown'
+                if fixedAPI not in repairCandidates:
+                    repairCandidates.append(fixedAPI)
+
         else:
             fixFlag='Successful'
             # for k,v in repairDict.items():
@@ -360,7 +365,7 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
             if fixedAPI not in repairCandidates:
                 repairCandidates.append(fixedAPI)
             break
-     
+        print(fixFlag) 
     # repairCandidates=list(set(repairCandidates)) 
     if len(repairCandidates)==0:
         return str(repairCandidates), 'Unknown' , 'Unknown'
