@@ -12,11 +12,12 @@ def extractLibAPI(version, sourceCodePath):
 
 
 if __name__=='__main__':
+    ### python extractLibAPI.py -cfg config.json
+    
     config=sys.argv[2]
     currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath = getSourceCodePath(config)
     
-    # print(currentVersion, currentSourceCodePath)
-    # print(targetVersion, targetSourceCodePath)
-
+    print(currentVersion, currentSourceCodePath)
     extractLibAPI(currentVersion, currentSourceCodePath)
+    print(targetVersion, targetSourceCodePath)
     extractLibAPI(targetVersion, targetSourceCodePath) 
