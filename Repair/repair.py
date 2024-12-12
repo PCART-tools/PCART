@@ -79,7 +79,6 @@ def mirrorAPI(fixedAPI,dic):
                             parameter.name=k[0]
 
 
-        # print(parameter.name,parameter.position)
         if nameFlag:
             paraObjLst.append((parameter,1)) #1表示使用时带了参数名
         else:
@@ -324,11 +323,6 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
         if not validateByStr(fixedAPI,repairDict,targetPara,starFlag,twoStarFlag):
             continue
         elif len(repairLst)==1:
-            # for k,v in repairDict.items():
-            #     print(k,v)
-            # print('\n')
-            # print(callAPI)
-            # print(fixedAPI)
             repairCandidates.append(fixedAPI)
 
         #2. 动态验证
@@ -338,7 +332,6 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
         apiWithValueFixed=ast.unparse(apiRoot)
         #1先通过动态运行,判断其是否修复成功
         result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand)
-        #print(result.stdout,result.stderr)
         if result==None:
             if fixedAPI not in repairCandidates:
                 repairCandidates.append(fixedAPI)
@@ -357,15 +350,10 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
 
         else:
             fixFlag='Successful'
-            # for k,v in repairDict.items():
-            #     print(k,v)
-            # print('\n')
-            # print(callAPI)
-            # print(fixedAPI)
             if fixedAPI not in repairCandidates:
                 repairCandidates.append(fixedAPI)
             break
-        print(fixFlag) 
+    
     # repairCandidates=list(set(repairCandidates)) 
     if len(repairCandidates)==0:
         return str(repairCandidates), 'Unknown' , 'Unknown'

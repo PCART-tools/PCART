@@ -86,7 +86,8 @@ def backwardTask(args):
         if repairLst==None:
             ansDict[key]['Compatible']="Unknown"
             if len(errLst)>0:
-                print('Error occurred, please check the fixedErrorLog.txt')
+                errorMsg = f"Error occurred, please check the {projName}_fixed_log.txt"
+                print(errorMsg)
                 with lock:
                     updateErrorLst(errorLog,errLst)
             continue
@@ -95,18 +96,18 @@ def backwardTask(args):
             ansDict[key]['Compatible']='Yes'
         else:
             apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst) #apiWithValue为空表示添加参数失败
-            fixedAPI,label,exec=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst)
-            if label=='Compatible':
+            fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst)
+            if compatibilityLabel=='Compatible':
                 ansDict[key]['Compatible']='Yes'
             else:
-                if label=='Incompatible':
+                if compatibilityLabel=='Incompatible':
                     ansDict[key]['Compatible']='No'
                 else:
                     ansDict[key]['Compatible']='Unknown'
 
-                if exec=='Successful':
+                if repairStatus=='Successful':
                     ansDict[key]['Repair <Successful>']=f"{fixedAPI}"
-                elif exec=='Failed':
+                elif repairStatus=='Failed':
                     ansDict[key]['Repair <Failed>']=f"{fixedAPI}"
                 else:
                     ansDict[key]['Repair <Unknown>']=f"{fixedAPI}"
