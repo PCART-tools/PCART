@@ -37,7 +37,7 @@ def backwardTask(args):
     fileRelativePath='/'.join(tempLst[pos:])
     copyFile='./Copy/'+fileRelativePath
     invokedAPINum=len(callAPIDict)
-    # errorLog=f"Report/{projName}_fixed_log.txt"
+    errorLog=f"Report/{projName}_fixed_log.txt"
     for key,formatAPI in callAPIDict.items():
         errLst=[] #记录错误信息
         ansDict[key]={}
@@ -85,10 +85,10 @@ def backwardTask(args):
         repairLst=isCompatible(currentMatch,targetMatch) #repairLst中每个元素都是tuple
         if repairLst==None:
             ansDict[key]['Compatible']="Unknown"
-            # if len(errLst)>0:
-            #     print('Error occurred, please check the fixedErrorLog.txt')
-            #     with lock:
-            #         updateErrorLst(errorLog,errLst)
+            if len(errLst)>0:
+                print('Error occurred, please check the fixedErrorLog.txt')
+                with lock:
+                    updateErrorLst(errorLog,errLst)
             continue
         
         if len(repairLst)==0: #若返回修复字典的个数为零，则一定是兼容的
@@ -112,10 +112,11 @@ def backwardTask(args):
                     ansDict[key]['Repair <Unknown>']=f"{fixedAPI}"
 
 
-        # if len(errLst)>0:
-        #     print('Error occurred, please check the fixedErrorLog.txt')
-        #     with lock:
-        #         updateErrorLst(errorLog,errLst)
+        if len(errLst)>0:
+            errorMsg = f"Error occurred, please check the {projName}_fixed_log.txt"
+            print(errorMsg)
+            with lock:
+                updateErrorLst(errorLog,errLst)
 
 
     #将修改操作更新到代码源文件
@@ -147,7 +148,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
         print(createResult.stderr)
         return
     print("Running complete")
-    # print(createResult.stdout)
+    #print(createResult.stdout)
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
     shutil.move(f'Copy/{projName}','temp')
@@ -182,12 +183,13 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
 
 
 if __name__=='__main__':
+    # python main.py -cfg config.json
     config=sys.argv[2]
     start=time.time()
     projPath,runCommand,runPath,libName,currentVersion,targetVersion,currentEnv,targetEnv=loadConfig(f'Configure/{config}')
+    print("Code preprocessing...")
     codeProcess(projPath,runCommand,runPath,libName) #首先对代码进行预处理
-    print("code preprocess complete")
+    print("Code preprocess complete")
     backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath)
     end=time.time()
-    # print(f"Total run time={(end-start)/60:.2f}min")
     print(f"Total run time={int(end-start)}s")
