@@ -216,6 +216,7 @@ A:jax.example_libraries.optimizers.subtrees->map(tree_unflatten, subtree_defs, s
 A:jax.example_libraries.optimizers.(sentinels, tree_def)->tree_flatten(marked_pytree)
 A:jax.example_libraries.optimizers.(states_flat, subtree_defs)->unzip2(map(tree_flatten, subtrees))
 jax.example_libraries.optimizers.JoinPoint(self,subtree)
+jax.example_libraries.optimizers.JoinPoint.__init__(self,subtree)
 jax.example_libraries.optimizers.JoinPoint.__iter__(self)
 jax.example_libraries.optimizers.Optimizer(NamedTuple)
 jax.example_libraries.optimizers.adagrad(step_size,momentum=0.9)
@@ -251,6 +252,7 @@ A:jax._src.iree.vm_module->iree.runtime.VmModule.from_flatbuffer(self.iree_confi
 A:jax._src.iree.module_object->iree.runtime.load_vm_module(vm_module, self.iree_config)
 jax._src.iree.IreeBuffer(self,client,device,buffer)
 jax._src.iree.IreeBuffer.__array__(self,dtype=None,context=None)
+jax._src.iree.IreeBuffer.__init__(self,client,device,buffer)
 jax._src.iree.IreeBuffer.__repr__(self)
 jax._src.iree.IreeBuffer._value(self)
 jax._src.iree.IreeBuffer.block_until_ready(self)->IreeBuffer
@@ -260,6 +262,7 @@ jax._src.iree.IreeBuffer.device(self)
 jax._src.iree.IreeBuffer.platform(self)
 jax._src.iree.IreeBuffer.to_iree(self)
 jax._src.iree.IreeClient(self,*,iree_backend:Optional[str]=None)
+jax._src.iree.IreeClient.__init__(self,*,iree_backend:Optional[str]=None)
 jax._src.iree.IreeClient.buffer_from_pyval(self,argument:Any,device:Optional[IreeDevice],force_copy:bool=True,host_buffer_semantics:xla_client.HostBufferSemantics=xla_client.HostBufferSemantics.ZERO_COPY)->IreeBuffer
 jax._src.iree.IreeClient.compile(self,computation:str,compile_options:xla_client.CompileOptions)->IreeExecutable
 jax._src.iree.IreeClient.device_count(self)->int
@@ -269,23 +272,139 @@ jax._src.iree.IreeClient.local_device_count(self)->int
 jax._src.iree.IreeClient.local_devices(self)->List[IreeDevice]
 jax._src.iree.IreeClient.process_index(self)->int
 jax._src.iree.IreeDevice(self,client)
+jax._src.iree.IreeDevice.__init__(self,client)
 jax._src.iree.IreeDevice.__str__(self)->str
 jax._src.iree.IreeDevice.live_buffers(self)->List[IreeBuffer]
 jax._src.iree.IreeDevice.transfer_from_outfeed(self,shape:xla_client.Shape)
 jax._src.iree.IreeDevice.transfer_to_infeed(self,literal:Any)
 jax._src.iree.IreeExecutable(self,client,devices,module_object,function_name)
+jax._src.iree.IreeExecutable.__init__(self,client,devices,module_object,function_name)
 jax._src.iree.IreeExecutable.execute(self,arguments:Sequence[IreeBuffer])->List[IreeBuffer]
 jax._src.iree.IreeExecutable.local_devices(self)->List[IreeDevice]
 jax._src.iree.iree_client_factory()
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/basearray.py----------------------------------------
-jax._src.Array(abc.ABC)
+jax.Array(abc.ABC)
+jax.Array.at(self)
 jax._src.basearray.Array(abc.ABC)
 jax._src.basearray.Array.at(self)
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/basearray.pyi----------------------------------------
+jax.Array.T(self)->Array
+jax.Array.__abs__(self)->Array
+jax.Array.__add__(self,other)->Array
+jax.Array.__and__(self,other)->Array
+jax.Array.__array__(self)->np.ndarray
+jax.Array.__bool__(self)->bool
+jax.Array.__complex__(self)->complex
+jax.Array.__divmod__(self,other)->Array
+jax.Array.__dlpack__(self)->Any
+jax.Array.__eq__(self,other)->Array
+jax.Array.__float__(self)->float
+jax.Array.__floordiv__(self,other)->Array
+jax.Array.__ge__(self,other)->Array
+jax.Array.__getitem__(self,key,indices_are_sorted=False,unique_indices=False)->Array
+jax.Array.__gt__(self,other)->Array
+jax.Array.__index__(self)->int
+jax.Array.__int__(self)->int
+jax.Array.__invert__(self)->Array
+jax.Array.__iter__(self)->Any
+jax.Array.__le__(self,other)->Array
+jax.Array.__len__(self)->int
+jax.Array.__lshift__(self,other)->Array
+jax.Array.__lt__(self,other)->Array
+jax.Array.__matmul__(self,other)->Array
+jax.Array.__mod__(self,other)->Array
+jax.Array.__mul__(self,other)->Array
+jax.Array.__ne__(self,other)->Array
+jax.Array.__neg__(self)->Array
+jax.Array.__or__(self,other)->Array
+jax.Array.__pos__(self)->Array
+jax.Array.__pow__(self,other)->Array
+jax.Array.__radd__(self,other)->Array
+jax.Array.__rand__(self,other)->Array
+jax.Array.__rdivmod__(self,other)->Array
+jax.Array.__reversed__(self)->Any
+jax.Array.__rfloordiv__(self,other)->Array
+jax.Array.__rlshift__(self,other)->Array
+jax.Array.__rmatmul__(self,other)->Array
+jax.Array.__rmod__(self,other)->Array
+jax.Array.__rmul__(self,other)->Array
+jax.Array.__ror__(self,other)->Array
+jax.Array.__round__(self,ndigits=None)->Array
+jax.Array.__rpow__(self,other)->Array
+jax.Array.__rrshift__(self,other)->Array
+jax.Array.__rshift__(self,other)->Array
+jax.Array.__rsub__(self,other)->Array
+jax.Array.__rtruediv__(self,other)->Array
+jax.Array.__rxor__(self,other)->Array
+jax.Array.__setitem__(self,key,value)->None
+jax.Array.__sub__(self,other)->Array
+jax.Array.__truediv__(self,other)->Array
+jax.Array.__xor__(self,other)->Array
+jax.Array.addressable_data(self,index:int)->Array
+jax.Array.addressable_shards(self)->Sequence[Shard]
+jax.Array.all(self,axis:Optional[Union[int,Tuple[int,...]]]=None,out=None,keepdims=None)->Array
+jax.Array.any(self,axis:Optional[Union[int,Tuple[int,...]]]=None,out=None,keepdims=None)->Array
+jax.Array.argmax(self,axis:Optional[int]=None,out=None,keepdims=None)->Array
+jax.Array.argmin(self,axis:Optional[int]=None,out=None,keepdims=None)->Array
+jax.Array.argpartition(self,kth,axis=-1,kind='introselect',order=None)->Array
+jax.Array.argsort(self,axis:Optional[int]=-1,kind='quicksort',order=None)->Array
+jax.Array.astype(self,dtype)->Array
+jax.Array.block_until_ready(self)->Array
+jax.Array.choose(self,choices,out=None,mode='raise')->Array
+jax.Array.clip(self,min=None,max=None,out=None)->Array
+jax.Array.compress(self,condition,axis:Optional[int]=None,out=None)->Array
+jax.Array.conj(self)->Array
+jax.Array.conjugate(self)->Array
+jax.Array.copy(self)->Array
+jax.Array.copy_to_host_async(self)->None
+jax.Array.cumprod(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None)->Array
+jax.Array.cumsum(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None)->Array
+jax.Array.delete(self)->None
+jax.Array.device(self)->Device
+jax.Array.devices(self)->List[Device]
+jax.Array.diagonal(self,offset=0,axis1:int=0,axis2:int=1)->Array
+jax.Array.dot(self,b,*,precision=None)->Array
+jax.Array.flatten(self)->Array
+jax.Array.global_shards(self)->Sequence[Shard]
+jax.Array.imag(self)->Array
+jax.Array.is_deleted(self)->bool
+jax.Array.is_fully_addressable(self)->bool
+jax.Array.is_fully_replicated(self)->bool
+jax.Array.item(self,*args)->Any
+jax.Array.max(self,axis:Optional[Union[int,Tuple[int,...]]]=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.Array.mean(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None,keepdims=False,*,where=None)->Array
+jax.Array.min(self,axis:Optional[Union[int,Tuple[int,...]]]=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.Array.nbytes(self)->int
+jax.Array.nonzero(self,*,size=None,fill_value=None)->Array
+jax.Array.on_device_size_in_bytes(self)->int
+jax.Array.prod(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.Array.ptp(self,axis:Optional[Union[int,Tuple[int,...]]]=None,out=None,keepdims=False)->Array
+jax.Array.ravel(self,order='C')->Array
+jax.Array.real(self)->Array
+jax.Array.repeat(self,repeats,axis:Optional[int]=None,*,total_repeat_length=None)->Array
+jax.Array.reshape(self,*args,order='C')->Array
+jax.Array.round(self,decimals=0,out=None)->Array
+jax.Array.searchsorted(self,v,side='left',sorter=None)->Array
+jax.Array.shape(self)->Tuple[int, ...]
+jax.Array.sort(self,axis:Optional[int]=-1,kind='quicksort',order=None)->Array
+jax.Array.squeeze(self,axis:Optional[Union[int,Tuple[int,...]]]=None)->Array
+jax.Array.std(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None,ddof=0,keepdims=False,*,where=None)->Array
+jax.Array.sum(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.Array.swapaxes(self,axis1:int,axis2:int)->Array
+jax.Array.take(self,indices,axis:Optional[int]=None,out=None,mode=None)->Array
+jax.Array.tobytes(self,order='C')->bytes
+jax.Array.tolist(self)->List[Any]
+jax.Array.trace(self,offset=0,axis1:int=0,axis2:int=1,dtype=None,out=None)->Array
+jax.Array.traceback(self)->Traceback
+jax.Array.transpose(self,*args)->Array
+jax.Array.unsafe_buffer_pointer(self)->int
+jax.Array.var(self,axis:Optional[Union[int,Tuple[int,...]]]=None,dtype=None,out=None,ddof=0,keepdims=False,*,where=None)->Array
+jax.Array.view(self,dtype=None,type=None)->Array
+jax.Array.weak_type(self)->bool
 jax._src.basearray.Array.T(self)->Array
 jax._src.basearray.Array.__abs__(self)->Array
 jax._src.basearray.Array.__add__(self,other)->Array
@@ -302,6 +421,7 @@ jax._src.basearray.Array.__ge__(self,other)->Array
 jax._src.basearray.Array.__getitem__(self,key,indices_are_sorted=False,unique_indices=False)->Array
 jax._src.basearray.Array.__gt__(self,other)->Array
 jax._src.basearray.Array.__index__(self)->int
+jax._src.basearray.Array.__init__(self,shape,dtype=None,buffer=None,offset=0,strides=None,order=None)
 jax._src.basearray.Array.__int__(self)->int
 jax._src.basearray.Array.__invert__(self)->Array
 jax._src.basearray.Array.__iter__(self)->Any
@@ -561,7 +681,9 @@ A:jax._src.maps.mps->jax._src.sharding.NamedSharding._from_parsed_pspec(resource
 A:jax._src.maps.unconstrained_dims->get_unconstrained_dims(mps)
 A:jax._src.maps.gspmd_sharding->jax._src.pjit.GSPMDSharding.get_replicated(mps._device_assignment)
 jax._src.maps.AxisNamePos(self,*args,user_repr,**kwargs)
+jax._src.maps.AxisNamePos.__init__(self,*args,user_repr,**kwargs)
 jax._src.maps.AxisNamePosWithRank(self,*args,expected_rank,**kwargs)
+jax._src.maps.AxisNamePosWithRank.__init__(self,*args,expected_rank,**kwargs)
 jax._src.maps.DotDotDotRepr
 jax._src.maps.DotDotDotRepr.__repr__(self)
 jax._src.maps.EvaluationPlan(NamedTuple)
@@ -575,6 +697,7 @@ jax._src.maps.FrozenDict(self,*args,**kwargs)
 jax._src.maps.FrozenDict.__eq__(self,other)
 jax._src.maps.FrozenDict.__getitem__(self,name)
 jax._src.maps.FrozenDict.__hash__(self)
+jax._src.maps.FrozenDict.__init__(self,*args,**kwargs)
 jax._src.maps.FrozenDict.__iter__(self)
 jax._src.maps.FrozenDict.__len__(self)
 jax._src.maps.FrozenDict.__repr__(self)
@@ -585,7 +708,9 @@ jax._src.maps.ResourceCount.to_local(self,semantics,global_size)
 jax._src.maps.SerialLoop(self,length)
 jax._src.maps.SerialLoop.__eq__(self,other)
 jax._src.maps.SerialLoop.__hash__(self)
+jax._src.maps.SerialLoop.__init__(self,length)
 jax._src.maps.XMapPrimitive(self)
+jax._src.maps.XMapPrimitive.__init__(self)
 jax._src.maps.XMapPrimitive.bind(self,fun,*args,in_axes,**params)
 jax._src.maps.XMapPrimitive.get_bind_params(self,params)
 jax._src.maps.XMapPrimitive.post_process(self,trace,out_tracers,params)
@@ -593,6 +718,7 @@ jax._src.maps.XMapPrimitive.process(self,trace,fun,tracers,params)
 jax._src.maps._UniqueResourceName(self,uid,tag=None)
 jax._src.maps._UniqueResourceName.__eq__(self,other)
 jax._src.maps._UniqueResourceName.__hash__(self)
+jax._src.maps._UniqueResourceName.__init__(self,uid,tag=None)
 jax._src.maps._UniqueResourceName.__repr__(self)
 jax._src.maps._axis_after_insertion(axis,inserted_named_axes)
 jax._src.maps._batch_trace_post_process_xmap(self,primitive,out_tracers,params)
@@ -805,22 +931,26 @@ jax._src.checkify.Error.tree_unflatten(cls,metadata,data)
 jax._src.checkify.ErrorEffect(effects.Effect)
 jax._src.checkify.ErrorEffect.__lt__(self,other:'ErrorEffect')
 jax._src.checkify.FailedCheckError(self,traceback_info,fmt_string,*a,**k)
+jax._src.checkify.FailedCheckError.__init__(self,traceback_info,fmt_string,*a,**k)
 jax._src.checkify.FailedCheckError.__str__(self)
 jax._src.checkify.FailedCheckError.get_effect_type(self)
 jax._src.checkify.FailedCheckError.tree_flatten(self)
 jax._src.checkify.FailedCheckError.tree_unflatten(cls,metadata,payload)
 jax._src.checkify.JaxException(self,traceback_info)
+jax._src.checkify.JaxException.__init__(self,traceback_info)
 jax._src.checkify.JaxException.__init_subclass__(cls)
 jax._src.checkify.JaxException.get_effect_type(self)->core.Effect
 jax._src.checkify.JaxException.tree_flatten(self)
 jax._src.checkify.JaxException.tree_unflatten(cls,metadata,payload)
 jax._src.checkify.JaxRuntimeError(ValueError)
 jax._src.checkify.NaNError(self,traceback_info,primitive_name)
+jax._src.checkify.NaNError.__init__(self,traceback_info,primitive_name)
 jax._src.checkify.NaNError.__str__(self)
 jax._src.checkify.NaNError.get_effect_type(self)
 jax._src.checkify.NaNError.tree_flatten(self)
 jax._src.checkify.NaNError.tree_unflatten(cls,metadata,_)
 jax._src.checkify.OOBError(self,traceback_info,primitive_name,operand_shape,payload)
+jax._src.checkify.OOBError.__init__(self,traceback_info,primitive_name,operand_shape,payload)
 jax._src.checkify.OOBError.__str__(self)
 jax._src.checkify.OOBError.get_effect_type(self)
 jax._src.checkify.OOBError.tree_flatten(self)
@@ -932,28 +1062,33 @@ A:jax._src.util.self.elts_set->set()
 A:jax._src.util.self.hash->hash(x)
 A:jax._src.util.original_func->_original_func(f)
 A:jax._src.util.fun->inspect.unwrap(fun)
-jax._src.curry(f)
 jax._src.util.Hashable(self,val)
 jax._src.util.Hashable.__eq__(self,other)
 jax._src.util.Hashable.__hash__(self)
+jax._src.util.Hashable.__init__(self,val)
 jax._src.util.HashableFunction(self,f,closure)
 jax._src.util.HashableFunction.__eq__(self,other)
 jax._src.util.HashableFunction.__hash__(self)
+jax._src.util.HashableFunction.__init__(self,f,closure)
 jax._src.util.HashableFunction.__repr__(self)
 jax._src.util.HashableWrapper(self,x)
 jax._src.util.HashableWrapper.__eq__(self,other)
 jax._src.util.HashableWrapper.__hash__(self)
+jax._src.util.HashableWrapper.__init__(self,x)
 jax._src.util.OrderedSet(self)
 jax._src.util.OrderedSet.__contains__(self,elt:T)->bool
+jax._src.util.OrderedSet.__init__(self)
 jax._src.util.OrderedSet.__iter__(self)->Iterator[T]
 jax._src.util.OrderedSet.__len__(self)->int
 jax._src.util.OrderedSet.add(self,elt:T)->None
 jax._src.util.OrderedSet.update(self,elts:Seq[T])->None
 jax._src.util.Unhashable(self,val)
 jax._src.util.Unhashable.__eq__(self,other)
+jax._src.util.Unhashable.__init__(self,val)
 jax._src.util.WrapKwArgs(self,val)
 jax._src.util.WrapKwArgs.__eq__(self,other)
 jax._src.util.WrapKwArgs.__hash__(self)
+jax._src.util.WrapKwArgs.__init__(self,val)
 jax._src.util._original_func(f)
 jax._src.util._remove_duplicates(node_list)
 jax._src.util.as_hashable_function(closure)
@@ -1015,6 +1150,7 @@ jax._src.monitoring.register_event_listener(callback:Callable[[str],None])
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/effects.py----------------------------------------
 jax._src.effects.Effect
 jax._src.effects.EffectTypeSet(self)
+jax._src.effects.EffectTypeSet.__init__(self)
 jax._src.effects.EffectTypeSet.add_type(self,effect_type:Type[Effect])
 jax._src.effects.EffectTypeSet.contains(self,eff:Effect)->bool
 jax._src.effects.EffectTypeSet.filter_in(self,effects:Iterable[Effect])->list[Effect]
@@ -1022,6 +1158,7 @@ jax._src.effects.EffectTypeSet.filter_not_in(self,effects:Iterable[Effect])->lis
 jax._src.effects.JaxprInputEffect(self,input_index:Any)
 jax._src.effects.JaxprInputEffect.__eq__(self,other)
 jax._src.effects.JaxprInputEffect.__hash__(self)
+jax._src.effects.JaxprInputEffect.__init__(self,input_index:Any)
 jax._src.effects.JaxprInputEffect.__repr__(self)
 jax._src.effects.JaxprInputEffect.replace(self,*,input_index:Optional[Any]=None)
 
@@ -1033,7 +1170,7 @@ A:jax._src.environment_info.info->textwrap.dedent(f'  jax:    {jax.__version__}\
 A:jax._src.environment_info.nvidia_smi->try_nvidia_smi()
 jax._src.environment_info.print_environment_info(return_string:bool=False)->Union[None, str]
 jax._src.environment_info.try_nvidia_smi()->Optional[str]
-jax._src.print_environment_info(return_string:bool=False)->Union[None, str]
+jax.print_environment_info(return_string:bool=False)->Union[None, str]
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/lax_reference.py----------------------------------------
@@ -1144,12 +1281,14 @@ A:jax._src.profiler.(directory, filename)->os.path.split(path)
 A:jax._src.profiler.abs_filename->_write_perfetto_trace_file(_profile_state.log_dir)
 A:jax._src.profiler.profile->device_memory_profile(backend)
 jax._src.profiler.StepTraceAnnotation(self,name:str,**kwargs)
+jax._src.profiler.StepTraceAnnotation.__init__(self,name:str,**kwargs)
 jax._src.profiler.TraceAnnotation(xla_client.profiler.TraceMe)
 jax._src.profiler._PerfettoServer(http.server.SimpleHTTPRequestHandler)
 jax._src.profiler._PerfettoServer.do_GET(self)
 jax._src.profiler._PerfettoServer.do_POST(self)
 jax._src.profiler._PerfettoServer.end_headers(self)
 jax._src.profiler._ProfileState(self)
+jax._src.profiler._ProfileState.__init__(self)
 jax._src.profiler._host_perfetto_trace_file(path)
 jax._src.profiler._write_perfetto_trace_file(log_dir)
 jax._src.profiler.annotate_function(func:Callable,name:Optional[str]=None,**decorator_kwargs)
@@ -1179,6 +1318,7 @@ A:jax._src.stages.(outs, _, _)->Compiled.call(self._params, *args, **kwargs)
 A:jax._src.stages.kw->dict(_allow_propagation_to_outputs=[pxla._is_unspecified(o) for o in self._lowering.compile_args['out_shardings']])
 jax._src.stages.ArgInfo
 jax._src.stages.Compiled(self,executable,args_info,out_tree,no_kwargs=False)
+jax._src.stages.Compiled.__init__(self,executable,args_info,out_tree,no_kwargs=False)
 jax._src.stages.Compiled.as_text(self)->Optional[str]
 jax._src.stages.Compiled.call(*args,**kwargs)
 jax._src.stages.Compiled.compiler_ir(self)
@@ -1198,6 +1338,7 @@ jax._src.stages.Executable.memory_analysis(self)->Any
 jax._src.stages.Executable.output_shardings(self)->Sequence[jax.sharding.XLACompatibleSharding]
 jax._src.stages.Executable.runtime_executable(self)->Any
 jax._src.stages.Lowered(self,lowering:XlaLowering,args_info,out_tree:tree_util.PyTreeDef,no_kwargs:bool=False)
+jax._src.stages.Lowered.__init__(self,lowering:XlaLowering,args_info,out_tree:tree_util.PyTreeDef,no_kwargs:bool=False)
 jax._src.stages.Lowered.as_text(self,dialect:Optional[str]=None)->str
 jax._src.stages.Lowered.compile(self)->Compiled
 jax._src.stages.Lowered.compiler_ir(self,dialect:Optional[str]=None)->Optional[Any]
@@ -1213,6 +1354,7 @@ jax._src.stages.Stage.donate_argnums(self)
 jax._src.stages.Stage.in_avals(self)
 jax._src.stages.Stage.in_tree(self)->tree_util.PyTreeDef
 jax._src.stages.Wrapped(self,*args,**kwargs)
+jax._src.stages.Wrapped.__call__(self,*args,**kwargs)
 jax._src.stages.Wrapped.lower(self,*args,**kwargs)->Lowered
 jax._src.stages.XlaExecutable(Executable)
 jax._src.stages.XlaExecutable.as_text(self)->str
@@ -1267,12 +1409,14 @@ jax._src.sharding.DeviceIdSet(self,name,*ids)
 jax._src.sharding.DeviceIdSet.__add__(self,other)->DeviceIdSet
 jax._src.sharding.DeviceIdSet.__eq__(self,other)->bool
 jax._src.sharding.DeviceIdSet.__hash__(self)->int
+jax._src.sharding.DeviceIdSet.__init__(self,name,*ids)
 jax._src.sharding.DeviceIdSet.__iter__(self)
 jax._src.sharding.DeviceIdSet.__len__(self)->int
 jax._src.sharding.DeviceIdSet.__repr__(self)->str
 jax._src.sharding.GSPMDSharding(self,devices:Sequence[Device],op_sharding:xc.OpSharding)
 jax._src.sharding.GSPMDSharding.__eq__(self,other)
 jax._src.sharding.GSPMDSharding.__hash__(self)
+jax._src.sharding.GSPMDSharding.__init__(self,devices:Sequence[Device],op_sharding:xc.OpSharding)
 jax._src.sharding.GSPMDSharding.__reduce__(self)
 jax._src.sharding.GSPMDSharding.__repr__(self)
 jax._src.sharding.GSPMDSharding._device_assignment(self)->XLADeviceAssignment
@@ -1285,6 +1429,7 @@ jax._src.sharding.GSPMDSharding.is_compatible_aval(self,aval_shape:Shape)
 jax._src.sharding.NamedSharding(self,mesh:pxla.Mesh,spec:PartitionSpec,_parsed_pspec=None)
 jax._src.sharding.NamedSharding.__eq__(self,other)
 jax._src.sharding.NamedSharding.__hash__(self)
+jax._src.sharding.NamedSharding.__init__(self,mesh:pxla.Mesh,spec:PartitionSpec,_parsed_pspec=None)
 jax._src.sharding.NamedSharding.__reduce__(self)
 jax._src.sharding.NamedSharding.__repr__(self)
 jax._src.sharding.NamedSharding._device_assignment(self)->XLADeviceAssignment
@@ -1294,11 +1439,13 @@ jax._src.sharding.NamedSharding._to_xla_op_sharding(self,num_dimensions:int,axis
 jax._src.sharding.NamedSharding.device_set(self)->Set[Device]
 jax._src.sharding.NamedSharding.is_compatible_aval(self,aval_shape:Shape)
 jax._src.sharding.PartitionSpec(self,*partitions)
+jax._src.sharding.PartitionSpec.__init__(self,*partitions)
 jax._src.sharding.PartitionSpec.__reduce__(self)
 jax._src.sharding.PartitionSpec.__repr__(self)
 jax._src.sharding.PmapSharding(self,devices:np.ndarray,sharding_spec:pxla.ShardingSpec)
 jax._src.sharding.PmapSharding.__eq__(self,other)
 jax._src.sharding.PmapSharding.__hash__(self)
+jax._src.sharding.PmapSharding.__init__(self,devices:np.ndarray,sharding_spec:pxla.ShardingSpec)
 jax._src.sharding.PmapSharding.__reduce__(self)
 jax._src.sharding.PmapSharding.__repr__(self)
 jax._src.sharding.PmapSharding.__str__(self)
@@ -1312,6 +1459,7 @@ jax._src.sharding.PmapSharding.shard_shape(self,global_shape:Shape)->Shape
 jax._src.sharding.PositionalSharding(self,devices:Union[Sequence[xc.Device],np.ndarray])
 jax._src.sharding.PositionalSharding.__eq__(self,other)->bool
 jax._src.sharding.PositionalSharding.__hash__(self)->int
+jax._src.sharding.PositionalSharding.__init__(self,devices:Union[Sequence[xc.Device],np.ndarray])
 jax._src.sharding.PositionalSharding.__repr__(self)->str
 jax._src.sharding.PositionalSharding._device_assignment(self)->list[xc.Device]
 jax._src.sharding.PositionalSharding._to_xla_op_sharding(self,num_dimensions:int,axis_ctx=None)
@@ -1331,6 +1479,7 @@ jax._src.sharding.Sharding.shard_shape(self,global_shape:Shape)->Shape
 jax._src.sharding.SingleDeviceSharding(self,device:Device)
 jax._src.sharding.SingleDeviceSharding.__eq__(self,other)
 jax._src.sharding.SingleDeviceSharding.__hash__(self)
+jax._src.sharding.SingleDeviceSharding.__init__(self,device:Device)
 jax._src.sharding.SingleDeviceSharding.__reduce__(self)
 jax._src.sharding.SingleDeviceSharding.__repr__(self)
 jax._src.sharding.SingleDeviceSharding._device_assignment(self)->XLADeviceAssignment
@@ -1374,7 +1523,12 @@ A:jax._src.array.device_to_index_map->sharding.devices_indices_map(shape)
 A:jax._src.array.xla.pytype_aval_mappings[ArrayImpl]->operator.attrgetter('aval')
 A:jax._src.array.api_util._shaped_abstractify_handlers[ArrayImpl]->operator.attrgetter('aval')
 A:jax._src.array.x_indices->x.sharding.addressable_devices_indices_map(x.shape).values()
-jax._src.Shard(self,device:Device,sharding:Sharding,global_shape:Shape,data:Optional[ArrayImpl]=None)
+jax.Shard(self,device:Device,sharding:Sharding,global_shape:Shape,data:Optional[ArrayImpl]=None)
+jax.Shard.__repr__(self)
+jax.Shard.data(self)
+jax.Shard.device(self)
+jax.Shard.index(self)->Index
+jax.Shard.replica_id(self)->int
 jax._src.array.ArrayImpl(self,aval:core.ShapedArray,sharding:Sharding,arrays:Union[Sequence[DeviceArray],Sequence[ArrayImpl]],committed:bool,_skip_checks:bool=False)
 jax._src.array.ArrayImpl.__array__(self,dtype=None,context=None)
 jax._src.array.ArrayImpl.__bool__(self)
@@ -1386,6 +1540,7 @@ jax._src.array.ArrayImpl.__format__(self,format_spec)
 jax._src.array.ArrayImpl.__getitem__(self,idx)
 jax._src.array.ArrayImpl.__hex__(self)
 jax._src.array.ArrayImpl.__index__(self)
+jax._src.array.ArrayImpl.__init__(self,aval:core.ShapedArray,sharding:Sharding,arrays:Union[Sequence[DeviceArray],Sequence[ArrayImpl]],committed:bool,_skip_checks:bool=False)
 jax._src.array.ArrayImpl.__int__(self)
 jax._src.array.ArrayImpl.__iter__(self)
 jax._src.array.ArrayImpl.__len__(self)
@@ -1421,6 +1576,7 @@ jax._src.array.ArrayImpl.tolist(self)
 jax._src.array.ArrayImpl.unsafe_buffer_pointer(self)
 jax._src.array.ArrayImpl.weak_type(self)
 jax._src.array.Shard(self,device:Device,sharding:Sharding,global_shape:Shape,data:Optional[ArrayImpl]=None)
+jax._src.array.Shard.__init__(self,device:Device,sharding:Sharding,global_shape:Shape,data:Optional[ArrayImpl]=None)
 jax._src.array.Shard.__repr__(self)
 jax._src.array.Shard.data(self)
 jax._src.array.Shard.device(self)
@@ -1434,8 +1590,8 @@ jax._src.array._reconstruct_array(fun,args,arr_state,aval_state)
 jax._src.array._single_device_array_from_buf(buf,committed)
 jax._src.array.make_array_from_callback(shape:Shape,sharding:Sharding,data_callback:Callable[[Optional[Index]],ArrayLike])->ArrayImpl
 jax._src.array.make_array_from_single_device_arrays(shape:Shape,sharding:Sharding,arrays:Sequence[ArrayImpl])->ArrayImpl
-jax._src.make_array_from_callback(shape:Shape,sharding:Sharding,data_callback:Callable[[Optional[Index]],ArrayLike])->ArrayImpl
-jax._src.make_array_from_single_device_arrays(shape:Shape,sharding:Sharding,arrays:Sequence[ArrayImpl])->ArrayImpl
+jax.make_array_from_callback(shape:Shape,sharding:Sharding,data_callback:Callable[[Optional[Index]],ArrayLike])->ArrayImpl
+jax.make_array_from_single_device_arrays(shape:Shape,sharding:Sharding,arrays:Sequence[ArrayImpl])->ArrayImpl
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/lazy_loader.py----------------------------------------
@@ -1479,6 +1635,7 @@ jax._src.custom_transpose.StoreEqual(lu.Store)
 jax._src.custom_transpose.StoreEqual.store(self,val)
 jax._src.custom_transpose.check_transpose_rule_trees(rule,lin_tree,rule_out_tree)
 jax._src.custom_transpose.custom_transpose(self,fun:Callable)
+jax._src.custom_transpose.custom_transpose.__init__(self,fun:Callable)
 jax._src.custom_transpose.custom_transpose.def_transpose(self,transpose:Callable)
 jax._src.custom_transpose.custom_transpose_lowering(*args,call_jaxpr,**params)
 jax._src.custom_transpose.custom_transpose_transpose_rule(cts,*args,out_types,res_tree,lin_tree,out_tree,**params)
@@ -1580,6 +1737,7 @@ A:jax._src.prng.unsafe_rbg_prng_impl->PRNGImpl(key_shape=(4,), seed=_rbg_seed, s
 jax._src.prng.KeyTy(self,impl)
 jax._src.prng.KeyTy.__eq__(self,other)
 jax._src.prng.KeyTy.__hash__(self)->int
+jax._src.prng.KeyTy.__init__(self,impl)
 jax._src.prng.KeyTy.__repr__(self)->str
 jax._src.prng.KeyTy.name(self)->str
 jax._src.prng.KeyTyRules
@@ -1602,6 +1760,7 @@ jax._src.prng.PRNGImpl.pprint(self)
 jax._src.prng.PRNGKeyArray(self,impl,key_data:Any)
 jax._src.prng.PRNGKeyArray.T(self)->'PRNGKeyArray'
 jax._src.prng.PRNGKeyArray.__getitem__(self,_)->'PRNGKeyArray'
+jax._src.prng.PRNGKeyArray.__init__(self,impl,key_data:Any)
 jax._src.prng.PRNGKeyArray.__iter__(self)->Iterator['PRNGKeyArray']
 jax._src.prng.PRNGKeyArray.__len__(self)
 jax._src.prng.PRNGKeyArray.__repr__(self)
@@ -1800,6 +1959,7 @@ jax._src.test_util._NumpyScalar(ScalarShape)
 jax._src.test_util._PythonScalar(ScalarShape)
 jax._src.test_util._cached_property(self,method)
 jax._src.test_util._cached_property.__get__(self,obj,cls)
+jax._src.test_util._cached_property.__init__(self,method)
 jax._src.test_util._cast_to_shape(value,shape,dtype)
 jax._src.test_util._choice(n,m)
 jax._src.test_util._dims_of_shape(shape)
@@ -1919,8 +2079,11 @@ A:jax._src.dtypes.(dtype, weak_type)->_lattice_result_type(*(float_ if arg is No
 A:jax._src.dtypes.np_dtype->numpy.dtype(dtype)
 jax._src.dtypes.TypePromotionError(ValueError)
 jax._src.dtypes._Bfloat16MachArLike(self)
+jax._src.dtypes._Bfloat16MachArLike.__init__(self)
 jax._src.dtypes._Float8E4m3FnMachArLike(self)
+jax._src.dtypes._Float8E4m3FnMachArLike.__init__(self)
 jax._src.dtypes._Float8E5m2MachArLike(self)
+jax._src.dtypes._Float8E5m2MachArLike.__init__(self)
 jax._src.dtypes._canonicalize_dtype(x64_enabled:bool,allow_opaque_dtype:bool,dtype:Any)->Union[DType, OpaqueDType]
 jax._src.dtypes._dtype_and_weaktype(value:Any)->Tuple[DType, bool]
 jax._src.dtypes._issubclass(a:Any,b:Any)->bool
@@ -1936,6 +2099,7 @@ jax._src.dtypes.check_valid_dtype(dtype:DType)->None
 jax._src.dtypes.coerce_to_array(x:Any,dtype:Optional[DTypeLike]=None)->np.ndarray
 jax._src.dtypes.dtype(x:Any,*,canonicalize:bool=False)->DType
 jax._src.dtypes.finfo(cls,dtype)
+jax._src.dtypes.finfo.__new__(cls,dtype)
 jax._src.dtypes.finfo._bfloat16_finfo()
 jax._src.dtypes.finfo._float8_e4m3fn_finfo()
 jax._src.dtypes.finfo._float8_e5m2_finfo()
@@ -2091,7 +2255,15 @@ A:jax._src.core.lhs->pp_vars(eqn.outvars, context, print_shapes=settings.print_s
 A:jax._src.core.kvs->' '.join((f'{k}={v}' for (k, v) in params.items() if _compact_eqn_should_include(k, v)))
 A:jax._src.core.lo->max(lo, 0)
 A:jax._src.core.hi->max(lo, min(hi, len(jaxpr.eqns)))
-jax._src.ShapedArray(self,shape,dtype,weak_type=False,named_shape=None)
+jax.ShapedArray(self,shape,dtype,weak_type=False,named_shape=None)
+jax.ShapedArray.__eq__(self,other)
+jax.ShapedArray.__hash__(self)
+jax.ShapedArray._len(self,ignored_tracer)
+jax.ShapedArray.at_least_vspace(self)
+jax.ShapedArray.join(self,other)
+jax.ShapedArray.str_short(self,short_dtypes=False)
+jax.ShapedArray.strip_named_shape(self)
+jax.ShapedArray.update(self,shape=None,dtype=None,weak_type=None,named_shape=None)
 jax._src.core.AbstractToken(AbstractValue)
 jax._src.core.AbstractToken.at_least_vspace(self)
 jax._src.core.AbstractToken.join(self,other)
@@ -2113,6 +2285,7 @@ jax._src.core.CallPrimitive.get_bind_params(self,params)
 jax._src.core.ClosedCallPrimitive(CallPrimitive)
 jax._src.core.ClosedCallPrimitive.get_bind_params(self,params)
 jax._src.core.ClosedJaxpr(self,jaxpr:Jaxpr,consts:Sequence)
+jax._src.core.ClosedJaxpr.__init__(self,jaxpr:Jaxpr,consts:Sequence)
 jax._src.core.ClosedJaxpr.__repr__(self)
 jax._src.core.ClosedJaxpr.__str__(self)
 jax._src.core.ClosedJaxpr._repr_pretty_(self,p,cycle)
@@ -2127,18 +2300,22 @@ jax._src.core.ClosedJaxpr.replace(self,*,jaxpr=None,consts=None)
 jax._src.core.ConcreteArray(self,dtype,val,weak_type=None)
 jax._src.core.ConcreteArray.__eq__(self,other)
 jax._src.core.ConcreteArray.__hash__(self)
+jax._src.core.ConcreteArray.__init__(self,dtype,val,weak_type=None)
 jax._src.core.ConcreteArray.join(self,other)->AbstractValue
 jax._src.core.ConcreteArray.str_short(self,short_dtypes=False)->str
 jax._src.core.ConcreteArray.update(self,dtype=None,val=None,weak_type=None)
 jax._src.core.DArray(self,aval,data)
 jax._src.core.DArray.__eq__(self,other)
 jax._src.core.DArray.__hash__(self)->int
+jax._src.core.DArray.__init__(self,aval,data)
 jax._src.core.DArray.__repr__(self)->str
 jax._src.core.DBIdx(NamedTuple)
 jax._src.core.DConcreteArray(self,shape,dtype,weak_type,val)
+jax._src.core.DConcreteArray.__init__(self,shape,dtype,weak_type,val)
 jax._src.core.DShapedArray(self,shape,dtype,weak_type=False)
 jax._src.core.DShapedArray.__eq__(self,other)
 jax._src.core.DShapedArray.__hash__(self)
+jax._src.core.DShapedArray.__init__(self,shape,dtype,weak_type=False)
 jax._src.core.DShapedArray.at_least_vspace(self)
 jax._src.core.DShapedArray.join(self,other)
 jax._src.core.DShapedArray.str_short(self,short_dtypes=False)->str
@@ -2155,8 +2332,10 @@ jax._src.core.DimensionHandler.stride(self,d:DimSize,window_size:DimSize,window_
 jax._src.core.DimensionHandler.sum(self,*ds:DimSize)->DimSize
 jax._src.core.DimensionHandler.symbolic_equal(self,d1:DimSize,d2:DimSize)->bool
 jax._src.core.DropVar(self,aval:AbstractValue)
+jax._src.core.DropVar.__init__(self,aval:AbstractValue)
 jax._src.core.DropVar.__repr__(self)
 jax._src.core.DuplicateAxisNameError(self,var)
+jax._src.core.DuplicateAxisNameError.__init__(self,var)
 jax._src.core.EvalTrace(Trace)
 jax._src.core.EvalTrace.process_call(self,primitive,f,tracers,params)
 jax._src.core.EvalTrace.process_custom_jvp_call(self,primitive,fun,jvp,tracers,**_)
@@ -2167,6 +2346,7 @@ jax._src.core.EvalTrace.pure(self,x)
 jax._src.core.InDBIdx
 jax._src.core.InconclusiveDimensionOperation(Exception)
 jax._src.core.Jaxpr(self,constvars:Sequence[Var],invars:Sequence[Var],outvars:Sequence[Atom],eqns:Sequence[JaxprEqn],effects:Effects=no_effects,debug_info:Optional[DebugInfo]=None)
+jax._src.core.Jaxpr.__init__(self,constvars:Sequence[Var],invars:Sequence[Var],outvars:Sequence[Atom],eqns:Sequence[JaxprEqn],effects:Effects=no_effects,debug_info:Optional[DebugInfo]=None)
 jax._src.core.Jaxpr.__str__(self)
 jax._src.core.Jaxpr._repr_pretty_(self,p,cycle)
 jax._src.core.Jaxpr.pretty_print(self,*,source_info=False,print_shapes=True,custom_pp_eqn_rules=True,name_stack=False,print_effects:bool=False,**kw)
@@ -2175,13 +2355,16 @@ jax._src.core.JaxprEqn(NamedTuple)
 jax._src.core.JaxprEqn.__repr__(self)
 jax._src.core.JaxprEqn.replace(self,*args,**kwargs)
 jax._src.core.JaxprPpContext(self)
+jax._src.core.JaxprPpContext.__init__(self)
 jax._src.core.JaxprPpSettings(NamedTuple)
 jax._src.core.JaxprTypeError(TypeError)
 jax._src.core.Literal(self,val,aval)
+jax._src.core.Literal.__init__(self,val,aval)
 jax._src.core.Literal.__repr__(self)
 jax._src.core.MainTrace(self,level,trace_type,**payload)
 jax._src.core.MainTrace.__eq__(self,other:object)->bool
 jax._src.core.MainTrace.__hash__(self)->int
+jax._src.core.MainTrace.__init__(self,level,trace_type,**payload)
 jax._src.core.MainTrace.__repr__(self)->str
 jax._src.core.MainTrace.with_cur_sublevel(self)
 jax._src.core.MapPrimitive(Primitive)
@@ -2190,10 +2373,12 @@ jax._src.core.MapPrimitive.get_bind_params(self,params)
 jax._src.core.MapPrimitive.post_process(self,trace,out_tracers,params)
 jax._src.core.MapPrimitive.process(self,trace,fun,tracers,params)
 jax._src.core.NameGatheringSubst(self)
+jax._src.core.NameGatheringSubst.__init__(self)
 jax._src.core.NamedShape(self,*args,**kwargs)
 jax._src.core.NamedShape.__eq__(self,other)
 jax._src.core.NamedShape.__getitem__(self,idx)
 jax._src.core.NamedShape.__hash__(self)
+jax._src.core.NamedShape.__init__(self,*args,**kwargs)
 jax._src.core.NamedShape.__str__(self)
 jax._src.core.NamedShape.named_items(self)
 jax._src.core.NamedShape.named_rank(self)
@@ -2205,6 +2390,7 @@ jax._src.core.NamedShape.rank(self)
 jax._src.core.NamedShape.total(self)
 jax._src.core.OutDBIdx
 jax._src.core.Primitive(self,name:str)
+jax._src.core.Primitive.__init__(self,name:str)
 jax._src.core.Primitive.__repr__(self)
 jax._src.core.Primitive.abstract_eval(self,*args,**params)
 jax._src.core.Primitive.bind(self,*args,**params)
@@ -2218,6 +2404,7 @@ jax._src.core.Primitive.impl(self,*args,**params)
 jax._src.core.ShapedArray(self,shape,dtype,weak_type=False,named_shape=None)
 jax._src.core.ShapedArray.__eq__(self,other)
 jax._src.core.ShapedArray.__hash__(self)
+jax._src.core.ShapedArray.__init__(self,shape,dtype,weak_type=False,named_shape=None)
 jax._src.core.ShapedArray._len(self,ignored_tracer)
 jax._src.core.ShapedArray.at_least_vspace(self)
 jax._src.core.ShapedArray.join(self,other)
@@ -2226,11 +2413,14 @@ jax._src.core.ShapedArray.strip_named_shape(self)
 jax._src.core.ShapedArray.update(self,shape=None,dtype=None,weak_type=None,named_shape=None)
 jax._src.core.Sublevel(self,level:int)
 jax._src.core.Sublevel.__eq__(self,other)
+jax._src.core.Sublevel.__init__(self,level:int)
 jax._src.core.Sublevel.__lt__(self,other)
 jax._src.core.Sublevel.__repr__(self)
 jax._src.core.ThreadLocalState(self)
+jax._src.core.ThreadLocalState.__init__(self)
 jax._src.core.Token
 jax._src.core.Trace(self,main:MainTrace,sublevel:Sublevel)
+jax._src.core.Trace.__init__(self,main:MainTrace,sublevel:Sublevel)
 jax._src.core.Trace.__repr__(self)
 jax._src.core.Trace.full_raise(self,val)->Tracer
 jax._src.core.Trace.lift(self,tracer)
@@ -2243,12 +2433,14 @@ jax._src.core.Trace.process_primitive(self,primitive,tracers,params)
 jax._src.core.Trace.pure(self,val)
 jax._src.core.Trace.sublift(self,tracer)
 jax._src.core.TraceStack(self)
+jax._src.core.TraceStack.__init__(self)
 jax._src.core.TraceStack.__repr__(self)->str
 jax._src.core.TraceStack.copy(self)
 jax._src.core.TraceStack.next_level(self)->int
 jax._src.core.TraceStack.pop(self)->None
 jax._src.core.TraceStack.push(self,main_trace:MainTrace)->None
 jax._src.core.TraceState(self)
+jax._src.core.TraceState.__init__(self)
 jax._src.core.TraceState.copy(self)
 jax._src.core.Tracer(self,trace:Trace)
 jax._src.core.Tracer.__abs__(self)
@@ -2272,6 +2464,7 @@ jax._src.core.Tracer.__getitem__(self,idx)
 jax._src.core.Tracer.__gt__(self,other)
 jax._src.core.Tracer.__hex__(self)
 jax._src.core.Tracer.__index__(self)
+jax._src.core.Tracer.__init__(self,trace:Trace)
 jax._src.core.Tracer.__int__(self)
 jax._src.core.Tracer.__invert__(self)
 jax._src.core.Tracer.__iter__(self)
@@ -2339,6 +2532,7 @@ jax._src.core.Tracer.unsafe_buffer_pointer(self)
 jax._src.core.UnshapedArray(self,dtype,weak_type=False)
 jax._src.core.UnshapedArray.__eq__(self,other)
 jax._src.core.UnshapedArray.__hash__(self)
+jax._src.core.UnshapedArray.__init__(self,dtype,weak_type=False)
 jax._src.core.UnshapedArray.__ne__(self,other)
 jax._src.core.UnshapedArray.__repr__(self)
 jax._src.core.UnshapedArray.at_least_vspace(self)->AbstractValue
@@ -2348,11 +2542,13 @@ jax._src.core.UnshapedArray.str_short(self,short_dtypes=False)->str
 jax._src.core.UnshapedArray.strip_weak_type(self)
 jax._src.core.UnshapedArray.update(self,dtype=None,weak_type=None)
 jax._src.core.Var(self,count:int,suffix:str,aval:AbstractValue)
+jax._src.core.Var.__init__(self,count:int,suffix:str,aval:AbstractValue)
 jax._src.core.Var.__lt__(self,other)
 jax._src.core.Var.__repr__(self)
 jax._src.core._TempAxisName(self,obj)
 jax._src.core._TempAxisName.__eq__(self,other)
 jax._src.core._TempAxisName.__hash__(self)
+jax._src.core._TempAxisName.__init__(self,obj)
 jax._src.core._TempAxisName.__lt__(self,other)
 jax._src.core._TempAxisName.__repr__(self)
 jax._src.core._canonicalize_dimension(dim:DimSize)->DimSize
@@ -2488,18 +2684,24 @@ jax._src.core.unmapped_aval(size:AxisSize,axis_name,axis:Optional[int],aval:Abst
 jax._src.core.used_axis_names(primitive:Primitive,params:ParamDict)->Set[AxisName]
 jax._src.core.used_axis_names_jaxpr(jaxpr:Union[Jaxpr,ClosedJaxpr])
 jax._src.core.valid_jaxtype(x)->bool
-jax._src.ensure_compile_time_eval()
+jax.ensure_compile_time_eval()
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/errors.py----------------------------------------
 jax._src.errors.ConcretizationTypeError(self,tracer:core.Tracer,context:str='')
+jax._src.errors.ConcretizationTypeError.__init__(self,tracer:core.Tracer,context:str='')
 jax._src.errors.JAXIndexError(_JAXErrorMixin,IndexError)
 jax._src.errors.JAXTypeError(_JAXErrorMixin,TypeError)
 jax._src.errors.NonConcreteBooleanIndexError(self,tracer:core.Tracer)
+jax._src.errors.NonConcreteBooleanIndexError.__init__(self,tracer:core.Tracer)
 jax._src.errors.TracerArrayConversionError(self,tracer:core.Tracer)
+jax._src.errors.TracerArrayConversionError.__init__(self,tracer:core.Tracer)
 jax._src.errors.TracerIntegerConversionError(self,tracer:core.Tracer)
+jax._src.errors.TracerIntegerConversionError.__init__(self,tracer:core.Tracer)
 jax._src.errors.UnexpectedTracerError(self,msg:str)
+jax._src.errors.UnexpectedTracerError.__init__(self,msg:str)
 jax._src.errors._JAXErrorMixin(self,message:str)
+jax._src.errors._JAXErrorMixin.__init__(self,message:str)
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/debugging.py----------------------------------------
@@ -2549,6 +2751,7 @@ A:jax._src.debugging.padding->tuple((max(x, 0) for x in padding))
 jax._src.debugging.DebugEffect(effects.Effect)
 jax._src.debugging.OrderedDebugEffect(effects.Effect)
 jax._src.debugging.ShardingCallbackInfo(self,callback,module_context)
+jax._src.debugging.ShardingCallbackInfo.__init__(self,callback,module_context)
 jax._src.debugging._DebugPrintFormatChecker(string.Formatter)
 jax._src.debugging._DebugPrintFormatChecker.check_unused_args(self,used_args,args,kwargs)
 jax._src.debugging._canonicalize_color(color:Color)->str
@@ -2600,16 +2803,6 @@ A:jax._src.xla_bridge.(factory, unused_priority)->_backend_factories.get(platfor
 A:jax._src.xla_bridge.bs->backends()
 A:jax._src.xla_bridge.platform->canonicalize_platform(platform)
 A:jax._src.xla_bridge.process_index->get_backend(backend).process_index()
-jax._src.default_backend()->str
-jax._src.device_count(backend:Optional[Union[str,XlaBackend]]=None)->int
-jax._src.devices(backend:Optional[Union[str,XlaBackend]]=None)->List[xla_client.Device]
-jax._src.host_count(backend=None)->int
-jax._src.host_id(backend=None)->int
-jax._src.host_ids(backend=None)->List[int]
-jax._src.local_device_count(backend:Optional[Union[str,XlaBackend]]=None)->int
-jax._src.local_devices(process_index:Optional[int]=None,backend:Optional[Union[str,XlaBackend]]=None,host_id:Optional[int]=None)->List[xla_client.Device]
-jax._src.process_count(backend:Optional[Union[str,XlaBackend]]=None)->int
-jax._src.process_index(backend:Optional[Union[str,XlaBackend]]=None)->int
 jax._src.xla_bridge._clear_backends()
 jax._src.xla_bridge._get_backend_uncached(platform=None)
 jax._src.xla_bridge._get_pjrt_plugin_names_and_library_paths(plugins_from_env:str)->Dict[str, str]
@@ -2638,6 +2831,16 @@ jax._src.xla_bridge.register_backend_factory(name,factory,*,priority=0)
 jax._src.xla_bridge.register_pjrt_plugin_factories(plugins_from_env:str)
 jax._src.xla_bridge.tpu_client_timer_callback(timer_secs:float)
 jax._src.xla_bridge.using_pjrt_c_api(backend=None)
+jax.default_backend()->str
+jax.device_count(backend:Optional[Union[str,XlaBackend]]=None)->int
+jax.devices(backend:Optional[Union[str,XlaBackend]]=None)->List[xla_client.Device]
+jax.host_count(backend=None)->int
+jax.host_id(backend=None)->int
+jax.host_ids(backend=None)->List[int]
+jax.local_device_count(backend:Optional[Union[str,XlaBackend]]=None)->int
+jax.local_devices(process_index:Optional[int]=None,backend:Optional[Union[str,XlaBackend]]=None,host_id:Optional[int]=None)->List[xla_client.Device]
+jax.process_count(backend:Optional[Union[str,XlaBackend]]=None)->int
+jax.process_index(backend:Optional[Union[str,XlaBackend]]=None)->int
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/ad_util.py----------------------------------------
@@ -2646,8 +2849,10 @@ A:jax._src.ad_util.attr->getattr(self.aval, name)
 A:jax._src.ad_util.t->type(attr)
 jax._src.ad_util.SymbolicZero(self,aval:core.AbstractValue)
 jax._src.ad_util.SymbolicZero.__getattr__(self,name)
+jax._src.ad_util.SymbolicZero.__init__(self,aval:core.AbstractValue)
 jax._src.ad_util.SymbolicZero.__repr__(self)->str
 jax._src.ad_util.Zero(self,aval:core.AbstractValue)
+jax._src.ad_util.Zero.__init__(self,aval:core.AbstractValue)
 jax._src.ad_util.Zero.__repr__(self)->str
 jax._src.ad_util.Zero.from_value(val:Any)->Zero
 jax._src.ad_util._stop_gradient_impl(x:T)->T
@@ -2741,12 +2946,61 @@ A:jax._src.config.transfer_guard_host_to_device->Config().define_enum_state(name
 A:jax._src.config.transfer_guard_device_to_device->Config().define_enum_state(name='jax_transfer_guard_device_to_device', enum_values=['allow', 'log', 'disallow', 'log_explicit', 'disallow_explicit'], default=None, help='Select the transfer guard level for device-to-device transfers. Default is "allow".', update_global_hook=lambda val: _update_transfer_guard(transfer_guard_lib.global_state(), 'device_to_device', val), update_thread_local_hook=lambda val: _update_transfer_guard(transfer_guard_lib.thread_local_state(), 'device_to_device', val))
 A:jax._src.config.transfer_guard_device_to_host->Config().define_enum_state(name='jax_transfer_guard_device_to_host', enum_values=['allow', 'log', 'disallow', 'log_explicit', 'disallow_explicit'], default=None, help='Select the transfer guard level for device-to-host transfers. Default is "allow".', update_global_hook=lambda val: _update_transfer_guard(transfer_guard_lib.global_state(), 'device_to_host', val), update_thread_local_hook=lambda val: _update_transfer_guard(transfer_guard_lib.thread_local_state(), 'device_to_host', val))
 A:jax._src.config._transfer_guard->Config().define_enum_state(name='jax_transfer_guard', enum_values=['allow', 'log', 'disallow', 'log_explicit', 'disallow_explicit'], default=None, help='Select the transfer guard level for all transfers. This option is set-only; the transfer guard level for a specific direction should be read using the per-transfer direction option. Default is "allow".', update_global_hook=_update_all_transfer_guard_global)
+jax._src._config_module.Config(self)
+jax._src._config_module.Config.DEFINE_bool(self,name,default,*args,**kwargs)
+jax._src._config_module.Config.DEFINE_enum(self,name,default,*args,**kwargs)
+jax._src._config_module.Config.DEFINE_float(self,name,default,*args,**kwargs)
+jax._src._config_module.Config.DEFINE_integer(self,name,default,*args,**kwargs)
+jax._src._config_module.Config.DEFINE_string(self,name,default,*args,**kwargs)
+jax._src._config_module.Config._config_module_with_absl(self)
+jax._src._config_module.Config._read(self,name)
+jax._src._config_module.Config._trace_context(self)
+jax._src._config_module.Config.add_option(self,name,default,opt_type,meta_args,meta_kwargs,update_hook:Optional[Callable[[Any],None]]=None)
+jax._src._config_module.Config.check_exists(self,name)
+jax._src._config_module.Config.complete_absl__config_module(self,absl_flags)
+jax._src._config_module.Config.define_bool_state(self,name:str,default:bool,help:str,*,update_global_hook:Optional[Callable[[bool],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[bool]],None]]=None,upgrade:bool=False,extra_description:str='')
+jax._src._config_module.Config.define_enum_state(self,name:str,enum_values:List[str],default:Optional[str],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
+jax._src._config_module.Config.define_float_state(self,name:str,default:Optional[float],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
+jax._src._config_module.Config.define_int_state(self,name:str,default:Optional[int],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
+jax._src._config_module.Config.define_string_or_object_state(self,name:str,default:Any,help:str,update_global_hook:Optional[Callable[[Any],None]]=None,update_thread_local_hook:Optional[Callable[[Any],None]]=None,validate_new_val_hook:Optional[Callable[[Any],None]]=None)
+jax._src._config_module.Config.define_string_state(self,name:str,default:Optional[str],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
+jax._src._config_module.Config.parse_flags_with_absl(self)
+jax._src._config_module.Config.read(self,name)
+jax._src._config_module.Config.update(self,name,val)
+jax._src._config_module.NameSpace(self,getter,setter)
+jax._src._config_module.NameSpace.__getattr__(self,name)
+jax._src._config_module.NameSpace.__setattr__(self,name,val)
+jax._src._config_module.NoDefault
+jax._src._config_module._GlobalExtraJitContext(NamedTuple)
+jax._src._config_module._StateContextManager(self,name,help,update_thread_local_hook,validate_new_val_hook:Optional[Callable[[Any],None]]=None,extra_description:str='',default_value:Any=no_default)
+jax._src._config_module._StateContextManager._add_hooks(self,update_global_hook,update_thread_local_hook)
+jax._src._config_module._ThreadLocalExtraJitContext(NamedTuple)
+jax._src._config_module._ThreadLocalStateCache(self)
+jax._src._config_module._Unset
+jax._src._config_module._update_all_transfer_guard_global(val)
+jax._src._config_module._update_default_device_global(val)
+jax._src._config_module._update_default_device_thread_local(val)
+jax._src._config_module._update_disable_jit_global(val)
+jax._src._config_module._update_disable_jit_thread_local(val)
+jax._src._config_module._update_global_jit_state(**kw)
+jax._src._config_module._update_jax_array_global(val)
+jax._src._config_module._update_jax_array_thread_local(val)
+jax._src._config_module._update_transfer_guard(state,key,val)
+jax._src._config_module._update_x64_global(val)
+jax._src._config_module._update_x64_thread_local(val)
+jax._src._config_module._validate_default_device(val)
+jax._src._config_module.bool_env(varname:str,default:bool)->bool
+jax._src._config_module.explicit_device_get_scope()->Iterator[None]
+jax._src._config_module.explicit_device_put_scope()->Iterator[None]
+jax._src._config_module.int_env(varname:str,default:int)->int
+jax._src._config_module.update_thread_local_jit_state(**kw)
 jax._src.config.Config(self)
 jax._src.config.Config.DEFINE_bool(self,name,default,*args,**kwargs)
 jax._src.config.Config.DEFINE_enum(self,name,default,*args,**kwargs)
 jax._src.config.Config.DEFINE_float(self,name,default,*args,**kwargs)
 jax._src.config.Config.DEFINE_integer(self,name,default,*args,**kwargs)
 jax._src.config.Config.DEFINE_string(self,name,default,*args,**kwargs)
+jax._src.config.Config.__init__(self)
 jax._src.config.Config._read(self,name)
 jax._src.config.Config._trace_context(self)
 jax._src.config.Config.add_option(self,name,default,opt_type,meta_args,meta_kwargs,update_hook:Optional[Callable[[Any],None]]=None)
@@ -2764,13 +3018,16 @@ jax._src.config.Config.read(self,name)
 jax._src.config.Config.update(self,name,val)
 jax._src.config.NameSpace(self,getter,setter)
 jax._src.config.NameSpace.__getattr__(self,name)
+jax._src.config.NameSpace.__init__(self,getter,setter)
 jax._src.config.NameSpace.__setattr__(self,name,val)
 jax._src.config.NoDefault
 jax._src.config._GlobalExtraJitContext(NamedTuple)
 jax._src.config._StateContextManager(self,name,help,update_thread_local_hook,validate_new_val_hook:Optional[Callable[[Any],None]]=None,extra_description:str='',default_value:Any=no_default)
+jax._src.config._StateContextManager.__init__(self,name,help,update_thread_local_hook,validate_new_val_hook:Optional[Callable[[Any],None]]=None,extra_description:str='',default_value:Any=no_default)
 jax._src.config._StateContextManager._add_hooks(self,update_global_hook,update_thread_local_hook)
 jax._src.config._ThreadLocalExtraJitContext(NamedTuple)
 jax._src.config._ThreadLocalStateCache(self)
+jax._src.config._ThreadLocalStateCache.__init__(self)
 jax._src.config._Unset
 jax._src.config._update_all_transfer_guard_global(val)
 jax._src.config._update_default_device_global(val)
@@ -2790,12 +3047,12 @@ jax._src.config.explicit_device_put_scope()->Iterator[None]
 jax._src.config.int_env(varname:str,default:int)->int
 jax._src.config.transfer_guard(new_val:str)->Iterator[None]
 jax._src.config.update_thread_local_jit_state(**kw)
-jax._src.transfer_guard(new_val:str)->Iterator[None]
+jax.transfer_guard(new_val:str)->Iterator[None]
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/cloud_tpu_init.py----------------------------------------
 A:jax._src.cloud_tpu_init.libtpu_module->maybe_import_libtpu()
-jax._src._cloud_tpu_init()
+jax._cloud_tpu_init()
 jax._src.cloud_tpu_init.cloud_tpu_init()
 jax._src.cloud_tpu_init.jax_force_tpu_init()->bool
 jax._src.cloud_tpu_init.maybe_import_libtpu()
@@ -2875,6 +3132,7 @@ A:jax._src.ad_checkpoint.optimization_barrier_p->jax._src.core.Primitive('optimi
 jax._src.ad_checkpoint.WrapHashably(self,val)
 jax._src.ad_checkpoint.WrapHashably.__eq__(self,other)
 jax._src.ad_checkpoint.WrapHashably.__hash__(self)
+jax._src.ad_checkpoint.WrapHashably.__init__(self,val)
 jax._src.ad_checkpoint._dummy_like(aval:core.AbstractValue)->Any
 jax._src.ad_checkpoint._dyn_args_fun(fun:Callable,static_argnums:FrozenSet[int],static_args:Tuple[WrapHashably,...],nargs:int)
 jax._src.ad_checkpoint._optimization_barrier(arg)
@@ -3035,7 +3293,6 @@ A:jax._src.custom_derivatives.(outs, residuals)->fwd(*primals)
 A:jax._src.custom_derivatives.tan_out_types->tree_map(lambda o: core.get_aval(o).at_least_vspace(), outs)
 A:jax._src.custom_derivatives.tan_fn->custom_transpose(partial(disallow_jvp, out_avals=tan_out_types))
 A:jax._src.custom_derivatives.custom_jvp_call_jaxpr_p->jax._src.core.Primitive('custom_jvp_call_jaxpr')
-jax._src.closure_convert(fun:Callable,*example_args)->Tuple[Callable, List[Any]]
 jax._src.custom_derivatives.CustomJVPCallPrimitive(core.Primitive)
 jax._src.custom_derivatives.CustomJVPCallPrimitive.bind(self,fun,jvp,*args,symbolic_zeros)
 jax._src.custom_derivatives.CustomJVPCallPrimitive.get_bind_params(self,params)
@@ -3046,6 +3303,7 @@ jax._src.custom_derivatives.CustomVJPCallPrimitive.bind(self,fun,fwd,bwd,*args,o
 jax._src.custom_derivatives.CustomVJPCallPrimitive.impl(self,fun,fwd,bwd,*args,out_trees)
 jax._src.custom_derivatives.CustomVJPCallPrimitive.post_process(self,trace,out_tracers,params)
 jax._src.custom_derivatives.Residuals(self,jaxpr,in_tree,out_tree,consts)
+jax._src.custom_derivatives.Residuals.__init__(self,jaxpr,in_tree,out_tree,consts)
 jax._src.custom_derivatives.Residuals.__iter__(self)
 jax._src.custom_derivatives.Residuals.tree_flatten(self)
 jax._src.custom_derivatives.Residuals.tree_unflatten(cls,aux,consts)
@@ -3079,9 +3337,11 @@ jax._src.custom_derivatives.abstractify(x)
 jax._src.custom_derivatives.closure_convert(fun:Callable,*example_args)->Tuple[Callable, List[Any]]
 jax._src.custom_derivatives.custom_gradient(fun)
 jax._src.custom_derivatives.custom_jvp(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
+jax._src.custom_derivatives.custom_jvp.__init__(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
 jax._src.custom_derivatives.custom_jvp.defjvp(self,jvp:Callable[...,Tuple[ReturnValue,ReturnValue]],symbolic_zeros:bool=False)->Callable[..., Tuple[ReturnValue, ReturnValue]]
 jax._src.custom_derivatives.custom_jvp.defjvps(self,*jvps:Optional[Callable[...,ReturnValue]])
 jax._src.custom_derivatives.custom_vjp(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
+jax._src.custom_derivatives.custom_vjp.__init__(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
 jax._src.custom_derivatives.custom_vjp.defvjp(self,fwd:Callable[...,Tuple[ReturnValue,Any]],bwd:Callable[...,Tuple[Any,...]])->None
 jax._src.custom_derivatives.custom_vjp_by_custom_transpose(fun,fwd,bwd)
 jax._src.custom_derivatives.linear_call(fun:Callable,fun_transpose:Callable,residual_args,linear_args)
@@ -3090,9 +3350,14 @@ jax._src.custom_derivatives.process_env_traces(primitive,level:int,jvp_was_run:b
 jax._src.custom_derivatives.process_env_traces_fwd(level:int,out_trees,*args)
 jax._src.custom_derivatives.unreachable(*args,out_avals=None,exc_type=TypeError,message='unreachable')
 jax._src.custom_derivatives.unreachable_impl(*_,out_avals,exc_type,message)
-jax._src.custom_gradient(fun)
-jax._src.custom_jvp(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
-jax._src.custom_vjp(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
+jax.closure_convert(fun:Callable,*example_args)->Tuple[Callable, List[Any]]
+jax.custom_gradient(fun)
+jax.custom_jvp(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
+jax.custom_jvp.defjvp(self,jvp:Callable[...,Tuple[ReturnValue,ReturnValue]],symbolic_zeros:bool=False)->Callable[..., Tuple[ReturnValue, ReturnValue]]
+jax.custom_jvp.defjvps(self,*jvps:Optional[Callable[...,ReturnValue]])
+jax.custom_vjp(self,fun:Callable[...,ReturnValue],nondiff_argnums:Tuple[int,...]=())
+jax.custom_vjp.defvjp(self,fwd:Callable[...,Tuple[ReturnValue,Any]],bwd:Callable[...,Tuple[Any,...]])->None
+jax.custom_vjp_by_custom_transpose(fun,fwd,bwd)
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/pretty_printer.py----------------------------------------
@@ -3121,20 +3386,26 @@ jax._src.pretty_printer.Doc.__add__(self,other:'Doc')->'Doc'
 jax._src.pretty_printer.Doc.__str__(self)
 jax._src.pretty_printer.Doc.format(self,width:int=80,use_color:Optional[bool]=None,annotation_prefix='#')->str
 jax._src.pretty_printer._BreakDoc(self,text:str)
+jax._src.pretty_printer._BreakDoc.__init__(self,text:str)
 jax._src.pretty_printer._BreakDoc.__repr__(self)
 jax._src.pretty_printer._ColorDoc(self,child:Doc,*,foreground:Optional[Color]=None,background:Optional[Color]=None,intensity:Optional[Intensity]=None)
+jax._src.pretty_printer._ColorDoc.__init__(self,child:Doc,*,foreground:Optional[Color]=None,background:Optional[Color]=None,intensity:Optional[Intensity]=None)
 jax._src.pretty_printer._ColorState(NamedTuple)
 jax._src.pretty_printer._ConcatDoc(self,children:Sequence[Doc])
+jax._src.pretty_printer._ConcatDoc.__init__(self,children:Sequence[Doc])
 jax._src.pretty_printer._ConcatDoc.__repr__(self)
 jax._src.pretty_printer._GroupDoc(self,child:Doc)
+jax._src.pretty_printer._GroupDoc.__init__(self,child:Doc)
 jax._src.pretty_printer._GroupDoc.__repr__(self)
 jax._src.pretty_printer._Line(NamedTuple)
 jax._src.pretty_printer._NestDoc(self,n:int,child:Doc)
+jax._src.pretty_printer._NestDoc.__init__(self,n:int,child:Doc)
 jax._src.pretty_printer._NestDoc.__repr__(self)
 jax._src.pretty_printer._NilDoc(Doc)
 jax._src.pretty_printer._NilDoc.__repr__(self)
 jax._src.pretty_printer._State(NamedTuple)
 jax._src.pretty_printer._TextDoc(self,text:str,annotation:Optional[str]=None)
+jax._src.pretty_printer._TextDoc.__init__(self,text:str,annotation:Optional[str]=None)
 jax._src.pretty_printer._TextDoc.__repr__(self)
 jax._src.pretty_printer._align_annotations(lines)
 jax._src.pretty_printer._can_use_color()->bool
@@ -3356,11 +3627,16 @@ A:jax._src.api.self.shape->tuple(shape)
 A:jax._src.api.size->property(lambda self: math.prod(self.shape))
 A:jax._src.api.named->frozenset(self.named_shape.items())
 A:jax._src.api.(wrapped_fun, out_tree)->flatten_fun(lu.wrap_init(fun), in_tree)
-jax._src.ShapeDtypeStruct(self,shape,dtype,named_shape=None,sharding=None)
+jax.ShapeDtypeStruct(self,shape,dtype,named_shape=None,sharding=None)
+jax.ShapeDtypeStruct.__eq__(self,other)
+jax.ShapeDtypeStruct.__hash__(self)
+jax.ShapeDtypeStruct.__len__(self)
+jax.ShapeDtypeStruct.__repr__(self)
 jax._src.api.PmapCallInfo(NamedTuple)
 jax._src.api.ShapeDtypeStruct(self,shape,dtype,named_shape=None,sharding=None)
 jax._src.api.ShapeDtypeStruct.__eq__(self,other)
 jax._src.api.ShapeDtypeStruct.__hash__(self)
+jax._src.api.ShapeDtypeStruct.__init__(self,shape,dtype,named_shape=None,sharding=None)
 jax._src.api.ShapeDtypeStruct.__len__(self)
 jax._src.api.ShapeDtypeStruct.__repr__(self)
 jax._src.api._BackendAndDeviceInfo(NamedTuple)
@@ -3430,34 +3706,34 @@ jax._src.api.value_and_grad(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_
 jax._src.api.vjp(fun:Callable,*primals,has_aux:bool=False,reduce_axes=())->Union[Tuple[Any, Callable], Tuple[Any, Callable, Any]]
 jax._src.api.vmap(fun:F,in_axes:Union[int,Sequence[Any]]=0,out_axes:Any=0,axis_name:Optional[AxisName]=None,axis_size:Optional[int]=None,spmd_axis_name:Optional[Union[AxisName,Tuple[AxisName,...]]]=None)->F
 jax._src.api.xla_computation(fun:Callable,static_argnums:Union[int,Iterable[int]]=(),axis_env:Optional[Sequence[Tuple[AxisName,int]]]=None,in_parts=None,out_parts=None,backend:Optional[str]=None,tuple_args:bool=False,instantiate_const_outputs:Optional[bool]=None,return_shape:bool=False,donate_argnums:Union[int,Iterable[int]]=())->Callable
-jax._src.block_until_ready(x)
-jax._src.checkpoint(fun:Callable,*,concrete:bool=False,prevent_cse:bool=True,static_argnums:Union[int,Tuple[int,...]]=(),policy:Optional[Callable[...,bool]]=None)->Callable
-jax._src.clear_backends()
-jax._src.device_get(x:Any)
-jax._src.device_put(x,device:Union[None,xc.Device,jax.sharding.Sharding,Any]=None)
-jax._src.device_put_replicated(x:Any,devices:Sequence[xc.Device])
-jax._src.device_put_sharded(shards:Sequence[Any],devices:Sequence[xc.Device])
-jax._src.disable_jit(disable:bool=True)
-jax._src.effects_barrier()
-jax._src.eval_shape(fun:Callable,*args,**kwargs)
-jax._src.grad(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False,reduce_axes:Sequence[AxisName]=())->Callable
-jax._src.hessian(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False)->Callable
-jax._src.jacfwd(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False)->Callable
-jax._src.jacrev(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False)->Callable
-jax._src.jit(fun:Callable,*,static_argnums:Union[int,Iterable[int],None]=None,static_argnames:Union[str,Iterable[str],None]=None,device:Optional[xc.Device]=None,backend:Optional[str]=None,donate_argnums:Union[int,Iterable[int]]=(),inline:bool=False,keep_unused:bool=False,abstracted_axes:Optional[Any]=None)->stages.Wrapped
-jax._src.jvp(fun:Callable,primals,tangents,has_aux:bool=False)->Tuple[Any, ...]
-jax._src.linear_transpose(fun:Callable,*primals,reduce_axes=())->Callable
-jax._src.linearize(fun:Callable,*primals)->Tuple[Any, Callable]
-jax._src.live_arrays(platform=None)
-jax._src.make_jaxpr(fun:Callable,static_argnums:Union[int,Iterable[int]]=(),axis_env:Optional[Sequence[Tuple[AxisName,int]]]=None,return_shape:bool=False,abstracted_axes:Optional[Any]=None)->Callable[..., Union[core.ClosedJaxpr, Tuple[core.ClosedJaxpr, Any]]]
-jax._src.named_call(fun:Callable[...,Any],*,name:Optional[str]=None)->Callable[..., Any]
-jax._src.named_scope(name:str)->Generator[None, None, None]
-jax._src.pmap(fun:Callable,axis_name:Optional[AxisName]=None,*,in_axes=0,out_axes=0,static_broadcasted_argnums:Union[int,Iterable[int]]=(),devices:Optional[Sequence[xc.Device]]=None,backend:Optional[str]=None,axis_size:Optional[int]=None,donate_argnums:Union[int,Iterable[int]]=(),global_arg_shapes:Optional[Tuple[Tuple[int,...],...]]=None)->Any
-jax._src.pure_callback(callback:Callable[...,Any],result_shape_dtypes:Any,*args:Any,vectorized:bool=False,**kwargs:Any)
-jax._src.value_and_grad(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False,reduce_axes:Sequence[AxisName]=())->Callable[..., Tuple[Any, Any]]
-jax._src.vjp(fun:Callable,*primals,has_aux:bool=False,reduce_axes=())->Union[Tuple[Any, Callable], Tuple[Any, Callable, Any]]
-jax._src.vmap(fun:F,in_axes:Union[int,Sequence[Any]]=0,out_axes:Any=0,axis_name:Optional[AxisName]=None,axis_size:Optional[int]=None,spmd_axis_name:Optional[Union[AxisName,Tuple[AxisName,...]]]=None)->F
-jax._src.xla_computation(fun:Callable,static_argnums:Union[int,Iterable[int]]=(),axis_env:Optional[Sequence[Tuple[AxisName,int]]]=None,in_parts=None,out_parts=None,backend:Optional[str]=None,tuple_args:bool=False,instantiate_const_outputs:Optional[bool]=None,return_shape:bool=False,donate_argnums:Union[int,Iterable[int]]=())->Callable
+jax.block_until_ready(x)
+jax.checkpoint(fun:Callable,*,concrete:bool=False,prevent_cse:bool=True,static_argnums:Union[int,Tuple[int,...]]=(),policy:Optional[Callable[...,bool]]=None)->Callable
+jax.clear_backends()
+jax.device_get(x:Any)
+jax.device_put(x,device:Union[None,xc.Device,jax.sharding.Sharding,Any]=None)
+jax.device_put_replicated(x:Any,devices:Sequence[xc.Device])
+jax.device_put_sharded(shards:Sequence[Any],devices:Sequence[xc.Device])
+jax.disable_jit(disable:bool=True)
+jax.effects_barrier()
+jax.eval_shape(fun:Callable,*args,**kwargs)
+jax.grad(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False,reduce_axes:Sequence[AxisName]=())->Callable
+jax.hessian(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False)->Callable
+jax.jacfwd(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False)->Callable
+jax.jacrev(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False)->Callable
+jax.jit(fun:Callable,*,static_argnums:Union[int,Iterable[int],None]=None,static_argnames:Union[str,Iterable[str],None]=None,device:Optional[xc.Device]=None,backend:Optional[str]=None,donate_argnums:Union[int,Iterable[int]]=(),inline:bool=False,keep_unused:bool=False,abstracted_axes:Optional[Any]=None)->stages.Wrapped
+jax.jvp(fun:Callable,primals,tangents,has_aux:bool=False)->Tuple[Any, ...]
+jax.linear_transpose(fun:Callable,*primals,reduce_axes=())->Callable
+jax.linearize(fun:Callable,*primals)->Tuple[Any, Callable]
+jax.live_arrays(platform=None)
+jax.make_jaxpr(fun:Callable,static_argnums:Union[int,Iterable[int]]=(),axis_env:Optional[Sequence[Tuple[AxisName,int]]]=None,return_shape:bool=False,abstracted_axes:Optional[Any]=None)->Callable[..., Union[core.ClosedJaxpr, Tuple[core.ClosedJaxpr, Any]]]
+jax.named_call(fun:Callable[...,Any],*,name:Optional[str]=None)->Callable[..., Any]
+jax.named_scope(name:str)->Generator[None, None, None]
+jax.pmap(fun:Callable,axis_name:Optional[AxisName]=None,*,in_axes=0,out_axes=0,static_broadcasted_argnums:Union[int,Iterable[int]]=(),devices:Optional[Sequence[xc.Device]]=None,backend:Optional[str]=None,axis_size:Optional[int]=None,donate_argnums:Union[int,Iterable[int]]=(),global_arg_shapes:Optional[Tuple[Tuple[int,...],...]]=None)->Any
+jax.pure_callback(callback:Callable[...,Any],result_shape_dtypes:Any,*args:Any,vectorized:bool=False,**kwargs:Any)
+jax.value_and_grad(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False,reduce_axes:Sequence[AxisName]=())->Callable[..., Tuple[Any, Any]]
+jax.vjp(fun:Callable,*primals,has_aux:bool=False,reduce_axes=())->Union[Tuple[Any, Callable], Tuple[Any, Callable, Any]]
+jax.vmap(fun:F,in_axes:Union[int,Sequence[Any]]=0,out_axes:Any=0,axis_name:Optional[AxisName]=None,axis_size:Optional[int]=None,spmd_axis_name:Optional[Union[AxisName,Tuple[AxisName,...]]]=None)->F
+jax.xla_computation(fun:Callable,static_argnums:Union[int,Iterable[int]]=(),axis_env:Optional[Sequence[Tuple[AxisName,int]]]=None,in_parts=None,out_parts=None,backend:Optional[str]=None,tuple_args:bool=False,instantiate_const_outputs:Optional[bool]=None,return_shape:bool=False,donate_argnums:Union[int,Iterable[int]]=())->Callable
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/linear_util.py----------------------------------------
@@ -3474,6 +3750,7 @@ A:jax._src.linear_util.out1->aux1()
 A:jax._src.linear_util.out2->aux2()
 jax._src.linear_util.EmptyStoreValue
 jax._src.linear_util.Store(self)
+jax._src.linear_util.Store.__init__(self)
 jax._src.linear_util.Store.__nonzero__(self)
 jax._src.linear_util.Store.reset(self)
 jax._src.linear_util.Store.store(self,val)
@@ -3482,6 +3759,7 @@ jax._src.linear_util.StoreException(Exception)
 jax._src.linear_util.WrappedFun(self,f,transforms,stores,params,in_type)
 jax._src.linear_util.WrappedFun.__eq__(self,other)
 jax._src.linear_util.WrappedFun.__hash__(self)
+jax._src.linear_util.WrappedFun.__init__(self,f,transforms,stores,params,in_type)
 jax._src.linear_util.WrappedFun.__name__(self)
 jax._src.linear_util.WrappedFun.__repr__(self)
 jax._src.linear_util.WrappedFun.call_wrapped(self,*args,**kwargs)
@@ -3520,6 +3798,7 @@ A:jax._src.device_array.deleted_buffer->DeletedBuffer()
 jax._src.device_array.DeletedBuffer(object)
 jax._src.device_array._DeviceArray(self,aval:core.ShapedArray,device:Optional[Device],device_buffer:Buffer)
 jax._src.device_array._DeviceArray.__cuda_array_interface__(self)
+jax._src.device_array._DeviceArray.__init__(self,aval:core.ShapedArray,device:Optional[Device],device_buffer:Buffer)
 jax._src.device_array._DeviceArray._check_if_deleted(self)
 jax._src.device_array._DeviceArray._value(self)
 jax._src.device_array._DeviceArray.block_until_ready(self)
@@ -3559,10 +3838,10 @@ A:jax._src.global_device_array.local_arrays->data_callback(local_indices)
 A:jax._src.global_device_array.dbs->data_callback(cb_inp)
 A:jax._src.global_device_array.global_idx_rid->get_shard_indices_replica_ids(global_aval.shape, global_mesh, out_axis_resources)
 A:jax._src.global_device_array.fast_path_args->_GdaFastPathArgs(global_idx_rid, local_devices)
-jax._src.global_device_Shard
 jax._src.global_device_array.GlobalDeviceArray(self,global_shape:Shape,global_mesh:pxla.Mesh,mesh_axes:MeshAxes,device_buffers:Sequence[DeviceArray],_gda_fast_path_args:Optional[_GdaFastPathArgs]=None,_enable_checks:bool=True)
 jax._src.global_device_array.GlobalDeviceArray.__array__(self,dtype=None,context=None)
 jax._src.global_device_array.GlobalDeviceArray.__eq__(self,other:object)
+jax._src.global_device_array.GlobalDeviceArray.__init__(self,global_shape:Shape,global_mesh:pxla.Mesh,mesh_axes:MeshAxes,device_buffers:Sequence[DeviceArray],_gda_fast_path_args:Optional[_GdaFastPathArgs]=None,_enable_checks:bool=True)
 jax._src.global_device_array.GlobalDeviceArray.__repr__(self)
 jax._src.global_device_array.GlobalDeviceArray.__str__(self)
 jax._src.global_device_array.GlobalDeviceArray._check_if_deleted(self)
@@ -3866,10 +4145,12 @@ A:jax._src.custom_batching.(mapped_args, bcast_args)->tree_split(in_batched, lis
 A:jax._src.custom_batching.out->jax.lax.map(to_map, mapped_args)
 A:jax._src.custom_batching.out_batched->tree_map(lambda _: True, out)
 jax._src.custom_batching.ClosedRule(self,rule)
+jax._src.custom_batching.ClosedRule.__init__(self,rule)
 jax._src.custom_batching.ClosedRule.__str__(self)
 jax._src.custom_batching.call_rule(rule,axis_size,in_batched,args)
 jax._src.custom_batching.check_vmap_rule_trees(rule,original_out_tree,out_tree,out_batched_tree)
 jax._src.custom_batching.custom_vmap(self,fun:Callable)
+jax._src.custom_batching.custom_vmap.__init__(self,fun:Callable)
 jax._src.custom_batching.custom_vmap.def_vmap(self,vmap_rule:Callable)->Callable
 jax._src.custom_batching.custom_vmap_abstract_eval(*in_avals,call,**_)
 jax._src.custom_batching.custom_vmap_batching(args_flat,dims,*,call,rule,in_tree,out_tree)
@@ -3969,6 +4250,7 @@ jax._src.source_info_util.SourceInfo.replace(self,*,traceback:Optional[Traceback
 jax._src.source_info_util.Transform(NamedTuple)
 jax._src.source_info_util.Transform.wrap(self,stack:Tuple[str,...])->Tuple[str, ...]
 jax._src.source_info_util._SourceInfoContext(self)
+jax._src.source_info_util._SourceInfoContext.__init__(self)
 jax._src.source_info_util._summarize_frame(frame:Frame)->str
 jax._src.source_info_util.current()->SourceInfo
 jax._src.source_info_util.current_name_stack()->NameStack
@@ -4027,7 +4309,6 @@ A:jax._src.tree_util.diff->set(prefix_tree_keys).symmetric_difference(set(full_t
 A:jax._src.tree_util.prefix_tree_meta_str->str(prefix_tree_meta)
 A:jax._src.tree_util.full_tree_meta_str->str(full_tree_meta)
 A:jax._src.tree_util.metadata_diff->textwrap.indent('\n'.join(difflib.ndiff(prefix_tree_meta_str.splitlines(), full_tree_meta_str.splitlines())), prefix='    ')
-jax._src.tree_map(f:Callable[...,Any],tree:Any,*rest:Any,is_leaf:Optional[Callable[[Any],bool]]=None)->Any
 jax._src.tree_util.AttributeKeyPathEntry(_DeprecatedKeyPathEntry)
 jax._src.tree_util.AttributeKeyPathEntry.__str__(self)
 jax._src.tree_util.AttributeKeyPathEntry.pprint(self)->str
@@ -4044,6 +4325,7 @@ jax._src.tree_util.GetitemKeyPathEntry(_DeprecatedKeyPathEntry)
 jax._src.tree_util.GetitemKeyPathEntry.__str__(self)
 jax._src.tree_util.GetitemKeyPathEntry.pprint(self)->str
 jax._src.tree_util.Partial(klass,func,*args,**kw)
+jax._src.tree_util.Partial.__new__(klass,func,*args,**kw)
 jax._src.tree_util.SequenceKey
 jax._src.tree_util.SequenceKey.__str__(self)
 jax._src.tree_util._DeprecatedKeyPathEntry(NamedTuple)
@@ -4051,6 +4333,7 @@ jax._src.tree_util._DeprecatedKeyPathEntry.pprint(self)->str
 jax._src.tree_util._HashableCallableShim(self,fun)
 jax._src.tree_util._HashableCallableShim.__eq__(self,other)
 jax._src.tree_util._HashableCallableShim.__hash__(self)
+jax._src.tree_util._HashableCallableShim.__init__(self,fun)
 jax._src.tree_util._HashableCallableShim.__repr__(self)
 jax._src.tree_util._RegistryWithKeypathsEntry(NamedTuple)
 jax._src.tree_util.__getattr__(name)
@@ -4167,6 +4450,7 @@ A:jax._src.dispatch.moved_buf->jax._src.xla_bridge.get_device_backend(device).bu
 A:jax._src.dispatch.map_->s.devices_indices_map(aval.shape)
 A:jax._src.dispatch.device_put_p->jax._src.core.Primitive('device_put')
 jax._src.dispatch.RuntimeTokenSet(self)
+jax._src.dispatch.RuntimeTokenSet.__init__(self)
 jax._src.dispatch.RuntimeTokenSet.block_until_ready(self)
 jax._src.dispatch.RuntimeTokenSet.clear(self)
 jax._src.dispatch.RuntimeTokenSet.get_token(self,eff:core.Effect,device:Device)->RuntimeToken
@@ -4174,10 +4458,12 @@ jax._src.dispatch.RuntimeTokenSet.set_output_runtime_token(self,device:Device,to
 jax._src.dispatch.RuntimeTokenSet.set_output_token(self,device:Device,token:RuntimeToken)
 jax._src.dispatch.RuntimeTokenSet.update_token(self,eff:core.Effect,token:RuntimeToken)
 jax._src.dispatch.SimpleResultHandler(self,handlers)
+jax._src.dispatch.SimpleResultHandler.__init__(self,handlers)
 jax._src.dispatch.SimpleResultHandler.__iter__(self)
 jax._src.dispatch.SimpleResultHandler.__len__(self)
 jax._src.dispatch.SourceInfo(NamedTuple)
 jax._src.dispatch.XlaCompiledComputation(self,xla_executable,in_avals,kept_var_idx,unsafe_call,keepalive:Any)
+jax._src.dispatch.XlaCompiledComputation.__init__(self,xla_executable,in_avals,kept_var_idx,unsafe_call,keepalive:Any)
 jax._src.dispatch.XlaCompiledComputation.call(self,*args)
 jax._src.dispatch.XlaCompiledComputation.from_trivial_jaxpr(jaxpr,consts,device,in_avals,out_avals,has_unordered_effects,ordered_effects,kept_var_idx,keepalive:Optional[Any],host_callbacks:List[Any])->XlaCompiledComputation
 jax._src.dispatch.XlaCompiledComputation.from_xla_computation(name:str,xla_computation:Optional[ir.Module],in_type:Optional[pe.InputType],out_type:pe.OutputType,nreps:int,device:Optional[Device],backend:Backend,tuple_args:bool,in_avals:Sequence[core.AbstractValue],out_avals:Sequence[core.AbstractValue],has_unordered_effects:bool,ordered_effects:List[core.Effect],kept_var_idx:Set[int],keepalive:Optional[Any],host_callbacks:List[Any])->XlaCompiledComputation
@@ -4185,6 +4471,7 @@ jax._src.dispatch.XlaCompiledComputation.is_trivial(self)
 jax._src.dispatch.XlaCompiledComputation.xla_executable(self)
 jax._src.dispatch.XlaCompiledComputation.xla_extension_executable(self)
 jax._src.dispatch.XlaComputation(self,name:str,hlo:Optional[ir.Module],is_trivial:bool,donated_invars:Optional[Sequence[bool]],in_type:Optional[pe.InputType],out_type:Optional[pe.OutputType],**compile_args)
+jax._src.dispatch.XlaComputation.__init__(self,name:str,hlo:Optional[ir.Module],is_trivial:bool,donated_invars:Optional[Sequence[bool]],in_type:Optional[pe.InputType],out_type:Optional[pe.OutputType],**compile_args)
 jax._src.dispatch.XlaComputation.compile(self)->XlaCompiledComputation
 jax._src.dispatch.XlaComputation.cost_analysis(self)->Dict[str, float]
 jax._src.dispatch.XlaComputation.hlo(self)->xc.XlaComputation
@@ -4289,6 +4576,7 @@ A:jax._src.api_util.dtype->numpy.dtype(x)
 jax._src.api_util._HashableWithStrictTypeEquality(self,val)
 jax._src.api_util._HashableWithStrictTypeEquality.__eq__(self,other)
 jax._src.api_util._HashableWithStrictTypeEquality.__hash__(self)
+jax._src.api_util._HashableWithStrictTypeEquality.__init__(self,val)
 jax._src.api_util._argnames_partial(fixed_kwargs:WrapKwArgs,*args,**dyn_kwargs)
 jax._src.api_util._argnums_partial(dyn_argnums,fixed_args,*dyn_args,**kwargs)
 jax._src.api_util._dtype(x)
@@ -4322,7 +4610,6 @@ jax._src.api_util.resolve_argnums(fun,donate_argnums,static_argnums,static_argna
 jax._src.api_util.shaped_abstractify(x)
 jax._src.api_util.validate_argnames(sig:inspect.Signature,argnames:Tuple[str,...],argnames_name:str)->None
 jax._src.api_util.validate_argnums(sig:inspect.Signature,argnums:Tuple[int,...],argnums_name:str)->None
-jax._src.flatten_fun_nokwargs(in_tree,*args_flat)
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/pjit.py----------------------------------------
@@ -4507,11 +4794,13 @@ A:jax._src.pjit.(in_ppspec, out_ppspec)->_get_ppspec_from_executable(executable,
 A:jax._src.pjit.out_partition_spec->_get_partition_spec(out_ppspec)
 A:jax._src.pjit.in_partition_spec->_get_partition_spec(in_ppspec)
 jax._src.pjit.CanonicalizedParsedPartitionSpec(self,parsed_pspec:ParsedPartitionSpec)
+jax._src.pjit.CanonicalizedParsedPartitionSpec.__init__(self,parsed_pspec:ParsedPartitionSpec)
 jax._src.pjit.CanonicalizedParsedPartitionSpec.__repr__(self)
 jax._src.pjit.ParsedPartitionSpec(self,user_spec,partitions,sync=SpecSync.IN_SYNC)
 jax._src.pjit.ParsedPartitionSpec.__eq__(self,other)
 jax._src.pjit.ParsedPartitionSpec.__getitem__(self,i)
 jax._src.pjit.ParsedPartitionSpec.__hash__(self)
+jax._src.pjit.ParsedPartitionSpec.__init__(self,user_spec,partitions,sync=SpecSync.IN_SYNC)
 jax._src.pjit.ParsedPartitionSpec.__iter__(self)
 jax._src.pjit.ParsedPartitionSpec.__len__(self)
 jax._src.pjit.ParsedPartitionSpec.__repr__(self)
@@ -4529,6 +4818,7 @@ jax._src.pjit.SameDeviceAssignmentTuple.__hash__(self)
 jax._src.pjit.SpecSync(IntEnum)
 jax._src.pjit._FromGdaSingleton
 jax._src.pjit._MostRecentPjitCallExecutable(self)
+jax._src.pjit._MostRecentPjitCallExecutable.__init__(self)
 jax._src.pjit._calc_is_global_sequence(in_positional_semantics,in_shardings)
 jax._src.pjit._check_all_or_none_unspecified(axis_resources,name)
 jax._src.pjit._check_and_canonicalize_out_shardings(out_shardings_thunk,out_tree,global_out_avals)
@@ -4619,6 +4909,7 @@ A:jax._src.debugger.web_debugger.current_frame->self.current_frame()
 A:jax._src.debugger.web_debugger.globals->'\n'.join([f'{key} = {value}' for (key, value) in sorted(current_frame.globals.items())])
 A:jax._src.debugger.web_debugger.locals->'\n'.join([f'{key} = {value}' for (key, value) in sorted(current_frame.locals.items())])
 jax._src.debugger.web_debugger.WebDebugger(self,frames:List[debugger_core.DebuggerFrame],thread_id,completekey:str='tab',host:str='',port:int=5555)
+jax._src.debugger.web_debugger.WebDebugger.__init__(self,frames:List[debugger_core.DebuggerFrame],thread_id,completekey:str='tab',host:str='',port:int=5555)
 jax._src.debugger.web_debugger.WebDebugger.get_current_frame_data(self)
 jax._src.debugger.web_debugger.WebDebugger.get_globals(self)
 jax._src.debugger.web_debugger.WebDebugger.get_locals(self)
@@ -4686,6 +4977,7 @@ A:jax._src.debugger.colab_debugger.self._interaction_log->jax._src.debugger.cola
 A:jax._src.debugger.colab_debugger.self._frame_preview->FramePreview(frame)
 A:jax._src.debugger.colab_debugger.self._debugger_view->DebuggerView(self.current_frame())
 jax._src.debugger.colab_debugger.CodeViewer(self,code_:str,highlights:List[int],linenostart:int=1)
+jax._src.debugger.colab_debugger.CodeViewer.__init__(self,code_:str,highlights:List[int],linenostart:int=1)
 jax._src.debugger.colab_debugger.CodeViewer._highlight_code(self,code:str,highlights,linenostart:int)
 jax._src.debugger.colab_debugger.CodeViewer.append(self,child)
 jax._src.debugger.colab_debugger.CodeViewer.clear(self)
@@ -4693,10 +4985,12 @@ jax._src.debugger.colab_debugger.CodeViewer.render(self)
 jax._src.debugger.colab_debugger.CodeViewer.update(self,elem)
 jax._src.debugger.colab_debugger.CodeViewer.update_code(self,code_,highlights,*,linenostart:int=1)
 jax._src.debugger.colab_debugger.ColabDebugger(self,frames:List[debugger_core.DebuggerFrame],thread_id:int)
+jax._src.debugger.colab_debugger.ColabDebugger.__init__(self,frames:List[debugger_core.DebuggerFrame],thread_id:int)
 jax._src.debugger.colab_debugger.ColabDebugger.do_down(self,arg)
 jax._src.debugger.colab_debugger.ColabDebugger.do_up(self,arg)
 jax._src.debugger.colab_debugger.ColabDebugger.run(self)
 jax._src.debugger.colab_debugger.DebuggerView(self,frame,*,log_color='')
+jax._src.debugger.colab_debugger.DebuggerView.__init__(self,frame,*,log_color='')
 jax._src.debugger.colab_debugger.DebuggerView.append(self,child)
 jax._src.debugger.colab_debugger.DebuggerView.clear(self)
 jax._src.debugger.colab_debugger.DebuggerView.flush(self)
@@ -4708,6 +5002,7 @@ jax._src.debugger.colab_debugger.DebuggerView.update(self,elem)
 jax._src.debugger.colab_debugger.DebuggerView.update_frame(self,frame)
 jax._src.debugger.colab_debugger.DebuggerView.write(self,text)
 jax._src.debugger.colab_debugger.FramePreview(self,frame)
+jax._src.debugger.colab_debugger.FramePreview.__init__(self,frame)
 jax._src.debugger.colab_debugger.FramePreview.append(self,child)
 jax._src.debugger.colab_debugger.FramePreview.clear(self)
 jax._src.debugger.colab_debugger.FramePreview.render(self)
@@ -4736,12 +5031,14 @@ A:jax._src.debugger.core.thread_id->threading.get_ident()
 A:jax._src.debugger.core.debugger->get_debugger(backend=backend)
 jax._src.debugger.breakpoint(*,backend:Optional[str]=None,filter_frames:bool=True,num_frames:Optional[int]=None,ordered:bool=False,**kwargs)
 jax._src.debugger.core.Debugger(self,frames:List[DebuggerFrame],thread_id:Optional[int],**kwargs:Any)
+jax._src.debugger.core.Debugger.__call__(self,frames:List[DebuggerFrame],thread_id:Optional[int],**kwargs:Any)
 jax._src.debugger.core.DebuggerFrame
 jax._src.debugger.core.DebuggerFrame.from_frameinfo(cls,frame_info)->DebuggerFrame
 jax._src.debugger.core.DebuggerFrame.tree_flatten(self)
 jax._src.debugger.core.DebuggerFrame.tree_unflatten(cls,info,valid_vars)
 jax._src.debugger.core._CantFlatten
 jax._src.debugger.core._DictWrapper(self,keys,values)
+jax._src.debugger.core._DictWrapper.__init__(self,keys,values)
 jax._src.debugger.core._DictWrapper.to_dict(self)
 jax._src.debugger.core._DictWrapper.tree_flatten(self)
 jax._src.debugger.core._DictWrapper.tree_unflatten(cls,keys,values)
@@ -4754,6 +5051,7 @@ jax._src.debugger.core.register_debugger(name:str,debugger:Debugger,priority:int
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/debugger/cli_debugger.py----------------------------------------
 A:jax._src.debugger.cli_debugger.msg->traceback.format_exception_only(*exc_info)[-1].strip()
 jax._src.debugger.cli_debugger.CliDebugger(self,frames:List[DebuggerFrame],thread_id,stdin:Optional[IO[str]]=None,stdout:Optional[IO[str]]=None,completekey:str='tab')
+jax._src.debugger.cli_debugger.CliDebugger.__init__(self,frames:List[DebuggerFrame],thread_id,stdin:Optional[IO[str]]=None,stdout:Optional[IO[str]]=None,completekey:str='tab')
 jax._src.debugger.cli_debugger.CliDebugger._error_message(self)
 jax._src.debugger.cli_debugger.CliDebugger.current_frame(self)
 jax._src.debugger.cli_debugger.CliDebugger.default(self,arg)
@@ -5466,6 +5764,7 @@ A:jax._src.scipy.stats.kde.mapped_kernel->vmap(reduced_kernel)
 jax._src.scipy.stats.kde._gaussian_kernel_convolve(chol,norm,target,weights,mean)
 jax._src.scipy.stats.kde._gaussian_kernel_eval(in_log,points,values,xi,precision)
 jax._src.scipy.stats.kde.gaussian_kde(self,dataset,bw_method=None,weights=None)
+jax._src.scipy.stats.kde.gaussian_kde.__init__(self,dataset,bw_method=None,weights=None)
 jax._src.scipy.stats.kde.gaussian_kde._reshape_points(self,points)
 jax._src.scipy.stats.kde.gaussian_kde._setattr(self,name,value)
 jax._src.scipy.stats.kde.gaussian_kde.d(self)
@@ -5821,6 +6120,7 @@ A:jax._src.third_party.scipy.interpolate.weight->asarray(1.0)
 A:jax._src.third_party.scipy.interpolate.out_of_bounds->zeros((xi.shape[1],), dtype=bool)
 A:jax._src.third_party.scipy.interpolate.i->where(i > g.size - 2, g.size - 2, i)
 jax._src.third_party.scipy.interpolate.RegularGridInterpolator(self,points,values,method='linear',bounds_error=False,fill_value=nan)
+jax._src.third_party.scipy.interpolate.RegularGridInterpolator.__init__(self,points,values,method='linear',bounds_error=False,fill_value=nan)
 jax._src.third_party.scipy.interpolate.RegularGridInterpolator._evaluate_linear(self,indices,norm_distances)
 jax._src.third_party.scipy.interpolate.RegularGridInterpolator._evaluate_nearest(self,indices,norm_distances)
 jax._src.third_party.scipy.interpolate.RegularGridInterpolator._find_indices(self,xi)
@@ -6419,8 +6719,10 @@ A:jax._src.numpy.lax_numpy.other->other.__jax_array__().__jax_array__()
 A:jax._src.numpy.lax_numpy.(num_chunks, tail)->jax._src.numpy.ufuncs.divmod(x.shape[0], size)
 jax._src.numpy.lax_numpy._IndexUpdateHelper(self,array)
 jax._src.numpy.lax_numpy._IndexUpdateHelper.__getitem__(self,index)
+jax._src.numpy.lax_numpy._IndexUpdateHelper.__init__(self,array)
 jax._src.numpy.lax_numpy._IndexUpdateHelper.__repr__(self)
 jax._src.numpy.lax_numpy._IndexUpdateRef(self,array,index)
+jax._src.numpy.lax_numpy._IndexUpdateRef.__init__(self,array,index)
 jax._src.numpy.lax_numpy._IndexUpdateRef.__repr__(self)
 jax._src.numpy.lax_numpy._IndexUpdateRef.add(self,values,indices_are_sorted=False,unique_indices=False,mode=None)
 jax._src.numpy.lax_numpy._IndexUpdateRef.apply(self,func,indices_are_sorted=False,unique_indices=False,mode=None)
@@ -6432,6 +6734,7 @@ jax._src.numpy.lax_numpy._IndexUpdateRef.multiply(self,values,indices_are_sorted
 jax._src.numpy.lax_numpy._IndexUpdateRef.power(self,values,indices_are_sorted=False,unique_indices=False,mode=None)
 jax._src.numpy.lax_numpy._IndexUpdateRef.set(self,values,indices_are_sorted=False,unique_indices=False,mode=None)
 jax._src.numpy.lax_numpy._ScalarMeta(self,x:Any)
+jax._src.numpy.lax_numpy._ScalarMeta.__call__(self,x:Any)
 jax._src.numpy.lax_numpy._ScalarMeta.__eq__(self,other:Any)->bool
 jax._src.numpy.lax_numpy._ScalarMeta.__hash__(self)->int
 jax._src.numpy.lax_numpy._ScalarMeta.__instancecheck__(self,instance:Any)->bool
@@ -7093,15 +7396,31 @@ A:jax._src.state.types.Aval->TypeVar('Aval', bound=core.AbstractValue)
 A:jax._src.state.types.ndim->property(lambda self: len(self.shape))
 A:jax._src.state.types.size->property(lambda self: math.prod(self.shape))
 jax._src.state.AbstractRef(self,inner_aval:core.AbstractValue)
+jax._src.state.AbstractRef.__eq__(self,other)
+jax._src.state.AbstractRef.__hash__(self)
+jax._src.state.AbstractRef.__repr__(self)->str
+jax._src.state.AbstractRef._getitem(self,tracer,idx)->Array
+jax._src.state.AbstractRef._setitem(self,tracer,idx,value)->None
+jax._src.state.AbstractRef.at_least_vspace(self)
+jax._src.state.AbstractRef.dtype(self)
+jax._src.state.AbstractRef.get(tracer,idx=())
+jax._src.state.AbstractRef.join(self,other)
+jax._src.state.AbstractRef.set(tracer,value,idx=())
+jax._src.state.AbstractRef.shape(self)
 jax._src.state.AccumEffect(RefEffect)
 jax._src.state.ReadEffect(RefEffect)
 jax._src.state.RefEffect(effects.JaxprInputEffect)
+jax._src.state.RefEffect.__eq__(self,other)
+jax._src.state.RefEffect.__hash__(self)
+jax._src.state.RefEffect.__str__(self)
+jax._src.state.RefEffect._pretty_print(self,context:core.JaxprPpContext)->pp.Doc
 jax._src.state.WriteEffect(RefEffect)
 jax._src.state.get_ref_state_effects(avals:Sequence[core.AbstractValue],effects:core.Effects)->List[Set[StateEffect]]
 jax._src.state.shaped_array_ref(shape:Tuple[int,...],dtype,weak_type:bool=False,named_shape=None)->AbstractRef[core.AbstractValue]
 jax._src.state.types.AbstractRef(self,inner_aval:core.AbstractValue)
 jax._src.state.types.AbstractRef.__eq__(self,other)
 jax._src.state.types.AbstractRef.__hash__(self)
+jax._src.state.types.AbstractRef.__init__(self,inner_aval:core.AbstractValue)
 jax._src.state.types.AbstractRef.__repr__(self)->str
 jax._src.state.types.AbstractRef._getitem(self,tracer,idx)->Array
 jax._src.state.types.AbstractRef._setitem(self,tracer,idx,value)->None
@@ -7221,6 +7540,7 @@ A:jax._src.state.discharge.(out_vals, ref_vals)->split_list(out_and_ref_vals, [n
 A:jax._src.state.discharge.ref_vals_iter->iter(ref_vals)
 A:jax._src.state.discharge.new_invals->tuple((next(ref_vals_iter) if isinstance(aval, AbstractRef) else None for aval in in_avals))
 jax._src.state.discharge.DischargeRule(self,in_avals:Sequence[core.AbstractValue],out_avals:Sequence[core.AbstractValue],*args:Any,**params:Any)
+jax._src.state.discharge.DischargeRule.__call__(self,in_avals:Sequence[core.AbstractValue],out_avals:Sequence[core.AbstractValue],*args:Any,**params:Any)
 jax._src.state.discharge.Environment
 jax._src.state.discharge.Environment.read(self,v:core.Atom)->Any
 jax._src.state.discharge.Environment.write(self,v:core.Var,val:Any)->None
@@ -7568,15 +7888,19 @@ jax._src.interpreters.pxla.DynamicAxisEnv.__getitem__(self,axis_name)
 jax._src.interpreters.pxla.DynamicAxisEnv.nreps(self)
 jax._src.interpreters.pxla.DynamicAxisEnv.sizes(self)
 jax._src.interpreters.pxla.DynamicAxisEnvFrame(self,name,pmap_trace,hard_size)
+jax._src.interpreters.pxla.DynamicAxisEnvFrame.__init__(self,name,pmap_trace,hard_size)
 jax._src.interpreters.pxla.EmapInfo(NamedTuple)
 jax._src.interpreters.pxla.ExecuteReplicated(self,xla_executable,name,backend,in_handler:InputsHandler,out_handler:ResultsHandler,unordered_effects:List[core.Effect],ordered_effects:List[core.Effect],keepalive:Any,has_host_callbacks:bool,kept_var_idx:Set[int])
+jax._src.interpreters.pxla.ExecuteReplicated.__init__(self,xla_executable,name,backend,in_handler:InputsHandler,out_handler:ResultsHandler,unordered_effects:List[core.Effect],ordered_effects:List[core.Effect],keepalive:Any,has_host_callbacks:bool,kept_var_idx:Set[int])
 jax._src.interpreters.pxla.ExecuteReplicated._add_tokens_to_inputs(self,input_bufs)
 jax._src.interpreters.pxla.ExecuteReplicated._call_with_tokens(self,input_bufs)
 jax._src.interpreters.pxla.ExecuteReplicated._handle_token_bufs(self,token_bufs,sharded_token)
 jax._src.interpreters.pxla.InputsHandler(self,local_devices,in_shardings,input_indices)
+jax._src.interpreters.pxla.InputsHandler.__init__(self,local_devices,in_shardings,input_indices)
 jax._src.interpreters.pxla.InputsHandler.__str__(self)
 jax._src.interpreters.pxla.Loop(NamedTuple)
 jax._src.interpreters.pxla.MapTrace(self,*args,emap_info)
+jax._src.interpreters.pxla.MapTrace.__init__(self,*args,emap_info)
 jax._src.interpreters.pxla.MapTrace.process_axis_index(self,frame)
 jax._src.interpreters.pxla.MapTrace.process_call(self,call_primitive,fun,tracers,params)
 jax._src.interpreters.pxla.MapTrace.process_custom_jvp_call(self,primitive,fun,jvp,tracers,*,symbolic_zeros)
@@ -7586,6 +7910,7 @@ jax._src.interpreters.pxla.MapTrace.process_primitive(self,primitive,tracers,par
 jax._src.interpreters.pxla.MapTrace.pure(self,val)
 jax._src.interpreters.pxla.MapTrace.sublift(self,tracer)
 jax._src.interpreters.pxla.MapTracer(self,trace:MapTrace,val,shard_axes:Dict[core.AxisName,int])
+jax._src.interpreters.pxla.MapTracer.__init__(self,trace:MapTrace,val,shard_axes:Dict[core.AxisName,int])
 jax._src.interpreters.pxla.MapTracer.__str__(self)
 jax._src.interpreters.pxla.MapTracer.aval(self)
 jax._src.interpreters.pxla.MapTracer.full_lower(self)
@@ -7594,6 +7919,7 @@ jax._src.interpreters.pxla.Mesh.__enter__(self)
 jax._src.interpreters.pxla.Mesh.__eq__(self,other)
 jax._src.interpreters.pxla.Mesh.__exit__(self,exc_type,exc_value,traceback)
 jax._src.interpreters.pxla.Mesh.__hash__(self)
+jax._src.interpreters.pxla.Mesh.__init__(self,devices:Union[np.ndarray,Sequence[xc.Device]],axis_names:Union[str,Sequence[MeshAxisName]])
 jax._src.interpreters.pxla.Mesh.__repr__(self)
 jax._src.interpreters.pxla.Mesh.__setattr__(self,name,value)
 jax._src.interpreters.pxla.Mesh._global_to_local(self,axes:ArrayMapping,aval)
@@ -7607,6 +7933,7 @@ jax._src.interpreters.pxla.Mesh.local_mesh(self)
 jax._src.interpreters.pxla.Mesh.shape(self)
 jax._src.interpreters.pxla.Mesh.size(self)
 jax._src.interpreters.pxla.MeshComputation(self,name:str,hlo:Optional[ir.Module],is_trivial:bool,donated_invars:Sequence[bool],**compile_args)
+jax._src.interpreters.pxla.MeshComputation.__init__(self,name:str,hlo:Optional[ir.Module],is_trivial:bool,donated_invars:Sequence[bool],**compile_args)
 jax._src.interpreters.pxla.MeshComputation._compile_unloaded(self,_allow_propagation_to_outputs:Optional[Sequence[bool]]=None,_allow_compile_replicated:bool=True)->Union[UnloadedMeshExecutable, MeshExecutable]
 jax._src.interpreters.pxla.MeshComputation.compile(self,_allow_propagation_to_outputs:Optional[Sequence[bool]]=None,_allow_compile_replicated:bool=True)->MeshExecutable
 jax._src.interpreters.pxla.MeshComputation.cost_analysis(self)->Dict[str, float]
@@ -7614,6 +7941,7 @@ jax._src.interpreters.pxla.MeshComputation.hlo(self)->xc.XlaComputation
 jax._src.interpreters.pxla.MeshComputation.mhlo(self)->ir.Module
 jax._src.interpreters.pxla.MeshComputation.stablehlo(self)->ir.Module
 jax._src.interpreters.pxla.MeshExecutable(self,xla_executable,unsafe_call,in_avals,in_shardings,out_shardings,auto_spmd_lowering,kept_var_idx,device_assignment)
+jax._src.interpreters.pxla.MeshExecutable.__init__(self,xla_executable,unsafe_call,in_avals,in_shardings,out_shardings,auto_spmd_lowering,kept_var_idx,device_assignment)
 jax._src.interpreters.pxla.MeshExecutable.call(self,*args)
 jax._src.interpreters.pxla.MeshExecutable.create_cpp_call(self,no_kwargs,in_tree,out_tree)
 jax._src.interpreters.pxla.MeshExecutable.from_trivial_jaxpr(jaxpr,consts,global_in_avals,global_out_avals,in_shardings,backend,device_assignment,committed,kept_var_idx,keepalive)->MeshExecutable
@@ -7629,12 +7957,14 @@ jax._src.interpreters.pxla.ParallelCallableInfo.local_devices(self)
 jax._src.interpreters.pxla.ParallelCallableInfo.out_axes(self)
 jax._src.interpreters.pxla.PartitionInfo(NamedTuple)
 jax._src.interpreters.pxla.PmapComputation(self,hlo:ir.Module,**compile_args)
+jax._src.interpreters.pxla.PmapComputation.__init__(self,hlo:ir.Module,**compile_args)
 jax._src.interpreters.pxla.PmapComputation._compile_unloaded(self)->Union[UnloadedPmapExecutable, PmapExecutable]
 jax._src.interpreters.pxla.PmapComputation.compile(self)->PmapExecutable
 jax._src.interpreters.pxla.PmapComputation.hlo(self)->xc.XlaComputation
 jax._src.interpreters.pxla.PmapComputation.mhlo(self)->ir.Module
 jax._src.interpreters.pxla.PmapComputation.stablehlo(self)->ir.Module
 jax._src.interpreters.pxla.PmapExecutable(self,xla_executable,unsafe_call,fingerprint,in_avals)
+jax._src.interpreters.pxla.PmapExecutable.__init__(self,xla_executable,unsafe_call,fingerprint,in_avals)
 jax._src.interpreters.pxla.PmapExecutable.call(self,*args)
 jax._src.interpreters.pxla.PmapExecutable.xla_extension_executable(self)
 jax._src.interpreters.pxla.ReplicaInfo(NamedTuple)
@@ -7648,6 +7978,7 @@ jax._src.interpreters.pxla.ResourceEnv.shape(self)
 jax._src.interpreters.pxla.ResourceEnv.with_extra_loop(self,loop:Loop)
 jax._src.interpreters.pxla.ResourceEnv.with_mesh(self,mesh:Mesh)
 jax._src.interpreters.pxla.ResultsHandler(self,handlers,out_shardings,out_avals)
+jax._src.interpreters.pxla.ResultsHandler.__init__(self,handlers,out_shardings,out_avals)
 jax._src.interpreters.pxla.SPMDBatchTrace(batching.BatchTrace)
 jax._src.interpreters.pxla.SPMDBatchTrace.get_axis_primitive_batcher(self,primitive,frame)
 jax._src.interpreters.pxla.ShardInfo(NamedTuple)
@@ -7663,15 +7994,19 @@ jax._src.interpreters.pxla.UnspecifiedValue
 jax._src.interpreters.pxla.UnspecifiedValue.__repr__(self)
 jax._src.interpreters.pxla.WeakRefList(list)
 jax._src.interpreters.pxla._PSThreadLocalState(self)
+jax._src.interpreters.pxla._PSThreadLocalState.__init__(self)
 jax._src.interpreters.pxla._PositionalSemantics(enum.Enum)
 jax._src.interpreters.pxla._ShardedDeviceArray(self,aval:ShapedArray,sharding_spec:ShardingSpec,device_buffers:List[xb.xla_client.Buffer],indices:Optional[Tuple[Index,...]]=None)
+jax._src.interpreters.pxla._ShardedDeviceArray.__init__(self,aval:ShapedArray,sharding_spec:ShardingSpec,device_buffers:List[xb.xla_client.Buffer],indices:Optional[Tuple[Index,...]]=None)
 jax._src.interpreters.pxla._ShardedDeviceArray.delete(self)
 jax._src.interpreters.pxla._ShardedDeviceArray.dtype(self)
 jax._src.interpreters.pxla._ShardedDeviceArray.ndim(self)
 jax._src.interpreters.pxla._ShardedDeviceArray.shape(self)
 jax._src.interpreters.pxla._ShardedDeviceArray.size(self)
 jax._src.interpreters.pxla._ThreadLocalState(self)
+jax._src.interpreters.pxla._ThreadLocalState.__init__(self)
 jax._src.interpreters.pxla._ThreadResourcesLocalState(self)
+jax._src.interpreters.pxla._ThreadResourcesLocalState.__init__(self)
 jax._src.interpreters.pxla._annot_to_flat(ndim:int,mapped_axes:Iterable[int],annotation:Optional[int])->Optional[int]
 jax._src.interpreters.pxla._compile_replicated_mesh_executable_from_hlo(name,computation,global_in_avals,global_out_avals,in_shardings,out_shardings,in_is_global,auto_spmd_lowering,compile_options,host_callbacks,has_unordered_effects,ordered_effects,kept_var_idx,backend,device_assignment,committed,pmap_nreps)
 jax._src.interpreters.pxla._compile_replicated_mesh_executable_from_trivial_jaxpr(jaxpr,consts,global_in_avals,global_out_avals,in_shardings,backend,device_assignment,committed,kept_var_idx,pmap_nreps)
@@ -7789,6 +8124,211 @@ jax._src.interpreters.pxla.vtile_by_mesh(fun:lu.WrappedFun,mesh:Mesh,in_axes:Seq
 jax._src.interpreters.pxla.vtile_manual(manual_axes:FrozenSet[MeshAxisName],mesh:Mesh,in_axes:Sequence[ArrayMapping],out_axes:Sequence[ArrayMapping],*args)
 jax._src.interpreters.pxla.xla_pmap_impl(fun:lu.WrappedFun,*args,**params)
 jax._src.interpreters.pxla.xla_pmap_impl_lazy(fun:lu.WrappedFun,*args,backend:Optional[str],axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Optional[Sequence[Any]],name:str,in_axes:Sequence[Optional[int]],out_axes_thunk:Callable[[],Sequence[Optional[int]]],donated_invars:Sequence[bool],global_arg_shapes:Sequence[Optional[Tuple[int,...]]],is_explicit_global_axis_size:bool)->Callable
+jax._src.pxla.AUTOAxisResource
+jax._src.pxla.DeviceAssignmentMismatch
+jax._src.pxla.DeviceAssignmentMismatch._dev_ids_plat_str(self)
+jax._src.pxla.DeviceAssignmentMismatch._maybe_api_name(self,api_name)->str
+jax._src.pxla.DeviceAssignmentMismatch._str(self,api_name)
+jax._src.pxla.DeviceAssignmentMismatch.device_ids(self)->Sequence[int]
+jax._src.pxla.DeviceAssignmentMismatch.m_type_str(self,api_name)
+jax._src.pxla.DeviceAssignmentMismatch.platform(self)->str
+jax._src.pxla.DeviceAssignmentMismatch.source_info_str(self)
+jax._src.pxla.DeviceAssignmentMismatchError(Exception)
+jax._src.pxla.DynamicAxisEnv(list)
+jax._src.pxla.DynamicAxisEnv.__contains__(self,axis_name)
+jax._src.pxla.DynamicAxisEnv.__getitem__(self,axis_name)
+jax._src.pxla.DynamicAxisEnv.nreps(self)
+jax._src.pxla.DynamicAxisEnv.sizes(self)
+jax._src.pxla.DynamicAxisEnvFrame(self,name,pmap_trace,hard_size)
+jax._src.pxla.EmapInfo(NamedTuple)
+jax._src.pxla.ExecuteReplicated(self,xla_executable,name,backend,in_handler:InputsHandler,out_handler:ResultsHandler,unordered_effects:List[core.Effect],ordered_effects:List[core.Effect],keepalive:Any,has_host_callbacks:bool,kept_var_idx:Set[int])
+jax._src.pxla.ExecuteReplicated._add_tokens_to_inputs(self,input_bufs)
+jax._src.pxla.ExecuteReplicated._call_with_tokens(self,input_bufs)
+jax._src.pxla.ExecuteReplicated._handle_token_bufs(self,token_bufs,sharded_token)
+jax._src.pxla.InputsHandler(self,local_devices,in_shardings,input_indices)
+jax._src.pxla.InputsHandler.__str__(self)
+jax._src.pxla.Loop(NamedTuple)
+jax._src.pxla.MapTrace(self,*args,emap_info)
+jax._src.pxla.MapTrace.process_axis_index(self,frame)
+jax._src.pxla.MapTrace.process_call(self,call_primitive,fun,tracers,params)
+jax._src.pxla.MapTrace.process_custom_jvp_call(self,primitive,fun,jvp,tracers,*,symbolic_zeros)
+jax._src.pxla.MapTrace.process_custom_vjp_call(self,primitive,fun,fwd,bwd,tracers,out_trees)
+jax._src.pxla.MapTrace.process_map(self,call_primitive,fun,tracers,params)
+jax._src.pxla.MapTrace.process_primitive(self,primitive,tracers,params)
+jax._src.pxla.MapTrace.pure(self,val)
+jax._src.pxla.MapTrace.sublift(self,tracer)
+jax._src.pxla.MapTracer(self,trace:MapTrace,val,shard_axes:Dict[core.AxisName,int])
+jax._src.pxla.MapTracer.__str__(self)
+jax._src.pxla.MapTracer.aval(self)
+jax._src.pxla.MapTracer.full_lower(self)
+jax._src.pxla.Mesh(self,devices:Union[np.ndarray,Sequence[xc.Device]],axis_names:Union[str,Sequence[MeshAxisName]])
+jax._src.pxla.Mesh.__enter__(self)
+jax._src.pxla.Mesh.__eq__(self,other)
+jax._src.pxla.Mesh.__exit__(self,exc_type,exc_value,traceback)
+jax._src.pxla.Mesh.__hash__(self)
+jax._src.pxla.Mesh.__repr__(self)
+jax._src.pxla.Mesh.__setattr__(self,name,value)
+jax._src.pxla.Mesh._global_to_local(self,axes:ArrayMapping,aval)
+jax._src.pxla.Mesh._local_mesh(self,process_index)
+jax._src.pxla.Mesh._local_to_global(self,axes:ArrayMapping,aval)
+jax._src.pxla.Mesh.device_ids(self)
+jax._src.pxla.Mesh.empty(self)
+jax._src.pxla.Mesh.is_multi_process(self)
+jax._src.pxla.Mesh.local_devices(self)
+jax._src.pxla.Mesh.local_mesh(self)
+jax._src.pxla.Mesh.shape(self)
+jax._src.pxla.Mesh.size(self)
+jax._src.pxla.MeshComputation(self,name:str,hlo:Optional[ir.Module],is_trivial:bool,donated_invars:Sequence[bool],**compile_args)
+jax._src.pxla.MeshComputation._compile_unloaded(self,_allow_propagation_to_outputs:Optional[Sequence[bool]]=None,_allow_compile_replicated:bool=True)->Union[UnloadedMeshExecutable, MeshExecutable]
+jax._src.pxla.MeshComputation.compile(self,_allow_propagation_to_outputs:Optional[Sequence[bool]]=None,_allow_compile_replicated:bool=True)->MeshExecutable
+jax._src.pxla.MeshComputation.cost_analysis(self)->Dict[str, float]
+jax._src.pxla.MeshComputation.hlo(self)->xc.XlaComputation
+jax._src.pxla.MeshComputation.mhlo(self)->ir.Module
+jax._src.pxla.MeshComputation.stablehlo(self)->ir.Module
+jax._src.pxla.MeshExecutable(self,xla_executable,unsafe_call,in_avals,in_shardings,out_shardings,auto_spmd_lowering,kept_var_idx,device_assignment)
+jax._src.pxla.MeshExecutable.call(self,*args)
+jax._src.pxla.MeshExecutable.create_cpp_call(self,no_kwargs,in_tree,out_tree)
+jax._src.pxla.MeshExecutable.from_trivial_jaxpr(jaxpr,consts,global_in_avals,global_out_avals,in_shardings,backend,device_assignment,committed,kept_var_idx,keepalive)->MeshExecutable
+jax._src.pxla.MeshExecutable.xla_extension_executable(self)
+jax._src.pxla.MeshExecutableFastpathData(NamedTuple)
+jax._src.pxla.MismatchType(enum.Enum)
+jax._src.pxla.MismatchType.__str__(self)
+jax._src.pxla.OutputType(enum.Enum)
+jax._src.pxla.ParallelCallableInfo
+jax._src.pxla.ParallelCallableInfo.local_devices(self)
+jax._src.pxla.ParallelCallableInfo.out_axes(self)
+jax._src.pxla.PartitionInfo(NamedTuple)
+jax._src.pxla.PmapComputation(self,hlo:ir.Module,**compile_args)
+jax._src.pxla.PmapComputation._compile_unloaded(self)->Union[UnloadedPmapExecutable, PmapExecutable]
+jax._src.pxla.PmapComputation.compile(self)->PmapExecutable
+jax._src.pxla.PmapComputation.hlo(self)->xc.XlaComputation
+jax._src.pxla.PmapComputation.mhlo(self)->ir.Module
+jax._src.pxla.PmapComputation.stablehlo(self)->ir.Module
+jax._src.pxla.PmapExecutable(self,xla_executable,unsafe_call,fingerprint,in_avals)
+jax._src.pxla.PmapExecutable.call(self,*args)
+jax._src.pxla.PmapExecutable.xla_extension_executable(self)
+jax._src.pxla.ReplicaInfo(NamedTuple)
+jax._src.pxla.ResourceEnv(NamedTuple)
+jax._src.pxla.ResourceEnv.__repr__(self)
+jax._src.pxla.ResourceEnv.local_shape(self)
+jax._src.pxla.ResourceEnv.loop_resource_axes(self)->Set[ResourceAxisName]
+jax._src.pxla.ResourceEnv.physical_resource_axes(self)->Set[ResourceAxisName]
+jax._src.pxla.ResourceEnv.resource_axes(self)->Set[ResourceAxisName]
+jax._src.pxla.ResourceEnv.shape(self)
+jax._src.pxla.ResourceEnv.with_extra_loop(self,loop:Loop)
+jax._src.pxla.ResourceEnv.with_mesh(self,mesh:Mesh)
+jax._src.pxla.ResultsHandler(self,handlers,out_shardings,out_avals)
+jax._src.pxla.SPMDBatchTrace(batching.BatchTrace)
+jax._src.pxla.SPMDBatchTrace.get_axis_primitive_batcher(self,primitive,frame)
+jax._src.pxla.ShardInfo(NamedTuple)
+jax._src.pxla.TileManual
+jax._src.pxla.TileVectorize
+jax._src.pxla.UnloadedMeshExecutable
+jax._src.pxla.UnloadedMeshExecutable.from_hlo(name:str,computation:Union[ir.Module,xc.XlaComputation],mesh:Optional[Mesh],global_in_avals:Sequence[ShapedArray],global_out_avals:Sequence[ShapedArray],in_shardings:Sequence[Union[sharding_internal.XLACompatibleSharding,AUTOAxisResource]],out_shardings:Sequence[Union[sharding_internal.XLACompatibleSharding,AUTOAxisResource,UnspecifiedValue]],spmd_lowering:bool,tuple_args:bool,in_is_global:Sequence[bool],auto_spmd_lowering:bool,_allow_propagation_to_outputs:Optional[Sequence[bool]],_allow_compile_replicated:bool,unordered_effects:List[core.Effect],ordered_effects:List[core.Effect],host_callbacks:List[Any],keepalive:Any,kept_var_idx:Set[int],backend:xb.XlaBackend,device_assignment:Sequence[xc.Device],committed:bool,pmap_nreps:int=1)->Union[MeshExecutable, UnloadedMeshExecutable]
+jax._src.pxla.UnloadedMeshExecutable.load(self)->MeshExecutable
+jax._src.pxla.UnloadedPmapExecutable
+jax._src.pxla.UnloadedPmapExecutable.from_hlo(xla_computation,pci:ParallelCallableInfo,replicas:ReplicaInfo,parts:PartitionInfo,shards:ShardInfo,tuple_args:bool,unordered_effects:List[core.Effect],ordered_effects:List[core.Effect],host_callbacks:List[Any],keepalive:Any)
+jax._src.pxla.UnloadedPmapExecutable.load(self)->PmapExecutable
+jax._src.pxla.UnspecifiedValue
+jax._src.pxla.UnspecifiedValue.__repr__(self)
+jax._src.pxla.WeakRefList(list)
+jax._src.pxla._PSThreadLocalState(self)
+jax._src.pxla._PositionalSemantics(enum.Enum)
+jax._src.pxla._ShardedDeviceArray(self,aval:ShapedArray,sharding_spec:ShardingSpec,device_buffers:List[xb.xla_client.Buffer],indices:Optional[Tuple[Index,...]]=None)
+jax._src.pxla._ShardedDeviceArray.delete(self)
+jax._src.pxla._ShardedDeviceArray.dtype(self)
+jax._src.pxla._ShardedDeviceArray.ndim(self)
+jax._src.pxla._ShardedDeviceArray.shape(self)
+jax._src.pxla._ShardedDeviceArray.size(self)
+jax._src.pxla._ThreadLocalState(self)
+jax._src.pxla._ThreadResourcesLocalState(self)
+jax._src.pxla._compile_replicated_mesh_executable_from_hlo(name,computation,global_in_avals,global_out_avals,in_shardings,out_shardings,in_is_global,auto_spmd_lowering,compile_options,host_callbacks,has_unordered_effects,ordered_effects,kept_var_idx,backend,device_assignment,committed,pmap_nreps)
+jax._src.pxla._compile_replicated_mesh_executable_from_trivial_jaxpr(jaxpr,consts,global_in_avals,global_out_avals,in_shardings,backend,device_assignment,committed,kept_var_idx,pmap_nreps)
+jax._src.pxla._compile_replicated_pmap_executable_from_hlo(xla_computation,pci,input_indices,in_shardings,handle_outs,compile_options,host_callbacks,has_unordered_effects,ordered_effects)
+jax._src.pxla._emap_impl(fun:lu.WrappedFun,*args,backend:Optional[str],axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Optional[Sequence[Any]],name:str,in_axes:Sequence[Optional[int]],out_axes_thunk:Callable[[],Sequence[Optional[int]]],donated_invars:Sequence[bool],global_arg_shapes:Sequence[Optional[Tuple[int,...]]],is_explicit_global_axis_size:bool)
+jax._src.pxla._execute_trivial(jaxpr,consts,in_handler,out_handler,kept_var_idx,*args)
+jax._src.pxla._find_partitions(jaxpr)
+jax._src.pxla._full_to_shard_abstract_eval(x,axes,mesh,**_)
+jax._src.pxla._full_to_shard_lowering(ctx,x,*,axes:ArrayMapping,mesh:Mesh,manual_axes:FrozenSet[MeshAxisName])
+jax._src.pxla._get_and_check_device_assignment(shardings:Iterable[ShardingInfo],devices:Optional[Sequence[xc.Device]])->Tuple[xc.Client, Sequence[xc.Device]]
+jax._src.pxla._get_input_indices(avals:Sequence[ShapedArray],shardings:Sequence[sharding_internal.XLACompatibleSharding])->Sequence[Tuple[Optional[Index], ...]]
+jax._src.pxla._get_logical_mesh_ids(mesh_shape)
+jax._src.pxla._hashable_index(idx)
+jax._src.pxla._hlo_shard(aval,axis_env,xs,in_axis)
+jax._src.pxla._hlo_unshard(ctx:mlir.LoweringRuleContext,aval,axis_env,out_axis,xs,platform)
+jax._src.pxla._is_unspecified(x)
+jax._src.pxla._map_schedule(idx:Tuple[Optional[int],...])->Tuple[Optional[int], ...]
+jax._src.pxla._masked_array_error(x,devices,indices,sharding)
+jax._src.pxla._moveaxis(ndim:int,shard_axes:Dict[core.AxisName,int],src:int,dst:int)->Dict[core.AxisName, int]
+jax._src.pxla._multi_pmap(f:Callable,info:EmapInfo,names:List[core.AxisName],all_axes:List[Tuple[Optional[int],...]])->Tuple[Callable, Dict[core.AxisName, int]]
+jax._src.pxla._one_replica_buffer_indices(indices:Tuple[Index,...])
+jax._src.pxla._pmap_axis_subst(params,subst,traverse)
+jax._src.pxla._pmap_dce_rule(used_outputs,eqn)
+jax._src.pxla._pmap_lowering(ctx,*in_nodes,axis_name,axis_size,global_axis_size,devices,name,call_jaxpr,backend=None,in_axes,out_axes,donated_invars,global_arg_shapes,is_explicit_global_axis_size)
+jax._src.pxla._pmap_partial_eval_custom_params_updater(unks_in,inst_in,kept_outs_known,kept_outs_staged,num_res,params_known,params_staged)
+jax._src.pxla._pmap_partial_eval_custom_res_maker(params_known,aval)
+jax._src.pxla._register_handlers_for_sharded_device_array(sda)
+jax._src.pxla._safe_div(x,y)
+jax._src.pxla._sanitize_mesh_jaxpr(jaxpr)
+jax._src.pxla._sda__getitem__(self,idx)
+jax._src.pxla._sda__iter__(self)
+jax._src.pxla._sda__reversed__(self)
+jax._src.pxla._sda_addressable_shards(self)
+jax._src.pxla._sda_block_until_ready(self)
+jax._src.pxla._sda_check_if_deleted(self)
+jax._src.pxla._sda_copy_to_host_async(self)
+jax._src.pxla._sda_one_replica_buffer_indices(self)
+jax._src.pxla._sda_value(self)
+jax._src.pxla._shard_abstract_array(size,axis:int,x)
+jax._src.pxla._shard_array(x,devices,indices,sharding)
+jax._src.pxla._shard_to_full_abstract_eval(x,axes,mesh,**_)
+jax._src.pxla._shard_to_full_lowering(ctx,x,*,axes:ArrayMapping,mesh:Mesh,manual_axes:FrozenSet[MeshAxisName])
+jax._src.pxla._shard_token(x,devices,indices,sharding)
+jax._src.pxla._sharded_device_array_mlir_constant_handler(val,canonicalize_types=True)
+jax._src.pxla._unravel_index_hlo(axis_env)
+jax._src.pxla.array_mapping_to_axis_resources(array_mapping:ArrayMapping)
+jax._src.pxla.as_slice_indices(arr:device_array.DeviceArrayProtocol,idx:Index)->Tuple[Tuple[int, ...], Tuple[int, ...], Tuple[int, ...]]
+jax._src.pxla.check_if_any_auto(shardings:Iterable[Union[sharding_internal.XLACompatibleSharding,AUTOAxisResource,UnspecifiedValue]])->bool
+jax._src.pxla.check_multihost_collective_allowlist(jaxpr)
+jax._src.pxla.device_put(x,devices:Sequence[xb.xla_client.Device],replicate:bool=False)->List[xb.xla_client.Buffer]
+jax._src.pxla.find_partitions(jaxpr)->PartitionInfo
+jax._src.pxla.find_replicas(jaxpr,axis_size,global_axis_size)
+jax._src.pxla.get_array_mapping(pspec:PartitionSpec)->ArrayMappingOrAutoOrUnspecified
+jax._src.pxla.get_global_aval(local_aval,global_parts:PartitionsOrReplicated,local_parts:PartitionsOrReplicated)
+jax._src.pxla.get_input_metadata(global_in_avals:Sequence[ShapedArray],in_shardings:Sequence[sharding_internal.XLACompatibleSharding],in_is_global:Sequence[bool])->Tuple[Sequence[sharding_internal.XLACompatibleSharding], Sequence[Tuple[Optional[Index], ...]], Sequence[ShapedArray]]
+jax._src.pxla.get_local_aval(global_aval,global_parts:PartitionsOrReplicated,local_parts:PartitionsOrReplicated)
+jax._src.pxla.get_num_partitions(*partitions)
+jax._src.pxla.get_num_ways_dim_sharded(op_sharding:xc.OpSharding)->Tuple[Sequence[int], int]
+jax._src.pxla.global_aval_to_result_handler(aval:core.AbstractValue,out_sharding,committed:bool,is_out_sharding_from_xla:bool)->Callable[[Sequence[xb.xla_client.Buffer]], Any]
+jax._src.pxla.global_avals_to_results_handler(global_out_avals:Sequence[ShapedArray],shardings:Sequence[sharding_internal.XLACompatibleSharding],committed:bool,are_out_shardings_from_xla:Sequence[bool])->ResultsHandler
+jax._src.pxla.identity(x)
+jax._src.pxla.is_auto(x)
+jax._src.pxla.local_aval_to_result_handler(aval:core.AbstractValue,sharding:sharding_internal.XLACompatibleSharding,indices:Optional[Tuple[Index,...]])->Callable[[List[xb.xla_client.Buffer]], Any]
+jax._src.pxla.local_avals_to_results_handler(unmapped_local_out_avals:Sequence[ShapedArray],local_shardings:Sequence[sharding_internal.XLACompatibleSharding])->ResultsHandler
+jax._src.pxla.lower_mesh_computation(fun_or_jaxpr:Union[lu.WrappedFun,core.ClosedJaxpr],api_name:str,fun_name:str,mesh:Mesh,in_shardings:Sequence[Union[sharding_internal.NamedSharding,AUTOAxisResource]],out_shardings:Sequence[Union[sharding_internal.NamedSharding,AUTOAxisResource,UnspecifiedValue]],donated_invars:Sequence[bool],spmd_lowering:bool,global_in_avals:Sequence[core.ShapedArray],tiling_method:Optional[TilingMethod],in_is_global:Sequence[bool],lowering_platform:Optional[str])->MeshComputation
+jax._src.pxla.lower_parallel_callable(fun:lu.WrappedFun,backend_name:Optional[str],axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Optional[Sequence[xc.Device]],name:str,in_axes:Iterable[Optional[int]],out_axes_thunk:Callable[[],Sequence[Optional[int]]],donated_invars:Sequence[bool],global_arg_shapes:Sequence[Optional[Tuple[int,...]]],is_explicit_global_axis_size:bool,avals:Sequence[core.AbstractValue],*,lowering_platform:Optional[str])
+jax._src.pxla.make_sharded_device_array(aval:ShapedArray,sharding_spec:Optional[ShardingSpec],device_buffers:List[Union[Any,xb.xla_client.Buffer]],indices:Optional[Tuple[Index,...]]=None)
+jax._src.pxla.manual_proto(aval:core.ShapedArray,manual_axes_set:FrozenSet[MeshAxisName],mesh:Mesh)
+jax._src.pxla.maybe_extend_axis_env(*args,**kwargs)
+jax._src.pxla.parallel_callable(fun:lu.WrappedFun,backend_name:Optional[str],axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Optional[Sequence[Any]],name:str,in_axes:Sequence[Optional[int]],out_axes_thunk:Callable[[],Sequence[Optional[int]]],donated_invars:Sequence[bool],global_arg_shapes:Sequence[Optional[Tuple[int,...]]],is_explicit_global_axis_size:bool,*avals)
+jax._src.pxla.reconcile_num_partitions(jaxpr,outer_num_parts:Optional[int])
+jax._src.pxla.replicate(val,axis_size,nrep,devices=None,backend=None,in_axis=0)
+jax._src.pxla.resource_typecheck(jaxpr,resource_env,axis_resources,what_jaxpr_thunk)
+jax._src.pxla.sda_array_result_handler(aval:ShapedArray,sharding,indices)
+jax._src.pxla.shard_arg(arg,devices,arg_indices,sharding)
+jax._src.pxla.shard_args(devices:Sequence[xb.xla_client.Device],indices:Sequence[Sequence[Index]],shardings:Sequence[sharding_internal.XLACompatibleSharding],args)->Sequence[Sequence[xb.xla_client.Buffer]]
+jax._src.pxla.shard_aval(size,axis:int,aval)
+jax._src.pxla.shard_device_array(x,devices,indices,sharding)
+jax._src.pxla.shard_sharded_device_array_slow_path(x,devices,indices,sharding)
+jax._src.pxla.show_axes(axes)
+jax._src.pxla.spec_to_indices(shape:Sequence[int],spec:ShardingSpec)->Tuple[Index, ...]
+jax._src.pxla.stage_parallel_callable(pci:ParallelCallableInfo,fun:lu.WrappedFun,global_arg_shapes:Sequence[Optional[Tuple[int,...]]])
+jax._src.pxla.tile_aval_nd(axis_sizes,in_axes:ArrayMapping,aval)
+jax._src.pxla.untile_aval_nd(axis_sizes,out_axes:ArrayMapping,aval)
+jax._src.pxla.vtile_by_mesh(fun:lu.WrappedFun,mesh:Mesh,in_axes:Sequence[ArrayMapping],out_axes:Sequence[ArrayMapping])
+jax._src.pxla.vtile_manual(manual_axes:FrozenSet[MeshAxisName],mesh:Mesh,in_axes:Sequence[ArrayMapping],out_axes:Sequence[ArrayMapping],*args)
+jax._src.pxla.xla_pmap_impl(fun:lu.WrappedFun,*args,**params)
+jax._src.pxla.xla_pmap_impl_lazy(fun:lu.WrappedFun,*args,backend:Optional[str],axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Optional[Sequence[Any]],name:str,in_axes:Sequence[Optional[int]],out_axes_thunk:Callable[[],Sequence[Optional[int]]],donated_invars:Sequence[bool],global_arg_shapes:Sequence[Optional[Tuple[int,...]]],is_explicit_global_axis_size:bool)->Callable
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/interpreters/mlir.py----------------------------------------
@@ -7948,9 +8488,11 @@ A:jax._src.interpreters.mlir.result_type->jax._src.lib.mlir.ir.TupleType.get_tup
 A:jax._src.interpreters.mlir.result->jax._src.lib.mlir.dialects.hlo.CustomCallOp([result_type], callback_operands, call_target_name=ir.StringAttr.get(call_target_name), has_side_effect=ir.BoolAttr.get(has_side_effect), api_version=i32_attr(2), called_computations=ir.ArrayAttr.get([]), backend_config=ir.StringAttr.get(str(callback_descriptor)), operand_layouts=None if operand_mlir_layouts is None else ir.ArrayAttr.get(operand_mlir_layouts), result_layouts=None if result_mlir_layouts is None else ir.ArrayAttr.get(result_mlir_layouts))
 A:jax._src.interpreters.mlir.lowering_result->lower_jaxpr_to_module(name, closed_jaxpr, backend_or_name=backend_or_name, unordered_effects=[], ordered_effects=[], name_stack=source_info_util.NameStack(), donated_args=[False] * len(closed_jaxpr.jaxpr.invars), axis_context=axis_context, platform=platform)
 jax._src.interpreters.mlir.ConstantHandler(self,val:Any,canonicalize_types:bool)
+jax._src.interpreters.mlir.ConstantHandler.__call__(self,val:Any,canonicalize_types:bool)
 jax._src.interpreters.mlir.DimExprEvaluator(self,value:ir.Value)
 jax._src.interpreters.mlir.DimExprEvaluator.__add__(self,other:Union[np.int32,np.int64,DimExprEvaluator])
 jax._src.interpreters.mlir.DimExprEvaluator.__divmod__(self,divisor:Union[np.int32,np.int64,DimExprEvaluator])
+jax._src.interpreters.mlir.DimExprEvaluator.__init__(self,value:ir.Value)
 jax._src.interpreters.mlir.DimExprEvaluator.__mul__(self,other:Union[np.int32,np.int64,DimExprEvaluator])
 jax._src.interpreters.mlir.DimExprEvaluator.__radd__(self,other:Union[np.int32,np.int64])
 jax._src.interpreters.mlir.DimExprEvaluator.__rdivmod__(self,dividend:Union[np.int32,np.int64])
@@ -7960,6 +8502,7 @@ jax._src.interpreters.mlir.LoweringRuleContext
 jax._src.interpreters.mlir.LoweringRuleContext.replace(self,**kw)
 jax._src.interpreters.mlir.LoweringRuleContext.set_tokens_out(self,tokens_out:TokenSet)
 jax._src.interpreters.mlir.ModuleContext(self,backend_or_name:Optional[Union[str,xb.XlaBackend]],platform:str,axis_context:AxisContext,name_stack:source_info_util.NameStack,keepalives:List[Any],channel_iterator:Iterator[int],host_callbacks:List[Any],context:Optional[ir.Context]=None,module:Optional[ir.Module]=None,ip:Optional[ir.InsertionPoint]=None,symbol_table:Optional[ir.SymbolTable]=None,cached_primitive_lowerings:Optional[Dict[Any,func_dialect.FuncOp]]=None,cached_call_jaxpr_lowerings:Optional[Dict[Any,func_dialect.FuncOp]]=None,dim_vars:Sequence[str]=())
+jax._src.interpreters.mlir.ModuleContext.__init__(self,backend_or_name:Optional[Union[str,xb.XlaBackend]],platform:str,axis_context:AxisContext,name_stack:source_info_util.NameStack,keepalives:List[Any],channel_iterator:Iterator[int],host_callbacks:List[Any],context:Optional[ir.Context]=None,module:Optional[ir.Module]=None,ip:Optional[ir.InsertionPoint]=None,symbol_table:Optional[ir.SymbolTable]=None,cached_primitive_lowerings:Optional[Dict[Any,func_dialect.FuncOp]]=None,cached_call_jaxpr_lowerings:Optional[Dict[Any,func_dialect.FuncOp]]=None,dim_vars:Sequence[str]=())
 jax._src.interpreters.mlir.ModuleContext.add_host_callback(self,host_callback:Any)->None
 jax._src.interpreters.mlir.ModuleContext.add_keepalive(self,keepalive:Any)->None
 jax._src.interpreters.mlir.ModuleContext.axis_env(self)->xla.AxisEnv
@@ -7974,6 +8517,7 @@ jax._src.interpreters.mlir.SPMDAxisContext.unsafe_axis_env(self)
 jax._src.interpreters.mlir.ShardingContext
 jax._src.interpreters.mlir.ShardingContext.axis_env(self)
 jax._src.interpreters.mlir.TokenSet(self,*args,**kwargs)
+jax._src.interpreters.mlir.TokenSet.__init__(self,*args,**kwargs)
 jax._src.interpreters.mlir.TokenSet.__len__(self)
 jax._src.interpreters.mlir.TokenSet.create(cls,effects:Sequence[core.Effect])->TokenSet
 jax._src.interpreters.mlir.TokenSet.effects(self)->set[core.Effect]
@@ -8138,6 +8682,7 @@ A:jax._src.interpreters.batching.x->moveaxis(x, bdx, bdy)
 A:jax._src.interpreters.batching._->jax._src.core.get_aval(x)
 A:jax._src.interpreters.batching.y->broadcast(y, x.shape[bdx], bdx)
 jax._src.interpreters.batching.BatchTrace(self,*args,axis_name,spmd_axis_name=None)
+jax._src.interpreters.batching.BatchTrace.__init__(self,*args,axis_name,spmd_axis_name=None)
 jax._src.interpreters.batching.BatchTrace.get_axis_primitive_batcher(self,primitive,frame)
 jax._src.interpreters.batching.BatchTrace.get_frame(self,vals,dims)->core.AxisEnvFrame
 jax._src.interpreters.batching.BatchTrace.get_primitive_batcher(self,primitive,frame)
@@ -8155,6 +8700,7 @@ jax._src.interpreters.batching.BatchTrace.process_primitive(self,primitive,trace
 jax._src.interpreters.batching.BatchTrace.pure(self,val)
 jax._src.interpreters.batching.BatchTrace.sublift(self,val)
 jax._src.interpreters.batching.BatchTracer(self,trace,val,batch_dim:Union[NotMapped,int,ConcatAxis],source_info:Optional[source_info_util.SourceInfo]=None)
+jax._src.interpreters.batching.BatchTracer.__init__(self,trace,val,batch_dim:Union[NotMapped,int,ConcatAxis],source_info:Optional[source_info_util.SourceInfo]=None)
 jax._src.interpreters.batching.BatchTracer._contents(self)
 jax._src.interpreters.batching.BatchTracer._origin_msg(self)
 jax._src.interpreters.batching.BatchTracer.aval(self)
@@ -8305,8 +8851,75 @@ A:jax._src.interpreters.ad.n->sum(primal_counts)
 A:jax._src.interpreters.ad.primal_groups->split_list(primals, primal_counts[:-1])
 A:jax._src.interpreters.ad.tangent_groups->split_list(tangents, tangent_counts[:-1])
 A:jax._src.interpreters.ad.(res, _)->split_list(invals, [num_res])
+jax._src.ad.CustomJVPException(self)
+jax._src.ad.CustomVJPException(self)
+jax._src.ad.JVPTrace(Trace)
+jax._src.ad.JVPTrace.join(self,xt,yt)
+jax._src.ad.JVPTrace.lift(self,val)
+jax._src.ad.JVPTrace.post_process_call(self,call_primitive,out_tracers,params)
+jax._src.ad.JVPTrace.post_process_custom_jvp_call(self,out_tracers,_)
+jax._src.ad.JVPTrace.post_process_custom_vjp_call(self,out_tracers,_)
+jax._src.ad.JVPTrace.process_call(self,call_primitive,f,tracers,params)
+jax._src.ad.JVPTrace.process_custom_jvp_call(self,_,__,f_jvp,tracers,*,symbolic_zeros)
+jax._src.ad.JVPTrace.process_custom_transpose(self,prim,call,tracers,**params)
+jax._src.ad.JVPTrace.process_custom_vjp_call(self,_,__,fwd,bwd,tracers,out_trees)
+jax._src.ad.JVPTrace.process_primitive(self,primitive,tracers,params)
+jax._src.ad.JVPTrace.pure(self,val)
+jax._src.ad.JVPTrace.sublift(self,val)
+jax._src.ad.JVPTracer(self,trace,primal,tangent)
+jax._src.ad.JVPTracer.aval(self)
+jax._src.ad.JVPTracer.full_lower(self)
+jax._src.ad.UndefinedPrimal(self,aval)
+jax._src.ad.UndefinedPrimal.__repr__(self)
+jax._src.ad._closed_call_transpose(params,jaxpr,args,ct,cts_in_avals,reduce_axes)
+jax._src.ad._custom_lin_transpose(cts_out,*invals,num_res,bwd,out_avals)
+jax._src.ad._interleave(xs,ys)
+jax._src.ad._jvp_jaxpr(jaxpr,nonzeros,instantiate)
+jax._src.ad._perm(primal_counts,tangent_counts,lst)
+jax._src.ad._primal_tangent_shapes_match(primal,tangent)
+jax._src.ad.add_tangents(x,y)
+jax._src.ad.backward_pass(jaxpr:core.Jaxpr,reduce_axes,transform_stack,consts,primals_in,cotangents_in)
+jax._src.ad.bilinear_transpose(lhs_rule,rhs_rule,cotangent,x,y,**kwargs)
+jax._src.ad.call_transpose(primitive,params,call_jaxpr,args,ct,_,reduce_axes)
+jax._src.ad.closed_backward_pass(jaxpr:core.ClosedJaxpr,reduce_axes,transform_stack,primals_in,cotangents_in)
+jax._src.ad.defbilinear(prim,lhs_rule,rhs_rule)
+jax._src.ad.defjvp(primitive,*jvprules)
+jax._src.ad.defjvp2(primitive,*jvprules)
+jax._src.ad.defjvp_zero(primitive)
+jax._src.ad.deflinear(primitive,transpose_rule)
+jax._src.ad.deflinear2(primitive,transpose_rule)
+jax._src.ad.f_jvp_traceable(nonzeros,*primals_and_nztangents)
+jax._src.ad.get_primitive_transpose(p)
+jax._src.ad.identity(x)
+jax._src.ad.instantiate_zeros(tangent)
+jax._src.ad.instantiate_zeros_aval(aval,tangent)
+jax._src.ad.is_undefined_primal(x)
+jax._src.ad.jvp(fun:lu.WrappedFun,has_aux=False,instantiate=True,transform_stack=True)->Any
+jax._src.ad.jvp_jaxpr(jaxpr:core.ClosedJaxpr,nonzeros:Sequence[bool],instantiate:Union[bool,Sequence[bool]])->Tuple[core.ClosedJaxpr, List[bool]]
+jax._src.ad.jvp_subtrace(main,primals,tangents)
+jax._src.ad.jvp_subtrace_aux(main,primals,tangents)
+jax._src.ad.jvpfun(instantiate,transform_stack,primals,tangents)
+jax._src.ad.linear_jvp(primitive,primals,tangents,**params)
+jax._src.ad.linear_transpose(transpose_rule,cotangent,*args,**kwargs)
+jax._src.ad.linear_transpose2(transpose_rule,cotangent,*args,**kwargs)
+jax._src.ad.linearize(traceable,*primals,**kwargs)
+jax._src.ad.map_transpose(primitive,params,call_jaxpr,args,ct,_,reduce_axes)
+jax._src.ad.nonzero_outputs(*args,**kwargs)
+jax._src.ad.nonzero_tangent_outputs(*args,**kwargs)
+jax._src.ad.raise_custom_vjp_error_on_jvp(*_,**__)
+jax._src.ad.rearrange_binders(jaxpr:core.ClosedJaxpr,primals_in,tangents_in,primals_out,tangents_out)
+jax._src.ad.recast_to_float0(primal,tangent)
+jax._src.ad.replace_float0s(primal,tangent)
+jax._src.ad.standard_jvp(jvprules,primitive,primals,tangents,**params)
+jax._src.ad.standard_jvp2(jvprules,primitive,primals,tangents,**params)
+jax._src.ad.traceable(in_tree,*primals_and_tangents)
+jax._src.ad.unpair_pval(pval)
+jax._src.ad.vjp(traceable,primals,has_aux=False,reduce_axes=())
+jax._src.ad.zero_jvp(primitive,primals,tangents,**params)
 jax._src.interpreters.ad.CustomJVPException(self)
+jax._src.interpreters.ad.CustomJVPException.__init__(self)
 jax._src.interpreters.ad.CustomVJPException(self)
+jax._src.interpreters.ad.CustomVJPException.__init__(self)
 jax._src.interpreters.ad.JVPTrace(Trace)
 jax._src.interpreters.ad.JVPTrace.join(self,xt,yt)
 jax._src.interpreters.ad.JVPTrace.lift(self,val)
@@ -8321,9 +8934,11 @@ jax._src.interpreters.ad.JVPTrace.process_primitive(self,primitive,tracers,param
 jax._src.interpreters.ad.JVPTrace.pure(self,val)
 jax._src.interpreters.ad.JVPTrace.sublift(self,val)
 jax._src.interpreters.ad.JVPTracer(self,trace,primal,tangent)
+jax._src.interpreters.ad.JVPTracer.__init__(self,trace,primal,tangent)
 jax._src.interpreters.ad.JVPTracer.aval(self)
 jax._src.interpreters.ad.JVPTracer.full_lower(self)
 jax._src.interpreters.ad.UndefinedPrimal(self,aval)
+jax._src.interpreters.ad.UndefinedPrimal.__init__(self,aval)
 jax._src.interpreters.ad.UndefinedPrimal.__repr__(self)
 jax._src.interpreters.ad._closed_call_transpose(params,jaxpr,args,ct,cts_in_avals,reduce_axes)
 jax._src.interpreters.ad._custom_lin_transpose(cts_out,*invals,num_res,bwd,out_avals)
@@ -8415,6 +9030,7 @@ jax._src.interpreters.xla.TranslationContext.replace(self,**kw)
 jax._src.interpreters.xla._BackendSpecificTranslationsAdapter(defaultdict)
 jax._src.interpreters.xla._BackendSpecificTranslationsAdapter.__missing__(self,key)
 jax._src.interpreters.xla._TranslationRuleAdapter(self,translations,wrap_fn:Callable[[core.Primitive,Callable],TranslationRule])
+jax._src.interpreters.xla._TranslationRuleAdapter.__init__(self,translations,wrap_fn:Callable[[core.Primitive,Callable],TranslationRule])
 jax._src.interpreters.xla._TranslationRuleAdapter.__setitem__(self,key:core.Primitive,value:Callable)
 jax._src.interpreters.xla._axis_groups(mesh_spec,mesh_axes)
 jax._src.interpreters.xla._canonicalize_masked_array_dtype(x)
@@ -8450,6 +9066,41 @@ jax._src.interpreters.xla.tuple_sharding_proto(elems)
 jax._src.interpreters.xla.with_sharding(builder,sharding:SpatialSharding,op_fn,*args,**kwargs)
 jax._src.interpreters.xla.with_sharding_proto(builder,sharding_proto,op_fn,*args,**kwargs)
 jax._src.interpreters.xla.xla_destructure(c,ans)
+jax._src.xla.AxisEnv(NamedTuple)
+jax._src.xla.TranslationContext
+jax._src.xla.TranslationContext.replace(self,**kw)
+jax._src.xla._BackendSpecificTranslationsAdapter(defaultdict)
+jax._src.xla._BackendSpecificTranslationsAdapter.__missing__(self,key)
+jax._src.xla._TranslationRuleAdapter(self,translations,wrap_fn:Callable[[core.Primitive,Callable],TranslationRule])
+jax._src.xla._TranslationRuleAdapter.__setitem__(self,key:core.Primitive,value:Callable)
+jax._src.xla._axis_groups(mesh_spec,mesh_axes)
+jax._src.xla._canonicalize_masked_array_dtype(x)
+jax._src.xla._canonicalize_ndarray_dtype(x)
+jax._src.xla._canonicalize_python_scalar_dtype(typ,x)
+jax._src.xla._make_abstract_python_scalar(typ,val)
+jax._src.xla._make_array_shape(a:ShapedArray)->Sequence[xc.Shape]
+jax._src.xla._pp_xla_call(eqn:core.JaxprEqn,context:core.JaxprPpContext,settings:core.JaxprPpSettings)->pp.Doc
+jax._src.xla._wrap_old_translation(prim:core.Primitive,f:Callable)->TranslationRule
+jax._src.xla._xla_call_jvp_update_params(params,nz_tangents)
+jax._src.xla._xla_call_partial_eval_custom_params_updater(unks_in:Sequence[bool],inst_in:Sequence[bool],kept_outs_known:Sequence[bool],kept_outs_staged:Sequence[bool],num_res:int,params_known:dict,params_staged:dict)->Tuple[dict, dict]
+jax._src.xla._xla_call_partial_eval_update_params(params:core.ParamDict,kept_inputs:Sequence[bool],num_new_inputs:int)->core.ParamDict
+jax._src.xla._xla_call_transpose_update_params(params,undef_primals,nonzero_cts)
+jax._src.xla.abstractify(x)->core.AbstractValue
+jax._src.xla.aval_to_xla_shapes(aval:core.AbstractValue)->Sequence[xc.Shape]
+jax._src.xla.axis_groups(axis_env:AxisEnv,name)->Tuple[Tuple[int, ...]]
+jax._src.xla.axis_read(axis_env,axis_name)
+jax._src.xla.canonicalize_dtype(x)
+jax._src.xla.check_backend_matches(inner_backend,outer_backend)
+jax._src.xla.extend_axis_env(env:AxisEnv,name,size:int)
+jax._src.xla.get_canonical_source_file(frame:source_info_util.Frame)
+jax._src.xla.identity(x)
+jax._src.xla.jaxpr_collectives(jaxpr)
+jax._src.xla.parameter(builder,num,shape,name=None,replicated=None)
+jax._src.xla.primitive_subcomputation(platform:str,axis_env:'AxisEnv',prim:core.Primitive,avals_in:Sequence[core.AbstractValue],avals_out:Sequence[core.AbstractValue],**params)
+jax._src.xla.register_collective_primitive(prim:core.Primitive)
+jax._src.xla.register_initial_style_primitive(prim:core.Primitive)
+jax._src.xla.register_translation(prim:core.Primitive,rule:TranslationRule,*,platform:Optional[str]=None)->None
+jax._src.xla.xla_destructure(c,ans)
 
 
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/nn/functions.py----------------------------------------
@@ -8512,6 +9163,7 @@ A:jax._src.nn.initializers.ortho_init->orthogonal(scale=scale, column_axis=colum
 A:jax._src.nn.initializers.ortho_matrix->ortho_init(key, shape[-2:])
 A:jax._src.nn.initializers.W->jax.numpy.zeros(shape, dtype=dtype)
 jax._src.nn.initializers.Initializer(key:KeyArray,shape:core.Shape,dtype:DTypeLikeInexact=jnp.float_)
+jax._src.nn.initializers.Initializer.__call__(key:KeyArray,shape:core.Shape,dtype:DTypeLikeInexact=jnp.float_)
 jax._src.nn.initializers._complex_truncated_normal(key:KeyArray,upper:Array,shape:Union[Sequence[int],core.NamedShape],dtype:DTypeLikeInexact)->Array
 jax._src.nn.initializers._complex_uniform(key:KeyArray,shape:Union[Sequence[int],core.NamedShape],dtype:DTypeLikeInexact)->Array
 jax._src.nn.initializers._compute_fans(shape:core.NamedShape,in_axis:Union[int,Sequence[int]]=-2,out_axis:Union[int,Sequence[int]]=-1,batch_axis:Union[int,Sequence[int]]=())->Tuple[Array, Array]
@@ -8538,6 +9190,11 @@ jax._src.nn.initializers.zeros(key:KeyArray,shape:core.Shape,dtype:DTypeLikeInex
 A:jax._src.clusters.ompi_cluster.launcher_ip_match->re.search('tcp://(.+?)[,:]|tcp6://\\[(.+?)[,\\]]', orte_uri)
 A:jax._src.clusters.ompi_cluster.launcher_ip->next((i for i in launcher_ip_match.groups() if i is not None))
 jax._src.clusters.OmpiCluster(ClusterEnv)
+jax._src.clusters.OmpiCluster.get_coordinator_address(cls)->str
+jax._src.clusters.OmpiCluster.get_local_process_id(cls)->Optional[int]
+jax._src.clusters.OmpiCluster.get_process_count(cls)->int
+jax._src.clusters.OmpiCluster.get_process_id(cls)->int
+jax._src.clusters.OmpiCluster.is_env_present(cls)->bool
 jax._src.clusters.ompi_cluster.OmpiCluster(ClusterEnv)
 jax._src.clusters.ompi_cluster.OmpiCluster.get_coordinator_address(cls)->str
 jax._src.clusters.ompi_cluster.OmpiCluster.get_local_process_id(cls)->Optional[int]
@@ -8549,6 +9206,12 @@ jax._src.clusters.ompi_cluster.OmpiCluster.is_env_present(cls)->bool
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/_src/clusters/cloud_tpu_cluster.py----------------------------------------
 A:jax._src.clusters.cloud_tpu_cluster.api_resp->requests.get(f'{gce_metadata_endpoint}/computeMetadata/v1/instance/attributes/{key}', headers={'Metadata-Flavor': 'Google'})
 jax._src.clusters.TpuCluster(ClusterEnv)
+jax._src.clusters.TpuCluster._get_worker_endpoints()->str
+jax._src.clusters.TpuCluster.get_coordinator_address(cls)->str
+jax._src.clusters.TpuCluster.get_local_process_id(cls)->Optional[int]
+jax._src.clusters.TpuCluster.get_process_count(cls)->int
+jax._src.clusters.TpuCluster.get_process_id(cls)->int
+jax._src.clusters.TpuCluster.is_env_present(cls)->bool
 jax._src.clusters.cloud_tpu_cluster.TpuCluster(ClusterEnv)
 jax._src.clusters.cloud_tpu_cluster.TpuCluster._get_worker_endpoints()->str
 jax._src.clusters.cloud_tpu_cluster.TpuCluster.get_coordinator_address(cls)->str
@@ -8563,6 +9226,11 @@ jax._src.clusters.cloud_tpu_cluster.get_metadata(key)
 A:jax._src.clusters.slurm_cluster.ind->next((i for (i, ch) in enumerate(node_list) if ch in delims), len(node_list))
 A:jax._src.clusters.slurm_cluster.ind2->next((i for (i, ch) in enumerate(suffix) if ch in delims2), None)
 jax._src.clusters.SlurmCluster(ClusterEnv)
+jax._src.clusters.SlurmCluster.get_coordinator_address(cls)->str
+jax._src.clusters.SlurmCluster.get_local_process_id(cls)->Optional[int]
+jax._src.clusters.SlurmCluster.get_process_count(cls)->int
+jax._src.clusters.SlurmCluster.get_process_id(cls)->int
+jax._src.clusters.SlurmCluster.is_env_present(cls)->bool
 jax._src.clusters.slurm_cluster.SlurmCluster(ClusterEnv)
 jax._src.clusters.slurm_cluster.SlurmCluster.get_coordinator_address(cls)->str
 jax._src.clusters.slurm_cluster.SlurmCluster.get_local_process_id(cls)->Optional[int]
@@ -8578,6 +9246,13 @@ A:jax._src.clusters.cluster.coordinator_address->next((env for env in cls._clust
 A:jax._src.clusters.cluster.num_processes->next((env for env in cls._cluster_types if env.is_env_present()), None).get_process_count()
 A:jax._src.clusters.cluster.process_id->next((env for env in cls._cluster_types if env.is_env_present()), None).get_process_id()
 jax._src.clusters.ClusterEnv
+jax._src.clusters.ClusterEnv.__init_subclass__(cls,**kwargs)
+jax._src.clusters.ClusterEnv.auto_detect_unset_distributed_params(cls,coordinator_address:Optional[str],num_processes:Optional[int],process_id:Optional[int],local_device_ids:Optional[Sequence[int]])->Tuple[Optional[str], Optional[int], Optional[int], Optional[Sequence[int]]]
+jax._src.clusters.ClusterEnv.get_coordinator_address(cls)->str
+jax._src.clusters.ClusterEnv.get_local_process_id(cls)->Optional[int]
+jax._src.clusters.ClusterEnv.get_process_count(cls)->int
+jax._src.clusters.ClusterEnv.get_process_id(cls)->int
+jax._src.clusters.ClusterEnv.is_env_present(cls)->bool
 jax._src.clusters.cluster.ClusterEnv
 jax._src.clusters.cluster.ClusterEnv.__init_subclass__(cls,**kwargs)
 jax._src.clusters.cluster.ClusterEnv.auto_detect_unset_distributed_params(cls,coordinator_address:Optional[str],num_processes:Optional[int],process_id:Optional[int],local_device_ids:Optional[Sequence[int]])->Tuple[Optional[str], Optional[int], Optional[int], Optional[Sequence[int]]]
@@ -9413,6 +10088,7 @@ jax._src.lax.lax.BIntRules.physical_avals(aval)->Sequence[core.AbstractValue]
 jax._src.lax.lax.BIntRules.result_handler(sticky_device,aval)
 jax._src.lax.lax.InOutFeedEffect(effects.Effect)
 jax._src.lax.lax.Precision(self,arg0)
+jax._src.lax.lax.Precision.__init__(self,arg0)
 jax._src.lax.lax.Precision.__str__(self)->str
 jax._src.lax.lax.RoundingMethod(enum.IntEnum)
 jax._src.lax.lax._abs_jvp_rule(g,ans,x)
@@ -9494,6 +10170,7 @@ jax._src.lax.lax._dyn_shape_staging_rule(trace,prim,out_aval,*args,**params)
 jax._src.lax.lax._empty_lower(ctx,*,dtype)
 jax._src.lax.lax._enum_descriptor(self,val)
 jax._src.lax.lax._enum_descriptor.__get__(self,_,owner)
+jax._src.lax.lax._enum_descriptor.__init__(self,val)
 jax._src.lax.lax._eq_meet(a,b)
 jax._src.lax.lax._extract_tracers_dyn_shape(shape:Sequence[Union[int,core.Tracer]])->Tuple[List[core.Tracer], List[Optional[int]]]
 jax._src.lax.lax._eye(dtype:DTypeLike,shape:Shape,offset:int)->Array
@@ -9893,6 +10570,7 @@ A:jax._src.lax.parallel.new_axes->tuple((dsrc if axis == frame_name else axis + 
 A:jax._src.lax.parallel.pgather_p->jax._src.core.AxisPrimitive('pgather')
 A:jax._src.lax.parallel.core.axis_substitution_rules[pgather_p]->partial(_subst_all_names_in_param, 'axes')
 jax._src.lax.parallel.XeinsumSpecParser(self,spec:str)
+jax._src.lax.parallel.XeinsumSpecParser.__init__(self,spec:str)
 jax._src.lax.parallel.XeinsumSpecParser.cur(self)
 jax._src.lax.parallel.XeinsumSpecParser.eof(self)
 jax._src.lax.parallel.XeinsumSpecParser.maybe_take(self,char:str,on_eof:bool=False)
@@ -10284,6 +10962,7 @@ jax._src.lax.qdwh.qdwh(x,*,is_hermitian=False,max_iterations=None,eps=None,dynam
 A:jax._src.lax.stack.elem->jax.tree_util.tree_map(lambda x: lax.dynamic_index_in_dim(x, self._size - 1, 0, keepdims=False), self._data)
 A:jax._src.lax.stack.(leaves, treedef)->jax.tree_util.tree_flatten(self._data)
 jax._src.lax.stack.Stack(self,size,data)
+jax._src.lax.stack.Stack.__init__(self,size,data)
 jax._src.lax.stack.Stack.__repr__(self)
 jax._src.lax.stack.Stack.create(capacity:int,prototype:Any)->Stack
 jax._src.lax.stack.Stack.empty(self)->Any
@@ -10611,6 +11290,7 @@ A:jax._src.lax.control_flow.conditionals.out_vals->jax._src.core.AxisPrimitive('
 A:jax._src.lax.control_flow.conditionals.(out_ref_vals, out_vals)->jax._src.util.split_list(out_vals, [len(out_vals) - len(out_avals)])
 A:jax._src.lax.control_flow.conditionals.ref_val_iter->iter(out_ref_vals)
 jax._src.lax.control_flow.cond(*args,**kwargs)
+jax._src.lax.control_flow.cond_bind(*args,branches,linear)
 jax._src.lax.control_flow.conditionals._bcast_select(pred,on_true,on_false)
 jax._src.lax.control_flow.conditionals._bcast_select_n(pred,*cases)
 jax._src.lax.control_flow.conditionals._cond(pred,true_fun:Callable,false_fun:Callable,*operands,operand=_no_operand_sentinel,linear=None)
@@ -10885,6 +11565,9 @@ A:jax._src.lax.control_flow.loops.ad.primitive_jvps[cumprod_p]->partial(_cumulat
 A:jax._src.lax.control_flow.loops.ad.primitive_jvps[cummin_p]->partial(_cumulative_jvp_rule, combine_fn=lax.min)
 A:jax._src.lax.control_flow.loops.ad.primitive_jvps[cummax_p]->partial(_cumulative_jvp_rule, combine_fn=lax.max)
 jax._src.lax.control_flow._scan_impl(*args,reverse,length,num_consts,num_carry,jaxpr,linear,unroll)
+jax._src.lax.control_flow._scan_impl_block_unrolled(*args,reverse,length,num_consts,num_carry,linear,block_length,f_impl,x_avals,y_avals)
+jax._src.lax.control_flow._scan_impl_loop(*args,reverse,length,num_consts,num_carry,linear,f_impl,x_avals,y_avals)
+jax._src.lax.control_flow._scan_impl_unrolled(*args,reverse,length,num_consts,num_carry,linear,f_impl,x_avals,y_avals)
 jax._src.lax.control_flow.associative_scan(fn:Callable,elems,reverse:bool=False,axis:int=0)
 jax._src.lax.control_flow.cumlogsumexp(operand:Array,axis:int=0,reverse:bool=False)->Array
 jax._src.lax.control_flow.cummax(operand:Array,axis:int=0,reverse:bool=False)->Array
@@ -11344,16 +12027,19 @@ A:jax.experimental.shard_map.pe.partial_eval_jaxpr_custom_rules[shard_map_p]->pa
 jax.experimental.shard_map.HashablePartial(self,f,*args,**kwargs)
 jax.experimental.shard_map.HashablePartial.__eq__(self,other)
 jax.experimental.shard_map.HashablePartial.__hash__(self)
+jax.experimental.shard_map.HashablePartial.__init__(self,f,*args,**kwargs)
 jax.experimental.shard_map.NoFail
 jax.experimental.shard_map.ShardMapPrimitive(core.Primitive)
 jax.experimental.shard_map.ShardMapPrimitive.bind(self,fun:lu.WrappedFun,*args:MaybeTracer,mesh:Mesh,in_names:Tuple[AxisNames,...],out_names_thunk:Callable[[],Tuple[AxisNames,...]],check_rep:bool)->Sequence[MaybeTracer]
 jax.experimental.shard_map.ShardMapPrimitive.get_bind_params(self,params)
 jax.experimental.shard_map.ShardMapTrace(self,*args,mesh,check)
+jax.experimental.shard_map.ShardMapTrace.__init__(self,*args,mesh,check)
 jax.experimental.shard_map.ShardMapTrace.process_call(self,call_primitive,fun,tracers,params)
 jax.experimental.shard_map.ShardMapTrace.process_primitive(self,prim,tracers,params)
 jax.experimental.shard_map.ShardMapTrace.pure(self,val)
 jax.experimental.shard_map.ShardMapTrace.sublift(self,tracer)
 jax.experimental.shard_map.ShardMapTracer(self,trace,rep,val)
+jax.experimental.shard_map.ShardMapTracer.__init__(self,trace,rep,val)
 jax.experimental.shard_map.ShardMapTracer.__str__(self)->str
 jax.experimental.shard_map.ShardMapTracer.aval(self)
 jax.experimental.shard_map.ShardMapTracer.full_lower(self)->ShardMapTracer
@@ -11425,6 +12111,7 @@ A:jax.experimental.serialize_executable.loaded_compiled_obj->lowered._lowering._
 jax.experimental.serialize_executable._JaxPjrtPickler(pickle.Pickler)
 jax.experimental.serialize_executable._JaxPjrtPickler.persistent_id(self,obj)
 jax.experimental.serialize_executable._JaxPjrtUnpickler(self,file,backend)
+jax.experimental.serialize_executable._JaxPjrtUnpickler.__init__(self,file,backend)
 jax.experimental.serialize_executable._JaxPjrtUnpickler.persistent_load(self,pid)
 jax.experimental.serialize_executable.compile_and_serialize(lowered:jax.stages.Lowered)
 jax.experimental.serialize_executable.load_compiled(serialized,in_tree,out_tree,backend:Optional[Union[str,xc.Client]]=None)
@@ -11496,6 +12183,7 @@ A:jax.experimental.custom_partitioning.sharding_callback_info->_ShardingCallback
 A:jax.experimental.custom_partitioning.key->str(id(sharding_callback_info))
 A:jax.experimental.custom_partitioning.out->jax._src.lib.mlir.dialects.hlo.CustomCallOp(out_type, list(values), call_target_name=ir.StringAttr.get(_CUSTOM_PARTITIONING_CALL_NAME), has_side_effect=ir.BoolAttr.get(False), api_version=mlir.i32_attr(2), called_computations=ir.ArrayAttr.get([]), backend_config=ir.StringAttr.get(key), operand_layouts=None, result_layouts=None)
 jax.experimental.custom_partitioning._ShardingCallbackInfo(self,propagate_user_sharding,partition,to_mesh_pspec_sharding,infer_sharding_from_operands,module_context,mesh,static_args)
+jax.experimental.custom_partitioning._ShardingCallbackInfo.__init__(self,propagate_user_sharding,partition,to_mesh_pspec_sharding,infer_sharding_from_operands,module_context,mesh,static_args)
 jax.experimental.custom_partitioning._check_for_tracers(x)
 jax.experimental.custom_partitioning._custom_partitioning_abstract_eval(*avals,call,in_tree,out_tree,propagate_user_sharding,partition,infer_sharding_from_operands,static_args)
 jax.experimental.custom_partitioning._custom_partitioning_impl(*args,call,in_tree,out_tree,propagate_user_sharding,partition,infer_sharding_from_operands,static_args)
@@ -11506,6 +12194,7 @@ jax.experimental.custom_partitioning._custom_partitioning_propagate_user_shardin
 jax.experimental.custom_partitioning._resolve_kwargs(fun,args,kwargs)
 jax.experimental.custom_partitioning._to_jax_shape(s)
 jax.experimental.custom_partitioning.custom_partitioning(self,fun,static_argnums=())
+jax.experimental.custom_partitioning.custom_partitioning.__init__(self,fun,static_argnums=())
 jax.experimental.custom_partitioning.custom_partitioning.def_partition(self,partition,infer_sharding_from_operands,propagate_user_sharding=None)
 
 
@@ -11637,6 +12326,7 @@ jax.experimental.jet.JetTrace.process_primitive(self,primitive,tracers,params)
 jax.experimental.jet.JetTrace.pure(self,val)
 jax.experimental.jet.JetTrace.sublift(self,val)
 jax.experimental.jet.JetTracer(self,trace,primal,terms)
+jax.experimental.jet.JetTracer.__init__(self,trace,primal,terms)
 jax.experimental.jet.JetTracer.aval(self)
 jax.experimental.jet.JetTracer.full_lower(self)
 jax.experimental.jet.ZeroSeries
@@ -11789,10 +12479,12 @@ A:jax.experimental.host_callback.cv->threading.Condition(lock=lock)
 A:jax.experimental.host_callback.x_on_dev->jax._src.api.device_put(d_idx, device=d)
 jax.experimental.host_callback.CallbackException(Exception)
 jax.experimental.host_callback._CallbackHandlerData(self)
+jax.experimental.host_callback._CallbackHandlerData.__init__(self)
 jax.experimental.host_callback._CallbackHandlerData.stop(self)
 jax.experimental.host_callback._CallbackWrapper(self,callback_func,identity,call_with_device)
 jax.experimental.host_callback._CallbackWrapper.__eq__(self,other)
 jax.experimental.host_callback._CallbackWrapper.__hash__(self)
+jax.experimental.host_callback._CallbackWrapper.__init__(self,callback_func,identity,call_with_device)
 jax.experimental.host_callback._add_transform(params:Dict,name:str,*transform_params)->Dict
 jax.experimental.host_callback._aval_is_empty(aval)->bool
 jax.experimental.host_callback._call(callback_func:Callable,arg,*,result_shape=None,call_with_device=False,device_index=0,identity=False)
@@ -11975,8 +12667,25 @@ A:jax.experimental.sparse.csr.csr_matmat_p->jax._src.core.Primitive('csr_matmat'
 A:jax.experimental.sparse.csr._csr_matmat_lowering->jax.interpreters.mlir.lower_fun(_csr_matmat_impl, multiple_results=False)
 A:jax.experimental.sparse.csr.B->jax.numpy.asarray(B)
 jax.experimental.sparse.CSC(self,args,*,shape)
+jax.experimental.sparse.CSC.__matmul__(self,other)
+jax.experimental.sparse.CSC._empty(cls,shape,*,dtype=None,index_dtype='int32')
+jax.experimental.sparse.CSC._eye(cls,N,M,k,*,dtype=None,index_dtype='int32')
+jax.experimental.sparse.CSC.fromdense(cls,mat,*,nse=None,index_dtype=np.int32)
+jax.experimental.sparse.CSC.todense(self)
+jax.experimental.sparse.CSC.transpose(self,axes=None)
+jax.experimental.sparse.CSC.tree_flatten(self)
+jax.experimental.sparse.CSC.tree_unflatten(cls,aux_data,children)
 jax.experimental.sparse.CSR(self,args,*,shape)
+jax.experimental.sparse.CSR.__matmul__(self,other)
+jax.experimental.sparse.CSR._empty(cls,shape,*,dtype=None,index_dtype='int32')
+jax.experimental.sparse.CSR._eye(cls,N,M,k,*,dtype=None,index_dtype='int32')
+jax.experimental.sparse.CSR.fromdense(cls,mat,*,nse=None,index_dtype=np.int32)
+jax.experimental.sparse.CSR.todense(self)
+jax.experimental.sparse.CSR.transpose(self,axes=None)
+jax.experimental.sparse.CSR.tree_flatten(self)
+jax.experimental.sparse.CSR.tree_unflatten(cls,aux_data,children)
 jax.experimental.sparse.csr.CSC(self,args,*,shape)
+jax.experimental.sparse.csr.CSC.__init__(self,args,*,shape)
 jax.experimental.sparse.csr.CSC.__matmul__(self,other)
 jax.experimental.sparse.csr.CSC._empty(cls,shape,*,dtype=None,index_dtype='int32')
 jax.experimental.sparse.csr.CSC._eye(cls,N,M,k,*,dtype=None,index_dtype='int32')
@@ -11986,6 +12695,7 @@ jax.experimental.sparse.csr.CSC.transpose(self,axes=None)
 jax.experimental.sparse.csr.CSC.tree_flatten(self)
 jax.experimental.sparse.csr.CSC.tree_unflatten(cls,aux_data,children)
 jax.experimental.sparse.csr.CSR(self,args,*,shape)
+jax.experimental.sparse.csr.CSR.__init__(self,args,*,shape)
 jax.experimental.sparse.csr.CSR.__matmul__(self,other)
 jax.experimental.sparse.csr.CSR._empty(cls,shape,*,dtype=None,index_dtype='int32')
 jax.experimental.sparse.csr.CSR._eye(cls,N,M,k,*,dtype=None,index_dtype='int32')
@@ -12085,7 +12795,21 @@ A:jax.experimental.sparse.bcsr.obj->object.__new__(cls)
 A:jax.experimental.sparse.bcsr.(batch_shape, sparse_shape, dense_shape)->split_list(shape, [n_batch, n_sparse])
 A:jax.experimental.sparse.bcsr.coo_indices->_bcsr_to_bcoo(self.indices, self.indptr, shape=self.shape)
 jax.experimental.sparse.BCSR(self,args:Tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
+jax.experimental.sparse.BCSR.__repr__(self)
+jax.experimental.sparse.BCSR._empty(cls,shape,*,dtype=None,index_dtype='int32',n_dense=0,n_batch=0,nse=0)
+jax.experimental.sparse.BCSR._sparse_shape(self)
+jax.experimental.sparse.BCSR.from_bcoo(cls,arr:bcoo.BCOO)->BCSR
+jax.experimental.sparse.BCSR.from_scipy_sparse(cls,mat,*,index_dtype=None,n_dense=0,n_batch=0)
+jax.experimental.sparse.BCSR.fromdense(cls,mat,*,nse=None,index_dtype=np.int32,n_dense=0,n_batch=0)
+jax.experimental.sparse.BCSR.sum_duplicates(self,nse:Optional[int]=None,remove_zeros:bool=True)->BCSR
+jax.experimental.sparse.BCSR.to_bcoo(self)->bcoo.BCOO
+jax.experimental.sparse.BCSR.todense(self)
+jax.experimental.sparse.BCSR.transpose(self,*args,**kwargs)
+jax.experimental.sparse.BCSR.tree_flatten(self)
+jax.experimental.sparse.BCSR.tree_unflatten(cls,aux_data,children)
+jax.experimental.sparse.BCSRProperties(NamedTuple)
 jax.experimental.sparse.bcsr.BCSR(self,args:Tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
+jax.experimental.sparse.bcsr.BCSR.__init__(self,args:Tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.bcsr.BCSR.__repr__(self)
 jax.experimental.sparse.bcsr.BCSR._empty(cls,shape,*,dtype=None,index_dtype='int32',n_dense=0,n_batch=0,nse=0)
 jax.experimental.sparse.bcsr.BCSR._sparse_shape(self)
@@ -12350,7 +13074,24 @@ A:jax.experimental.sparse.bcoo.mat_T->bcoo_transpose(self, permutation=perm)
 A:jax.experimental.sparse.bcoo.shape_T->tuple((self.shape[i] for i in perm))
 A:jax.experimental.sparse.bcoo.obj->object.__new__(cls)
 jax.experimental.sparse.BCOO(self,args:Tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
+jax.experimental.sparse.BCOO.__repr__(self)
+jax.experimental.sparse.BCOO._empty(cls,shape:Shape,*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32',n_dense:int=0,n_batch:int=0,nse:int=0)->BCOO
+jax.experimental.sparse.BCOO._eye(cls,N:int,M:int,k:int,*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32',n_batch:int=0,n_dense:int=0)->BCOO
+jax.experimental.sparse.BCOO.astype(self,*args,**kwargs)->BCOO
+jax.experimental.sparse.BCOO.from_scipy_sparse(cls,mat,*,index_dtype:Optional[DTypeLike]=None,n_dense:int=0,n_batch:int=0)->BCOO
+jax.experimental.sparse.BCOO.fromdense(cls,mat:Array,*,nse:Optional[int]=None,index_dtype:DTypeLike=np.int32,n_dense:int=0,n_batch:int=0)->BCOO
+jax.experimental.sparse.BCOO.reshape(self,*args,**kwargs)->BCOO
+jax.experimental.sparse.BCOO.sort_indices(self)->BCOO
+jax.experimental.sparse.BCOO.sum(self)->BCOO
+jax.experimental.sparse.BCOO.sum_duplicates(self,nse:Optional[int]=None,remove_zeros:bool=True)->BCOO
+jax.experimental.sparse.BCOO.todense(self)->Array
+jax.experimental.sparse.BCOO.transpose(self,axes:Optional[Sequence[int]]=None)->BCOO
+jax.experimental.sparse.BCOO.tree_flatten(self)
+jax.experimental.sparse.BCOO.tree_unflatten(cls,aux_data,children)
+jax.experimental.sparse.BCOO.update_layout(self,*,n_batch:Optional[int]=None,n_dense:Optional[int]=None,on_inefficient:str='error')->BCOO
+jax.experimental.sparse.BCOOProperties(NamedTuple)
 jax.experimental.sparse.bcoo.BCOO(self,args:Tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
+jax.experimental.sparse.bcoo.BCOO.__init__(self,args:Tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.bcoo.BCOO.__repr__(self)
 jax.experimental.sparse.bcoo.BCOO._empty(cls,shape:Shape,*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32',n_dense:int=0,n_batch:int=0,nse:int=0)->BCOO
 jax.experimental.sparse.bcoo.BCOO._eye(cls,N:int,M:int,k:int,*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32',n_batch:int=0,n_dense:int=0)->BCOO
@@ -12595,7 +13336,18 @@ A:jax.experimental.sparse.coo.coo_matmat_p->jax._src.core.Primitive('coo_matmat'
 A:jax.experimental.sparse.coo.B->jax.numpy.asarray(B)
 A:jax.experimental.sparse.coo._coo_matmat_lowering->jax.interpreters.mlir.lower_fun(_coo_matmat_impl, multiple_results=False)
 jax.experimental.sparse.COO(self,args:Tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
+jax.experimental.sparse.COO.__matmul__(self,other:ArrayLike)->Array
+jax.experimental.sparse.COO._empty(cls,shape:Sequence[int],*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32')->COO
+jax.experimental.sparse.COO._eye(cls,N:int,M:int,k:int,*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32')->COO
+jax.experimental.sparse.COO._sort_indices(self)->COO
+jax.experimental.sparse.COO.fromdense(cls,mat:Array,*,nse:Optional[int]=None,index_dtype:DTypeLike=np.int32)->COO
+jax.experimental.sparse.COO.todense(self)->Array
+jax.experimental.sparse.COO.transpose(self,axes:Optional[Tuple[int,...]]=None)->COO
+jax.experimental.sparse.COO.tree_flatten(self)->Tuple[Tuple[Array, Array, Array], Dict[str, Any]]
+jax.experimental.sparse.COO.tree_unflatten(cls,aux_data,children)
+jax.experimental.sparse.COOInfo(NamedTuple)
 jax.experimental.sparse.coo.COO(self,args:Tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
+jax.experimental.sparse.coo.COO.__init__(self,args:Tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
 jax.experimental.sparse.coo.COO.__matmul__(self,other:ArrayLike)->Array
 jax.experimental.sparse.coo.COO._empty(cls,shape:Sequence[int],*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32')->COO
 jax.experimental.sparse.coo.COO._eye(cls,N:int,M:int,k:int,*,dtype:Optional[DTypeLike]=None,index_dtype:DTypeLike='int32')->COO
@@ -12769,10 +13521,32 @@ jax.experimental.sparse.random_bcoo(key,shape,*,dtype=jnp.float_,indices_dtype=N
 A:jax.experimental.sparse._base.self.shape->tuple(shape)
 A:jax.experimental.sparse._base.shape->list(self.shape)
 jax.experimental.sparse.JAXSparse(self,args:Tuple[Array,...],*,shape:Sequence[int])
+jax.experimental.sparse.JAXSparse.T(self)
+jax.experimental.sparse.JAXSparse.__add__(self,other)
+jax.experimental.sparse.JAXSparse.__getitem__(self,item)
+jax.experimental.sparse.JAXSparse.__len__(self)
+jax.experimental.sparse.JAXSparse.__matmul__(self,other)
+jax.experimental.sparse.JAXSparse.__mul__(self,other)
+jax.experimental.sparse.JAXSparse.__neg__(self)
+jax.experimental.sparse.JAXSparse.__pos__(self)
+jax.experimental.sparse.JAXSparse.__radd__(self,other)
+jax.experimental.sparse.JAXSparse.__repr__(self)
+jax.experimental.sparse.JAXSparse.__rmatmul__(self,other)
+jax.experimental.sparse.JAXSparse.__rmul__(self,other)
+jax.experimental.sparse.JAXSparse.__rsub__(self,other)
+jax.experimental.sparse.JAXSparse.__sub__(self,other)
+jax.experimental.sparse.JAXSparse.block_until_ready(self)
+jax.experimental.sparse.JAXSparse.ndim(self)->int
+jax.experimental.sparse.JAXSparse.size(self)->int
+jax.experimental.sparse.JAXSparse.sum(self,*args,**kwargs)
+jax.experimental.sparse.JAXSparse.transpose(self,axes=None)
+jax.experimental.sparse.JAXSparse.tree_flatten(self)
+jax.experimental.sparse.JAXSparse.tree_unflatten(cls,aux_data,children)
 jax.experimental.sparse._base.JAXSparse(self,args:Tuple[Array,...],*,shape:Sequence[int])
 jax.experimental.sparse._base.JAXSparse.T(self)
 jax.experimental.sparse._base.JAXSparse.__add__(self,other)
 jax.experimental.sparse._base.JAXSparse.__getitem__(self,item)
+jax.experimental.sparse._base.JAXSparse.__init__(self,args:Tuple[Array,...],*,shape:Sequence[int])
 jax.experimental.sparse._base.JAXSparse.__len__(self)
 jax.experimental.sparse._base.JAXSparse.__matmul__(self,other)
 jax.experimental.sparse._base.JAXSparse.__mul__(self,other)
@@ -12871,7 +13645,13 @@ A:jax.experimental.sparse.transform.xs_out->tree_unflatten(xs_tree, out[len(carr
 A:jax.experimental.sparse.transform.(sp_branches, treedefs)->zip(*(_sparsify_jaxpr(spenv, jaxpr, *operands) for jaxpr in branches))
 A:jax.experimental.sparse.transform.(args, _)->tree_flatten(spvalues_to_arrays(spenv, (pred, *operands)))
 jax.experimental.sparse.SparseTracer(self,trace:core.Trace,*,spvalue)
+jax.experimental.sparse.SparseTracer.aval(self)
+jax.experimental.sparse.SparseTracer.full_lower(self)
+jax.experimental.sparse.SparseTracer.spenv(self)
 jax.experimental.sparse.sparsify(f,use_tracer=False)
+jax.experimental.sparse.sparsify_fun(wrapped_fun,args:List[ArrayOrSparse])
+jax.experimental.sparse.sparsify_raw(f)
+jax.experimental.sparse.sparsify_subtrace(main,spvalues,*bufs)
 jax.experimental.sparse.transform.SparseTrace(core.Trace)
 jax.experimental.sparse.transform.SparseTrace.lift(self,val:core.Tracer)
 jax.experimental.sparse.transform.SparseTrace.process_call(self,call_primitive,f:lu.WrappedFun,tracers,params)
@@ -12879,10 +13659,12 @@ jax.experimental.sparse.transform.SparseTrace.process_primitive(self,primitive,t
 jax.experimental.sparse.transform.SparseTrace.pure(self,val:Any)
 jax.experimental.sparse.transform.SparseTrace.sublift(self,val:SparseTracer)
 jax.experimental.sparse.transform.SparseTracer(self,trace:core.Trace,*,spvalue)
+jax.experimental.sparse.transform.SparseTracer.__init__(self,trace:core.Trace,*,spvalue)
 jax.experimental.sparse.transform.SparseTracer.aval(self)
 jax.experimental.sparse.transform.SparseTracer.full_lower(self)
 jax.experimental.sparse.transform.SparseTracer.spenv(self)
 jax.experimental.sparse.transform.SparsifyEnv(self,bufs=())
+jax.experimental.sparse.transform.SparsifyEnv.__init__(self,bufs=())
 jax.experimental.sparse.transform.SparsifyEnv._push(self,arr:Array)->int
 jax.experimental.sparse.transform.SparsifyEnv.data(self,spvalue:SparsifyValue)->Array
 jax.experimental.sparse.transform.SparsifyEnv.dense(self,data)
@@ -12971,6 +13753,7 @@ jax.experimental.compilation_cache.compilation_cache.reset_cache()
 ----------------------------------------/home/zhang/Packages/jax/jax0.4.6/experimental/compilation_cache/gfile_cache.py----------------------------------------
 A:jax.experimental.compilation_cache.gfile_cache.self._path->jax._src.path.Path(path)
 jax.experimental.compilation_cache.gfile_cache.GFileCache(self,path:str)
+jax.experimental.compilation_cache.gfile_cache.GFileCache.__init__(self,path:str)
 jax.experimental.compilation_cache.gfile_cache.GFileCache.get(self,key:str)
 jax.experimental.compilation_cache.gfile_cache.GFileCache.put(self,key:str,value:bytes)
 
@@ -13054,10 +13837,13 @@ jax.experimental.jax2tf.shape_poly.DimensionHandlerPoly.is_constant(self,d:DimSi
 jax.experimental.jax2tf.shape_poly.DimensionHandlerPoly.stride(self,d:DimSize,window_size:DimSize,window_stride:DimSize)->DimSize
 jax.experimental.jax2tf.shape_poly.DimensionHandlerPoly.symbolic_equal(self,d1:core.DimSize,d2:core.DimSize)->bool
 jax.experimental.jax2tf.shape_poly.InconclusiveDimensionOperation(self,message:str)
+jax.experimental.jax2tf.shape_poly.InconclusiveDimensionOperation.__init__(self,message:str)
 jax.experimental.jax2tf.shape_poly.PolyShape(self,*dim_specs)
+jax.experimental.jax2tf.shape_poly.PolyShape.__init__(self,*dim_specs)
 jax.experimental.jax2tf.shape_poly._DimAtom(self,*operands:'_DimExpr',var:Optional[str]=None,operation:Optional[str]=None)
 jax.experimental.jax2tf.shape_poly._DimAtom.__eq__(self,other:Any)
 jax.experimental.jax2tf.shape_poly._DimAtom.__hash__(self)
+jax.experimental.jax2tf.shape_poly._DimAtom.__init__(self,*operands:'_DimExpr',var:Optional[str]=None,operation:Optional[str]=None)
 jax.experimental.jax2tf.shape_poly._DimAtom.__lt__(self,other:'_DimAtom')
 jax.experimental.jax2tf.shape_poly._DimAtom.__str__(self)
 jax.experimental.jax2tf.shape_poly._DimAtom.bounds(self)->Tuple[float, float]
@@ -13072,6 +13858,7 @@ jax.experimental.jax2tf.shape_poly._DimExpr.__divmod__(self,divisor)
 jax.experimental.jax2tf.shape_poly._DimExpr.__floordiv__(self,divisor)
 jax.experimental.jax2tf.shape_poly._DimExpr.__gt__(self,other:DimSize)
 jax.experimental.jax2tf.shape_poly._DimExpr.__hash__(self)
+jax.experimental.jax2tf.shape_poly._DimExpr.__init__(self,coeffs:Dict[_DimMon,int])
 jax.experimental.jax2tf.shape_poly._DimExpr.__int__(self)
 jax.experimental.jax2tf.shape_poly._DimExpr.__jax_array__(self)
 jax.experimental.jax2tf.shape_poly._DimExpr.__le__(self,other:DimSize)
@@ -13592,9 +14379,11 @@ jax.experimental.jax2tf.jax2tf.TensorFlowTrace.process_primitive(self,primitive:
 jax.experimental.jax2tf.jax2tf.TensorFlowTrace.pure(self,val:TfVal)->TensorFlowTracer
 jax.experimental.jax2tf.jax2tf.TensorFlowTrace.sublift(self,val:TensorFlowTracer)->TensorFlowTracer
 jax.experimental.jax2tf.jax2tf.TensorFlowTracer(self,trace:'TensorFlowTrace',val:TfVal,aval:core.AbstractValue)
+jax.experimental.jax2tf.jax2tf.TensorFlowTracer.__init__(self,trace:'TensorFlowTrace',val:TfVal,aval:core.AbstractValue)
 jax.experimental.jax2tf.jax2tf.TensorFlowTracer.aval(self)
 jax.experimental.jax2tf.jax2tf.TensorFlowTracer.full_lower(self)
 jax.experimental.jax2tf.jax2tf._ThreadLocalState(self)
+jax.experimental.jax2tf.jax2tf._ThreadLocalState.__init__(self)
 jax.experimental.jax2tf.jax2tf._abs(x:TfVal)->TfVal
 jax.experimental.jax2tf.jax2tf._add(x:TfVal,y:TfVal)->TfVal
 jax.experimental.jax2tf.jax2tf._approx_top_k(operand:TfVal,k:int,reduction_dimension:int,recall_target:float,is_max_k:bool,reduction_input_size_override:int,aggregate_to_topk:bool)->Tuple[TfVal, TfVal]
@@ -13661,6 +14450,7 @@ jax.experimental.jax2tf.jax2tf._pad(operand,padding_value,*,padding_config,_in_a
 jax.experimental.jax2tf.jax2tf._pjit(*args:TfVal,jaxpr:core.ClosedJaxpr,in_shardings:Sequence[sharding.XLACompatibleSharding],out_shardings:Sequence[sharding.XLACompatibleSharding],resource_env:maps.ResourceEnv,donated_invars,name:str,in_positional_semantics,out_positional_semantics,keep_unused:bool,inline:bool,_in_avals:Sequence[core.ShapedArray],_out_aval:Sequence[core.ShapedArray])->TfVal
 jax.experimental.jax2tf.jax2tf._pjit_sharding_constraint(arg:TfVal,*,sharding:sharding.NamedSharding,resource_env:maps.ResourceEnv,_in_avals:Sequence[core.ShapedArray],_out_aval:core.ShapedArray,**kwargs)->TfVal
 jax.experimental.jax2tf.jax2tf._population_count(x)
+jax.experimental.jax2tf.jax2tf._precision__config_module_proto(precision:Optional[Tuple[PrecisionType,PrecisionType]])
 jax.experimental.jax2tf.jax2tf._precision_config_proto(precision:Optional[Tuple[PrecisionType,PrecisionType]])
 jax.experimental.jax2tf.jax2tf._qr(operand,full_matrices)
 jax.experimental.jax2tf.jax2tf._random_bits_impl(keys:TfVal,*,bit_width,shape,_in_avals,_out_aval)
@@ -14052,6 +14842,7 @@ A:jax.experimental.jax2tf.tests.jax2tf_limitations.angular_diff->jax.numpy.arcco
 A:jax.experimental.jax2tf.tests.jax2tf_limitations.v_jax->jax.numpy.swapaxes(r_jax[2][..., :rank, :], -2, -1).conj()
 A:jax.experimental.jax2tf.tests.jax2tf_limitations.v_tf->jax.numpy.swapaxes(r_tf[2][..., :rank, :], -2, -1).conj()
 jax.experimental.jax2tf.tests.jax2tf_limitations.Jax2TfLimitation(self,description:str,*,devices:Union[str,Sequence[str]]=('cpu','gpu','tpu'),dtypes:Sequence[DType]=(),enabled:bool=True,modes=('eager','graph','compiled'),native_lowering=FOR_NON_NATIVE,skip_tf_run=False,expect_tf_error:bool=True,skip_comparison=False,custom_assert:Optional[Callable]=None,tol=None)
+jax.experimental.jax2tf.tests.jax2tf_limitations.Jax2TfLimitation.__init__(self,description:str,*,devices:Union[str,Sequence[str]]=('cpu','gpu','tpu'),dtypes:Sequence[DType]=(),enabled:bool=True,modes=('eager','graph','compiled'),native_lowering=FOR_NON_NATIVE,skip_tf_run=False,expect_tf_error:bool=True,skip_comparison=False,custom_assert:Optional[Callable]=None,tol=None)
 jax.experimental.jax2tf.tests.jax2tf_limitations.Jax2TfLimitation._pow_test_util(cls,harness:primitive_harness.Harness)
 jax.experimental.jax2tf.tests.jax2tf_limitations.Jax2TfLimitation.acos(cls,harness:primitive_harness.Harness)
 jax.experimental.jax2tf.tests.jax2tf_limitations.Jax2TfLimitation.acosh(cls,harness:primitive_harness.Harness)
@@ -14424,6 +15215,7 @@ A:jax.experimental.jax2tf.tests.cross_compilation_check.other_hlo->open(filename
 A:jax.experimental.jax2tf.tests.cross_compilation_check.nr_harnesses->len(primitive_harness.all_harnesses)
 A:jax.experimental.jax2tf.tests.cross_compilation_check.enable_xla->harness.params.get('enable_xla', True)
 jax.experimental.jax2tf.tests.cross_compilation_check.Io(self,use_gfile=False)
+jax.experimental.jax2tf.tests.cross_compilation_check.Io.__init__(self,use_gfile=False)
 jax.experimental.jax2tf.tests.cross_compilation_check.Io.exists(self,filename:str)->bool
 jax.experimental.jax2tf.tests.cross_compilation_check.Io.makedirs(self,dirname:str)
 jax.experimental.jax2tf.tests.cross_compilation_check.Io.open(self,filename:str,mode:str)
@@ -14472,6 +15264,7 @@ A:jax.experimental.jax2tf.tests.primitive_harness.shapestr->','.join((str(dim) f
 A:jax.experimental.jax2tf.tests.primitive_harness.out_iinfo->tuple(dtypes).finfo(out_dtype)
 jax.experimental.jax2tf.tests.primitive_harness.CustomArg(NamedTuple)
 jax.experimental.jax2tf.tests.primitive_harness.Harness(self,group_name,name,fun,arg_descriptors,*,dtype,rng_factory=jtu.rand_default,jax_unimplemented:Sequence['Limitation']=(),**params)
+jax.experimental.jax2tf.tests.primitive_harness.Harness.__init__(self,group_name,name,fun,arg_descriptors,*,dtype,rng_factory=jtu.rand_default,jax_unimplemented:Sequence['Limitation']=(),**params)
 jax.experimental.jax2tf.tests.primitive_harness.Harness.__str__(self)
 jax.experimental.jax2tf.tests.primitive_harness.Harness._arg_maker(self,arg_descriptor,rng:Rng)
 jax.experimental.jax2tf.tests.primitive_harness.Harness._args_from_dynargs(self,dyn_args:Sequence)->Sequence
@@ -14481,6 +15274,7 @@ jax.experimental.jax2tf.tests.primitive_harness.Harness.dyn_fun(self,*dyn_args)
 jax.experimental.jax2tf.tests.primitive_harness.Harness.filter(self,device_under_test:str,*,include_jax_unimpl:bool=False,one_containing:Optional[str]=None)->bool
 jax.experimental.jax2tf.tests.primitive_harness.Harness.fullname(self)
 jax.experimental.jax2tf.tests.primitive_harness.Limitation(self,description:str,*,enabled:bool=True,devices:Union[str,Sequence[str]]=('cpu','gpu','tpu'),dtypes:Sequence[DType]=(),skip_run:bool=False)
+jax.experimental.jax2tf.tests.primitive_harness.Limitation.__init__(self,description:str,*,enabled:bool=True,devices:Union[str,Sequence[str]]=('cpu','gpu','tpu'),dtypes:Sequence[DType]=(),skip_run:bool=False)
 jax.experimental.jax2tf.tests.primitive_harness.Limitation.__str__(self)
 jax.experimental.jax2tf.tests.primitive_harness.Limitation.filter(self,device:Optional[str]=None,dtype:Optional[DType]=None)->bool
 jax.experimental.jax2tf.tests.primitive_harness.RandArg(NamedTuple)
@@ -14741,6 +15535,7 @@ jax.experimental.jax2tf.tests.shape_poly_test.DimExprTest.test_poly_equal(self)
 jax.experimental.jax2tf.tests.shape_poly_test.DimExprTest.test_poly_int_results(self)
 jax.experimental.jax2tf.tests.shape_poly_test.DimExprTest.test_stride_shape(self)
 jax.experimental.jax2tf.tests.shape_poly_test.PolyHarness(self,group_name:str,name:str,fun:Callable,*,arg_descriptors:Sequence[primitive_harness.ArgDescriptor]=(),polymorphic_shapes:Optional[Sequence[Any]]=None,input_signature:Optional[Sequence[tf.TensorSpec]]=None,poly_axes:Optional[Sequence[Optional[Union[int,Sequence[int]]]]]=None,expected_output_signature:Optional[tf.TensorSpec]=None,enable_xla:bool=True,expect_error:Tuple[Optional[Any],Optional[str]]=(None,None),skip_jax_run:bool=False,check_result:bool=True,tol:Optional[float]=None)
+jax.experimental.jax2tf.tests.shape_poly_test.PolyHarness.__init__(self,group_name:str,name:str,fun:Callable,*,arg_descriptors:Sequence[primitive_harness.ArgDescriptor]=(),polymorphic_shapes:Optional[Sequence[Any]]=None,input_signature:Optional[Sequence[tf.TensorSpec]]=None,poly_axes:Optional[Sequence[Optional[Union[int,Sequence[int]]]]]=None,expected_output_signature:Optional[tf.TensorSpec]=None,enable_xla:bool=True,expect_error:Tuple[Optional[Any],Optional[str]]=(None,None),skip_jax_run:bool=False,check_result:bool=True,tol:Optional[float]=None)
 jax.experimental.jax2tf.tests.shape_poly_test.PolyHarness.both_enable_and_disable_xla(self)->Tuple['PolyHarness', 'PolyHarness']
 jax.experimental.jax2tf.tests.shape_poly_test.PolyHarness.run_test(self,tst:tf_test_util.JaxToTfTestCase)
 jax.experimental.jax2tf.tests.shape_poly_test.ShapePolyPrimitivesTest(tf_test_util.JaxToTfTestCase)
@@ -14821,6 +15616,7 @@ A:jax.experimental.jax2tf.examples.mnist_lib.inferred_labels->inference_fn(image
 A:jax.experimental.jax2tf.examples.mnist_lib.digit->matplotlib.pyplot.figure(figsize=(8.0, 4.0), num=title).add_subplot(nr_rows, nr_cols, i + 1)
 jax.experimental.jax2tf.examples.mnist_lib.FlaxMNIST
 jax.experimental.jax2tf.examples.mnist_lib.FlaxMNIST.Module(self,x,with_classifier=True)
+jax.experimental.jax2tf.examples.mnist_lib.FlaxMNIST.Module.__call__(self,x,with_classifier=True)
 jax.experimental.jax2tf.examples.mnist_lib.FlaxMNIST.loss(params,inputs,labels)
 jax.experimental.jax2tf.examples.mnist_lib.FlaxMNIST.predict(params,inputs,with_classifier=True)
 jax.experimental.jax2tf.examples.mnist_lib.FlaxMNIST.train(train_ds,test_ds,num_epochs,with_classifier=True)
@@ -14844,6 +15640,7 @@ A:jax.experimental.jax2tf.examples.saved_model_lib.wrapper->_ReusableSavedModelW
 A:jax.experimental.jax2tf.examples.saved_model_lib.saved_model_options->tensorflow.saved_model.SaveOptions(experimental_custom_gradients=True)
 A:jax.experimental.jax2tf.examples.saved_model_lib.self.variables->tensorflow.nest.flatten(param_vars)
 jax.experimental.jax2tf.examples.saved_model_lib._ReusableSavedModelWrapper(self,tf_graph,param_vars)
+jax.experimental.jax2tf.examples.saved_model_lib._ReusableSavedModelWrapper.__init__(self,tf_graph,param_vars)
 jax.experimental.jax2tf.examples.saved_model_lib.convert_and_save_model(jax_fn:Callable[[Any,Any],Any],params,model_dir:str,*,input_signatures:Sequence[tf.TensorSpec],polymorphic_shapes:Optional[Union[str,jax2tf.PolyShape]]=None,with_gradient:bool=False,enable_xla:bool=True,compile_model:bool=True,saved_model_options:Optional[tf.saved_model.SaveOptions]=None)
 
 
@@ -14941,6 +15738,7 @@ A:jax.experimental.gda_serialization.serialization.self._thread->threading.Threa
 A:jax.experimental.gda_serialization.serialization.get_key->_get_key(self._count)
 jax.experimental.gda_serialization.serialization.AsyncManager(self,timeout_secs=300)
 jax.experimental.gda_serialization.serialization.AsyncManager.__del__(self)
+jax.experimental.gda_serialization.serialization.AsyncManager.__init__(self,timeout_secs=300)
 jax.experimental.gda_serialization.serialization.AsyncManager._add_futures(self,futures:Sequence[asyncio.Future])
 jax.experimental.gda_serialization.serialization.AsyncManager._start_async_commit(self,on_commit_callback)
 jax.experimental.gda_serialization.serialization.AsyncManager._thread_func(self)
@@ -14955,6 +15753,7 @@ jax.experimental.gda_serialization.serialization.GlobalAsyncCheckpointManagerBas
 jax.experimental.gda_serialization.serialization.GlobalAsyncCheckpointManagerBase.serialize(self,arrays,tensorstore_specs,*,on_commit_callback:Callable[[],None])
 jax.experimental.gda_serialization.serialization.GlobalAsyncCheckpointManagerBase.wait_until_finished(self)
 jax.experimental.gda_serialization.serialization._LimitInFlightBytes(self,num_bytes)
+jax.experimental.gda_serialization.serialization._LimitInFlightBytes.__init__(self,num_bytes)
 jax.experimental.gda_serialization.serialization._get_key(key:str)
 jax.experimental.gda_serialization.serialization._get_kvstore_for_gcs(ckpt_path:str)
 jax.experimental.gda_serialization.serialization._get_metadata(arr)
@@ -15253,6 +16052,7 @@ jax.interpreters.partial_eval.DynamicJaxprTrace.process_map(self,map_primitive,f
 jax.interpreters.partial_eval.DynamicJaxprTrace.process_primitive(self,primitive,tracers,params)
 jax.interpreters.partial_eval.DynamicJaxprTrace.sublift(self,t)
 jax.interpreters.partial_eval.DynamicJaxprTracer(self,trace,aval,line_info=None)
+jax.interpreters.partial_eval.DynamicJaxprTracer.__init__(self,trace,aval,line_info=None)
 jax.interpreters.partial_eval.DynamicJaxprTracer._assert_live(self)->None
 jax.interpreters.partial_eval.DynamicJaxprTracer._contents(self)
 jax.interpreters.partial_eval.DynamicJaxprTracer._origin_msg(self)
@@ -15260,12 +16060,14 @@ jax.interpreters.partial_eval.DynamicJaxprTracer.full_lower(self)
 jax.interpreters.partial_eval.DynamicJaxprTracer.get_referent(self)
 jax.interpreters.partial_eval.JaxprEqnRecipe(NamedTuple)
 jax.interpreters.partial_eval.JaxprStackFrame(self)
+jax.interpreters.partial_eval.JaxprStackFrame.__init__(self)
 jax.interpreters.partial_eval.JaxprStackFrame.add_eqn(self,eqn:core.JaxprEqn)
 jax.interpreters.partial_eval.JaxprStackFrame.find_progenitors(self,tracer)
 jax.interpreters.partial_eval.JaxprStackFrame.newvar(self,aval)
 jax.interpreters.partial_eval.JaxprStackFrame.to_jaxpr(self,out_tracers)
 jax.interpreters.partial_eval.JaxprStackFrame.to_jaxpr2(self,out_tracers)
 jax.interpreters.partial_eval.JaxprTrace(self,*args,name_stack:source_info_util.NameStack)
+jax.interpreters.partial_eval.JaxprTrace.__init__(self,*args,name_stack:source_info_util.NameStack)
 jax.interpreters.partial_eval.JaxprTrace._current_truncated_name_stack(self)
 jax.interpreters.partial_eval.JaxprTrace.default_process_primitive(self,primitive,tracers,params)
 jax.interpreters.partial_eval.JaxprTrace.instantiate_const(self,tracer)->Tracer
@@ -15288,6 +16090,7 @@ jax.interpreters.partial_eval.JaxprTrace.process_primitive(self,primitive,tracer
 jax.interpreters.partial_eval.JaxprTrace.pure(self,val:Any)->JaxprTracer
 jax.interpreters.partial_eval.JaxprTrace.sublift(self,val:JaxprTracer)->JaxprTracer
 jax.interpreters.partial_eval.JaxprTracer(self,trace:JaxprTrace,pval:PartialVal,recipe:Optional[JaxprTracerRecipe])
+jax.interpreters.partial_eval.JaxprTracer.__init__(self,trace:JaxprTrace,pval:PartialVal,recipe:Optional[JaxprTracerRecipe])
 jax.interpreters.partial_eval.JaxprTracer.__repr__(self)
 jax.interpreters.partial_eval.JaxprTracer.aval(self)->AbstractValue
 jax.interpreters.partial_eval.JaxprTracer.full_lower(self)
@@ -15295,6 +16098,7 @@ jax.interpreters.partial_eval.JaxprTracer.get_referent(self)
 jax.interpreters.partial_eval.JaxprTracer.is_known(self)
 jax.interpreters.partial_eval.JaxprTracer.parents(self)->Sequence[JaxprTracer]
 jax.interpreters.partial_eval.PartialVal(cls,xs:Tuple[Optional[AbstractValue],core.Value])
+jax.interpreters.partial_eval.PartialVal.__new__(cls,xs:Tuple[Optional[AbstractValue],core.Value])
 jax.interpreters.partial_eval.PartialVal.get_aval(self)->AbstractValue
 jax.interpreters.partial_eval.PartialVal.get_known(self)->Optional[core.Value]
 jax.interpreters.partial_eval.PartialVal.is_known(self)->bool
@@ -15303,6 +16107,7 @@ jax.interpreters.partial_eval.PartialVal.unknown(cls,aval:AbstractValue)->Partia
 jax.interpreters.partial_eval.TracerAsName(self,tracer)
 jax.interpreters.partial_eval.TracerAsName.__eq__(self,other)
 jax.interpreters.partial_eval.TracerAsName.__hash__(self)
+jax.interpreters.partial_eval.TracerAsName.__init__(self,tracer)
 jax.interpreters.partial_eval._add_implicit_outputs(jaxpr:Jaxpr)->Tuple[Jaxpr, OutputType]
 jax.interpreters.partial_eval._arg_type(idxs:Dict[AbstractedAxisName,DBIdx],x:Any,spec:Dict[int,AbstractedAxisName])->AbstractValue
 jax.interpreters.partial_eval._canonicalize_specs(ndims:Sequence[int],specs:Optional[Sequence[AbstractedAxesSpec]])->List[Dict[int, AbstractedAxisName]]

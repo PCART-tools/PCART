@@ -10,7 +10,6 @@ def extractLibAPI(version, sourceCodePath):
     get_def_function((libName, version, sourceCodePath))
 
 
-
 if __name__=='__main__':
     ### python extractLibAPI.py -cfg config.json
     

@@ -29,9 +29,11 @@ rich.prompt.Confirm.render_default(self,default:DefaultType)->Text
 rich.prompt.FloatPrompt(PromptBase[int])
 rich.prompt.IntPrompt(PromptBase[int])
 rich.prompt.InvalidResponse(self,message:TextType)
+rich.prompt.InvalidResponse.__init__(self,message:TextType)
 rich.prompt.InvalidResponse.__rich__(self)->TextType
 rich.prompt.Prompt(PromptBase[str])
 rich.prompt.PromptBase(self,prompt:TextType='',*,console:Optional[Console]=None,password:bool=False,choices:Optional[List[str]]=None,show_default:bool=True,show_choices:bool=True)
+rich.prompt.PromptBase.__init__(self,prompt:TextType='',*,console:Optional[Console]=None,password:bool=False,choices:Optional[List[str]]=None,show_default:bool=True,show_choices:bool=True)
 rich.prompt.PromptBase.ask(cls,prompt:TextType='',*,console:Optional[Console]=None,password:bool=False,choices:Optional[List[str]]=None,show_default:bool=True,show_choices:bool=True,default:Any=...,stream:Optional[TextIO]=None)->Any
 rich.prompt.PromptBase.check_choice(self,value:str)->bool
 rich.prompt.PromptBase.get_input(cls,console:Console,prompt:TextType,password:bool,stream:Optional[TextIO]=None)->str
@@ -54,6 +56,7 @@ A:rich.containers.next_style->next_word.get_style_at_offset(console, 0)
 A:rich.containers.self[line_index]->Text('').join(tokens)
 rich.containers.Lines(self,lines:Iterable['Text']=())
 rich.containers.Lines.__getitem__(self,index:Union[slice,int])->Union['Text', List['Text']]
+rich.containers.Lines.__init__(self,lines:Iterable['Text']=())
 rich.containers.Lines.__iter__(self)->Iterator['Text']
 rich.containers.Lines.__len__(self)->int
 rich.containers.Lines.__repr__(self)->str
@@ -64,6 +67,7 @@ rich.containers.Lines.extend(self,lines:Iterable['Text'])->None
 rich.containers.Lines.justify(self,console:'Console',width:int,justify:'JustifyMethod'='left',overflow:'OverflowMethod'='fold')->None
 rich.containers.Lines.pop(self,index:int=-1)->'Text'
 rich.containers.Renderables(self,renderables:Optional[Iterable['RenderableType']]=None)
+rich.containers.Renderables.__init__(self,renderables:Optional[Iterable['RenderableType']]=None)
 rich.containers.Renderables.__iter__(self)->Iterable['RenderableType']
 rich.containers.Renderables.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.containers.Renderables.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
@@ -146,6 +150,7 @@ rich._win32_console.GetConsoleScreenBufferInfo(std_handle:wintypes.HANDLE)->CONS
 rich._win32_console.GetStdHandle(handle:int=STDOUT)->wintypes.HANDLE
 rich._win32_console.LegacyWindowsError(Exception)
 rich._win32_console.LegacyWindowsTerm(self,file:'IO[str]')
+rich._win32_console.LegacyWindowsTerm.__init__(self,file:'IO[str]')
 rich._win32_console.LegacyWindowsTerm._get_cursor_size(self)->int
 rich._win32_console.LegacyWindowsTerm.cursor_position(self)->WindowsCoordinates
 rich._win32_console.LegacyWindowsTerm.erase_end_of_line(self)->None
@@ -221,12 +226,15 @@ A:rich.syntax.args->argparse.ArgumentParser(description='Render syntax to the co
 A:rich.syntax.console->Console(force_terminal=args.force_color, width=args.width)
 A:rich.syntax.syntax->Syntax.from_path(args.path, lexer=args.lexer_name, line_numbers=args.line_numbers, word_wrap=args.word_wrap, theme=args.theme, background_color=args.background_color, indent_guides=args.indent_guides, padding=args.padding, highlight_lines={args.highlight_line})
 rich.syntax.ANSISyntaxTheme(self,style_map:Dict[TokenType,Style])
+rich.syntax.ANSISyntaxTheme.__init__(self,style_map:Dict[TokenType,Style])
 rich.syntax.ANSISyntaxTheme.get_background_style(self)->Style
 rich.syntax.ANSISyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
 rich.syntax.PygmentsSyntaxTheme(self,theme:Union[str,Type[PygmentsStyle]])
+rich.syntax.PygmentsSyntaxTheme.__init__(self,theme:Union[str,Type[PygmentsStyle]])
 rich.syntax.PygmentsSyntaxTheme.get_background_style(self)->Style
 rich.syntax.PygmentsSyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
 rich.syntax.Syntax(self,code:str,lexer:Union[Lexer,str],*,theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,start_line:int=1,line_range:Optional[Tuple[Optional[int],Optional[int]]]=None,highlight_lines:Optional[Set[int]]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:Optional[str]=None,indent_guides:bool=False,padding:PaddingDimensions=0)
+rich.syntax.Syntax.__init__(self,code:str,lexer:Union[Lexer,str],*,theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,start_line:int=1,line_range:Optional[Tuple[Optional[int],Optional[int]]]=None,highlight_lines:Optional[Set[int]]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:Optional[str]=None,indent_guides:bool=False,padding:PaddingDimensions=0)
 rich.syntax.Syntax.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.syntax.Syntax.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
 rich.syntax.Syntax._apply_stylized_ranges(self,text:Text)->None
@@ -310,6 +318,7 @@ rich.text.Text.__bool__(self)->bool
 rich.text.Text.__contains__(self,other:object)->bool
 rich.text.Text.__eq__(self,other:object)->bool
 rich.text.Text.__getitem__(self,slice:Union[int,slice])->'Text'
+rich.text.Text.__init__(self,text:str='',style:Union[str,Style]='',*,justify:Optional['JustifyMethod']=None,overflow:Optional['OverflowMethod']=None,no_wrap:Optional[bool]=None,end:str='\n',tab_size:Optional[int]=8,spans:Optional[List[Span]]=None)
 rich.text.Text.__len__(self)->int
 rich.text.Text.__repr__(self)->str
 rich.text.Text.__rich_console__(self,console:'Console',options:'ConsoleOptions')->Iterable[Segment]
@@ -375,6 +384,7 @@ A:rich.align.highlighter->ReprHighlighter()
 A:rich.align.console->Console()
 A:rich.align.panel->Panel(Group(Align.left(highlighter("align='left'")), Align.center(highlighter("align='center'")), Align.right(highlighter("align='right'"))), width=60, style='on dark_blue', title='Align')
 rich.align.Align(self,renderable:'RenderableType',align:AlignMethod='left',style:Optional[StyleType]=None,*,vertical:Optional[VerticalAlignMethod]=None,pad:bool=True,width:Optional[int]=None,height:Optional[int]=None)
+rich.align.Align.__init__(self,renderable:'RenderableType',align:AlignMethod='left',style:Optional[StyleType]=None,*,vertical:Optional[VerticalAlignMethod]=None,pad:bool=True,width:Optional[int]=None,height:Optional[int]=None)
 rich.align.Align.__repr__(self)->str
 rich.align.Align.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.align.Align.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->Measurement
@@ -382,6 +392,7 @@ rich.align.Align.center(cls,renderable:'RenderableType',style:Optional[StyleType
 rich.align.Align.left(cls,renderable:'RenderableType',style:Optional[StyleType]=None,*,vertical:Optional[VerticalAlignMethod]=None,pad:bool=True,width:Optional[int]=None,height:Optional[int]=None)->'Align'
 rich.align.Align.right(cls,renderable:'RenderableType',style:Optional[StyleType]=None,*,vertical:Optional[VerticalAlignMethod]=None,pad:bool=True,width:Optional[int]=None,height:Optional[int]=None)->'Align'
 rich.align.VerticalCenter(self,renderable:'RenderableType',style:Optional[StyleType]=None)
+rich.align.VerticalCenter.__init__(self,renderable:'RenderableType',style:Optional[StyleType]=None)
 rich.align.VerticalCenter.__repr__(self)->str
 rich.align.VerticalCenter.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.align.VerticalCenter.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->Measurement
@@ -488,14 +499,96 @@ A:rich.console.chrome->make_tag('rect', fill=_theme.background_color.hex, stroke
 A:rich.console.svg->self.export_svg(title=title, theme=theme, clear=clear, code_format=code_format, font_aspect_ratio=font_aspect_ratio, unique_id=unique_id)
 A:rich.console.console->Console(record=True)
 rich.Console(self,*,color_system:Optional[Literal['auto','standard','256','truecolor','windows']]='auto',force_terminal:Optional[bool]=None,force_jupyter:Optional[bool]=None,force_interactive:Optional[bool]=None,soft_wrap:bool=False,theme:Optional[Theme]=None,stderr:bool=False,file:Optional[IO[str]]=None,quiet:bool=False,width:Optional[int]=None,height:Optional[int]=None,style:Optional[StyleType]=None,no_color:Optional[bool]=None,tab_size:int=8,record:bool=False,markup:bool=True,emoji:bool=True,emoji_variant:Optional[EmojiVariant]=None,highlight:bool=True,log_time:bool=True,log_path:bool=True,log_time_format:Union[str,FormatTimeCallable]='[%X]',highlighter:Optional['HighlighterType']=ReprHighlighter(),legacy_windows:Optional[bool]=None,safe_box:bool=True,get_datetime:Optional[Callable[[],datetime]]=None,get_time:Optional[Callable[[],float]]=None,_environ:Optional[Mapping[str,str]]=None)
+rich.Console.__enter__(self)->'Console'
+rich.Console.__exit__(self,exc_type:Any,exc_value:Any,traceback:Any)->None
+rich.Console.__repr__(self)->str
+rich.Console._buffer(self)->List[Segment]
+rich.Console._buffer_index(self)->int
+rich.Console._buffer_index(self,value:int)->None
+rich.Console._caller_frame_info(offset:int,currentframe:Callable[[],Optional[FrameType]]=inspect.currentframe)->Tuple[str, int, Dict[str, Any]]
+rich.Console._check_buffer(self)->None
+rich.Console._collect_renderables(self,objects:Iterable[Any],sep:str,end:str,*,justify:Optional[JustifyMethod]=None,emoji:Optional[bool]=None,markup:Optional[bool]=None,highlight:Optional[bool]=None)->List[ConsoleRenderable]
+rich.Console._detect_color_system(self)->Optional[ColorSystem]
+rich.Console._enter_buffer(self)->None
+rich.Console._exit_buffer(self)->None
+rich.Console._render_buffer(self,buffer:Iterable[Segment])->str
+rich.Console._theme_stack(self)->ThemeStack
+rich.Console.begin_capture(self)->None
+rich.Console.bell(self)->None
+rich.Console.capture(self)->Capture
+rich.Console.clear(self,home:bool=True)->None
+rich.Console.clear_live(self)->None
+rich.Console.color_system(self)->Optional[str]
+rich.Console.control(self,*control:Control)->None
+rich.Console.encoding(self)->str
+rich.Console.end_capture(self)->str
+rich.Console.export_html(self,*,theme:Optional[TerminalTheme]=None,clear:bool=True,code_format:Optional[str]=None,inline_styles:bool=False)->str
+rich.Console.export_svg(self,*,title:str='Rich',theme:Optional[TerminalTheme]=None,clear:bool=True,code_format:str=CONSOLE_SVG_FORMAT,font_aspect_ratio:float=0.61,unique_id:Optional[str]=None)->str
+rich.Console.export_text(self,*,clear:bool=True,styles:bool=False)->str
+rich.Console.file(self)->IO[str]
+rich.Console.file(self,new_file:IO[str])->None
+rich.Console.get_style(self,name:Union[str,Style],*,default:Optional[Union[Style,str]]=None)->Style
+rich.Console.height(self)->int
+rich.Console.height(self,height:int)->None
+rich.Console.input(self,prompt:TextType='',*,markup:bool=True,emoji:bool=True,password:bool=False,stream:Optional[TextIO]=None)->str
+rich.Console.is_alt_screen(self)->bool
+rich.Console.is_dumb_terminal(self)->bool
+rich.Console.is_terminal(self)->bool
+rich.Console.line(self,count:int=1)->None
+rich.Console.log(self,*objects:Any,sep:str='',end:str='\n',style:Optional[Union[str,Style]]=None,justify:Optional[JustifyMethod]=None,emoji:Optional[bool]=None,markup:Optional[bool]=None,highlight:Optional[bool]=None,log_locals:bool=False,_stack_offset:int=1)->None
+rich.Console.measure(self,renderable:RenderableType,*,options:Optional[ConsoleOptions]=None)->Measurement
+rich.Console.options(self)->ConsoleOptions
+rich.Console.out(self,*objects:Any,sep:str='',end:str='\n',style:Optional[Union[str,Style]]=None,highlight:Optional[bool]=None)->None
+rich.Console.pager(self,pager:Optional[Pager]=None,styles:bool=False,links:bool=False)->PagerContext
+rich.Console.pop_render_hook(self)->None
+rich.Console.pop_theme(self)->None
+rich.Console.print(self,*objects:Any,sep:str='',end:str='\n',style:Optional[Union[str,Style]]=None,justify:Optional[JustifyMethod]=None,overflow:Optional[OverflowMethod]=None,no_wrap:Optional[bool]=None,emoji:Optional[bool]=None,markup:Optional[bool]=None,highlight:Optional[bool]=None,width:Optional[int]=None,height:Optional[int]=None,crop:bool=True,soft_wrap:Optional[bool]=None,new_line_start:bool=False)->None
+rich.Console.print_exception(self,*,width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False,suppress:Iterable[Union[str,ModuleType]]=(),max_frames:int=100)->None
+rich.Console.print_json(self,json:Optional[str]=None,*,data:Any=None,indent:Union[None,int,str]=2,highlight:bool=True,skip_keys:bool=False,ensure_ascii:bool=False,check_circular:bool=True,allow_nan:bool=True,default:Optional[Callable[[Any],Any]]=None,sort_keys:bool=False)->None
+rich.Console.push_render_hook(self,hook:RenderHook)->None
+rich.Console.push_theme(self,theme:Theme,*,inherit:bool=True)->None
+rich.Console.render(self,renderable:RenderableType,options:Optional[ConsoleOptions]=None)->Iterable[Segment]
+rich.Console.render_lines(self,renderable:RenderableType,options:Optional[ConsoleOptions]=None,*,style:Optional[Style]=None,pad:bool=True,new_lines:bool=False)->List[List[Segment]]
+rich.Console.render_str(self,text:str,*,style:Union[str,Style]='',justify:Optional[JustifyMethod]=None,overflow:Optional[OverflowMethod]=None,emoji:Optional[bool]=None,markup:Optional[bool]=None,highlight:Optional[bool]=None,highlighter:Optional[HighlighterType]=None)->'Text'
+rich.Console.rule(self,title:TextType='',*,characters:str='─',style:Union[str,Style]='rule.line',align:AlignMethod='center')->None
+rich.Console.save_html(self,path:str,*,theme:Optional[TerminalTheme]=None,clear:bool=True,code_format:str=CONSOLE_HTML_FORMAT,inline_styles:bool=False)->None
+rich.Console.save_svg(self,path:str,*,title:str='Rich',theme:Optional[TerminalTheme]=None,clear:bool=True,code_format:str=CONSOLE_SVG_FORMAT,font_aspect_ratio:float=0.61,unique_id:Optional[str]=None)->None
+rich.Console.save_text(self,path:str,*,clear:bool=True,styles:bool=False)->None
+rich.Console.screen(self,hide_cursor:bool=True,style:Optional[StyleType]=None)->'ScreenContext'
+rich.Console.set_alt_screen(self,enable:bool=True)->bool
+rich.Console.set_live(self,live:'Live')->None
+rich.Console.set_window_title(self,title:str)->bool
+rich.Console.show_cursor(self,show:bool=True)->bool
+rich.Console.size(self)->ConsoleDimensions
+rich.Console.size(self,new_size:Tuple[int,int])->None
+rich.Console.status(self,status:RenderableType,*,spinner:str='dots',spinner_style:StyleType='status.spinner',speed:float=1.0,refresh_per_second:float=12.5)->'Status'
+rich.Console.update_screen(self,renderable:RenderableType,*,region:Optional[Region]=None,options:Optional[ConsoleOptions]=None)->None
+rich.Console.update_screen_lines(self,lines:List[List[Segment]],x:int=0,y:int=0)->None
+rich.Console.use_theme(self,theme:Theme,*,inherit:bool=True)->ThemeContext
+rich.Console.width(self)->int
+rich.Console.width(self,width:int)->None
+rich.ConsoleDimensions(NamedTuple)
+rich.ConsoleOptions
+rich.ConsoleOptions.ascii_only(self)->bool
+rich.ConsoleOptions.copy(self)->'ConsoleOptions'
+rich.ConsoleOptions.reset_height(self)->'ConsoleOptions'
+rich.ConsoleOptions.update(self,*,width:Union[int,NoChange]=NO_CHANGE,min_width:Union[int,NoChange]=NO_CHANGE,max_width:Union[int,NoChange]=NO_CHANGE,justify:Union[Optional[JustifyMethod],NoChange]=NO_CHANGE,overflow:Union[Optional[OverflowMethod],NoChange]=NO_CHANGE,no_wrap:Union[Optional[bool],NoChange]=NO_CHANGE,highlight:Union[Optional[bool],NoChange]=NO_CHANGE,markup:Union[Optional[bool],NoChange]=NO_CHANGE,height:Union[Optional[int],NoChange]=NO_CHANGE)->'ConsoleOptions'
+rich.ConsoleOptions.update_dimensions(self,width:int,height:int)->'ConsoleOptions'
+rich.ConsoleOptions.update_height(self,height:int)->'ConsoleOptions'
+rich.ConsoleOptions.update_width(self,width:int)->'ConsoleOptions'
+rich.ConsoleRenderable(Protocol)
+rich.ConsoleRenderable.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.ConsoleThreadLocals(threading.local)
 rich.console.Capture(self,console:'Console')
 rich.console.Capture.__enter__(self)->'Capture'
 rich.console.Capture.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.console.Capture.__init__(self,console:'Console')
 rich.console.Capture.get(self)->str
 rich.console.CaptureError(Exception)
 rich.console.Console(self,*,color_system:Optional[Literal['auto','standard','256','truecolor','windows']]='auto',force_terminal:Optional[bool]=None,force_jupyter:Optional[bool]=None,force_interactive:Optional[bool]=None,soft_wrap:bool=False,theme:Optional[Theme]=None,stderr:bool=False,file:Optional[IO[str]]=None,quiet:bool=False,width:Optional[int]=None,height:Optional[int]=None,style:Optional[StyleType]=None,no_color:Optional[bool]=None,tab_size:int=8,record:bool=False,markup:bool=True,emoji:bool=True,emoji_variant:Optional[EmojiVariant]=None,highlight:bool=True,log_time:bool=True,log_path:bool=True,log_time_format:Union[str,FormatTimeCallable]='[%X]',highlighter:Optional['HighlighterType']=ReprHighlighter(),legacy_windows:Optional[bool]=None,safe_box:bool=True,get_datetime:Optional[Callable[[],datetime]]=None,get_time:Optional[Callable[[],float]]=None,_environ:Optional[Mapping[str,str]]=None)
 rich.console.Console.__enter__(self)->'Console'
 rich.console.Console.__exit__(self,exc_type:Any,exc_value:Any,traceback:Any)->None
+rich.console.Console.__init__(self,*,color_system:Optional[Literal['auto','standard','256','truecolor','windows']]='auto',force_terminal:Optional[bool]=None,force_jupyter:Optional[bool]=None,force_interactive:Optional[bool]=None,soft_wrap:bool=False,theme:Optional[Theme]=None,stderr:bool=False,file:Optional[IO[str]]=None,quiet:bool=False,width:Optional[int]=None,height:Optional[int]=None,style:Optional[StyleType]=None,no_color:Optional[bool]=None,tab_size:int=8,record:bool=False,markup:bool=True,emoji:bool=True,emoji_variant:Optional[EmojiVariant]=None,highlight:bool=True,log_time:bool=True,log_path:bool=True,log_time_format:Union[str,FormatTimeCallable]='[%X]',highlighter:Optional['HighlighterType']=ReprHighlighter(),legacy_windows:Optional[bool]=None,safe_box:bool=True,get_datetime:Optional[Callable[[],datetime]]=None,get_time:Optional[Callable[[],float]]=None,_environ:Optional[Mapping[str,str]]=None)
 rich.console.Console.__repr__(self)->str
 rich.console.Console._buffer(self)->List[Segment]
 rich.console.Console._buffer_index(self)->int
@@ -575,15 +668,18 @@ rich.console.ConsoleRenderable(Protocol)
 rich.console.ConsoleRenderable.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.console.ConsoleThreadLocals(threading.local)
 rich.console.Group(self,*renderables:'RenderableType',fit:bool=True)
+rich.console.Group.__init__(self,*renderables:'RenderableType',fit:bool=True)
 rich.console.Group.__rich_console__(self,console:'Console',options:'ConsoleOptions')->RenderResult
 rich.console.Group.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
 rich.console.Group.renderables(self)->List['RenderableType']
 rich.console.NewLine(self,count:int=1)
+rich.console.NewLine.__init__(self,count:int=1)
 rich.console.NewLine.__rich_console__(self,console:'Console',options:'ConsoleOptions')->Iterable[Segment]
 rich.console.NoChange
 rich.console.PagerContext(self,console:'Console',pager:Optional[Pager]=None,styles:bool=False,links:bool=False)
 rich.console.PagerContext.__enter__(self)->'PagerContext'
 rich.console.PagerContext.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.console.PagerContext.__init__(self,console:'Console',pager:Optional[Pager]=None,styles:bool=False,links:bool=False)
 rich.console.RenderHook(ABC)
 rich.console.RenderHook.process_renderables(self,renderables:List[ConsoleRenderable])->List[ConsoleRenderable]
 rich.console.RichCast(Protocol)
@@ -591,12 +687,15 @@ rich.console.RichCast.__rich__(self)->Union['ConsoleRenderable', 'RichCast', str
 rich.console.ScreenContext(self,console:'Console',hide_cursor:bool,style:StyleType='')
 rich.console.ScreenContext.__enter__(self)->'ScreenContext'
 rich.console.ScreenContext.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.console.ScreenContext.__init__(self,console:'Console',hide_cursor:bool,style:StyleType='')
 rich.console.ScreenContext.update(self,*renderables:RenderableType,style:Optional[StyleType]=None)->None
 rich.console.ScreenUpdate(self,lines:List[List[Segment]],x:int,y:int)
+rich.console.ScreenUpdate.__init__(self,lines:List[List[Segment]],x:int,y:int)
 rich.console.ScreenUpdate.__rich_console__(self,console:'Console',options:ConsoleOptions)->RenderResult
 rich.console.ThemeContext(self,console:'Console',theme:Theme,inherit:bool=True)
 rich.console.ThemeContext.__enter__(self)->'ThemeContext'
 rich.console.ThemeContext.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.console.ThemeContext.__init__(self,console:'Console',theme:Theme,inherit:bool=True)
 rich.console._is_jupyter()->bool
 rich.console._svg_hash(svg_main_code:str)->str
 rich.console.detect_legacy_windows()->bool
@@ -609,6 +708,7 @@ A:rich.screen.self.renderable->Group(*renderables)
 A:rich.screen.render_options->options.update(width=width, height=height)
 A:rich.screen.lines->segment.Segment.set_shape(lines, width, height, style=style)
 rich.screen.Screen(self,*renderables:'RenderableType',style:Optional[StyleType]=None,application_mode:bool=False)
+rich.screen.Screen.__init__(self,*renderables:'RenderableType',style:Optional[StyleType]=None,application_mode:bool=False)
 rich.screen.Screen.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 
 
@@ -627,6 +727,7 @@ A:rich.terminal_theme.DIMMED_MONOKAI->TerminalTheme((25, 25, 25), (185, 188, 186
 A:rich.terminal_theme.NIGHT_OWLISH->TerminalTheme((255, 255, 255), (64, 63, 83), [(1, 22, 39), (211, 66, 62), (42, 162, 152), (218, 170, 1), (72, 118, 214), (64, 63, 83), (8, 145, 106), (122, 129, 129), (122, 129, 129)], [(247, 110, 110), (73, 208, 197), (218, 194, 107), (92, 167, 228), (105, 112, 152), (0, 201, 144), (152, 159, 177)])
 A:rich.terminal_theme.SVG_EXPORT_THEME->TerminalTheme((41, 41, 41), (197, 200, 198), [(75, 78, 85), (204, 85, 90), (152, 168, 75), (208, 179, 68), (96, 138, 177), (152, 114, 159), (104, 160, 179), (197, 200, 198), (154, 155, 153)], [(255, 38, 39), (0, 130, 61), (208, 132, 66), (25, 132, 233), (255, 44, 122), (57, 130, 128), (253, 253, 197)])
 rich.terminal_theme.TerminalTheme(self,background:_ColorTuple,foreground:_ColorTuple,normal:List[_ColorTuple],bright:Optional[List[_ColorTuple]]=None)
+rich.terminal_theme.TerminalTheme.__init__(self,background:_ColorTuple,foreground:_ColorTuple,normal:List[_ColorTuple],bright:Optional[List[_ColorTuple]]=None)
 
 
 ----------------------------------------/home/zhang/Packages/rich/rich13.4.1/_export_format.py----------------------------------------
@@ -638,6 +739,7 @@ A:rich.styled.rendered_segments->console.render(self.renderable, options)
 A:rich.styled.segments->segment.Segment.apply_style(rendered_segments, style)
 A:rich.styled.panel->Styled(Panel('hello'), 'on blue')
 rich.styled.Styled(self,renderable:'RenderableType',style:'StyleType')
+rich.styled.Styled.__init__(self,renderable:'RenderableType',style:'StyleType')
 rich.styled.Styled.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.styled.Styled.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->Measurement
 
@@ -648,6 +750,7 @@ A:rich.file_proxy.(line, new_line, text)->text.partition('\n')
 A:rich.file_proxy.output->''.join(self.__buffer)
 rich.file_proxy.FileProxy(self,console:'Console',file:IO[str])
 rich.file_proxy.FileProxy.__getattr__(self,name:str)->Any
+rich.file_proxy.FileProxy.__init__(self,console:'Console',file:IO[str])
 rich.file_proxy.FileProxy.fileno(self)->int
 rich.file_proxy.FileProxy.flush(self)->None
 rich.file_proxy.FileProxy.rich_proxied_file(self)->IO[str]
@@ -667,6 +770,7 @@ A:rich.columns.get_renderable->itemgetter(1)
 A:rich.columns.console->Console()
 A:rich.columns.columns->Columns(files, padding=(0, 1), expand=False, equal=False)
 rich.columns.Columns(self,renderables:Optional[Iterable[RenderableType]]=None,padding:PaddingDimensions=(0,1),*,width:Optional[int]=None,expand:bool=False,equal:bool=False,column_first:bool=False,right_to_left:bool=False,align:Optional[AlignMethod]=None,title:Optional[TextType]=None)
+rich.columns.Columns.__init__(self,renderables:Optional[Iterable[RenderableType]]=None,padding:PaddingDimensions=(0,1),*,width:Optional[int]=None,expand:bool=False,equal:bool=False,column_first:bool=False,right_to_left:bool=False,align:Optional[AlignMethod]=None,title:Optional[TextType]=None)
 rich.columns.Columns.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.columns.Columns.add_renderable(self,renderable:RenderableType)->None
 
@@ -686,6 +790,7 @@ A:rich.ansi.data->os.read(fd, 1024)
 A:rich.ansi.console->Console(record=True)
 A:rich.ansi.stdout_result->io.BytesIO().getvalue().decode('utf-8')
 rich.ansi.AnsiDecoder(self)
+rich.ansi.AnsiDecoder.__init__(self)
 rich.ansi.AnsiDecoder.decode(self,terminal_text:str)->Iterable[Text]
 rich.ansi.AnsiDecoder.decode_line(self,line:str)->Text
 rich.ansi._AnsiToken(NamedTuple)
@@ -709,6 +814,7 @@ A:rich.box.table->Table(show_footer=True, style='dim', border_style='not dim', e
 A:rich.box.table.box->getattr(box, box_name)
 A:rich.box.table.title->Text(f'box.{box_name}', style='magenta')
 rich.box.Box(self,box:str,*,ascii:bool=False)
+rich.box.Box.__init__(self,box:str,*,ascii:bool=False)
 rich.box.Box.__repr__(self)->str
 rich.box.Box.__str__(self)->str
 rich.box.Box.get_bottom(self,widths:Iterable[int])->str
@@ -764,16 +870,20 @@ A:rich.progress.task1->Progress(*columns, auto_refresh=auto_refresh, console=con
 A:rich.progress.task2->Progress(*columns, auto_refresh=auto_refresh, console=console, transient=transient, get_time=get_time, refresh_per_second=refresh_per_second or 10, disable=disable).add_task('[green]Processing', total=1000)
 A:rich.progress.task3->Progress(*columns, auto_refresh=auto_refresh, console=console, transient=transient, get_time=get_time, refresh_per_second=refresh_per_second or 10, disable=disable).add_task('[yellow]Thinking', total=None)
 rich.progress.BarColumn(self,bar_width:Optional[int]=40,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',table_column:Optional[Column]=None)
+rich.progress.BarColumn.__init__(self,bar_width:Optional[int]=40,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',table_column:Optional[Column]=None)
 rich.progress.BarColumn.render(self,task:'Task')->ProgressBar
 rich.progress.DownloadColumn(self,binary_units:bool=False,table_column:Optional[Column]=None)
+rich.progress.DownloadColumn.__init__(self,binary_units:bool=False,table_column:Optional[Column]=None)
 rich.progress.DownloadColumn.render(self,task:'Task')->Text
 rich.progress.FileSizeColumn(ProgressColumn)
 rich.progress.FileSizeColumn.render(self,task:'Task')->Text
 rich.progress.MofNCompleteColumn(self,separator:str='/',table_column:Optional[Column]=None)
+rich.progress.MofNCompleteColumn.__init__(self,separator:str='/',table_column:Optional[Column]=None)
 rich.progress.MofNCompleteColumn.render(self,task:'Task')->Text
 rich.progress.Progress(self,*columns:Union[str,ProgressColumn],console:Optional[Console]=None,auto_refresh:bool=True,refresh_per_second:float=10,speed_estimate_period:float=30.0,transient:bool=False,redirect_stdout:bool=True,redirect_stderr:bool=True,get_time:Optional[GetTimeCallable]=None,disable:bool=False,expand:bool=False)
 rich.progress.Progress.__enter__(self)->'Progress'
 rich.progress.Progress.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.progress.Progress.__init__(self,*columns:Union[str,ProgressColumn],console:Optional[Console]=None,auto_refresh:bool=True,refresh_per_second:float=10,speed_estimate_period:float=30.0,transient:bool=False,redirect_stdout:bool=True,redirect_stderr:bool=True,get_time:Optional[GetTimeCallable]=None,disable:bool=False,expand:bool=False)
 rich.progress.Progress.__rich__(self)->RenderableType
 rich.progress.Progress.add_task(self,description:str,start:bool=True,total:Optional[float]=100.0,completed:int=0,visible:bool=True,**fields:Any)->TaskID
 rich.progress.Progress.advance(self,task_id:TaskID,advance:float=1)->None
@@ -797,12 +907,15 @@ rich.progress.Progress.track(self,sequence:Union[Iterable[ProgressType],Sequence
 rich.progress.Progress.update(self,task_id:TaskID,*,total:Optional[float]=None,completed:Optional[float]=None,advance:Optional[float]=None,description:Optional[str]=None,visible:Optional[bool]=None,refresh:bool=False,**fields:Any)->None
 rich.progress.Progress.wrap_file(self,file:BinaryIO,total:Optional[int]=None,*,task_id:Optional[TaskID]=None,description:str='Reading...')->BinaryIO
 rich.progress.ProgressColumn(self,table_column:Optional[Column]=None)
+rich.progress.ProgressColumn.__init__(self,table_column:Optional[Column]=None)
 rich.progress.ProgressColumn.get_table_column(self)->Column
 rich.progress.ProgressColumn.render(self,task:'Task')->RenderableType
 rich.progress.ProgressSample(NamedTuple)
 rich.progress.RenderableColumn(self,renderable:RenderableType='',*,table_column:Optional[Column]=None)
+rich.progress.RenderableColumn.__init__(self,renderable:RenderableType='',*,table_column:Optional[Column]=None)
 rich.progress.RenderableColumn.render(self,task:'Task')->RenderableType
 rich.progress.SpinnerColumn(self,spinner_name:str='dots',style:Optional[StyleType]='progress.spinner',speed:float=1.0,finished_text:TextType='',table_column:Optional[Column]=None)
+rich.progress.SpinnerColumn.__init__(self,spinner_name:str='dots',style:Optional[StyleType]='progress.spinner',speed:float=1.0,finished_text:TextType='',table_column:Optional[Column]=None)
 rich.progress.SpinnerColumn.render(self,task:'Task')->RenderableType
 rich.progress.SpinnerColumn.set_spinner(self,spinner_name:str,spinner_style:Optional[StyleType]='progress.spinner',speed:float=1.0)->None
 rich.progress.Task
@@ -816,13 +929,16 @@ rich.progress.Task.speed(self)->Optional[float]
 rich.progress.Task.started(self)->bool
 rich.progress.Task.time_remaining(self)->Optional[float]
 rich.progress.TaskProgressColumn(self,text_format:str='[progress.percentage]{task.percentage:>3.0f}%',text_format_no_percentage:str='',style:StyleType='none',justify:JustifyMethod='left',markup:bool=True,highlighter:Optional[Highlighter]=None,table_column:Optional[Column]=None,show_speed:bool=False)
+rich.progress.TaskProgressColumn.__init__(self,text_format:str='[progress.percentage]{task.percentage:>3.0f}%',text_format_no_percentage:str='',style:StyleType='none',justify:JustifyMethod='left',markup:bool=True,highlighter:Optional[Highlighter]=None,table_column:Optional[Column]=None,show_speed:bool=False)
 rich.progress.TaskProgressColumn.render(self,task:'Task')->Text
 rich.progress.TaskProgressColumn.render_speed(cls,speed:Optional[float])->Text
 rich.progress.TextColumn(self,text_format:str,style:StyleType='none',justify:JustifyMethod='left',markup:bool=True,highlighter:Optional[Highlighter]=None,table_column:Optional[Column]=None)
+rich.progress.TextColumn.__init__(self,text_format:str,style:StyleType='none',justify:JustifyMethod='left',markup:bool=True,highlighter:Optional[Highlighter]=None,table_column:Optional[Column]=None)
 rich.progress.TextColumn.render(self,task:'Task')->Text
 rich.progress.TimeElapsedColumn(ProgressColumn)
 rich.progress.TimeElapsedColumn.render(self,task:'Task')->Text
 rich.progress.TimeRemainingColumn(self,compact:bool=False,elapsed_when_finished:bool=False,table_column:Optional[Column]=None)
+rich.progress.TimeRemainingColumn.__init__(self,compact:bool=False,elapsed_when_finished:bool=False,table_column:Optional[Column]=None)
 rich.progress.TimeRemainingColumn.render(self,task:'Task')->Text
 rich.progress.TotalFileSizeColumn(ProgressColumn)
 rich.progress.TotalFileSizeColumn.render(self,task:'Task')->Text
@@ -831,9 +947,11 @@ rich.progress.TransferSpeedColumn.render(self,task:'Task')->Text
 rich.progress._ReadContext(self,progress:'Progress',reader:_I)
 rich.progress._ReadContext.__enter__(self)->_I
 rich.progress._ReadContext.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.progress._ReadContext.__init__(self,progress:'Progress',reader:_I)
 rich.progress._Reader(self,handle:BinaryIO,progress:'Progress',task:TaskID,close_handle:bool=True)
 rich.progress._Reader.__enter__(self)->'_Reader'
 rich.progress._Reader.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.progress._Reader.__init__(self,handle:BinaryIO,progress:'Progress',task:TaskID,close_handle:bool=True)
 rich.progress._Reader.__iter__(self)->BinaryIO
 rich.progress._Reader.__next__(self)->bytes
 rich.progress._Reader.close(self)->None
@@ -855,6 +973,7 @@ rich.progress._Reader.write(self,s:Any)->int
 rich.progress._TrackThread(self,progress:'Progress',task_id:'TaskID',update_period:float)
 rich.progress._TrackThread.__enter__(self)->'_TrackThread'
 rich.progress._TrackThread.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.progress._TrackThread.__init__(self,progress:'Progress',task_id:'TaskID',update_period:float)
 rich.progress._TrackThread.run(self)->None
 rich.progress.open(file:Union[str,'PathLike[str]',bytes],mode:Union[Literal['rb'],Literal['rt'],Literal['r']]='r',buffering:int=-1,encoding:Optional[str]=None,errors:Optional[str]=None,newline:Optional[str]=None,*,total:Optional[int]=None,description:str='Reading...',auto_refresh:bool=True,console:Optional[Console]=None,transient:bool=False,get_time:Optional[Callable[[],float]]=None,refresh_per_second:float=10,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',disable:bool=False)->Union[ContextManager[BinaryIO], ContextManager[TextIO]]
 rich.progress.track(sequence:Union[Sequence[ProgressType],Iterable[ProgressType]],description:str='Working...',total:Optional[float]=None,auto_refresh:bool=True,console:Optional[Console]=None,transient:bool=False,get_time:Optional[Callable[[],float]]=None,refresh_per_second:float=10,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',update_period:float=0.1,disable:bool=False,show_speed:bool=True)->Iterable[ProgressType]
@@ -872,6 +991,7 @@ A:rich.jupyter.jupyter_renderable->JupyterRenderable(html, text)
 rich.jupyter.JupyterMixin
 rich.jupyter.JupyterMixin._repr_mimebundle_(self:'ConsoleRenderable',include:Sequence[str],exclude:Sequence[str],**kwargs:Any)->Dict[str, str]
 rich.jupyter.JupyterRenderable(self,html:str,text:str)
+rich.jupyter.JupyterRenderable.__init__(self,html:str,text:str)
 rich.jupyter.JupyterRenderable._repr_mimebundle_(self,include:Sequence[str],exclude:Sequence[str],**kwargs:Any)->Dict[str, str]
 rich.jupyter._render_segments(segments:Iterable[Segment])->str
 rich.jupyter.display(segments:Iterable[Segment],text:str)->None
@@ -902,6 +1022,7 @@ A:rich.spinner.frame->Text(self.frames[int(frame_no) % len(self.frames)], style=
 A:rich.spinner.table->table.Table.grid(padding=1)
 A:rich.spinner.all_spinners->Columns([Spinner(spinner_name, text=Text(repr(spinner_name), style='green')) for spinner_name in sorted(SPINNERS.keys())], column_first=True, expand=True)
 rich.spinner.Spinner(self,name:str,text:'RenderableType'='',*,style:Optional['StyleType']=None,speed:float=1.0)
+rich.spinner.Spinner.__init__(self,name:str,text:'RenderableType'='',*,style:Optional['StyleType']=None,speed:float=1.0)
 rich.spinner.Spinner.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.spinner.Spinner.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->Measurement
 rich.spinner.Spinner.render(self,time:float)->'RenderableType'
@@ -930,6 +1051,7 @@ rich.layout.ColumnSplitter.divide(self,children:Sequence['Layout'],region:Region
 rich.layout.ColumnSplitter.get_tree_icon(self)->str
 rich.layout.Layout(self,renderable:Optional[RenderableType]=None,*,name:Optional[str]=None,size:Optional[int]=None,minimum_size:int=1,ratio:int=1,visible:bool=True)
 rich.layout.Layout.__getitem__(self,name:str)->'Layout'
+rich.layout.Layout.__init__(self,renderable:Optional[RenderableType]=None,*,name:Optional[str]=None,size:Optional[int]=None,minimum_size:int=1,ratio:int=1,visible:bool=True)
 rich.layout.Layout.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.layout.Layout.__rich_repr__(self)->Result
 rich.layout.Layout._make_region_map(self,width:int,height:int)->RegionMap
@@ -956,6 +1078,7 @@ rich.layout.Splitter(ABC)
 rich.layout.Splitter.divide(self,children:Sequence['Layout'],region:Region)->Iterable[Tuple['Layout', Region]]
 rich.layout.Splitter.get_tree_icon(self)->str
 rich.layout._Placeholder(self,layout:'Layout',style:StyleType='')
+rich.layout._Placeholder.__init__(self,layout:'Layout',style:StyleType='')
 rich.layout._Placeholder.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 
 
@@ -981,6 +1104,7 @@ A:rich.logging.level->self.get_level_text(record)
 A:rich.logging.log_time->datetime.datetime.fromtimestamp(record.created)
 A:rich.logging.log->logging.getLogger('rich')
 rich.logging.RichHandler(self,level:Union[int,str]=logging.NOTSET,console:Optional[Console]=None,*,show_time:bool=True,omit_repeated_times:bool=True,show_level:bool=True,show_path:bool=True,enable_link_path:bool=True,highlighter:Optional[Highlighter]=None,markup:bool=False,rich_tracebacks:bool=False,tracebacks_width:Optional[int]=None,tracebacks_extra_lines:int=3,tracebacks_theme:Optional[str]=None,tracebacks_word_wrap:bool=True,tracebacks_show_locals:bool=False,tracebacks_suppress:Iterable[Union[str,ModuleType]]=(),locals_max_length:int=10,locals_max_string:int=80,log_time_format:Union[str,FormatTimeCallable]='[%x%X]',keywords:Optional[List[str]]=None)
+rich.logging.RichHandler.__init__(self,level:Union[int,str]=logging.NOTSET,console:Optional[Console]=None,*,show_time:bool=True,omit_repeated_times:bool=True,show_level:bool=True,show_path:bool=True,enable_link_path:bool=True,highlighter:Optional[Highlighter]=None,markup:bool=False,rich_tracebacks:bool=False,tracebacks_width:Optional[int]=None,tracebacks_extra_lines:int=3,tracebacks_theme:Optional[str]=None,tracebacks_word_wrap:bool=True,tracebacks_show_locals:bool=False,tracebacks_suppress:Iterable[Union[str,ModuleType]]=(),locals_max_length:int=10,locals_max_string:int=80,log_time_format:Union[str,FormatTimeCallable]='[%x%X]',keywords:Optional[List[str]]=None)
 rich.logging.RichHandler.emit(self,record:LogRecord)->None
 rich.logging.RichHandler.get_level_text(self,record:LogRecord)->Text
 rich.logging.RichHandler.render(self,*,record:LogRecord,traceback:Optional[Traceback],message_renderable:'ConsoleRenderable')->'ConsoleRenderable'
@@ -1006,6 +1130,7 @@ A:rich.panel.(_, right, _, left)->padding.Padding.unpack(self.padding)
 A:rich.panel.c->Console()
 A:rich.panel.p->Panel('Hello, World!', title='rich.Panel', style='white on blue', box=DOUBLE, padding=1)
 rich.panel.Panel(self,renderable:'RenderableType',box:Box=ROUNDED,*,title:Optional[TextType]=None,title_align:AlignMethod='center',subtitle:Optional[TextType]=None,subtitle_align:AlignMethod='center',safe_box:Optional[bool]=None,expand:bool=True,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,height:Optional[int]=None,padding:PaddingDimensions=(0,1),highlight:bool=False)
+rich.panel.Panel.__init__(self,renderable:'RenderableType',box:Box=ROUNDED,*,title:Optional[TextType]=None,title_align:AlignMethod='center',subtitle:Optional[TextType]=None,subtitle_align:AlignMethod='center',safe_box:Optional[bool]=None,expand:bool=True,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,height:Optional[int]=None,padding:PaddingDimensions=(0,1),highlight:bool=False)
 rich.panel.Panel.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.panel.Panel.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
 rich.panel.Panel._subtitle(self)->Optional[Text]
@@ -1025,6 +1150,7 @@ rich.protocol.rich_cast(renderable:object)->'RenderableType'
 A:rich.emoji.console->Console(record=True)
 A:rich.emoji.columns->Columns((f':{name}: {name}' for name in sorted(EMOJI.keys()) if '\u200d' not in name), column_first=True)
 rich.emoji.Emoji(self,name:str,style:Union[str,Style]='none',variant:Optional[EmojiVariant]=None)
+rich.emoji.Emoji.__init__(self,name:str,style:Union[str,Style]='none',variant:Optional[EmojiVariant]=None)
 rich.emoji.Emoji.__repr__(self)->str
 rich.emoji.Emoji.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.emoji.Emoji.__str__(self)->str
@@ -1067,35 +1193,44 @@ A:rich.markdown.markdown->Markdown(markdown_body, justify='full' if args.justify
 A:rich.markdown.fileio->io.StringIO()
 A:rich.markdown.console->Console(force_terminal=args.force_color, width=args.width, record=True)
 rich.markdown.BlockQuote(self)
+rich.markdown.BlockQuote.__init__(self)
 rich.markdown.BlockQuote.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.BlockQuote.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.CodeBlock(self,lexer_name:str,theme:str)
+rich.markdown.CodeBlock.__init__(self,lexer_name:str,theme:str)
 rich.markdown.CodeBlock.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.CodeBlock.create(cls,markdown:'Markdown',token:Token)->'CodeBlock'
 rich.markdown.Heading(self,tag:str)
+rich.markdown.Heading.__init__(self,tag:str)
 rich.markdown.Heading.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.Heading.create(cls,markdown:'Markdown',token:Token)->'Heading'
 rich.markdown.Heading.on_enter(self,context:'MarkdownContext')->None
 rich.markdown.HorizontalRule(MarkdownElement)
 rich.markdown.HorizontalRule.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.ImageItem(self,destination:str,hyperlinks:bool)
+rich.markdown.ImageItem.__init__(self,destination:str,hyperlinks:bool)
 rich.markdown.ImageItem.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.ImageItem.create(cls,markdown:'Markdown',token:Token)->'MarkdownElement'
 rich.markdown.ImageItem.on_enter(self,context:'MarkdownContext')->None
 rich.markdown.Link(self,text:str,href:str)
+rich.markdown.Link.__init__(self,text:str,href:str)
 rich.markdown.Link.create(cls,markdown:'Markdown',token:Token)->'MarkdownElement'
 rich.markdown.ListElement(self,list_type:str,list_start:int|None)
+rich.markdown.ListElement.__init__(self,list_type:str,list_start:int|None)
 rich.markdown.ListElement.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.ListElement.create(cls,markdown:'Markdown',token:Token)->'ListElement'
 rich.markdown.ListElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.ListItem(self)
+rich.markdown.ListItem.__init__(self)
 rich.markdown.ListItem.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.ListItem.render_bullet(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.ListItem.render_number(self,console:Console,options:ConsoleOptions,number:int,last_number:int)->RenderResult
 rich.markdown.Markdown(self,markup:str,code_theme:str='monokai',justify:Optional[JustifyMethod]=None,style:Union[str,Style]='none',hyperlinks:bool=True,inline_code_lexer:Optional[str]=None,inline_code_theme:Optional[str]=None)
+rich.markdown.Markdown.__init__(self,markup:str,code_theme:str='monokai',justify:Optional[JustifyMethod]=None,style:Union[str,Style]='none',hyperlinks:bool=True,inline_code_lexer:Optional[str]=None,inline_code_theme:Optional[str]=None)
 rich.markdown.Markdown.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.Markdown._flatten_tokens(self,tokens:Iterable[Token])->Iterable[Token]
 rich.markdown.MarkdownContext(self,console:Console,options:ConsoleOptions,style:Style,inline_code_lexer:Optional[str]=None,inline_code_theme:str='monokai')
+rich.markdown.MarkdownContext.__init__(self,console:Console,options:ConsoleOptions,style:Style,inline_code_lexer:Optional[str]=None,inline_code_theme:str='monokai')
 rich.markdown.MarkdownContext.current_style(self)->Style
 rich.markdown.MarkdownContext.enter_style(self,style_name:Union[str,Style])->Style
 rich.markdown.MarkdownContext.leave_style(self)->Style
@@ -1108,19 +1243,25 @@ rich.markdown.MarkdownElement.on_enter(self,context:'MarkdownContext')->None
 rich.markdown.MarkdownElement.on_leave(self,context:'MarkdownContext')->None
 rich.markdown.MarkdownElement.on_text(self,context:'MarkdownContext',text:TextType)->None
 rich.markdown.Paragraph(self,justify:JustifyMethod)
+rich.markdown.Paragraph.__init__(self,justify:JustifyMethod)
 rich.markdown.Paragraph.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.Paragraph.create(cls,markdown:'Markdown',token:Token)->'Paragraph'
 rich.markdown.TableBodyElement(self)
+rich.markdown.TableBodyElement.__init__(self)
 rich.markdown.TableBodyElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.TableDataElement(self,justify:JustifyMethod)
+rich.markdown.TableDataElement.__init__(self,justify:JustifyMethod)
 rich.markdown.TableDataElement.create(cls,markdown:'Markdown',token:Token)->'MarkdownElement'
 rich.markdown.TableDataElement.on_text(self,context:'MarkdownContext',text:TextType)->None
 rich.markdown.TableElement(self)
+rich.markdown.TableElement.__init__(self)
 rich.markdown.TableElement.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.markdown.TableElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.TableHeaderElement(self)
+rich.markdown.TableHeaderElement.__init__(self)
 rich.markdown.TableHeaderElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.TableRowElement(self)
+rich.markdown.TableRowElement.__init__(self)
 rich.markdown.TableRowElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
 rich.markdown.TextElement(MarkdownElement)
 rich.markdown.TextElement.on_enter(self,context:'MarkdownContext')->None
@@ -1209,6 +1350,7 @@ A:rich.progress_bar.complete_style->Console().get_style(self.finished_style if i
 A:rich.progress_bar.console->Console()
 A:rich.progress_bar.bar->ProgressBar(width=50, total=100)
 rich.progress_bar.ProgressBar(self,total:Optional[float]=100.0,completed:float=0,width:Optional[int]=None,pulse:bool=False,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',animation_time:Optional[float]=None)
+rich.progress_bar.ProgressBar.__init__(self,total:Optional[float]=100.0,completed:float=0,width:Optional[int]=None,pulse:bool=False,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',animation_time:Optional[float]=None)
 rich.progress_bar.ProgressBar.__repr__(self)->str
 rich.progress_bar.ProgressBar.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.progress_bar.ProgressBar.__rich_measure__(self,console:Console,options:ConsoleOptions)->Measurement
@@ -1229,6 +1371,7 @@ A:rich.rule.right->Text(characters * (side_width // chars_len + 1))
 A:rich.rule.rule_text.plain->set_cell_size(rule_text.plain, width)
 A:rich.rule.console->Console()
 rich.rule.Rule(self,title:Union[str,Text]='',*,characters:str='─',style:Union[str,Style]='rule.line',end:str='\n',align:AlignMethod='center')
+rich.rule.Rule.__init__(self,title:Union[str,Text]='',*,characters:str='─',style:Union[str,Style]='rule.line',end:str='\n',align:AlignMethod='center')
 rich.rule.Rule.__repr__(self)->str
 rich.rule.Rule.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.rule.Rule.__rich_measure__(self,console:Console,options:ConsoleOptions)->Measurement
@@ -1242,6 +1385,7 @@ A:rich.status.console->Console()
 rich.status.Status(self,status:RenderableType,*,console:Optional[Console]=None,spinner:str='dots',spinner_style:StyleType='status.spinner',speed:float=1.0,refresh_per_second:float=12.5)
 rich.status.Status.__enter__(self)->'Status'
 rich.status.Status.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.status.Status.__init__(self,status:RenderableType,*,console:Optional[Console]=None,spinner:str='dots',spinner_style:StyleType='status.spinner',speed:float=1.0,refresh_per_second:float=12.5)
 rich.status.Status.__rich__(self)->RenderableType
 rich.status.Status.console(self)->'Console'
 rich.status.Status.renderable(self)->Spinner
@@ -1271,7 +1415,13 @@ A:rich._inspect.docs->_first_paragraph(docs)
 A:rich._inspect.doc->highlighter(docs)
 A:rich._inspect.obj->type(obj)
 rich.Inspect(self,obj:Any,*,title:Optional[TextType]=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True,value:bool=True)
+rich.Inspect.__rich__(self)->Panel
+rich.Inspect._get_formatted_doc(self,object_:Any)->Optional[str]
+rich.Inspect._get_signature(self,name:str,obj:Any)->Optional[Text]
+rich.Inspect._make_title(self,obj:Any)->Text
+rich.Inspect._render(self)->Iterable[RenderableType]
 rich._inspect.Inspect(self,obj:Any,*,title:Optional[TextType]=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True,value:bool=True)
+rich._inspect.Inspect.__init__(self,obj:Any,*,title:Optional[TextType]=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True,value:bool=True)
 rich._inspect.Inspect.__rich__(self)->Panel
 rich._inspect.Inspect._get_formatted_doc(self,object_:Any)->Optional[str]
 rich._inspect.Inspect._get_signature(self,name:str,obj:Any)->Optional[Text]
@@ -1330,8 +1480,10 @@ rich.segment.Segment.split_lines(cls,segments:Iterable['Segment'])->Iterable[Lis
 rich.segment.Segment.strip_links(cls,segments:Iterable['Segment'])->Iterable['Segment']
 rich.segment.Segment.strip_styles(cls,segments:Iterable['Segment'])->Iterable['Segment']
 rich.segment.SegmentLines(self,lines:Iterable[List[Segment]],new_lines:bool=False)
+rich.segment.SegmentLines.__init__(self,lines:Iterable[List[Segment]],new_lines:bool=False)
 rich.segment.SegmentLines.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.segment.Segments(self,segments:Iterable[Segment],new_lines:bool=False)
+rich.segment.Segments.__init__(self,segments:Iterable[Segment],new_lines:bool=False)
 rich.segment.Segments.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 
 
@@ -1343,6 +1495,7 @@ A:rich.highlighter.highlight_text->text.copy()
 A:rich.highlighter.(start, end)->match.span()
 A:rich.highlighter.console->Console()
 rich.highlighter.Highlighter(self,text:Union[str,Text])
+rich.highlighter.Highlighter.__call__(self,text:Union[str,Text])
 rich.highlighter.Highlighter.highlight(self,text:Text)->None
 rich.highlighter.ISO8601Highlighter(RegexHighlighter)
 rich.highlighter.JSONHighlighter(RegexHighlighter)
@@ -1413,6 +1566,7 @@ A:rich.live.examples->cycle(progress_renderables)
 rich.live.Live(self,renderable:Optional[RenderableType]=None,*,console:Optional[Console]=None,screen:bool=False,auto_refresh:bool=True,refresh_per_second:float=4,transient:bool=False,redirect_stdout:bool=True,redirect_stderr:bool=True,vertical_overflow:VerticalOverflowMethod='ellipsis',get_renderable:Optional[Callable[[],RenderableType]]=None)
 rich.live.Live.__enter__(self)->'Live'
 rich.live.Live.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+rich.live.Live.__init__(self,renderable:Optional[RenderableType]=None,*,console:Optional[Console]=None,screen:bool=False,auto_refresh:bool=True,refresh_per_second:float=4,transient:bool=False,redirect_stdout:bool=True,redirect_stderr:bool=True,vertical_overflow:VerticalOverflowMethod='ellipsis',get_renderable:Optional[Callable[[],RenderableType]]=None)
 rich.live.Live._disable_redirect_io(self)->None
 rich.live.Live._enable_redirect_io(self)->None
 rich.live.Live.get_renderable(self)->RenderableType
@@ -1424,6 +1578,7 @@ rich.live.Live.start(self,refresh:bool=False)->None
 rich.live.Live.stop(self)->None
 rich.live.Live.update(self,renderable:RenderableType,*,refresh:bool=False)->None
 rich.live._RefreshThread(self,live:'Live',refresh_per_second:float)
+rich.live._RefreshThread.__init__(self,live:'Live',refresh_per_second:float)
 rich.live._RefreshThread.run(self)->None
 rich.live._RefreshThread.stop(self)->None
 
@@ -1450,6 +1605,7 @@ A:rich.control.self.segment->Segment(rendered_codes, None, control_codes)
 A:rich.control.control->cls(*get_codes())
 A:rich.control.console->Console()
 rich.control.Control(self,*codes:Union[ControlType,ControlCode])
+rich.control.Control.__init__(self,*codes:Union[ControlType,ControlCode])
 rich.control.Control.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.control.Control.__str__(self)->str
 rich.control.Control.alt_screen(cls,enable:bool)->'Control'
@@ -1479,6 +1635,7 @@ A:rich.padding.lines->console.render_lines(self.renderable, render_options, styl
 A:rich.padding.(measure_min, measure_max)->measure.Measurement.get(console, options, self.renderable)
 A:rich.padding.measurement->measurement.with_maximum(max_width).with_maximum(max_width)
 rich.padding.Padding(self,renderable:'RenderableType',pad:'PaddingDimensions'=(0,0,0,0),*,style:Union[str,Style]='none',expand:bool=True)
+rich.padding.Padding.__init__(self,renderable:'RenderableType',pad:'PaddingDimensions'=(0,0,0,0),*,style:Union[str,Style]='none',expand:bool=True)
 rich.padding.Padding.__repr__(self)->str
 rich.padding.Padding.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.padding.Padding.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
@@ -1529,6 +1686,7 @@ rich.table.Column.copy(self)->'Column'
 rich.table.Column.flexible(self)->bool
 rich.table.Row
 rich.table.Table(self,*headers:Union[Column,str],title:Optional[TextType]=None,caption:Optional[TextType]=None,width:Optional[int]=None,min_width:Optional[int]=None,box:Optional[box.Box]=box.HEAVY_HEAD,safe_box:Optional[bool]=None,padding:PaddingDimensions=(0,1),collapse_padding:bool=False,pad_edge:bool=True,expand:bool=False,show_header:bool=True,show_footer:bool=False,show_edge:bool=True,show_lines:bool=False,leading:int=0,style:StyleType='none',row_styles:Optional[Iterable[StyleType]]=None,header_style:Optional[StyleType]='table.header',footer_style:Optional[StyleType]='table.footer',border_style:Optional[StyleType]=None,title_style:Optional[StyleType]=None,caption_style:Optional[StyleType]=None,title_justify:'JustifyMethod'='center',caption_justify:'JustifyMethod'='center',highlight:bool=False)
+rich.table.Table.__init__(self,*headers:Union[Column,str],title:Optional[TextType]=None,caption:Optional[TextType]=None,width:Optional[int]=None,min_width:Optional[int]=None,box:Optional[box.Box]=box.HEAVY_HEAD,safe_box:Optional[bool]=None,padding:PaddingDimensions=(0,1),collapse_padding:bool=False,pad_edge:bool=True,expand:bool=False,show_header:bool=True,show_footer:bool=False,show_edge:bool=True,show_lines:bool=False,leading:int=0,style:StyleType='none',row_styles:Optional[Iterable[StyleType]]=None,header_style:Optional[StyleType]='table.header',footer_style:Optional[StyleType]='table.footer',border_style:Optional[StyleType]=None,title_style:Optional[StyleType]=None,caption_style:Optional[StyleType]=None,title_justify:'JustifyMethod'='center',caption_justify:'JustifyMethod'='center',highlight:bool=False)
 rich.table.Table.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.table.Table.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->Measurement
 rich.table.Table._calculate_column_widths(self,console:'Console',options:'ConsoleOptions')->List[int]
@@ -1555,10 +1713,12 @@ rich.table._Cell(NamedTuple)
 A:rich.theme.config->configparser.ConfigParser()
 A:rich.theme.theme->Theme()
 rich.theme.Theme(self,styles:Optional[Mapping[str,StyleType]]=None,inherit:bool=True)
+rich.theme.Theme.__init__(self,styles:Optional[Mapping[str,StyleType]]=None,inherit:bool=True)
 rich.theme.Theme.config(self)->str
 rich.theme.Theme.from_file(cls,config_file:IO[str],source:Optional[str]=None,inherit:bool=True)->'Theme'
 rich.theme.Theme.read(cls,path:str,inherit:bool=True,encoding:Optional[str]=None)->'Theme'
 rich.theme.ThemeStack(self,theme:Theme)
+rich.theme.ThemeStack.__init__(self,theme:Theme)
 rich.theme.ThemeStack.pop_theme(self)->None
 rich.theme.ThemeStack.push_theme(self,theme:Theme,inherit:bool=True)->None
 rich.theme.ThemeStackError(Exception)
@@ -1629,6 +1789,7 @@ rich.traceback.PathHighlighter(RegexHighlighter)
 rich.traceback.Stack
 rich.traceback.Trace
 rich.traceback.Traceback(self,trace:Optional[Trace]=None,*,width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False,locals_max_length:int=LOCALS_MAX_LENGTH,locals_max_string:int=LOCALS_MAX_STRING,locals_hide_dunder:bool=True,locals_hide_sunder:bool=False,indent_guides:bool=True,suppress:Iterable[Union[str,ModuleType]]=(),max_frames:int=100)
+rich.traceback.Traceback.__init__(self,trace:Optional[Trace]=None,*,width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False,locals_max_length:int=LOCALS_MAX_LENGTH,locals_max_string:int=LOCALS_MAX_STRING,locals_hide_dunder:bool=True,locals_hide_sunder:bool=False,indent_guides:bool=True,suppress:Iterable[Union[str,ModuleType]]=(),max_frames:int=100)
 rich.traceback.Traceback.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.traceback.Traceback._guess_lexer(cls,filename:str,code:str)->str
 rich.traceback.Traceback._render_stack(self,stack:Stack)->RenderResult
@@ -1650,6 +1811,7 @@ A:rich.json.console->Console()
 A:rich.json.error_console->Console(stderr=True)
 A:rich.json.json_data->Path(args.path).read_text()
 rich.json.JSON(self,json:str,indent:Union[None,int,str]=2,highlight:bool=True,skip_keys:bool=False,ensure_ascii:bool=False,check_circular:bool=True,allow_nan:bool=True,default:Optional[Callable[[Any],Any]]=None,sort_keys:bool=False)
+rich.json.JSON.__init__(self,json:str,indent:Union[None,int,str]=2,highlight:bool=True,skip_keys:bool=False,ensure_ascii:bool=False,check_circular:bool=True,allow_nan:bool=True,default:Optional[Callable[[Any],Any]]=None,sort_keys:bool=False)
 rich.json.JSON.__rich__(self)->Text
 rich.json.JSON.from_data(cls,data:Any,indent:Union[None,int,str]=2,highlight:bool=True,skip_keys:bool=False,ensure_ascii:bool=False,check_circular:bool=True,allow_nan:bool=True,default:Optional[Callable[[Any],Any]]=None,sort_keys:bool=False)->'JSON'
 
@@ -1687,6 +1849,7 @@ A:rich.bar.width->min(self.width if self.width is not None else options.max_widt
 A:rich.bar.prefix_complete_eights->int(width * 8 * self.begin / self.size)
 A:rich.bar.body_complete_eights->int(width * 8 * self.end / self.size)
 rich.bar.Bar(self,size:float,begin:float,end:float,*,width:Optional[int]=None,color:Union[Color,str]='default',bgcolor:Union[Color,str]='default')
+rich.bar.Bar.__init__(self,size:float,begin:float,end:float,*,width:Optional[int]=None,color:Union[Color,str]='default',bgcolor:Union[Color,str]='default')
 rich.bar.Bar.__repr__(self)->str
 rich.bar.Bar.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.bar.Bar.__rich_measure__(self,console:Console,options:ConsoleOptions)->Measurement
@@ -1729,6 +1892,7 @@ rich.style.Style.__add__(self,style:Optional['Style'])->'Style'
 rich.style.Style.__bool__(self)->bool
 rich.style.Style.__eq__(self,other:Any)->bool
 rich.style.Style.__hash__(self)->int
+rich.style.Style.__init__(self,*,color:Optional[Union[Color,str]]=None,bgcolor:Optional[Union[Color,str]]=None,bold:Optional[bool]=None,dim:Optional[bool]=None,italic:Optional[bool]=None,underline:Optional[bool]=None,blink:Optional[bool]=None,blink2:Optional[bool]=None,reverse:Optional[bool]=None,conceal:Optional[bool]=None,strike:Optional[bool]=None,underline2:Optional[bool]=None,frame:Optional[bool]=None,encircle:Optional[bool]=None,overline:Optional[bool]=None,link:Optional[str]=None,meta:Optional[Dict[str,Any]]=None)
 rich.style.Style.__ne__(self,other:Any)->bool
 rich.style.Style.__rich_repr__(self)->Result
 rich.style.Style.__str__(self)->str
@@ -1758,12 +1922,14 @@ rich.style.Style.transparent_background(self)->bool
 rich.style.Style.update_link(self,link:Optional[str]=None)->'Style'
 rich.style.Style.without_color(self)->'Style'
 rich.style.StyleStack(self,default_style:'Style')
+rich.style.StyleStack.__init__(self,default_style:'Style')
 rich.style.StyleStack.__repr__(self)->str
 rich.style.StyleStack.current(self)->Style
 rich.style.StyleStack.pop(self)->Style
 rich.style.StyleStack.push(self,style:Style)->None
 rich.style._Bit(self,bit_no:int)
 rich.style._Bit.__get__(self,obj:'Style',objtype:Type['Style'])->Optional[bool]
+rich.style._Bit.__init__(self,bit_no:int)
 
 
 ----------------------------------------/home/zhang/Packages/rich/rich13.4.1/__init__.py----------------------------------------
@@ -1818,6 +1984,7 @@ rich.pretty.Node.check_length(self,start_length:int,max_length:int)->bool
 rich.pretty.Node.iter_tokens(self)->Iterable[str]
 rich.pretty.Node.render(self,max_width:int=80,indent_size:int=4,expand_all:bool=False)->str
 rich.pretty.Pretty(self,_object:Any,highlighter:Optional['HighlighterType']=None,*,indent_size:int=4,justify:Optional['JustifyMethod']=None,overflow:Optional['OverflowMethod']=None,no_wrap:Optional[bool]=False,indent_guides:bool=False,max_length:Optional[int]=None,max_string:Optional[int]=None,max_depth:Optional[int]=None,expand_all:bool=False,margin:int=0,insert_line:bool=False)
+rich.pretty.Pretty.__init__(self,_object:Any,highlighter:Optional['HighlighterType']=None,*,indent_size:int=4,justify:Optional['JustifyMethod']=None,overflow:Optional['OverflowMethod']=None,no_wrap:Optional[bool]=False,indent_guides:bool=False,max_length:Optional[int]=None,max_string:Optional[int]=None,max_depth:Optional[int]=None,expand_all:bool=False,margin:int=0,insert_line:bool=False)
 rich.pretty.Pretty.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.pretty.Pretty.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
 rich.pretty._Line
@@ -1846,6 +2013,7 @@ A:rich.constrain.child_options->options.update_width(self.width).update_width(mi
 A:rich.constrain.options->options.update_width(self.width).update_width(self.width)
 A:rich.constrain.measurement->measure.Measurement.get(console, options, self.renderable)
 rich.constrain.Constrain(self,renderable:'RenderableType',width:Optional[int]=80)
+rich.constrain.Constrain.__init__(self,renderable:'RenderableType',width:Optional[int]=80)
 rich.constrain.Constrain.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.constrain.Constrain.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
 
@@ -1877,6 +2045,7 @@ A:rich.tree.containers_node->Tree('🌲 [b green]Rich Tree', highlight=True, hid
 A:rich.tree.panel->rich.panel.Panel.fit('Just a panel', border_style='red')
 A:rich.tree.console->Console()
 rich.tree.Tree(self,label:RenderableType,*,style:StyleType='tree',guide_style:StyleType='tree.line',expanded:bool=True,highlight:bool=False,hide_root:bool=False)
+rich.tree.Tree.__init__(self,label:RenderableType,*,style:StyleType='tree',guide_style:StyleType='tree.line',expanded:bool=True,highlight:bool=False,hide_root:bool=False)
 rich.tree.Tree.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
 rich.tree.Tree.__rich_measure__(self,console:'Console',options:'ConsoleOptions')->'Measurement'
 rich.tree.Tree.add(self,label:RenderableType,*,style:Optional[StyleType]=None,guide_style:Optional[StyleType]=None,expanded:bool=True,highlight:Optional[bool]=False)->'Tree'
@@ -1897,6 +2066,7 @@ A:rich.palette.color->rich.color.Color.from_rgb(r2 * 255, g2 * 255, b2 * 255)
 A:rich.palette.console->Console()
 rich.palette.Palette(self,colors:Sequence[Tuple[int,int,int]])
 rich.palette.Palette.__getitem__(self,number:int)->ColorTriplet
+rich.palette.Palette.__init__(self,colors:Sequence[Tuple[int,int,int]])
 rich.palette.Palette.__rich__(self)->'Table'
 rich.palette.Palette.match(self,color:Tuple[int,int,int])->int
 
@@ -1914,6 +2084,7 @@ A:rich.live_render.shape->segment.Segment.get_shape(lines)
 A:rich.live_render.overflow_text->Text('...', overflow='crop', justify='center', end='', style='live.ellipsis')
 A:rich.live_render.new_line->segment.Segment.line()
 rich.live_render.LiveRender(self,renderable:RenderableType,style:StyleType='',vertical_overflow:VerticalOverflowMethod='ellipsis')
+rich.live_render.LiveRender.__init__(self,renderable:RenderableType,style:StyleType='',vertical_overflow:VerticalOverflowMethod='ellipsis')
 rich.live_render.LiveRender.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 rich.live_render.LiveRender.position_cursor(self)->Control
 rich.live_render.LiveRender.restore_cursor(self)->Control
@@ -1943,4 +2114,5 @@ A:rich._log_render.log_time_display->Text(log_time.strftime(time_format))
 A:rich._log_render.path_text->Text()
 A:rich._log_render.c->Console()
 rich._log_render.LogRender(self,show_time:bool=True,show_level:bool=False,show_path:bool=True,time_format:Union[str,FormatTimeCallable]='[%x%X]',omit_repeated_times:bool=True,level_width:Optional[int]=8)
+rich._log_render.LogRender.__init__(self,show_time:bool=True,show_level:bool=False,show_path:bool=True,time_format:Union[str,FormatTimeCallable]='[%x%X]',omit_repeated_times:bool=True,level_width:Optional[int]=8)
 

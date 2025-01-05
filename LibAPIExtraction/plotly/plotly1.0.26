@@ -1,5 +1,5 @@
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/utils.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/utils.py----------------------------------------
 A:plotly.utils.data->json.load(f)
 A:plotly.utils.l->obj.tolist()
 A:plotly.utils.d->self.datetimeJSONEncoder(l)
@@ -20,7 +20,7 @@ plotly.utils.save_json_dict(filename,json_dict)
 plotly.utils.template_doc(**names)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/tools.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/tools.py----------------------------------------
 A:plotly.tools.PLOTLY_DIR->os.path.join(os.path.expanduser('~'), '.plotly')
 A:plotly.tools.CREDENTIALS_FILE->os.path.join(PLOTLY_DIR, '.credentials')
 A:plotly.tools.CONFIG_FILE->os.path.join(PLOTLY_DIR, '.config')
@@ -59,34 +59,40 @@ plotly.tools.validate(obj,obj_type)
 plotly.tools.validate_stream(obj,obj_type)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/version.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/version.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/exceptions.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/exceptions.py----------------------------------------
 A:plotly.exceptions.message->"The entry at index, '{}', is invalid because it does not contain a valid 'type' key-value. This is required for valid '{}' lists.".format(index, obj.__class__.__name__)
 A:plotly.exceptions.plain_message->"The entry at index, '{}', is invalid because it does not contain a valid 'type' key-value. This is required for valid data lists.".format(index)
 plotly.exceptions.PlotlyAccountError(PlotlyServerError)
 plotly.exceptions.PlotlyConnectionError(PlotlyServerError)
 plotly.exceptions.PlotlyCredentialError(PlotlyServerError)
 plotly.exceptions.PlotlyDataTypeError(self,obj='',index='',**kwargs)
+plotly.exceptions.PlotlyDataTypeError.__init__(self,obj='',index='',**kwargs)
 plotly.exceptions.PlotlyDictKeyError(self,obj='',key='',**kwargs)
+plotly.exceptions.PlotlyDictKeyError.__init__(self,obj='',key='',**kwargs)
 plotly.exceptions.PlotlyDictValueError(self,obj='',key='',value='',val_types='',**kwargs)
+plotly.exceptions.PlotlyDictValueError.__init__(self,obj='',key='',value='',val_types='',**kwargs)
 plotly.exceptions.PlotlyError(Exception)
 plotly.exceptions.PlotlyGraphObjectError(self,message='',path=None,notes=None,plain_message='')
+plotly.exceptions.PlotlyGraphObjectError.__init__(self,message='',path=None,notes=None,plain_message='')
 plotly.exceptions.PlotlyGraphObjectError.add_note(self,note)
 plotly.exceptions.PlotlyGraphObjectError.add_to_error_path(self,path)
 plotly.exceptions.PlotlyGraphObjectError.prepare(self)
 plotly.exceptions.PlotlyListEntryError(self,obj='',index='',entry='',**kwargs)
+plotly.exceptions.PlotlyListEntryError.__init__(self,obj='',index='',entry='',**kwargs)
 plotly.exceptions.PlotlyLocalCredentialsError(self)
+plotly.exceptions.PlotlyLocalCredentialsError.__init__(self)
 plotly.exceptions.PlotlyLocalError(PlotlyError)
 plotly.exceptions.PlotlyRateLimitError(PlotlyServerError)
 plotly.exceptions.PlotlyServerError(PlotlyError)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/renderer.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/renderer.py----------------------------------------
 A:plotly.matplotlylib.renderer.self.plotly_fig->Figure(data=Data(), layout=Layout())
 A:plotly.matplotlylib.renderer.self.plotly_fig['layout']->Layout(width=int(props['figwidth'] * props['dpi']), height=int(props['figheight'] * props['dpi']), autosize=False, hovermode='closest')
 A:plotly.matplotlylib.renderer.(self.mpl_x_bounds, self.mpl_y_bounds)->mpltools.get_axes_bounds(fig)
@@ -109,7 +115,25 @@ A:plotly.matplotlylib.renderer.yref->'y{}'.format(self.axis_ct)
 A:plotly.matplotlylib.renderer.annotation->Annotation(text=props['text'], font=Font(color=props['style']['color'], size=props['style']['fontsize']), xref='paper', yref='paper', x=x, y=y, xanchor='center', yanchor='bottom', showarrow=False)
 A:plotly.matplotlylib.renderer.titlefont->Font(size=props['style']['fontsize'], color=props['style']['color'])
 A:plotly.matplotlylib.renderer.axis_key->'yaxis{}'.format(self.axis_ct)
+plotly.matplotlylib.PlotlyRenderer(self)
+plotly.matplotlylib.PlotlyRenderer.close_axes(self,ax)
+plotly.matplotlylib.PlotlyRenderer.close_figure(self,fig)
+plotly.matplotlylib.PlotlyRenderer.draw_bar(self,patch_coll)
+plotly.matplotlylib.PlotlyRenderer.draw_image(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_marked_line(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_path(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_path_collection(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_text(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_title(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_xlabel(self,**props)
+plotly.matplotlylib.PlotlyRenderer.draw_ylabel(self,**props)
+plotly.matplotlylib.PlotlyRenderer.file_bar(self,bar)
+plotly.matplotlylib.PlotlyRenderer.open_axes(self,ax,props)
+plotly.matplotlylib.PlotlyRenderer.open_figure(self,fig,props)
+plotly.matplotlylib.PlotlyRenderer.resize(self)
+plotly.matplotlylib.PlotlyRenderer.strip_style(self)
 plotly.matplotlylib.renderer.PlotlyRenderer(self)
+plotly.matplotlylib.renderer.PlotlyRenderer.__init__(self)
 plotly.matplotlylib.renderer.PlotlyRenderer.close_axes(self,ax)
 plotly.matplotlylib.renderer.PlotlyRenderer.close_figure(self,fig)
 plotly.matplotlylib.renderer.PlotlyRenderer.draw_bar(self,patch_coll)
@@ -128,10 +152,10 @@ plotly.matplotlylib.renderer.PlotlyRenderer.resize(self)
 plotly.matplotlylib.renderer.PlotlyRenderer.strip_style(self)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mpltools.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mpltools.py----------------------------------------
 A:plotly.matplotlylib.mpltools.code->tuple(path[1])
 A:plotly.matplotlylib.mpltools.axis->dict(range=None, type='linear')
 A:plotly.matplotlylib.mpltools.xaxis->dict(type=props['axes'][0]['scale'], range=list(props['xlim']), showgrid=props['axes'][0]['grid']['gridOn'], domain=convert_x_domain(props['bounds'], x_bounds), side=props['axes'][0]['position'], tickfont=dict(size=props['axes'][0]['fontsize']))
@@ -158,7 +182,7 @@ plotly.matplotlylib.mpltools.prep_xy_axis(ax,props,x_bounds,y_bounds)
 plotly.matplotlylib.mpltools.prep_y_ticks(ax,props)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/utils.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/utils.py----------------------------------------
 A:plotly.matplotlylib.mplexporter.utils.rgb->matplotlib.colors.colorConverter.to_rgb(color)
 A:plotly.matplotlylib.mplexporter.utils.LINESTYLES->many_to_one({('solid', '-', (None, None)): '10,0', ('dashed', '--'): '6,6', ('dotted', ':'): '2,2', ('dashdot', '-.'): '4,4,2,4', ('', ' ', 'None', 'none'): 'none'})
 A:plotly.matplotlylib.mplexporter.utils.ls->obj.get_linestyle()
@@ -218,7 +242,7 @@ plotly.matplotlylib.mplexporter.utils.iter_all_children(obj,skipContainers=False
 plotly.matplotlylib.mplexporter.utils.many_to_one(input_dict)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/exporter.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/exporter.py----------------------------------------
 A:plotly.matplotlylib.mplexporter.exporter.data->(transform - force_trans).transform(data)
 A:plotly.matplotlylib.mplexporter.exporter.legend->ax.get_legend()
 A:plotly.matplotlylib.mplexporter.exporter.props->utils.get_legend_properties(ax, legend)
@@ -238,7 +262,19 @@ A:plotly.matplotlylib.mplexporter.exporter.(transform, transOffset, offsets, pat
 A:plotly.matplotlylib.mplexporter.exporter.(offset_coords, offsets)->self.process_transform(transOffset, ax, offsets, force_trans=force_offsettrans)
 A:plotly.matplotlylib.mplexporter.exporter.path_coords->self.process_transform(transform, ax, force_trans=force_pathtrans)
 A:plotly.matplotlylib.mplexporter.exporter.path_transforms->collection.get_transforms()
+plotly.matplotlylib.Exporter(self,renderer,close_mpl=True)
+plotly.matplotlylib.Exporter.crawl_ax(self,ax)
+plotly.matplotlylib.Exporter.crawl_fig(self,fig)
+plotly.matplotlylib.Exporter.crawl_legend(self,ax,legend)
+plotly.matplotlylib.Exporter.draw_collection(self,ax,collection,force_pathtrans=None,force_offsettrans=None)
+plotly.matplotlylib.Exporter.draw_image(self,ax,image)
+plotly.matplotlylib.Exporter.draw_line(self,ax,line,force_trans=None)
+plotly.matplotlylib.Exporter.draw_patch(self,ax,patch,force_trans=None)
+plotly.matplotlylib.Exporter.draw_text(self,ax,text,force_trans=None,text_type=None)
+plotly.matplotlylib.Exporter.process_transform(transform,ax=None,data=None,return_trans=False,force_trans=None)
+plotly.matplotlylib.Exporter.run(self,fig)
 plotly.matplotlylib.mplexporter.exporter.Exporter(self,renderer,close_mpl=True)
+plotly.matplotlylib.mplexporter.exporter.Exporter.__init__(self,renderer,close_mpl=True)
 plotly.matplotlylib.mplexporter.exporter.Exporter.crawl_ax(self,ax)
 plotly.matplotlylib.mplexporter.exporter.Exporter.crawl_fig(self,fig)
 plotly.matplotlylib.mplexporter.exporter.Exporter.crawl_legend(self,ax,legend)
@@ -251,18 +287,18 @@ plotly.matplotlylib.mplexporter.exporter.Exporter.process_transform(transform,ax
 plotly.matplotlylib.mplexporter.exporter.Exporter.run(self,fig)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/tools.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/tools.py----------------------------------------
 A:plotly.matplotlylib.mplexporter.tools.load_js->require_js.format(dep_libs)
 plotly.matplotlylib.mplexporter.tools.ipynb_vega_init()
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/_py3k_compat.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/_py3k_compat.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/renderers/vega_renderer.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/renderers/vega_renderer.py----------------------------------------
 A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.self.figwidth->int(props['figwidth'] * props['dpi'])
 A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.self.figheight->int(props['figheight'] * props['dpi'])
 A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.dataname->'table{0:03d}'.format(len(self.data) + 1)
@@ -270,7 +306,15 @@ A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.self.specification->di
 A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.id->random.randint(0, 2 ** 16)
 A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.renderer->VegaRenderer()
 A:plotly.matplotlylib.mplexporter.renderers.vega_renderer.vega_html->VegaHTML(renderer)
+plotly.matplotlylib.mplexporter.renderers.VegaRenderer(Renderer)
+plotly.matplotlylib.mplexporter.renderers.VegaRenderer.draw_line(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.VegaRenderer.draw_markers(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.VegaRenderer.draw_text(self,text,position,coordinates,style,text_type=None,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.VegaRenderer.open_axes(self,ax,props)
+plotly.matplotlylib.mplexporter.renderers.VegaRenderer.open_figure(self,fig,props)
+plotly.matplotlylib.mplexporter.renderers.fig_to_vega(fig,notebook=False)
 plotly.matplotlylib.mplexporter.renderers.vega_renderer.VegaHTML(self,renderer)
+plotly.matplotlylib.mplexporter.renderers.vega_renderer.VegaHTML.__init__(self,renderer)
 plotly.matplotlylib.mplexporter.renderers.vega_renderer.VegaHTML._repr_html_(self)
 plotly.matplotlylib.mplexporter.renderers.vega_renderer.VegaHTML.html(self)
 plotly.matplotlylib.mplexporter.renderers.vega_renderer.VegaRenderer(Renderer)
@@ -282,13 +326,37 @@ plotly.matplotlylib.mplexporter.renderers.vega_renderer.VegaRenderer.open_figure
 plotly.matplotlylib.mplexporter.renderers.vega_renderer.fig_to_vega(fig,notebook=False)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/renderers/base.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/renderers/base.py----------------------------------------
 A:plotly.matplotlylib.mplexporter.renderers.base.pathstyle->dict(((key, style[key]) for key in ['alpha', 'edgecolor', 'facecolor', 'zorder', 'edgewidth']))
 A:plotly.matplotlylib.mplexporter.renderers.base.pathstyle['edgecolor']->dict(((key, style[key]) for key in ['alpha', 'edgecolor', 'facecolor', 'zorder', 'edgewidth'])).pop('color')
 A:plotly.matplotlylib.mplexporter.renderers.base.pathstyle['edgewidth']->dict(((key, style[key]) for key in ['alpha', 'edgecolor', 'facecolor', 'zorder', 'edgewidth'])).pop('linewidth')
 A:plotly.matplotlylib.mplexporter.renderers.base.N->max(len(paths), len(offsets))
 A:plotly.matplotlylib.mplexporter.renderers.base.path_transform->matplotlib.transforms.Affine2D(path_transform)
 A:plotly.matplotlylib.mplexporter.renderers.base.vertices->matplotlib.transforms.Affine2D(path_transform).transform(vertices)
+plotly.matplotlylib.mplexporter.Renderer(object)
+plotly.matplotlylib.mplexporter.Renderer._iter_path_collection(paths,path_transforms,offsets,styles)
+plotly.matplotlylib.mplexporter.Renderer.ax_has_xgrid(ax)
+plotly.matplotlylib.mplexporter.Renderer.ax_has_ygrid(ax)
+plotly.matplotlylib.mplexporter.Renderer.ax_zoomable(ax)
+plotly.matplotlylib.mplexporter.Renderer.close_axes(self,ax)
+plotly.matplotlylib.mplexporter.Renderer.close_figure(self,fig)
+plotly.matplotlylib.mplexporter.Renderer.close_legend(self,legend)
+plotly.matplotlylib.mplexporter.Renderer.current_ax_has_xgrid(self)
+plotly.matplotlylib.mplexporter.Renderer.current_ax_has_ygrid(self)
+plotly.matplotlylib.mplexporter.Renderer.current_ax_zoomable(self)
+plotly.matplotlylib.mplexporter.Renderer.draw_axes(self,ax,props)
+plotly.matplotlylib.mplexporter.Renderer.draw_figure(self,fig,props)
+plotly.matplotlylib.mplexporter.Renderer.draw_image(self,imdata,extent,coordinates,style,mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.draw_legend(self,legend,props)
+plotly.matplotlylib.mplexporter.Renderer.draw_line(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.draw_marked_line(self,data,coordinates,linestyle,markerstyle,label,mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.draw_markers(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.draw_path(self,data,coordinates,pathcodes,style,offset=None,offset_coordinates='data',mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.draw_path_collection(self,paths,path_coordinates,path_transforms,offsets,offset_coordinates,offset_order,styles,mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.draw_text(self,text,position,coordinates,style,text_type=None,mplobj=None)
+plotly.matplotlylib.mplexporter.Renderer.open_axes(self,ax,props)
+plotly.matplotlylib.mplexporter.Renderer.open_figure(self,fig,props)
+plotly.matplotlylib.mplexporter.Renderer.open_legend(self,legend,props)
 plotly.matplotlylib.mplexporter.renderers.base.Renderer(object)
 plotly.matplotlylib.mplexporter.renderers.base.Renderer._iter_path_collection(paths,path_transforms,offsets,styles)
 plotly.matplotlylib.mplexporter.renderers.base.Renderer.ax_has_xgrid(ax)
@@ -315,8 +383,23 @@ plotly.matplotlylib.mplexporter.renderers.base.Renderer.open_figure(self,fig,pro
 plotly.matplotlylib.mplexporter.renderers.base.Renderer.open_legend(self,legend,props)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/renderers/fake_renderer.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/renderers/fake_renderer.py----------------------------------------
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer(self)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.close_axes(self,ax)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.close_figure(self,fig)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.close_legend(self,legend)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.draw_image(self,imdata,extent,coordinates,style,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.draw_path(self,data,coordinates,pathcodes,style,offset=None,offset_coordinates='data',mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.draw_text(self,text,position,coordinates,style,text_type=None,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.open_axes(self,ax,props)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.open_figure(self,fig,props)
+plotly.matplotlylib.mplexporter.renderers.FakeRenderer.open_legend(self,legend,props)
+plotly.matplotlylib.mplexporter.renderers.FullFakeRenderer(FakeRenderer)
+plotly.matplotlylib.mplexporter.renderers.FullFakeRenderer.draw_line(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.FullFakeRenderer.draw_markers(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.FullFakeRenderer.draw_path_collection(self,paths,path_coordinates,path_transforms,offsets,offset_coordinates,offset_order,styles,mplobj=None)
 plotly.matplotlylib.mplexporter.renderers.fake_renderer.FakeRenderer(self)
+plotly.matplotlylib.mplexporter.renderers.fake_renderer.FakeRenderer.__init__(self)
 plotly.matplotlylib.mplexporter.renderers.fake_renderer.FakeRenderer.close_axes(self,ax)
 plotly.matplotlylib.mplexporter.renderers.fake_renderer.FakeRenderer.close_figure(self,fig)
 plotly.matplotlylib.mplexporter.renderers.fake_renderer.FakeRenderer.close_legend(self,legend)
@@ -332,13 +415,18 @@ plotly.matplotlylib.mplexporter.renderers.fake_renderer.FullFakeRenderer.draw_ma
 plotly.matplotlylib.mplexporter.renderers.fake_renderer.FullFakeRenderer.draw_path_collection(self,paths,path_coordinates,path_transforms,offsets,offset_coordinates,offset_order,styles,mplobj=None)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/renderers/vincent_renderer.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/renderers/vincent_renderer.py----------------------------------------
 A:plotly.matplotlylib.mplexporter.renderers.vincent_renderer.self.figwidth->int(props['figwidth'] * props['dpi'])
 A:plotly.matplotlylib.mplexporter.renderers.vincent_renderer.self.figheight->int(props['figheight'] * props['dpi'])
 A:plotly.matplotlylib.mplexporter.renderers.vincent_renderer.line->vincent.Line(linedata, iter_idx='x', width=self.figwidth, height=self.figheight)
 A:plotly.matplotlylib.mplexporter.renderers.vincent_renderer.markers->vincent.Scatter(markerdata, iter_idx='x', width=self.figwidth, height=self.figheight)
 A:plotly.matplotlylib.mplexporter.renderers.vincent_renderer.renderer->VincentRenderer()
 A:plotly.matplotlylib.mplexporter.renderers.vincent_renderer.exporter->Exporter(renderer)
+plotly.matplotlylib.mplexporter.renderers.VincentRenderer(Renderer)
+plotly.matplotlylib.mplexporter.renderers.VincentRenderer.draw_line(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.VincentRenderer.draw_markers(self,data,coordinates,style,label,mplobj=None)
+plotly.matplotlylib.mplexporter.renderers.VincentRenderer.open_figure(self,fig,props)
+plotly.matplotlylib.mplexporter.renderers.fig_to_vincent(fig)
 plotly.matplotlylib.mplexporter.renderers.vincent_renderer.VincentRenderer(Renderer)
 plotly.matplotlylib.mplexporter.renderers.vincent_renderer.VincentRenderer.draw_line(self,data,coordinates,style,label,mplobj=None)
 plotly.matplotlylib.mplexporter.renderers.vincent_renderer.VincentRenderer.draw_markers(self,data,coordinates,style,label,mplobj=None)
@@ -346,10 +434,10 @@ plotly.matplotlylib.mplexporter.renderers.vincent_renderer.VincentRenderer.open_
 plotly.matplotlylib.mplexporter.renderers.vincent_renderer.fig_to_vincent(fig)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/matplotlylib/mplexporter/renderers/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/matplotlylib/mplexporter/renderers/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/graph_objs/graph_objs.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/graph_objs/graph_objs.py----------------------------------------
 A:plotly.graph_objs.graph_objs.s->resource_string('plotly', 'graph_reference/graph_objs_meta.json').decode('utf-8')
 A:plotly.graph_objs.graph_objs.INFO->utils.decode_unicode(INFO)
 A:plotly.graph_objs.graph_objs.KEY_TO_NAME->dict(plotlylist='PlotlyList', data='Data', angularaxis='AngularAxis', annotations='Annotations', area='Area', plotlydict='PlotlyDict', plotlytrace='PlotlyTrace', bar='Bar', box='Box', contour='Contour', heatmap='Heatmap', histogram='Histogram', histogram2d='Histogram2d', histogram2dcontour='Histogram2dContour', scatter='Scatter', annotation='Annotation', colorbar='ColorBar', contours='Contours', error_x='ErrorX', error_y='ErrorY', figure='Figure', font='Font', layout='Layout', legend='Legend', line='Line', margin='Margin', marker='Marker', radialaxis='RadialAxis', stream='Stream', trace='Trace', textfont='Font', tickfont='Font', titlefont='Font', xaxis='XAxis', xbins='XBins', yaxis='YAxis', ybins='YBins')
@@ -378,6 +466,64 @@ A:plotly.graph_objs.graph_objs.kwargs['layout']->Layout()
 A:plotly.graph_objs.graph_objs.axis_int->int(key[5:])
 A:plotly.graph_objs.graph_objs.test_if_int->int(key[5:])
 A:plotly.graph_objs.graph_objs.NAME_TO_CLASS->dict(PlotlyList=PlotlyList, Data=Data, Annotations=Annotations, PlotlyDict=PlotlyDict, PlotlyTrace=PlotlyTrace, Area=Area, Bar=Bar, Box=Box, Contour=Contour, Heatmap=Heatmap, Histogram=Histogram, Histogram2d=Histogram2d, Histogram2dContour=Histogram2dContour, Scatter=Scatter, AngularAxis=AngularAxis, Annotation=Annotation, ColorBar=ColorBar, Contours=Contours, ErrorX=ErrorX, ErrorY=ErrorY, Figure=Figure, Font=Font, Layout=Layout, Legend=Legend, Line=Line, Margin=Margin, Marker=Marker, RadialAxis=RadialAxis, Stream=Stream, Trace=Trace, XAxis=XAxis, XBins=XBins, YAxis=YAxis, YBins=YBins)
+plotly.AngularAxis(PlotlyDict)
+plotly.Annotation(PlotlyDict)
+plotly.Annotations(PlotlyList)
+plotly.Annotations.to_graph_objs(self,caller=True)
+plotly.Area(PlotlyTrace)
+plotly.Bar(PlotlyTrace)
+plotly.Box(PlotlyTrace)
+plotly.ColorBar(PlotlyDict)
+plotly.Contour(PlotlyTrace)
+plotly.Contours(PlotlyDict)
+plotly.Data(PlotlyList)
+plotly.Data.to_graph_objs(self,caller=True)
+plotly.DictMeta(mcs,name,bases,attrs)
+plotly.ErrorX(PlotlyDict)
+plotly.ErrorY(PlotlyDict)
+plotly.Figure(self,*args,**kwargs)
+plotly.Font(PlotlyDict)
+plotly.Heatmap(PlotlyTrace)
+plotly.Histogram(PlotlyTrace)
+plotly.Histogram2d(PlotlyTrace)
+plotly.Histogram2dContour(PlotlyTrace)
+plotly.Layout(self,*args,**kwargs)
+plotly.Layout.force_clean(self,caller=True)
+plotly.Layout.to_graph_objs(self,caller=True)
+plotly.Layout.to_string(self,level=0,indent=4,eol='\n',pretty=True,max_chars=80)
+plotly.Legend(PlotlyDict)
+plotly.Line(PlotlyDict)
+plotly.ListMeta(mcs,name,bases,attrs)
+plotly.Margin(PlotlyDict)
+plotly.Marker(PlotlyDict)
+plotly.PlotlyDict(self,*args,**kwargs)
+plotly.PlotlyDict.force_clean(self,caller=True)
+plotly.PlotlyDict.get_data(self)
+plotly.PlotlyDict.get_ordered(self,caller=True)
+plotly.PlotlyDict.strip_style(self)
+plotly.PlotlyDict.to_graph_objs(self,caller=True)
+plotly.PlotlyDict.to_string(self,level=0,indent=4,eol='\n',pretty=True,max_chars=80)
+plotly.PlotlyDict.update(self,dict1=None,**dict2)
+plotly.PlotlyDict.validate(self,caller=True)
+plotly.PlotlyList(self,*args)
+plotly.PlotlyList.force_clean(self,caller=True)
+plotly.PlotlyList.get_data(self)
+plotly.PlotlyList.get_ordered(self,caller=True)
+plotly.PlotlyList.strip_style(self)
+plotly.PlotlyList.to_graph_objs(self,caller=True)
+plotly.PlotlyList.to_string(self,level=0,indent=4,eol='\n',pretty=True,max_chars=80)
+plotly.PlotlyList.update(self,changes)
+plotly.PlotlyList.validate(self,caller=True)
+plotly.PlotlyTrace(self,*args,**kwargs)
+plotly.PlotlyTrace.to_string(self,level=0,indent=4,eol='\n',pretty=True,max_chars=80)
+plotly.RadialAxis(PlotlyDict)
+plotly.Scatter(PlotlyTrace)
+plotly.Stream(PlotlyDict)
+plotly.Trace(PlotlyTrace)
+plotly.XAxis(PlotlyDict)
+plotly.XBins(PlotlyDict)
+plotly.YAxis(PlotlyDict)
+plotly.YBins(PlotlyDict)
 plotly.graph_objs.graph_objs.AngularAxis(PlotlyDict)
 plotly.graph_objs.graph_objs.Annotation(PlotlyDict)
 plotly.graph_objs.graph_objs.Annotations(PlotlyList)
@@ -391,24 +537,29 @@ plotly.graph_objs.graph_objs.Contours(PlotlyDict)
 plotly.graph_objs.graph_objs.Data(PlotlyList)
 plotly.graph_objs.graph_objs.Data.to_graph_objs(self,caller=True)
 plotly.graph_objs.graph_objs.DictMeta(mcs,name,bases,attrs)
+plotly.graph_objs.graph_objs.DictMeta.__new__(mcs,name,bases,attrs)
 plotly.graph_objs.graph_objs.ErrorX(PlotlyDict)
 plotly.graph_objs.graph_objs.ErrorY(PlotlyDict)
 plotly.graph_objs.graph_objs.Figure(self,*args,**kwargs)
+plotly.graph_objs.graph_objs.Figure.__init__(self,*args,**kwargs)
 plotly.graph_objs.graph_objs.Font(PlotlyDict)
 plotly.graph_objs.graph_objs.Heatmap(PlotlyTrace)
 plotly.graph_objs.graph_objs.Histogram(PlotlyTrace)
 plotly.graph_objs.graph_objs.Histogram2d(PlotlyTrace)
 plotly.graph_objs.graph_objs.Histogram2dContour(PlotlyTrace)
 plotly.graph_objs.graph_objs.Layout(self,*args,**kwargs)
+plotly.graph_objs.graph_objs.Layout.__init__(self,*args,**kwargs)
 plotly.graph_objs.graph_objs.Layout.force_clean(self,caller=True)
 plotly.graph_objs.graph_objs.Layout.to_graph_objs(self,caller=True)
 plotly.graph_objs.graph_objs.Layout.to_string(self,level=0,indent=4,eol='\n',pretty=True,max_chars=80)
 plotly.graph_objs.graph_objs.Legend(PlotlyDict)
 plotly.graph_objs.graph_objs.Line(PlotlyDict)
 plotly.graph_objs.graph_objs.ListMeta(mcs,name,bases,attrs)
+plotly.graph_objs.graph_objs.ListMeta.__new__(mcs,name,bases,attrs)
 plotly.graph_objs.graph_objs.Margin(PlotlyDict)
 plotly.graph_objs.graph_objs.Marker(PlotlyDict)
 plotly.graph_objs.graph_objs.PlotlyDict(self,*args,**kwargs)
+plotly.graph_objs.graph_objs.PlotlyDict.__init__(self,*args,**kwargs)
 plotly.graph_objs.graph_objs.PlotlyDict.force_clean(self,caller=True)
 plotly.graph_objs.graph_objs.PlotlyDict.get_data(self)
 plotly.graph_objs.graph_objs.PlotlyDict.get_ordered(self,caller=True)
@@ -418,6 +569,7 @@ plotly.graph_objs.graph_objs.PlotlyDict.to_string(self,level=0,indent=4,eol='\n'
 plotly.graph_objs.graph_objs.PlotlyDict.update(self,dict1=None,**dict2)
 plotly.graph_objs.graph_objs.PlotlyDict.validate(self,caller=True)
 plotly.graph_objs.graph_objs.PlotlyList(self,*args)
+plotly.graph_objs.graph_objs.PlotlyList.__init__(self,*args)
 plotly.graph_objs.graph_objs.PlotlyList.force_clean(self,caller=True)
 plotly.graph_objs.graph_objs.PlotlyList.get_data(self)
 plotly.graph_objs.graph_objs.PlotlyList.get_ordered(self,caller=True)
@@ -427,6 +579,7 @@ plotly.graph_objs.graph_objs.PlotlyList.to_string(self,level=0,indent=4,eol='\n'
 plotly.graph_objs.graph_objs.PlotlyList.update(self,changes)
 plotly.graph_objs.graph_objs.PlotlyList.validate(self,caller=True)
 plotly.graph_objs.graph_objs.PlotlyTrace(self,*args,**kwargs)
+plotly.graph_objs.graph_objs.PlotlyTrace.__init__(self,*args,**kwargs)
 plotly.graph_objs.graph_objs.PlotlyTrace.to_string(self,level=0,indent=4,eol='\n',pretty=True,max_chars=80)
 plotly.graph_objs.graph_objs.RadialAxis(PlotlyDict)
 plotly.graph_objs.graph_objs.Scatter(PlotlyTrace)
@@ -438,69 +591,101 @@ plotly.graph_objs.graph_objs.YAxis(PlotlyDict)
 plotly.graph_objs.graph_objs.YBins(PlotlyDict)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/graph_objs/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/graph_objs/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/plotly/plotly.py----------------------------------------
-A:plotly.plotly.plotl._DEFAULT_PLOT_OPTIONS->dict(filename='plot from API', fileopt='new', world_readable=True, auto_open=True, validate=True)
-A:plotly.plotly.plotl._credentials->dict()
-A:plotly.plotly.plotl._plot_options->dict()
-A:plotly.plotly.plotl.res->requests.post(url, data=json.dumps(figure, cls=utils._plotlyJSONEncoder), headers=headers)
-A:plotly.plotly.plotl.urlsplit->requests.post(url, data=json.dumps(figure, cls=utils._plotlyJSONEncoder), headers=headers).split('/')
-A:plotly.plotly.plotl.embed_options->dict()
-A:plotly.plotly.plotl.options->dict()
-A:plotly.plotly.plotl.plot_options->_plot_option_logic(plot_options)
-A:plotly.plotly.plotl.fig->tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
-A:plotly.plotly.plotl.resource->'/apigetfile/{username}/{file_id}'.format(username=file_owner, file_id=file_id)
-A:plotly.plotly.plotl.(username, api_key)->_validation_key_logic()
-A:plotly.plotly.plotl.test_if_int->int(file_id)
-A:plotly.plotly.plotl.response->requests.get(plotly_rest_url + resource, headers=headers)
-A:plotly.plotly.plotl.content->json.loads(response.content)
-A:plotly.plotly.plotl.self._stream->chunked_requests.Stream(streaming_url, 80, {'Host': streaming_url, 'plotly-streamtoken': self.stream_id})
-A:plotly.plotly.plotl.stream_object->dict()
-A:plotly.plotly.plotl.jdata->json.dumps(stream_object, cls=utils._plotlyJSONEncoder)
-A:plotly.plotly.plotl.return_data->json.loads(res.content)
-A:plotly.plotly.plotl.img->base64.b64decode(img)
-A:plotly.plotly.plotl.(base, ext)->os.path.splitext(filename)
-A:plotly.plotly.plotl.f->open(filename, 'w')
-A:plotly.plotly.plotl.data->json.dumps(figure['data'] if 'data' in figure else [], cls=utils._plotlyJSONEncoder)
-A:plotly.plotly.plotl.file_credentials->tools.get_credentials_file()
-A:plotly.plotly.plotl.kwargs->json.dumps(dict(filename=plot_options['filename'], fileopt=plot_options['fileopt'], world_readable=plot_options['world_readable'], layout=figure['layout'] if 'layout' in figure else {}), cls=utils._plotlyJSONEncoder)
-A:plotly.plotly.plotl.payload->dict(platform='python', version=version.__version__, args=data, un=username, key=api_key, origin='plot', kwargs=kwargs)
-A:plotly.plotly.plotl.r->json.loads(r.text)
-A:plotly.plotly.plotl.creds_on_file->tools.get_credentials_file()
-plotly.plotly.plotl.Stream(self,stream_id)
-plotly.plotly.plotl.Stream.close(self)
-plotly.plotly.plotl.Stream.open(self)
-plotly.plotly.plotl.Stream.write(self,data,layout=None,validate=True,reconnect_on=(200,'',408))
-plotly.plotly.plotl._plot_option_logic(plot_options)
-plotly.plotly.plotl._send_to_plotly(figure,**plot_options)
-plotly.plotly.plotl._validation_key_logic()
-plotly.plotly.plotl.get_credentials()
-plotly.plotly.plotl.get_figure(file_owner,file_id,raw=False)
-plotly.plotly.plotl.get_plot_options()
-plotly.plotly.plotl.image
-plotly.plotly.plotl.image.get(figure)
-plotly.plotly.plotl.image.ishow(cls,figure)
-plotly.plotly.plotl.image.save_as(cls,figure,filename)
-plotly.plotly.plotl.iplot(figure_or_data,**plot_options)
-plotly.plotly.plotl.iplot_mpl(fig,resize=True,strip_style=False,**plot_options)
-plotly.plotly.plotl.plot(figure_or_data,validate=True,**plot_options)
-plotly.plotly.plotl.plot_mpl(fig,resize=True,strip_style=False,**plot_options)
-plotly.plotly.plotl.sign_in(username,api_key)
-plotly.plotly.plotl.update_plot_options(**kwargs)
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/plotly/plotly.py----------------------------------------
+A:plotly.plotly.plotly._DEFAULT_PLOT_OPTIONS->dict(filename='plot from API', fileopt='new', world_readable=True, auto_open=True, validate=True)
+A:plotly.plotly.plotly._credentials->dict()
+A:plotly.plotly.plotly._plot_options->dict()
+A:plotly.plotly.plotly.res->requests.post(url, data=json.dumps(figure, cls=utils._plotlyJSONEncoder), headers=headers)
+A:plotly.plotly.plotly.urlsplit->requests.post(url, data=json.dumps(figure, cls=utils._plotlyJSONEncoder), headers=headers).split('/')
+A:plotly.plotly.plotly.embed_options->dict()
+A:plotly.plotly.plotly.options->dict()
+A:plotly.plotly.plotly.plot_options->_plot_option_logic(plot_options)
+A:plotly.plotly.plotly.fig->tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
+A:plotly.plotly.plotly.resource->'/apigetfile/{username}/{file_id}'.format(username=file_owner, file_id=file_id)
+A:plotly.plotly.plotly.(username, api_key)->_validation_key_logic()
+A:plotly.plotly.plotly.test_if_int->int(file_id)
+A:plotly.plotly.plotly.response->requests.get(plotly_rest_url + resource, headers=headers)
+A:plotly.plotly.plotly.content->json.loads(response.content)
+A:plotly.plotly.plotly.self._stream->chunked_requests.Stream(streaming_url, 80, {'Host': streaming_url, 'plotly-streamtoken': self.stream_id})
+A:plotly.plotly.plotly.stream_object->dict()
+A:plotly.plotly.plotly.jdata->json.dumps(stream_object, cls=utils._plotlyJSONEncoder)
+A:plotly.plotly.plotly.return_data->json.loads(res.content)
+A:plotly.plotly.plotly.img->base64.b64decode(img)
+A:plotly.plotly.plotly.(base, ext)->os.path.splitext(filename)
+A:plotly.plotly.plotly.f->open(filename, 'w')
+A:plotly.plotly.plotly.data->json.dumps(figure['data'] if 'data' in figure else [], cls=utils._plotlyJSONEncoder)
+A:plotly.plotly.plotly.file_credentials->tools.get_credentials_file()
+A:plotly.plotly.plotly.kwargs->json.dumps(dict(filename=plot_options['filename'], fileopt=plot_options['fileopt'], world_readable=plot_options['world_readable'], layout=figure['layout'] if 'layout' in figure else {}), cls=utils._plotlyJSONEncoder)
+A:plotly.plotly.plotly.payload->dict(platform='python', version=version.__version__, args=data, un=username, key=api_key, origin='plot', kwargs=kwargs)
+A:plotly.plotly.plotly.r->json.loads(r.text)
+A:plotly.plotly.plotly.creds_on_file->tools.get_credentials_file()
+Stream(self,stream_id)
+Stream.close(self)
+Stream.open(self)
+Stream.write(self,data,layout=None,validate=True,reconnect_on=(200,'',408))
+_plot_option_logic(plot_options)
+_send_to_plotly(figure,**plot_options)
+_validation_key_logic()
+get_credentials()
+get_figure(file_owner,file_id,raw=False)
+get_plot_options()
+image
+image.get(figure)
+image.ishow(cls,figure)
+image.save_as(cls,figure,filename)
+iplot(figure_or_data,**plot_options)
+iplot_mpl(fig,resize=True,strip_style=False,**plot_options)
+plot(figure_or_data,validate=True,**plot_options)
+plot_mpl(fig,resize=True,strip_style=False,**plot_options)
+plotly.plotly.plotly.Stream(self,stream_id)
+plotly.plotly.plotly.Stream.__init__(self,stream_id)
+plotly.plotly.plotly.Stream.close(self)
+plotly.plotly.plotly.Stream.open(self)
+plotly.plotly.plotly.Stream.write(self,data,layout=None,validate=True,reconnect_on=(200,'',408))
+plotly.plotly.plotly._plot_option_logic(plot_options)
+plotly.plotly.plotly._send_to_plotly(figure,**plot_options)
+plotly.plotly.plotly._validation_key_logic()
+plotly.plotly.plotly.get_credentials()
+plotly.plotly.plotly.get_figure(file_owner,file_id,raw=False)
+plotly.plotly.plotly.get_plot_options()
+plotly.plotly.plotly.image
+plotly.plotly.plotly.image.get(figure)
+plotly.plotly.plotly.image.ishow(cls,figure)
+plotly.plotly.plotly.image.save_as(cls,figure,filename)
+plotly.plotly.plotly.iplot(figure_or_data,**plot_options)
+plotly.plotly.plotly.iplot_mpl(fig,resize=True,strip_style=False,**plot_options)
+plotly.plotly.plotly.plot(figure_or_data,validate=True,**plot_options)
+plotly.plotly.plotly.plot_mpl(fig,resize=True,strip_style=False,**plot_options)
+plotly.plotly.plotly.sign_in(username,api_key)
+plotly.plotly.plotly.update_plot_options(**kwargs)
+sign_in(username,api_key)
+update_plot_options(**kwargs)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/plotly/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/plotly/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/plotly/chunked_requests/chunked_request.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/plotly/chunked_requests/chunked_request.py----------------------------------------
 A:plotly.plotly.chunked_requests.chunked_request.response->http.client.HTTPResponse(_FakeSocket(response))
 A:plotly.plotly.chunked_requests.chunked_request.msglen->format(len(msg), 'x')
 A:plotly.plotly.chunked_requests.chunked_request.self._conn->http.client.HTTPConnection(server, port)
 A:plotly.plotly.chunked_requests.chunked_request.bytes->self._conn.sock.recv(1)
 A:plotly.plotly.chunked_requests.chunked_request.self._bytes->self._conn.sock.recv(1)
+chunked_requests.Stream(self,server,port=80,headers={})
+chunked_requests.Stream._connect(self)
+chunked_requests.Stream._getresponse(self)
+chunked_requests.Stream._isconnected(self)
+chunked_requests.Stream._reconnect(self)
+chunked_requests.Stream._reset_retries(self)
+chunked_requests.Stream.close(self)
+chunked_requests.Stream.write(self,data,reconnect_on=('',200))
+chunked_requests.chunked_request._FakeSocket(io.StringIO)
+chunked_requests.chunked_request._FakeSocket.makefile(self,*args,**kwargs)
 plotly.plotly.chunked_requests.chunked_request.Stream(self,server,port=80,headers={})
+plotly.plotly.chunked_requests.chunked_request.Stream.__init__(self,server,port=80,headers={})
 plotly.plotly.chunked_requests.chunked_request.Stream._connect(self)
 plotly.plotly.chunked_requests.chunked_request.Stream._getresponse(self)
 plotly.plotly.chunked_requests.chunked_request.Stream._isconnected(self)
@@ -512,5 +697,5 @@ plotly.plotly.chunked_requests.chunked_request._FakeSocket(io.StringIO)
 plotly.plotly.chunked_requests.chunked_request._FakeSocket.makefile(self,*args,**kwargs)
 
 
-----------------------------------------/home/zhang/Packages/plotly.py/plotly1.0.26/plotly/chunked_requests/__init__.py----------------------------------------
+----------------------------------------/home/zhang/Packages/plotly/plotly1.0.26/plotly/chunked_requests/__init__.py----------------------------------------
 

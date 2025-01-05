@@ -76,21 +76,37 @@ A:lightgbm.dask._base_doc->sklearn._lgbmmodel_doc_fit.format(X_shape='Dask Array
 A:lightgbm.dask.predict.__doc__->sklearn._lgbmmodel_doc_predict.format(description='Return the predicted value for each sample.', X_shape='Dask Array or Dask DataFrame of shape = [n_samples, n_features]', output_name='predicted_result', predicted_result_shape='Dask Array of shape = [n_samples]', X_leaves_shape='Dask Array of shape = [n_samples, n_trees]', X_SHAP_values_shape='Dask Array of shape = [n_samples, n_features + 1]')
 A:lightgbm.dask.predict_proba.__doc__->sklearn._lgbmmodel_doc_predict.format(description='Return the predicted probability for each class for each sample.', X_shape='Dask Array or Dask DataFrame of shape = [n_samples, n_features]', output_name='predicted_probability', predicted_result_shape='Dask Array of shape = [n_samples] or shape = [n_samples, n_classes]', X_leaves_shape='Dask Array of shape = [n_samples, n_trees] or shape = [n_samples, n_trees * n_classes]', X_SHAP_values_shape='Dask Array of shape = [n_samples, n_features + 1] or shape = [n_samples, (n_features + 1) * n_classes] or (if multi-class and using sparse inputs) a list of ``n_classes`` Dask Arrays of shape = [n_samples, n_features + 1]')
 lightgbm.DaskLGBMClassifier(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
+lightgbm.DaskLGBMClassifier.__getstate__(self)->Dict[Any, Any]
+lightgbm.DaskLGBMClassifier.fit(self,X:_DaskMatrixLike,y:_DaskCollection,sample_weight:Optional[_DaskVectorLike]=None,init_score:Optional[_DaskCollection]=None,eval_set:Optional[List[Tuple[_DaskMatrixLike,_DaskCollection]]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_DaskVectorLike]]=None,eval_class_weight:Optional[List[Union[dict,str]]]=None,eval_init_score:Optional[List[_DaskCollection]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,**kwargs:Any)->'DaskLGBMClassifier'
+lightgbm.DaskLGBMClassifier.predict(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
+lightgbm.DaskLGBMClassifier.predict_proba(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
+lightgbm.DaskLGBMClassifier.to_local(self)->LGBMClassifier
 lightgbm.DaskLGBMRanker(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
+lightgbm.DaskLGBMRanker.__getstate__(self)->Dict[Any, Any]
+lightgbm.DaskLGBMRanker.fit(self,X:_DaskMatrixLike,y:_DaskCollection,sample_weight:Optional[_DaskVectorLike]=None,init_score:Optional[_DaskVectorLike]=None,group:Optional[_DaskVectorLike]=None,eval_set:Optional[List[Tuple[_DaskMatrixLike,_DaskCollection]]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_DaskVectorLike]]=None,eval_init_score:Optional[List[_DaskVectorLike]]=None,eval_group:Optional[List[_DaskVectorLike]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,eval_at:Union[List[int],Tuple[int,...]]=(1,2,3,4,5),**kwargs:Any)->'DaskLGBMRanker'
+lightgbm.DaskLGBMRanker.predict(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
+lightgbm.DaskLGBMRanker.to_local(self)->LGBMRanker
 lightgbm.DaskLGBMRegressor(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
+lightgbm.DaskLGBMRegressor.__getstate__(self)->Dict[Any, Any]
+lightgbm.DaskLGBMRegressor.fit(self,X:_DaskMatrixLike,y:_DaskCollection,sample_weight:Optional[_DaskVectorLike]=None,init_score:Optional[_DaskVectorLike]=None,eval_set:Optional[List[Tuple[_DaskMatrixLike,_DaskCollection]]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_DaskVectorLike]]=None,eval_init_score:Optional[List[_DaskVectorLike]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,**kwargs:Any)->'DaskLGBMRegressor'
+lightgbm.DaskLGBMRegressor.predict(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
+lightgbm.DaskLGBMRegressor.to_local(self)->LGBMRegressor
 lightgbm.dask.DaskLGBMClassifier(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
 lightgbm.dask.DaskLGBMClassifier.__getstate__(self)->Dict[Any, Any]
+lightgbm.dask.DaskLGBMClassifier.__init__(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
 lightgbm.dask.DaskLGBMClassifier.fit(self,X:_DaskMatrixLike,y:_DaskCollection,sample_weight:Optional[_DaskVectorLike]=None,init_score:Optional[_DaskCollection]=None,eval_set:Optional[List[Tuple[_DaskMatrixLike,_DaskCollection]]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_DaskVectorLike]]=None,eval_class_weight:Optional[List[Union[dict,str]]]=None,eval_init_score:Optional[List[_DaskCollection]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,**kwargs:Any)->'DaskLGBMClassifier'
 lightgbm.dask.DaskLGBMClassifier.predict(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
 lightgbm.dask.DaskLGBMClassifier.predict_proba(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
 lightgbm.dask.DaskLGBMClassifier.to_local(self)->LGBMClassifier
 lightgbm.dask.DaskLGBMRanker(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
 lightgbm.dask.DaskLGBMRanker.__getstate__(self)->Dict[Any, Any]
+lightgbm.dask.DaskLGBMRanker.__init__(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
 lightgbm.dask.DaskLGBMRanker.fit(self,X:_DaskMatrixLike,y:_DaskCollection,sample_weight:Optional[_DaskVectorLike]=None,init_score:Optional[_DaskVectorLike]=None,group:Optional[_DaskVectorLike]=None,eval_set:Optional[List[Tuple[_DaskMatrixLike,_DaskCollection]]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_DaskVectorLike]]=None,eval_init_score:Optional[List[_DaskVectorLike]]=None,eval_group:Optional[List[_DaskVectorLike]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,eval_at:Union[List[int],Tuple[int,...]]=(1,2,3,4,5),**kwargs:Any)->'DaskLGBMRanker'
 lightgbm.dask.DaskLGBMRanker.predict(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
 lightgbm.dask.DaskLGBMRanker.to_local(self)->LGBMRanker
 lightgbm.dask.DaskLGBMRegressor(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
 lightgbm.dask.DaskLGBMRegressor.__getstate__(self)->Dict[Any, Any]
+lightgbm.dask.DaskLGBMRegressor.__init__(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',client:Optional[Client]=None,**kwargs:Any)
 lightgbm.dask.DaskLGBMRegressor.fit(self,X:_DaskMatrixLike,y:_DaskCollection,sample_weight:Optional[_DaskVectorLike]=None,init_score:Optional[_DaskVectorLike]=None,eval_set:Optional[List[Tuple[_DaskMatrixLike,_DaskCollection]]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_DaskVectorLike]]=None,eval_init_score:Optional[List[_DaskVectorLike]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,**kwargs:Any)->'DaskLGBMRegressor'
 lightgbm.dask.DaskLGBMRegressor.predict(self,X:_DaskMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)->dask_Array
 lightgbm.dask.DaskLGBMRegressor.to_local(self)->LGBMRegressor
@@ -156,9 +172,35 @@ A:lightgbm.sklearn.class_index->numpy.argmax(result, axis=1)
 A:lightgbm.sklearn.predict_proba.__doc__->_lgbmmodel_doc_predict.format(description='Return the predicted probability for each class for each sample.', X_shape="numpy array, pandas DataFrame, H2O DataTable's Frame , scipy.sparse, list of lists of int or float of shape = [n_samples, n_features]", output_name='predicted_probability', predicted_result_shape='array-like of shape = [n_samples] or shape = [n_samples, n_classes]', X_leaves_shape='array-like of shape = [n_samples, n_trees] or shape = [n_samples, n_trees * n_classes]', X_SHAP_values_shape='array-like of shape = [n_samples, n_features + 1] or shape = [n_samples, (n_features + 1) * n_classes] or list with n_classes length of such objects')
 A:lightgbm.sklearn.(_before_feature_name, _feature_name, _after_feature_name)->LGBMModel.fit.__doc__.replace('self : LGBMModel', 'self : LGBMRanker').partition('feature_name :')
 lightgbm.LGBMClassifier(_LGBMClassifierBase,LGBMModel)
+lightgbm.LGBMClassifier.classes_(self)->np.ndarray
+lightgbm.LGBMClassifier.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,sample_weight:Optional[_LGBM_WeightType]=None,init_score:Optional[_LGBM_InitScoreType]=None,eval_set:Optional[List[_LGBM_ScikitValidSet]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_LGBM_WeightType]]=None,eval_class_weight:Optional[List[float]]=None,eval_init_score:Optional[List[_LGBM_InitScoreType]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',callbacks:Optional[List[Callable]]=None,init_model:Optional[Union[str,Path,Booster,LGBMModel]]=None)->'LGBMClassifier'
+lightgbm.LGBMClassifier.n_classes_(self)->int
+lightgbm.LGBMClassifier.predict(self,X:_LGBM_ScikitMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)
+lightgbm.LGBMClassifier.predict_proba(self,X:_LGBM_ScikitMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)
 lightgbm.LGBMModel(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[Dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',**kwargs)
+lightgbm.LGBMModel.__sklearn_is_fitted__(self)->bool
+lightgbm.LGBMModel._more_tags(self)->Dict[str, Any]
+lightgbm.LGBMModel._process_n_jobs(self,n_jobs:Optional[int])->int
+lightgbm.LGBMModel._process_params(self,stage:str)->Dict[str, Any]
+lightgbm.LGBMModel.best_iteration_(self)->int
+lightgbm.LGBMModel.best_score_(self)->_LGBM_BoosterBestScoreType
+lightgbm.LGBMModel.booster_(self)->Booster
+lightgbm.LGBMModel.evals_result_(self)->_EvalResultDict
+lightgbm.LGBMModel.feature_importances_(self)->np.ndarray
+lightgbm.LGBMModel.feature_name_(self)->List[str]
+lightgbm.LGBMModel.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,sample_weight:Optional[_LGBM_WeightType]=None,init_score:Optional[_LGBM_InitScoreType]=None,group:Optional[_LGBM_GroupType]=None,eval_set:Optional[List[_LGBM_ScikitValidSet]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_LGBM_WeightType]]=None,eval_class_weight:Optional[List[float]]=None,eval_init_score:Optional[List[_LGBM_InitScoreType]]=None,eval_group:Optional[List[_LGBM_GroupType]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',callbacks:Optional[List[Callable]]=None,init_model:Optional[Union[str,Path,Booster,'LGBMModel']]=None)->'LGBMModel'
+lightgbm.LGBMModel.get_params(self,deep:bool=True)->Dict[str, Any]
+lightgbm.LGBMModel.n_estimators_(self)->int
+lightgbm.LGBMModel.n_features_(self)->int
+lightgbm.LGBMModel.n_features_in_(self)->int
+lightgbm.LGBMModel.n_iter_(self)->int
+lightgbm.LGBMModel.objective_(self)->Union[str, _LGBM_ScikitCustomObjectiveFunction]
+lightgbm.LGBMModel.predict(self,X:_LGBM_ScikitMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)
+lightgbm.LGBMModel.set_params(self,**params:Any)->'LGBMModel'
 lightgbm.LGBMRanker(LGBMModel)
+lightgbm.LGBMRanker.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,sample_weight:Optional[_LGBM_WeightType]=None,init_score:Optional[_LGBM_InitScoreType]=None,group:Optional[_LGBM_GroupType]=None,eval_set:Optional[List[_LGBM_ScikitValidSet]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_LGBM_WeightType]]=None,eval_init_score:Optional[List[_LGBM_InitScoreType]]=None,eval_group:Optional[List[_LGBM_GroupType]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,eval_at:Union[List[int],Tuple[int,...]]=(1,2,3,4,5),feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',callbacks:Optional[List[Callable]]=None,init_model:Optional[Union[str,Path,Booster,LGBMModel]]=None)->'LGBMRanker'
 lightgbm.LGBMRegressor(_LGBMRegressorBase,LGBMModel)
+lightgbm.LGBMRegressor.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,sample_weight:Optional[_LGBM_WeightType]=None,init_score:Optional[_LGBM_InitScoreType]=None,eval_set:Optional[List[_LGBM_ScikitValidSet]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_LGBM_WeightType]]=None,eval_init_score:Optional[List[_LGBM_InitScoreType]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',callbacks:Optional[List[Callable]]=None,init_model:Optional[Union[str,Path,Booster,LGBMModel]]=None)->'LGBMRegressor'
 lightgbm.sklearn.LGBMClassifier(_LGBMClassifierBase,LGBMModel)
 lightgbm.sklearn.LGBMClassifier.classes_(self)->np.ndarray
 lightgbm.sklearn.LGBMClassifier.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,sample_weight:Optional[_LGBM_WeightType]=None,init_score:Optional[_LGBM_InitScoreType]=None,eval_set:Optional[List[_LGBM_ScikitValidSet]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_LGBM_WeightType]]=None,eval_class_weight:Optional[List[float]]=None,eval_init_score:Optional[List[_LGBM_InitScoreType]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',callbacks:Optional[List[Callable]]=None,init_model:Optional[Union[str,Path,Booster,LGBMModel]]=None)->'LGBMClassifier'
@@ -166,6 +208,7 @@ lightgbm.sklearn.LGBMClassifier.n_classes_(self)->int
 lightgbm.sklearn.LGBMClassifier.predict(self,X:_LGBM_ScikitMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)
 lightgbm.sklearn.LGBMClassifier.predict_proba(self,X:_LGBM_ScikitMatrixLike,raw_score:bool=False,start_iteration:int=0,num_iteration:Optional[int]=None,pred_leaf:bool=False,pred_contrib:bool=False,validate_features:bool=False,**kwargs:Any)
 lightgbm.sklearn.LGBMModel(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[Dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',**kwargs)
+lightgbm.sklearn.LGBMModel.__init__(self,boosting_type:str='gbdt',num_leaves:int=31,max_depth:int=-1,learning_rate:float=0.1,n_estimators:int=100,subsample_for_bin:int=200000,objective:Optional[Union[str,_LGBM_ScikitCustomObjectiveFunction]]=None,class_weight:Optional[Union[Dict,str]]=None,min_split_gain:float=0.0,min_child_weight:float=0.001,min_child_samples:int=20,subsample:float=1.0,subsample_freq:int=0,colsample_bytree:float=1.0,reg_alpha:float=0.0,reg_lambda:float=0.0,random_state:Optional[Union[int,np.random.RandomState]]=None,n_jobs:Optional[int]=None,importance_type:str='split',**kwargs)
 lightgbm.sklearn.LGBMModel.__sklearn_is_fitted__(self)->bool
 lightgbm.sklearn.LGBMModel._more_tags(self)->Dict[str, Any]
 lightgbm.sklearn.LGBMModel._process_n_jobs(self,n_jobs:Optional[int])->int
@@ -190,7 +233,9 @@ lightgbm.sklearn.LGBMRanker.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,
 lightgbm.sklearn.LGBMRegressor(_LGBMRegressorBase,LGBMModel)
 lightgbm.sklearn.LGBMRegressor.fit(self,X:_LGBM_ScikitMatrixLike,y:_LGBM_LabelType,sample_weight:Optional[_LGBM_WeightType]=None,init_score:Optional[_LGBM_InitScoreType]=None,eval_set:Optional[List[_LGBM_ScikitValidSet]]=None,eval_names:Optional[List[str]]=None,eval_sample_weight:Optional[List[_LGBM_WeightType]]=None,eval_init_score:Optional[List[_LGBM_InitScoreType]]=None,eval_metric:Optional[_LGBM_ScikitEvalMetricType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',callbacks:Optional[List[Callable]]=None,init_model:Optional[Union[str,Path,Booster,LGBMModel]]=None)->'LGBMRegressor'
 lightgbm.sklearn._EvalFunctionWrapper(self,func:_LGBM_ScikitCustomEvalFunction)
+lightgbm.sklearn._EvalFunctionWrapper.__init__(self,func:_LGBM_ScikitCustomEvalFunction)
 lightgbm.sklearn._ObjectiveFunctionWrapper(self,func:_LGBM_ScikitCustomObjectiveFunction)
+lightgbm.sklearn._ObjectiveFunctionWrapper.__init__(self,func:_LGBM_ScikitCustomObjectiveFunction)
 
 
 ----------------------------------------/home/zhang/Packages/lightgbm/lightgbm4.0.0/basic.py----------------------------------------
@@ -347,8 +392,97 @@ A:lightgbm.basic.self.__inner_predict_buffer[data_idx]->numpy.empty(n_preds, dty
 A:lightgbm.basic.data_ptr->self.__inner_predict_buffer[data_idx].ctypes.data_as(ctypes.POINTER(ctypes.c_double))
 A:lightgbm.basic.out_num_eval->ctypes.c_int(0)
 lightgbm.Booster(self,params:Optional[Dict[str,Any]]=None,train_set:Optional[Dataset]=None,model_file:Optional[Union[str,Path]]=None,model_str:Optional[str]=None)
+lightgbm.Booster.__boost(self,grad:np.ndarray,hess:np.ndarray)->bool
+lightgbm.Booster.__copy__(self)->'Booster'
+lightgbm.Booster.__deepcopy__(self,_)->'Booster'
+lightgbm.Booster.__del__(self)->None
+lightgbm.Booster.__get_eval_info(self)->None
+lightgbm.Booster.__getstate__(self)->Dict[str, Any]
+lightgbm.Booster.__inner_eval(self,data_name:str,data_idx:int,feval:Optional[Union[_LGBM_CustomEvalFunction,List[_LGBM_CustomEvalFunction]]])->List[_LGBM_BoosterEvalMethodResultType]
+lightgbm.Booster.__inner_predict(self,data_idx:int)->np.ndarray
+lightgbm.Booster.__setstate__(self,state:Dict[str,Any])->None
+lightgbm.Booster._free_buffer(self)->'Booster'
+lightgbm.Booster._get_loaded_param(self)->Dict[str, Any]
+lightgbm.Booster._to_predictor(self,pred_parameter:Dict[str,Any])->_InnerPredictor
+lightgbm.Booster.add_valid(self,data:Dataset,name:str)->'Booster'
+lightgbm.Booster.current_iteration(self)->int
+lightgbm.Booster.dump_model(self,num_iteration:Optional[int]=None,start_iteration:int=0,importance_type:str='split',object_hook:Optional[Callable[[Dict[str,Any]],Dict[str,Any]]]=None)->Dict[str, Any]
+lightgbm.Booster.eval(self,data:Dataset,name:str,feval:Optional[Union[_LGBM_CustomEvalFunction,List[_LGBM_CustomEvalFunction]]]=None)->List[_LGBM_BoosterEvalMethodResultType]
+lightgbm.Booster.eval_train(self,feval:Optional[Union[_LGBM_CustomEvalFunction,List[_LGBM_CustomEvalFunction]]]=None)->List[_LGBM_BoosterEvalMethodResultType]
+lightgbm.Booster.eval_valid(self,feval:Optional[Union[_LGBM_CustomEvalFunction,List[_LGBM_CustomEvalFunction]]]=None)->List[_LGBM_BoosterEvalMethodResultType]
+lightgbm.Booster.feature_importance(self,importance_type:str='split',iteration:Optional[int]=None)->np.ndarray
+lightgbm.Booster.feature_name(self)->List[str]
+lightgbm.Booster.free_dataset(self)->'Booster'
+lightgbm.Booster.free_network(self)->'Booster'
+lightgbm.Booster.get_leaf_output(self,tree_id:int,leaf_id:int)->float
+lightgbm.Booster.get_split_value_histogram(self,feature:Union[int,str],bins:Optional[Union[int,str]]=None,xgboost_style:bool=False)->Union[Tuple[np.ndarray, np.ndarray], np.ndarray, pd_DataFrame]
+lightgbm.Booster.lower_bound(self)->float
+lightgbm.Booster.model_from_string(self,model_str:str)->'Booster'
+lightgbm.Booster.model_to_string(self,num_iteration:Optional[int]=None,start_iteration:int=0,importance_type:str='split')->str
+lightgbm.Booster.num_feature(self)->int
+lightgbm.Booster.num_model_per_iteration(self)->int
+lightgbm.Booster.num_trees(self)->int
+lightgbm.Booster.predict(self,data:_LGBM_PredictDataType,start_iteration:int=0,num_iteration:Optional[int]=None,raw_score:bool=False,pred_leaf:bool=False,pred_contrib:bool=False,data_has_header:bool=False,validate_features:bool=False,**kwargs:Any)->Union[np.ndarray, scipy.sparse.spmatrix, List[scipy.sparse.spmatrix]]
+lightgbm.Booster.refit(self,data:_LGBM_TrainDataType,label:_LGBM_LabelType,decay_rate:float=0.9,reference:Optional[Dataset]=None,weight:Optional[_LGBM_WeightType]=None,group:Optional[_LGBM_GroupType]=None,init_score:Optional[_LGBM_InitScoreType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',dataset_params:Optional[Dict[str,Any]]=None,free_raw_data:bool=True,validate_features:bool=False,**kwargs)->'Booster'
+lightgbm.Booster.reset_parameter(self,params:Dict[str,Any])->'Booster'
+lightgbm.Booster.rollback_one_iter(self)->'Booster'
+lightgbm.Booster.save_model(self,filename:Union[str,Path],num_iteration:Optional[int]=None,start_iteration:int=0,importance_type:str='split')->'Booster'
+lightgbm.Booster.set_leaf_output(self,tree_id:int,leaf_id:int,value:float)->'Booster'
+lightgbm.Booster.set_network(self,machines:Union[List[str],Set[str],str],local_listen_port:int=12400,listen_time_out:int=120,num_machines:int=1)->'Booster'
+lightgbm.Booster.set_train_data_name(self,name:str)->'Booster'
+lightgbm.Booster.shuffle_models(self,start_iteration:int=0,end_iteration:int=-1)->'Booster'
+lightgbm.Booster.trees_to_dataframe(self)->pd_DataFrame
+lightgbm.Booster.update(self,train_set:Optional[Dataset]=None,fobj:Optional[_LGBM_CustomObjectiveFunction]=None)->bool
+lightgbm.Booster.upper_bound(self)->float
 lightgbm.Dataset(self,data:_LGBM_TrainDataType,label:Optional[_LGBM_LabelType]=None,reference:Optional['Dataset']=None,weight:Optional[_LGBM_WeightType]=None,group:Optional[_LGBM_GroupType]=None,init_score:Optional[_LGBM_InitScoreType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',params:Optional[Dict[str,Any]]=None,free_raw_data:bool=True)
+lightgbm.Dataset.__del__(self)->None
+lightgbm.Dataset.__init_from_csc(self,csc:scipy.sparse.csc_matrix,params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
+lightgbm.Dataset.__init_from_csr(self,csr:scipy.sparse.csr_matrix,params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
+lightgbm.Dataset.__init_from_list_np2d(self,mats:List[np.ndarray],params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
+lightgbm.Dataset.__init_from_np2d(self,mat:np.ndarray,params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
+lightgbm.Dataset.__init_from_seqs(self,seqs:List[Sequence],ref_dataset:Optional[_DatasetHandle])->'Dataset'
+lightgbm.Dataset.__sample(self,seqs:List[Sequence],total_nrow:int)->Tuple[List[np.ndarray], List[np.ndarray]]
+lightgbm.Dataset._compare_params_for_warning(params:Optional[Dict[str,Any]],other_params:Optional[Dict[str,Any]],ignore_keys:Set[str])->bool
+lightgbm.Dataset._create_sample_indices(self,total_nrow:int)->np.ndarray
+lightgbm.Dataset._dump_text(self,filename:Union[str,Path])->'Dataset'
+lightgbm.Dataset._free_handle(self)->'Dataset'
+lightgbm.Dataset._init_from_ref_dataset(self,total_nrow:int,ref_dataset:_DatasetHandle)->'Dataset'
+lightgbm.Dataset._init_from_sample(self,sample_data:List[np.ndarray],sample_indices:List[np.ndarray],sample_cnt:int,total_nrow:int)->'Dataset'
+lightgbm.Dataset._lazy_init(self,data:Optional[_LGBM_TrainDataType],label:Optional[_LGBM_LabelType],reference:Optional['Dataset'],weight:Optional[_LGBM_WeightType],group:Optional[_LGBM_GroupType],init_score:Optional[_LGBM_InitScoreType],predictor:Optional[_InnerPredictor],feature_name:_LGBM_FeatureNameConfiguration,categorical_feature:_LGBM_CategoricalFeatureConfiguration,params:Optional[Dict[str,Any]])->'Dataset'
+lightgbm.Dataset._push_rows(self,data:np.ndarray)->'Dataset'
+lightgbm.Dataset._reverse_update_params(self)->'Dataset'
+lightgbm.Dataset._set_init_score_by_predictor(self,predictor:Optional[_InnerPredictor],data:_LGBM_TrainDataType,used_indices:Optional[Union[List[int],np.ndarray]])->'Dataset'
+lightgbm.Dataset._set_predictor(self,predictor:Optional[_InnerPredictor])->'Dataset'
+lightgbm.Dataset._update_params(self,params:Optional[Dict[str,Any]])->'Dataset'
+lightgbm.Dataset._yield_row_from_seqlist(seqs:List[Sequence],indices:Iterable[int])
+lightgbm.Dataset.add_features_from(self,other:'Dataset')->'Dataset'
+lightgbm.Dataset.construct(self)->'Dataset'
+lightgbm.Dataset.create_valid(self,data:_LGBM_TrainDataType,label:Optional[_LGBM_LabelType]=None,weight:Optional[_LGBM_WeightType]=None,group:Optional[_LGBM_GroupType]=None,init_score:Optional[_LGBM_InitScoreType]=None,params:Optional[Dict[str,Any]]=None)->'Dataset'
+lightgbm.Dataset.feature_num_bin(self,feature:Union[int,str])->int
+lightgbm.Dataset.get_data(self)->Optional[_LGBM_TrainDataType]
+lightgbm.Dataset.get_feature_name(self)->List[str]
+lightgbm.Dataset.get_field(self,field_name:str)->Optional[np.ndarray]
+lightgbm.Dataset.get_group(self)->Optional[np.ndarray]
+lightgbm.Dataset.get_init_score(self)->Optional[np.ndarray]
+lightgbm.Dataset.get_label(self)->Optional[np.ndarray]
+lightgbm.Dataset.get_params(self)->Dict[str, Any]
+lightgbm.Dataset.get_ref_chain(self,ref_limit:int=100)->Set['Dataset']
+lightgbm.Dataset.get_weight(self)->Optional[np.ndarray]
+lightgbm.Dataset.num_data(self)->int
+lightgbm.Dataset.num_feature(self)->int
+lightgbm.Dataset.save_binary(self,filename:Union[str,Path])->'Dataset'
+lightgbm.Dataset.set_categorical_feature(self,categorical_feature:_LGBM_CategoricalFeatureConfiguration)->'Dataset'
+lightgbm.Dataset.set_feature_name(self,feature_name:_LGBM_FeatureNameConfiguration)->'Dataset'
+lightgbm.Dataset.set_field(self,field_name:str,data:Optional[Union[List[List[float]],List[List[int]],List[float],List[int],np.ndarray,pd_Series,pd_DataFrame]])->'Dataset'
+lightgbm.Dataset.set_group(self,group:Optional[_LGBM_GroupType])->'Dataset'
+lightgbm.Dataset.set_init_score(self,init_score:Optional[_LGBM_InitScoreType])->'Dataset'
+lightgbm.Dataset.set_label(self,label:Optional[_LGBM_LabelType])->'Dataset'
+lightgbm.Dataset.set_reference(self,reference:'Dataset')->'Dataset'
+lightgbm.Dataset.set_weight(self,weight:Optional[_LGBM_WeightType])->'Dataset'
+lightgbm.Dataset.subset(self,used_indices:List[int],params:Optional[Dict[str,Any]]=None)->'Dataset'
 lightgbm.Sequence(abc.ABC)
+lightgbm.Sequence.__getitem__(self,idx:Union[int,slice,List[int]])->np.ndarray
+lightgbm.Sequence.__len__(self)->int
 lightgbm.basic.Booster(self,params:Optional[Dict[str,Any]]=None,train_set:Optional[Dataset]=None,model_file:Optional[Union[str,Path]]=None,model_str:Optional[str]=None)
 lightgbm.basic.Booster.__boost(self,grad:np.ndarray,hess:np.ndarray)->bool
 lightgbm.basic.Booster.__copy__(self)->'Booster'
@@ -356,6 +490,7 @@ lightgbm.basic.Booster.__deepcopy__(self,_)->'Booster'
 lightgbm.basic.Booster.__del__(self)->None
 lightgbm.basic.Booster.__get_eval_info(self)->None
 lightgbm.basic.Booster.__getstate__(self)->Dict[str, Any]
+lightgbm.basic.Booster.__init__(self,params:Optional[Dict[str,Any]]=None,train_set:Optional[Dataset]=None,model_file:Optional[Union[str,Path]]=None,model_str:Optional[str]=None)
 lightgbm.basic.Booster.__inner_eval(self,data_name:str,data_idx:int,feval:Optional[Union[_LGBM_CustomEvalFunction,List[_LGBM_CustomEvalFunction]]])->List[_LGBM_BoosterEvalMethodResultType]
 lightgbm.basic.Booster.__inner_predict(self,data_idx:int)->np.ndarray
 lightgbm.basic.Booster.__setstate__(self,state:Dict[str,Any])->None
@@ -394,6 +529,7 @@ lightgbm.basic.Booster.update(self,train_set:Optional[Dataset]=None,fobj:Optiona
 lightgbm.basic.Booster.upper_bound(self)->float
 lightgbm.basic.Dataset(self,data:_LGBM_TrainDataType,label:Optional[_LGBM_LabelType]=None,reference:Optional['Dataset']=None,weight:Optional[_LGBM_WeightType]=None,group:Optional[_LGBM_GroupType]=None,init_score:Optional[_LGBM_InitScoreType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',params:Optional[Dict[str,Any]]=None,free_raw_data:bool=True)
 lightgbm.basic.Dataset.__del__(self)->None
+lightgbm.basic.Dataset.__init__(self,data:_LGBM_TrainDataType,label:Optional[_LGBM_LabelType]=None,reference:Optional['Dataset']=None,weight:Optional[_LGBM_WeightType]=None,group:Optional[_LGBM_GroupType]=None,init_score:Optional[_LGBM_InitScoreType]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',params:Optional[Dict[str,Any]]=None,free_raw_data:bool=True)
 lightgbm.basic.Dataset.__init_from_csc(self,csc:scipy.sparse.csc_matrix,params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
 lightgbm.basic.Dataset.__init_from_csr(self,csr:scipy.sparse.csr_matrix,params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
 lightgbm.basic.Dataset.__init_from_list_np2d(self,mats:List[np.ndarray],params_str:str,ref_dataset:Optional[_DatasetHandle])->'Dataset'
@@ -456,6 +592,7 @@ lightgbm.basic._InnerPredictor.__create_sparse_native(self,cs:Union[scipy.sparse
 lightgbm.basic._InnerPredictor.__del__(self)->None
 lightgbm.basic._InnerPredictor.__get_num_preds(self,start_iteration:int,num_iteration:int,nrow:int,predict_type:int)->int
 lightgbm.basic._InnerPredictor.__getstate__(self)->Dict[str, Any]
+lightgbm.basic._InnerPredictor.__init__(self,model_file:Optional[Union[str,Path]]=None,booster_handle:Optional[ctypes.c_void_p]=None,pred_parameter:Optional[Dict[str,Any]]=None)
 lightgbm.basic._InnerPredictor.__inner_predict_csr(self,csr:scipy.sparse.csr_matrix,start_iteration:int,num_iteration:int,predict_type:int,preds:Optional[np.ndarray])->Tuple[np.ndarray, int]
 lightgbm.basic._InnerPredictor.__inner_predict_csr_sparse(self,csr:scipy.sparse.csr_matrix,start_iteration:int,num_iteration:int,predict_type:int)->Tuple[Union[List[scipy.sparse.csc_matrix], List[scipy.sparse.csr_matrix]], int]
 lightgbm.basic._InnerPredictor.__inner_predict_np2d(self,mat:np.ndarray,start_iteration:int,num_iteration:int,predict_type:int,preds:Optional[np.ndarray])->Tuple[np.ndarray, int]
@@ -546,10 +683,20 @@ A:lightgbm.engine.results->collections.defaultdict(list)
 A:lightgbm.engine.cvfolds->_make_n_folds(full_data=train_set, folds=folds, nfold=nfold, params=params, seed=seed, fpreproc=fpreproc, stratified=stratified, shuffle=shuffle, eval_train_metric=eval_train_metric)
 A:lightgbm.engine.res->_agg_cv_result(cvfolds.eval_valid(feval))
 lightgbm.CVBooster(self,model_file:Optional[Union[str,Path]]=None)
+lightgbm.CVBooster.__getattr__(self,name:str)->Callable[[Any, Any], List[Any]]
+lightgbm.CVBooster.__getstate__(self)->Dict[str, Any]
+lightgbm.CVBooster.__setstate__(self,state:Dict[str,Any])->None
+lightgbm.CVBooster._append(self,booster:Booster)->None
+lightgbm.CVBooster._from_dict(self,models:Dict[str,Any])->None
+lightgbm.CVBooster._to_dict(self,num_iteration:Optional[int],start_iteration:int,importance_type:str)->Dict[str, Any]
+lightgbm.CVBooster.model_from_string(self,model_str:str)->'CVBooster'
+lightgbm.CVBooster.model_to_string(self,num_iteration:Optional[int]=None,start_iteration:int=0,importance_type:str='split')->str
+lightgbm.CVBooster.save_model(self,filename:Union[str,Path],num_iteration:Optional[int]=None,start_iteration:int=0,importance_type:str='split')->'CVBooster'
 lightgbm.cv(params:Dict[str,Any],train_set:Dataset,num_boost_round:int=100,folds:Optional[Union[Iterable[Tuple[np.ndarray,np.ndarray]],_LGBMBaseCrossValidator]]=None,nfold:int=5,stratified:bool=True,shuffle:bool=True,metrics:Optional[Union[str,List[str]]]=None,feval:Optional[Union[_LGBM_CustomMetricFunction,List[_LGBM_CustomMetricFunction]]]=None,init_model:Optional[Union[str,Path,Booster]]=None,feature_name:_LGBM_FeatureNameConfiguration='auto',categorical_feature:_LGBM_CategoricalFeatureConfiguration='auto',fpreproc:Optional[_LGBM_PreprocFunction]=None,seed:int=0,callbacks:Optional[List[Callable]]=None,eval_train_metric:bool=False,return_cvbooster:bool=False)->Dict[str, Union[List[float], CVBooster]]
 lightgbm.engine.CVBooster(self,model_file:Optional[Union[str,Path]]=None)
 lightgbm.engine.CVBooster.__getattr__(self,name:str)->Callable[[Any, Any], List[Any]]
 lightgbm.engine.CVBooster.__getstate__(self)->Dict[str, Any]
+lightgbm.engine.CVBooster.__init__(self,model_file:Optional[Union[str,Path]]=None)
 lightgbm.engine.CVBooster.__setstate__(self,state:Dict[str,Any])->None
 lightgbm.engine.CVBooster._append(self,booster:Booster)->None
 lightgbm.engine.CVBooster._from_dict(self,models:Dict[str,Any])->None
@@ -621,7 +768,9 @@ A:lightgbm.callback.best_score_str->'\t'.join([_format_eval_result(x, show_stdv=
 A:lightgbm.callback.eval_name_splitted->env.evaluation_result_list[i][1].split(' ')
 A:lightgbm.callback.eval_result_str->'\t'.join([_format_eval_result(x, show_stdv=True) for x in self.best_score_list[i]])
 lightgbm.callback.EarlyStopException(self,best_iteration:int,best_score:_ListOfEvalResultTuples)
+lightgbm.callback.EarlyStopException.__init__(self,best_iteration:int,best_score:_ListOfEvalResultTuples)
 lightgbm.callback._EarlyStoppingCallback(self,stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True,min_delta:Union[float,List[float]]=0.0)
+lightgbm.callback._EarlyStoppingCallback.__init__(self,stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True,min_delta:Union[float,List[float]]=0.0)
 lightgbm.callback._EarlyStoppingCallback._final_iteration_check(self,env:CallbackEnv,eval_name_splitted:List[str],i:int)->None
 lightgbm.callback._EarlyStoppingCallback._gt_delta(self,curr_score:float,best_score:float,delta:float)->bool
 lightgbm.callback._EarlyStoppingCallback._init(self,env:CallbackEnv)->None
@@ -629,9 +778,12 @@ lightgbm.callback._EarlyStoppingCallback._is_train_set(self,ds_name:str,eval_nam
 lightgbm.callback._EarlyStoppingCallback._lt_delta(self,curr_score:float,best_score:float,delta:float)->bool
 lightgbm.callback._EarlyStoppingCallback._reset_storages(self)->None
 lightgbm.callback._LogEvaluationCallback(self,period:int=1,show_stdv:bool=True)
+lightgbm.callback._LogEvaluationCallback.__init__(self,period:int=1,show_stdv:bool=True)
 lightgbm.callback._RecordEvaluationCallback(self,eval_result:_EvalResultDict)
+lightgbm.callback._RecordEvaluationCallback.__init__(self,eval_result:_EvalResultDict)
 lightgbm.callback._RecordEvaluationCallback._init(self,env:CallbackEnv)->None
 lightgbm.callback._ResetParameterCallback(self,**kwargs:Union[list,Callable])
+lightgbm.callback._ResetParameterCallback.__init__(self,**kwargs:Union[list,Callable])
 lightgbm.callback._format_eval_result(value:_EvalResultTuple,show_stdv:bool)->str
 lightgbm.callback.early_stopping(stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True,min_delta:Union[float,List[float]]=0.0)->_EarlyStoppingCallback
 lightgbm.callback.log_evaluation(period:int=1,show_stdv:bool=True)->_LogEvaluationCallback
