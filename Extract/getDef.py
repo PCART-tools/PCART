@@ -63,8 +63,8 @@ def getAssign(root_node):
 #通过解析__init__.py,把源码中的部分API路径缩短
 #缩短API路径可能会将不同文件中的API还原成相同的形式，比如A.b.f,A.c.f都还原成A.f
 def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的API路径
-    absolutePath=[k for k in fileDict.keys()][0] #pkg/file.py 
-    relativePath=[v for v in fileDict.values()][0] #/home/zhang/pkg/file.py
+    absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
+    relativePath=[v for v in fileDict.values()][0] #pkg/file.py 
     pos1=relativePath.rfind('/')
     if pos1==-1:
         return
@@ -79,7 +79,8 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
         except Exception as e:
             print(f"shortenPath --> ast.parse failed:{e}")
             return
-        obj=FromImport()
+        currentLevel=relativePath.split('/')[-1]
+        obj=FromImport(currentLevel)
         obj.visit(root)
         replaceKey1=''
         replaceVal1=''
