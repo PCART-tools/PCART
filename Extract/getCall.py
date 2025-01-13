@@ -80,7 +80,7 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
             if '#' in s and '=' in s:
                 tempNode = ast.parse(s)
                 s = ast.unparse(tempNode)
-            s=s.replace(' ','')
+            s=s.replace(' ','') 
             
             if name_parts[0]!='self':
                 if f"{name_parts[0]}="==s[0:len(name_parts[0])+1]:
