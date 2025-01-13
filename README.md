@@ -22,8 +22,8 @@ In the `Configure` directory, construct a JSON configuration file for the projec
   "libName": "torch"
   "currentVersion": "1.7.1",
   "targetVersion": "1.9.0",
-  "currentVenvPath": "/home/usr/anaconda3/envs/v1",
-  "targetVenvPath": "home/usr/anaconda3/envs/v2"
+  "currentEnv": "/home/usr/anaconda3/envs/v1",
+  "targetEnv": "home/usr/anaconda3/envs/v2"
 }
 ```
 For `runFilePath`, if the entry file is located in the first-level subdirectory of the project, the value should be an empty string, i.e., runFilePath: "". For `libName`, you should fill in the name used in the code. For instance, "Pillow" should be written as "PIL", and "scikit-learn" should be written as "sklearn".
