@@ -76,7 +76,15 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
     if index!=-1:
         index-=1
         while index>=0: #看是否能在前面找到相关的赋值语句
-            s=codeLst[index].replace(' ','').rstrip('\n')
+            s=codeLst[index].strip() #去除字符串首尾空格以及换行符
+            if '#' in s and '=' in s:
+                try:
+                    tempNode=ast.parse(s)
+                    s=ast.unparse(tempNode)
+                except:
+                    pass
+            s=s.replace(' ','')
+            
             if name_parts[0]!='self':
                 if f"{name_parts[0]}="==s[0:len(name_parts[0])+1]:
                     pos=s.find('=')

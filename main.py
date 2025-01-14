@@ -87,7 +87,7 @@ def backwardTask(args):
             ansDict[key]['Compatible']="Unknown"
             if len(errLst)>0:
                 errorMsg = f"Error occurred, please check the {projName}_fixed_log.txt"
-                print(errorMsg)
+                # print(errorMsg)
                 with lock:
                     updateErrorLst(errorLog,errLst)
             continue
@@ -115,7 +115,7 @@ def backwardTask(args):
 
         if len(errLst)>0:
             errorMsg = f"Error occurred, please check the {projName}_fixed_log.txt"
-            print(errorMsg)
+            # print(errorMsg)
             with lock:
                 updateErrorLst(errorLog,errLst)
 
