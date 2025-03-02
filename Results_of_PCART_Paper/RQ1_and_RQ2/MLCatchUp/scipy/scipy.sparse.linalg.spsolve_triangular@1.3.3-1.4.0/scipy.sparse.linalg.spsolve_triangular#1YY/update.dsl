@@ -1,1 +1,0 @@
-add_parameter unit_diagonal with_value False for spsolve_triangular

@@ -1,5 +1,0 @@
-remove_parameterstream for Response
-remove_parameterext for Response
-remove_parameteron_close for Response
-add_parameter AsyncByteStream] with_value None for Response
-add_parameter extensions with_value None for Response

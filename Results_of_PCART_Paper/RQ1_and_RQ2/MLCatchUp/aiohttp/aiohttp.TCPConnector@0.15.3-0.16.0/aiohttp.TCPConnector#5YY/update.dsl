@@ -1,2 +1,0 @@
-remove_parameterargs for TCPConnector
-add_parameter fingerprint with_value None for TCPConnector

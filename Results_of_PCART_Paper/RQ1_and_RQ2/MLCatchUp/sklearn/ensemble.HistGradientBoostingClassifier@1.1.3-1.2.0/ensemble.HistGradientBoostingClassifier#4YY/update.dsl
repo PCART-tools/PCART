@@ -1,2 +1,0 @@
-add_parameter interaction_cst with_value None for HistGradientBoostingClassifier
-add_parameter class_weight with_value None for HistGradientBoostingClassifier

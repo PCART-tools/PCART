@@ -1,2 +1,0 @@
-from rich.rule import Rule
-rule = Rule('',  None,  'rule.line')

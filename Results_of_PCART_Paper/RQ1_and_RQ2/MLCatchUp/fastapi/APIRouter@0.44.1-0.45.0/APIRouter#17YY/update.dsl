@@ -1,1 +1,0 @@
-add_parameter default_response_class with_value None for APIRouter

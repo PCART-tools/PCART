@@ -1,1 +1,0 @@
-add_parameter x0 with_value None for differential_evolution

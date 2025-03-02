@@ -1,1 +1,0 @@
-add_parameter flow_func with_value None for node_connectivity

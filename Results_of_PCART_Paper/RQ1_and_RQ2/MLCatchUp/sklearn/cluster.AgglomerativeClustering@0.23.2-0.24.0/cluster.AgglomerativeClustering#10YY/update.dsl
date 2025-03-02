@@ -1,1 +1,0 @@
-add_parameter compute_distances with_value False for AgglomerativeClustering

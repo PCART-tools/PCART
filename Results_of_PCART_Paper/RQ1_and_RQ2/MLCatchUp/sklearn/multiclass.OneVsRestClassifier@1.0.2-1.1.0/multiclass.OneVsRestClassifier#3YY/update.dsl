@@ -1,1 +1,0 @@
-add_parameter verbose with_value 0 for OneVsRestClassifier

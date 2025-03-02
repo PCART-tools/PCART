@@ -1,2 +1,0 @@
-add_parameter k with_value None for betweenness_centrality
-add_parameter seed with_value None for betweenness_centrality

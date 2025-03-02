@@ -1,1 +1,0 @@
-add_parameter n_components with_value None for SpectralClustering

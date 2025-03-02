@@ -1,1 +1,0 @@
-add_parameter tracebacks_show_locals with_value False for RichHandler

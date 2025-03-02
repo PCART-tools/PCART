@@ -1,1 +1,0 @@
-add_parameter store_covariance with_value False for QuadraticDiscriminantAnalysis

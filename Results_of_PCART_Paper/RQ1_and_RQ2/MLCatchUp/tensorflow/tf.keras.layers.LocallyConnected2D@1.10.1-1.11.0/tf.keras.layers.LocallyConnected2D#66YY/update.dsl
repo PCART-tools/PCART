@@ -1,1 +1,0 @@
-add_parameter implementation with_value 1 for LocallyConnected2D

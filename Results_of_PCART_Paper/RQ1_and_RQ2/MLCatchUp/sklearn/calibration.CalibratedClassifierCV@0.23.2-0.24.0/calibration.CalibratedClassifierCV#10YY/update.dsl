@@ -1,2 +1,0 @@
-add_parameter n_jobs with_value None for CalibratedClassifierCV
-add_parameter ensemble with_value True for CalibratedClassifierCV

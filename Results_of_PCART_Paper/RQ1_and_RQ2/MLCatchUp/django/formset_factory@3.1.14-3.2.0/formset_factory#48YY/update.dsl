@@ -1,2 +1,0 @@
-add_parameter absolute_max with_value None for formset_factory
-add_parameter can_delete_extra with_value True for formset_factory

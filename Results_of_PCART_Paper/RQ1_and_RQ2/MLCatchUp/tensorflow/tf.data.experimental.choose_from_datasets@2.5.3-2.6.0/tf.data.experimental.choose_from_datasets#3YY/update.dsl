@@ -1,1 +1,0 @@
-add_parameter stop_on_empty_dataset with_value False for choose_from_datasets

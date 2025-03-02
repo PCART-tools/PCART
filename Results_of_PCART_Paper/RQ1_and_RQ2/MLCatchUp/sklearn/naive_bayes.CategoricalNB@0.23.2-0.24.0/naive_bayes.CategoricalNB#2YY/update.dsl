@@ -1,1 +1,0 @@
-add_parameter min_categories with_value None for CategoricalNB

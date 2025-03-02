@@ -1,3 +1,0 @@
-remove_parameterreuse_timeout for BaseConnector
-add_parameter keepalive_timeout with_value 30 for BaseConnector
-add_parameter force_close with_value False for BaseConnector

@@ -1,1 +1,0 @@
-add_parameter sample_weight with_value None for jaccard_similarity_score

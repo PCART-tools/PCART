@@ -1,3 +1,0 @@
-remove_parameterdata for delete
-remove_parameterfiles for delete
-remove_parameterjson for delete

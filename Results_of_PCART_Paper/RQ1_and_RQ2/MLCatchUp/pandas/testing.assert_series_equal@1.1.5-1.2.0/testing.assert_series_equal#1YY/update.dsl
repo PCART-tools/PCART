@@ -1,1 +1,0 @@
-add_parameter check_flags with_value True for assert_series_equal

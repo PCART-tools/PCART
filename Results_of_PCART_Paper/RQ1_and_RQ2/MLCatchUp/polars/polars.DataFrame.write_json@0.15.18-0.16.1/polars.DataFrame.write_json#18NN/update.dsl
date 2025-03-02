@@ -1,2 +1,0 @@
-rename_parameter row_oriented to row_oriented for write_json
-remove_parameterto_string for write_json

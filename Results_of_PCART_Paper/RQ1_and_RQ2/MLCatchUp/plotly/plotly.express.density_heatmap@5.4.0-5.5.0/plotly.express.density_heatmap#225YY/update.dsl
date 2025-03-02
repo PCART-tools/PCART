@@ -1,1 +1,0 @@
-add_parameter text_auto with_value False for density_heatmap

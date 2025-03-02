@@ -1,5 +1,0 @@
-add_parameter parent_point with_value None for PrismaticJoint
-add_parameter child_point with_value None for PrismaticJoint
-add_parameter parent_interframe with_value None for PrismaticJoint
-add_parameter child_interframe with_value None for PrismaticJoint
-add_parameter joint_axis with_value None for PrismaticJoint

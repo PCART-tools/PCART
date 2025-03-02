@@ -1,1 +1,0 @@
-add_parameter ssl_context with_value None for TCPConnector

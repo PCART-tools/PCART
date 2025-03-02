@@ -1,1 +1,0 @@
-rename_parameter weighted to weight for average_shortest_path_length

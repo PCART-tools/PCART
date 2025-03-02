@@ -1,1 +1,0 @@
-add_parameter preserve_tone with_value False for autocontrast

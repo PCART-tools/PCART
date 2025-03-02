@@ -1,1 +1,0 @@
-rename_parameter weighted_edges to distance for closeness_centrality

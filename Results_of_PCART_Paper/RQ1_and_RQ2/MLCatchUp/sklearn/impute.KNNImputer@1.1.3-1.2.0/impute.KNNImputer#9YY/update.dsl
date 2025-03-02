@@ -1,1 +1,0 @@
-add_parameter keep_empty_features with_value False for KNNImputer

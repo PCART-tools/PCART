@@ -1,1 +1,0 @@
-add_parameter beta with_value 1.0 for homogeneity_completeness_v_measure

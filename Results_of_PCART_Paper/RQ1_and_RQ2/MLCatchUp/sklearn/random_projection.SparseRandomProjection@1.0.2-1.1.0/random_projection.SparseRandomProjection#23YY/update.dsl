@@ -1,1 +1,0 @@
-add_parameter compute_inverse_components with_value False for SparseRandomProjection

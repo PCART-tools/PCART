@@ -1,1 +1,0 @@
-add_parameter ignore_class with_value None for SparseCategoricalCrossentropy

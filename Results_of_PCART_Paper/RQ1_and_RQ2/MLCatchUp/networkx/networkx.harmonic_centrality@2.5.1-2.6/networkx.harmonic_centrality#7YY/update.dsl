@@ -1,1 +1,0 @@
-add_parameter sources with_value None for harmonic_centrality

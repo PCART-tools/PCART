@@ -1,2 +1,0 @@
-add_parameter alpha_init with_value None for BayesianRidge
-add_parameter lambda_init with_value None for BayesianRidge

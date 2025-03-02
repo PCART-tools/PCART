@@ -1,1 +1,0 @@
-add_parameter source with_value None for has_eulerian_path

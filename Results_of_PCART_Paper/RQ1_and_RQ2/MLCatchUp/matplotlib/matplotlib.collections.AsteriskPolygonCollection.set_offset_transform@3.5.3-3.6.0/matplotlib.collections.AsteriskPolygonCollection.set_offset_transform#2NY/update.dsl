@@ -1,1 +1,0 @@
-rename_parameter transOffset to self for set_offset_transform

@@ -1,4 +1,0 @@
-import flask
-file_path = '/home/zhang/test.json'
-with open(file_path, 'r', encoding='utf-8') as text_file:
-    flask.json.load(fp=text_file, app=None)

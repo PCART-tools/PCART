@@ -1,1 +1,0 @@
-add_parameter sparse_output with_value False for SplineTransformer

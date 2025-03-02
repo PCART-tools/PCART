@@ -1,1 +1,0 @@
-add_parameter distance_threshold with_value None for AgglomerativeClustering

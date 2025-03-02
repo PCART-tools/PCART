@@ -1,1 +1,0 @@
-add_parameter flatten_transform with_value None for VotingClassifier
