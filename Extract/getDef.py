@@ -207,7 +207,7 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文�
 
 
 #filePath是库下所有文件对应的路径
-def get_def_function(args):
+def getDefFunction(args):
     libName, version, libPath=args
     fileObj=Path('DF')
     fileObj.getPath(libPath)
