@@ -18,10 +18,12 @@ A:tornado.util.old_value->kwargs.get(self.name)
 A:tornado.util.mask_arr->array.array('B', mask)
 A:tornado.util.unmasked_arr->array.array('B', data)
 tornado.util.ArgReplacer(self,func:Callable,name:str)
+tornado.util.ArgReplacer.__init__(self,func:Callable,name:str)
 tornado.util.ArgReplacer._getargnames(self,func:Callable)->List[str]
 tornado.util.ArgReplacer.get_old_value(self,args:Sequence[Any],kwargs:Dict[str,Any],default:Any=None)->Any
 tornado.util.ArgReplacer.replace(self,new_value:Any,args:Sequence[Any],kwargs:Dict[str,Any])->Tuple[Any, Sequence[Any], Dict[str, Any]]
 tornado.util.Configurable(cls,*args:Any,**kwargs:Any)
+tornado.util.Configurable.__new__(cls,*args:Any,**kwargs:Any)
 tornado.util.Configurable._initialize(self)->None
 tornado.util.Configurable._restore_configuration(cls,saved)
 tornado.util.Configurable._save_configuration(cls)
@@ -30,6 +32,7 @@ tornado.util.Configurable.configurable_default(cls)
 tornado.util.Configurable.configure(cls,impl,**kwargs)
 tornado.util.Configurable.configured_class(cls)
 tornado.util.GzipDecompressor(self)
+tornado.util.GzipDecompressor.__init__(self)
 tornado.util.GzipDecompressor.decompress(self,value:bytes,max_length:int=0)->bytes
 tornado.util.GzipDecompressor.flush(self)->bytes
 tornado.util.GzipDecompressor.unconsumed_tail(self)->bytes
@@ -116,6 +119,7 @@ tornado.httputil.HTTPFile(ObjectDict)
 tornado.httputil.HTTPHeaders(self,*args:typing.Any,**kwargs:str)
 tornado.httputil.HTTPHeaders.__delitem__(self,name:str)->None
 tornado.httputil.HTTPHeaders.__getitem__(self,name:str)->str
+tornado.httputil.HTTPHeaders.__init__(self,*args:typing.Any,**kwargs:str)
 tornado.httputil.HTTPHeaders.__iter__(self)->Iterator[typing.Any]
 tornado.httputil.HTTPHeaders.__len__(self)->int
 tornado.httputil.HTTPHeaders.__setitem__(self,name:str,value:str)->None
@@ -137,6 +141,7 @@ tornado.httputil.HTTPServerConnectionDelegate(object)
 tornado.httputil.HTTPServerConnectionDelegate.on_close(self,server_conn:object)->None
 tornado.httputil.HTTPServerConnectionDelegate.start_request(self,server_conn:object,request_conn:'HTTPConnection')->'HTTPMessageDelegate'
 tornado.httputil.HTTPServerRequest(self,method:Optional[str]=None,uri:Optional[str]=None,version:str='HTTP/1.0',headers:Optional[HTTPHeaders]=None,body:Optional[bytes]=None,host:Optional[str]=None,files:Optional[Dict[str,List['HTTPFile']]]=None,connection:Optional['HTTPConnection']=None,start_line:Optional['RequestStartLine']=None,server_connection:Optional[object]=None)
+tornado.httputil.HTTPServerRequest.__init__(self,method:Optional[str]=None,uri:Optional[str]=None,version:str='HTTP/1.0',headers:Optional[HTTPHeaders]=None,body:Optional[bytes]=None,host:Optional[str]=None,files:Optional[Dict[str,List['HTTPFile']]]=None,connection:Optional['HTTPConnection']=None,start_line:Optional['RequestStartLine']=None,server_connection:Optional[object]=None)
 tornado.httputil.HTTPServerRequest.__repr__(self)->str
 tornado.httputil.HTTPServerRequest._parse_body(self)->None
 tornado.httputil.HTTPServerRequest.cookies(self)->Dict[str, http.cookies.Morsel]
@@ -185,12 +190,15 @@ A:tornado.locale.s->str(value)
 A:tornado.locale.message_dict->self.translations.get('unknown', {})
 A:tornado.locale.result->self.gettext(msg_with_ctxt)
 tornado.locale.CSVLocale(self,code:str,translations:Dict[str,Dict[str,str]])
+tornado.locale.CSVLocale.__init__(self,code:str,translations:Dict[str,Dict[str,str]])
 tornado.locale.CSVLocale.pgettext(self,context:str,message:str,plural_message:Optional[str]=None,count:Optional[int]=None)->str
 tornado.locale.CSVLocale.translate(self,message:str,plural_message:Optional[str]=None,count:Optional[int]=None)->str
 tornado.locale.GettextLocale(self,code:str,translations:gettext.NullTranslations)
+tornado.locale.GettextLocale.__init__(self,code:str,translations:gettext.NullTranslations)
 tornado.locale.GettextLocale.pgettext(self,context:str,message:str,plural_message:Optional[str]=None,count:Optional[int]=None)->str
 tornado.locale.GettextLocale.translate(self,message:str,plural_message:Optional[str]=None,count:Optional[int]=None)->str
 tornado.locale.Locale(self,code:str)
+tornado.locale.Locale.__init__(self,code:str)
 tornado.locale.Locale.format_date(self,date:Union[int,float,datetime.datetime],gmt_offset:int=0,relative:bool=True,shorter:bool=False,full_format:bool=False)->str
 tornado.locale.Locale.format_day(self,date:datetime.datetime,gmt_offset:int=0,dow:bool=True)->bool
 tornado.locale.Locale.friendly_number(self,value:int)->str
@@ -239,8 +247,10 @@ tornado.gen.BadYieldError(Exception)
 tornado.gen.KeyReuseError(Exception)
 tornado.gen.LeakedCallbackError(Exception)
 tornado.gen.Return(self,value:Any=None)
+tornado.gen.Return.__init__(self,value:Any=None)
 tornado.gen.ReturnValueIgnoredError(Exception)
 tornado.gen.Runner(self,ctx_run:Callable,gen:'Generator[_Yieldable,Any,_T]',result_future:'Future[_T]',first_yielded:_Yieldable)
+tornado.gen.Runner.__init__(self,ctx_run:Callable,gen:'Generator[_Yieldable,Any,_T]',result_future:'Future[_T]',first_yielded:_Yieldable)
 tornado.gen.Runner.handle_exception(self,typ:Type[Exception],value:Exception,tb:types.TracebackType)->bool
 tornado.gen.Runner.handle_yield(self,yielded:_Yieldable)->bool
 tornado.gen.Runner.run(self)->None
@@ -248,6 +258,7 @@ tornado.gen.UnknownKeyError(Exception)
 tornado.gen.WaitIterator(self,*args:Future,**kwargs:Future)
 tornado.gen.WaitIterator.__aiter__(self)->typing.AsyncIterator
 tornado.gen.WaitIterator.__anext__(self)->Future
+tornado.gen.WaitIterator.__init__(self,*args:Future,**kwargs:Future)
 tornado.gen.WaitIterator._done_callback(self,done:Future)->None
 tornado.gen.WaitIterator._return_result(self,done:Future)->Future
 tornado.gen.WaitIterator.done(self)->bool
@@ -275,6 +286,7 @@ A:tornado.tcpserver.connection->ssl_wrap_socket(connection, self.ssl_options, se
 A:tornado.tcpserver.stream->IOStream(connection, max_buffer_size=self.max_buffer_size, read_chunk_size=self.read_chunk_size)
 A:tornado.tcpserver.future->self.handle_stream(stream, address)
 tornado.tcpserver.TCPServer(self,ssl_options:Optional[Union[Dict[str,Any],ssl.SSLContext]]=None,max_buffer_size:Optional[int]=None,read_chunk_size:Optional[int]=None)
+tornado.tcpserver.TCPServer.__init__(self,ssl_options:Optional[Union[Dict[str,Any],ssl.SSLContext]]=None,max_buffer_size:Optional[int]=None,read_chunk_size:Optional[int]=None)
 tornado.tcpserver.TCPServer._handle_connection(self,connection:socket.socket,address:Any)->None
 tornado.tcpserver.TCPServer.add_socket(self,socket:socket.socket)->None
 tornado.tcpserver.TCPServer.add_sockets(self,sockets:Iterable[socket.socket])->None
@@ -308,6 +320,7 @@ A:tornado.process.(ret_pid, status)->os.waitpid(pid, os.WNOHANG)
 A:tornado.process.subproc->cls._waiting.pop(pid)
 A:tornado.process.self.returncode->os.WEXITSTATUS(status)
 tornado.process.Subprocess(self,*args:Any,**kwargs:Any)
+tornado.process.Subprocess.__init__(self,*args:Any,**kwargs:Any)
 tornado.process.Subprocess._cleanup(cls)->None
 tornado.process.Subprocess._set_returncode(self,status:int)->None
 tornado.process.Subprocess._try_cleanup_process(cls,pid:int)->None
@@ -360,6 +373,7 @@ tornado.testing.AsyncHTTPTestCase.get_url(self,path:str)->str
 tornado.testing.AsyncHTTPTestCase.setUp(self)->None
 tornado.testing.AsyncHTTPTestCase.tearDown(self)->None
 tornado.testing.AsyncTestCase(self,methodName:str='runTest')
+tornado.testing.AsyncTestCase.__init__(self,methodName:str='runTest')
 tornado.testing.AsyncTestCase.__rethrow(self)->None
 tornado.testing.AsyncTestCase._handle_exception(self,typ:Type[Exception],value:Exception,tb:TracebackType)->bool
 tornado.testing.AsyncTestCase.get_new_ioloop(self)->IOLoop
@@ -371,9 +385,11 @@ tornado.testing.AsyncTestCase.wait(self,condition:Optional[Callable[...,bool]]=N
 tornado.testing.ExpectLog(self,logger:Union[logging.Logger,basestring_type],regex:str,required:bool=True,level:Optional[int]=None)
 tornado.testing.ExpectLog.__enter__(self)->'ExpectLog'
 tornado.testing.ExpectLog.__exit__(self,typ:'Optional[Type[BaseException]]',value:Optional[BaseException],tb:Optional[TracebackType])->None
+tornado.testing.ExpectLog.__init__(self,logger:Union[logging.Logger,basestring_type],regex:str,required:bool=True,level:Optional[int]=None)
 tornado.testing.ExpectLog.filter(self,record:logging.LogRecord)->bool
 tornado.testing._TestMethodWrapper(self,orig_method:Callable)
 tornado.testing._TestMethodWrapper.__getattr__(self,name:str)->Any
+tornado.testing._TestMethodWrapper.__init__(self,orig_method:Callable)
 tornado.testing.bind_unused_port(reuse_port:bool=False,address:str='127.0.0.1')->Tuple[socket.socket, int]
 tornado.testing.gen_test(func:Optional[Callable[...,Union[Generator,'Coroutine']]]=None,timeout:Optional[float]=None)->Union[Callable[..., None], Callable[[Callable[..., Union[Generator, 'Coroutine']]], Callable[..., None]]]
 tornado.testing.get_async_test_timeout()->float
@@ -396,6 +412,7 @@ A:tornado.log.formatted->'\n'.join(lines)
 A:tornado.log.logger->logging.getLogger()
 A:tornado.log.channel->logging.StreamHandler()
 tornado.log.LogFormatter(self,fmt:str=DEFAULT_FORMAT,datefmt:str=DEFAULT_DATE_FORMAT,style:str='%',color:bool=True,colors:Dict[int,int]=DEFAULT_COLORS)
+tornado.log.LogFormatter.__init__(self,fmt:str=DEFAULT_FORMAT,datefmt:str=DEFAULT_DATE_FORMAT,style:str='%',color:bool=True,colors:Dict[int,int]=DEFAULT_COLORS)
 tornado.log.LogFormatter.format(self,record:Any)->str
 tornado.log._safe_unicode(s:Any)->str
 tornado.log._stderr_supports_color()->bool
@@ -445,49 +462,65 @@ A:tornado.template.fn->suffix.strip('"').strip("'").strip('"').strip("'").strip(
 A:tornado.template.mode->suffix.strip('"').strip("'").strip('"').strip("'").strip()
 A:tornado.template.block_body->_parse(reader, template, operator, in_loop)
 tornado.template.BaseLoader(self,autoescape:str=_DEFAULT_AUTOESCAPE,namespace:Optional[Dict[str,Any]]=None,whitespace:Optional[str]=None)
+tornado.template.BaseLoader.__init__(self,autoescape:str=_DEFAULT_AUTOESCAPE,namespace:Optional[Dict[str,Any]]=None,whitespace:Optional[str]=None)
 tornado.template.BaseLoader._create_template(self,name:str)->Template
 tornado.template.BaseLoader.load(self,name:str,parent_path:Optional[str]=None)->Template
 tornado.template.BaseLoader.reset(self)->None
 tornado.template.BaseLoader.resolve_path(self,name:str,parent_path:Optional[str]=None)->str
 tornado.template.DictLoader(self,dict:Dict[str,str],**kwargs:Any)
+tornado.template.DictLoader.__init__(self,dict:Dict[str,str],**kwargs:Any)
 tornado.template.DictLoader._create_template(self,name:str)->Template
 tornado.template.DictLoader.resolve_path(self,name:str,parent_path:Optional[str]=None)->str
 tornado.template.Loader(self,root_directory:str,**kwargs:Any)
+tornado.template.Loader.__init__(self,root_directory:str,**kwargs:Any)
 tornado.template.Loader._create_template(self,name:str)->Template
 tornado.template.Loader.resolve_path(self,name:str,parent_path:Optional[str]=None)->str
 tornado.template.ParseError(self,message:str,filename:Optional[str]=None,lineno:int=0)
+tornado.template.ParseError.__init__(self,message:str,filename:Optional[str]=None,lineno:int=0)
 tornado.template.ParseError.__str__(self)->str
 tornado.template.Template(self,template_string:Union[str,bytes],name:str='<string>',loader:Optional['BaseLoader']=None,compress_whitespace:Union[bool,_UnsetMarker]=_UNSET,autoescape:Optional[Union[str,_UnsetMarker]]=_UNSET,whitespace:Optional[str]=None)
+tornado.template.Template.__init__(self,template_string:Union[str,bytes],name:str='<string>',loader:Optional['BaseLoader']=None,compress_whitespace:Union[bool,_UnsetMarker]=_UNSET,autoescape:Optional[Union[str,_UnsetMarker]]=_UNSET,whitespace:Optional[str]=None)
 tornado.template.Template._generate_python(self,loader:Optional['BaseLoader'])->str
 tornado.template.Template._get_ancestors(self,loader:Optional['BaseLoader'])->List['_File']
 tornado.template.Template.generate(self,**kwargs:Any)->bytes
 tornado.template._ApplyBlock(self,method:str,line:int,body:_Node)
+tornado.template._ApplyBlock.__init__(self,method:str,line:int,body:_Node)
 tornado.template._ApplyBlock.each_child(self)->Iterable['_Node']
 tornado.template._ApplyBlock.generate(self,writer:'_CodeWriter')->None
 tornado.template._ChunkList(self,chunks:List[_Node])
+tornado.template._ChunkList.__init__(self,chunks:List[_Node])
 tornado.template._ChunkList.each_child(self)->Iterable['_Node']
 tornado.template._ChunkList.generate(self,writer:'_CodeWriter')->None
 tornado.template._CodeWriter(self,file:TextIO,named_blocks:Dict[str,_NamedBlock],loader:Optional[BaseLoader],current_template:Template)
+tornado.template._CodeWriter.__init__(self,file:TextIO,named_blocks:Dict[str,_NamedBlock],loader:Optional[BaseLoader],current_template:Template)
 tornado.template._CodeWriter.include(self,template:Template,line:int)->'ContextManager'
 tornado.template._CodeWriter.indent(self)->'ContextManager'
 tornado.template._CodeWriter.indent_size(self)->int
 tornado.template._CodeWriter.write_line(self,line:str,line_number:int,indent:Optional[int]=None)->None
 tornado.template._ControlBlock(self,statement:str,line:int,body:_Node)
+tornado.template._ControlBlock.__init__(self,statement:str,line:int,body:_Node)
 tornado.template._ControlBlock.each_child(self)->Iterable[_Node]
 tornado.template._ControlBlock.generate(self,writer:'_CodeWriter')->None
 tornado.template._Expression(self,expression:str,line:int,raw:bool=False)
+tornado.template._Expression.__init__(self,expression:str,line:int,raw:bool=False)
 tornado.template._Expression.generate(self,writer:'_CodeWriter')->None
 tornado.template._ExtendsBlock(self,name:str)
+tornado.template._ExtendsBlock.__init__(self,name:str)
 tornado.template._File(self,template:Template,body:'_ChunkList')
+tornado.template._File.__init__(self,template:Template,body:'_ChunkList')
 tornado.template._File.each_child(self)->Iterable['_Node']
 tornado.template._File.generate(self,writer:'_CodeWriter')->None
 tornado.template._IncludeBlock(self,name:str,reader:'_TemplateReader',line:int)
+tornado.template._IncludeBlock.__init__(self,name:str,reader:'_TemplateReader',line:int)
 tornado.template._IncludeBlock.find_named_blocks(self,loader:Optional[BaseLoader],named_blocks:Dict[str,_NamedBlock])->None
 tornado.template._IncludeBlock.generate(self,writer:'_CodeWriter')->None
 tornado.template._IntermediateControlBlock(self,statement:str,line:int)
+tornado.template._IntermediateControlBlock.__init__(self,statement:str,line:int)
 tornado.template._IntermediateControlBlock.generate(self,writer:'_CodeWriter')->None
 tornado.template._Module(self,expression:str,line:int)
+tornado.template._Module.__init__(self,expression:str,line:int)
 tornado.template._NamedBlock(self,name:str,body:_Node,template:Template,line:int)
+tornado.template._NamedBlock.__init__(self,name:str,body:_Node,template:Template,line:int)
 tornado.template._NamedBlock.each_child(self)->Iterable['_Node']
 tornado.template._NamedBlock.find_named_blocks(self,loader:Optional[BaseLoader],named_blocks:Dict[str,'_NamedBlock'])->None
 tornado.template._NamedBlock.generate(self,writer:'_CodeWriter')->None
@@ -496,9 +529,11 @@ tornado.template._Node.each_child(self)->Iterable['_Node']
 tornado.template._Node.find_named_blocks(self,loader:Optional[BaseLoader],named_blocks:Dict[str,'_NamedBlock'])->None
 tornado.template._Node.generate(self,writer:'_CodeWriter')->None
 tornado.template._Statement(self,statement:str,line:int)
+tornado.template._Statement.__init__(self,statement:str,line:int)
 tornado.template._Statement.generate(self,writer:'_CodeWriter')->None
 tornado.template._TemplateReader(self,name:str,text:str,whitespace:str)
 tornado.template._TemplateReader.__getitem__(self,key:Union[int,slice])->str
+tornado.template._TemplateReader.__init__(self,name:str,text:str,whitespace:str)
 tornado.template._TemplateReader.__len__(self)->int
 tornado.template._TemplateReader.__str__(self)->str
 tornado.template._TemplateReader.consume(self,count:Optional[int]=None)->str
@@ -506,6 +541,7 @@ tornado.template._TemplateReader.find(self,needle:str,start:int=0,end:Optional[i
 tornado.template._TemplateReader.raise_parse_error(self,msg:str)->None
 tornado.template._TemplateReader.remaining(self)->int
 tornado.template._Text(self,value:str,line:int,whitespace:str)
+tornado.template._Text.__init__(self,value:str,line:int,whitespace:str)
 tornado.template._Text.generate(self,writer:'_CodeWriter')->None
 tornado.template._UnsetMarker
 tornado.template._format_code(code:str)->str
@@ -562,6 +598,7 @@ tornado.options.OptionParser(self)
 tornado.options.OptionParser.__contains__(self,name:str)->bool
 tornado.options.OptionParser.__getattr__(self,name:str)->Any
 tornado.options.OptionParser.__getitem__(self,name:str)->Any
+tornado.options.OptionParser.__init__(self)
 tornado.options.OptionParser.__iter__(self)->Iterator
 tornado.options.OptionParser.__setattr__(self,name:str,value:Any)->None
 tornado.options.OptionParser.__setitem__(self,name:str,value:Any)->None
@@ -581,8 +618,10 @@ tornado.options.OptionParser.run_parse_callbacks(self)->None
 tornado.options._Mockable(self,options:OptionParser)
 tornado.options._Mockable.__delattr__(self,name:str)->None
 tornado.options._Mockable.__getattr__(self,name:str)->Any
+tornado.options._Mockable.__init__(self,options:OptionParser)
 tornado.options._Mockable.__setattr__(self,name:str,value:Any)->None
 tornado.options._Option(self,name:str,default:Any=None,type:Optional[type]=None,help:Optional[str]=None,metavar:Optional[str]=None,multiple:bool=False,file_name:Optional[str]=None,group_name:Optional[str]=None,callback:Optional[Callable[[Any],None]]=None)
+tornado.options._Option.__init__(self,name:str,default:Any=None,type:Optional[type]=None,help:Optional[str]=None,metavar:Optional[str]=None,multiple:bool=False,file_name:Optional[str]=None,group_name:Optional[str]=None,callback:Optional[Callable[[Any],None]]=None)
 tornado.options._Option._parse_bool(self,value:str)->bool
 tornado.options._Option._parse_datetime(self,value:str)->datetime.datetime
 tornado.options._Option._parse_string(self,value:str)->str
@@ -631,8 +670,10 @@ A:tornado.simple_httpclient.new_request.url->urllib.parse.urljoin(self.request.u
 A:tornado.simple_httpclient.buffer->BytesIO(data)
 A:tornado.simple_httpclient.response->HTTPResponse(original_request, self.code, reason=getattr(self, 'reason', None), headers=self.headers, request_time=self.io_loop.time() - self.start_time, start_time=self.start_wall_time, buffer=buffer, effective_url=self.request.url)
 tornado.simple_httpclient.HTTPStreamClosedError(self,message:str)
+tornado.simple_httpclient.HTTPStreamClosedError.__init__(self,message:str)
 tornado.simple_httpclient.HTTPStreamClosedError.__str__(self)->str
 tornado.simple_httpclient.HTTPTimeoutError(self,message:str)
+tornado.simple_httpclient.HTTPTimeoutError.__init__(self,message:str)
 tornado.simple_httpclient.HTTPTimeoutError.__str__(self)->str
 tornado.simple_httpclient.SimpleAsyncHTTPClient(AsyncHTTPClient)
 tornado.simple_httpclient.SimpleAsyncHTTPClient._connection_class(self)->type
@@ -645,6 +686,7 @@ tornado.simple_httpclient.SimpleAsyncHTTPClient.close(self)->None
 tornado.simple_httpclient.SimpleAsyncHTTPClient.fetch_impl(self,request:HTTPRequest,callback:Callable[[HTTPResponse],None])->None
 tornado.simple_httpclient.SimpleAsyncHTTPClient.initialize(self,max_clients:int=10,hostname_mapping:Optional[Dict[str,str]]=None,max_buffer_size:int=104857600,resolver:Optional[Resolver]=None,defaults:Optional[Dict[str,Any]]=None,max_header_size:Optional[int]=None,max_body_size:Optional[int]=None)->None
 tornado.simple_httpclient._HTTPConnection(self,client:Optional[SimpleAsyncHTTPClient],request:HTTPRequest,release_callback:Callable[[],None],final_callback:Callable[[HTTPResponse],None],max_buffer_size:int,tcp_client:TCPClient,max_header_size:int,max_body_size:int)
+tornado.simple_httpclient._HTTPConnection.__init__(self,client:Optional[SimpleAsyncHTTPClient],request:HTTPRequest,release_callback:Callable[[],None],final_callback:Callable[[HTTPResponse],None],max_buffer_size:int,tcp_client:TCPClient,max_header_size:int,max_body_size:int)
 tornado.simple_httpclient._HTTPConnection._create_connection(self,stream:IOStream)->HTTP1Connection
 tornado.simple_httpclient._HTTPConnection._get_ssl_options(self,scheme:str)->Union[None, Dict[str, Any], ssl.SSLContext]
 tornado.simple_httpclient._HTTPConnection._handle_exception(self,typ:'Optional[Type[BaseException]]',value:Optional[BaseException],tb:Optional[TracebackType])->bool
@@ -684,6 +726,7 @@ A:tornado.httpclient.args->parse_command_line()
 A:tornado.httpclient.request_attr->getattr(self.request, name)
 A:tornado.httpclient.client->HTTPClient()
 tornado.httpclient.AsyncHTTPClient(cls,force_instance:bool=False,**kwargs:Any)
+tornado.httpclient.AsyncHTTPClient.__new__(cls,force_instance:bool=False,**kwargs:Any)
 tornado.httpclient.AsyncHTTPClient._async_clients(cls)->Dict[IOLoop, 'AsyncHTTPClient']
 tornado.httpclient.AsyncHTTPClient.close(self)->None
 tornado.httpclient.AsyncHTTPClient.configurable_base(cls)->Type[Configurable]
@@ -694,21 +737,26 @@ tornado.httpclient.AsyncHTTPClient.fetch_impl(self,request:'HTTPRequest',callbac
 tornado.httpclient.AsyncHTTPClient.initialize(self,defaults:Optional[Dict[str,Any]]=None)->None
 tornado.httpclient.HTTPClient(self,async_client_class:'Optional[Type[AsyncHTTPClient]]'=None,**kwargs:Any)
 tornado.httpclient.HTTPClient.__del__(self)->None
+tornado.httpclient.HTTPClient.__init__(self,async_client_class:'Optional[Type[AsyncHTTPClient]]'=None,**kwargs:Any)
 tornado.httpclient.HTTPClient.close(self)->None
 tornado.httpclient.HTTPClient.fetch(self,request:Union['HTTPRequest',str],**kwargs:Any)->'HTTPResponse'
 tornado.httpclient.HTTPClientError(self,code:int,message:Optional[str]=None,response:Optional[HTTPResponse]=None)
+tornado.httpclient.HTTPClientError.__init__(self,code:int,message:Optional[str]=None,response:Optional[HTTPResponse]=None)
 tornado.httpclient.HTTPClientError.__str__(self)->str
 tornado.httpclient.HTTPRequest(self,url:str,method:str='GET',headers:Optional[Union[Dict[str,str],httputil.HTTPHeaders]]=None,body:Optional[Union[bytes,str]]=None,auth_username:Optional[str]=None,auth_password:Optional[str]=None,auth_mode:Optional[str]=None,connect_timeout:Optional[float]=None,request_timeout:Optional[float]=None,if_modified_since:Optional[Union[float,datetime.datetime]]=None,follow_redirects:Optional[bool]=None,max_redirects:Optional[int]=None,user_agent:Optional[str]=None,use_gzip:Optional[bool]=None,network_interface:Optional[str]=None,streaming_callback:Optional[Callable[[bytes],None]]=None,header_callback:Optional[Callable[[str],None]]=None,prepare_curl_callback:Optional[Callable[[Any],None]]=None,proxy_host:Optional[str]=None,proxy_port:Optional[int]=None,proxy_username:Optional[str]=None,proxy_password:Optional[str]=None,proxy_auth_mode:Optional[str]=None,allow_nonstandard_methods:Optional[bool]=None,validate_cert:Optional[bool]=None,ca_certs:Optional[str]=None,allow_ipv6:Optional[bool]=None,client_key:Optional[str]=None,client_cert:Optional[str]=None,body_producer:Optional[Callable[[Callable[[bytes],None]],'Future[None]']]=None,expect_100_continue:bool=False,decompress_response:Optional[bool]=None,ssl_options:Optional[Union[Dict[str,Any],ssl.SSLContext]]=None)
+tornado.httpclient.HTTPRequest.__init__(self,url:str,method:str='GET',headers:Optional[Union[Dict[str,str],httputil.HTTPHeaders]]=None,body:Optional[Union[bytes,str]]=None,auth_username:Optional[str]=None,auth_password:Optional[str]=None,auth_mode:Optional[str]=None,connect_timeout:Optional[float]=None,request_timeout:Optional[float]=None,if_modified_since:Optional[Union[float,datetime.datetime]]=None,follow_redirects:Optional[bool]=None,max_redirects:Optional[int]=None,user_agent:Optional[str]=None,use_gzip:Optional[bool]=None,network_interface:Optional[str]=None,streaming_callback:Optional[Callable[[bytes],None]]=None,header_callback:Optional[Callable[[str],None]]=None,prepare_curl_callback:Optional[Callable[[Any],None]]=None,proxy_host:Optional[str]=None,proxy_port:Optional[int]=None,proxy_username:Optional[str]=None,proxy_password:Optional[str]=None,proxy_auth_mode:Optional[str]=None,allow_nonstandard_methods:Optional[bool]=None,validate_cert:Optional[bool]=None,ca_certs:Optional[str]=None,allow_ipv6:Optional[bool]=None,client_key:Optional[str]=None,client_cert:Optional[str]=None,body_producer:Optional[Callable[[Callable[[bytes],None]],'Future[None]']]=None,expect_100_continue:bool=False,decompress_response:Optional[bool]=None,ssl_options:Optional[Union[Dict[str,Any],ssl.SSLContext]]=None)
 tornado.httpclient.HTTPRequest.body(self)->bytes
 tornado.httpclient.HTTPRequest.body(self,value:Union[bytes,str])->None
 tornado.httpclient.HTTPRequest.headers(self)->httputil.HTTPHeaders
 tornado.httpclient.HTTPRequest.headers(self,value:Union[Dict[str,str],httputil.HTTPHeaders])->None
 tornado.httpclient.HTTPResponse(self,request:HTTPRequest,code:int,headers:Optional[httputil.HTTPHeaders]=None,buffer:Optional[BytesIO]=None,effective_url:Optional[str]=None,error:Optional[BaseException]=None,request_time:Optional[float]=None,time_info:Optional[Dict[str,float]]=None,reason:Optional[str]=None,start_time:Optional[float]=None)
+tornado.httpclient.HTTPResponse.__init__(self,request:HTTPRequest,code:int,headers:Optional[httputil.HTTPHeaders]=None,buffer:Optional[BytesIO]=None,effective_url:Optional[str]=None,error:Optional[BaseException]=None,request_time:Optional[float]=None,time_info:Optional[Dict[str,float]]=None,reason:Optional[str]=None,start_time:Optional[float]=None)
 tornado.httpclient.HTTPResponse.__repr__(self)->str
 tornado.httpclient.HTTPResponse.body(self)->bytes
 tornado.httpclient.HTTPResponse.rethrow(self)->None
 tornado.httpclient._RequestProxy(self,request:HTTPRequest,defaults:Optional[Dict[str,Any]])
 tornado.httpclient._RequestProxy.__getattr__(self,name:str)->Any
+tornado.httpclient._RequestProxy.__init__(self,request:HTTPRequest,defaults:Optional[Dict[str,Any]])
 tornado.httpclient.main()->None
 
 
@@ -768,6 +816,7 @@ tornado.ioloop.IOLoop.stop(self)->None
 tornado.ioloop.IOLoop.time(self)->float
 tornado.ioloop.IOLoop.update_handler(self,fd:Union[int,_Selectable],events:int)->None
 tornado.ioloop.PeriodicCallback(self,callback:Callable[[],Optional[Awaitable]],callback_time:Union[datetime.timedelta,float],jitter:float=0)
+tornado.ioloop.PeriodicCallback.__init__(self,callback:Callable[[],Optional[Awaitable]],callback_time:Union[datetime.timedelta,float],jitter:float=0)
 tornado.ioloop.PeriodicCallback._schedule_next(self)->None
 tornado.ioloop.PeriodicCallback._update_next(self,current_time:float)->None
 tornado.ioloop.PeriodicCallback.is_running(self)->bool
@@ -777,6 +826,7 @@ tornado.ioloop._Selectable(Protocol)
 tornado.ioloop._Selectable.close(self)->None
 tornado.ioloop._Selectable.fileno(self)->int
 tornado.ioloop._Timeout(self,deadline:float,callback:Callable[[],None],io_loop:IOLoop)
+tornado.ioloop._Timeout.__init__(self,deadline:float,callback:Callable[[],None],io_loop:IOLoop)
 tornado.ioloop._Timeout.__le__(self,other:'_Timeout')->bool
 tornado.ioloop._Timeout.__lt__(self,other:'_Timeout')->bool
 
@@ -795,6 +845,7 @@ A:tornado.wsgi.port->int(hostport[1])
 A:tornado.wsgi.environ['CONTENT_TYPE']->request.headers.pop('Content-Type')
 A:tornado.wsgi.environ['CONTENT_LENGTH']->request.headers.pop('Content-Length')
 tornado.wsgi.WSGIContainer(self,wsgi_application:'WSGIAppType',executor:Optional[concurrent.futures.Executor]=None)
+tornado.wsgi.WSGIContainer.__init__(self,wsgi_application:'WSGIAppType',executor:Optional[concurrent.futures.Executor]=None)
 tornado.wsgi.WSGIContainer._log(self,status_code:int,request:httputil.HTTPServerRequest)->None
 tornado.wsgi.WSGIContainer.environ(self,request:httputil.HTTPServerRequest)->Dict[Text, Any]
 tornado.wsgi.to_wsgi_str(s:bytes)->str
@@ -855,6 +906,7 @@ A:tornado.websocket.request.headers->tornado.httputil.HTTPHeaders(request.header
 A:tornado.websocket.request->cast(httpclient.HTTPRequest, httpclient._RequestProxy(request, httpclient.HTTPRequest._DEFAULTS))
 A:tornado.websocket.conn->WebSocketClientConnection(request, on_message_callback=on_message_callback, compression_options=compression_options, ping_interval=ping_interval, ping_timeout=ping_timeout, max_message_size=max_message_size, subprotocols=subprotocols, resolver=resolver)
 tornado.websocket.WebSocketClientConnection(self,request:httpclient.HTTPRequest,on_message_callback:Optional[Callable[[Union[None,str,bytes]],None]]=None,compression_options:Optional[Dict[str,Any]]=None,ping_interval:Optional[float]=None,ping_timeout:Optional[float]=None,max_message_size:int=_default_max_message_size,subprotocols:Optional[List[str]]=[],resolver:Optional[Resolver]=None)
+tornado.websocket.WebSocketClientConnection.__init__(self,request:httpclient.HTTPRequest,on_message_callback:Optional[Callable[[Union[None,str,bytes]],None]]=None,compression_options:Optional[Dict[str,Any]]=None,ping_interval:Optional[float]=None,ping_timeout:Optional[float]=None,max_message_size:int=_default_max_message_size,subprotocols:Optional[List[str]]=[],resolver:Optional[Resolver]=None)
 tornado.websocket.WebSocketClientConnection._on_http_response(self,response:httpclient.HTTPResponse)->None
 tornado.websocket.WebSocketClientConnection._on_message(self,message:Union[None,str,bytes])->Optional[Awaitable[None]]
 tornado.websocket.WebSocketClientConnection.close(self,code:Optional[int]=None,reason:Optional[str]=None)->None
@@ -872,6 +924,7 @@ tornado.websocket.WebSocketClientConnection.write_message(self,message:Union[str
 tornado.websocket.WebSocketClosedError(WebSocketError)
 tornado.websocket.WebSocketError(Exception)
 tornado.websocket.WebSocketHandler(self,application:tornado.web.Application,request:httputil.HTTPServerRequest,**kwargs:Any)
+tornado.websocket.WebSocketHandler.__init__(self,application:tornado.web.Application,request:httputil.HTTPServerRequest,**kwargs:Any)
 tornado.websocket.WebSocketHandler._break_cycles(self)->None
 tornado.websocket.WebSocketHandler._detach_stream(self)->IOStream
 tornado.websocket.WebSocketHandler.check_origin(self,origin:str)->bool
@@ -894,6 +947,7 @@ tornado.websocket.WebSocketHandler.selected_subprotocol(self)->Optional[str]
 tornado.websocket.WebSocketHandler.set_nodelay(self,value:bool)->None
 tornado.websocket.WebSocketHandler.write_message(self,message:Union[bytes,str,Dict[str,Any]],binary:bool=False)->'Future[None]'
 tornado.websocket.WebSocketProtocol(self,handler:'_WebSocketDelegate')
+tornado.websocket.WebSocketProtocol.__init__(self,handler:'_WebSocketDelegate')
 tornado.websocket.WebSocketProtocol._abort(self)->None
 tornado.websocket.WebSocketProtocol._process_server_headers(self,key:Union[str,bytes],headers:httputil.HTTPHeaders)->None
 tornado.websocket.WebSocketProtocol._run_callback(self,callback:Callable,*args:Any,**kwargs:Any)->'Optional[Future[Any]]'
@@ -906,6 +960,7 @@ tornado.websocket.WebSocketProtocol.start_pinging(self)->None
 tornado.websocket.WebSocketProtocol.write_message(self,message:Union[str,bytes,Dict[str,Any]],binary:bool=False)->'Future[None]'
 tornado.websocket.WebSocketProtocol.write_ping(self,data:bytes)->None
 tornado.websocket.WebSocketProtocol13(self,handler:'_WebSocketDelegate',mask_outgoing:bool,params:_WebSocketParams)
+tornado.websocket.WebSocketProtocol13.__init__(self,handler:'_WebSocketDelegate',mask_outgoing:bool,params:_WebSocketParams)
 tornado.websocket.WebSocketProtocol13._challenge_response(self,handler:WebSocketHandler)->str
 tornado.websocket.WebSocketProtocol13._create_compressors(self,side:str,agreed_parameters:Dict[str,Any],compression_options:Optional[Dict[str,Any]]=None)->None
 tornado.websocket.WebSocketProtocol13._get_compressor_options(self,side:str,agreed_parameters:Dict[str,Any],compression_options:Optional[Dict[str,Any]]=None)->Dict[str, Any]
@@ -928,12 +983,15 @@ tornado.websocket.WebSocketProtocol13.write_message(self,message:Union[str,bytes
 tornado.websocket.WebSocketProtocol13.write_ping(self,data:bytes)->None
 tornado.websocket._DecompressTooLargeError(Exception)
 tornado.websocket._PerMessageDeflateCompressor(self,persistent:bool,max_wbits:Optional[int],compression_options:Optional[Dict[str,Any]]=None)
+tornado.websocket._PerMessageDeflateCompressor.__init__(self,persistent:bool,max_wbits:Optional[int],compression_options:Optional[Dict[str,Any]]=None)
 tornado.websocket._PerMessageDeflateCompressor._create_compressor(self)->'_Compressor'
 tornado.websocket._PerMessageDeflateCompressor.compress(self,data:bytes)->bytes
 tornado.websocket._PerMessageDeflateDecompressor(self,persistent:bool,max_wbits:Optional[int],max_message_size:int,compression_options:Optional[Dict[str,Any]]=None)
+tornado.websocket._PerMessageDeflateDecompressor.__init__(self,persistent:bool,max_wbits:Optional[int],max_message_size:int,compression_options:Optional[Dict[str,Any]]=None)
 tornado.websocket._PerMessageDeflateDecompressor._create_decompressor(self)->'_Decompressor'
 tornado.websocket._PerMessageDeflateDecompressor.decompress(self,data:bytes)->bytes
 tornado.websocket._WebSocketParams(self,ping_interval:Optional[float]=None,ping_timeout:Optional[float]=None,max_message_size:int=_default_max_message_size,compression_options:Optional[Dict[str,Any]]=None)
+tornado.websocket._WebSocketParams.__init__(self,ping_interval:Optional[float]=None,ping_timeout:Optional[float]=None,max_message_size:int=_default_max_message_size,compression_options:Optional[Dict[str,Any]]=None)
 tornado.websocket._raise_not_supported_for_websockets(*args:Any,**kwargs:Any)->None
 tornado.websocket.websocket_connect(url:Union[str,httpclient.HTTPRequest],callback:Optional[Callable[['Future[WebSocketClientConnection]'],None]]=None,connect_timeout:Optional[float]=None,on_message_callback:Optional[Callable[[Union[None,str,bytes]],None]]=None,compression_options:Optional[Dict[str,Any]]=None,ping_interval:Optional[float]=None,ping_timeout:Optional[float]=None,max_message_size:int=_default_max_message_size,subprotocols:Optional[List[str]]=None,resolver:Optional[Resolver]=None)->'Awaitable[WebSocketClientConnection]'
 
@@ -952,6 +1010,7 @@ A:tornado.locks.res->super().__repr__()
 A:tornado.locks.extra->'{0},waiters:{1}'.format(extra, len(self._waiters))
 A:tornado.locks.self._block->BoundedSemaphore(value=1)
 tornado.locks.BoundedSemaphore(self,value:int=1)
+tornado.locks.BoundedSemaphore.__init__(self,value:int=1)
 tornado.locks.BoundedSemaphore.release(self)->None
 tornado.locks.Condition(_TimeoutGarbageCollector)
 tornado.locks.Condition.__repr__(self)->str
@@ -959,6 +1018,7 @@ tornado.locks.Condition.notify(self,n:int=1)->None
 tornado.locks.Condition.notify_all(self)->None
 tornado.locks.Condition.wait(self,timeout:Optional[Union[float,datetime.timedelta]]=None)->Awaitable[bool]
 tornado.locks.Event(self)
+tornado.locks.Event.__init__(self)
 tornado.locks.Event.__repr__(self)->str
 tornado.locks.Event.clear(self)->None
 tornado.locks.Event.is_set(self)->bool
@@ -967,19 +1027,23 @@ tornado.locks.Event.wait(self,timeout:Optional[Union[float,datetime.timedelta]]=
 tornado.locks.Lock(self)
 tornado.locks.Lock.__enter__(self)->None
 tornado.locks.Lock.__exit__(self,typ:'Optional[Type[BaseException]]',value:Optional[BaseException],tb:Optional[types.TracebackType])->None
+tornado.locks.Lock.__init__(self)
 tornado.locks.Lock.__repr__(self)->str
 tornado.locks.Lock.acquire(self,timeout:Optional[Union[float,datetime.timedelta]]=None)->Awaitable[_ReleasingContextManager]
 tornado.locks.Lock.release(self)->None
 tornado.locks.Semaphore(self,value:int=1)
 tornado.locks.Semaphore.__enter__(self)->None
 tornado.locks.Semaphore.__exit__(self,typ:'Optional[Type[BaseException]]',value:Optional[BaseException],traceback:Optional[types.TracebackType])->None
+tornado.locks.Semaphore.__init__(self,value:int=1)
 tornado.locks.Semaphore.__repr__(self)->str
 tornado.locks.Semaphore.acquire(self,timeout:Optional[Union[float,datetime.timedelta]]=None)->Awaitable[_ReleasingContextManager]
 tornado.locks.Semaphore.release(self)->None
 tornado.locks._ReleasingContextManager(self,obj:Any)
 tornado.locks._ReleasingContextManager.__enter__(self)->None
 tornado.locks._ReleasingContextManager.__exit__(self,exc_type:'Optional[Type[BaseException]]',exc_val:Optional[BaseException],exc_tb:Optional[types.TracebackType])->None
+tornado.locks._ReleasingContextManager.__init__(self,obj:Any)
 tornado.locks._TimeoutGarbageCollector(self)
+tornado.locks._TimeoutGarbageCollector.__init__(self)
 tornado.locks._TimeoutGarbageCollector._garbage_collect(self)->None
 
 
@@ -1024,6 +1088,7 @@ tornado.queues.PriorityQueue._init(self)->None
 tornado.queues.PriorityQueue._put(self,item:_T)->None
 tornado.queues.Queue(self,maxsize:int=0)
 tornado.queues.Queue.__aiter__(self)->_QueueIterator[_T]
+tornado.queues.Queue.__init__(self,maxsize:int=0)
 tornado.queues.Queue.__put_internal(self,item:_T)->None
 tornado.queues.Queue.__repr__(self)->str
 tornado.queues.Queue.__str__(self)->str
@@ -1046,6 +1111,7 @@ tornado.queues.QueueEmpty(Exception)
 tornado.queues.QueueFull(Exception)
 tornado.queues._QueueIterator(self,q:'Queue[_T]')
 tornado.queues._QueueIterator.__anext__(self)->Awaitable[_T]
+tornado.queues._QueueIterator.__init__(self,q:'Queue[_T]')
 tornado.queues._set_timeout(future:Future,timeout:Union[None,float,datetime.timedelta])->None
 
 
@@ -1065,9 +1131,11 @@ A:tornado.tcpclient.connector->_Connector(addrinfo, functools.partial(self._crea
 A:tornado.tcpclient.socket_obj->socket.socket(af)
 A:tornado.tcpclient.fu->Future()
 tornado.tcpclient.TCPClient(self,resolver:Optional[Resolver]=None)
+tornado.tcpclient.TCPClient.__init__(self,resolver:Optional[Resolver]=None)
 tornado.tcpclient.TCPClient._create_stream(self,max_buffer_size:int,af:socket.AddressFamily,addr:Tuple,source_ip:Optional[str]=None,source_port:Optional[int]=None)->Tuple[IOStream, 'Future[IOStream]']
 tornado.tcpclient.TCPClient.close(self)->None
 tornado.tcpclient._Connector(self,addrinfo:List[Tuple],connect:Callable[[socket.AddressFamily,Tuple],Tuple[IOStream,'Future[IOStream]']])
+tornado.tcpclient._Connector.__init__(self,addrinfo:List[Tuple],connect:Callable[[socket.AddressFamily,Tuple],Tuple[IOStream,'Future[IOStream]']])
 tornado.tcpclient._Connector.clear_timeout(self)->None
 tornado.tcpclient._Connector.clear_timeouts(self)->None
 tornado.tcpclient._Connector.close_streams(self)->None
@@ -1101,37 +1169,46 @@ A:tornado.routing.matcher->PathMatches(pattern)
 tornado.routing.AnyMatches(Matcher)
 tornado.routing.AnyMatches.match(self,request:httputil.HTTPServerRequest)->Optional[Dict[str, Any]]
 tornado.routing.DefaultHostMatches(self,application:Any,host_pattern:Pattern)
+tornado.routing.DefaultHostMatches.__init__(self,application:Any,host_pattern:Pattern)
 tornado.routing.DefaultHostMatches.match(self,request:httputil.HTTPServerRequest)->Optional[Dict[str, Any]]
 tornado.routing.HostMatches(self,host_pattern:Union[str,Pattern])
+tornado.routing.HostMatches.__init__(self,host_pattern:Union[str,Pattern])
 tornado.routing.HostMatches.match(self,request:httputil.HTTPServerRequest)->Optional[Dict[str, Any]]
 tornado.routing.Matcher(object)
 tornado.routing.Matcher.match(self,request:httputil.HTTPServerRequest)->Optional[Dict[str, Any]]
 tornado.routing.Matcher.reverse(self,*args:Any)->Optional[str]
 tornado.routing.PathMatches(self,path_pattern:Union[str,Pattern])
+tornado.routing.PathMatches.__init__(self,path_pattern:Union[str,Pattern])
 tornado.routing.PathMatches._find_groups(self)->Tuple[Optional[str], Optional[int]]
 tornado.routing.PathMatches.match(self,request:httputil.HTTPServerRequest)->Optional[Dict[str, Any]]
 tornado.routing.PathMatches.reverse(self,*args:Any)->Optional[str]
 tornado.routing.ReversibleRouter(Router)
 tornado.routing.ReversibleRouter.reverse_url(self,name:str,*args:Any)->Optional[str]
 tornado.routing.ReversibleRuleRouter(self,rules:Optional[_RuleList]=None)
+tornado.routing.ReversibleRuleRouter.__init__(self,rules:Optional[_RuleList]=None)
 tornado.routing.ReversibleRuleRouter.process_rule(self,rule:'Rule')->'Rule'
 tornado.routing.ReversibleRuleRouter.reverse_url(self,name:str,*args:Any)->Optional[str]
 tornado.routing.Router(httputil.HTTPServerConnectionDelegate)
 tornado.routing.Router.find_handler(self,request:httputil.HTTPServerRequest,**kwargs:Any)->Optional[httputil.HTTPMessageDelegate]
 tornado.routing.Router.start_request(self,server_conn:object,request_conn:httputil.HTTPConnection)->httputil.HTTPMessageDelegate
 tornado.routing.Rule(self,matcher:'Matcher',target:Any,target_kwargs:Optional[Dict[str,Any]]=None,name:Optional[str]=None)
+tornado.routing.Rule.__init__(self,matcher:'Matcher',target:Any,target_kwargs:Optional[Dict[str,Any]]=None,name:Optional[str]=None)
 tornado.routing.Rule.__repr__(self)->str
 tornado.routing.Rule.reverse(self,*args:Any)->Optional[str]
 tornado.routing.RuleRouter(self,rules:Optional[_RuleList]=None)
+tornado.routing.RuleRouter.__init__(self,rules:Optional[_RuleList]=None)
 tornado.routing.RuleRouter.add_rules(self,rules:_RuleList)->None
 tornado.routing.RuleRouter.find_handler(self,request:httputil.HTTPServerRequest,**kwargs:Any)->Optional[httputil.HTTPMessageDelegate]
 tornado.routing.RuleRouter.get_target_delegate(self,target:Any,request:httputil.HTTPServerRequest,**target_params:Any)->Optional[httputil.HTTPMessageDelegate]
 tornado.routing.RuleRouter.process_rule(self,rule:'Rule')->'Rule'
 tornado.routing.URLSpec(self,pattern:Union[str,Pattern],handler:Any,kwargs:Optional[Dict[str,Any]]=None,name:Optional[str]=None)
+tornado.routing.URLSpec.__init__(self,pattern:Union[str,Pattern],handler:Any,kwargs:Optional[Dict[str,Any]]=None,name:Optional[str]=None)
 tornado.routing.URLSpec.__repr__(self)->str
 tornado.routing._DefaultMessageDelegate(self,connection:httputil.HTTPConnection)
+tornado.routing._DefaultMessageDelegate.__init__(self,connection:httputil.HTTPConnection)
 tornado.routing._DefaultMessageDelegate.finish(self)->None
 tornado.routing._RoutingDelegate(self,router:Router,server_conn:object,request_conn:httputil.HTTPConnection)
+tornado.routing._RoutingDelegate.__init__(self,router:Router,server_conn:object,request_conn:httputil.HTTPConnection)
 tornado.routing._RoutingDelegate.data_received(self,chunk:bytes)->Optional[Awaitable[None]]
 tornado.routing._RoutingDelegate.finish(self)->None
 tornado.routing._RoutingDelegate.headers_received(self,start_line:Union[httputil.RequestStartLine,httputil.ResponseStartLine],headers:httputil.HTTPHeaders)->Optional[Awaitable[None]]
@@ -1151,6 +1228,7 @@ A:tornado.httpserver.self.trusted_downstream->set(trusted_downstream or [])
 A:tornado.httpserver.ip->headers.get('X-Real-Ip', ip)
 A:tornado.httpserver.proto_header->proto_header.split(',')[-1].strip().split(',')[-1].strip()
 tornado.httpserver.HTTPServer(self,*args:Any,**kwargs:Any)
+tornado.httpserver.HTTPServer.__init__(self,*args:Any,**kwargs:Any)
 tornado.httpserver.HTTPServer.configurable_base(cls)->Type[Configurable]
 tornado.httpserver.HTTPServer.configurable_default(cls)->Type[Configurable]
 tornado.httpserver.HTTPServer.handle_stream(self,stream:iostream.IOStream,address:Tuple)->None
@@ -1158,15 +1236,18 @@ tornado.httpserver.HTTPServer.initialize(self,request_callback:Union[httputil.HT
 tornado.httpserver.HTTPServer.on_close(self,server_conn:object)->None
 tornado.httpserver.HTTPServer.start_request(self,server_conn:object,request_conn:httputil.HTTPConnection)->httputil.HTTPMessageDelegate
 tornado.httpserver._CallableAdapter(self,request_callback:Callable[[httputil.HTTPServerRequest],None],request_conn:httputil.HTTPConnection)
+tornado.httpserver._CallableAdapter.__init__(self,request_callback:Callable[[httputil.HTTPServerRequest],None],request_conn:httputil.HTTPConnection)
 tornado.httpserver._CallableAdapter.data_received(self,chunk:bytes)->Optional[Awaitable[None]]
 tornado.httpserver._CallableAdapter.finish(self)->None
 tornado.httpserver._CallableAdapter.headers_received(self,start_line:Union[httputil.RequestStartLine,httputil.ResponseStartLine],headers:httputil.HTTPHeaders)->Optional[Awaitable[None]]
 tornado.httpserver._CallableAdapter.on_connection_close(self)->None
 tornado.httpserver._HTTPRequestContext(self,stream:iostream.IOStream,address:Tuple,protocol:Optional[str],trusted_downstream:Optional[List[str]]=None)
+tornado.httpserver._HTTPRequestContext.__init__(self,stream:iostream.IOStream,address:Tuple,protocol:Optional[str],trusted_downstream:Optional[List[str]]=None)
 tornado.httpserver._HTTPRequestContext.__str__(self)->str
 tornado.httpserver._HTTPRequestContext._apply_xheaders(self,headers:httputil.HTTPHeaders)->None
 tornado.httpserver._HTTPRequestContext._unapply_xheaders(self)->None
 tornado.httpserver._ProxyAdapter(self,delegate:httputil.HTTPMessageDelegate,request_conn:httputil.HTTPConnection)
+tornado.httpserver._ProxyAdapter.__init__(self,delegate:httputil.HTTPMessageDelegate,request_conn:httputil.HTTPConnection)
 tornado.httpserver._ProxyAdapter._cleanup(self)->None
 tornado.httpserver._ProxyAdapter.data_received(self,chunk:bytes)->Optional[Awaitable[None]]
 tornado.httpserver._ProxyAdapter.finish(self)->None
@@ -1360,6 +1441,7 @@ A:tornado.web.expected_sig->_create_signature_v2(secret, signed_string)
 A:tornado.web.(key_version, _, _, _, _)->_decode_fields_v2(value)
 A:tornado.web.hash->hmac.new(utf8(secret), digestmod=hashlib.sha256)
 tornado.web.Application(self,handlers:Optional[_RuleList]=None,default_host:Optional[str]=None,transforms:Optional[List[Type['OutputTransform']]]=None,**settings:Any)
+tornado.web.Application.__init__(self,handlers:Optional[_RuleList]=None,default_host:Optional[str]=None,transforms:Optional[List[Type['OutputTransform']]]=None,**settings:Any)
 tornado.web.Application._load_ui_methods(self,methods:Any)->None
 tornado.web.Application._load_ui_modules(self,modules:Any)->None
 tornado.web.Application.add_handlers(self,host_pattern:str,host_handlers:_RuleList)->None
@@ -1378,19 +1460,24 @@ tornado.web.FallbackHandler.initialize(self,fallback:Callable[[httputil.HTTPServ
 tornado.web.FallbackHandler.prepare(self)->None
 tornado.web.Finish(Exception)
 tornado.web.GZipContentEncoding(self,request:httputil.HTTPServerRequest)
+tornado.web.GZipContentEncoding.__init__(self,request:httputil.HTTPServerRequest)
 tornado.web.GZipContentEncoding._compressible_type(self,ctype:str)->bool
 tornado.web.GZipContentEncoding.transform_chunk(self,chunk:bytes,finishing:bool)->bytes
 tornado.web.GZipContentEncoding.transform_first_chunk(self,status_code:int,headers:httputil.HTTPHeaders,chunk:bytes,finishing:bool)->Tuple[int, httputil.HTTPHeaders, bytes]
 tornado.web.HTTPError(self,status_code:int=500,log_message:Optional[str]=None,*args:Any,**kwargs:Any)
+tornado.web.HTTPError.__init__(self,status_code:int=500,log_message:Optional[str]=None,*args:Any,**kwargs:Any)
 tornado.web.HTTPError.__str__(self)->str
 tornado.web.MissingArgumentError(self,arg_name:str)
+tornado.web.MissingArgumentError.__init__(self,arg_name:str)
 tornado.web.OutputTransform(self,request:httputil.HTTPServerRequest)
+tornado.web.OutputTransform.__init__(self,request:httputil.HTTPServerRequest)
 tornado.web.OutputTransform.transform_chunk(self,chunk:bytes,finishing:bool)->bytes
 tornado.web.OutputTransform.transform_first_chunk(self,status_code:int,headers:httputil.HTTPHeaders,chunk:bytes,finishing:bool)->Tuple[int, httputil.HTTPHeaders, bytes]
 tornado.web.RedirectHandler(RequestHandler)
 tornado.web.RedirectHandler.get(self,*args:Any,**kwargs:Any)->None
 tornado.web.RedirectHandler.initialize(self,url:str,permanent:bool=True)->None
 tornado.web.RequestHandler(self,application:'Application',request:httputil.HTTPServerRequest,**kwargs:Any)
+tornado.web.RequestHandler.__init__(self,application:'Application',request:httputil.HTTPServerRequest,**kwargs:Any)
 tornado.web.RequestHandler._break_cycles(self)->None
 tornado.web.RequestHandler._clear_representation_headers(self)->None
 tornado.web.RequestHandler._convert_header_value(self,value:_HeaderTypes)->str
@@ -1489,6 +1576,7 @@ tornado.web.StaticFileHandler.set_headers(self)->None
 tornado.web.StaticFileHandler.should_return_304(self)->bool
 tornado.web.StaticFileHandler.validate_absolute_path(self,root:str,absolute_path:str)->Optional[str]
 tornado.web.TemplateModule(self,handler:RequestHandler)
+tornado.web.TemplateModule.__init__(self,handler:RequestHandler)
 tornado.web.TemplateModule._get_resources(self,key:str)->Iterable[str]
 tornado.web.TemplateModule.css_files(self)->Iterable[str]
 tornado.web.TemplateModule.embedded_css(self)->str
@@ -1498,6 +1586,7 @@ tornado.web.TemplateModule.html_head(self)->str
 tornado.web.TemplateModule.javascript_files(self)->Iterable[str]
 tornado.web.TemplateModule.render(self,path:str,**kwargs:Any)->bytes
 tornado.web.UIModule(self,handler:RequestHandler)
+tornado.web.UIModule.__init__(self,handler:RequestHandler)
 tornado.web.UIModule.css_files(self)->Optional[Iterable[str]]
 tornado.web.UIModule.current_user(self)->Any
 tornado.web.UIModule.embedded_css(self)->Optional[str]
@@ -1508,10 +1597,12 @@ tornado.web.UIModule.javascript_files(self)->Optional[Iterable[str]]
 tornado.web.UIModule.render(self,*args:Any,**kwargs:Any)->str
 tornado.web.UIModule.render_string(self,path:str,**kwargs:Any)->bytes
 tornado.web._ApplicationRouter(self,application:'Application',rules:Optional[_RuleList]=None)
+tornado.web._ApplicationRouter.__init__(self,application:'Application',rules:Optional[_RuleList]=None)
 tornado.web._ApplicationRouter.get_target_delegate(self,target:Any,request:httputil.HTTPServerRequest,**target_params:Any)->Optional[httputil.HTTPMessageDelegate]
 tornado.web._ApplicationRouter.process_rule(self,rule:Rule)->Rule
 tornado.web._ArgDefaultMarker
 tornado.web._HandlerDelegate(self,application:Application,request:httputil.HTTPServerRequest,handler_class:Type[RequestHandler],handler_kwargs:Optional[Dict[str,Any]],path_args:Optional[List[bytes]],path_kwargs:Optional[Dict[str,bytes]])
+tornado.web._HandlerDelegate.__init__(self,application:Application,request:httputil.HTTPServerRequest,handler_class:Type[RequestHandler],handler_kwargs:Optional[Dict[str,Any]],path_args:Optional[List[bytes]],path_kwargs:Optional[Dict[str,bytes]])
 tornado.web._HandlerDelegate.data_received(self,data:bytes)->Optional[Awaitable[None]]
 tornado.web._HandlerDelegate.execute(self)->Optional[Awaitable[None]]
 tornado.web._HandlerDelegate.finish(self)->None
@@ -1520,6 +1611,7 @@ tornado.web._HandlerDelegate.on_connection_close(self)->None
 tornado.web._UIModuleNamespace(self,handler:RequestHandler,ui_modules:Dict[str,Type[UIModule]])
 tornado.web._UIModuleNamespace.__getattr__(self,key:str)->Callable[..., str]
 tornado.web._UIModuleNamespace.__getitem__(self,key:str)->Callable[..., str]
+tornado.web._UIModuleNamespace.__init__(self,handler:RequestHandler,ui_modules:Dict[str,Type[UIModule]])
 tornado.web._create_signature_v1(secret:Union[str,bytes],*parts:Union[str,bytes])->bytes
 tornado.web._create_signature_v2(secret:Union[str,bytes],s:bytes)->bytes
 tornado.web._decode_fields_v2(value:bytes)->Tuple[int, bytes, bytes, bytes, bytes]
@@ -1582,6 +1674,7 @@ A:tornado.iostream.self.socket->ssl_wrap_socket(self.socket, self._ssl_options, 
 A:tornado.iostream.futureself._ssl_connect_future->Future()
 A:tornado.iostream.self._fio->io.FileIO(self.fd, 'r+')
 tornado.iostream.BaseIOStream(self,max_buffer_size:Optional[int]=None,read_chunk_size:Optional[int]=None,max_write_buffer_size:Optional[int]=None)
+tornado.iostream.BaseIOStream.__init__(self,max_buffer_size:Optional[int]=None,read_chunk_size:Optional[int]=None,max_write_buffer_size:Optional[int]=None)
 tornado.iostream.BaseIOStream._add_io_state(self,state:int)->None
 tornado.iostream.BaseIOStream._check_closed(self)->None
 tornado.iostream.BaseIOStream._check_max_bytes(self,delimiter:Union[bytes,Pattern],size:int)->None
@@ -1618,6 +1711,7 @@ tornado.iostream.BaseIOStream.write(self,data:Union[bytes,memoryview])->'Future[
 tornado.iostream.BaseIOStream.write_to_fd(self,data:memoryview)->int
 tornado.iostream.BaseIOStream.writing(self)->bool
 tornado.iostream.IOStream(self,socket:socket.socket,*args:Any,**kwargs:Any)
+tornado.iostream.IOStream.__init__(self,socket:socket.socket,*args:Any,**kwargs:Any)
 tornado.iostream.IOStream._handle_connect(self)->None
 tornado.iostream.IOStream.close_fd(self)->None
 tornado.iostream.IOStream.connect(self:_IOStreamType,address:Any,server_hostname:Optional[str]=None)->'Future[_IOStreamType]'
@@ -1628,11 +1722,13 @@ tornado.iostream.IOStream.set_nodelay(self,value:bool)->None
 tornado.iostream.IOStream.start_tls(self,server_side:bool,ssl_options:Optional[Union[Dict[str,Any],ssl.SSLContext]]=None,server_hostname:Optional[str]=None)->Awaitable['SSLIOStream']
 tornado.iostream.IOStream.write_to_fd(self,data:memoryview)->int
 tornado.iostream.PipeIOStream(self,fd:int,*args:Any,**kwargs:Any)
+tornado.iostream.PipeIOStream.__init__(self,fd:int,*args:Any,**kwargs:Any)
 tornado.iostream.PipeIOStream.close_fd(self)->None
 tornado.iostream.PipeIOStream.fileno(self)->int
 tornado.iostream.PipeIOStream.read_from_fd(self,buf:Union[bytearray,memoryview])->Optional[int]
 tornado.iostream.PipeIOStream.write_to_fd(self,data:memoryview)->int
 tornado.iostream.SSLIOStream(self,*args:Any,**kwargs:Any)
+tornado.iostream.SSLIOStream.__init__(self,*args:Any,**kwargs:Any)
 tornado.iostream.SSLIOStream._do_ssl_handshake(self)->None
 tornado.iostream.SSLIOStream._finish_ssl_connect(self)->None
 tornado.iostream.SSLIOStream._handle_connect(self)->None
@@ -1648,8 +1744,10 @@ tornado.iostream.SSLIOStream.write_to_fd(self,data:memoryview)->int
 tornado.iostream.SSLIOStream.writing(self)->bool
 tornado.iostream.StreamBufferFullError(Exception)
 tornado.iostream.StreamClosedError(self,real_error:Optional[BaseException]=None)
+tornado.iostream.StreamClosedError.__init__(self,real_error:Optional[BaseException]=None)
 tornado.iostream.UnsatisfiableReadError(Exception)
 tornado.iostream._StreamBuffer(self)
+tornado.iostream._StreamBuffer.__init__(self)
 tornado.iostream._StreamBuffer.__len__(self)->int
 tornado.iostream._StreamBuffer.advance(self,size:int)->None
 tornado.iostream._StreamBuffer.append(self,data:Union[bytes,bytearray,memoryview])->None
@@ -1760,6 +1858,7 @@ A:tornado.http1connection.fut->tornado.gen.convert_yielded(self._server_request_
 A:tornado.http1connection.conn->HTTP1Connection(self.stream, False, self.params, self.context)
 A:tornado.http1connection.request_delegate->_GzipMessageDelegate(delegate, self.params.chunk_size).start_request(self, conn)
 tornado.http1connection.HTTP1Connection(self,stream:iostream.IOStream,is_client:bool,params:Optional[HTTP1ConnectionParameters]=None,context:Optional[object]=None)
+tornado.http1connection.HTTP1Connection.__init__(self,stream:iostream.IOStream,is_client:bool,params:Optional[HTTP1ConnectionParameters]=None,context:Optional[object]=None)
 tornado.http1connection.HTTP1Connection._can_keep_alive(self,start_line:httputil.RequestStartLine,headers:httputil.HTTPHeaders)->bool
 tornado.http1connection.HTTP1Connection._clear_callbacks(self)->None
 tornado.http1connection.HTTP1Connection._finish_request(self,future:'Optional[Future[None]]')->None
@@ -1778,16 +1877,21 @@ tornado.http1connection.HTTP1Connection.set_max_body_size(self,max_body_size:int
 tornado.http1connection.HTTP1Connection.write(self,chunk:bytes)->'Future[None]'
 tornado.http1connection.HTTP1Connection.write_headers(self,start_line:Union[httputil.RequestStartLine,httputil.ResponseStartLine],headers:httputil.HTTPHeaders,chunk:Optional[bytes]=None)->'Future[None]'
 tornado.http1connection.HTTP1ConnectionParameters(self,no_keep_alive:bool=False,chunk_size:Optional[int]=None,max_header_size:Optional[int]=None,header_timeout:Optional[float]=None,max_body_size:Optional[int]=None,body_timeout:Optional[float]=None,decompress:bool=False)
+tornado.http1connection.HTTP1ConnectionParameters.__init__(self,no_keep_alive:bool=False,chunk_size:Optional[int]=None,max_header_size:Optional[int]=None,header_timeout:Optional[float]=None,max_body_size:Optional[int]=None,body_timeout:Optional[float]=None,decompress:bool=False)
 tornado.http1connection.HTTP1ServerConnection(self,stream:iostream.IOStream,params:Optional[HTTP1ConnectionParameters]=None,context:Optional[object]=None)
+tornado.http1connection.HTTP1ServerConnection.__init__(self,stream:iostream.IOStream,params:Optional[HTTP1ConnectionParameters]=None,context:Optional[object]=None)
 tornado.http1connection.HTTP1ServerConnection.start_serving(self,delegate:httputil.HTTPServerConnectionDelegate)->None
 tornado.http1connection._ExceptionLoggingContext(self,logger:logging.Logger)
 tornado.http1connection._ExceptionLoggingContext.__enter__(self)->None
 tornado.http1connection._ExceptionLoggingContext.__exit__(self,typ:'Optional[Type[BaseException]]',value:Optional[BaseException],tb:types.TracebackType)->None
+tornado.http1connection._ExceptionLoggingContext.__init__(self,logger:logging.Logger)
 tornado.http1connection._GzipMessageDelegate(self,delegate:httputil.HTTPMessageDelegate,chunk_size:int)
+tornado.http1connection._GzipMessageDelegate.__init__(self,delegate:httputil.HTTPMessageDelegate,chunk_size:int)
 tornado.http1connection._GzipMessageDelegate.finish(self)->None
 tornado.http1connection._GzipMessageDelegate.headers_received(self,start_line:Union[httputil.RequestStartLine,httputil.ResponseStartLine],headers:httputil.HTTPHeaders)->Optional[Awaitable[None]]
 tornado.http1connection._GzipMessageDelegate.on_connection_close(self)->None
 tornado.http1connection._QuietException(self)
+tornado.http1connection._QuietException.__init__(self)
 
 
 ----------------------------------------/home/zhang/Packages/tornado/tornado6.3b1/curl_httpclient.py----------------------------------------
@@ -1831,6 +1935,7 @@ tornado.curl_httpclient.CurlAsyncHTTPClient.fetch_impl(self,request:HTTPRequest,
 tornado.curl_httpclient.CurlAsyncHTTPClient.handle_callback_exception(self,callback:Any)->None
 tornado.curl_httpclient.CurlAsyncHTTPClient.initialize(self,max_clients:int=10,defaults:Optional[Dict[str,Any]]=None)->None
 tornado.curl_httpclient.CurlError(self,errno:int,message:str)
+tornado.curl_httpclient.CurlError.__init__(self,errno:int,message:str)
 
 
 ----------------------------------------/home/zhang/Packages/tornado/tornado6.3b1/escape.py----------------------------------------
@@ -2425,6 +2530,7 @@ A:tornado.test.concurrent_test.self.executor->concurrent.futures.thread.ThreadPo
 A:tornado.test.concurrent_test.o->Object()
 A:tornado.test.concurrent_test.self.__executor->concurrent.futures.thread.ThreadPoolExecutor(1)
 tornado.test.concurrent_test.BaseCapClient(self,port)
+tornado.test.concurrent_test.BaseCapClient.__init__(self,port)
 tornado.test.concurrent_test.BaseCapClient.process_response(self,data)
 tornado.test.concurrent_test.CapError(Exception)
 tornado.test.concurrent_test.CapServer(TCPServer)
@@ -2465,6 +2571,7 @@ tornado.test.routing_test.BasicRouterTestCase.test_basic_router(self)
 tornado.test.routing_test.ConnectionDelegate(HTTPServerConnectionDelegate)
 tornado.test.routing_test.ConnectionDelegate.start_request(self,server_conn,request_conn)
 tornado.test.routing_test.CustomRouter(self)
+tornado.test.routing_test.CustomRouter.__init__(self)
 tornado.test.routing_test.CustomRouter.add_routes(self,routes)
 tornado.test.routing_test.CustomRouter.find_handler(self,request,**kwargs)
 tornado.test.routing_test.CustomRouter.reverse_url(self,name,*args)
@@ -2474,6 +2581,7 @@ tornado.test.routing_test.CustomRouterTestCase.test_custom_router(self)
 tornado.test.routing_test.GetResource(RequestHandler)
 tornado.test.routing_test.GetResource.get(self,path)
 tornado.test.routing_test.HTTPMethodRouter(self,app)
+tornado.test.routing_test.HTTPMethodRouter.__init__(self,app)
 tornado.test.routing_test.HTTPMethodRouter.find_handler(self,request,**kwargs)
 tornado.test.routing_test.HTTPMethodRouterTestCase(AsyncHTTPTestCase)
 tornado.test.routing_test.HTTPMethodRouterTestCase.get_app(self)
@@ -2588,6 +2696,7 @@ A:tornado.test.options_test.frame->sys._getframe(0)
 A:tornado.test.options_test.b_group_dict->OptionParser().group_dict('b_group')
 A:tornado.test.options_test.buf->StringIO()
 tornado.test.options_test.Email(self,value)
+tornado.test.options_test.Email.__init__(self,value)
 tornado.test.options_test.Email.value(self)
 tornado.test.options_test.OptionsTest(unittest.TestCase)
 tornado.test.options_test.OptionsTest._check_options_values(self,options)
@@ -2907,6 +3016,7 @@ tornado.test.web_test.CookieTest.test_set_cookie_false_flags(self)
 tornado.test.web_test.CookieTest.test_set_cookie_max_age(self)
 tornado.test.web_test.CookieTest.test_set_cookie_overwrite(self)
 tornado.test.web_test.CookieTestRequestHandler(self,cookie_secret='0123456789',key_version=None)
+tornado.test.web_test.CookieTestRequestHandler.__init__(self,cookie_secret='0123456789',key_version=None)
 tornado.test.web_test.CookieTestRequestHandler.get_cookie(self,name)
 tornado.test.web_test.CookieTestRequestHandler.set_cookie(self,name,value,expires_days=None)
 tornado.test.web_test.Custom404Test(WebTestCase)
@@ -3679,6 +3789,7 @@ tornado.test.httpserver_test.SSLv3Test(BaseSSLTest,SSLTestMixin)
 tornado.test.httpserver_test.SSLv3Test.get_ssl_version(self)
 tornado.test.httpserver_test.StreamingChunkSizeTest(AsyncHTTPTestCase)
 tornado.test.httpserver_test.StreamingChunkSizeTest.MessageDelegate(self,connection)
+tornado.test.httpserver_test.StreamingChunkSizeTest.MessageDelegate.__init__(self,connection)
 tornado.test.httpserver_test.StreamingChunkSizeTest.MessageDelegate.data_received(self,chunk)
 tornado.test.httpserver_test.StreamingChunkSizeTest.MessageDelegate.finish(self)
 tornado.test.httpserver_test.StreamingChunkSizeTest.MessageDelegate.headers_received(self,start_line,headers)
@@ -3773,6 +3884,7 @@ A:tornado.test.tcpclient_test.conn->_Connector(addrinfo, self.create_stream)
 A:tornado.test.tcpclient_test.(conn, future)->self.start_connect(self.addrinfo)
 tornado.test.tcpclient_test.ConnectorTest(AsyncTestCase)
 tornado.test.tcpclient_test.ConnectorTest.FakeStream(self)
+tornado.test.tcpclient_test.ConnectorTest.FakeStream.__init__(self)
 tornado.test.tcpclient_test.ConnectorTest.FakeStream.close(self)
 tornado.test.tcpclient_test.ConnectorTest.assert_connector_streams_closed(self,conn)
 tornado.test.tcpclient_test.ConnectorTest.assert_pending(self,*keys)
@@ -3820,6 +3932,7 @@ tornado.test.tcpclient_test.TestConnectorSplit(unittest.TestCase)
 tornado.test.tcpclient_test.TestConnectorSplit.test_mixed(self)
 tornado.test.tcpclient_test.TestConnectorSplit.test_one_family(self)
 tornado.test.tcpclient_test.TestTCPServer(self,family)
+tornado.test.tcpclient_test.TestTCPServer.__init__(self,family)
 tornado.test.tcpclient_test.TestTCPServer.handle_stream(self,stream,address)
 tornado.test.tcpclient_test.TestTCPServer.stop(self)
 
@@ -4333,9 +4446,11 @@ A:tornado.test.runtests.log_counter->LogCounter()
 A:tornado.test.runtests.counting_stderr->CountingStderr(orig_stderr)
 A:tornado.test.runtests.kwargs['testRunner']->test_runner_factory(orig_stderr)
 tornado.test.runtests.CountingStderr(self,real)
+tornado.test.runtests.CountingStderr.__init__(self,real)
 tornado.test.runtests.CountingStderr.flush(self)
 tornado.test.runtests.CountingStderr.write(self,data)
 tornado.test.runtests.LogCounter(self,*args,**kwargs)
+tornado.test.runtests.LogCounter.__init__(self,*args,**kwargs)
 tornado.test.runtests.LogCounter.filter(self,record)
 tornado.test.runtests.all()
 tornado.test.runtests.main()
@@ -4378,6 +4493,7 @@ A:tornado.platform.asyncio.self._writers[fd]->functools.partial(callback, *args)
 tornado.platform.asyncio.AddThreadSelectorEventLoop(self,real_loop:asyncio.AbstractEventLoop)
 tornado.platform.asyncio.AddThreadSelectorEventLoop.__del__(self)->None
 tornado.platform.asyncio.AddThreadSelectorEventLoop.__getattribute__(self,name:str)->Any
+tornado.platform.asyncio.AddThreadSelectorEventLoop.__init__(self,real_loop:asyncio.AbstractEventLoop)
 tornado.platform.asyncio.AddThreadSelectorEventLoop._consume_waker(self)->None
 tornado.platform.asyncio.AddThreadSelectorEventLoop._handle_event(self,fd:'_FileDescriptorLike',cb_map:Dict['_FileDescriptorLike',Callable])->None
 tornado.platform.asyncio.AddThreadSelectorEventLoop._handle_select(self,rs:List['_FileDescriptorLike'],ws:List['_FileDescriptorLike'])->None
@@ -4390,6 +4506,7 @@ tornado.platform.asyncio.AddThreadSelectorEventLoop.close(self)->None
 tornado.platform.asyncio.AddThreadSelectorEventLoop.remove_reader(self,fd:'_FileDescriptorLike')->bool
 tornado.platform.asyncio.AddThreadSelectorEventLoop.remove_writer(self,fd:'_FileDescriptorLike')->bool
 tornado.platform.asyncio.AnyThreadEventLoopPolicy(self)
+tornado.platform.asyncio.AnyThreadEventLoopPolicy.__init__(self)
 tornado.platform.asyncio.AnyThreadEventLoopPolicy.get_event_loop(self)->asyncio.AbstractEventLoop
 tornado.platform.asyncio.AsyncIOLoop(BaseAsyncIOLoop)
 tornado.platform.asyncio.AsyncIOLoop._clear_current_hook(self)->None

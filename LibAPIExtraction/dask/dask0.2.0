@@ -60,6 +60,7 @@ dask.core.istask(x)
 dask.core.reverse_dict(d)
 dask.core.set(d,key,val,args=[])
 dask.get(d,key,get=None,concrete=True,**kwargs)
+dask.get_dependencies(dsk,task)
 dask.istask(x)
 dask.set(d,key,val,args=[])
 
@@ -162,7 +163,12 @@ A:dask.array.core.fast_functions->kwargs.get('fast_functions', set([operator.get
 A:dask.array.core.dsk2->threaded.inline(dsk, fast_functions=fast_functions)
 A:dask.array.core.dsk3->core.cull(dsk2, list(core.flatten(keys)))
 dask.array.Array(self,dask,name,shape,blockshape=None,blockdims=None)
+dask.array.Array._get_block(self,*args)
+dask.array.Array.keys(self,*args)
+dask.array.Array.ndim(self)
+dask.array.Array.numblocks(self)
 dask.array.core.Array(self,dask,name,shape,blockshape=None,blockdims=None)
+dask.array.core.Array.__init__(self,dask,name,shape,blockshape=None,blockdims=None)
 dask.array.core.Array._get_block(self,*args)
 dask.array.core.Array.keys(self,*args)
 dask.array.core.Array.ndim(self)
@@ -181,6 +187,7 @@ dask.array.core.new_blockdim(dim_shape,lengths,index)
 dask.array.core.top(func,output,out_indices,*arrind_pairs,**kwargs)
 dask.array.core.zero_broadcast_dimensions(lol,nblocks)
 dask.array.get(dsk,keys,get=threaded.get,**kwargs)
+dask.array.getem(arr,blocksize,shape)
 
 
 ----------------------------------------/home/zhang/Packages/dask/dask0.2.0/array/__init__.py----------------------------------------

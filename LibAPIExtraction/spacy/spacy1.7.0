@@ -47,6 +47,7 @@ A:spacy.lemmatizer.lemmas->lemmatize(string, self.index.get(univ_pos, {}), self.
 A:spacy.lemmatizer.true_morph_key->morphology.get('morph', 0)
 A:spacy.lemmatizer.string->string.lower().lower()
 spacy.lemmatizer.Lemmatizer(self,index,exceptions,rules)
+spacy.lemmatizer.Lemmatizer.__init__(self,index,exceptions,rules)
 spacy.lemmatizer.Lemmatizer.adj(self,string,morphology=None)
 spacy.lemmatizer.Lemmatizer.is_base_form(self,univ_pos,morphology=None)
 spacy.lemmatizer.Lemmatizer.load(cls,path,rules=None)
@@ -122,6 +123,7 @@ spacy.language.BaseDefaults.create_tagger(cls,nlp=None)
 spacy.language.BaseDefaults.create_tokenizer(cls,nlp=None)
 spacy.language.BaseDefaults.create_vocab(cls,nlp=None)
 spacy.language.Language(self,**overrides)
+spacy.language.Language.__init__(self,**overrides)
 spacy.language.Language.end_training(self,path=None)
 spacy.language.Language.pipe(self,texts,tag=True,parse=True,entity=True,n_threads=2,batch_size=1000)
 spacy.language.Language.train(cls,path,gold_tuples,*configs)
@@ -129,6 +131,7 @@ spacy.language.Language.train(cls,path,gold_tuples,*configs)
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy1.7.0/multi_words.py----------------------------------------
 spacy.multi_words.RegexMerger(self,regexes)
+spacy.multi_words.RegexMerger.__init__(self,regexes)
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy1.7.0/__main__.py----------------------------------------
@@ -149,6 +152,7 @@ A:spacy.train.indices->list(range(len(self.gold_tuples)))
 A:spacy.train.loss->process.update(doc, gold, itn=self.nr_epoch)
 A:spacy.train.scorer->Scorer()
 spacy.train.Trainer(self,nlp,gold_tuples)
+spacy.train.Trainer.__init__(self,nlp,gold_tuples)
 spacy.train.Trainer.epochs(self,nr_epoch,augment_data=None,gold_preproc=False)
 spacy.train.Trainer.evaluate(self,dev_sents,gold_preproc=False)
 spacy.train.Trainer.make_docs(self,raw_text,paragraph_tuples)
@@ -170,11 +174,13 @@ A:spacy.scorer.cand_deps->set()
 A:spacy.scorer.cand_tags->set()
 A:spacy.scorer.cand_ents->set()
 spacy.scorer.PRFScore(self)
+spacy.scorer.PRFScore.__init__(self)
 spacy.scorer.PRFScore.fscore(self)
 spacy.scorer.PRFScore.precision(self)
 spacy.scorer.PRFScore.recall(self)
 spacy.scorer.PRFScore.score_set(self,cand,gold)
 spacy.scorer.Scorer(self,eval_punct=False)
+spacy.scorer.Scorer.__init__(self,eval_punct=False)
 spacy.scorer.Scorer.ents_f(self)
 spacy.scorer.Scorer.ents_p(self)
 spacy.scorer.Scorer.ents_r(self)
@@ -978,6 +984,7 @@ A:spacy.en.__init__.lemma_exc->dict(LEMMA_EXC)
 A:spacy.en.__init__.overrides->fix_glove_vectors_loading(overrides)
 spacy.en.__init__.English(self,**overrides)
 spacy.en.__init__.English.Defaults(Language.Defaults)
+spacy.en.__init__.English.__init__(self,**overrides)
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy1.7.0/en/word_sets.py----------------------------------------
@@ -1124,6 +1131,7 @@ spacy.hu.__init__.Hungarian.Defaults(Language.Defaults)
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy1.7.0/syntax/util.py----------------------------------------
 spacy.syntax.util.Config(self,**kwargs)
+spacy.syntax.util.Config.__init__(self,**kwargs)
 spacy.syntax.util.Config.get(self,attr,default=None)
 spacy.syntax.util.Config.read(cls,model_dir,name)
 spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
@@ -1155,6 +1163,7 @@ spacy.cli.download.download(model=None,direct=False)
 spacy.cli.download.download_model(filename)
 spacy.cli.download.get_compatibility()
 spacy.cli.download.get_version(model,comp)
+spacy.cli.download_model(filename)
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy1.7.0/cli/__init__.py----------------------------------------
@@ -1170,6 +1179,7 @@ spacy.cli.link.is_package(origin)
 spacy.cli.link.link(origin,link_name,force=False)
 spacy.cli.link.link_package(origin,link_name,force=False)
 spacy.cli.link.symlink(model_path,link_name,force)
+spacy.cli.link_package(origin,link_name,force=False)
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy1.7.0/tokens/__init__.py----------------------------------------

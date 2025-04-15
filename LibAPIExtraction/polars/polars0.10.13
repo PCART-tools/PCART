@@ -6,6 +6,7 @@ polars.StringCache.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:
 polars.string_cache.StringCache(self)
 polars.string_cache.StringCache.__enter__(self)->'StringCache'
 polars.string_cache.StringCache.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+polars.string_cache.StringCache.__init__(self)
 polars.string_cache.toggle_string_cache(toggle:bool)->None
 polars.toggle_string_cache(toggle:bool)->None
 
@@ -16,6 +17,7 @@ A:polars._html.self.col_idx->range(0, df.width)
 A:polars._html.template_mid->'\n\n'.join(map(lambda t: template_select % t, element_props))
 A:polars._html.template->dedent('\n'.join((template_first, template_mid, template_last)))
 polars._html.HTMLFormatter(self,df:'pl.DataFrame',max_cols:int=75,max_rows:int=40)
+polars._html.HTMLFormatter.__init__(self,df:'pl.DataFrame',max_cols:int=75,max_rows:int=40)
 polars._html.HTMLFormatter.render(self)->tp.List[str]
 polars._html.HTMLFormatter.write(self,inner:str)->None
 polars._html.HTMLFormatter.write_body(self)->None
@@ -26,6 +28,7 @@ polars._html.NotebookFormatter.write_style(self)->None
 polars._html.Tag(self,elements:tp.List[str],tag:str,attributes:Optional[Dict[str,str]]=None)
 polars._html.Tag.__enter__(self)->None
 polars._html.Tag.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+polars._html.Tag.__init__(self,elements:tp.List[str],tag:str,attributes:Optional[Dict[str,str]]=None)
 polars._html.div(inner:str)->str
 polars._html.table(inner:str)->str
 polars._html.tag(inner:str,tag:str)->str
@@ -413,6 +416,7 @@ polars._maybe_cast(el:'Type[DataType]',dtype:Type)->'Type[DataType]'
 polars._to_python_datetime(value:Union[int,float],dtype:Type[DataType])->Union[date, datetime]
 polars.eager.series.DateTimeNameSpace(self,series:Series)
 polars.eager.series.DateTimeNameSpace.__getitem__(self,item:int)->Union[date, datetime]
+polars.eager.series.DateTimeNameSpace.__init__(self,series:Series)
 polars.eager.series.DateTimeNameSpace.day(self)->Series
 polars.eager.series.DateTimeNameSpace.hour(self)->Series
 polars.eager.series.DateTimeNameSpace.max(self)->Union[date, datetime]
@@ -432,6 +436,7 @@ polars.eager.series.DateTimeNameSpace.week(self)->Series
 polars.eager.series.DateTimeNameSpace.weekday(self)->Series
 polars.eager.series.DateTimeNameSpace.year(self)->Series
 polars.eager.series.ListNameSpace(self,series:Series)
+polars.eager.series.ListNameSpace.__init__(self,series:Series)
 polars.eager.series.ListNameSpace.concat(self,other:Union[tp.List[Series],Series])->'Series'
 polars.eager.series.ListNameSpace.lengths(self)->Series
 polars.eager.series.ListNameSpace.max(self)->Series
@@ -454,6 +459,7 @@ polars.eager.series.Series.__ge__(self,other:Any)->'Series'
 polars.eager.series.Series.__getitem__(self,item:Any)->Any
 polars.eager.series.Series.__getstate__(self)
 polars.eager.series.Series.__gt__(self,other:Any)->'Series'
+polars.eager.series.Series.__init__(self,name:Optional[Union[str,ArrayLike]]=None,values:Optional[ArrayLike]=None,dtype:Optional[Type[DataType]]=None,strict:bool=True,nan_to_null:bool=False)
 polars.eager.series.Series.__invert__(self)->'Series'
 polars.eager.series.Series.__iter__(self)->'SeriesIter'
 polars.eager.series.Series.__le__(self,other:Any)->'Series'
@@ -593,9 +599,11 @@ polars.eager.series.Series.var(self,ddof:int=1)->Optional[float]
 polars.eager.series.Series.view(self,ignore_nulls:bool=False)->np.ndarray
 polars.eager.series.Series.zip_with(self,mask:'Series',other:'Series')->'Series'
 polars.eager.series.SeriesIter(self,length:int,s:Series)
+polars.eager.series.SeriesIter.__init__(self,length:int,s:Series)
 polars.eager.series.SeriesIter.__iter__(self)->'SeriesIter'
 polars.eager.series.SeriesIter.__next__(self)->Any
 polars.eager.series.StringNameSpace(self,series:'Series')
+polars.eager.series.StringNameSpace.__init__(self,series:'Series')
 polars.eager.series.StringNameSpace.contains(self,pattern:str)->Series
 polars.eager.series.StringNameSpace.extract(self,pattern:str,group_index:int=1)->Series
 polars.eager.series.StringNameSpace.json_path_match(self,json_path:str)->Series
@@ -805,6 +813,7 @@ polars.eager.frame.DataFrame.__deepcopy__(self,memodict={})->'DataFrame'
 polars.eager.frame.DataFrame.__getattr__(self,item:Any)->'PySeries'
 polars.eager.frame.DataFrame.__getitem__(self,item:Any)->Any
 polars.eager.frame.DataFrame.__getstate__(self)
+polars.eager.frame.DataFrame.__init__(self,data:Optional[Union[Dict[str,Sequence[Any]],Sequence[Any],np.ndarray,'pa.Table','pd.DataFrame','pl.Series']]=None,columns:Optional[Sequence[str]]=None,orient:Optional[str]=None)
 polars.eager.frame.DataFrame.__iter__(self)->Iterator[Any]
 polars.eager.frame.DataFrame.__len__(self)->int
 polars.eager.frame.DataFrame.__mul__(self,other:Any)->'DataFrame'
@@ -906,6 +915,7 @@ polars.eager.frame.DataFrame.with_column_renamed(self,existing_name:str,new_name
 polars.eager.frame.DataFrame.with_columns(self,exprs:Union['pl.Expr',tp.List['pl.Expr']])->'DataFrame'
 polars.eager.frame.DataFrame.with_row_count(self,name:str='row_nr')->'DataFrame'
 polars.eager.frame.GBSelection(self,df:'PyDataFrame',by:Union[str,tp.List[str]],selection:Optional[tp.List[str]],downsample:bool=False,rule:Optional[str]=None,downsample_n:int=0)
+polars.eager.frame.GBSelection.__init__(self,df:'PyDataFrame',by:Union[str,tp.List[str]],selection:Optional[tp.List[str]],downsample:bool=False,rule:Optional[str]=None,downsample_n:int=0)
 polars.eager.frame.GBSelection.agg_list(self)->DataFrame
 polars.eager.frame.GBSelection.apply(self,func:Callable[[Any],Any],return_dtype:Optional[Type[DataType]]=None)->DataFrame
 polars.eager.frame.GBSelection.count(self)->DataFrame
@@ -920,6 +930,7 @@ polars.eager.frame.GBSelection.quantile(self,quantile:float)->DataFrame
 polars.eager.frame.GBSelection.sum(self)->DataFrame
 polars.eager.frame.GroupBy(self,df:'PyDataFrame',by:Union[str,tp.List[str]],maintain_order:bool=False,downsample:bool=False,rule:Optional[str]=None,downsample_n:int=0)
 polars.eager.frame.GroupBy.__getitem__(self,item:Any)->'GBSelection'
+polars.eager.frame.GroupBy.__init__(self,df:'PyDataFrame',by:Union[str,tp.List[str]],maintain_order:bool=False,downsample:bool=False,rule:Optional[str]=None,downsample_n:int=0)
 polars.eager.frame.GroupBy.__iter__(self)->Iterable[Any]
 polars.eager.frame.GroupBy._select(self,columns:Union[str,tp.List[str]])->'GBSelection'
 polars.eager.frame.GroupBy._select_all(self)->'GBSelection'
@@ -942,6 +953,7 @@ polars.eager.frame.GroupBy.quantile(self,quantile:float)->DataFrame
 polars.eager.frame.GroupBy.sum(self)->DataFrame
 polars.eager.frame.GroupBy.tail(self,n:int=5)->DataFrame
 polars.eager.frame.PivotOps(self,df:DataFrame,by:Union[str,tp.List[str]],pivot_column:str,values_column:str)
+polars.eager.frame.PivotOps.__init__(self,df:DataFrame,by:Union[str,tp.List[str]],pivot_column:str,values_column:str)
 polars.eager.frame.PivotOps.count(self)->DataFrame
 polars.eager.frame.PivotOps.first(self)->DataFrame
 polars.eager.frame.PivotOps.max(self)->DataFrame
@@ -972,11 +984,14 @@ polars.WhenThenThen.otherwise(self,expr:Union['pl.Expr',int,float,str])->'pl.Exp
 polars.WhenThenThen.then(self,expr:Union['pl.Expr',int,float,str])->'WhenThenThen'
 polars.WhenThenThen.when(self,predicate:'pl.Expr')->'WhenThenThen'
 polars.lazy.whenthen.When(self,pywhen:'pywhen')
+polars.lazy.whenthen.When.__init__(self,pywhen:'pywhen')
 polars.lazy.whenthen.When.then(self,expr:Union['pl.Expr',int,float,str])->WhenThen
 polars.lazy.whenthen.WhenThen(self,pywhenthen:Any)
+polars.lazy.whenthen.WhenThen.__init__(self,pywhenthen:Any)
 polars.lazy.whenthen.WhenThen.otherwise(self,expr:Union['pl.Expr',int,float,str])->'pl.Expr'
 polars.lazy.whenthen.WhenThen.when(self,predicate:'pl.Expr')->WhenThenThen
 polars.lazy.whenthen.WhenThenThen(self,pywhenthenthen:Any)
+polars.lazy.whenthen.WhenThenThen.__init__(self,pywhenthenthen:Any)
 polars.lazy.whenthen.WhenThenThen.otherwise(self,expr:Union['pl.Expr',int,float,str])->'pl.Expr'
 polars.lazy.whenthen.WhenThenThen.then(self,expr:Union['pl.Expr',int,float,str])->'WhenThenThen'
 polars.lazy.whenthen.WhenThenThen.when(self,predicate:'pl.Expr')->'WhenThenThen'
@@ -1263,6 +1278,7 @@ polars.lazy.expr.Expr.__eq__(self,other:Any)->'Expr'
 polars.lazy.expr.Expr.__floordiv__(self,other:Any)->'Expr'
 polars.lazy.expr.Expr.__ge__(self,other:Any)->'Expr'
 polars.lazy.expr.Expr.__gt__(self,other:Any)->'Expr'
+polars.lazy.expr.Expr.__init__(self)
 polars.lazy.expr.Expr.__invert__(self)->'Expr'
 polars.lazy.expr.Expr.__le__(self,other:Any)->'Expr'
 polars.lazy.expr.Expr.__lt__(self,other:Any)->'Expr'
@@ -1390,6 +1406,7 @@ polars.lazy.expr.Expr.unique(self)->'Expr'
 polars.lazy.expr.Expr.var(self)->'Expr'
 polars.lazy.expr.Expr.where(self,predicate:'Expr')->'Expr'
 polars.lazy.expr.ExprDateTimeNameSpace(self,expr:Expr)
+polars.lazy.expr.ExprDateTimeNameSpace.__init__(self,expr:Expr)
 polars.lazy.expr.ExprDateTimeNameSpace.day(self)->Expr
 polars.lazy.expr.ExprDateTimeNameSpace.hour(self)->Expr
 polars.lazy.expr.ExprDateTimeNameSpace.minute(self)->Expr
@@ -1405,6 +1422,7 @@ polars.lazy.expr.ExprDateTimeNameSpace.week(self)->Expr
 polars.lazy.expr.ExprDateTimeNameSpace.weekday(self)->Expr
 polars.lazy.expr.ExprDateTimeNameSpace.year(self)->Expr
 polars.lazy.expr.ExprListNameSpace(self,expr:Expr)
+polars.lazy.expr.ExprListNameSpace.__init__(self,expr:Expr)
 polars.lazy.expr.ExprListNameSpace.concat(self,other:Union[tp.List[Expr],Expr,str,tp.List[str]])->'Expr'
 polars.lazy.expr.ExprListNameSpace.lengths(self)->Expr
 polars.lazy.expr.ExprListNameSpace.max(self)->'Expr'
@@ -1415,6 +1433,7 @@ polars.lazy.expr.ExprListNameSpace.sort(self,reverse:bool)->'Expr'
 polars.lazy.expr.ExprListNameSpace.sum(self)->'Expr'
 polars.lazy.expr.ExprListNameSpace.unique(self)->'Expr'
 polars.lazy.expr.ExprStringNameSpace(self,expr:Expr)
+polars.lazy.expr.ExprStringNameSpace.__init__(self,expr:Expr)
 polars.lazy.expr.ExprStringNameSpace.contains(self,pattern:str)->Expr
 polars.lazy.expr.ExprStringNameSpace.extract(self,pattern:str,group_index:int=1)->Expr
 polars.lazy.expr.ExprStringNameSpace.json_path_match(self,json_path:str)->Expr
@@ -1506,6 +1525,7 @@ polars.LazyGroupBy.apply(self,f:Callable[['pl.DataFrame'],'pl.DataFrame'])->'Laz
 polars.LazyGroupBy.head(self,n:int=5)->'LazyFrame'
 polars.LazyGroupBy.tail(self,n:int=5)->'LazyFrame'
 polars.lazy.frame.LazyFrame(self)
+polars.lazy.frame.LazyFrame.__init__(self)
 polars.lazy.frame.LazyFrame._from_pyldf(ldf:'PyLazyFrame')->'LazyFrame'
 polars.lazy.frame.LazyFrame.cache(self)->'LazyFrame'
 polars.lazy.frame.LazyFrame.collect(self,type_coercion:bool=True,predicate_pushdown:bool=True,projection_pushdown:bool=True,simplify_expression:bool=True,string_cache:bool=False,no_optimization:bool=False)->'pl.DataFrame'
@@ -1555,6 +1575,7 @@ polars.lazy.frame.LazyFrame.with_column_renamed(self,existing_name:str,new_name:
 polars.lazy.frame.LazyFrame.with_columns(self,exprs:Union[tp.List['Expr'],'Expr'])->'LazyFrame'
 polars.lazy.frame.LazyFrame.with_row_count(self,name:str='row_nr')->'LazyFrame'
 polars.lazy.frame.LazyGroupBy(self,lgb:'PyLazyGroupBy')
+polars.lazy.frame.LazyGroupBy.__init__(self,lgb:'PyLazyGroupBy')
 polars.lazy.frame.LazyGroupBy.agg(self,aggs:Union[tp.List['Expr'],'Expr'])->'LazyFrame'
 polars.lazy.frame.LazyGroupBy.apply(self,f:Callable[['pl.DataFrame'],'pl.DataFrame'])->'LazyFrame'
 polars.lazy.frame.LazyGroupBy.head(self,n:int=5)->'LazyFrame'

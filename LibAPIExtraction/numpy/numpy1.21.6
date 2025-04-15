@@ -84,14 +84,17 @@ A:numpy.__init__.kernel_version->tuple((int(v) for v in kernel_version))
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/__init__.pyi----------------------------------------
 numpy.__init__.AxisError(self,axis:int,ndim:Optional[int]=...,msg_prefix:Optional[str]=...)
+numpy.__init__.AxisError.__init__(self,axis:int,ndim:Optional[int]=...,msg_prefix:Optional[str]=...)
 numpy.__init__.ComplexWarning(RuntimeWarning)
 numpy.__init__.DataSource(self,destpath:Union[None,str,os.PathLike[str]]=...)
 numpy.__init__.DataSource.__del__(self)->None
+numpy.__init__.DataSource.__init__(self,destpath:Union[None,str,os.PathLike[str]]=...)
 numpy.__init__.DataSource.abspath(self,path:str)->str
 numpy.__init__.DataSource.exists(self,path:str)->bool
 numpy.__init__.DataSource.open(self,path:str,mode:str=...,encoding:Optional[str]=...,newline:Optional[str]=...)->IO[Any]
 numpy.__init__.MachAr(self,float_conv:Any=...,int_conv:Any=...,float_to_float:Any=...,float_to_str:Any=...,title:Any=...)
 numpy.__init__.MachAr.__getattr__(self,key:str)->Any
+numpy.__init__.MachAr.__init__(self,float_conv:Any=...,int_conv:Any=...,float_to_float:Any=...,float_to_str:Any=...,title:Any=...)
 numpy.__init__.ModuleDeprecationWarning(DeprecationWarning)
 numpy.__init__.RankWarning(UserWarning)
 numpy.__init__.TooHardError(RuntimeError)
@@ -201,6 +204,7 @@ numpy.__init__.bool_(self,__value:object=...)
 numpy.__init__.bool_.__abs__(self:_ArraySelf)->_ArraySelf
 numpy.__init__.bool_.__complex__(self)->complex
 numpy.__init__.bool_.__float__(self)->float
+numpy.__init__.bool_.__init__(self,__value:object=...)
 numpy.__init__.bool_.__int__(self)->int
 numpy.__init__.bool_.__invert__(self)->bool_
 numpy.__init__.bool_.imag(self:_ArraySelf)->_ArraySelf
@@ -209,6 +213,7 @@ numpy.__init__.bool_.real(self:_ArraySelf)->_ArraySelf
 numpy.__init__.bool_.tolist(self)->bool
 numpy.__init__.broadcast(cls,*args:ArrayLike)
 numpy.__init__.broadcast.__iter__(self:_T)->_T
+numpy.__init__.broadcast.__new__(cls,*args:ArrayLike)
 numpy.__init__.broadcast.__next__(self)->Tuple[Any, ...]
 numpy.__init__.broadcast.index(self)->int
 numpy.__init__.broadcast.iters(self)->Tuple[flatiter[Any], ...]
@@ -222,7 +227,9 @@ numpy.__init__.busday_count(begindates,enddates,weekmask=...,holidays=...,busday
 numpy.__init__.busday_offset(dates,offsets,roll=...,weekmask=...,holidays=...,busdaycal=...,out=...)
 numpy.__init__.busdaycalendar(cls,weekmask:Any=...,holidays:Any=...)
 numpy.__init__.busdaycalendar.__getattr__(self,key:str)->Any
+numpy.__init__.busdaycalendar.__new__(cls,weekmask:Any=...,holidays:Any=...)
 numpy.__init__.bytes_(self,__value:str,encoding:str=...,errors:str=...)
+numpy.__init__.bytes_.__init__(self,__value:str,encoding:str=...,errors:str=...)
 numpy.__init__.bytes_.item(self,__args:Union[L[0],Tuple[()],Tuple[L[0]]]=...)->bytes
 numpy.__init__.bytes_.tolist(self)->bytes
 numpy.__init__.can_cast(from_,to,casting=...)
@@ -231,6 +238,7 @@ numpy.__init__.character.__float__(self)->float
 numpy.__init__.character.__int__(self)->int
 numpy.__init__.chararray(subtype,shape:Any,itemsize:Any=...,unicode:Any=...,buffer:Any=...,offset:Any=...,strides:Any=...,order:Any=...)
 numpy.__init__.chararray.__array_finalize__(self,obj)
+numpy.__init__.chararray.__new__(subtype,shape:Any,itemsize:Any=...,unicode:Any=...,buffer:Any=...,offset:Any=...,strides:Any=...,order:Any=...)
 numpy.__init__.chararray.argsort(self,axis=...,kind=...,order=...)
 numpy.__init__.chararray.capitalize(self)
 numpy.__init__.chararray.center(self,width,fillchar=...)
@@ -275,6 +283,7 @@ numpy.__init__.compare_chararrays(a,b,cmp_op,rstrip)
 numpy.__init__.complexfloating(self,__value:_ComplexValue=...)
 numpy.__init__.complexfloating.__abs__(self)->floating[_NBit1]
 numpy.__init__.complexfloating.__getnewargs__(self:complex128)->Tuple[float, float]
+numpy.__init__.complexfloating.__init__(self,__value:_ComplexValue=...)
 numpy.__init__.complexfloating.imag(self)->floating[_NBit2]
 numpy.__init__.complexfloating.item(self,__args:Union[L[0],Tuple[()],Tuple[L[0]]]=...)->complex
 numpy.__init__.complexfloating.real(self)->floating[_NBit1]
@@ -284,6 +293,7 @@ numpy.__init__.copyto(dst,src,casting=...,where=...)
 numpy.__init__.cumproduct(*args,**kwargs)
 numpy.__init__.datetime64(self,__value:int,__format:Union[_CharLike_co,Tuple[_CharLike_co,_IntLike_co]])
 numpy.__init__.datetime64.__add__(self,other:_TD64Like_co)->datetime64
+numpy.__init__.datetime64.__init__(self,__value:int,__format:Union[_CharLike_co,Tuple[_CharLike_co,_IntLike_co]])
 numpy.__init__.datetime64.__radd__(self,other:_TD64Like_co)->datetime64
 numpy.__init__.datetime64.__rsub__(self,other:datetime64)->timedelta64
 numpy.__init__.datetime64.__sub__(self,other:_TD64Like_co)->datetime64
@@ -301,6 +311,7 @@ numpy.__init__.dtype.__lt__(self,other:DTypeLike)->bool
 numpy.__init__.dtype.__mul__(self,value:L[0])->None
 numpy.__init__.dtype.__mul__(self,value:int)->dtype[void]
 numpy.__init__.dtype.__mul__(self:_DType,value:L[1])->_DType
+numpy.__init__.dtype.__new__(cls,dtype:Type[object],align:bool=...,copy:bool=...)
 numpy.__init__.dtype.__rmul__(self,value:int)->Any
 numpy.__init__.dtype.alignment(self)->int
 numpy.__init__.dtype.base(self:_DType)->_DType
@@ -329,8 +340,10 @@ numpy.__init__.empty(shape:_ShapeLike,dtype:DTypeLike=...,order:_OrderCF=...,*,l
 numpy.__init__.errstate(self,*,call:_CallType=...,all:Optional[_ErrKind]=...,divide:Optional[_ErrKind]=...,over:Optional[_ErrKind]=...,under:Optional[_ErrKind]=...,invalid:Optional[_ErrKind]=...)
 numpy.__init__.errstate.__enter__(self)->None
 numpy.__init__.errstate.__exit__(self,__exc_type:Optional[Type[BaseException]],__exc_value:Optional[BaseException],__traceback:Optional[TracebackType])->None
+numpy.__init__.errstate.__init__(self,*,call:_CallType=...,all:Optional[_ErrKind]=...,divide:Optional[_ErrKind]=...,over:Optional[_ErrKind]=...,under:Optional[_ErrKind]=...,invalid:Optional[_ErrKind]=...)
 numpy.__init__.finfo(cls,dtype:Any)
 numpy.__init__.finfo.__getattr__(self,key:str)->Any
+numpy.__init__.finfo.__new__(cls,dtype:Any)
 numpy.__init__.flatiter(Generic[_NdArraySubClass])
 numpy.__init__.flatiter.__array__(self,__dtype:_DType)->ndarray[Any, _DType]
 numpy.__init__.flatiter.__array__(self:flatiter[ndarray[Any,_DType]],__dtype:None=...)->ndarray[Any, _DType]
@@ -347,6 +360,7 @@ numpy.__init__.flexible(generic)
 numpy.__init__.floating(self,__value:_FloatValue=...)
 numpy.__init__.floating.__getformat__(self:float64,__typestr:L['double','float'])->str
 numpy.__init__.floating.__getnewargs__(self:float64)->Tuple[float]
+numpy.__init__.floating.__init__(self,__value:_FloatValue=...)
 numpy.__init__.floating.__round__(self,ndigits:None=...)->int
 numpy.__init__.floating.__round__(self:_ScalarType,ndigits:SupportsIndex)->_ScalarType
 numpy.__init__.floating.__trunc__(self:float64)->int
@@ -357,6 +371,7 @@ numpy.__init__.floating.is_integer(self:float64)->bool
 numpy.__init__.floating.item(self,__args:Union[L[0],Tuple[()],Tuple[L[0]]]=...)->float
 numpy.__init__.floating.tolist(self)->float
 numpy.__init__.format_parser(self,formats:Any,names:Any,titles:Any,aligned:Any=...,byteorder:Any=...)
+numpy.__init__.format_parser.__init__(self,formats:Any,names:Any,titles:Any,aligned:Any=...,byteorder:Any=...)
 numpy.__init__.frombuffer(buffer,dtype=...,count=...,offset=...,*,like=...)
 numpy.__init__.fromfile(file,dtype=...,count=...,sep=...,offset=...,*,like=...)
 numpy.__init__.fromiter(iter,dtype,count=...,*,like=...)
@@ -365,6 +380,7 @@ numpy.__init__.fromstring(string,dtype=...,count=...,sep=...,*,like=...)
 numpy.__init__.generic(self,*args:Any,**kwargs:Any)
 numpy.__init__.generic.__array__(self,__dtype:_DType)->ndarray[Any, _DType]
 numpy.__init__.generic.__array__(self:_ScalarType,__dtype:None=...)->ndarray[Any, _dtype[_ScalarType]]
+numpy.__init__.generic.__init__(self,*args:Any,**kwargs:Any)
 numpy.__init__.generic.astype(self,dtype:DTypeLike,order:_OrderKACF=...,casting:_Casting=...,subok:bool=...,copy:bool=...)->Any
 numpy.__init__.generic.astype(self,dtype:_DTypeLike[_ScalarType],order:_OrderKACF=...,casting:_Casting=...,subok:bool=...,copy:bool=...)->_ScalarType
 numpy.__init__.generic.base(self)->None
@@ -397,6 +413,7 @@ numpy.__init__.histogram_bin_edges(a,bins=...,range=...,weights=...)
 numpy.__init__.histogramdd(sample,bins=...,range=...,normed=...,weights=...,density=...)
 numpy.__init__.iinfo(self,int_type:Any)
 numpy.__init__.iinfo.__getattr__(self,key:str)->Any
+numpy.__init__.iinfo.__init__(self,int_type:Any)
 numpy.__init__.inexact(number[_NBit1])
 numpy.__init__.inexact.__getnewargs__(self:inexact[_64Bit])->Tuple[float, ...]
 numpy.__init__.inner(a,b)
@@ -435,6 +452,7 @@ numpy.__init__.matrix.__getitem__(self,index)
 numpy.__init__.matrix.__imul__(self,other)
 numpy.__init__.matrix.__ipow__(self,other)
 numpy.__init__.matrix.__mul__(self,other)
+numpy.__init__.matrix.__new__(subtype,data:Any,dtype:Any=...,copy:Any=...)
 numpy.__init__.matrix.__pow__(self,other)
 numpy.__init__.matrix.__rmul__(self,other)
 numpy.__init__.matrix.__rpow__(self,other)
@@ -463,6 +481,7 @@ numpy.__init__.max(a,axis=...,out=...,keepdims=...,initial=...,where=...)
 numpy.__init__.may_share_memory(a,b,max_work=...)
 numpy.__init__.memmap(subtype,filename:Any,dtype:Any=...,mode:Any=...,offset:Any=...,shape:Any=...,order:Any=...)
 numpy.__init__.memmap.__getattr__(self,key:str)->Any
+numpy.__init__.memmap.__new__(subtype,filename:Any,dtype:Any=...,mode:Any=...,offset:Any=...,shape:Any=...,order:Any=...)
 numpy.__init__.min(a,axis=...,out=...,keepdims=...,initial=...,where=...)
 numpy.__init__.min_scalar_type(a)
 numpy.__init__.ndarray(cls:Type[_ArraySelf],shape:_ShapeLike,dtype:DTypeLike=...,buffer:_BufferType=...,offset:int=...,strides:_ShapeLike=...,order:_OrderKACF=...)
@@ -674,6 +693,7 @@ numpy.__init__.ndarray.__mul__(self:_ArrayUInt_co,other:_ArrayLikeUInt_co)->NDAr
 numpy.__init__.ndarray.__neg__(self:NDArray[_NumberType])->NDArray[_NumberType]
 numpy.__init__.ndarray.__neg__(self:NDArray[object_])->Any
 numpy.__init__.ndarray.__neg__(self:NDArray[timedelta64])->NDArray[timedelta64]
+numpy.__init__.ndarray.__new__(cls:Type[_ArraySelf],shape:_ShapeLike,dtype:DTypeLike=...,buffer:_BufferType=...,offset:int=...,strides:_ShapeLike=...,order:_OrderKACF=...)
 numpy.__init__.ndarray.__or__(self:NDArray[Any],other:_ArrayLikeObject_co)->Any
 numpy.__init__.ndarray.__or__(self:NDArray[Any],other:_NestedSequence[Union[str,bytes]])->NoReturn
 numpy.__init__.ndarray.__or__(self:NDArray[Union[bool_,integer[Any]]],other:_RecursiveSequence)->Any
@@ -916,8 +936,10 @@ numpy.__init__.ndarray.view(self,type:Type[_NdArraySubClass])->_NdArraySubClass
 numpy.__init__.ndarray.view(self:_ArraySelf)->_ArraySelf
 numpy.__init__.ndenumerate(cls,arr:_RecursiveSequence)
 numpy.__init__.ndenumerate.__iter__(self:_T)->_T
+numpy.__init__.ndenumerate.__new__(cls,arr:_RecursiveSequence)
 numpy.__init__.ndenumerate.__next__(self:ndenumerate[_ScalarType])->Tuple[_Shape, _ScalarType]
 numpy.__init__.ndindex(self,*shape:SupportsIndex)
+numpy.__init__.ndindex.__init__(self,*shape:SupportsIndex)
 numpy.__init__.ndindex.__iter__(self:_T)->_T
 numpy.__init__.ndindex.__next__(self)->_Shape
 numpy.__init__.nditer(cls,op:Any,flags:Any=...,op_flags:Any=...,op_dtypes:Any=...,order:Any=...,casting:Any=...,op_axes:Any=...,itershape:Any=...,buffersize:Any=...)
@@ -929,6 +951,7 @@ numpy.__init__.nditer.__getattr__(self,key:str)->Any
 numpy.__init__.nditer.__getitem__(self,index:SupportsIndex|slice)->Any
 numpy.__init__.nditer.__iter__(self)->Iterator[Any]
 numpy.__init__.nditer.__len__(self)->int
+numpy.__init__.nditer.__new__(cls,op:Any,flags:Any=...,op_flags:Any=...,op_dtypes:Any=...,order:Any=...,casting:Any=...,op_axes:Any=...,itershape:Any=...,buffersize:Any=...)
 numpy.__init__.nditer.__next__(self)->Any
 numpy.__init__.nditer.__setitem__(self,index:SupportsIndex|slice,value:Any)->None
 numpy.__init__.nested_iters(*args,**kwargs)
@@ -944,6 +967,7 @@ numpy.__init__.number.real(self:_ArraySelf)->_ArraySelf
 numpy.__init__.object_(self,__value:object=...)
 numpy.__init__.object_.__complex__(self)->complex
 numpy.__init__.object_.__float__(self)->float
+numpy.__init__.object_.__init__(self,__value:object=...)
 numpy.__init__.object_.__int__(self)->int
 numpy.__init__.object_.imag(self:_ArraySelf)->_ArraySelf
 numpy.__init__.object_.real(self:_ArraySelf)->_ArraySelf
@@ -953,6 +977,7 @@ numpy.__init__.poly1d.__array__(self,t=...)
 numpy.__init__.poly1d.__div__(self,other)
 numpy.__init__.poly1d.__eq__(self,other)
 numpy.__init__.poly1d.__getitem__(self,val)
+numpy.__init__.poly1d.__init__(self,c_or_r:Any,r:Any=...,variable:Any=...)
 numpy.__init__.poly1d.__iter__(self)
 numpy.__init__.poly1d.__len__(self)
 numpy.__init__.poly1d.__mul__(self,other)
@@ -990,6 +1015,7 @@ numpy.__init__.recarray(subtype,shape:Any,dtype:Any=...,buf:Any=...,offset:Any=.
 numpy.__init__.recarray.__array_finalize__(self,obj)
 numpy.__init__.recarray.__getattribute__(self,attr)
 numpy.__init__.recarray.__getitem__(self,indx)
+numpy.__init__.recarray.__new__(subtype,shape:Any,dtype:Any=...,buf:Any=...,offset:Any=...,strides:Any=...,formats:Any=...,names:Any=...,titles:Any=...,byteorder:Any=...,aligned:Any=...,order:Any=...)
 numpy.__init__.recarray.__setattr__(self,attr,val)
 numpy.__init__.recarray.field(self,attr,val=...)
 numpy.__init__.record(void)
@@ -1004,7 +1030,9 @@ numpy.__init__.seterrobj(errobj)
 numpy.__init__.shares_memory(a,b,max_work=...)
 numpy.__init__.show_config()
 numpy.__init__.signedinteger(self,__value:_IntValue=...)
+numpy.__init__.signedinteger.__init__(self,__value:_IntValue=...)
 numpy.__init__.str_(self,__value:bytes,encoding:str=...,errors:str=...)
+numpy.__init__.str_.__init__(self,__value:bytes,encoding:str=...,errors:str=...)
 numpy.__init__.str_.item(self,__args:Union[L[0],Tuple[()],Tuple[L[0]]]=...)->str
 numpy.__init__.str_.tolist(self)->str
 numpy.__init__.timedelta64(self,__value:Union[None,int,_CharLike_co,dt.timedelta,timedelta64]=...,__format:Union[_CharLike_co,Tuple[_CharLike_co,_IntLike_co]]=...)
@@ -1013,6 +1041,7 @@ numpy.__init__.timedelta64.__add__(self,other:_TD64Like_co)->timedelta64
 numpy.__init__.timedelta64.__complex__(self)->complex
 numpy.__init__.timedelta64.__divmod__(self,other:timedelta64)->Tuple[int64, timedelta64]
 numpy.__init__.timedelta64.__float__(self)->float
+numpy.__init__.timedelta64.__init__(self,__value:Union[None,int,_CharLike_co,dt.timedelta,timedelta64]=...,__format:Union[_CharLike_co,Tuple[_CharLike_co,_IntLike_co]]=...)
 numpy.__init__.timedelta64.__int__(self)->int
 numpy.__init__.timedelta64.__mod__(self,other:timedelta64)->timedelta64
 numpy.__init__.timedelta64.__mul__(self,other:_FloatLike_co)->timedelta64
@@ -1039,10 +1068,13 @@ numpy.__init__.ufunc.ntypes(self)->int
 numpy.__init__.ufunc.signature(self)->Optional[str]
 numpy.__init__.ufunc.types(self)->List[str]
 numpy.__init__.unsignedinteger(self,__value:_IntValue=...)
+numpy.__init__.unsignedinteger.__init__(self,__value:_IntValue=...)
 numpy.__init__.vdot(a,b)
 numpy.__init__.vectorize(self,pyfunc,otypes:Any=...,doc:Any=...,excluded:Any=...,cache:Any=...,signature:Any=...)
+numpy.__init__.vectorize.__init__(self,pyfunc,otypes:Any=...,doc:Any=...,excluded:Any=...,cache:Any=...,signature:Any=...)
 numpy.__init__.void(self,__value:Union[_IntLike_co,bytes])
 numpy.__init__.void.__getitem__(self,key:SupportsIndex)->Any
+numpy.__init__.void.__init__(self,__value:Union[_IntLike_co,bytes])
 numpy.__init__.void.__setitem__(self,key:SupportsIndex,value:ArrayLike)->None
 numpy.__init__.void.imag(self:_ArraySelf)->_ArraySelf
 numpy.__init__.void.real(self:_ArraySelf)->_ArraySelf
@@ -1150,6 +1182,7 @@ A:numpy._pytesttester.module_path->os.path.abspath(module.__path__[0])
 A:numpy._pytesttester.code->pytest.main(pytest_args)
 numpy.PytestTester(self,module_name)
 numpy._pytesttester.PytestTester(self,module_name)
+numpy._pytesttester.PytestTester.__init__(self,module_name)
 numpy._pytesttester._show_numpy_info()
 
 
@@ -1183,9 +1216,13 @@ A:numpy._globals.cls.__instance->super().__new__(cls)
 A:numpy._globals._NoValue->_NoValueType()
 numpy.ModuleDeprecationWarning(DeprecationWarning)
 numpy.VisibleDeprecationWarning(UserWarning)
+numpy._NoValueType(cls)
+numpy._NoValueType.__reduce__(self)
+numpy._NoValueType.__repr__(self)
 numpy._globals.ModuleDeprecationWarning(DeprecationWarning)
 numpy._globals.VisibleDeprecationWarning(UserWarning)
 numpy._globals._NoValueType(cls)
+numpy._globals._NoValueType.__new__(cls)
 numpy._globals._NoValueType.__reduce__(self)
 numpy._globals._NoValueType.__repr__(self)
 
@@ -1475,13 +1512,19 @@ numpy.fill_diagonal(a,val,wrap=False)
 numpy.ix_(*args)
 numpy.lib.index_tricks.AxisConcatenator(self,axis=0,matrix=False,ndmin=1,trans1d=-1)
 numpy.lib.index_tricks.AxisConcatenator.__getitem__(self,key)
+numpy.lib.index_tricks.AxisConcatenator.__init__(self,axis=0,matrix=False,ndmin=1,trans1d=-1)
 numpy.lib.index_tricks.AxisConcatenator.__len__(self)
 numpy.lib.index_tricks.CClass(self)
+numpy.lib.index_tricks.CClass.__init__(self)
 numpy.lib.index_tricks.IndexExpression(self,maketuple)
 numpy.lib.index_tricks.IndexExpression.__getitem__(self,item)
+numpy.lib.index_tricks.IndexExpression.__init__(self,maketuple)
 numpy.lib.index_tricks.MGridClass(self)
+numpy.lib.index_tricks.MGridClass.__init__(self)
 numpy.lib.index_tricks.OGridClass(self)
+numpy.lib.index_tricks.OGridClass.__init__(self)
 numpy.lib.index_tricks.RClass(self)
+numpy.lib.index_tricks.RClass.__init__(self)
 numpy.lib.index_tricks._diag_indices_from(arr)
 numpy.lib.index_tricks._fill_diagonal_dispatcher(a,val,wrap=None)
 numpy.lib.index_tricks._ix__dispatcher(*args)
@@ -1491,10 +1534,13 @@ numpy.lib.index_tricks.fill_diagonal(a,val,wrap=False)
 numpy.lib.index_tricks.ix_(*args)
 numpy.lib.index_tricks.nd_grid(self,sparse=False)
 numpy.lib.index_tricks.nd_grid.__getitem__(self,key)
+numpy.lib.index_tricks.nd_grid.__init__(self,sparse=False)
 numpy.lib.index_tricks.ndenumerate(self,arr)
+numpy.lib.index_tricks.ndenumerate.__init__(self,arr)
 numpy.lib.index_tricks.ndenumerate.__iter__(self)
 numpy.lib.index_tricks.ndenumerate.__next__(self)
 numpy.lib.index_tricks.ndindex(self,*shape)
+numpy.lib.index_tricks.ndindex.__init__(self,*shape)
 numpy.lib.index_tricks.ndindex.__iter__(self)
 numpy.lib.index_tricks.ndindex.__next__(self)
 numpy.lib.index_tricks.ndindex.ndincr(self)
@@ -1657,6 +1703,7 @@ numpy.lib.polynomial.poly1d.__array__(self,t=None)
 numpy.lib.polynomial.poly1d.__div__(self,other)
 numpy.lib.polynomial.poly1d.__eq__(self,other)
 numpy.lib.polynomial.poly1d.__getitem__(self,val)
+numpy.lib.polynomial.poly1d.__init__(self,c_or_r,r=False,variable=None)
 numpy.lib.polynomial.poly1d.__iter__(self)
 numpy.lib.polynomial.poly1d.__len__(self)
 numpy.lib.polynomial.poly1d.__mul__(self,other)
@@ -1847,11 +1894,13 @@ numpy.genfromtxt(fname,dtype=float,comments='#',delimiter=None,skip_header=0,ski
 numpy.lib.npyio.BagObj(self,obj)
 numpy.lib.npyio.BagObj.__dir__(self)
 numpy.lib.npyio.BagObj.__getattribute__(self,key)
+numpy.lib.npyio.BagObj.__init__(self,obj)
 numpy.lib.npyio.NpzFile(self,fid,own_fid=False,allow_pickle=False,pickle_kwargs=None)
 numpy.lib.npyio.NpzFile.__del__(self)
 numpy.lib.npyio.NpzFile.__enter__(self)
 numpy.lib.npyio.NpzFile.__exit__(self,exc_type,exc_value,traceback)
 numpy.lib.npyio.NpzFile.__getitem__(self,key)
+numpy.lib.npyio.NpzFile.__init__(self,fid,own_fid=False,allow_pickle=False,pickle_kwargs=None)
 numpy.lib.npyio.NpzFile.__iter__(self)
 numpy.lib.npyio.NpzFile.__len__(self)
 numpy.lib.npyio.NpzFile.close(self)
@@ -1994,6 +2043,7 @@ numpy.broadcast_arrays(*args,subok=False)
 numpy.broadcast_shapes(*args)
 numpy.broadcast_to(array,shape,subok=False)
 numpy.lib.stride_tricks.DummyArray(self,interface,base=None)
+numpy.lib.stride_tricks.DummyArray.__init__(self,interface,base=None)
 numpy.lib.stride_tricks._broadcast_arrays_dispatcher(*args,subok=None)
 numpy.lib.stride_tricks._broadcast_shape(*args)
 numpy.lib.stride_tricks._broadcast_to(array,shape,subok,readonly)
@@ -2224,6 +2274,7 @@ numpy.deprecate_with_doc(msg)
 numpy.get_include()
 numpy.info(object=None,maxwidth=76,output=sys.stdout,toplevel='numpy')
 numpy.lib.utils._Deprecate(self,old_name=None,new_name=None,message=None)
+numpy.lib.utils._Deprecate.__init__(self,old_name=None,new_name=None,message=None)
 numpy.lib.utils._get_indent(lines)
 numpy.lib.utils._getmembers(item)
 numpy.lib.utils._info(obj,output=sys.stdout)
@@ -2301,6 +2352,7 @@ numpy._datasource._check_mode(mode,encoding,newline)
 numpy._datasource.open(path,mode='r',destpath=os.curdir,encoding=None,newline=None)
 numpy.lib._datasource.DataSource(self,destpath=os.curdir)
 numpy.lib._datasource.DataSource.__del__(self)
+numpy.lib._datasource.DataSource.__init__(self,destpath=os.curdir)
 numpy.lib._datasource.DataSource._cache(self,path)
 numpy.lib._datasource.DataSource._findfile(self,path)
 numpy.lib._datasource.DataSource._isurl(self,path)
@@ -2314,6 +2366,7 @@ numpy.lib._datasource.DataSource.exists(self,path)
 numpy.lib._datasource.DataSource.open(self,path,mode='r',encoding=None,newline=None)
 numpy.lib._datasource.Repository(self,baseurl,destpath=os.curdir)
 numpy.lib._datasource.Repository.__del__(self)
+numpy.lib._datasource.Repository.__init__(self,baseurl,destpath=os.curdir)
 numpy.lib._datasource.Repository._findfile(self,path)
 numpy.lib._datasource.Repository._fullpath(self,path)
 numpy.lib._datasource.Repository.abspath(self,path)
@@ -2322,6 +2375,7 @@ numpy.lib._datasource.Repository.listdir(self)
 numpy.lib._datasource.Repository.open(self,path,mode='r',encoding=None,newline=None)
 numpy.lib._datasource._FileOpeners(self)
 numpy.lib._datasource._FileOpeners.__getitem__(self,key)
+numpy.lib._datasource._FileOpeners.__init__(self)
 numpy.lib._datasource._FileOpeners._load(self)
 numpy.lib._datasource._FileOpeners.keys(self)
 numpy.lib._datasource._check_mode(mode,encoding,newline)
@@ -2547,13 +2601,16 @@ numpy.lib._iotools.ConversionWarning(UserWarning)
 numpy.lib._iotools.ConverterError(Exception)
 numpy.lib._iotools.ConverterLockError(ConverterError)
 numpy.lib._iotools.LineSplitter(self,delimiter=None,comments='#',autostrip=True,encoding=None)
+numpy.lib._iotools.LineSplitter.__init__(self,delimiter=None,comments='#',autostrip=True,encoding=None)
 numpy.lib._iotools.LineSplitter._delimited_splitter(self,line)
 numpy.lib._iotools.LineSplitter._fixedwidth_splitter(self,line)
 numpy.lib._iotools.LineSplitter._variablewidth_splitter(self,line)
 numpy.lib._iotools.LineSplitter.autostrip(self,method)
 numpy.lib._iotools.NameValidator(self,excludelist=None,deletechars=None,case_sensitive=None,replace_space='_')
+numpy.lib._iotools.NameValidator.__init__(self,excludelist=None,deletechars=None,case_sensitive=None,replace_space='_')
 numpy.lib._iotools.NameValidator.validate(self,names,defaultfmt='f%i',nbfields=None)
 numpy.lib._iotools.StringConverter(self,dtype_or_func=None,default=None,missing_values=None,locked=False)
+numpy.lib._iotools.StringConverter.__init__(self,dtype_or_func=None,default=None,missing_values=None,locked=False)
 numpy.lib._iotools.StringConverter._do_upgrade(self)
 numpy.lib._iotools.StringConverter._dtypeortype(cls,dtype)
 numpy.lib._iotools.StringConverter._find_map_entry(cls,dtype)
@@ -2606,6 +2663,7 @@ numpy.lib._version.NumpyVersion(self,vstring)
 numpy.lib._version.NumpyVersion.__eq__(self,other)
 numpy.lib._version.NumpyVersion.__ge__(self,other)
 numpy.lib._version.NumpyVersion.__gt__(self,other)
+numpy.lib._version.NumpyVersion.__init__(self,vstring)
 numpy.lib._version.NumpyVersion.__le__(self,other)
 numpy.lib._version.NumpyVersion.__lt__(self,other)
 numpy.lib._version.NumpyVersion.__ne__(self,other)
@@ -2775,6 +2833,7 @@ numpy.lib.user_array.container.__idiv__(self,other)
 numpy.lib.user_array.container.__ilshift__(self,other)
 numpy.lib.user_array.container.__imod__(self,other)
 numpy.lib.user_array.container.__imul__(self,other)
+numpy.lib.user_array.container.__init__(self,data,dtype=None,copy=True)
 numpy.lib.user_array.container.__int__(self)
 numpy.lib.user_array.container.__invert__(self)
 numpy.lib.user_array.container.__ior__(self,other)
@@ -3260,6 +3319,7 @@ numpy.lib.function_base.trapz(y,x=None,dx=1.0,axis=-1)
 numpy.lib.function_base.trim_zeros(filt,trim='fb')
 numpy.lib.function_base.unwrap(p,discont=None,axis=-1,*,period=2*pi)
 numpy.lib.function_base.vectorize(self,pyfunc,otypes=None,doc=None,excluded=None,cache=False,signature=None)
+numpy.lib.function_base.vectorize.__init__(self,pyfunc,otypes=None,doc=None,excluded=None,cache=False,signature=None)
 numpy.lib.function_base.vectorize._get_ufunc_and_otypes(self,func,args)
 numpy.lib.function_base.vectorize._vectorize_call(self,func,args)
 numpy.lib.function_base.vectorize._vectorize_call_with_signature(self,func,args)
@@ -3369,16 +3429,17 @@ A:numpy.lib.arrayterator.out.stop[i]->min(stop, out.stop[i])
 A:numpy.lib.arrayterator.slice_->tuple((slice(*t) for t in zip(start, stop, step)))
 A:numpy.lib.arrayterator.stop[i]->min(self.stop[i], stop[i])
 numpy.Arrayterator(self,var,buf_size=None)
-numpy.arrayterator.Arrayterator.__array__(self)
-numpy.arrayterator.Arrayterator.__getattr__(self,attr)
-numpy.arrayterator.Arrayterator.__getitem__(self,index)
-numpy.arrayterator.Arrayterator.__iter__(self)
-numpy.arrayterator.Arrayterator.flat(self)
-numpy.arrayterator.Arrayterator.shape(self)
+numpy.Arrayterator.__array__(self)
+numpy.Arrayterator.__getattr__(self,attr)
+numpy.Arrayterator.__getitem__(self,index)
+numpy.Arrayterator.__iter__(self)
+numpy.Arrayterator.flat(self)
+numpy.Arrayterator.shape(self)
 numpy.lib.arrayterator.Arrayterator(self,var,buf_size=None)
 numpy.lib.arrayterator.Arrayterator.__array__(self)
 numpy.lib.arrayterator.Arrayterator.__getattr__(self,attr)
 numpy.lib.arrayterator.Arrayterator.__getitem__(self,index)
+numpy.lib.arrayterator.Arrayterator.__init__(self,var,buf_size=None)
 numpy.lib.arrayterator.Arrayterator.__iter__(self)
 numpy.lib.arrayterator.Arrayterator.flat(self)
 numpy.lib.arrayterator.Arrayterator.shape(self)
@@ -3658,9 +3719,11 @@ A:numpy.lib.tests.test_io.expected->numpy.array((1,), dtype=np.int32)
 A:numpy.lib.tests.test_io.g->gzip.GzipFile(fileobj=s, mode='w')
 A:numpy.lib.tests.test_io.z->numpy.load(s)
 numpy.lib.tests.test_io.JustReader(self,base)
+numpy.lib.tests.test_io.JustReader.__init__(self,base)
 numpy.lib.tests.test_io.JustReader.read(self,n)
 numpy.lib.tests.test_io.JustReader.seek(self,off,whence=0)
 numpy.lib.tests.test_io.JustWriter(self,base)
+numpy.lib.tests.test_io.JustWriter.__init__(self,base)
 numpy.lib.tests.test_io.JustWriter.flush(self)
 numpy.lib.tests.test_io.JustWriter.write(self,s)
 numpy.lib.tests.test_io.LoadTxtBase
@@ -3852,6 +3915,7 @@ numpy.lib.tests.test_io.Testfromregex.test_record_2(self)
 numpy.lib.tests.test_io.Testfromregex.test_record_3(self)
 numpy.lib.tests.test_io.Testfromregex.test_record_unicode(self)
 numpy.lib.tests.test_io.TextIO(self,s='')
+numpy.lib.tests.test_io.TextIO.__init__(self,s='')
 numpy.lib.tests.test_io.TextIO.write(self,s)
 numpy.lib.tests.test_io.TextIO.writelines(self,lines)
 numpy.lib.tests.test_io.strptime(s,fmt=None)
@@ -5059,6 +5123,7 @@ A:numpy.lib.tests.test_mixins.err_msg->'failed for operator {}'.format(op)
 A:numpy.lib.tests.test_mixins.(mantissa, exponent)->numpy.frexp(2 ** (-3))
 numpy.lib.tests.test_mixins.ArrayLike(self,value)
 numpy.lib.tests.test_mixins.ArrayLike.__array_ufunc__(self,ufunc,method,*inputs,**kwargs)
+numpy.lib.tests.test_mixins.ArrayLike.__init__(self,value)
 numpy.lib.tests.test_mixins.ArrayLike.__repr__(self)
 numpy.lib.tests.test_mixins.TestNDArrayOperatorsMixin
 numpy.lib.tests.test_mixins.TestNDArrayOperatorsMixin.test_array_like_add(self)
@@ -6889,6 +6954,7 @@ A:numpy.lib.tests.test_stride_tricks.input_array->numpy.array('a', dtype=object)
 A:numpy.lib.tests.test_stride_tricks.(actual, _)->broadcast_arrays(input_array, np.ones(3))
 numpy.lib.tests.test_stride_tricks.SimpleSubClass(cls,*args,**kwargs)
 numpy.lib.tests.test_stride_tricks.SimpleSubClass.__array_finalize__(self,obj)
+numpy.lib.tests.test_stride_tricks.SimpleSubClass.__new__(cls,*args,**kwargs)
 numpy.lib.tests.test_stride_tricks.TestSlidingWindowView
 numpy.lib.tests.test_stride_tricks.TestSlidingWindowView.test_1d(self)
 numpy.lib.tests.test_stride_tricks.TestSlidingWindowView.test_2d(self)
@@ -6899,6 +6965,7 @@ numpy.lib.tests.test_stride_tricks.TestSlidingWindowView.test_errors(self)
 numpy.lib.tests.test_stride_tricks.TestSlidingWindowView.test_subok(self)
 numpy.lib.tests.test_stride_tricks.TestSlidingWindowView.test_writeable(self)
 numpy.lib.tests.test_stride_tricks.VerySimpleSubClass(cls,*args,**kwargs)
+numpy.lib.tests.test_stride_tricks.VerySimpleSubClass.__new__(cls,*args,**kwargs)
 numpy.lib.tests.test_stride_tricks.as_strided_writeable()
 numpy.lib.tests.test_stride_tricks.assert_incompatible_shapes_raise(input_shapes)
 numpy.lib.tests.test_stride_tricks.assert_same_as_ufunc(shape0,shape1,transposed=False,flipped=False)
@@ -6984,8 +7051,10 @@ numpy.tests.test_public_api.test_numpy_namespace()
 A:numpy.tests.test_warnings.p->ParseCall()
 A:numpy.tests.test_warnings.tree->ast.parse(file.read())
 numpy.tests.test_warnings.FindFuncs(self,filename)
+numpy.tests.test_warnings.FindFuncs.__init__(self,filename)
 numpy.tests.test_warnings.FindFuncs.visit_Call(self,node)
 numpy.tests.test_warnings.ParseCall(self)
+numpy.tests.test_warnings.ParseCall.__init__(self)
 numpy.tests.test_warnings.ParseCall.visit_Attribute(self,node)
 numpy.tests.test_warnings.ParseCall.visit_Name(self,node)
 numpy.tests.test_warnings.test_warning_calls()
@@ -7143,6 +7212,7 @@ numpy.compat.py3k.asunicode_nested(x)
 numpy.compat.py3k.contextlib_nullcontext(self,enter_result=None)
 numpy.compat.py3k.contextlib_nullcontext.__enter__(self)
 numpy.compat.py3k.contextlib_nullcontext.__exit__(self,*excinfo)
+numpy.compat.py3k.contextlib_nullcontext.__init__(self,enter_result=None)
 numpy.compat.py3k.getexception()
 numpy.compat.py3k.is_pathlib_path(obj)
 numpy.compat.py3k.isfileobj(f)
@@ -7263,6 +7333,7 @@ numpy.matrixlib.defmatrix.matrix.__getitem__(self,index)
 numpy.matrixlib.defmatrix.matrix.__imul__(self,other)
 numpy.matrixlib.defmatrix.matrix.__ipow__(self,other)
 numpy.matrixlib.defmatrix.matrix.__mul__(self,other)
+numpy.matrixlib.defmatrix.matrix.__new__(subtype,data,dtype=None,copy=True)
 numpy.matrixlib.defmatrix.matrix.__pow__(self,other)
 numpy.matrixlib.defmatrix.matrix.__rmul__(self,other)
 numpy.matrixlib.defmatrix.matrix.__rpow__(self,other)
@@ -7540,6 +7611,7 @@ A:numpy.matrixlib.tests.test_masked_matrix.xmx->masked_array(mx.data.__array__()
 A:numpy.matrixlib.tests.test_masked_matrix.expected->numpy.ma.array(np.r_['r', 1, 2, 3])
 numpy.matrixlib.tests.test_masked_matrix.MMatrix(cls,data,mask=nomask)
 numpy.matrixlib.tests.test_masked_matrix.MMatrix.__array_finalize__(self,obj)
+numpy.matrixlib.tests.test_masked_matrix.MMatrix.__new__(cls,data,mask=nomask)
 numpy.matrixlib.tests.test_masked_matrix.MMatrix._series(self)
 numpy.matrixlib.tests.test_masked_matrix.TestConcatenator
 numpy.matrixlib.tests.test_masked_matrix.TestConcatenator.test_matrix(self)
@@ -7935,6 +8007,7 @@ numpy.numerictypes.sctype2char(sctype)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/core/numerictypes.pyi----------------------------------------
 numpy.core.numerictypes._CastFunc(self,x:ArrayLike,k:DTypeLike=...)
+numpy.core.numerictypes._CastFunc.__call__(self,x:ArrayLike,k:DTypeLike=...)
 numpy.core.numerictypes._TypeCodes(TypedDict)
 numpy.numerictypes._CastFunc(self,x:ArrayLike,k:DTypeLike=...)
 numpy.numerictypes._TypeCodes(TypedDict)
@@ -7978,6 +8051,60 @@ A:numpy.core.defchararray.val->narray(obj, dtype=(dtype, itemsize), order=order,
 A:numpy.core.defchararray.temp->narray(obj, dtype=(dtype, itemsize), order=order, subok=True).rstrip()
 A:numpy.core.defchararray.obj->obj.tolist().tolist()
 numpy.chararray(subtype,shape,itemsize=1,unicode=False,buffer=None,offset=0,strides=None,order='C')
+numpy.chararray.__add__(self,other)
+numpy.chararray.__array_finalize__(self,obj)
+numpy.chararray.__eq__(self,other)
+numpy.chararray.__ge__(self,other)
+numpy.chararray.__getitem__(self,obj)
+numpy.chararray.__gt__(self,other)
+numpy.chararray.__le__(self,other)
+numpy.chararray.__lt__(self,other)
+numpy.chararray.__mod__(self,i)
+numpy.chararray.__mul__(self,i)
+numpy.chararray.__ne__(self,other)
+numpy.chararray.__radd__(self,other)
+numpy.chararray.__rmod__(self,other)
+numpy.chararray.__rmul__(self,i)
+numpy.chararray.argsort(self,axis=-1,kind=None,order=None)
+numpy.chararray.capitalize(self)
+numpy.chararray.center(self,width,fillchar='')
+numpy.chararray.count(self,sub,start=0,end=None)
+numpy.chararray.decode(self,encoding=None,errors=None)
+numpy.chararray.encode(self,encoding=None,errors=None)
+numpy.chararray.endswith(self,suffix,start=0,end=None)
+numpy.chararray.expandtabs(self,tabsize=8)
+numpy.chararray.find(self,sub,start=0,end=None)
+numpy.chararray.index(self,sub,start=0,end=None)
+numpy.chararray.isalnum(self)
+numpy.chararray.isalpha(self)
+numpy.chararray.isdecimal(self)
+numpy.chararray.isdigit(self)
+numpy.chararray.islower(self)
+numpy.chararray.isnumeric(self)
+numpy.chararray.isspace(self)
+numpy.chararray.istitle(self)
+numpy.chararray.isupper(self)
+numpy.chararray.join(self,seq)
+numpy.chararray.ljust(self,width,fillchar='')
+numpy.chararray.lower(self)
+numpy.chararray.lstrip(self,chars=None)
+numpy.chararray.partition(self,sep)
+numpy.chararray.replace(self,old,new,count=None)
+numpy.chararray.rfind(self,sub,start=0,end=None)
+numpy.chararray.rindex(self,sub,start=0,end=None)
+numpy.chararray.rjust(self,width,fillchar='')
+numpy.chararray.rpartition(self,sep)
+numpy.chararray.rsplit(self,sep=None,maxsplit=None)
+numpy.chararray.rstrip(self,chars=None)
+numpy.chararray.split(self,sep=None,maxsplit=None)
+numpy.chararray.splitlines(self,keepends=None)
+numpy.chararray.startswith(self,prefix,start=0,end=None)
+numpy.chararray.strip(self,chars=None)
+numpy.chararray.swapcase(self)
+numpy.chararray.title(self)
+numpy.chararray.translate(self,table,deletechars=None)
+numpy.chararray.upper(self)
+numpy.chararray.zfill(self,width)
 numpy.core.defchararray._binary_op_dispatcher(x1,x2)
 numpy.core.defchararray._center_dispatcher(a,width,fillchar=None)
 numpy.core.defchararray._clean_args(*args)
@@ -8019,6 +8146,7 @@ numpy.core.defchararray.chararray.__lt__(self,other)
 numpy.core.defchararray.chararray.__mod__(self,i)
 numpy.core.defchararray.chararray.__mul__(self,i)
 numpy.core.defchararray.chararray.__ne__(self,other)
+numpy.core.defchararray.chararray.__new__(subtype,shape,itemsize=1,unicode=False,buffer=None,offset=0,strides=None,order='C')
 numpy.core.defchararray.chararray.__radd__(self,other)
 numpy.core.defchararray.chararray.__rmod__(self,other)
 numpy.core.defchararray.chararray.__rmul__(self,i)
@@ -8137,60 +8265,6 @@ numpy.defchararray.array(obj,itemsize=None,copy=True,unicode=None,order=None)
 numpy.defchararray.asarray(obj,itemsize=None,unicode=None,order=None)
 numpy.defchararray.capitalize(a)
 numpy.defchararray.center(a,width,fillchar='')
-numpy.defchararray.chararray.__add__(self,other)
-numpy.defchararray.chararray.__array_finalize__(self,obj)
-numpy.defchararray.chararray.__eq__(self,other)
-numpy.defchararray.chararray.__ge__(self,other)
-numpy.defchararray.chararray.__getitem__(self,obj)
-numpy.defchararray.chararray.__gt__(self,other)
-numpy.defchararray.chararray.__le__(self,other)
-numpy.defchararray.chararray.__lt__(self,other)
-numpy.defchararray.chararray.__mod__(self,i)
-numpy.defchararray.chararray.__mul__(self,i)
-numpy.defchararray.chararray.__ne__(self,other)
-numpy.defchararray.chararray.__radd__(self,other)
-numpy.defchararray.chararray.__rmod__(self,other)
-numpy.defchararray.chararray.__rmul__(self,i)
-numpy.defchararray.chararray.argsort(self,axis=-1,kind=None,order=None)
-numpy.defchararray.chararray.capitalize(self)
-numpy.defchararray.chararray.center(self,width,fillchar='')
-numpy.defchararray.chararray.count(self,sub,start=0,end=None)
-numpy.defchararray.chararray.decode(self,encoding=None,errors=None)
-numpy.defchararray.chararray.encode(self,encoding=None,errors=None)
-numpy.defchararray.chararray.endswith(self,suffix,start=0,end=None)
-numpy.defchararray.chararray.expandtabs(self,tabsize=8)
-numpy.defchararray.chararray.find(self,sub,start=0,end=None)
-numpy.defchararray.chararray.index(self,sub,start=0,end=None)
-numpy.defchararray.chararray.isalnum(self)
-numpy.defchararray.chararray.isalpha(self)
-numpy.defchararray.chararray.isdecimal(self)
-numpy.defchararray.chararray.isdigit(self)
-numpy.defchararray.chararray.islower(self)
-numpy.defchararray.chararray.isnumeric(self)
-numpy.defchararray.chararray.isspace(self)
-numpy.defchararray.chararray.istitle(self)
-numpy.defchararray.chararray.isupper(self)
-numpy.defchararray.chararray.join(self,seq)
-numpy.defchararray.chararray.ljust(self,width,fillchar='')
-numpy.defchararray.chararray.lower(self)
-numpy.defchararray.chararray.lstrip(self,chars=None)
-numpy.defchararray.chararray.partition(self,sep)
-numpy.defchararray.chararray.replace(self,old,new,count=None)
-numpy.defchararray.chararray.rfind(self,sub,start=0,end=None)
-numpy.defchararray.chararray.rindex(self,sub,start=0,end=None)
-numpy.defchararray.chararray.rjust(self,width,fillchar='')
-numpy.defchararray.chararray.rpartition(self,sep)
-numpy.defchararray.chararray.rsplit(self,sep=None,maxsplit=None)
-numpy.defchararray.chararray.rstrip(self,chars=None)
-numpy.defchararray.chararray.split(self,sep=None,maxsplit=None)
-numpy.defchararray.chararray.splitlines(self,keepends=None)
-numpy.defchararray.chararray.startswith(self,prefix,start=0,end=None)
-numpy.defchararray.chararray.strip(self,chars=None)
-numpy.defchararray.chararray.swapcase(self)
-numpy.defchararray.chararray.title(self)
-numpy.defchararray.chararray.translate(self,table,deletechars=None)
-numpy.defchararray.chararray.upper(self)
-numpy.defchararray.chararray.zfill(self,width)
 numpy.defchararray.count(a,sub,start=0,end=None)
 numpy.defchararray.decode(a,encoding=None,errors=None)
 numpy.defchararray.encode(a,encoding=None,errors=None)
@@ -8263,6 +8337,7 @@ numpy.MachAr(self,float_conv=float,int_conv=int,float_to_float=float,float_to_st
 numpy.MachAr.__str__(self)
 numpy.MachAr._do_init(self,float_conv,int_conv,float_to_float,float_to_str,title)
 numpy.core.machar.MachAr(self,float_conv=float,int_conv=int,float_to_float=float,float_to_str=lambdav:'%24.16e'%v,title='Pythonfloatingpointnumber')
+numpy.core.machar.MachAr.__init__(self,float_conv=float,int_conv=int,float_to_float=float,float_to_str=lambdav:'%24.16e'%v,title='Pythonfloatingpointnumber')
 numpy.core.machar.MachAr.__str__(self)
 numpy.core.machar.MachAr._do_init(self,float_conv,int_conv,float_to_float,float_to_str,title)
 
@@ -8342,6 +8417,7 @@ numpy.core.memmap.memmap(subtype,filename,dtype=uint8,mode='r+',offset=0,shape=N
 numpy.core.memmap.memmap.__array_finalize__(self,obj)
 numpy.core.memmap.memmap.__array_wrap__(self,arr,context=None)
 numpy.core.memmap.memmap.__getitem__(self,index)
+numpy.core.memmap.memmap.__new__(subtype,filename,dtype=uint8,mode='r+',offset=0,shape=None,order='C')
 numpy.core.memmap.memmap.flush(self)
 numpy.flush(self)
 numpy.memmap(subtype,filename,dtype=uint8,mode='r+',offset=0,shape=None,order='C')
@@ -8612,18 +8688,26 @@ numpy.arrayprint.set_printoptions(precision=None,threshold=None,edgeitems=None,l
 numpy.arrayprint.set_string_function(f,repr=True)
 numpy.arrayprint.str_format(x)
 numpy.core.arrayprint.BoolFormat(self,data,**kwargs)
+numpy.core.arrayprint.BoolFormat.__init__(self,data,**kwargs)
 numpy.core.arrayprint.ComplexFloatingFormat(self,x,precision,floatmode,suppress_small,sign=False,*,legacy=None)
+numpy.core.arrayprint.ComplexFloatingFormat.__init__(self,x,precision,floatmode,suppress_small,sign=False,*,legacy=None)
 numpy.core.arrayprint.DatetimeFormat(self,x,unit=None,timezone=None,casting='same_kind',legacy=False)
+numpy.core.arrayprint.DatetimeFormat.__init__(self,x,unit=None,timezone=None,casting='same_kind',legacy=False)
 numpy.core.arrayprint.DatetimeFormat._format_non_nat(self,x)
 numpy.core.arrayprint.FloatingFormat(self,data,precision,floatmode,suppress_small,sign=False,*,legacy=None)
+numpy.core.arrayprint.FloatingFormat.__init__(self,data,precision,floatmode,suppress_small,sign=False,*,legacy=None)
 numpy.core.arrayprint.FloatingFormat.fillFormat(self,data)
 numpy.core.arrayprint.IntegerFormat(self,data)
+numpy.core.arrayprint.IntegerFormat.__init__(self,data)
 numpy.core.arrayprint.StructuredVoidFormat(self,format_functions)
+numpy.core.arrayprint.StructuredVoidFormat.__init__(self,format_functions)
 numpy.core.arrayprint.StructuredVoidFormat.from_data(cls,data,**options)
 numpy.core.arrayprint.SubArrayFormat(self,format_function)
+numpy.core.arrayprint.SubArrayFormat.__init__(self,format_function)
 numpy.core.arrayprint.TimedeltaFormat(_TimelikeFormat)
 numpy.core.arrayprint.TimedeltaFormat._format_non_nat(self,x)
 numpy.core.arrayprint._TimelikeFormat(self,data)
+numpy.core.arrayprint._TimelikeFormat.__init__(self,data)
 numpy.core.arrayprint._TimelikeFormat._format_non_nat(self,x)
 numpy.core.arrayprint._array2string(a,options,separator='',prefix='')
 numpy.core.arrayprint._array2string_dispatcher(a,max_line_width=None,precision=None,suppress_small=None,separator=None,prefix=None,style=None,formatter=None,threshold=None,edgeitems=None,sign=None,floatmode=None,suffix=None,*,legacy=None)
@@ -8720,6 +8804,7 @@ numpy.core._ufunc_config._unspecified
 numpy.core._ufunc_config.errstate(self,*,call=_Unspecified,**kwargs)
 numpy.core._ufunc_config.errstate.__enter__(self)
 numpy.core._ufunc_config.errstate.__exit__(self,*exc_info)
+numpy.core._ufunc_config.errstate.__init__(self,*,call=_Unspecified,**kwargs)
 numpy.core._ufunc_config.getbufsize()
 numpy.core._ufunc_config.geterr()
 numpy.core._ufunc_config.geterrcall()
@@ -8925,6 +9010,7 @@ numpy._internal.npy_ctypes_check(cls)
 numpy._internal.recursive(self,func)
 numpy.core._internal._Stream(self,s)
 numpy.core._internal._Stream.__bool__(self)
+numpy.core._internal._Stream.__init__(self,s)
 numpy.core._internal._Stream.advance(self,n)
 numpy.core._internal._Stream.consume(self,c)
 numpy.core._internal._Stream.consume_until(self,c)
@@ -8935,6 +9021,7 @@ numpy.core._internal._array_descr(descriptor)
 numpy.core._internal._commastring(astr)
 numpy.core._internal._copy_fields(ary)
 numpy.core._internal._ctypes(self,array,ptr=None)
+numpy.core._internal._ctypes.__init__(self,array,ptr=None)
 numpy.core._internal._ctypes._as_parameter_(self)
 numpy.core._internal._ctypes.data(self)
 numpy.core._internal._ctypes.data_as(self,obj)
@@ -8955,6 +9042,7 @@ numpy.core._internal._lcm(a,b)
 numpy.core._internal._makenames_list(adict,align)
 numpy.core._internal._missing_ctypes
 numpy.core._internal._missing_ctypes.c_void_p(self,ptr)
+numpy.core._internal._missing_ctypes.c_void_p.__init__(self,ptr)
 numpy.core._internal._missing_ctypes.cast(self,num,obj)
 numpy.core._internal._newnames(datatype,order)
 numpy.core._internal._prod(a)
@@ -8966,13 +9054,16 @@ numpy.core._internal.array_function_errmsg_formatter(public_api,types)
 numpy.core._internal.array_ufunc_errmsg_formatter(dummy,ufunc,method,*inputs,**kwargs)
 numpy.core._internal.dummy_ctype(self,cls)
 numpy.core._internal.dummy_ctype.__eq__(self,other)
+numpy.core._internal.dummy_ctype.__init__(self,cls)
 numpy.core._internal.dummy_ctype.__mul__(self,other)
 numpy.core._internal.dummy_ctype.__ne__(self,other)
 numpy.core._internal.npy_ctypes_check(cls)
 numpy.core._internal.recursive(self,func)
+numpy.core._internal.recursive.__init__(self,func)
 
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/core/_internal.pyi----------------------------------------
+numpy.core._internal._ctypes.__new__(cls,array:ndarray[Any,Any],ptr:_PT)
 
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/core/fromnumeric.py----------------------------------------
@@ -9415,6 +9506,7 @@ A:numpy.core.setup.msvc_mlib->' '.join(['%s.lib' % l for l in mlibs])
 A:numpy.core.setup.blas_info->get_info('blas_opt', 0)
 A:numpy.core.setup.dir->os.path.dirname(target)
 numpy.core.setup.CallOnceOnly(self)
+numpy.core.setup.CallOnceOnly.__init__(self)
 numpy.core.setup.CallOnceOnly.check_complex(self,*a,**kw)
 numpy.core.setup.CallOnceOnly.check_ieee_macros(self,*a,**kw)
 numpy.core.setup.CallOnceOnly.check_types(self,*a,**kw)
@@ -9515,6 +9607,7 @@ numpy.core.records._deprecate_shape_0_as_None(shape)
 numpy.core.records.array(obj,dtype=None,shape=None,offset=0,strides=None,formats=None,names=None,titles=None,aligned=False,byteorder=None,copy=True)
 numpy.core.records.find_duplicate(list)
 numpy.core.records.format_parser(self,formats,names,titles,aligned=False,byteorder=None)
+numpy.core.records.format_parser.__init__(self,formats,names,titles,aligned=False,byteorder=None)
 numpy.core.records.format_parser._createdtype(self,byteorder)
 numpy.core.records.format_parser._parseFormats(self,formats,aligned=False)
 numpy.core.records.format_parser._setfieldnames(self,names,titles)
@@ -9527,6 +9620,7 @@ numpy.core.records.recarray(subtype,shape,dtype=None,buf=None,offset=0,strides=N
 numpy.core.records.recarray.__array_finalize__(self,obj)
 numpy.core.records.recarray.__getattribute__(self,attr)
 numpy.core.records.recarray.__getitem__(self,indx)
+numpy.core.records.recarray.__new__(subtype,shape,dtype=None,buf=None,offset=0,strides=None,formats=None,names=None,titles=None,byteorder=None,aligned=False,order='C')
 numpy.core.records.recarray.__repr__(self)
 numpy.core.records.recarray.__setattr__(self,attr,val)
 numpy.core.records.recarray.field(self,attr,val=None)
@@ -9538,31 +9632,31 @@ numpy.core.records.record.__setattr__(self,attr,val)
 numpy.core.records.record.__str__(self)
 numpy.core.records.record.pprint(self)
 numpy.format_parser(self,formats,names,titles,aligned=False,byteorder=None)
+numpy.format_parser._createdtype(self,byteorder)
+numpy.format_parser._parseFormats(self,formats,aligned=False)
+numpy.format_parser._setfieldnames(self,names,titles)
 numpy.recarray(subtype,shape,dtype=None,buf=None,offset=0,strides=None,formats=None,names=None,titles=None,byteorder=None,aligned=False,order='C')
+numpy.recarray.__array_finalize__(self,obj)
+numpy.recarray.__getattribute__(self,attr)
+numpy.recarray.__getitem__(self,indx)
+numpy.recarray.__repr__(self)
+numpy.recarray.__setattr__(self,attr,val)
+numpy.recarray.field(self,attr,val=None)
 numpy.record(nt.void)
+numpy.record.__getattribute__(self,attr)
+numpy.record.__getitem__(self,indx)
+numpy.record.__repr__(self)
+numpy.record.__setattr__(self,attr,val)
+numpy.record.__str__(self)
+numpy.record.pprint(self)
 numpy.records._deprecate_shape_0_as_None(shape)
 numpy.records.array(obj,dtype=None,shape=None,offset=0,strides=None,formats=None,names=None,titles=None,aligned=False,byteorder=None,copy=True)
 numpy.records.find_duplicate(list)
-numpy.records.format_parser._createdtype(self,byteorder)
-numpy.records.format_parser._parseFormats(self,formats,aligned=False)
-numpy.records.format_parser._setfieldnames(self,names,titles)
 numpy.records.fromarrays(arrayList,dtype=None,shape=None,formats=None,names=None,titles=None,aligned=False,byteorder=None)
 numpy.records.fromfile(fd,dtype=None,shape=None,offset=0,formats=None,names=None,titles=None,aligned=False,byteorder=None)
 numpy.records.fromrecords(recList,dtype=None,shape=None,formats=None,names=None,titles=None,aligned=False,byteorder=None)
 numpy.records.fromstring(datastring,dtype=None,shape=None,offset=0,formats=None,names=None,titles=None,aligned=False,byteorder=None)
 numpy.records.get_remaining_size(fd)
-numpy.records.recarray.__array_finalize__(self,obj)
-numpy.records.recarray.__getattribute__(self,attr)
-numpy.records.recarray.__getitem__(self,indx)
-numpy.records.recarray.__repr__(self)
-numpy.records.recarray.__setattr__(self,attr,val)
-numpy.records.recarray.field(self,attr,val=None)
-numpy.records.record.__getattribute__(self,attr)
-numpy.records.record.__getitem__(self,indx)
-numpy.records.record.__repr__(self)
-numpy.records.record.__setattr__(self,attr,val)
-numpy.records.record.__str__(self)
-numpy.records.record.pprint(self)
 
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/core/getlimits.py----------------------------------------
@@ -9609,6 +9703,7 @@ numpy._get_machar(ftype)
 numpy._register_known_types()
 numpy._register_type(machar,bytepat)
 numpy.core.getlimits.MachArLike(self,ftype,*,eps,epsneg,huge,tiny,ibeta,**kwargs)
+numpy.core.getlimits.MachArLike.__init__(self,ftype,*,eps,epsneg,huge,tiny,ibeta,**kwargs)
 numpy.core.getlimits._discovered_machar(ftype)
 numpy.core.getlimits._fr0(a)
 numpy.core.getlimits._fr1(a)
@@ -9616,10 +9711,12 @@ numpy.core.getlimits._get_machar(ftype)
 numpy.core.getlimits._register_known_types()
 numpy.core.getlimits._register_type(machar,bytepat)
 numpy.core.getlimits.finfo(cls,dtype)
+numpy.core.getlimits.finfo.__new__(cls,dtype)
 numpy.core.getlimits.finfo.__repr__(self)
 numpy.core.getlimits.finfo.__str__(self)
 numpy.core.getlimits.finfo._init(self,dtype)
 numpy.core.getlimits.iinfo(self,int_type)
+numpy.core.getlimits.iinfo.__init__(self,int_type)
 numpy.core.getlimits.iinfo.__repr__(self)
 numpy.core.getlimits.iinfo.__str__(self)
 numpy.core.getlimits.iinfo.max(self)
@@ -9724,20 +9821,28 @@ numpy._exceptions._UFuncOutputCastingError.__str__(self)
 numpy._exceptions._display_as_base(cls)
 numpy._exceptions._unpack_tuple(tup)
 numpy.core._exceptions.AxisError(self,axis,ndim=None,msg_prefix=None)
+numpy.core._exceptions.AxisError.__init__(self,axis,ndim=None,msg_prefix=None)
 numpy.core._exceptions.TooHardError(RuntimeError)
 numpy.core._exceptions.UFuncTypeError(self,ufunc)
+numpy.core._exceptions.UFuncTypeError.__init__(self,ufunc)
 numpy.core._exceptions._ArrayMemoryError(self,shape,dtype)
+numpy.core._exceptions._ArrayMemoryError.__init__(self,shape,dtype)
 numpy.core._exceptions._ArrayMemoryError.__str__(self)
 numpy.core._exceptions._ArrayMemoryError._size_to_string(num_bytes)
 numpy.core._exceptions._ArrayMemoryError._total_size(self)
 numpy.core._exceptions._UFuncBinaryResolutionError(self,ufunc,dtypes)
+numpy.core._exceptions._UFuncBinaryResolutionError.__init__(self,ufunc,dtypes)
 numpy.core._exceptions._UFuncBinaryResolutionError.__str__(self)
 numpy.core._exceptions._UFuncCastingError(self,ufunc,casting,from_,to)
+numpy.core._exceptions._UFuncCastingError.__init__(self,ufunc,casting,from_,to)
 numpy.core._exceptions._UFuncInputCastingError(self,ufunc,casting,from_,to,i)
+numpy.core._exceptions._UFuncInputCastingError.__init__(self,ufunc,casting,from_,to,i)
 numpy.core._exceptions._UFuncInputCastingError.__str__(self)
 numpy.core._exceptions._UFuncNoLoopError(self,ufunc,dtypes)
+numpy.core._exceptions._UFuncNoLoopError.__init__(self,ufunc,dtypes)
 numpy.core._exceptions._UFuncNoLoopError.__str__(self)
 numpy.core._exceptions._UFuncOutputCastingError(self,ufunc,casting,from_,to,i)
+numpy.core._exceptions._UFuncOutputCastingError.__init__(self,ufunc,casting,from_,to,i)
 numpy.core._exceptions._UFuncOutputCastingError.__str__(self)
 numpy.core._exceptions._display_as_base(cls)
 numpy.core._exceptions._unpack_tuple(tup)
@@ -9769,6 +9874,7 @@ numpy.core.tests.test_scalarinherit.C(B)
 numpy.core.tests.test_scalarinherit.C0(B0)
 numpy.core.tests.test_scalarinherit.D(C,B)
 numpy.core.tests.test_scalarinherit.HasNew(cls,*args,**kwargs)
+numpy.core.tests.test_scalarinherit.HasNew.__new__(cls,*args,**kwargs)
 numpy.core.tests.test_scalarinherit.TestCharacter
 numpy.core.tests.test_scalarinherit.TestCharacter.test_char_radd(self)
 numpy.core.tests.test_scalarinherit.TestCharacter.test_char_repeat(self)
@@ -16199,10 +16305,13 @@ numpy.core.tests.test_multiarray.TestArrayInterface
 numpy.core.tests.test_multiarray.TestArrayInterface.Foo(self,value)
 numpy.core.tests.test_multiarray.TestArrayInterface.Foo.__array_interface__(self)
 numpy.core.tests.test_multiarray.TestArrayInterface.Foo.__float__(self)
+numpy.core.tests.test_multiarray.TestArrayInterface.Foo.__init__(self,value)
 numpy.core.tests.test_multiarray.TestArrayInterface.test_scalar_interface(self,val,iface,expected)
 numpy.core.tests.test_multiarray.TestArrayPriority
 numpy.core.tests.test_multiarray.TestArrayPriority.Bar(cls,*args,**kwargs)
+numpy.core.tests.test_multiarray.TestArrayPriority.Bar.__new__(cls,*args,**kwargs)
 numpy.core.tests.test_multiarray.TestArrayPriority.Foo(cls,*args,**kwargs)
+numpy.core.tests.test_multiarray.TestArrayPriority.Foo.__new__(cls,*args,**kwargs)
 numpy.core.tests.test_multiarray.TestArrayPriority.Other
 numpy.core.tests.test_multiarray.TestArrayPriority.Other._all(self,other)
 numpy.core.tests.test_multiarray.TestArrayPriority.test_ndarray_other(self)
@@ -17555,6 +17664,7 @@ numpy.core.tests.test_function_base.PhysicalQuantity(cls,value)
 numpy.core.tests.test_function_base.PhysicalQuantity.__add__(self,x)
 numpy.core.tests.test_function_base.PhysicalQuantity.__div__(self,x)
 numpy.core.tests.test_function_base.PhysicalQuantity.__mul__(self,x)
+numpy.core.tests.test_function_base.PhysicalQuantity.__new__(cls,value)
 numpy.core.tests.test_function_base.PhysicalQuantity.__rdiv__(self,x)
 numpy.core.tests.test_function_base.PhysicalQuantity.__rsub__(self,x)
 numpy.core.tests.test_function_base.PhysicalQuantity.__sub__(self,x)
@@ -18547,6 +18657,7 @@ numpy.f2py.auxfuncs.replace(str,d,defaultsep='')
 numpy.f2py.auxfuncs.requiresf90wrapper(rout)
 numpy.f2py.auxfuncs.stripcomma(s)
 numpy.f2py.auxfuncs.throw_error(self,mess)
+numpy.f2py.auxfuncs.throw_error.__init__(self,mess)
 
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/f2py/use_rules.py----------------------------------------
@@ -18933,11 +19044,13 @@ A:numpy.f2py.tests.test_array_from_pyobj.request.cls.type->Type(request.param)
 A:numpy.f2py.tests.test_array_from_pyobj.a->self.array(shape, intent.inplace, obj)
 A:numpy.f2py.tests.test_array_from_pyobj.seq->getattr(self, 'num' + inp)
 numpy.f2py.tests.test_array_from_pyobj.Array(self,typ,dims,intent,obj)
+numpy.f2py.tests.test_array_from_pyobj.Array.__init__(self,typ,dims,intent,obj)
 numpy.f2py.tests.test_array_from_pyobj.Array.__str__(self)
 numpy.f2py.tests.test_array_from_pyobj.Array.arr_equal(self,arr1,arr2)
 numpy.f2py.tests.test_array_from_pyobj.Array.has_shared_memory(self)
 numpy.f2py.tests.test_array_from_pyobj.Intent(self,intent_list=[])
 numpy.f2py.tests.test_array_from_pyobj.Intent.__getattr__(self,name)
+numpy.f2py.tests.test_array_from_pyobj.Intent.__init__(self,intent_list=[])
 numpy.f2py.tests.test_array_from_pyobj.Intent.__repr__(self)
 numpy.f2py.tests.test_array_from_pyobj.Intent.__str__(self)
 numpy.f2py.tests.test_array_from_pyobj.Intent.is_intent(self,*names)
@@ -18969,6 +19082,7 @@ numpy.f2py.tests.test_array_from_pyobj.TestSharedMemory.test_optional_from_23seq
 numpy.f2py.tests.test_array_from_pyobj.TestSharedMemory.test_optional_from_2seq(self)
 numpy.f2py.tests.test_array_from_pyobj.TestSharedMemory.test_optional_none(self)
 numpy.f2py.tests.test_array_from_pyobj.Type(cls,name)
+numpy.f2py.tests.test_array_from_pyobj.Type.__new__(cls,name)
 numpy.f2py.tests.test_array_from_pyobj.Type._init(self,name)
 numpy.f2py.tests.test_array_from_pyobj.Type.all_types(self)
 numpy.f2py.tests.test_array_from_pyobj.Type.cast_types(self)
@@ -19230,6 +19344,7 @@ numpy.testing.__init__.build_err_msg(arrays,err_msg,header=...,verbose=...,names
 numpy.testing.__init__.clear_and_catch_warnings(self,record=...,modules=...)
 numpy.testing.__init__.clear_and_catch_warnings.__enter__(self)
 numpy.testing.__init__.clear_and_catch_warnings.__exit__(self,*exc_info)
+numpy.testing.__init__.clear_and_catch_warnings.__init__(self,record=...,modules=...)
 numpy.testing.__init__.decorate_methods(cls,decorator,testmatch=...)
 numpy.testing.__init__.jiffies(_proc_pid_stat=...,_load_time=...)
 numpy.testing.__init__.measure(code_str,times=...,label=...)
@@ -19242,6 +19357,7 @@ numpy.testing.__init__.runstring(astr,dict)
 numpy.testing.__init__.suppress_warnings(self,forwarding_rule=...)
 numpy.testing.__init__.suppress_warnings.__enter__(self)
 numpy.testing.__init__.suppress_warnings.__exit__(self,*exc_info)
+numpy.testing.__init__.suppress_warnings.__init__(self,forwarding_rule=...)
 numpy.testing.__init__.suppress_warnings.filter(self,category=...,message=...,module=...)
 numpy.testing.__init__.suppress_warnings.record(self,category=...,message=...,module=...)
 numpy.testing.__init__.tempdir(*args,**kwargs)
@@ -19269,6 +19385,7 @@ A:numpy.testing.print_coercion_tables.indx->types.index(dtype.char)
 A:numpy.testing.print_coercion_tables.row->table.get(from_dt, {})
 numpy.testing.print_coercion_tables.GenericObject(self,v)
 numpy.testing.print_coercion_tables.GenericObject.__add__(self,other)
+numpy.testing.print_coercion_tables.GenericObject.__init__(self,v)
 numpy.testing.print_coercion_tables.GenericObject.__radd__(self,other)
 numpy.testing.print_coercion_tables.print_cancast_table(ntypes)
 numpy.testing.print_coercion_tables.print_coercion_table(ntypes,inputfirstvalue,inputsecondvalue,firstarray,use_promote_types=False)
@@ -19303,10 +19420,12 @@ numpy.testing._private.parameterized.default_doc_func(func,num,p)
 numpy.testing._private.parameterized.default_name_func(func,num,p)
 numpy.testing._private.parameterized.detect_runner()
 numpy.testing._private.parameterized.param(cls,*args,**kwargs)
+numpy.testing._private.parameterized.param.__new__(cls,*args,**kwargs)
 numpy.testing._private.parameterized.param.__repr__(self)
 numpy.testing._private.parameterized.param.explicit(cls,args=None,kwargs=None)
 numpy.testing._private.parameterized.param.from_decorator(cls,args)
 numpy.testing._private.parameterized.parameterized(self,input,doc_func=None)
+numpy.testing._private.parameterized.parameterized.__init__(self,input,doc_func=None)
 numpy.testing._private.parameterized.parameterized._terrible_magic_get_defining_classes(self)
 numpy.testing._private.parameterized.parameterized.assert_not_in_testcase_subclass(self)
 numpy.testing._private.parameterized.parameterized.check_input_values(cls,input_values)
@@ -19446,6 +19565,7 @@ numpy.testing._private.utils.check_free_memory(free_bytes)
 numpy.testing._private.utils.clear_and_catch_warnings(self,record=False,modules=())
 numpy.testing._private.utils.clear_and_catch_warnings.__enter__(self)
 numpy.testing._private.utils.clear_and_catch_warnings.__exit__(self,*exc_info)
+numpy.testing._private.utils.clear_and_catch_warnings.__init__(self,record=False,modules=())
 numpy.testing._private.utils.decorate_methods(cls,decorator,testmatch=None)
 numpy.testing._private.utils.gisfinite(x)
 numpy.testing._private.utils.gisinf(x)
@@ -19462,6 +19582,7 @@ numpy.testing._private.utils.runstring(astr,dict)
 numpy.testing._private.utils.suppress_warnings(self,forwarding_rule='always')
 numpy.testing._private.utils.suppress_warnings.__enter__(self)
 numpy.testing._private.utils.suppress_warnings.__exit__(self,*exc_info)
+numpy.testing._private.utils.suppress_warnings.__init__(self,forwarding_rule='always')
 numpy.testing._private.utils.suppress_warnings._clear_registries(self)
 numpy.testing._private.utils.suppress_warnings._filter(self,category=Warning,message='',module=None,record=False)
 numpy.testing._private.utils.suppress_warnings._showwarning(self,message,category,filename,lineno,*args,use_warnmsg=None,**kwargs)
@@ -19548,6 +19669,7 @@ numpy.testing._private.noseclasses.KnownFailurePlugin(ErrorClassPlugin)
 numpy.testing._private.noseclasses.KnownFailurePlugin.configure(self,options,conf)
 numpy.testing._private.noseclasses.KnownFailurePlugin.options(self,parser,env=os.environ)
 numpy.testing._private.noseclasses.NumpyDocTestCase(self,test,optionflags=0,setUp=None,tearDown=None,checker=None,obj=None,result_var='_')
+numpy.testing._private.noseclasses.NumpyDocTestCase.__init__(self,test,optionflags=0,setUp=None,tearDown=None,checker=None,obj=None,result_var='_')
 numpy.testing._private.noseclasses.NumpyDocTestFinder(doctest.DocTestFinder)
 numpy.testing._private.noseclasses.NumpyDocTestFinder._find(self,tests,obj,name,module,source_lines,globs,seen)
 numpy.testing._private.noseclasses.NumpyDocTestFinder._from_module(self,module,object)
@@ -19563,6 +19685,7 @@ numpy.testing._private.noseclasses.NumpyOutputChecker.check_output(self,want,got
 numpy.testing._private.noseclasses.NumpyTestProgram(nose.core.TestProgram)
 numpy.testing._private.noseclasses.NumpyTestProgram.runTests(self)
 numpy.testing._private.noseclasses.Unplugger(self,to_unplug='doctest')
+numpy.testing._private.noseclasses.Unplugger.__init__(self,to_unplug='doctest')
 numpy.testing._private.noseclasses.Unplugger.configure(self,options,config)
 numpy.testing._private.noseclasses.Unplugger.options(self,parser,env)
 
@@ -19576,6 +19699,12 @@ numpy.testing._private.decorators.parametrize(vars,input)
 numpy.testing._private.decorators.setastest(tf=True)
 numpy.testing._private.decorators.skipif(skip_condition,msg=None)
 numpy.testing._private.decorators.slow(t)
+numpy.testing.dec.deprecated(conditional=True)
+numpy.testing.dec.knownfailureif(fail_condition,msg=None)
+numpy.testing.dec.parametrize(vars,input)
+numpy.testing.dec.setastest(tf=True)
+numpy.testing.dec.skipif(skip_condition,msg=None)
+numpy.testing.dec.slow(t)
 
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/testing/_private/nosetester.py----------------------------------------
@@ -19596,7 +19725,14 @@ A:numpy.testing._private.nosetester.(argv, plugins)->self.prepare_test_args(labe
 A:numpy.testing._private.nosetester._warn_opts->dict(develop=(Warning,), release=())
 A:numpy.testing._private.nosetester.t->NumpyTestProgram(argv=argv, exit=False, plugins=plugins)
 numpy.Tester(self,package=None,raise_warnings='release',depth=0,check_fpu_mode=False)
+numpy.Tester._get_custom_doctester(self)
+numpy.Tester._show_system_info(self)
+numpy.Tester._test_argv(self,label,verbose,extra_argv)
+numpy.Tester.bench(self,label='fast',verbose=1,extra_argv=None)
+numpy.Tester.prepare_test_args(self,label='fast',verbose=1,extra_argv=None,doctests=False,coverage=False,timer=False)
+numpy.Tester.test(self,label='fast',verbose=1,extra_argv=None,doctests=False,coverage=False,raise_warnings=None,timer=False)
 numpy.testing._private.nosetester.NoseTester(self,package=None,raise_warnings='release',depth=0,check_fpu_mode=False)
+numpy.testing._private.nosetester.NoseTester.__init__(self,package=None,raise_warnings='release',depth=0,check_fpu_mode=False)
 numpy.testing._private.nosetester.NoseTester._get_custom_doctester(self)
 numpy.testing._private.nosetester.NoseTester._show_system_info(self)
 numpy.testing._private.nosetester.NoseTester._test_argv(self,label,verbose,extra_argv)
@@ -19835,6 +19971,9 @@ A:numpy.polynomial.polynomial._fromroots->staticmethod(polyfromroots)
 A:numpy.polynomial.polynomial.domain->numpy.array(polydomain)
 A:numpy.polynomial.polynomial.window->numpy.array(polydomain)
 numpy.polynomial.Polynomial(ABCPolyBase)
+numpy.polynomial.Polynomial._repr_latex_term(i,arg_str,needs_parens)
+numpy.polynomial.Polynomial._str_term_ascii(i,arg_str)
+numpy.polynomial.Polynomial._str_term_unicode(cls,i,arg_str)
 numpy.polynomial.polynomial.Polynomial(ABCPolyBase)
 numpy.polynomial.polynomial.Polynomial._repr_latex_term(i,arg_str,needs_parens)
 numpy.polynomial.polynomial.Polynomial._str_term_ascii(i,arg_str)
@@ -20001,6 +20140,7 @@ A:numpy.polynomial.chebyshev.coef->chebinterpolate(xfunc, deg)
 A:numpy.polynomial.chebyshev.domain->numpy.array(chebdomain)
 A:numpy.polynomial.chebyshev.window->numpy.array(chebdomain)
 numpy.polynomial.Chebyshev(ABCPolyBase)
+numpy.polynomial.Chebyshev.interpolate(cls,func,deg,domain=None,args=())
 numpy.polynomial.chebyshev.Chebyshev(ABCPolyBase)
 numpy.polynomial.chebyshev.Chebyshev.interpolate(cls,func,deg,domain=None,args=())
 numpy.polynomial.chebyshev._cseries_to_zseries(c)
@@ -20153,6 +20293,75 @@ A:numpy.polynomial._polybase.[roots]->pu.as_series([roots], trim=False)
 A:numpy.polynomial._polybase.deg->len(roots)
 A:numpy.polynomial._polybase.ideg->int(deg)
 numpy.polynomial.ABCPolyBase(self,coef,domain=None,window=None)
+numpy.polynomial.ABCPolyBase.__add__(self,other)
+numpy.polynomial.ABCPolyBase.__divmod__(self,other)
+numpy.polynomial.ABCPolyBase.__eq__(self,other)
+numpy.polynomial.ABCPolyBase.__floordiv__(self,other)
+numpy.polynomial.ABCPolyBase.__format__(self,fmt_str)
+numpy.polynomial.ABCPolyBase.__getstate__(self)
+numpy.polynomial.ABCPolyBase.__iter__(self)
+numpy.polynomial.ABCPolyBase.__len__(self)
+numpy.polynomial.ABCPolyBase.__mod__(self,other)
+numpy.polynomial.ABCPolyBase.__mul__(self,other)
+numpy.polynomial.ABCPolyBase.__ne__(self,other)
+numpy.polynomial.ABCPolyBase.__neg__(self)
+numpy.polynomial.ABCPolyBase.__pos__(self)
+numpy.polynomial.ABCPolyBase.__pow__(self,other)
+numpy.polynomial.ABCPolyBase.__radd__(self,other)
+numpy.polynomial.ABCPolyBase.__rdiv__(self,other)
+numpy.polynomial.ABCPolyBase.__rdivmod__(self,other)
+numpy.polynomial.ABCPolyBase.__repr__(self)
+numpy.polynomial.ABCPolyBase.__rfloordiv__(self,other)
+numpy.polynomial.ABCPolyBase.__rmod__(self,other)
+numpy.polynomial.ABCPolyBase.__rmul__(self,other)
+numpy.polynomial.ABCPolyBase.__rsub__(self,other)
+numpy.polynomial.ABCPolyBase.__rtruediv__(self,other)
+numpy.polynomial.ABCPolyBase.__setstate__(self,dict)
+numpy.polynomial.ABCPolyBase.__str__(self)
+numpy.polynomial.ABCPolyBase.__sub__(self,other)
+numpy.polynomial.ABCPolyBase.__truediv__(self,other)
+numpy.polynomial.ABCPolyBase._add(c1,c2)
+numpy.polynomial.ABCPolyBase._der(c,m,scl)
+numpy.polynomial.ABCPolyBase._div(c1,c2)
+numpy.polynomial.ABCPolyBase._fit(x,y,deg,rcond,full)
+numpy.polynomial.ABCPolyBase._fromroots(r)
+numpy.polynomial.ABCPolyBase._generate_string(self,term_method)
+numpy.polynomial.ABCPolyBase._get_coefficients(self,other)
+numpy.polynomial.ABCPolyBase._int(c,m,k,lbnd,scl)
+numpy.polynomial.ABCPolyBase._line(off,scl)
+numpy.polynomial.ABCPolyBase._mul(c1,c2)
+numpy.polynomial.ABCPolyBase._pow(c,pow,maxpower=None)
+numpy.polynomial.ABCPolyBase._repr_latex_(self)
+numpy.polynomial.ABCPolyBase._repr_latex_scalar(x)
+numpy.polynomial.ABCPolyBase._repr_latex_term(cls,i,arg_str,needs_parens)
+numpy.polynomial.ABCPolyBase._roots(c)
+numpy.polynomial.ABCPolyBase._str_term_ascii(cls,i,arg_str)
+numpy.polynomial.ABCPolyBase._str_term_unicode(cls,i,arg_str)
+numpy.polynomial.ABCPolyBase._sub(c1,c2)
+numpy.polynomial.ABCPolyBase._val(x,c)
+numpy.polynomial.ABCPolyBase.basis(cls,deg,domain=None,window=None)
+numpy.polynomial.ABCPolyBase.basis_name(self)
+numpy.polynomial.ABCPolyBase.cast(cls,series,domain=None,window=None)
+numpy.polynomial.ABCPolyBase.convert(self,domain=None,kind=None,window=None)
+numpy.polynomial.ABCPolyBase.copy(self)
+numpy.polynomial.ABCPolyBase.cutdeg(self,deg)
+numpy.polynomial.ABCPolyBase.degree(self)
+numpy.polynomial.ABCPolyBase.deriv(self,m=1)
+numpy.polynomial.ABCPolyBase.domain(self)
+numpy.polynomial.ABCPolyBase.fit(cls,x,y,deg,domain=None,rcond=None,full=False,w=None,window=None)
+numpy.polynomial.ABCPolyBase.fromroots(cls,roots,domain=[],window=None)
+numpy.polynomial.ABCPolyBase.has_samecoef(self,other)
+numpy.polynomial.ABCPolyBase.has_samedomain(self,other)
+numpy.polynomial.ABCPolyBase.has_sametype(self,other)
+numpy.polynomial.ABCPolyBase.has_samewindow(self,other)
+numpy.polynomial.ABCPolyBase.identity(cls,domain=None,window=None)
+numpy.polynomial.ABCPolyBase.integ(self,m=1,k=[],lbnd=None)
+numpy.polynomial.ABCPolyBase.linspace(self,n=100,domain=None)
+numpy.polynomial.ABCPolyBase.mapparms(self)
+numpy.polynomial.ABCPolyBase.roots(self)
+numpy.polynomial.ABCPolyBase.trim(self,tol=0)
+numpy.polynomial.ABCPolyBase.truncate(self,size)
+numpy.polynomial.ABCPolyBase.window(self)
 numpy.polynomial._polybase.ABCPolyBase(self,coef,domain=None,window=None)
 numpy.polynomial._polybase.ABCPolyBase.__add__(self,other)
 numpy.polynomial._polybase.ABCPolyBase.__divmod__(self,other)
@@ -20160,6 +20369,7 @@ numpy.polynomial._polybase.ABCPolyBase.__eq__(self,other)
 numpy.polynomial._polybase.ABCPolyBase.__floordiv__(self,other)
 numpy.polynomial._polybase.ABCPolyBase.__format__(self,fmt_str)
 numpy.polynomial._polybase.ABCPolyBase.__getstate__(self)
+numpy.polynomial._polybase.ABCPolyBase.__init__(self,coef,domain=None,window=None)
 numpy.polynomial._polybase.ABCPolyBase.__iter__(self)
 numpy.polynomial._polybase.ABCPolyBase.__len__(self)
 numpy.polynomial._polybase.ABCPolyBase.__mod__(self,other)
@@ -21203,11 +21413,16 @@ numpy.ma.extras.MAxisConcatenator.makemat(cls,arr)
 numpy.ma.extras._covhelper(x,y=None,rowvar=True,allow_masked=True)
 numpy.ma.extras._ezclump(mask)
 numpy.ma.extras._fromnxfunction(self,funcname)
+numpy.ma.extras._fromnxfunction.__init__(self,funcname)
 numpy.ma.extras._fromnxfunction.getdoc(self)
 numpy.ma.extras._fromnxfunction_allargs(self,*args,**params)
+numpy.ma.extras._fromnxfunction_allargs.__call__(self,*args,**params)
 numpy.ma.extras._fromnxfunction_args(self,*args,**params)
+numpy.ma.extras._fromnxfunction_args.__call__(self,*args,**params)
 numpy.ma.extras._fromnxfunction_seq(self,x,*args,**params)
+numpy.ma.extras._fromnxfunction_seq.__call__(self,x,*args,**params)
 numpy.ma.extras._fromnxfunction_single(self,x,*args,**params)
+numpy.ma.extras._fromnxfunction_single.__call__(self,x,*args,**params)
 numpy.ma.extras._median(a,axis=None,out=None,overwrite_input=False)
 numpy.ma.extras.apply_along_axis(func1d,axis,arr,*args,**kwargs)
 numpy.ma.extras.apply_over_axes(func,a,axes)
@@ -21235,6 +21450,7 @@ numpy.ma.extras.masked_all(shape,dtype=float)
 numpy.ma.extras.masked_all_like(arr)
 numpy.ma.extras.median(a,axis=None,out=None,overwrite_input=False,keepdims=False)
 numpy.ma.extras.mr_class(self)
+numpy.ma.extras.mr_class.__init__(self)
 numpy.ma.extras.notmasked_contiguous(a,axis=None)
 numpy.ma.extras.notmasked_edges(a,axis=None)
 numpy.ma.extras.polyfit(x,y,deg,rcond=None,full=False,w=None,cov=False)
@@ -21736,6 +21952,7 @@ numpy.ma.core.MaskedArray.__isub__(self,other)
 numpy.ma.core.MaskedArray.__itruediv__(self,other)
 numpy.ma.core.MaskedArray.__mul__(self,other)
 numpy.ma.core.MaskedArray.__ne__(self,other)
+numpy.ma.core.MaskedArray.__new__(cls,data=None,mask=nomask,dtype=None,copy=False,subok=True,ndmin=0,fill_value=None,keep_mask=True,hard_mask=None,shrink=True,order=None)
 numpy.ma.core.MaskedArray.__pow__(self,other)
 numpy.ma.core.MaskedArray.__radd__(self,other)
 numpy.ma.core.MaskedArray.__reduce__(self)
@@ -21828,6 +22045,7 @@ numpy.ma.core.MaskedConstant.__deepcopy__(self,memo)
 numpy.ma.core.MaskedConstant.__format__(self,format_spec)
 numpy.ma.core.MaskedConstant.__has_singleton(cls)
 numpy.ma.core.MaskedConstant.__iop__(self,other)
+numpy.ma.core.MaskedConstant.__new__(cls)
 numpy.ma.core.MaskedConstant.__reduce__(self)
 numpy.ma.core.MaskedConstant.__repr__(self)
 numpy.ma.core.MaskedConstant.__setattr__(self,attr,value)
@@ -21835,40 +22053,54 @@ numpy.ma.core.MaskedConstant.__str__(self)
 numpy.ma.core.MaskedConstant.copy(self,*args,**kwargs)
 numpy.ma.core.MaskedIterator(self,ma)
 numpy.ma.core.MaskedIterator.__getitem__(self,indx)
+numpy.ma.core.MaskedIterator.__init__(self,ma)
 numpy.ma.core.MaskedIterator.__iter__(self)
 numpy.ma.core.MaskedIterator.__next__(self)
 numpy.ma.core.MaskedIterator.__setitem__(self,index,value)
 numpy.ma.core._DomainCheckInterval(self,a,b)
+numpy.ma.core._DomainCheckInterval.__init__(self,a,b)
 numpy.ma.core._DomainGreater(self,critical_value)
+numpy.ma.core._DomainGreater.__init__(self,critical_value)
 numpy.ma.core._DomainGreaterEqual(self,critical_value)
+numpy.ma.core._DomainGreaterEqual.__init__(self,critical_value)
 numpy.ma.core._DomainSafeDivide(self,tolerance=None)
+numpy.ma.core._DomainSafeDivide.__init__(self,tolerance=None)
 numpy.ma.core._DomainTan(self,eps)
+numpy.ma.core._DomainTan.__init__(self,eps)
 numpy.ma.core._DomainedBinaryOperation(self,dbfunc,domain,fillx=0,filly=0)
+numpy.ma.core._DomainedBinaryOperation.__init__(self,dbfunc,domain,fillx=0,filly=0)
 numpy.ma.core._MaskedBinaryOperation(self,mbfunc,fillx=0,filly=0)
+numpy.ma.core._MaskedBinaryOperation.__init__(self,mbfunc,fillx=0,filly=0)
 numpy.ma.core._MaskedBinaryOperation.accumulate(self,target,axis=0)
 numpy.ma.core._MaskedBinaryOperation.outer(self,a,b)
 numpy.ma.core._MaskedBinaryOperation.reduce(self,target,axis=0,dtype=None)
 numpy.ma.core._MaskedPrintOption(self,display)
+numpy.ma.core._MaskedPrintOption.__init__(self,display)
 numpy.ma.core._MaskedPrintOption.__str__(self)
 numpy.ma.core._MaskedPrintOption.display(self)
 numpy.ma.core._MaskedPrintOption.enable(self,shrink=1)
 numpy.ma.core._MaskedPrintOption.enabled(self)
 numpy.ma.core._MaskedPrintOption.set_display(self,s)
 numpy.ma.core._MaskedUFunc(self,ufunc)
+numpy.ma.core._MaskedUFunc.__init__(self,ufunc)
 numpy.ma.core._MaskedUFunc.__str__(self)
 numpy.ma.core._MaskedUnaryOperation(self,mufunc,fill=0,domain=None)
+numpy.ma.core._MaskedUnaryOperation.__init__(self,mufunc,fill=0,domain=None)
 numpy.ma.core._arraymethod(funcname,onmask=True)
 numpy.ma.core._check_fill_value(fill_value,ndtype)
 numpy.ma.core._check_mask_axis(mask,axis,keepdims=np._NoValue)
 numpy.ma.core._convert2ma(self,funcname,params=None)
+numpy.ma.core._convert2ma.__init__(self,funcname,params=None)
 numpy.ma.core._convert2ma.getdoc(self)
 numpy.ma.core._convolve_or_correlate(f,a,v,mode,propagate_mask)
 numpy.ma.core._deprecate_argsort_axis(arr)
 numpy.ma.core._extrema_operation(self,ufunc,compare,fill_value)
+numpy.ma.core._extrema_operation.__init__(self,ufunc,compare,fill_value)
 numpy.ma.core._extrema_operation.outer(self,a,b)
 numpy.ma.core._extrema_operation.reduce(self,target,axis=np._NoValue)
 numpy.ma.core._extremum_fill_value(obj,extremum,extremum_name)
 numpy.ma.core._frommethod(self,methodname,reversed=False)
+numpy.ma.core._frommethod.__init__(self,methodname,reversed=False)
 numpy.ma.core._frommethod.getdoc(self)
 numpy.ma.core._get_dtype_of(obj)
 numpy.ma.core._mareconstruct(subtype,baseclass,baseshape,basetype)
@@ -21940,6 +22172,7 @@ numpy.ma.core.mvoid(self,data,mask=nomask,dtype=None,fill_value=None,hardmask=Fa
 numpy.ma.core.mvoid.__getitem__(self,indx)
 numpy.ma.core.mvoid.__iter__(self)
 numpy.ma.core.mvoid.__len__(self)
+numpy.ma.core.mvoid.__new__(self,data,mask=nomask,dtype=None,fill_value=None,hardmask=False,copy=False,subok=True)
 numpy.ma.core.mvoid.__setitem__(self,indx,value)
 numpy.ma.core.mvoid.__str__(self)
 numpy.ma.core.mvoid._data(self)
@@ -22101,6 +22334,7 @@ A:numpy.ma.timer_comparison.m4->self.ones(6)
 A:numpy.ma.timer_comparison.z->self.masked_array(y, m3)
 A:numpy.ma.timer_comparison.cur->numpy.sort(cur)
 numpy.ma.timer_comparison.ModuleTester(self,module)
+numpy.ma.timer_comparison.ModuleTester.__init__(self,module)
 numpy.ma.timer_comparison.ModuleTester.assert_array_compare(self,comparison,x,y,err_msg='',header='',fill_value=True)
 numpy.ma.timer_comparison.ModuleTester.assert_array_equal(self,x,y,err_msg='')
 numpy.ma.timer_comparison.ModuleTester.test_0(self)
@@ -22170,6 +22404,7 @@ numpy.ma.mrecords.MaskedRecords.__getattribute__(self,attr)
 numpy.ma.mrecords.MaskedRecords.__getitem__(self,indx)
 numpy.ma.mrecords.MaskedRecords.__getstate__(self)
 numpy.ma.mrecords.MaskedRecords.__len__(self)
+numpy.ma.mrecords.MaskedRecords.__new__(cls,shape,dtype=None,buf=None,offset=0,strides=None,formats=None,names=None,titles=None,byteorder=None,aligned=False,mask=nomask,hard_mask=False,fill_value=None,keep_mask=True,copy=False,**options)
 numpy.ma.mrecords.MaskedRecords.__reduce__(self)
 numpy.ma.mrecords.MaskedRecords.__repr__(self)
 numpy.ma.mrecords.MaskedRecords.__setattr__(self,attr,val)
@@ -22534,6 +22769,7 @@ A:numpy.ma.tests.test_subclassing.arr2->SubMaskedArray(data=[0, 1, 2, 3, 4, 5])
 A:numpy.ma.tests.test_subclassing.diff1->numpy.subtract(arr1, arr2)
 numpy.ma.tests.test_subclassing.CSAIterator(self,a)
 numpy.ma.tests.test_subclassing.CSAIterator.__getitem__(self,indx)
+numpy.ma.tests.test_subclassing.CSAIterator.__init__(self,a)
 numpy.ma.tests.test_subclassing.CSAIterator.__iter__(self)
 numpy.ma.tests.test_subclassing.CSAIterator.__next__(self)
 numpy.ma.tests.test_subclassing.CSAIterator.__setitem__(self,index,value)
@@ -22547,12 +22783,15 @@ numpy.ma.tests.test_subclassing.ComplicatedSubArray._validate_input(self,value)
 numpy.ma.tests.test_subclassing.ComplicatedSubArray.flat(self)
 numpy.ma.tests.test_subclassing.ComplicatedSubArray.flat(self,value)
 numpy.ma.tests.test_subclassing.MSubArray(cls,data,info={},mask=nomask)
+numpy.ma.tests.test_subclassing.MSubArray.__new__(cls,data,info={},mask=nomask)
 numpy.ma.tests.test_subclassing.MSubArray._series(self)
 numpy.ma.tests.test_subclassing.SubArray(cls,arr,info={})
 numpy.ma.tests.test_subclassing.SubArray.__add__(self,other)
 numpy.ma.tests.test_subclassing.SubArray.__array_finalize__(self,obj)
 numpy.ma.tests.test_subclassing.SubArray.__iadd__(self,other)
+numpy.ma.tests.test_subclassing.SubArray.__new__(cls,arr,info={})
 numpy.ma.tests.test_subclassing.SubMaskedArray(cls,info=None,**kwargs)
+numpy.ma.tests.test_subclassing.SubMaskedArray.__new__(cls,info=None,**kwargs)
 numpy.ma.tests.test_subclassing.TestSubclassing
 numpy.ma.tests.test_subclassing.TestSubclassing.setup(self)
 numpy.ma.tests.test_subclassing.TestSubclassing.test_attributepropagation(self)
@@ -23653,7 +23892,12 @@ numpy.ma.tests.test_old_ma.eqmask(m1,m2)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/random/_mt19937.pyi----------------------------------------
 numpy.random.MT19937(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random.MT19937._legacy_seeding(self,seed:_ArrayLikeInt_co)->None
+numpy.random.MT19937.jumped(self,jumps:int=...)->MT19937
+numpy.random.MT19937.state(self)->_MT19937State
+numpy.random.MT19937.state(self,value:_MT19937State)->None
 numpy.random._mt19937.MT19937(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random._mt19937.MT19937.__init__(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
 numpy.random._mt19937.MT19937._legacy_seeding(self,seed:_ArrayLikeInt_co)->None
 numpy.random._mt19937.MT19937.jumped(self,jumps:int=...)->MT19937
 numpy.random._mt19937.MT19937.state(self)->_MT19937State
@@ -23664,8 +23908,123 @@ numpy.random._mt19937._MT19937State(TypedDict)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/random/_generator.pyi----------------------------------------
 numpy.random.Generator(self,bit_generator:BitGenerator)
+numpy.random.Generator.__getstate__(self)->Dict[str, Any]
+numpy.random.Generator.__reduce__(self)->Tuple[Callable[[str], Generator], Tuple[str], Dict[str, Any]]
+numpy.random.Generator.__repr__(self)->str
+numpy.random.Generator.__setstate__(self,state:Dict[str,Any])->None
+numpy.random.Generator.__str__(self)->str
+numpy.random.Generator.beta(self,a:_ArrayLikeFloat_co,b:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.beta(self,a:float,b:float,size:None=...)->float
+numpy.random.Generator.binomial(self,n:_ArrayLikeInt_co,p:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.binomial(self,n:int,p:float,size:None=...)->int
+numpy.random.Generator.bit_generator(self)->BitGenerator
+numpy.random.Generator.bytes(self,length:int)->bytes
+numpy.random.Generator.chisquare(self,df:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.chisquare(self,df:float,size:None=...)->float
+numpy.random.Generator.choice(self,a:ArrayLike,size:None=...,replace:bool=...,p:Optional[_ArrayLikeFloat_co]=...,axis:int=...,shuffle:bool=...)->Any
+numpy.random.Generator.choice(self,a:ArrayLike,size:_ShapeLike=...,replace:bool=...,p:Optional[_ArrayLikeFloat_co]=...,axis:int=...,shuffle:bool=...)->ndarray[Any, Any]
+numpy.random.Generator.choice(self,a:int,size:None=...,replace:bool=...,p:Optional[_ArrayLikeFloat_co]=...,axis:int=...,shuffle:bool=...)->int
+numpy.random.Generator.choice(self,a:int,size:_ShapeLike=...,replace:bool=...,p:Optional[_ArrayLikeFloat_co]=...,axis:int=...,shuffle:bool=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.dirichlet(self,alpha:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.exponential(self,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.exponential(self,scale:float=...,size:None=...)->float
+numpy.random.Generator.f(self,dfnum:_ArrayLikeFloat_co,dfden:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.f(self,dfnum:float,dfden:float,size:None=...)->float
+numpy.random.Generator.gamma(self,shape:_ArrayLikeFloat_co,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.gamma(self,shape:float,scale:float=...,size:None=...)->float
+numpy.random.Generator.geometric(self,p:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.geometric(self,p:float,size:None=...)->int
+numpy.random.Generator.gumbel(self,loc:_ArrayLikeFloat_co=...,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.gumbel(self,loc:float=...,scale:float=...,size:None=...)->float
+numpy.random.Generator.hypergeometric(self,ngood:_ArrayLikeInt_co,nbad:_ArrayLikeInt_co,nsample:_ArrayLikeInt_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.hypergeometric(self,ngood:int,nbad:int,nsample:int,size:None=...)->int
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Optional[Union[dtype[int64],Type[int64],_Int64Codes,_SupportsDType[dtype[int64]]]]=...,endpoint:bool=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[int16],Type[int16],_Int16Codes,_SupportsDType[dtype[int16]]]=...,endpoint:bool=...)->ndarray[Any, dtype[int16]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[int32],Type[int32],_Int32Codes,_SupportsDType[dtype[int32]]]=...,endpoint:bool=...)->ndarray[Any, dtype[Union[int32]]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[int8],Type[int8],_Int8Codes,_SupportsDType[dtype[int8]]]=...,endpoint:bool=...)->ndarray[Any, dtype[int8]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[int_],Type[int],Type[int_],_IntCodes,_SupportsDType[dtype[int_]]]=...,endpoint:bool=...)->ndarray[Any, dtype[int_]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[uint16],Type[uint16],_UInt16Codes,_SupportsDType[dtype[uint16]]]=...,endpoint:bool=...)->ndarray[Any, dtype[Union[uint16]]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[uint32],Type[uint32],_UInt32Codes,_SupportsDType[dtype[uint32]]]=...,endpoint:bool=...)->ndarray[Any, dtype[uint32]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[uint64],Type[uint64],_UInt64Codes,_SupportsDType[dtype[uint64]]]=...,endpoint:bool=...)->ndarray[Any, dtype[uint64]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[uint8],Type[uint8],_UInt8Codes,_SupportsDType[dtype[uint8]]]=...,endpoint:bool=...)->ndarray[Any, dtype[uint8]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:Union[dtype[uint],Type[uint],_UIntCodes,_SupportsDType[dtype[uint]]]=...,endpoint:bool=...)->ndarray[Any, dtype[uint]]
+numpy.random.Generator.integers(self,low:_ArrayLikeInt_co,high:Optional[_ArrayLikeInt_co]=...,size:Optional[_ShapeLike]=...,dtype:_DTypeLikeBool=...,endpoint:bool=...)->ndarray[Any, dtype[bool_]]
+numpy.random.Generator.integers(self,low:int,high:Optional[int]=...)->int
+numpy.random.Generator.integers(self,low:int,high:Optional[int]=...,size:None=...,dtype:Union[_DTypeLikeInt,_DTypeLikeUInt]=...,endpoint:bool=...)->int
+numpy.random.Generator.integers(self,low:int,high:Optional[int]=...,size:None=...,dtype:_DTypeLikeBool=...,endpoint:bool=...)->bool
+numpy.random.Generator.laplace(self,loc:_ArrayLikeFloat_co=...,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.laplace(self,loc:float=...,scale:float=...,size:None=...)->float
+numpy.random.Generator.logistic(self,loc:_ArrayLikeFloat_co=...,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.logistic(self,loc:float=...,scale:float=...,size:None=...)->float
+numpy.random.Generator.lognormal(self,mean:_ArrayLikeFloat_co=...,sigma:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.lognormal(self,mean:float=...,sigma:float=...,size:None=...)->float
+numpy.random.Generator.logseries(self,p:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.logseries(self,p:float,size:None=...)->int
+numpy.random.Generator.multinomial(self,n:_ArrayLikeInt_co,pvals:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.multivariate_hypergeometric(self,colors:_ArrayLikeInt_co,nsample:int,size:Optional[_ShapeLike]=...,method:Literal['marginals','count']=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.multivariate_normal(self,mean:_ArrayLikeFloat_co,cov:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...,check_valid:Literal['warn','raise','ignore']=...,tol:float=...,*,method:Literal['svd','eigh','cholesky']=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.negative_binomial(self,n:_ArrayLikeFloat_co,p:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.negative_binomial(self,n:float,p:float,size:None=...)->int
+numpy.random.Generator.noncentral_chisquare(self,df:_ArrayLikeFloat_co,nonc:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.noncentral_chisquare(self,df:float,nonc:float,size:None=...)->float
+numpy.random.Generator.noncentral_f(self,dfnum:_ArrayLikeFloat_co,dfden:_ArrayLikeFloat_co,nonc:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.noncentral_f(self,dfnum:float,dfden:float,nonc:float,size:None=...)->float
+numpy.random.Generator.normal(self,loc:_ArrayLikeFloat_co=...,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.normal(self,loc:float=...,scale:float=...,size:None=...)->float
+numpy.random.Generator.pareto(self,a:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.pareto(self,a:float,size:None=...)->float
+numpy.random.Generator.permutation(self,x:ArrayLike,axis:int=...)->ndarray[Any, Any]
+numpy.random.Generator.permutation(self,x:int,axis:int=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.permuted(self,x:ArrayLike,*,axis:Optional[int]=...,out:Optional[ndarray[Any,Any]]=...)->ndarray[Any, Any]
+numpy.random.Generator.poisson(self,lam:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.poisson(self,lam:float=...,size:None=...)->int
+numpy.random.Generator.power(self,a:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.power(self,a:float,size:None=...)->float
+numpy.random.Generator.random(self,*,out:ndarray[Any,dtype[float64]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.random(self,size:None=...,dtype:Union[_DTypeLikeFloat32,_DTypeLikeFloat64]=...,out:None=...)->float
+numpy.random.Generator.random(self,size:_ShapeLike=...,*,out:Optional[ndarray[Any,dtype[float64]]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.random(self,size:_ShapeLike=...,dtype:_DTypeLikeFloat32=...,out:Optional[ndarray[Any,dtype[float32]]]=...)->ndarray[Any, dtype[float32]]
+numpy.random.Generator.random(self,size:_ShapeLike=...,dtype:_DTypeLikeFloat64=...,out:Optional[ndarray[Any,dtype[float64]]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.rayleigh(self,scale:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.rayleigh(self,scale:float=...,size:None=...)->float
+numpy.random.Generator.shuffle(self,x:ArrayLike,axis:int=...)->None
+numpy.random.Generator.standard_cauchy(self,size:None=...)->float
+numpy.random.Generator.standard_cauchy(self,size:_ShapeLike=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_exponential(self,*,out:ndarray[Any,dtype[float64]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_exponential(self,size:None=...,dtype:Union[_DTypeLikeFloat32,_DTypeLikeFloat64]=...,method:Literal['zig','inv']=...,out:None=...)->float
+numpy.random.Generator.standard_exponential(self,size:_ShapeLike=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_exponential(self,size:_ShapeLike=...,*,method:Literal['zig','inv']=...,out:Optional[ndarray[Any,dtype[float64]]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_exponential(self,size:_ShapeLike=...,dtype:_DTypeLikeFloat32=...,method:Literal['zig','inv']=...,out:Optional[ndarray[Any,dtype[float32]]]=...)->ndarray[Any, dtype[float32]]
+numpy.random.Generator.standard_exponential(self,size:_ShapeLike=...,dtype:_DTypeLikeFloat64=...,method:Literal['zig','inv']=...,out:Optional[ndarray[Any,dtype[float64]]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_gamma(self,shape:_ArrayLikeFloat_co,*,out:ndarray[Any,dtype[float64]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_gamma(self,shape:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_gamma(self,shape:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...,dtype:_DTypeLikeFloat32=...,out:Optional[ndarray[Any,dtype[float32]]]=...)->ndarray[Any, dtype[float32]]
+numpy.random.Generator.standard_gamma(self,shape:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...,dtype:_DTypeLikeFloat64=...,out:Optional[ndarray[Any,dtype[float64]]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_gamma(self,shape:float,size:None=...,dtype:Union[_DTypeLikeFloat32,_DTypeLikeFloat64]=...,out:None=...)->float
+numpy.random.Generator.standard_normal(self,*,out:ndarray[Any,dtype[float64]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_normal(self,size:None=...,dtype:Union[_DTypeLikeFloat32,_DTypeLikeFloat64]=...,out:None=...)->float
+numpy.random.Generator.standard_normal(self,size:_ShapeLike=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_normal(self,size:_ShapeLike=...,dtype:_DTypeLikeFloat32=...,out:Optional[ndarray[Any,dtype[float32]]]=...)->ndarray[Any, dtype[float32]]
+numpy.random.Generator.standard_normal(self,size:_ShapeLike=...,dtype:_DTypeLikeFloat64=...,out:Optional[ndarray[Any,dtype[float64]]]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_t(self,df:_ArrayLikeFloat_co,size:None=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_t(self,df:_ArrayLikeFloat_co,size:_ShapeLike=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.standard_t(self,df:float,size:None=...)->float
+numpy.random.Generator.triangular(self,left:_ArrayLikeFloat_co,mode:_ArrayLikeFloat_co,right:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.triangular(self,left:float,mode:float,right:float,size:None=...)->float
+numpy.random.Generator.uniform(self,low:_ArrayLikeFloat_co=...,high:_ArrayLikeFloat_co=...,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.uniform(self,low:float=...,high:float=...,size:None=...)->float
+numpy.random.Generator.vonmises(self,mu:_ArrayLikeFloat_co,kappa:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.vonmises(self,mu:float,kappa:float,size:None=...)->float
+numpy.random.Generator.wald(self,mean:_ArrayLikeFloat_co,scale:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.wald(self,mean:float,scale:float,size:None=...)->float
+numpy.random.Generator.weibull(self,a:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[float64]]
+numpy.random.Generator.weibull(self,a:float,size:None=...)->float
+numpy.random.Generator.zipf(self,a:_ArrayLikeFloat_co,size:Optional[_ShapeLike]=...)->ndarray[Any, dtype[int64]]
+numpy.random.Generator.zipf(self,a:float,size:None=...)->int
 numpy.random._generator.Generator(self,bit_generator:BitGenerator)
 numpy.random._generator.Generator.__getstate__(self)->Dict[str, Any]
+numpy.random._generator.Generator.__init__(self,bit_generator:BitGenerator)
 numpy.random._generator.Generator.__reduce__(self)->Tuple[Callable[[str], Generator], Tuple[str], Dict[str, Any]]
 numpy.random._generator.Generator.__repr__(self)->str
 numpy.random._generator.Generator.__setstate__(self,state:Dict[str,Any])->None
@@ -23785,13 +24144,23 @@ numpy.random.default_rng(seed:Union[None,_ArrayLikeInt_co,SeedSequence,BitGenera
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/random/_pcg64.pyi----------------------------------------
 numpy.random.PCG64(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random.PCG64.advance(self,delta:int)->PCG64
+numpy.random.PCG64.jumped(self,jumps:int=...)->PCG64
+numpy.random.PCG64.state(self)->_PCG64State
+numpy.random.PCG64.state(self,value:_PCG64State)->None
 numpy.random.PCG64DXSM(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random.PCG64DXSM.advance(self,delta:int)->PCG64DXSM
+numpy.random.PCG64DXSM.jumped(self,jumps:int=...)->PCG64DXSM
+numpy.random.PCG64DXSM.state(self)->_PCG64State
+numpy.random.PCG64DXSM.state(self,value:_PCG64State)->None
 numpy.random._pcg64.PCG64(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random._pcg64.PCG64.__init__(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
 numpy.random._pcg64.PCG64.advance(self,delta:int)->PCG64
 numpy.random._pcg64.PCG64.jumped(self,jumps:int=...)->PCG64
 numpy.random._pcg64.PCG64.state(self)->_PCG64State
 numpy.random._pcg64.PCG64.state(self,value:_PCG64State)->None
 numpy.random._pcg64.PCG64DXSM(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random._pcg64.PCG64DXSM.__init__(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
 numpy.random._pcg64.PCG64DXSM.advance(self,delta:int)->PCG64DXSM
 numpy.random._pcg64.PCG64DXSM.jumped(self,jumps:int=...)->PCG64DXSM
 numpy.random._pcg64.PCG64DXSM.state(self)->_PCG64State
@@ -23802,7 +24171,12 @@ numpy.random._pcg64._PCG64State(TypedDict)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/random/_philox.pyi----------------------------------------
 numpy.random.Philox(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...,counter:Union[None,_ArrayLikeInt_co]=...,key:Union[None,_ArrayLikeInt_co]=...)
+numpy.random.Philox.advance(self,delta:int)->Philox
+numpy.random.Philox.jumped(self,jumps:int=...)->Philox
+numpy.random.Philox.state(self)->_PhiloxState
+numpy.random.Philox.state(self,value:_PhiloxState)->None
 numpy.random._philox.Philox(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...,counter:Union[None,_ArrayLikeInt_co]=...,key:Union[None,_ArrayLikeInt_co]=...)
+numpy.random._philox.Philox.__init__(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...,counter:Union[None,_ArrayLikeInt_co]=...,key:Union[None,_ArrayLikeInt_co]=...)
 numpy.random._philox.Philox.advance(self,delta:int)->Philox
 numpy.random._philox.Philox.jumped(self,jumps:int=...)->Philox
 numpy.random._philox.Philox.state(self)->_PhiloxState
@@ -23935,6 +24309,7 @@ numpy.random.RandomState.zipf(self,a:_ArrayLikeFloat_co,size:Optional[_ShapeLike
 numpy.random.RandomState.zipf(self,a:float,size:None=...)->int
 numpy.random.mtrand.RandomState(self,seed:Union[None,_ArrayLikeInt_co,BitGenerator]=...)
 numpy.random.mtrand.RandomState.__getstate__(self)->Dict[str, Any]
+numpy.random.mtrand.RandomState.__init__(self,seed:Union[None,_ArrayLikeInt_co,BitGenerator]=...)
 numpy.random.mtrand.RandomState.__reduce__(self)->Tuple[Callable[[str], RandomState], Tuple[str], Dict[str, Any]]
 numpy.random.mtrand.RandomState.__repr__(self)->str
 numpy.random.mtrand.RandomState.__setstate__(self,state:Dict[str,Any])->None
@@ -24050,9 +24425,25 @@ numpy.random.mtrand.RandomState.zipf(self,a:float,size:None=...)->int
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/random/bit_generator.pyi----------------------------------------
 numpy.random.BitGenerator(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random.BitGenerator.__getstate__(self)->Dict[str, Any]
+numpy.random.BitGenerator.__reduce__(self)->Tuple[Callable[[str], BitGenerator], Tuple[str], Tuple[Dict[str, Any]]]
+numpy.random.BitGenerator.__setstate__(self,state:Dict[str,Any])->None
+numpy.random.BitGenerator._benchmark(self,cnt:int,method:str=...)->None
+numpy.random.BitGenerator.cffi(self)->_Interface
+numpy.random.BitGenerator.ctypes(self)->_Interface
+numpy.random.BitGenerator.random_raw(self,size:None=...,output:Literal[True]=...)->int
+numpy.random.BitGenerator.random_raw(self,size:Optional[_ShapeLike]=...,output:Literal[False]=...)->None
+numpy.random.BitGenerator.random_raw(self,size:_ShapeLike=...,output:Literal[True]=...)->ndarray[Any, dtype[uint64]]
+numpy.random.BitGenerator.state(self)->Mapping[str, Any]
+numpy.random.BitGenerator.state(self,value:Mapping[str,Any])->None
 numpy.random.SeedSequence(self,entropy:Union[None,int,Sequence[int],_ArrayLikeInt_co]=...,*,spawn_key:Sequence[int]=...,pool_size:int=...,n_children_spawned:int=...)
+numpy.random.SeedSequence.__repr__(self)->str
+numpy.random.SeedSequence.generate_state(self,n_words:int,dtype:Union[_DTypeLikeUint32,_DTypeLikeUint64]=...)->ndarray[Any, dtype[Union[uint32, uint64]]]
+numpy.random.SeedSequence.spawn(self,n_children:int)->List[SeedSequence]
+numpy.random.SeedSequence.state(self)->_SeedSeqState
 numpy.random.bit_generator.BitGenerator(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
 numpy.random.bit_generator.BitGenerator.__getstate__(self)->Dict[str, Any]
+numpy.random.bit_generator.BitGenerator.__init__(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
 numpy.random.bit_generator.BitGenerator.__reduce__(self)->Tuple[Callable[[str], BitGenerator], Tuple[str], Tuple[Dict[str, Any]]]
 numpy.random.bit_generator.BitGenerator.__setstate__(self,state:Dict[str,Any])->None
 numpy.random.bit_generator.BitGenerator._benchmark(self,cnt:int,method:str=...)->None
@@ -24068,6 +24459,7 @@ numpy.random.bit_generator.ISeedSequence.generate_state(self,n_words:int,dtype:U
 numpy.random.bit_generator.ISpawnableSeedSequence(ISeedSequence)
 numpy.random.bit_generator.ISpawnableSeedSequence.spawn(self:_T,n_children:int)->List[_T]
 numpy.random.bit_generator.SeedSequence(self,entropy:Union[None,int,Sequence[int],_ArrayLikeInt_co]=...,*,spawn_key:Sequence[int]=...,pool_size:int=...,n_children_spawned:int=...)
+numpy.random.bit_generator.SeedSequence.__init__(self,entropy:Union[None,int,Sequence[int],_ArrayLikeInt_co]=...,*,spawn_key:Sequence[int]=...,pool_size:int=...,n_children_spawned:int=...)
 numpy.random.bit_generator.SeedSequence.__repr__(self)->str
 numpy.random.bit_generator.SeedSequence.generate_state(self,n_words:int,dtype:Union[_DTypeLikeUint32,_DTypeLikeUint64]=...)->ndarray[Any, dtype[Union[uint32, uint64]]]
 numpy.random.bit_generator.SeedSequence.spawn(self,n_children:int)->List[SeedSequence]
@@ -24081,7 +24473,10 @@ numpy.random.bit_generator._SeedSeqState(TypedDict)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/random/_sfc64.pyi----------------------------------------
 numpy.random.SFC64(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random.SFC64.state(self)->_SFC64State
+numpy.random.SFC64.state(self,value:_SFC64State)->None
 numpy.random._sfc64.SFC64(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
+numpy.random._sfc64.SFC64.__init__(self,seed:Union[None,_ArrayLikeInt_co,SeedSequence]=...)
 numpy.random._sfc64.SFC64.state(self)->_SFC64State
 numpy.random._sfc64.SFC64.state(self,value:_SFC64State)->None
 numpy.random._sfc64._SFC64Internal(TypedDict)
@@ -25280,6 +25675,19 @@ A:numpy.typing._generic_alias.ScalarType->TypeVar('ScalarType', bound=np.generic
 A:numpy.typing._generic_alias._DType->_GenericAlias(np.dtype, (ScalarType,))
 A:numpy.typing._generic_alias.NDArray->_GenericAlias(np.ndarray, (Any, _DType))
 numpy.typing._GenericAlias(self,origin:type,args:Any)
+numpy.typing._GenericAlias.__args__(self)->Tuple[Any, ...]
+numpy.typing._GenericAlias.__dir__(self)->List[str]
+numpy.typing._GenericAlias.__eq__(self,value:object)->bool
+numpy.typing._GenericAlias.__getattribute__(self,name:str)->Any
+numpy.typing._GenericAlias.__getitem__(self:_T,key:Any)->_T
+numpy.typing._GenericAlias.__hash__(self)->int
+numpy.typing._GenericAlias.__instancecheck__(self,obj:object)->NoReturn
+numpy.typing._GenericAlias.__mro_entries__(self,bases:Iterable[object])->Tuple[type]
+numpy.typing._GenericAlias.__origin__(self)->type
+numpy.typing._GenericAlias.__parameters__(self)->Tuple[TypeVar, ...]
+numpy.typing._GenericAlias.__reduce__(self:_T)->Tuple[Type[_T], Tuple[type, Tuple[Any, ...]]]
+numpy.typing._GenericAlias.__repr__(self)->str
+numpy.typing._GenericAlias.__subclasscheck__(self,cls:type)->NoReturn
 numpy.typing._generic_alias._GenericAlias(self,origin:type,args:Any)
 numpy.typing._generic_alias._GenericAlias.__args__(self)->Tuple[Any, ...]
 numpy.typing._generic_alias._GenericAlias.__dir__(self)->List[str]
@@ -25287,6 +25695,7 @@ numpy.typing._generic_alias._GenericAlias.__eq__(self,value:object)->bool
 numpy.typing._generic_alias._GenericAlias.__getattribute__(self,name:str)->Any
 numpy.typing._generic_alias._GenericAlias.__getitem__(self:_T,key:Any)->_T
 numpy.typing._generic_alias._GenericAlias.__hash__(self)->int
+numpy.typing._generic_alias._GenericAlias.__init__(self,origin:type,args:Any)
 numpy.typing._generic_alias._GenericAlias.__instancecheck__(self,obj:object)->NoReturn
 numpy.typing._generic_alias._GenericAlias.__mro_entries__(self,bases:Iterable[object])->Tuple[type]
 numpy.typing._generic_alias._GenericAlias.__origin__(self)->type
@@ -25320,11 +25729,73 @@ numpy.typing.__init__._96Bit(_128Bit)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/typing/_ufunc.pyi----------------------------------------
 numpy.typing._GUFunc_Nin2_Nout1(self,__x1:ArrayLike,__x2:ArrayLike,out:Union[NDArray[Any],Tuple[NDArray[Any]]],*,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...,axes:List[_2Tuple[SupportsIndex]]=...)
+numpy.typing._GUFunc_Nin2_Nout1.__name__(self)->_NameType
+numpy.typing._GUFunc_Nin2_Nout1.accumulate(self)->None
+numpy.typing._GUFunc_Nin2_Nout1.at(self)->None
+numpy.typing._GUFunc_Nin2_Nout1.identity(self)->_IDType
+numpy.typing._GUFunc_Nin2_Nout1.nargs(self)->Literal[3]
+numpy.typing._GUFunc_Nin2_Nout1.nin(self)->Literal[2]
+numpy.typing._GUFunc_Nin2_Nout1.nout(self)->Literal[1]
+numpy.typing._GUFunc_Nin2_Nout1.ntypes(self)->_NTypes
+numpy.typing._GUFunc_Nin2_Nout1.outer(self)->None
+numpy.typing._GUFunc_Nin2_Nout1.reduce(self)->None
+numpy.typing._GUFunc_Nin2_Nout1.reduceat(self)->None
+numpy.typing._GUFunc_Nin2_Nout1.signature(self)->Literal['(n?,k),(k,m?)->(n?,m?)']
 numpy.typing._UFunc_Nin1_Nout1(self,__x1:ArrayLike,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,*,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_2Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._UFunc_Nin1_Nout1.__name__(self)->_NameType
+numpy.typing._UFunc_Nin1_Nout1.accumulate(self)->None
+numpy.typing._UFunc_Nin1_Nout1.at(self,__a:NDArray[Any],__indices:_ArrayLikeInt_co)->None
+numpy.typing._UFunc_Nin1_Nout1.identity(self)->_IDType
+numpy.typing._UFunc_Nin1_Nout1.nargs(self)->Literal[2]
+numpy.typing._UFunc_Nin1_Nout1.nin(self)->Literal[1]
+numpy.typing._UFunc_Nin1_Nout1.nout(self)->Literal[1]
+numpy.typing._UFunc_Nin1_Nout1.ntypes(self)->_NTypes
+numpy.typing._UFunc_Nin1_Nout1.outer(self)->None
+numpy.typing._UFunc_Nin1_Nout1.reduce(self)->None
+numpy.typing._UFunc_Nin1_Nout1.reduceat(self)->None
+numpy.typing._UFunc_Nin1_Nout1.signature(self)->None
 numpy.typing._UFunc_Nin1_Nout2(self,__x1:ArrayLike,__out1:Optional[NDArray[Any]]=...,__out2:Optional[NDArray[Any]]=...,*,out:_2Tuple[NDArray[Any]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._UFunc_Nin1_Nout2.__name__(self)->_NameType
+numpy.typing._UFunc_Nin1_Nout2.accumulate(self)->None
+numpy.typing._UFunc_Nin1_Nout2.at(self)->None
+numpy.typing._UFunc_Nin1_Nout2.identity(self)->_IDType
+numpy.typing._UFunc_Nin1_Nout2.nargs(self)->Literal[3]
+numpy.typing._UFunc_Nin1_Nout2.nin(self)->Literal[1]
+numpy.typing._UFunc_Nin1_Nout2.nout(self)->Literal[2]
+numpy.typing._UFunc_Nin1_Nout2.ntypes(self)->_NTypes
+numpy.typing._UFunc_Nin1_Nout2.outer(self)->None
+numpy.typing._UFunc_Nin1_Nout2.reduce(self)->None
+numpy.typing._UFunc_Nin1_Nout2.reduceat(self)->None
+numpy.typing._UFunc_Nin1_Nout2.signature(self)->None
 numpy.typing._UFunc_Nin2_Nout1(self,__x1:ArrayLike,__x2:ArrayLike,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,*,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._UFunc_Nin2_Nout1.__name__(self)->_NameType
+numpy.typing._UFunc_Nin2_Nout1.accumulate(self,array:ArrayLike,axis:SupportsIndex=...,dtype:DTypeLike=...,out:Optional[NDArray[Any]]=...)->NDArray[Any]
+numpy.typing._UFunc_Nin2_Nout1.at(self,__a:NDArray[Any],__indices:_ArrayLikeInt_co,__b:ArrayLike)->None
+numpy.typing._UFunc_Nin2_Nout1.identity(self)->_IDType
+numpy.typing._UFunc_Nin2_Nout1.nargs(self)->Literal[3]
+numpy.typing._UFunc_Nin2_Nout1.nin(self)->Literal[2]
+numpy.typing._UFunc_Nin2_Nout1.nout(self)->Literal[1]
+numpy.typing._UFunc_Nin2_Nout1.ntypes(self)->_NTypes
+numpy.typing._UFunc_Nin2_Nout1.outer(self,__A:ArrayLike,__B:ArrayLike,*,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)->NDArray[Any]
+numpy.typing._UFunc_Nin2_Nout1.outer(self,__A:_ScalarLike_co,__B:_ScalarLike_co,*,out:None=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)->Any
+numpy.typing._UFunc_Nin2_Nout1.reduce(self,array:ArrayLike,axis:Optional[_ShapeLike]=...,dtype:DTypeLike=...,out:Optional[NDArray[Any]]=...,keepdims:bool=...,initial:Any=...,where:_ArrayLikeBool_co=...)->Any
+numpy.typing._UFunc_Nin2_Nout1.reduceat(self,array:ArrayLike,indices:_ArrayLikeInt_co,axis:SupportsIndex=...,dtype:DTypeLike=...,out:Optional[NDArray[Any]]=...)->NDArray[Any]
+numpy.typing._UFunc_Nin2_Nout1.signature(self)->None
 numpy.typing._UFunc_Nin2_Nout2(self,__x1:ArrayLike,__x2:ArrayLike,__out1:Optional[NDArray[Any]]=...,__out2:Optional[NDArray[Any]]=...,*,out:_2Tuple[NDArray[Any]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_4Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._UFunc_Nin2_Nout2.__name__(self)->_NameType
+numpy.typing._UFunc_Nin2_Nout2.accumulate(self)->None
+numpy.typing._UFunc_Nin2_Nout2.at(self)->None
+numpy.typing._UFunc_Nin2_Nout2.identity(self)->_IDType
+numpy.typing._UFunc_Nin2_Nout2.nargs(self)->Literal[4]
+numpy.typing._UFunc_Nin2_Nout2.nin(self)->Literal[2]
+numpy.typing._UFunc_Nin2_Nout2.nout(self)->Literal[2]
+numpy.typing._UFunc_Nin2_Nout2.ntypes(self)->_NTypes
+numpy.typing._UFunc_Nin2_Nout2.outer(self)->None
+numpy.typing._UFunc_Nin2_Nout2.reduce(self)->None
+numpy.typing._UFunc_Nin2_Nout2.reduceat(self)->None
+numpy.typing._UFunc_Nin2_Nout2.signature(self)->None
 numpy.typing._ufunc._GUFunc_Nin2_Nout1(self,__x1:ArrayLike,__x2:ArrayLike,out:Union[NDArray[Any],Tuple[NDArray[Any]]],*,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...,axes:List[_2Tuple[SupportsIndex]]=...)
+numpy.typing._ufunc._GUFunc_Nin2_Nout1.__call__(self,__x1:ArrayLike,__x2:ArrayLike,out:Union[NDArray[Any],Tuple[NDArray[Any]]],*,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...,axes:List[_2Tuple[SupportsIndex]]=...)
 numpy.typing._ufunc._GUFunc_Nin2_Nout1.__name__(self)->_NameType
 numpy.typing._ufunc._GUFunc_Nin2_Nout1.accumulate(self)->None
 numpy.typing._ufunc._GUFunc_Nin2_Nout1.at(self)->None
@@ -25338,6 +25809,7 @@ numpy.typing._ufunc._GUFunc_Nin2_Nout1.reduce(self)->None
 numpy.typing._ufunc._GUFunc_Nin2_Nout1.reduceat(self)->None
 numpy.typing._ufunc._GUFunc_Nin2_Nout1.signature(self)->Literal['(n?,k),(k,m?)->(n?,m?)']
 numpy.typing._ufunc._UFunc_Nin1_Nout1(self,__x1:ArrayLike,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,*,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_2Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._ufunc._UFunc_Nin1_Nout1.__call__(self,__x1:ArrayLike,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,*,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_2Tuple[Optional[str]]]=...,extobj:List[Any]=...)
 numpy.typing._ufunc._UFunc_Nin1_Nout1.__name__(self)->_NameType
 numpy.typing._ufunc._UFunc_Nin1_Nout1.accumulate(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout1.at(self,__a:NDArray[Any],__indices:_ArrayLikeInt_co)->None
@@ -25351,6 +25823,7 @@ numpy.typing._ufunc._UFunc_Nin1_Nout1.reduce(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout1.reduceat(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout1.signature(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout2(self,__x1:ArrayLike,__out1:Optional[NDArray[Any]]=...,__out2:Optional[NDArray[Any]]=...,*,out:_2Tuple[NDArray[Any]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._ufunc._UFunc_Nin1_Nout2.__call__(self,__x1:ArrayLike,__out1:Optional[NDArray[Any]]=...,__out2:Optional[NDArray[Any]]=...,*,out:_2Tuple[NDArray[Any]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)
 numpy.typing._ufunc._UFunc_Nin1_Nout2.__name__(self)->_NameType
 numpy.typing._ufunc._UFunc_Nin1_Nout2.accumulate(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout2.at(self)->None
@@ -25364,6 +25837,7 @@ numpy.typing._ufunc._UFunc_Nin1_Nout2.reduce(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout2.reduceat(self)->None
 numpy.typing._ufunc._UFunc_Nin1_Nout2.signature(self)->None
 numpy.typing._ufunc._UFunc_Nin2_Nout1(self,__x1:ArrayLike,__x2:ArrayLike,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,*,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._ufunc._UFunc_Nin2_Nout1.__call__(self,__x1:ArrayLike,__x2:ArrayLike,out:Union[None,NDArray[Any],Tuple[NDArray[Any]]]=...,*,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_3Tuple[Optional[str]]]=...,extobj:List[Any]=...)
 numpy.typing._ufunc._UFunc_Nin2_Nout1.__name__(self)->_NameType
 numpy.typing._ufunc._UFunc_Nin2_Nout1.accumulate(self,array:ArrayLike,axis:SupportsIndex=...,dtype:DTypeLike=...,out:Optional[NDArray[Any]]=...)->NDArray[Any]
 numpy.typing._ufunc._UFunc_Nin2_Nout1.at(self,__a:NDArray[Any],__indices:_ArrayLikeInt_co,__b:ArrayLike)->None
@@ -25378,6 +25852,7 @@ numpy.typing._ufunc._UFunc_Nin2_Nout1.reduce(self,array:ArrayLike,axis:Optional[
 numpy.typing._ufunc._UFunc_Nin2_Nout1.reduceat(self,array:ArrayLike,indices:_ArrayLikeInt_co,axis:SupportsIndex=...,dtype:DTypeLike=...,out:Optional[NDArray[Any]]=...)->NDArray[Any]
 numpy.typing._ufunc._UFunc_Nin2_Nout1.signature(self)->None
 numpy.typing._ufunc._UFunc_Nin2_Nout2(self,__x1:ArrayLike,__x2:ArrayLike,__out1:Optional[NDArray[Any]]=...,__out2:Optional[NDArray[Any]]=...,*,out:_2Tuple[NDArray[Any]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_4Tuple[Optional[str]]]=...,extobj:List[Any]=...)
+numpy.typing._ufunc._UFunc_Nin2_Nout2.__call__(self,__x1:ArrayLike,__x2:ArrayLike,__out1:Optional[NDArray[Any]]=...,__out2:Optional[NDArray[Any]]=...,*,out:_2Tuple[NDArray[Any]]=...,where:Optional[_ArrayLikeBool_co]=...,casting:_Casting=...,order:_OrderKACF=...,dtype:DTypeLike=...,subok:bool=...,signature:Union[str,_4Tuple[Optional[str]]]=...,extobj:List[Any]=...)
 numpy.typing._ufunc._UFunc_Nin2_Nout2.__name__(self)->_NameType
 numpy.typing._ufunc._UFunc_Nin2_Nout2.accumulate(self)->None
 numpy.typing._ufunc._UFunc_Nin2_Nout2.at(self)->None
@@ -26308,6 +26783,7 @@ A:numpy.linalg.tests.test_build.rdeps->dict([(dep, re.compile(dep)) for dep in d
 A:numpy.linalg.tests.test_build.f->FindDependenciesLdd()
 A:numpy.linalg.tests.test_build.deps->FindDependenciesLdd().grep_dependencies(lapack_lite.__file__, [b'libg2c', b'libgfortran'])
 numpy.linalg.tests.test_build.FindDependenciesLdd(self)
+numpy.linalg.tests.test_build.FindDependenciesLdd.__init__(self)
 numpy.linalg.tests.test_build.FindDependenciesLdd.get_dependencies(self,lfile)
 numpy.linalg.tests.test_build.FindDependenciesLdd.grep_dependencies(self,lfile,deps)
 numpy.linalg.tests.test_build.TestF77Mismatch
@@ -26429,6 +26905,7 @@ numpy.linalg.tests.test_linalg.HermitianTestCase.test_herm_cases(self)
 numpy.linalg.tests.test_linalg.InvCases(LinalgSquareTestCase,LinalgGeneralizedSquareTestCase)
 numpy.linalg.tests.test_linalg.InvCases.do(self,a,b,tags)
 numpy.linalg.tests.test_linalg.LinalgCase(self,name,a,b,tags=set())
+numpy.linalg.tests.test_linalg.LinalgCase.__init__(self,name,a,b,tags=set())
 numpy.linalg.tests.test_linalg.LinalgCase.__repr__(self)
 numpy.linalg.tests.test_linalg.LinalgCase.check(self,do)
 numpy.linalg.tests.test_linalg.LinalgGeneralizedNonsquareTestCase(LinalgTestCase)
@@ -26849,16 +27326,20 @@ numpy.distutils.VariableSet.variables(self)
 numpy.distutils._escape_backslash(val)
 numpy.distutils._read_config_imp(filenames,dirs=None)
 numpy.distutils.npy_pkg_config.FormatError(self,msg)
+numpy.distutils.npy_pkg_config.FormatError.__init__(self,msg)
 numpy.distutils.npy_pkg_config.FormatError.__str__(self)
 numpy.distutils.npy_pkg_config.LibraryInfo(self,name,description,version,sections,vars,requires=None)
+numpy.distutils.npy_pkg_config.LibraryInfo.__init__(self,name,description,version,sections,vars,requires=None)
 numpy.distutils.npy_pkg_config.LibraryInfo.__str__(self)
 numpy.distutils.npy_pkg_config.LibraryInfo.cflags(self,section='default')
 numpy.distutils.npy_pkg_config.LibraryInfo.libs(self,section='default')
 numpy.distutils.npy_pkg_config.LibraryInfo.sections(self)
 numpy.distutils.npy_pkg_config.PkgNotFound(self,msg)
+numpy.distutils.npy_pkg_config.PkgNotFound.__init__(self,msg)
 numpy.distutils.npy_pkg_config.PkgNotFound.__str__(self)
 numpy.distutils.npy_pkg_config.VariableSet(self,d)
 numpy.distutils.npy_pkg_config.VariableSet.__getitem__(self,name)
+numpy.distutils.npy_pkg_config.VariableSet.__init__(self,d)
 numpy.distutils.npy_pkg_config.VariableSet.__setitem__(self,name,value)
 numpy.distutils.npy_pkg_config.VariableSet._init_parse(self)
 numpy.distutils.npy_pkg_config.VariableSet._init_parse_var(self,name,value)
@@ -26888,6 +27369,7 @@ A:numpy.distutils.msvc9compiler.environ_include->os.getenv('include')
 A:numpy.distutils.msvc9compiler.os.environ['lib']->_merge(environ_lib, os.environ['lib'])
 A:numpy.distutils.msvc9compiler.os.environ['include']->_merge(environ_include, os.environ['include'])
 numpy.distutils.msvc9compiler.MSVCCompiler(self,verbose=0,dry_run=0,force=0)
+numpy.distutils.msvc9compiler.MSVCCompiler.__init__(self,verbose=0,dry_run=0,force=0)
 numpy.distutils.msvc9compiler.MSVCCompiler.initialize(self,plat_name=None)
 numpy.distutils.msvc9compiler.MSVCCompiler.manifest_setup_ldargs(self,output_filename,build_temp,ld_args)
 numpy.distutils.msvc9compiler._merge(old,new)
@@ -26904,6 +27386,7 @@ numpy.distutils.show_config()
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/distutils/numpy_distribution.py----------------------------------------
 numpy.distutils.numpy_distribution.NumpyDistribution(self,attrs=None)
+numpy.distutils.numpy_distribution.NumpyDistribution.__init__(self,attrs=None)
 numpy.distutils.numpy_distribution.NumpyDistribution.has_scons_scripts(self)
 
 
@@ -27011,6 +27494,7 @@ A:numpy.distutils.misc_util.prefix->prefix.replace('/', os.path.sep).replace('/'
 A:numpy.distutils.misc_util.(pathdrive, path)->os.path.splitdrive(path)
 A:numpy.distutils.misc_util.foo->importlib.util.module_from_spec(spec)
 numpy.distutils.misc_util.Configuration(self,package_name=None,parent_name=None,top_path=None,package_path=None,caller_level=1,setup_name='setup.py',**attrs)
+numpy.distutils.misc_util.Configuration.__init__(self,package_name=None,parent_name=None,top_path=None,package_path=None,caller_level=1,setup_name='setup.py',**attrs)
 numpy.distutils.misc_util.Configuration.__str__(self)
 numpy.distutils.misc_util.Configuration._add_library(self,name,sources,install_dir,build_info)
 numpy.distutils.misc_util.Configuration._fix_paths_dict(self,kw)
@@ -27049,6 +27533,7 @@ numpy.distutils.misc_util.Configuration.set_options(self,**options)
 numpy.distutils.misc_util.Configuration.todict(self)
 numpy.distutils.misc_util.Configuration.warn(self,message)
 numpy.distutils.misc_util.InstallableLib(self,name,build_info,target_dir)
+numpy.distutils.misc_util.InstallableLib.__init__(self,name,build_info,target_dir)
 numpy.distutils.misc_util._commandline_dep_string(cc_args,extra_postargs,pp_opts)
 numpy.distutils.misc_util._fix_paths(paths,local_path,include_non_existing)
 numpy.distutils.misc_util._get_directories(list_of_sources)
@@ -27213,6 +27698,7 @@ numpy.distutils.cpuinfo.CPUInfoBase._is_32bit(self)
 numpy.distutils.cpuinfo.CPUInfoBase._is_64bit(self)
 numpy.distutils.cpuinfo.CPUInfoBase._try_call(self,func)
 numpy.distutils.cpuinfo.DarwinCPUInfo(self)
+numpy.distutils.cpuinfo.DarwinCPUInfo.__init__(self)
 numpy.distutils.cpuinfo.DarwinCPUInfo.__machine(self,n)
 numpy.distutils.cpuinfo.DarwinCPUInfo._getNCPUs(self)
 numpy.distutils.cpuinfo.DarwinCPUInfo._is_Power_Macintosh(self)
@@ -27239,6 +27725,7 @@ numpy.distutils.cpuinfo.DarwinCPUInfo._is_ppc860(self)
 numpy.distutils.cpuinfo.DarwinCPUInfo._not_impl(self)
 numpy.distutils.cpuinfo.IRIXCPUInfo(self)
 numpy.distutils.cpuinfo.IRIXCPUInfo.__cputype(self,n)
+numpy.distutils.cpuinfo.IRIXCPUInfo.__init__(self)
 numpy.distutils.cpuinfo.IRIXCPUInfo.__machine(self,n)
 numpy.distutils.cpuinfo.IRIXCPUInfo._getNCPUs(self)
 numpy.distutils.cpuinfo.IRIXCPUInfo._is_IP19(self)
@@ -27275,6 +27762,7 @@ numpy.distutils.cpuinfo.IRIXCPUInfo._is_singleCPU(self)
 numpy.distutils.cpuinfo.IRIXCPUInfo._not_impl(self)
 numpy.distutils.cpuinfo.IRIXCPUInfo.get_ip(self)
 numpy.distutils.cpuinfo.LinuxCPUInfo(self)
+numpy.distutils.cpuinfo.LinuxCPUInfo.__init__(self)
 numpy.distutils.cpuinfo.LinuxCPUInfo._getNCPUs(self)
 numpy.distutils.cpuinfo.LinuxCPUInfo._has_3dnow(self)
 numpy.distutils.cpuinfo.LinuxCPUInfo._has_3dnowext(self)
@@ -27321,6 +27809,7 @@ numpy.distutils.cpuinfo.LinuxCPUInfo._is_i686(self)
 numpy.distutils.cpuinfo.LinuxCPUInfo._is_singleCPU(self)
 numpy.distutils.cpuinfo.LinuxCPUInfo._not_impl(self)
 numpy.distutils.cpuinfo.SunOSCPUInfo(self)
+numpy.distutils.cpuinfo.SunOSCPUInfo.__init__(self)
 numpy.distutils.cpuinfo.SunOSCPUInfo._getNCPUs(self)
 numpy.distutils.cpuinfo.SunOSCPUInfo._is_SUNW(self)
 numpy.distutils.cpuinfo.SunOSCPUInfo._is_cpusparcv7(self)
@@ -27346,6 +27835,7 @@ numpy.distutils.cpuinfo.SunOSCPUInfo._is_ultraenterprice(self)
 numpy.distutils.cpuinfo.SunOSCPUInfo._is_ultraenterprice10k(self)
 numpy.distutils.cpuinfo.SunOSCPUInfo._not_impl(self)
 numpy.distutils.cpuinfo.Win32CPUInfo(self)
+numpy.distutils.cpuinfo.Win32CPUInfo.__init__(self)
 numpy.distutils.cpuinfo.Win32CPUInfo._getNCPUs(self)
 numpy.distutils.cpuinfo.Win32CPUInfo._has_3dnow(self)
 numpy.distutils.cpuinfo.Win32CPUInfo._has_3dnowext(self)
@@ -27468,6 +27958,7 @@ A:numpy.distutils.mingw32ccompiler.msver->get_build_msvc_version()
 A:numpy.distutils.mingw32ccompiler.(ma_str, mi_str)->str(msver).split('.')
 A:numpy.distutils.mingw32ccompiler.manxml->msvc_manifest_xml(int(ma_str), int(mi_str))
 numpy.distutils.mingw32ccompiler.Mingw32CCompiler(self,verbose=0,dry_run=0,force=0)
+numpy.distutils.mingw32ccompiler.Mingw32CCompiler.__init__(self,verbose=0,dry_run=0,force=0)
 numpy.distutils.mingw32ccompiler.Mingw32CCompiler.link(self,target_desc,objects,output_filename,output_dir,libraries,library_dirs,runtime_library_dirs,export_symbols=None,debug=0,extra_preargs=None,extra_postargs=None,build_temp=None,target_lang=None)
 numpy.distutils.mingw32ccompiler.Mingw32CCompiler.object_filenames(self,source_filenames,strip_dir=0,output_dir='')
 numpy.distutils.mingw32ccompiler._build_import_library_amd64()
@@ -27756,6 +28247,7 @@ numpy.distutils.system_info._c_string_literal(s)
 numpy.distutils.system_info._ilp64_opt_info_mixin
 numpy.distutils.system_info._ilp64_opt_info_mixin._check_info(self,info)
 numpy.distutils.system_info._numpy_info(self)
+numpy.distutils.system_info._numpy_info.__init__(self)
 numpy.distutils.system_info._numpy_info.calc_info(self)
 numpy.distutils.system_info._parse_env_order(base_order,env)
 numpy.distutils.system_info._pkg_config_info(system_info)
@@ -27868,6 +28360,7 @@ numpy.distutils.system_info.lapack_src_info.calc_info(self)
 numpy.distutils.system_info.lapack_src_info.get_paths(self,section,key)
 numpy.distutils.system_info.libpaths(paths,bits)
 numpy.distutils.system_info.mkl_info(self)
+numpy.distutils.system_info.mkl_info.__init__(self)
 numpy.distutils.system_info.mkl_info.calc_info(self)
 numpy.distutils.system_info.mkl_info.get_mkl_rootdir(self)
 numpy.distutils.system_info.numarray_info(_numpy_info)
@@ -27894,6 +28387,7 @@ numpy.distutils.system_info.sfftw_info(fftw_info)
 numpy.distutils.system_info.sfftw_threads_info(fftw_info)
 numpy.distutils.system_info.show_all(argv=None)
 numpy.distutils.system_info.system_info(self,default_lib_dirs=default_lib_dirs,default_include_dirs=default_include_dirs)
+numpy.distutils.system_info.system_info.__init__(self,default_lib_dirs=default_lib_dirs,default_include_dirs=default_include_dirs)
 numpy.distutils.system_info.system_info._check_libs(self,lib_dirs,libs,opt_libs,exts)
 numpy.distutils.system_info.system_info._find_lib(self,lib_dir,lib,exts)
 numpy.distutils.system_info.system_info._find_libs(self,lib_dirs,libs,exts)
@@ -27919,6 +28413,7 @@ numpy.distutils.system_info.umfpack_info(system_info)
 numpy.distutils.system_info.umfpack_info.calc_info(self)
 numpy.distutils.system_info.wx_info(_pkg_config_info)
 numpy.distutils.system_info.x11_info(self)
+numpy.distutils.system_info.x11_info.__init__(self)
 numpy.distutils.system_info.x11_info.calc_info(self)
 numpy.distutils.system_info.xft_info(_pkg_config_info)
 
@@ -27990,6 +28485,7 @@ A:numpy.distutils.msvccompiler.environ_include->os.getenv('include', '')
 A:numpy.distutils.msvccompiler.os.environ['lib']->_merge(environ_lib, os.environ['lib'])
 A:numpy.distutils.msvccompiler.os.environ['include']->_merge(environ_include, os.environ['include'])
 numpy.distutils.msvccompiler.MSVCCompiler(self,verbose=0,dry_run=0,force=0)
+numpy.distutils.msvccompiler.MSVCCompiler.__init__(self,verbose=0,dry_run=0,force=0)
 numpy.distutils.msvccompiler.MSVCCompiler.initialize(self)
 numpy.distutils.msvccompiler._merge(old,new)
 
@@ -28001,11 +28497,13 @@ numpy.distutils.setup.configuration(parent_package='',top_path=None)
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/distutils/pathccompiler.py----------------------------------------
 numpy.distutils.pathccompiler.PathScaleCCompiler(self,verbose=0,dry_run=0,force=0)
+numpy.distutils.pathccompiler.PathScaleCCompiler.__init__(self,verbose=0,dry_run=0,force=0)
 
 
 ----------------------------------------/home/zhang/Packages/numpy/numpy1.21.6/distutils/extension.py----------------------------------------
 A:numpy.distutils.extension.self.swig_opts->self.swig_opts.split()
 numpy.distutils.extension.Extension(self,name,sources,include_dirs=None,define_macros=None,undef_macros=None,library_dirs=None,libraries=None,runtime_library_dirs=None,extra_objects=None,extra_compile_args=None,extra_link_args=None,export_symbols=None,swig_opts=None,depends=None,language=None,f2py_options=None,module_dirs=None,extra_f77_compile_args=None,extra_f90_compile_args=None)
+numpy.distutils.extension.Extension.__init__(self,name,sources,include_dirs=None,define_macros=None,undef_macros=None,library_dirs=None,libraries=None,runtime_library_dirs=None,extra_objects=None,extra_compile_args=None,extra_link_args=None,export_symbols=None,swig_opts=None,depends=None,language=None,f2py_options=None,module_dirs=None,extra_f77_compile_args=None,extra_f90_compile_args=None)
 numpy.distutils.extension.Extension.has_cxx_sources(self)
 numpy.distutils.extension.Extension.has_f2py_sources(self)
 
@@ -28018,7 +28516,9 @@ A:numpy.distutils.intelccompiler.self.cc->self.find_exe('icl.exe')
 A:numpy.distutils.intelccompiler.self.lib->self.find_exe('xilib')
 A:numpy.distutils.intelccompiler.self.linker->self.find_exe('xilink')
 numpy.distutils.intelccompiler.IntelCCompiler(self,verbose=0,dry_run=0,force=0)
+numpy.distutils.intelccompiler.IntelCCompiler.__init__(self,verbose=0,dry_run=0,force=0)
 numpy.distutils.intelccompiler.IntelEM64TCCompiler(self,verbose=0,dry_run=0,force=0)
+numpy.distutils.intelccompiler.IntelEM64TCCompiler.__init__(self,verbose=0,dry_run=0,force=0)
 numpy.distutils.intelccompiler.IntelItaniumCCompiler(IntelCCompiler)
 
 
@@ -28138,6 +28638,7 @@ A:numpy.distutils.ccompiler_opt.last_hash->os.path.dirname(self._cache_path).get
 A:numpy.distutils.ccompiler_opt.req_detect->'&&'.join(['CHK(%s)' % f for f in req_detect])
 A:numpy.distutils.ccompiler_opt.opt->CCompilerOpt(compiler, **kwargs)
 numpy.distutils.ccompiler_opt.CCompilerOpt(self,ccompiler,cpu_baseline='min',cpu_dispatch='max',cache_path=None)
+numpy.distutils.ccompiler_opt.CCompilerOpt.__init__(self,ccompiler,cpu_baseline='min',cpu_dispatch='max',cache_path=None)
 numpy.distutils.ccompiler_opt.CCompilerOpt._generate_config(self,output_dir,dispatch_src,targets,has_baseline=False)
 numpy.distutils.ccompiler_opt.CCompilerOpt._wrap_target(self,output_dir,dispatch_src,target,nochange=False)
 numpy.distutils.ccompiler_opt.CCompilerOpt.cpu_baseline_flags(self)
@@ -28148,18 +28649,22 @@ numpy.distutils.ccompiler_opt.CCompilerOpt.is_cached(self)
 numpy.distutils.ccompiler_opt.CCompilerOpt.report(self,full=False)
 numpy.distutils.ccompiler_opt.CCompilerOpt.try_dispatch(self,sources,src_dir=None,ccompiler=None,**kwargs)
 numpy.distutils.ccompiler_opt._CCompiler(self)
+numpy.distutils.ccompiler_opt._CCompiler.__init__(self)
 numpy.distutils.ccompiler_opt._CCompiler._cc_normalize_unix(self,flags)
 numpy.distutils.ccompiler_opt._CCompiler._cc_normalize_win(self,flags)
 numpy.distutils.ccompiler_opt._CCompiler.cc_normalize_flags(self,flags)
 numpy.distutils.ccompiler_opt._CCompiler.cc_test_flags(self,flags)
 numpy.distutils.ccompiler_opt._Cache(self,cache_path=None,*factors)
 numpy.distutils.ccompiler_opt._Cache.__del__(self)
+numpy.distutils.ccompiler_opt._Cache.__init__(self,cache_path=None,*factors)
 numpy.distutils.ccompiler_opt._Cache.cache_flush(self)
 numpy.distutils.ccompiler_opt._Cache.cache_hash(self,*factors)
 numpy.distutils.ccompiler_opt._Cache.me(cb)
 numpy.distutils.ccompiler_opt._Config(self)
+numpy.distutils.ccompiler_opt._Config.__init__(self)
 numpy.distutils.ccompiler_opt._Config.conf_features_partial(self)
 numpy.distutils.ccompiler_opt._Distutils(self,ccompiler)
+numpy.distutils.ccompiler_opt._Distutils.__init__(self,ccompiler)
 numpy.distutils.ccompiler_opt._Distutils._dist_str(*args)
 numpy.distutils.ccompiler_opt._Distutils._dist_test_spawn(cmd,display=None)
 numpy.distutils.ccompiler_opt._Distutils._dist_test_spawn_paths(self,cmd,display=None)
@@ -28171,6 +28676,7 @@ numpy.distutils.ccompiler_opt._Distutils.dist_load_module(name,path)
 numpy.distutils.ccompiler_opt._Distutils.dist_log(*args,stderr=False)
 numpy.distutils.ccompiler_opt._Distutils.dist_test(self,source,flags,macros=[])
 numpy.distutils.ccompiler_opt._Feature(self)
+numpy.distutils.ccompiler_opt._Feature.__init__(self)
 numpy.distutils.ccompiler_opt._Feature.feature_ahead(self,names)
 numpy.distutils.ccompiler_opt._Feature.feature_c_preprocessor(self,feature_name,tabs=0)
 numpy.distutils.ccompiler_opt._Feature.feature_can_autovec(self,name)
@@ -28187,6 +28693,7 @@ numpy.distutils.ccompiler_opt._Feature.feature_sorted(self,names,reverse=False)
 numpy.distutils.ccompiler_opt._Feature.feature_test(self,name,force_flags=None,macros=[])
 numpy.distutils.ccompiler_opt._Feature.feature_untied(self,names)
 numpy.distutils.ccompiler_opt._Parse(self,cpu_baseline,cpu_dispatch)
+numpy.distutils.ccompiler_opt._Parse.__init__(self,cpu_baseline,cpu_dispatch)
 numpy.distutils.ccompiler_opt._Parse._parse_arg_features(self,arg_name,req_features)
 numpy.distutils.ccompiler_opt._Parse._parse_multi_target(self,targets)
 numpy.distutils.ccompiler_opt._Parse._parse_policy_autovec(self,has_baseline,final_targets,extra_flags)
@@ -28216,12 +28723,15 @@ numpy.distutils.tests.test_exec_command.TestExecCommand.test_basic(self)
 numpy.distutils.tests.test_exec_command.emulate_nonposix(self,osname='non-posix')
 numpy.distutils.tests.test_exec_command.emulate_nonposix.__enter__(self)
 numpy.distutils.tests.test_exec_command.emulate_nonposix.__exit__(self,exc_type,exc_value,traceback)
+numpy.distutils.tests.test_exec_command.emulate_nonposix.__init__(self,osname='non-posix')
 numpy.distutils.tests.test_exec_command.redirect_stderr(self,stderr=None)
 numpy.distutils.tests.test_exec_command.redirect_stderr.__enter__(self)
 numpy.distutils.tests.test_exec_command.redirect_stderr.__exit__(self,exc_type,exc_value,traceback)
+numpy.distutils.tests.test_exec_command.redirect_stderr.__init__(self,stderr=None)
 numpy.distutils.tests.test_exec_command.redirect_stdout(self,stdout=None)
 numpy.distutils.tests.test_exec_command.redirect_stdout.__enter__(self)
 numpy.distutils.tests.test_exec_command.redirect_stdout.__exit__(self,exc_type,exc_value,traceback)
+numpy.distutils.tests.test_exec_command.redirect_stdout.__init__(self,stdout=None)
 numpy.distutils.tests.test_exec_command.test_exec_command_stderr()
 numpy.distutils.tests.test_exec_command.test_exec_command_stdout()
 
@@ -28303,10 +28813,12 @@ A:numpy.distutils.tests.test_ccompiler_opt_conf.impl_dict->search_in.get(f)
 A:numpy.distutils.tests.test_ccompiler_opt_conf.group->group.split().split()
 A:numpy.distutils.tests.test_ccompiler_opt_conf.extra_checks->extra_checks.split().split()
 numpy.distutils.tests.test_ccompiler_opt_conf.FakeCCompilerOpt(self,*args,**kwargs)
+numpy.distutils.tests.test_ccompiler_opt_conf.FakeCCompilerOpt.__init__(self,*args,**kwargs)
 numpy.distutils.tests.test_ccompiler_opt_conf.FakeCCompilerOpt.dist_compile(self,sources,flags,**kwargs)
 numpy.distutils.tests.test_ccompiler_opt_conf.FakeCCompilerOpt.dist_info(self)
 numpy.distutils.tests.test_ccompiler_opt_conf.FakeCCompilerOpt.dist_log(*args,stderr=False)
 numpy.distutils.tests.test_ccompiler_opt_conf.TestConfFeatures(self,methodName='runTest')
+numpy.distutils.tests.test_ccompiler_opt_conf.TestConfFeatures.__init__(self,methodName='runTest')
 numpy.distutils.tests.test_ccompiler_opt_conf.TestConfFeatures.setup(self)
 numpy.distutils.tests.test_ccompiler_opt_conf.TestConfFeatures.test_features(self)
 numpy.distutils.tests.test_ccompiler_opt_conf._TestConfFeatures(FakeCCompilerOpt)
@@ -28351,6 +28863,7 @@ A:numpy.distutils.tests.test_ccompiler_opt.targets->' '.join(targets)
 A:numpy.distutils.tests.test_ccompiler_opt.match_dict->self.arg_regex(**kwargs)
 A:numpy.distutils.tests.test_ccompiler_opt.(_, tar_flags)->self.get_targets(targets=targets, groups=groups)
 numpy.distutils.tests.test_ccompiler_opt.FakeCCompilerOpt(self,trap_files='',trap_flags='',*args,**kwargs)
+numpy.distutils.tests.test_ccompiler_opt.FakeCCompilerOpt.__init__(self,trap_files='',trap_flags='',*args,**kwargs)
 numpy.distutils.tests.test_ccompiler_opt.FakeCCompilerOpt.__repr__(self)
 numpy.distutils.tests.test_ccompiler_opt.FakeCCompilerOpt.dist_compile(self,sources,flags,**kwargs)
 numpy.distutils.tests.test_ccompiler_opt.FakeCCompilerOpt.dist_info(self)
@@ -28435,6 +28948,7 @@ numpy.distutils.tests.test_system_info.TestSystemInfoReading.test_overrides(self
 numpy.distutils.tests.test_system_info.TestSystemInfoReading.test_temp1(self)
 numpy.distutils.tests.test_system_info.TestSystemInfoReading.test_temp2(self)
 numpy.distutils.tests.test_system_info._system_info(self,default_lib_dirs=default_lib_dirs,default_include_dirs=default_include_dirs,verbosity=1)
+numpy.distutils.tests.test_system_info._system_info.__init__(self,default_lib_dirs=default_lib_dirs,default_include_dirs=default_include_dirs,verbosity=1)
 numpy.distutils.tests.test_system_info._system_info._check_libs(self,lib_dirs,libs,opt_libs,exts)
 numpy.distutils.tests.test_system_info.get_class(name,notfound_action=1)
 numpy.distutils.tests.test_system_info.have_compiler()
@@ -28584,8 +29098,16 @@ A:numpy.distutils.fcompiler.environment.envvar_contents->convert(envvar_contents
 A:numpy.distutils.fcompiler.environment.ec->self.__class__(distutils_section=self._distutils_section, **self._conf_keys)
 A:numpy.distutils.fcompiler.environment.self._conf->dist.get_option_dict(self._distutils_section)
 numpy.distutils.fcompiler.EnvironmentConfig(self,distutils_section='ALL',**kw)
+numpy.distutils.fcompiler.EnvironmentConfig.__getattr__(self,name)
+numpy.distutils.fcompiler.EnvironmentConfig._get_var(self,name,conf_desc)
+numpy.distutils.fcompiler.EnvironmentConfig.clone(self,hook_handler)
+numpy.distutils.fcompiler.EnvironmentConfig.dump_variable(self,name)
+numpy.distutils.fcompiler.EnvironmentConfig.dump_variables(self)
+numpy.distutils.fcompiler.EnvironmentConfig.get(self,name,default=None)
+numpy.distutils.fcompiler.EnvironmentConfig.use_distribution(self,dist)
 numpy.distutils.fcompiler.environment.EnvironmentConfig(self,distutils_section='ALL',**kw)
 numpy.distutils.fcompiler.environment.EnvironmentConfig.__getattr__(self,name)
+numpy.distutils.fcompiler.environment.EnvironmentConfig.__init__(self,distutils_section='ALL',**kw)
 numpy.distutils.fcompiler.environment.EnvironmentConfig._get_var(self,name,conf_desc)
 numpy.distutils.fcompiler.environment.EnvironmentConfig.clone(self,hook_handler)
 numpy.distutils.fcompiler.environment.EnvironmentConfig.dump_variable(self,name)
@@ -28793,6 +29315,7 @@ A:numpy.distutils.fcompiler.__init__.flags[fcname]->split_quoted(fflags)
 numpy.distutils.fcompiler.__init__.CompilerNotFound(Exception)
 numpy.distutils.fcompiler.__init__.FCompiler(self,*args,**kw)
 numpy.distutils.fcompiler.__init__.FCompiler.__copy__(self)
+numpy.distutils.fcompiler.__init__.FCompiler.__init__(self,*args,**kw)
 numpy.distutils.fcompiler.__init__.FCompiler._command_property(key)
 numpy.distutils.fcompiler.__init__.FCompiler._compile(self,obj,src,ext,cc_args,extra_postargs,pp_opts)
 numpy.distutils.fcompiler.__init__.FCompiler._environment_hook(self,name,hook_name)
@@ -29068,6 +29591,7 @@ A:numpy.distutils.command.config.output->filepath_from_subprocess_output(output)
 A:numpy.distutils.command.config.exitcode->os.WEXITSTATUS(exitstatus)
 A:numpy.distutils.command.config.sig->os.WTERMSIG(exitstatus)
 numpy.distutils.command.config.GrabStdout(self)
+numpy.distutils.command.config.GrabStdout.__init__(self)
 numpy.distutils.command.config.GrabStdout.flush(self)
 numpy.distutils.command.config.GrabStdout.restore(self)
 numpy.distutils.command.config.GrabStdout.write(self,data)

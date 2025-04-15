@@ -93,7 +93,11 @@ A:spacy.util.kwargs->dict(kwargs)
 A:spacy.util.error_handler->proc.get_error_handler()
 A:spacy.util.doc->proc(doc, **kwargs)
 spacy.registry(thinc.registry)
+spacy.registry.get(cls,registry_name:str,func_name:str)->Callable
+spacy.registry.get_registry_names(cls)->List[str]
+spacy.registry.has(cls,registry_name:str,func_name:str)->bool
 spacy.util.DummyTokenizer(self,text)
+spacy.util.DummyTokenizer.__call__(self,text)
 spacy.util.DummyTokenizer.from_bytes(self,_bytes_data,**kwargs)
 spacy.util.DummyTokenizer.from_disk(self,_path,**kwargs)
 spacy.util.DummyTokenizer.pipe(self,texts,**kwargs)
@@ -101,10 +105,12 @@ spacy.util.DummyTokenizer.to_bytes(self,**kwargs)
 spacy.util.DummyTokenizer.to_disk(self,_path,**kwargs)
 spacy.util.ENV_VARS
 spacy.util.SimpleFrozenDict(self,*args,error:str=Errors.E095,**kwargs)
+spacy.util.SimpleFrozenDict.__init__(self,*args,error:str=Errors.E095,**kwargs)
 spacy.util.SimpleFrozenDict.__setitem__(self,key,value)
 spacy.util.SimpleFrozenDict.pop(self,key,default=None)
 spacy.util.SimpleFrozenDict.update(self,other)
 spacy.util.SimpleFrozenList(self,*args,error:str=Errors.E927)
+spacy.util.SimpleFrozenList.__init__(self,*args,error:str=Errors.E927)
 spacy.util.SimpleFrozenList.append(self,*args,**kwargs)
 spacy.util.SimpleFrozenList.clear(self,*args,**kwargs)
 spacy.util.SimpleFrozenList.extend(self,*args,**kwargs)
@@ -208,6 +214,7 @@ A:spacy.lookups.self._tables[key]->Table(key, value)
 A:spacy.lookups.path->ensure_path(path)
 spacy.lookups.Lookups(self)
 spacy.lookups.Lookups.__contains__(self,name:str)->bool
+spacy.lookups.Lookups.__init__(self)
 spacy.lookups.Lookups.__len__(self)->int
 spacy.lookups.Lookups.add_table(self,name:str,data:dict=SimpleFrozenDict())->Table
 spacy.lookups.Lookups.from_bytes(self,bytes_data:bytes,**kwargs)->'Lookups'
@@ -222,6 +229,7 @@ spacy.lookups.Lookups.to_disk(self,path:Union[str,Path],filename:str='lookups.bi
 spacy.lookups.Table(self,name:Optional[str]=None,data:Optional[dict]=None)
 spacy.lookups.Table.__contains__(self,key:Union[str,int])->bool
 spacy.lookups.Table.__getitem__(self,key:Union[str,int])->Any
+spacy.lookups.Table.__init__(self,name:Optional[str]=None,data:Optional[dict]=None)
 spacy.lookups.Table.__setitem__(self,key:Union[str,int],value:Any)->None
 spacy.lookups.Table.from_bytes(self,bytes_data:bytes)->'Table'
 spacy.lookups.Table.from_dict(cls,data:dict,name:Optional[str]=None)->'Table'
@@ -245,6 +253,7 @@ A:spacy.errors.pattern_errors->'\n'.join([f'- {e}' for e in error_msgs])
 spacy.Errors
 spacy.errors.Errors
 spacy.errors.MatchPatternError(self,key,errors)
+spacy.errors.MatchPatternError.__init__(self,key,errors)
 spacy.errors.Warnings
 spacy.errors.add_codes(err_cls)
 
@@ -350,13 +359,70 @@ A:spacy.language.texts->receiver.get()
 A:spacy.language.self.data->iter(data)
 A:spacy.language.self.queues->iter(cycle(queues))
 spacy.Language(self,vocab:Union[Vocab,bool]=True,*,max_length:int=10**6,meta:Dict[str,Any]={},create_tokenizer:Optional[Callable[['Language'],Callable[[str],Doc]]]=None,batch_size:int=1000,**kwargs)
+spacy.Language.__init_subclass__(cls,**kwargs)
+spacy.Language._get_pipe_index(self,before:Optional[Union[str,int]]=None,after:Optional[Union[str,int]]=None,first:Optional[bool]=None,last:Optional[bool]=None)->int
+spacy.Language._link_components(self)->None
+spacy.Language._multiprocessing_pipe(self,texts:Iterable[str],pipes:Iterable[Callable[[Doc],Doc]],n_process:int,batch_size:int)->None
+spacy.Language.add_pipe(self,factory_name:str,name:Optional[str]=None,*,before:Optional[Union[str,int]]=None,after:Optional[Union[str,int]]=None,first:Optional[bool]=None,last:Optional[bool]=None,source:Optional['Language']=None,config:Optional[Dict[str,Any]]=SimpleFrozenDict(),raw_config:Optional[Config]=None,validate:bool=True)->Callable[[Doc], Doc]
+spacy.Language.analyze_pipes(self,*,keys:List[str]=['assigns','requires','scores','retokenizes'],pretty:bool=False)->Optional[Dict[str, Any]]
+spacy.Language.begin_training(self,get_examples:Optional[Callable[[],Iterable[Example]]]=None,*,sgd:Optional[Optimizer]=None)->Optimizer
+spacy.Language.component(cls,name:Optional[str]=None,*,assigns:Iterable[str]=SimpleFrozenList(),requires:Iterable[str]=SimpleFrozenList(),retokenizes:bool=False,func:Optional[Callable[[Doc],Doc]]=None)->Callable
+spacy.Language.component_names(self)->List[str]
+spacy.Language.components(self)->List[Tuple[str, Callable[[Doc], Doc]]]
+spacy.Language.config(self)->Config
+spacy.Language.config(self,value:Config)->None
+spacy.Language.create_optimizer(self)
+spacy.Language.create_pipe(self,factory_name:str,name:Optional[str]=None,*,config:Optional[Dict[str,Any]]=SimpleFrozenDict(),raw_config:Optional[Config]=None,validate:bool=True)->Callable[[Doc], Doc]
+spacy.Language.create_pipe_from_source(self,source_name:str,source:'Language',*,name:str)->Tuple[Callable[[Doc], Doc], str]
+spacy.Language.disable_pipe(self,name:str)->None
+spacy.Language.disable_pipes(self,*names)->'DisabledPipes'
+spacy.Language.disabled(self)->List[str]
+spacy.Language.enable_pipe(self,name:str)->None
+spacy.Language.evaluate(self,examples:Iterable[Example],*,batch_size:Optional[int]=None,scorer:Optional[Scorer]=None,component_cfg:Optional[Dict[str,Dict[str,Any]]]=None,scorer_cfg:Optional[Dict[str,Any]]=None)->Dict[str, Union[float, dict]]
+spacy.Language.factory(cls,name:str,*,default_config:Dict[str,Any]=SimpleFrozenDict(),assigns:Iterable[str]=SimpleFrozenList(),requires:Iterable[str]=SimpleFrozenList(),retokenizes:bool=False,default_score_weights:Dict[str,float]=SimpleFrozenDict(),func:Optional[Callable]=None)->Callable
+spacy.Language.factory_names(self)->List[str]
+spacy.Language.from_bytes(self,bytes_data:bytes,*,exclude:Iterable[str]=SimpleFrozenList())->'Language'
+spacy.Language.from_config(cls,config:Union[Dict[str,Any],Config]={},*,vocab:Union[Vocab,bool]=True,disable:Iterable[str]=SimpleFrozenList(),exclude:Iterable[str]=SimpleFrozenList(),meta:Dict[str,Any]=SimpleFrozenDict(),auto_fill:bool=True,validate:bool=True)->'Language'
+spacy.Language.from_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->'Language'
+spacy.Language.get_factory_meta(cls,name:str)->'FactoryMeta'
+spacy.Language.get_factory_name(cls,name:str)->str
+spacy.Language.get_pipe(self,name:str)->Callable[[Doc], Doc]
+spacy.Language.get_pipe_config(self,name:str)->Config
+spacy.Language.get_pipe_meta(self,name:str)->'FactoryMeta'
+spacy.Language.has_factory(cls,name:str)->bool
+spacy.Language.has_pipe(self,name:str)->bool
+spacy.Language.initialize(self,get_examples:Optional[Callable[[],Iterable[Example]]]=None,*,sgd:Optional[Optimizer]=None)->Optimizer
+spacy.Language.make_doc(self,text:str)->Doc
+spacy.Language.meta(self)->Dict[str, Any]
+spacy.Language.meta(self,value:Dict[str,Any])->None
+spacy.Language.path(self)
+spacy.Language.pipe(self,texts:Iterable[str],*,as_tuples:bool=False,batch_size:Optional[int]=None,disable:Iterable[str]=SimpleFrozenList(),component_cfg:Optional[Dict[str,Dict[str,Any]]]=None,n_process:int=1)
+spacy.Language.pipe_factories(self)->Dict[str, str]
+spacy.Language.pipe_labels(self)->Dict[str, List[str]]
+spacy.Language.pipe_names(self)->List[str]
+spacy.Language.pipeline(self)->List[Tuple[str, Callable[[Doc], Doc]]]
+spacy.Language.rehearse(self,examples:Iterable[Example],*,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None,component_cfg:Optional[Dict[str,Dict[str,Any]]]=None,exclude:Iterable[str]=SimpleFrozenList())->Dict[str, float]
+spacy.Language.remove_pipe(self,name:str)->Tuple[str, Callable[[Doc], Doc]]
+spacy.Language.rename_pipe(self,old_name:str,new_name:str)->None
+spacy.Language.replace_listeners(self,tok2vec_name:str,pipe_name:str,listeners:Iterable[str])->None
+spacy.Language.replace_pipe(self,name:str,factory_name:str,*,config:Dict[str,Any]=SimpleFrozenDict(),validate:bool=True)->Callable[[Doc], Doc]
+spacy.Language.resume_training(self,*,sgd:Optional[Optimizer]=None)->Optimizer
+spacy.Language.select_pipes(self,*,disable:Optional[Union[str,Iterable[str]]]=None,enable:Optional[Union[str,Iterable[str]]]=None)->'DisabledPipes'
+spacy.Language.set_error_handler(self,error_handler:Callable[[str,Callable[[Doc],Doc],List[Doc],Exception],None])
+spacy.Language.set_factory_meta(cls,name:str,value:'FactoryMeta')->None
+spacy.Language.to_bytes(self,*,exclude:Iterable[str]=SimpleFrozenList())->bytes
+spacy.Language.to_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->None
+spacy.Language.update(self,examples:Iterable[Example],_:Optional[Any]=None,*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None,component_cfg:Optional[Dict[str,Dict[str,Any]]]=None,exclude:Iterable[str]=SimpleFrozenList())
+spacy.Language.use_params(self,params:Optional[dict])
 spacy.language.BaseDefaults
 spacy.language.DisabledPipes(self,nlp:Language,names:List[str])
 spacy.language.DisabledPipes.__enter__(self)
 spacy.language.DisabledPipes.__exit__(self,*args)
+spacy.language.DisabledPipes.__init__(self,nlp:Language,names:List[str])
 spacy.language.DisabledPipes.restore(self)->None
 spacy.language.FactoryMeta
 spacy.language.Language(self,vocab:Union[Vocab,bool]=True,*,max_length:int=10**6,meta:Dict[str,Any]={},create_tokenizer:Optional[Callable[['Language'],Callable[[str],Doc]]]=None,batch_size:int=1000,**kwargs)
+spacy.language.Language.__init__(self,vocab:Union[Vocab,bool]=True,*,max_length:int=10**6,meta:Dict[str,Any]={},create_tokenizer:Optional[Callable[['Language'],Callable[[str],Doc]]]=None,batch_size:int=1000,**kwargs)
 spacy.language.Language.__init_subclass__(cls,**kwargs)
 spacy.language.Language._get_pipe_index(self,before:Optional[Union[str,int]]=None,after:Optional[Union[str,int]]=None,first:Optional[bool]=None,last:Optional[bool]=None)->int
 spacy.language.Language._link_components(self)->None
@@ -413,6 +479,7 @@ spacy.language.Language.to_disk(self,path:Union[str,Path],*,exclude:Iterable[str
 spacy.language.Language.update(self,examples:Iterable[Example],_:Optional[Any]=None,*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None,component_cfg:Optional[Dict[str,Dict[str,Any]]]=None,exclude:Iterable[str]=SimpleFrozenList())
 spacy.language.Language.use_params(self,params:Optional[dict])
 spacy.language._Sender(self,data:Iterable[Any],queues:List[mp.Queue],chunk_size:int)
+spacy.language._Sender.__init__(self,data:Iterable[Any],queues:List[mp.Queue],chunk_size:int)
 spacy.language._Sender.send(self)->None
 spacy.language._Sender.step(self)->None
 spacy.language._apply_pipes(make_doc:Callable[[str],Doc],pipes:Iterable[Callable[[Doc],Doc]],receiver,sender,underscore_state:Tuple[dict,dict,dict])->None
@@ -538,6 +605,7 @@ A:spacy.scorer.area->area.dtype.type(area).dtype.type(area)
 spacy.scorer.PRFScore(self)
 spacy.scorer.PRFScore.__add__(self,other)
 spacy.scorer.PRFScore.__iadd__(self,other)
+spacy.scorer.PRFScore.__init__(self)
 spacy.scorer.PRFScore.__len__(self)->int
 spacy.scorer.PRFScore.fscore(self)->float
 spacy.scorer.PRFScore.precision(self)->float
@@ -545,10 +613,12 @@ spacy.scorer.PRFScore.recall(self)->float
 spacy.scorer.PRFScore.score_set(self,cand:set,gold:set)->None
 spacy.scorer.PRFScore.to_dict(self)->Dict[str, float]
 spacy.scorer.ROCAUCScore(self)
+spacy.scorer.ROCAUCScore.__init__(self)
 spacy.scorer.ROCAUCScore.is_binary(self)
 spacy.scorer.ROCAUCScore.score(self)
 spacy.scorer.ROCAUCScore.score_set(self,cand,gold)->None
 spacy.scorer.Scorer(self,nlp:Optional['Language']=None,default_lang:str='xx',default_pipeline:Iterable[str]=DEFAULT_PIPELINE,**cfg)
+spacy.scorer.Scorer.__init__(self,nlp:Optional['Language']=None,default_lang:str='xx',default_pipeline:Iterable[str]=DEFAULT_PIPELINE,**cfg)
 spacy.scorer.Scorer.score(self,examples:Iterable[Example])->Dict[str, Any]
 spacy.scorer.Scorer.score_cats(examples:Iterable[Example],attr:str,*,getter:Callable[[Doc,str],Any]=getattr,labels:Iterable[str]=SimpleFrozenList(),multi_label:bool=True,positive_label:Optional[str]=None,threshold:Optional[float]=None,**cfg)->Dict[str, Any]
 spacy.scorer.Scorer.score_deps(examples:Iterable[Example],attr:str,*,getter:Callable[[Token,str],Any]=getattr,head_attr:str='head',head_getter:Callable[[Token,str],Token]=getattr,ignore_labels:Iterable[str]=SimpleFrozenList(),missing_values:Set[Any]=MISSING_VALUES,**cfg)->Dict[str, Any]
@@ -582,7 +652,23 @@ A:spacy.pipeline.tok2vec.(tokvecs, bp_tokvecs)->self.model.begin_update(docs)
 A:spacy.pipeline.tok2vec.d_docs->bp_tokvecs(d_tokvecs)
 A:spacy.pipeline.tok2vec.width->model.get_dim('nO')
 spacy.pipeline.Tok2Vec(self,vocab:Vocab,model:Model,name:str='tok2vec')
+spacy.pipeline.Tok2Vec.add_label(self,label)
+spacy.pipeline.Tok2Vec.add_listener(self,listener:'Tok2VecListener',component_name:str)->None
+spacy.pipeline.Tok2Vec.find_listeners(self,component)->None
+spacy.pipeline.Tok2Vec.get_loss(self,examples,scores)->None
+spacy.pipeline.Tok2Vec.initialize(self,get_examples:Callable[[],Iterable[Example]],*,nlp:Optional[Language]=None)
+spacy.pipeline.Tok2Vec.listeners(self)->List['Tok2VecListener']
+spacy.pipeline.Tok2Vec.listening_components(self)->List[str]
+spacy.pipeline.Tok2Vec.predict(self,docs:Iterable[Doc])
+spacy.pipeline.Tok2Vec.remove_listener(self,listener:'Tok2VecListener',component_name:str)->bool
+spacy.pipeline.Tok2Vec.set_annotations(self,docs:Sequence[Doc],tokvecses)->None
+spacy.pipeline.Tok2Vec.update(self,examples:Iterable[Example],*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None)
+spacy.pipeline.Tok2VecListener(self,upstream_name:str,width:int)
+spacy.pipeline.Tok2VecListener.get_batch_id(cls,inputs:List[Doc])->int
+spacy.pipeline.Tok2VecListener.receive(self,batch_id:int,outputs,backprop)->None
+spacy.pipeline.Tok2VecListener.verify_inputs(self,inputs)->bool
 spacy.pipeline.tok2vec.Tok2Vec(self,vocab:Vocab,model:Model,name:str='tok2vec')
+spacy.pipeline.tok2vec.Tok2Vec.__init__(self,vocab:Vocab,model:Model,name:str='tok2vec')
 spacy.pipeline.tok2vec.Tok2Vec.add_label(self,label)
 spacy.pipeline.tok2vec.Tok2Vec.add_listener(self,listener:'Tok2VecListener',component_name:str)->None
 spacy.pipeline.tok2vec.Tok2Vec.find_listeners(self,component)->None
@@ -595,6 +681,7 @@ spacy.pipeline.tok2vec.Tok2Vec.remove_listener(self,listener:'Tok2VecListener',c
 spacy.pipeline.tok2vec.Tok2Vec.set_annotations(self,docs:Sequence[Doc],tokvecses)->None
 spacy.pipeline.tok2vec.Tok2Vec.update(self,examples:Iterable[Example],*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None)
 spacy.pipeline.tok2vec.Tok2VecListener(self,upstream_name:str,width:int)
+spacy.pipeline.tok2vec.Tok2VecListener.__init__(self,upstream_name:str,width:int)
 spacy.pipeline.tok2vec.Tok2VecListener.get_batch_id(cls,inputs:List[Doc])->int
 spacy.pipeline.tok2vec.Tok2VecListener.receive(self,batch_id:int,outputs,backprop)->None
 spacy.pipeline.tok2vec.Tok2VecListener.verify_inputs(self,inputs)->bool
@@ -622,7 +709,20 @@ A:spacy.pipeline.lemmatizer.rules->self.lookups.get_table('lemma_rules', {}).get
 A:spacy.pipeline.lemmatizer.string->string.lower().lower()
 A:spacy.pipeline.lemmatizer.forms->list(dict.fromkeys(forms))
 spacy.pipeline.Lemmatizer(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='lookup',overwrite:bool=False)
+spacy.pipeline.Lemmatizer._validate_tables(self,error_message:str=Errors.E912)->None
+spacy.pipeline.Lemmatizer.from_bytes(self,bytes_data:bytes,*,exclude:Iterable[str]=SimpleFrozenList())->'Lemmatizer'
+spacy.pipeline.Lemmatizer.from_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->'Lemmatizer'
+spacy.pipeline.Lemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
+spacy.pipeline.Lemmatizer.initialize(self,get_examples:Optional[Callable[[],Iterable[Example]]]=None,*,nlp:Optional[Language]=None,lookups:Optional[Lookups]=None)
+spacy.pipeline.Lemmatizer.is_base_form(self,token:Token)->bool
+spacy.pipeline.Lemmatizer.lookup_lemmatize(self,token:Token)->List[str]
+spacy.pipeline.Lemmatizer.mode(self)
+spacy.pipeline.Lemmatizer.rule_lemmatize(self,token:Token)->List[str]
+spacy.pipeline.Lemmatizer.score(self,examples:Iterable[Example],**kwargs)->Dict[str, Any]
+spacy.pipeline.Lemmatizer.to_bytes(self,*,exclude:Iterable[str]=SimpleFrozenList())->bytes
+spacy.pipeline.Lemmatizer.to_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())
 spacy.pipeline.lemmatizer.Lemmatizer(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='lookup',overwrite:bool=False)
+spacy.pipeline.lemmatizer.Lemmatizer.__init__(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='lookup',overwrite:bool=False)
 spacy.pipeline.lemmatizer.Lemmatizer._validate_tables(self,error_message:str=Errors.E912)->None
 spacy.pipeline.lemmatizer.Lemmatizer.from_bytes(self,bytes_data:bytes,*,exclude:Iterable[str]=SimpleFrozenList())->'Lemmatizer'
 spacy.pipeline.lemmatizer.Lemmatizer.from_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->'Lemmatizer'
@@ -646,6 +746,7 @@ A:spacy.pipeline.functions.self.min_length->config.get('min_length', 0)
 A:spacy.pipeline.functions.self.split_length->config.get('split_length', 0)
 A:spacy.pipeline.functions.path->util.ensure_path(path)
 spacy.pipeline.functions.TokenSplitter(self,min_length:int=0,split_length:int=0)
+spacy.pipeline.functions.TokenSplitter.__init__(self,min_length:int=0,split_length:int=0)
 spacy.pipeline.functions.TokenSplitter._get_config(self)->Dict[str, Any]
 spacy.pipeline.functions.TokenSplitter._set_config(self,config:Dict[str,Any]={})->None
 spacy.pipeline.functions.TokenSplitter.from_bytes(self,data,**kwargs)
@@ -671,7 +772,22 @@ A:spacy.pipeline.attributeruler.morph->self.vocab.morphology.add(morph_attrs)
 A:spacy.pipeline.attributeruler.key->str(len(self.attrs))
 A:spacy.pipeline.attributeruler.attrs->set()
 spacy.pipeline.AttributeRuler(self,vocab:Vocab,name:str='attribute_ruler',*,validate:bool=False)
+spacy.pipeline.AttributeRuler.add(self,patterns:Iterable[MatcherPatternType],attrs:Dict,index:int=0)->None
+spacy.pipeline.AttributeRuler.add_patterns(self,patterns:Iterable[AttributeRulerPatternType])->None
+spacy.pipeline.AttributeRuler.clear(self)->None
+spacy.pipeline.AttributeRuler.from_bytes(self,bytes_data:bytes,exclude:Iterable[str]=SimpleFrozenList())->'AttributeRuler'
+spacy.pipeline.AttributeRuler.from_disk(self,path:Union[Path,str],exclude:Iterable[str]=SimpleFrozenList())->'AttributeRuler'
+spacy.pipeline.AttributeRuler.initialize(self,get_examples:Optional[Callable[[],Iterable[Example]]],*,nlp:Optional[Language]=None,patterns:Optional[Iterable[AttributeRulerPatternType]]=None,tag_map:Optional[TagMapType]=None,morph_rules:Optional[MorphRulesType]=None)->None
+spacy.pipeline.AttributeRuler.load_from_morph_rules(self,morph_rules:Dict[str,Dict[str,Dict[Union[int,str],Union[int,str]]]])->None
+spacy.pipeline.AttributeRuler.load_from_tag_map(self,tag_map:Dict[str,Dict[Union[int,str],Union[int,str]]])->None
+spacy.pipeline.AttributeRuler.match(self,doc:Doc)
+spacy.pipeline.AttributeRuler.patterns(self)->List[AttributeRulerPatternType]
+spacy.pipeline.AttributeRuler.score(self,examples:Iterable[Example],**kwargs)->Dict[str, Any]
+spacy.pipeline.AttributeRuler.set_annotations(self,doc,matches)
+spacy.pipeline.AttributeRuler.to_bytes(self,exclude:Iterable[str]=SimpleFrozenList())->bytes
+spacy.pipeline.AttributeRuler.to_disk(self,path:Union[Path,str],exclude:Iterable[str]=SimpleFrozenList())->None
 spacy.pipeline.attributeruler.AttributeRuler(self,vocab:Vocab,name:str='attribute_ruler',*,validate:bool=False)
+spacy.pipeline.attributeruler.AttributeRuler.__init__(self,vocab:Vocab,name:str='attribute_ruler',*,validate:bool=False)
 spacy.pipeline.attributeruler.AttributeRuler.add(self,patterns:Iterable[MatcherPatternType],attrs:Dict,index:int=0)->None
 spacy.pipeline.attributeruler.AttributeRuler.add_patterns(self,patterns:Iterable[AttributeRulerPatternType])->None
 spacy.pipeline.attributeruler.AttributeRuler.clear(self)->None
@@ -722,8 +838,26 @@ A:spacy.pipeline.entityruler.path->ensure_path(path)
 A:spacy.pipeline.entityruler.depr_patterns_path->ensure_path(path).with_suffix('.jsonl')
 A:spacy.pipeline.entityruler.patterns->srsly.read_jsonl(depr_patterns_path)
 spacy.pipeline.EntityRuler(self,nlp:Language,name:str='entity_ruler',*,phrase_matcher_attr:Optional[Union[int,str]]=None,validate:bool=False,overwrite_ents:bool=False,ent_id_sep:str=DEFAULT_ENT_ID_SEP,patterns:Optional[List[PatternType]]=None)
+spacy.pipeline.EntityRuler.__contains__(self,label:str)->bool
+spacy.pipeline.EntityRuler.__len__(self)->int
+spacy.pipeline.EntityRuler._create_label(self,label:str,ent_id:str)->str
+spacy.pipeline.EntityRuler._split_label(self,label:str)->Tuple[str, str]
+spacy.pipeline.EntityRuler.add_patterns(self,patterns:List[PatternType])->None
+spacy.pipeline.EntityRuler.clear(self)->None
+spacy.pipeline.EntityRuler.ent_ids(self)->Tuple[str, ...]
+spacy.pipeline.EntityRuler.from_bytes(self,patterns_bytes:bytes,*,exclude:Iterable[str]=SimpleFrozenList())->'EntityRuler'
+spacy.pipeline.EntityRuler.from_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->'EntityRuler'
+spacy.pipeline.EntityRuler.initialize(self,get_examples:Callable[[],Iterable[Example]],*,nlp:Optional[Language]=None,patterns:Optional[Sequence[PatternType]]=None)
+spacy.pipeline.EntityRuler.labels(self)->Tuple[str, ...]
+spacy.pipeline.EntityRuler.match(self,doc:Doc)
+spacy.pipeline.EntityRuler.patterns(self)->List[PatternType]
+spacy.pipeline.EntityRuler.score(self,examples,**kwargs)
+spacy.pipeline.EntityRuler.set_annotations(self,doc,matches)
+spacy.pipeline.EntityRuler.to_bytes(self,*,exclude:Iterable[str]=SimpleFrozenList())->bytes
+spacy.pipeline.EntityRuler.to_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->None
 spacy.pipeline.entityruler.EntityRuler(self,nlp:Language,name:str='entity_ruler',*,phrase_matcher_attr:Optional[Union[int,str]]=None,validate:bool=False,overwrite_ents:bool=False,ent_id_sep:str=DEFAULT_ENT_ID_SEP,patterns:Optional[List[PatternType]]=None)
 spacy.pipeline.entityruler.EntityRuler.__contains__(self,label:str)->bool
+spacy.pipeline.entityruler.EntityRuler.__init__(self,nlp:Language,name:str='entity_ruler',*,phrase_matcher_attr:Optional[Union[int,str]]=None,validate:bool=False,overwrite_ents:bool=False,ent_id_sep:str=DEFAULT_ENT_ID_SEP,patterns:Optional[List[PatternType]]=None)
 spacy.pipeline.entityruler.EntityRuler.__len__(self)->int
 spacy.pipeline.entityruler.EntityRuler._create_label(self,label:str,ent_id:str)->str
 spacy.pipeline.entityruler.EntityRuler._split_label(self,label:str)->Tuple[str, str]
@@ -766,7 +900,20 @@ A:spacy.pipeline.entity_linker.entity_norm->xp.linalg.norm(entity_encodings, axi
 A:spacy.pipeline.entity_linker.best_index->scores.argmax().item()
 A:spacy.pipeline.entity_linker.count_ents->len([ent for doc in docs for ent in doc.ents])
 spacy.pipeline.EntityLinker(self,vocab:Vocab,model:Model,name:str='entity_linker',*,labels_discard:Iterable[str],n_sents:int,incl_prior:bool,incl_context:bool,entity_vector_length:int,get_candidates:Callable[[KnowledgeBase,'Span'],Iterable[Candidate]])
+spacy.pipeline.EntityLinker.add_label(self,label)
+spacy.pipeline.EntityLinker.from_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->'EntityLinker'
+spacy.pipeline.EntityLinker.get_loss(self,examples:Iterable[Example],sentence_encodings)
+spacy.pipeline.EntityLinker.initialize(self,get_examples:Callable[[],Iterable[Example]],*,nlp:Optional[Language]=None,kb_loader:Callable[[Vocab],KnowledgeBase]=None)
+spacy.pipeline.EntityLinker.predict(self,docs:Iterable[Doc])->List[str]
+spacy.pipeline.EntityLinker.rehearse(self,examples,*,sgd=None,losses=None,**config)
+spacy.pipeline.EntityLinker.score(self,examples,**kwargs)
+spacy.pipeline.EntityLinker.set_annotations(self,docs:Iterable[Doc],kb_ids:List[str])->None
+spacy.pipeline.EntityLinker.set_kb(self,kb_loader:Callable[[Vocab],KnowledgeBase])
+spacy.pipeline.EntityLinker.to_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->None
+spacy.pipeline.EntityLinker.update(self,examples:Iterable[Example],*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None)->Dict[str, float]
+spacy.pipeline.EntityLinker.validate_kb(self)->None
 spacy.pipeline.entity_linker.EntityLinker(self,vocab:Vocab,model:Model,name:str='entity_linker',*,labels_discard:Iterable[str],n_sents:int,incl_prior:bool,incl_context:bool,entity_vector_length:int,get_candidates:Callable[[KnowledgeBase,'Span'],Iterable[Candidate]])
+spacy.pipeline.entity_linker.EntityLinker.__init__(self,vocab:Vocab,model:Model,name:str='entity_linker',*,labels_discard:Iterable[str],n_sents:int,incl_prior:bool,incl_context:bool,entity_vector_length:int,get_candidates:Callable[[KnowledgeBase,'Span'],Iterable[Candidate]])
 spacy.pipeline.entity_linker.EntityLinker.add_label(self,label)
 spacy.pipeline.entity_linker.EntityLinker.from_disk(self,path:Union[str,Path],*,exclude:Iterable[str]=SimpleFrozenList())->'EntityLinker'
 spacy.pipeline.entity_linker.EntityLinker.get_loss(self,examples:Iterable[Example],sentence_encodings)
@@ -787,7 +934,11 @@ A:spacy.pipeline.textcat_multilabel.self.cfg->dict(cfg)
 A:spacy.pipeline.textcat_multilabel.subbatch->list(islice(get_examples(), 10))
 A:spacy.pipeline.textcat_multilabel.(label_sample, _)->self._examples_to_truth(subbatch)
 spacy.pipeline.MultiLabel_TextCategorizer(self,vocab:Vocab,model:Model,name:str='textcat_multilabel',*,threshold:float)
+spacy.pipeline.MultiLabel_TextCategorizer._validate_categories(self,examples:List[Example])
+spacy.pipeline.MultiLabel_TextCategorizer.initialize(self,get_examples:Callable[[],Iterable[Example]],*,nlp:Optional[Language]=None,labels:Optional[Iterable[str]]=None)
+spacy.pipeline.MultiLabel_TextCategorizer.score(self,examples:Iterable[Example],**kwargs)->Dict[str, Any]
 spacy.pipeline.textcat_multilabel.MultiLabel_TextCategorizer(self,vocab:Vocab,model:Model,name:str='textcat_multilabel',*,threshold:float)
+spacy.pipeline.textcat_multilabel.MultiLabel_TextCategorizer.__init__(self,vocab:Vocab,model:Model,name:str='textcat_multilabel',*,threshold:float)
 spacy.pipeline.textcat_multilabel.MultiLabel_TextCategorizer._validate_categories(self,examples:List[Example])
 spacy.pipeline.textcat_multilabel.MultiLabel_TextCategorizer.initialize(self,get_examples:Callable[[],Iterable[Example]],*,nlp:Optional[Language]=None,labels:Optional[Iterable[str]]=None)
 spacy.pipeline.textcat_multilabel.MultiLabel_TextCategorizer.score(self,examples:Iterable[Example],**kwargs)->Dict[str, Any]
@@ -810,7 +961,20 @@ A:spacy.pipeline.textcat.err->errors.Errors.E919.format(pos_label=positive_label
 A:spacy.pipeline.textcat.subbatch->list(islice(get_examples(), 10))
 A:spacy.pipeline.textcat.(label_sample, _)->self._examples_to_truth(subbatch)
 spacy.pipeline.TextCategorizer(self,vocab:Vocab,model:Model,name:str='textcat',*,threshold:float)
+spacy.pipeline.TextCategorizer._examples_to_truth(self,examples:List[Example])->Tuple[numpy.ndarray, numpy.ndarray]
+spacy.pipeline.TextCategorizer._validate_categories(self,examples:List[Example])
+spacy.pipeline.TextCategorizer.add_label(self,label:str)->int
+spacy.pipeline.TextCategorizer.get_loss(self,examples:Iterable[Example],scores)->Tuple[float, float]
+spacy.pipeline.TextCategorizer.initialize(self,get_examples:Callable[[],Iterable[Example]],*,nlp:Optional[Language]=None,labels:Optional[Iterable[str]]=None,positive_label:Optional[str]=None)->None
+spacy.pipeline.TextCategorizer.label_data(self)->List[str]
+spacy.pipeline.TextCategorizer.labels(self)->Tuple[str]
+spacy.pipeline.TextCategorizer.predict(self,docs:Iterable[Doc])
+spacy.pipeline.TextCategorizer.rehearse(self,examples:Iterable[Example],*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None)->Dict[str, float]
+spacy.pipeline.TextCategorizer.score(self,examples:Iterable[Example],**kwargs)->Dict[str, Any]
+spacy.pipeline.TextCategorizer.set_annotations(self,docs:Iterable[Doc],scores)->None
+spacy.pipeline.TextCategorizer.update(self,examples:Iterable[Example],*,drop:float=0.0,sgd:Optional[Optimizer]=None,losses:Optional[Dict[str,float]]=None)->Dict[str, float]
 spacy.pipeline.textcat.TextCategorizer(self,vocab:Vocab,model:Model,name:str='textcat',*,threshold:float)
+spacy.pipeline.textcat.TextCategorizer.__init__(self,vocab:Vocab,model:Model,name:str='textcat',*,threshold:float)
 spacy.pipeline.textcat.TextCategorizer._examples_to_truth(self,examples:List[Example])->Tuple[numpy.ndarray, numpy.ndarray]
 spacy.pipeline.textcat.TextCategorizer._validate_categories(self,examples:List[Example])
 spacy.pipeline.textcat.TextCategorizer.add_label(self,label:str)->int
@@ -1425,6 +1589,7 @@ A:spacy.tests.pipeline.test_pipe_factories.source_nlp->English()
 A:spacy.tests.pipeline.test_pipe_factories.meta->spacy.lang.en.English.from_config(config).get_pipe_meta('custom')
 A:spacy.tests.pipeline.test_pipe_factories.pipe_cfg->spacy.lang.en.English.from_config(config).get_pipe_config(name)
 spacy.tests.pipeline.test_pipe_factories.PipeFactoriesIdempotent(self,nlp,name)
+spacy.tests.pipeline.test_pipe_factories.PipeFactoriesIdempotent.__init__(self,nlp,name)
 spacy.tests.pipeline.test_pipe_factories.test_language_factories_combine_score_weights(weights,expected)
 spacy.tests.pipeline.test_pipe_factories.test_language_factories_invalid()
 spacy.tests.pipeline.test_pipe_factories.test_language_factories_scores()
@@ -3474,6 +3639,7 @@ A:spacy.tests.regression.test_issue4501-5000.sent_ext->self._get_my_ext(sent)
 A:spacy.tests.regression.test_issue4501-5000.docs->list(nlp.pipe(text, n_process=2))
 A:spacy.tests.regression.test_issue4501-5000.example->spacy.training.Example.from_dict(nlp.make_doc(''), {})
 spacy.tests.regression.test_issue4501-5000.CustomPipe(self,nlp,name='my_pipe')
+spacy.tests.regression.test_issue4501-5000.CustomPipe.__init__(self,nlp,name='my_pipe')
 spacy.tests.regression.test_issue4501-5000.CustomPipe._get_my_ext(span)
 spacy.tests.regression.test_issue4501-5000.test_gold_misaligned(en_tokenizer,text,words)
 spacy.tests.regression.test_issue4501-5000.test_issue4528(en_vocab)
@@ -3739,6 +3905,7 @@ A:spacy.tests.parser.test_ner.beams->English().add_pipe('beam_ner', config=confi
 A:spacy.tests.parser.test_ner.beams2->spacy.util.load_model_from_path(tmp_dir).get_pipe('beam_ner').predict(docs2)
 A:spacy.tests.parser.test_ner.nlp.vocab.lookups->Lookups()
 spacy.tests.parser.test_ner.BlockerComponent1(self,nlp,start,end,name='my_blocker')
+spacy.tests.parser.test_ner.BlockerComponent1.__init__(self,nlp,start,end,name='my_blocker')
 spacy.tests.parser.test_ner.doc(vocab)
 spacy.tests.parser.test_ner.entity_annots(doc)
 spacy.tests.parser.test_ner.entity_types(entity_annots)
@@ -4339,8 +4506,18 @@ A:spacy.displacy.render.entity->escape_html(text[start:end])
 A:spacy.displacy.render.fragments->text[offset:].split('\n')
 A:spacy.displacy.render.color->self.colors.get(label.upper(), self.default_color)
 spacy.displacy.DependencyRenderer(self,options:Dict[str,Any]={})
+spacy.displacy.DependencyRenderer.get_arc(self,x_start:int,y:int,y_curve:int,x_end:int)->str
+spacy.displacy.DependencyRenderer.get_arrowhead(self,direction:str,x:int,y:int,end:int)->str
+spacy.displacy.DependencyRenderer.get_levels(self,arcs:List[Dict[str,Any]])->List[int]
+spacy.displacy.DependencyRenderer.render(self,parsed:List[Dict[str,Any]],page:bool=False,minify:bool=False)->str
+spacy.displacy.DependencyRenderer.render_arrow(self,label:str,start:int,end:int,direction:str,i:int)->str
+spacy.displacy.DependencyRenderer.render_svg(self,render_id:Union[int,str],words:List[Dict[str,Any]],arcs:List[Dict[str,Any]])->str
+spacy.displacy.DependencyRenderer.render_word(self,text:str,tag:str,lemma:str,i:int)->str
 spacy.displacy.EntityRenderer(self,options:Dict[str,Any]={})
+spacy.displacy.EntityRenderer.render(self,parsed:List[Dict[str,Any]],page:bool=False,minify:bool=False)->str
+spacy.displacy.EntityRenderer.render_ents(self,text:str,spans:List[Dict[str,Any]],title:Optional[str])->str
 spacy.displacy.render.DependencyRenderer(self,options:Dict[str,Any]={})
+spacy.displacy.render.DependencyRenderer.__init__(self,options:Dict[str,Any]={})
 spacy.displacy.render.DependencyRenderer.get_arc(self,x_start:int,y:int,y_curve:int,x_end:int)->str
 spacy.displacy.render.DependencyRenderer.get_arrowhead(self,direction:str,x:int,y:int,end:int)->str
 spacy.displacy.render.DependencyRenderer.get_levels(self,arcs:List[Dict[str,Any]])->List[int]
@@ -4349,6 +4526,7 @@ spacy.displacy.render.DependencyRenderer.render_arrow(self,label:str,start:int,e
 spacy.displacy.render.DependencyRenderer.render_svg(self,render_id:Union[int,str],words:List[Dict[str,Any]],arcs:List[Dict[str,Any]])->str
 spacy.displacy.render.DependencyRenderer.render_word(self,text:str,tag:str,lemma:str,i:int)->str
 spacy.displacy.render.EntityRenderer(self,options:Dict[str,Any]={})
+spacy.displacy.render.EntityRenderer.__init__(self,options:Dict[str,Any]={})
 spacy.displacy.render.EntityRenderer.render(self,parsed:List[Dict[str,Any]],page:bool=False,minify:bool=False)->str
 spacy.displacy.render.EntityRenderer.render_ents(self,text:str,spans:List[Dict[str,Any]],title:Optional[str])->str
 
@@ -4462,6 +4640,7 @@ A:spacy.lang.th.__init__.config->load_config_from_str(DEFAULT_CONFIG)
 spacy.lang.th.__init__.Thai(Language)
 spacy.lang.th.__init__.ThaiDefaults(Language.Defaults)
 spacy.lang.th.__init__.ThaiTokenizer(self,nlp:Language)
+spacy.lang.th.__init__.ThaiTokenizer.__init__(self,nlp:Language)
 spacy.lang.th.__init__.create_thai_tokenizer()
 
 
@@ -4482,6 +4661,7 @@ A:spacy.lang.mk.lemmatizer.rules->self.lookups.get_table('lemma_rules', {}).get(
 A:spacy.lang.mk.lemmatizer.string->string.lower().lower()
 A:spacy.lang.mk.lemmatizer.forms->list(OrderedDict.fromkeys(forms))
 spacy.lang.mk.MacedonianLemmatizer(Lemmatizer)
+spacy.lang.mk.MacedonianLemmatizer.rule_lemmatize(self,token:Token)->List[str]
 spacy.lang.mk.lemmatizer.MacedonianLemmatizer(Lemmatizer)
 spacy.lang.mk.lemmatizer.MacedonianLemmatizer.rule_lemmatize(self,token:Token)->List[str]
 
@@ -4717,6 +4897,7 @@ A:spacy.lang.ja.__init__.word_start->text[text_pos:].index(word)
 spacy.lang.ja.__init__.Japanese(Language)
 spacy.lang.ja.__init__.JapaneseDefaults(Language.Defaults)
 spacy.lang.ja.__init__.JapaneseTokenizer(self,nlp:Language,split_mode:Optional[str]=None)
+spacy.lang.ja.__init__.JapaneseTokenizer.__init__(self,nlp:Language,split_mode:Optional[str]=None)
 spacy.lang.ja.__init__.JapaneseTokenizer._get_config(self)->Dict[str, Any]
 spacy.lang.ja.__init__.JapaneseTokenizer._get_dtokens(self,sudachipy_tokens,need_sub_tokens:bool=True)
 spacy.lang.ja.__init__.JapaneseTokenizer._get_sub_tokens(self,sudachipy_tokens)
@@ -4803,6 +4984,17 @@ A:spacy.lang.es.lemmatizer.voc_alt_lemma->lemma.replace(old, new, 1)
 A:spacy.lang.es.lemmatizer.m->re.search(pron_patt, verb)
 A:spacy.lang.es.lemmatizer.verb->re.sub(old, new, verb)
 spacy.lang.es.SpanishLemmatizer(Lemmatizer)
+spacy.lang.es.SpanishLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
+spacy.lang.es.SpanishLemmatizer.lemmatize_adj(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_adv(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_det(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_noun(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_num(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_pron(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_verb(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.lemmatize_verb_pron(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
+spacy.lang.es.SpanishLemmatizer.rule_lemmatize(self,token:Token)->List[str]
+spacy.lang.es.SpanishLemmatizer.select_rule(self,pos:str,features:List[str])->Optional[str]
 spacy.lang.es.lemmatizer.SpanishLemmatizer(Lemmatizer)
 spacy.lang.es.lemmatizer.SpanishLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
 spacy.lang.es.lemmatizer.SpanishLemmatizer.lemmatize_adj(self,word:str,features:List[str],rule:str,index:List[str])->List[str]
@@ -4931,6 +5123,7 @@ A:spacy.lang.zh.__init__.config->load_config_from_str(DEFAULT_CONFIG)
 spacy.lang.zh.__init__.Chinese(Language)
 spacy.lang.zh.__init__.ChineseDefaults(Language.Defaults)
 spacy.lang.zh.__init__.ChineseTokenizer(self,nlp:Language,segmenter:Segmenter=Segmenter.char)
+spacy.lang.zh.__init__.ChineseTokenizer.__init__(self,nlp:Language,segmenter:Segmenter=Segmenter.char)
 spacy.lang.zh.__init__.ChineseTokenizer._get_config(self)->Dict[str, Any]
 spacy.lang.zh.__init__.ChineseTokenizer._set_config(self,config:Dict[str,Any]={})->None
 spacy.lang.zh.__init__.ChineseTokenizer.from_bytes(self,data,**kwargs)
@@ -4971,6 +5164,9 @@ A:spacy.lang.nl.lemmatizer.lemma_index->self.lookups.get_table('lemma_index', {}
 A:spacy.lang.nl.lemmatizer.looked_up_lemma->self.lookups.get_table('lemma_lookup', {}).get(string)
 A:spacy.lang.nl.lemmatizer.forms->list(set(oov_forms))
 spacy.lang.nl.DutchLemmatizer(Lemmatizer)
+spacy.lang.nl.DutchLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
+spacy.lang.nl.DutchLemmatizer.lookup_lemmatize(self,token:Token)->List[str]
+spacy.lang.nl.DutchLemmatizer.rule_lemmatize(self,token:Token)->List[str]
 spacy.lang.nl.lemmatizer.DutchLemmatizer(Lemmatizer)
 spacy.lang.nl.lemmatizer.DutchLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
 spacy.lang.nl.lemmatizer.DutchLemmatizer.lookup_lemmatize(self,token:Token)->List[str]
@@ -5203,6 +5399,7 @@ spacy.lang.ro.punctuation._make_ro_variants(tokens)
 A:spacy.lang.en.lemmatizer.univ_pos->token.pos_.lower()
 A:spacy.lang.en.lemmatizer.morphology->token.morph.to_dict()
 spacy.lang.en.EnglishLemmatizer(Lemmatizer)
+spacy.lang.en.EnglishLemmatizer.is_base_form(self,token:Token)->bool
 spacy.lang.en.lemmatizer.EnglishLemmatizer(Lemmatizer)
 spacy.lang.en.lemmatizer.EnglishLemmatizer.is_base_form(self,token:Token)->bool
 
@@ -5256,7 +5453,10 @@ A:spacy.lang.ru.lemmatizer.unmatched->set()
 A:spacy.lang.ru.lemmatizer.grams->oc_tag.replace(' ', ',').split(',')
 A:spacy.lang.ru.lemmatizer.gram->set().pop()
 spacy.lang.ru.RussianLemmatizer(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='pymorphy2',overwrite:bool=False)
+spacy.lang.ru.RussianLemmatizer.lookup_lemmatize(self,token:Token)->List[str]
+spacy.lang.ru.RussianLemmatizer.pymorphy2_lemmatize(self,token:Token)->List[str]
 spacy.lang.ru.lemmatizer.RussianLemmatizer(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='pymorphy2',overwrite:bool=False)
+spacy.lang.ru.lemmatizer.RussianLemmatizer.__init__(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='pymorphy2',overwrite:bool=False)
 spacy.lang.ru.lemmatizer.RussianLemmatizer.lookup_lemmatize(self,token:Token)->List[str]
 spacy.lang.ru.lemmatizer.RussianLemmatizer.pymorphy2_lemmatize(self,token:Token)->List[str]
 spacy.lang.ru.lemmatizer.oc2ud(oc_tag:str)->Tuple[str, Dict[str, str]]
@@ -5344,6 +5544,8 @@ A:spacy.lang.fr.lemmatizer.rules->self.lookups.get_table('lemma_rules', {}).get(
 A:spacy.lang.fr.lemmatizer.string->string.lower().lower()
 A:spacy.lang.fr.lemmatizer.forms->list(set(forms))
 spacy.lang.fr.FrenchLemmatizer(Lemmatizer)
+spacy.lang.fr.FrenchLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
+spacy.lang.fr.FrenchLemmatizer.rule_lemmatize(self,token:Token)->List[str]
 spacy.lang.fr.lemmatizer.FrenchLemmatizer(Lemmatizer)
 spacy.lang.fr.lemmatizer.FrenchLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
 spacy.lang.fr.lemmatizer.FrenchLemmatizer.rule_lemmatize(self,token:Token)->List[str]
@@ -5523,6 +5725,7 @@ spacy.lang.ko.__init__.Korean(Language)
 spacy.lang.ko.__init__.KoreanDefaults(Language.Defaults)
 spacy.lang.ko.__init__.KoreanTokenizer(self,nlp:Optional[Language]=None)
 spacy.lang.ko.__init__.KoreanTokenizer.__del__(self)
+spacy.lang.ko.__init__.KoreanTokenizer.__init__(self,nlp:Optional[Language]=None)
 spacy.lang.ko.__init__.KoreanTokenizer.detailed_tokens(self,text:str)->Dict[str, Any]
 spacy.lang.ko.__init__.KoreanTokenizer.score(self,examples)
 spacy.lang.ko.__init__.check_spaces(text,tokens)
@@ -5700,6 +5903,7 @@ A:spacy.lang.el.lemmatizer.rules->self.lookups.get_table('lemma_rules', {}).get(
 A:spacy.lang.el.lemmatizer.string->string.lower().lower()
 A:spacy.lang.el.lemmatizer.forms->list(set(forms))
 spacy.lang.el.GreekLemmatizer(Lemmatizer)
+spacy.lang.el.GreekLemmatizer.rule_lemmatize(self,token:Token)->List[str]
 spacy.lang.el.lemmatizer.GreekLemmatizer(Lemmatizer)
 spacy.lang.el.lemmatizer.GreekLemmatizer.rule_lemmatize(self,token:Token)->List[str]
 
@@ -5896,6 +6100,7 @@ spacy.lang.ti.lex_attrs.like_num(text)
 A:spacy.lang.uk.lemmatizer.UkrainianLemmatizer._morph->MorphAnalyzer(lang='uk')
 spacy.lang.uk.UkrainianLemmatizer(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='pymorphy2',overwrite:bool=False)
 spacy.lang.uk.lemmatizer.UkrainianLemmatizer(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='pymorphy2',overwrite:bool=False)
+spacy.lang.uk.lemmatizer.UkrainianLemmatizer.__init__(self,vocab:Vocab,model:Optional[Model],name:str='lemmatizer',*,mode:str='pymorphy2',overwrite:bool=False)
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/lang/uk/stop_words.py----------------------------------------
@@ -5969,6 +6174,11 @@ A:spacy.lang.pl.lemmatizer.lookup_pos->univ_pos.lower()
 A:spacy.lang.pl.lemmatizer.lookup_table->self.lookups.get_table('lemma_lookup_' + lookup_pos, {})
 A:spacy.lang.pl.lemmatizer.string->string.lower().lower()
 spacy.lang.pl.PolishLemmatizer(Lemmatizer)
+spacy.lang.pl.PolishLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
+spacy.lang.pl.PolishLemmatizer.lemmatize_adj(self,string:str,morphology:dict,lookup_table:Dict[str,str])->List[str]
+spacy.lang.pl.PolishLemmatizer.lemmatize_noun(self,string:str,morphology:dict,lookup_table:Dict[str,str])->List[str]
+spacy.lang.pl.PolishLemmatizer.lemmatize_verb(self,string:str,morphology:dict,lookup_table:Dict[str,str])->List[str]
+spacy.lang.pl.PolishLemmatizer.pos_lookup_lemmatize(self,token:Token)->List[str]
 spacy.lang.pl.lemmatizer.PolishLemmatizer(Lemmatizer)
 spacy.lang.pl.lemmatizer.PolishLemmatizer.get_lookups_config(cls,mode:str)->Tuple[List[str], List[str]]
 spacy.lang.pl.lemmatizer.PolishLemmatizer.lemmatize_adj(self,string:str,morphology:dict,lookup_table:Dict[str,str])->List[str]
@@ -6138,6 +6348,7 @@ A:spacy.lang.vi.__init__.config->load_config_from_str(DEFAULT_CONFIG)
 spacy.lang.vi.__init__.Vietnamese(Language)
 spacy.lang.vi.__init__.VietnameseDefaults(Language.Defaults)
 spacy.lang.vi.__init__.VietnameseTokenizer(self,nlp:Language,use_pyvi:bool=False)
+spacy.lang.vi.__init__.VietnameseTokenizer.__init__(self,nlp:Language,use_pyvi:bool=False)
 spacy.lang.vi.__init__.create_vietnamese_tokenizer(use_pyvi:bool=True)
 
 
@@ -6211,6 +6422,7 @@ A:spacy.training.pretrain.self.prev_loss->float(self.loss)
 A:spacy.training.pretrain.n_digits->len(str(int(figure)))
 A:spacy.training.pretrain.n_decimal->min(n_decimal, max_decimal)
 spacy.training.pretrain.ProgressTracker(self,frequency=1000000)
+spacy.training.pretrain.ProgressTracker.__init__(self,frequency=1000000)
 spacy.training.pretrain.ProgressTracker.update(self,epoch,loss,docs)
 spacy.training.pretrain._resume_model(model:Model,resume_path:Path,epoch_resume:int,silent:bool=True)->None
 spacy.training.pretrain._smart_round(figure:Union[float,int],width:int=10,max_decimal:int=4)->str
@@ -6325,12 +6537,18 @@ A:spacy.training.corpus.docs->DocBin().from_disk(loc).get_docs(vocab)
 A:spacy.training.corpus.records->srsly.read_jsonl(loc)
 A:spacy.training.corpus.doc->nlp.make_doc(record['text'])
 spacy.training.Corpus(self,path:Union[str,Path],*,limit:int=0,gold_preproc:bool=False,max_length:int=0,augmenter:Optional[Callable]=None)
+spacy.training.Corpus._make_example(self,nlp:'Language',reference:Doc,gold_preproc:bool)->Example
+spacy.training.Corpus.make_examples(self,nlp:'Language',reference_docs:Iterable[Doc])->Iterator[Example]
+spacy.training.Corpus.make_examples_gold_preproc(self,nlp:'Language',reference_docs:Iterable[Doc])->Iterator[Example]
+spacy.training.Corpus.read_docbin(self,vocab:Vocab,locs:Iterable[Union[str,Path]])->Iterator[Doc]
 spacy.training.corpus.Corpus(self,path:Union[str,Path],*,limit:int=0,gold_preproc:bool=False,max_length:int=0,augmenter:Optional[Callable]=None)
+spacy.training.corpus.Corpus.__init__(self,path:Union[str,Path],*,limit:int=0,gold_preproc:bool=False,max_length:int=0,augmenter:Optional[Callable]=None)
 spacy.training.corpus.Corpus._make_example(self,nlp:'Language',reference:Doc,gold_preproc:bool)->Example
 spacy.training.corpus.Corpus.make_examples(self,nlp:'Language',reference_docs:Iterable[Doc])->Iterator[Example]
 spacy.training.corpus.Corpus.make_examples_gold_preproc(self,nlp:'Language',reference_docs:Iterable[Doc])->Iterator[Example]
 spacy.training.corpus.Corpus.read_docbin(self,vocab:Vocab,locs:Iterable[Union[str,Path]])->Iterator[Doc]
 spacy.training.corpus.JsonlCorpus(self,path:Union[str,Path],*,limit:int=0,min_length:int=0,max_length:int=0)
+spacy.training.corpus.JsonlCorpus.__init__(self,path:Union[str,Path],*,limit:int=0,min_length:int=0,max_length:int=0)
 spacy.training.corpus.create_docbin_reader(path:Optional[Path],gold_preproc:bool,max_length:int=0,limit:int=0,augmenter:Optional[Callable]=None)->Callable[['Language'], Iterable[Example]]
 spacy.training.corpus.create_jsonl_reader(path:Path,min_length:int=0,max_length:int=0,limit:int=0)->Callable[['Language'], Iterable[Doc]]
 spacy.training.corpus.read_labels(path:Path,*,require:bool=False)
@@ -6346,6 +6564,8 @@ A:spacy.training.alignment.y2x->_make_ragged(y2x)
 A:spacy.training.alignment.(x2y, y2x)->get_alignments(A, B)
 A:spacy.training.alignment.lengths->numpy.array([len(x) for x in indices], dtype='i')
 spacy.training.Alignment
+spacy.training.Alignment.from_indices(cls,x2y:List[List[int]],y2x:List[List[int]])->'Alignment'
+spacy.training.Alignment.from_strings(cls,A:List[str],B:List[str])->'Alignment'
 spacy.training.alignment.Alignment
 spacy.training.alignment.Alignment.from_indices(cls,x2y:List[List[int]],y2x:List[List[int]])->'Alignment'
 spacy.training.alignment.Alignment.from_strings(cls,A:List[str],B:List[str])->'Alignment'
@@ -6645,6 +6865,7 @@ spacy.ml.create_pretrain_vectors(maxout_pieces:int,hidden_size:int,loss:str)->Ca
 spacy.ml.get_characters_loss(ops,docs,prediction,nr_char)
 spacy.ml.get_vectors_loss(ops,docs,prediction,distance)
 spacy.ml.models.multi_task._RandomWords(self,vocab:'Vocab')
+spacy.ml.models.multi_task._RandomWords.__init__(self,vocab:'Vocab')
 spacy.ml.models.multi_task._RandomWords.next(self)->str
 spacy.ml.models.multi_task._apply_mask(docs:Iterable['Doc'],random_words:_RandomWords,mask_prob:float=0.15)->Tuple[numpy.ndarray, List['Doc']]
 spacy.ml.models.multi_task._replace_word(word:str,random_words:_RandomWords,mask:str='[MASK]')->str
@@ -6704,6 +6925,7 @@ A:spacy.cli.pretrain.config->load_config(config_path, overrides=config_overrides
 A:spacy.cli.pretrain.model_name->re.search('model\\d+\\.bin', str(resume_path))
 spacy.cli.pretrain.pretrain_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,dir_okay=False,allow_dash=True),output_dir:Path=Arg(...,help='Directorytowriteweightstooneachepoch'),code_path:Optional[Path]=Opt(None,'--code','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),resume_path:Optional[Path]=Opt(None,'--resume-path','-r',help='Pathtopretrainedweightsfromwhichtoresumepretraining'),epoch_resume:Optional[int]=Opt(None,'--epoch-resume','-er',help='Theepochtoresumecountingfromwhenusing--resume-path.Preventsunintendedoverwritingofexistingweightfiles.'),use_gpu:int=Opt(-1,'--gpu-id','-g',help='GPUIDor-1forCPU'))
 spacy.cli.pretrain.verify_cli_args(config_path,output_dir,resume_path,epoch_resume)
+spacy.cli.pretrain_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,dir_okay=False,allow_dash=True),output_dir:Path=Arg(...,help='Directorytowriteweightstooneachepoch'),code_path:Optional[Path]=Opt(None,'--code','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),resume_path:Optional[Path]=Opt(None,'--resume-path','-r',help='Pathtopretrainedweightsfromwhichtoresumepretraining'),epoch_resume:Optional[int]=Opt(None,'--epoch-resume','-er',help='Theepochtoresumecountingfromwhenusing--resume-path.Preventsunintendedoverwritingofexistingweightfiles.'),use_gpu:int=Opt(-1,'--gpu-id','-g',help='GPUIDor-1forCPU'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/init_pipeline.py----------------------------------------
@@ -6799,6 +7021,7 @@ spacy.cli.package.get_meta(model_path:Union[str,Path],existing_meta:Dict[str,Any
 spacy.cli.package.has_wheel()->bool
 spacy.cli.package.package(input_dir:Path,output_dir:Path,meta_path:Optional[Path]=None,code_paths:List[Path]=[],name:Optional[str]=None,version:Optional[str]=None,create_meta:bool=False,create_sdist:bool=True,create_wheel:bool=False,force:bool=False,silent:bool=True)->None
 spacy.cli.package.package_cli(input_dir:Path=Arg(...,help='Directorywithpipelinedata',exists=True,file_okay=False),output_dir:Path=Arg(...,help='Outputparentdirectory',exists=True,file_okay=False),code_paths:str=Opt('','--code','-c',help='Comma-separatedpathstoPythonfilewithadditionalcode(registeredfunctions)tobeincludedinthepackage'),meta_path:Optional[Path]=Opt(None,'--meta-path','--meta','-m',help='Pathtometa.json',exists=True,dir_okay=False),create_meta:bool=Opt(False,'--create-meta','-c','-C',help='Createmeta.json,evenifoneexists'),name:Optional[str]=Opt(None,'--name','-n',help='Packagenametooverridemeta'),version:Optional[str]=Opt(None,'--version','-v',help='Packageversiontooverridemeta'),build:str=Opt('sdist','--build','-b',help='Comma-separatedformatstobuild:sdistand/orwheel,ornone.'),force:bool=Opt(False,'--force','-f','-F',help='Forceoverwritingexistingdatainoutputdirectory'))
+spacy.cli.package_cli(input_dir:Path=Arg(...,help='Directorywithpipelinedata',exists=True,file_okay=False),output_dir:Path=Arg(...,help='Outputparentdirectory',exists=True,file_okay=False),code_paths:str=Opt('','--code','-c',help='Comma-separatedpathstoPythonfilewithadditionalcode(registeredfunctions)tobeincludedinthepackage'),meta_path:Optional[Path]=Opt(None,'--meta-path','--meta','-m',help='Pathtometa.json',exists=True,dir_okay=False),create_meta:bool=Opt(False,'--create-meta','-c','-C',help='Createmeta.json,evenifoneexists'),name:Optional[str]=Opt(None,'--name','-n',help='Packagenametooverridemeta'),version:Optional[str]=Opt(None,'--version','-v',help='Packageversiontooverridemeta'),build:str=Opt('sdist','--build','-b',help='Comma-separatedformatstobuild:sdistand/orwheel,ornone.'),force:bool=Opt(False,'--force','-f','-F',help='Forceoverwritingexistingdatainoutputdirectory'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/init_config.py----------------------------------------
@@ -6826,6 +7049,7 @@ spacy.cli.init_config.init_config_cli(output_file:Path=Arg(...,help='Filetosavec
 spacy.cli.init_config.init_fill_config_cli(base_path:Path=Arg(...,help='Baseconfigtofill',exists=True,dir_okay=False),output_file:Path=Arg('-',help='Filetosaveconfig.cfgto(or-forstdout)',allow_dash=True),pretraining:bool=Opt(False,'--pretraining','-pt',help="Includeconfigforpretraining(with'spacypretrain')"),diff:bool=Opt(False,'--diff','-D',help='Printavisualdiffhighlightingthechanges'))
 spacy.cli.init_config.save_config(config:Config,output_file:Path,is_stdout:bool=False,silent:bool=False)->None
 spacy.cli.init_config.validate_config_for_pretrain(config:Config,msg:Printer)->None
+spacy.cli.init_config_cli(output_file:Path=Arg(...,help='Filetosaveconfig.cfgtoor-forstdout(willonlyoutputconfigandnoadditionallogginginfo)',allow_dash=True),lang:Optional[str]=Opt('en','--lang','-l',help='Two-lettercodeofthelanguagetouse'),pipeline:Optional[str]=Opt('tagger,parser,ner','--pipeline','-p',help="Comma-separatednamesoftrainablepipelinecomponentstoinclude(without'tok2vec'or'transformer')"),optimize:Optimizations=Opt(Optimizations.efficiency.value,'--optimize','-o',help='Whethertooptimizeforefficiency(fasterinference,smallermodel,lowermemoryconsumption)orhigheraccuracy(potentiallylargerandslowermodel).Thiswillimpactthechoiceofarchitecture,pretrainedweightsandrelatedhyperparameters.'),gpu:bool=Opt(False,'--gpu','-G',help='WhetherthemodelcanrunonGPU.Thiswillimpactthechoiceofarchitecture,pretrainedweightsandrelatedhyperparameters.'),pretraining:bool=Opt(False,'--pretraining','-pt',help="Includeconfigforpretraining(with'spacypretrain')"),force_overwrite:bool=Opt(False,'--force','-F',help='Forceoverwritingtheoutputfile'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/debug_config.py----------------------------------------
@@ -6845,6 +7069,7 @@ spacy.cli.debug_config.debug_config(config_path:Path,*,overrides:Dict[str,Any]={
 spacy.cli.debug_config.debug_config_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,allow_dash=True),code_path:Optional[Path]=Opt(None,'--code-path','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),show_funcs:bool=Opt(False,'--show-functions','-F',help='Showanoverviewofallregisteredfunctionsusedintheconfigandwheretheycomefrom(modules,filesetc.)'),show_vars:bool=Opt(False,'--show-variables','-V',help='Showanoverviewofallvariablesreferencedintheconfigandtheirvalues.ThiswillalsoreflectvariablesoverwrittenontheCLI.'))
 spacy.cli.debug_config.get_registered_funcs(config:Config)->List[Dict[str, Optional[Union[str, int]]]]
 spacy.cli.debug_config.get_variables(config:Config)->Dict[str, Any]
+spacy.cli.debug_config_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,allow_dash=True),code_path:Optional[Path]=Opt(None,'--code-path','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),show_funcs:bool=Opt(False,'--show-functions','-F',help='Showanoverviewofallregisteredfunctionsusedintheconfigandwheretheycomefrom(modules,filesetc.)'),show_vars:bool=Opt(False,'--show-variables','-V',help='Showanoverviewofallvariablesreferencedintheconfigandtheirvalues.ThiswillalsoreflectvariablesoverwrittenontheCLI.'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/profile.py----------------------------------------
@@ -6862,6 +7087,7 @@ spacy.cli.profile._read_inputs(loc:Union[Path,str],msg:Printer)->Iterator[str]
 spacy.cli.profile.parse_texts(nlp:Language,texts:Sequence[str])->None
 spacy.cli.profile.profile(model:str,inputs:Optional[Path]=None,n_texts:int=10000)->None
 spacy.cli.profile.profile_cli(ctx:typer.Context,model:str=Arg(...,help='Trainedpipelinetoload'),inputs:Optional[Path]=Arg(None,help="Locationofinputfile.'-'forstdin.",exists=True,allow_dash=True),n_texts:int=Opt(10000,'--n-texts','-n',help='Maximumnumberoftextstouseifavailable'))
+spacy.cli.profile_cli(ctx:typer.Context,model:str=Arg(...,help='Trainedpipelinetoload'),inputs:Optional[Path]=Arg(None,help="Locationofinputfile.'-'forstdin.",exists=True,allow_dash=True),n_texts:int=Opt(10000,'--n-texts','-n',help='Maximumnumberoftextstouseifavailable'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/info.py----------------------------------------
@@ -6883,6 +7109,9 @@ spacy.cli.info.info(model:Optional[str]=None,*,markdown:bool=False,silent:bool=T
 spacy.cli.info.info_cli(model:Optional[str]=Arg(None,help='OptionalloadablespaCypipeline'),markdown:bool=Opt(False,'--markdown','-md',help='GenerateMarkdownforGitHubissues'),silent:bool=Opt(False,'--silent','-s','-S',help="Don'tprintanything(justreturn)"),exclude:Optional[str]=Opt('labels','--exclude','-e',help='Comma-separatedkeystoexcludefromtheprint-out'))
 spacy.cli.info.info_model(model:str,*,silent:bool=True)->Dict[str, Any]
 spacy.cli.info.info_spacy()->Dict[str, any]
+spacy.cli.info_cli(model:Optional[str]=Arg(None,help='OptionalloadablespaCypipeline'),markdown:bool=Opt(False,'--markdown','-md',help='GenerateMarkdownforGitHubissues'),silent:bool=Opt(False,'--silent','-s','-S',help="Don'tprintanything(justreturn)"),exclude:Optional[str]=Opt('labels','--exclude','-e',help='Comma-separatedkeystoexcludefromtheprint-out'))
+spacy.cli.info_model(model:str,*,silent:bool=True)->Dict[str, Any]
+spacy.cli.info_spacy()->Dict[str, any]
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/debug_data.py----------------------------------------
@@ -6918,6 +7147,7 @@ spacy.cli.debug_data._get_labels_from_model(nlp:Language,pipe_name:str)->Sequenc
 spacy.cli.debug_data._load_file(file_path:Path,msg:Printer)->None
 spacy.cli.debug_data.debug_data(config_path:Path,*,config_overrides:Dict[str,Any]={},ignore_warnings:bool=False,verbose:bool=False,no_format:bool=True,silent:bool=True)
 spacy.cli.debug_data.debug_data_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,allow_dash=True),code_path:Optional[Path]=Opt(None,'--code-path','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),ignore_warnings:bool=Opt(False,'--ignore-warnings','-IW',help='Ignorewarnings,onlyshowstatsanderrors'),verbose:bool=Opt(False,'--verbose','-V',help='Printadditionalinformationandexplanations'),no_format:bool=Opt(False,'--no-format','-NF',help="Don'tpretty-printtheresults"))
+spacy.cli.debug_data_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,allow_dash=True),code_path:Optional[Path]=Opt(None,'--code-path','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),ignore_warnings:bool=Opt(False,'--ignore-warnings','-IW',help='Ignorewarnings,onlyshowstatsanderrors'),verbose:bool=Opt(False,'--verbose','-V',help='Printadditionalinformationandexplanations'),no_format:bool=Opt(False,'--no-format','-NF',help="Don'tpretty-printtheresults"))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/validate.py----------------------------------------
@@ -6939,6 +7169,7 @@ spacy.cli.validate.get_model_pkgs(silent:bool=False)->Tuple[dict, dict]
 spacy.cli.validate.reformat_version(version:str)->str
 spacy.cli.validate.validate()->None
 spacy.cli.validate.validate_cli()
+spacy.cli.validate_cli()
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/train.py----------------------------------------
@@ -6962,6 +7193,8 @@ spacy.cli.download.download_cli(ctx:typer.Context,model:str=Arg(...,help='Nameof
 spacy.cli.download.download_model(filename:str,user_pip_args:Optional[Sequence[str]]=None)->None
 spacy.cli.download.get_compatibility()->dict
 spacy.cli.download.get_version(model:str,comp:dict)->str
+spacy.cli.download_cli(ctx:typer.Context,model:str=Arg(...,help='Nameofpipelinepackagetodownload'),direct:bool=Opt(False,'--direct','-d','-D',help='Forcedirectdownloadofname+version'),sdist:bool=Opt(False,'--sdist','-S',help='Downloadsdist(.tar.gz)archiveinsteadofpre-builtbinarywheel'))
+spacy.cli.download_model(filename:str,user_pip_args:Optional[Sequence[str]]=None)->None
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/__init__.py----------------------------------------
@@ -6985,6 +7218,7 @@ spacy.cli.evaluate.evaluate_cli(model:str=Arg(...,help='Modelnameorpath'),data_p
 spacy.cli.evaluate.print_prf_per_type(msg:Printer,scores:Dict[str,Dict[str,float]],name:str,type:str)->None
 spacy.cli.evaluate.print_textcats_auc_per_cat(msg:Printer,scores:Dict[str,Dict[str,float]])->None
 spacy.cli.evaluate.render_parses(docs:List[Doc],output_path:Path,model_name:str='',limit:int=250,deps:bool=True,ents:bool=True)
+spacy.cli.evaluate_cli(model:str=Arg(...,help='Modelnameorpath'),data_path:Path=Arg(...,help='Locationofbinaryevaluationdatain.spacyformat',exists=True),output:Optional[Path]=Opt(None,'--output','-o',help='OutputJSONfileformetrics',dir_okay=False),code_path:Optional[Path]=Opt(None,'--code','-c',help='PathtoPythonfilewithadditionalcode(registeredfunctions)tobeimported'),use_gpu:int=Opt(-1,'--gpu-id','-g',help='GPUIDor-1forCPU'),gold_preproc:bool=Opt(False,'--gold-preproc','-G',help='Usegoldpreprocessing'),displacy_path:Optional[Path]=Opt(None,'--displacy-path','-dp',help='DirectorytooutputrenderedparsesasHTML',exists=True,file_okay=False),displacy_limit:int=Opt(25,'--displacy-limit','-dl',help='LimitofparsestorenderasHTML'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/debug_model.py----------------------------------------
@@ -7019,6 +7253,7 @@ spacy.cli.debug_model._simulate_gold(element,counter=1)
 spacy.cli.debug_model.debug_model(config,resolved_train_config,nlp,model:Model,*,print_settings:Optional[Dict[str,Any]]=None)
 spacy.cli.debug_model.debug_model_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,allow_dash=True),component:str=Arg(...,help='Nameofthepipelinecomponentofwhichthemodelshouldbeanalysed'),layers:str=Opt('','--layers','-l',help='Comma-separatednamesoflayerIDstoprint'),dimensions:bool=Opt(False,'--dimensions','-DIM',help='Showdimensions'),parameters:bool=Opt(False,'--parameters','-PAR',help='Showparameters'),gradients:bool=Opt(False,'--gradients','-GRAD',help='Showgradients'),attributes:bool=Opt(False,'--attributes','-ATTR',help='Showattributes'),P0:bool=Opt(False,'--print-step0','-P0',help='Printmodelbeforetraining'),P1:bool=Opt(False,'--print-step1','-P1',help='Printmodelafterinitialization'),P2:bool=Opt(False,'--print-step2','-P2',help='Printmodelaftertraining'),P3:bool=Opt(False,'--print-step3','-P3',help='Printfinalpredictions'),use_gpu:int=Opt(-1,'--gpu-id','-g',help='GPUIDor-1forCPU'))
 spacy.cli.debug_model.get_gradient(goldY,Y,ops)
+spacy.cli.debug_model_cli(ctx:typer.Context,config_path:Path=Arg(...,help='Pathtoconfigfile',exists=True,allow_dash=True),component:str=Arg(...,help='Nameofthepipelinecomponentofwhichthemodelshouldbeanalysed'),layers:str=Opt('','--layers','-l',help='Comma-separatednamesoflayerIDstoprint'),dimensions:bool=Opt(False,'--dimensions','-DIM',help='Showdimensions'),parameters:bool=Opt(False,'--parameters','-PAR',help='Showparameters'),gradients:bool=Opt(False,'--gradients','-GRAD',help='Showgradients'),attributes:bool=Opt(False,'--attributes','-ATTR',help='Showattributes'),P0:bool=Opt(False,'--print-step0','-P0',help='Printmodelbeforetraining'),P1:bool=Opt(False,'--print-step1','-P1',help='Printmodelafterinitialization'),P2:bool=Opt(False,'--print-step2','-P2',help='Printmodelaftertraining'),P3:bool=Opt(False,'--print-step3','-P3',help='Printfinalpredictions'),use_gpu:int=Opt(-1,'--gpu-id','-g',help='GPUIDor-1forCPU'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/convert.py----------------------------------------
@@ -7050,6 +7285,7 @@ spacy.cli.convert.convert(input_path:Union[str,Path],output_dir:Union[str,Path],
 spacy.cli.convert.convert_cli(input_path:str=Arg(...,help='Inputfileordirectory',exists=True),output_dir:Path=Arg('-',help="Outputdirectory.'-'forstdout.",allow_dash=True,exists=True),file_type:FileTypes=Opt('spacy','--file-type','-t',help='Typeofdatatoproduce'),n_sents:int=Opt(1,'--n-sents','-n',help='Numberofsentencesperdoc(0todisable)'),seg_sents:bool=Opt(False,'--seg-sents','-s',help='Segmentsentences(for-cner)'),model:Optional[str]=Opt(None,'--model','--base','-b',help='TrainedspaCypipelineforsentencesegmentationtouseasbase(for--seg-sents)'),morphology:bool=Opt(False,'--morphology','-m',help='Enableappendingmorphologytotags'),merge_subtokens:bool=Opt(False,'--merge-subtokens','-T',help='MergeCoNLL-Usubtokens'),converter:str=Opt('auto','--converter','-c',help=f'Converter:{tuple(CONVERTERS.keys())}'),ner_map:Optional[Path]=Opt(None,'--ner-map','-nm',help='NERtagmapping(asJSON-encodeddictofentitytypes)',exists=True),lang:Optional[str]=Opt(None,'--lang','-l',help='Language(iftokenizerrequired)'),concatenate:bool=Opt(None,'--concatenate','-C',help='Concatenateoutputtoasinglefile'))
 spacy.cli.convert.verify_cli_args(msg:Printer,input_path:Union[str,Path],output_dir:Union[str,Path],file_type:FileTypes,converter:str,ner_map:Optional[Path])
 spacy.cli.convert.walk_directory(path:Path,converter:str)->List[Path]
+spacy.cli.convert_cli(input_path:str=Arg(...,help='Inputfileordirectory',exists=True),output_dir:Path=Arg('-',help="Outputdirectory.'-'forstdout.",allow_dash=True,exists=True),file_type:FileTypes=Opt('spacy','--file-type','-t',help='Typeofdatatoproduce'),n_sents:int=Opt(1,'--n-sents','-n',help='Numberofsentencesperdoc(0todisable)'),seg_sents:bool=Opt(False,'--seg-sents','-s',help='Segmentsentences(for-cner)'),model:Optional[str]=Opt(None,'--model','--base','-b',help='TrainedspaCypipelineforsentencesegmentationtouseasbase(for--seg-sents)'),morphology:bool=Opt(False,'--morphology','-m',help='Enableappendingmorphologytotags'),merge_subtokens:bool=Opt(False,'--merge-subtokens','-T',help='MergeCoNLL-Usubtokens'),converter:str=Opt('auto','--converter','-c',help=f'Converter:{tuple(CONVERTERS.keys())}'),ner_map:Optional[Path]=Opt(None,'--ner-map','-nm',help='NERtagmapping(asJSON-encodeddictofentitytypes)',exists=True),lang:Optional[str]=Opt(None,'--lang','-l',help='Language(iftokenizerrequired)'),concatenate:bool=Opt(None,'--concatenate','-C',help='Concatenateoutputtoasinglefile'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/push.py----------------------------------------
@@ -7061,6 +7297,7 @@ spacy.cli.project.push._is_not_empty_dir(loc:Path)
 spacy.cli.project.push.project_push(project_dir:Path,remote:str)
 spacy.cli.project.push.project_push_cli(remote:str=Arg('default',help='Nameorpathofremotestorage'),project_dir:Path=Arg(Path.cwd(),help='Locationofprojectdirectory.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False))
 spacy.cli.project_push(project_dir:Path,remote:str)
+spacy.cli.project_push_cli(remote:str=Arg('default',help='Nameorpathofremotestorage'),project_dir:Path=Arg(Path.cwd(),help='Locationofprojectdirectory.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/document.py----------------------------------------
@@ -7076,6 +7313,7 @@ A:spacy.cli.project.document.existing->f.read()
 spacy.cli.project.document.project_document(project_dir:Path,output_file:Path,*,no_emoji:bool=False)->None
 spacy.cli.project.document.project_document_cli(project_dir:Path=Arg(Path.cwd(),help='Pathtoclonedproject.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False),output_file:Path=Opt('-','--output','-o',help='PathtooutputMarkdownfileforoutput.Defaultsto-forstandardoutput'),no_emoji:bool=Opt(False,'--no-emoji','-NE',help="Don'tuseemoji"))
 spacy.cli.project_document(project_dir:Path,output_file:Path,*,no_emoji:bool=False)->None
+spacy.cli.project_document_cli(project_dir:Path=Arg(Path.cwd(),help='Pathtoclonedproject.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False),output_file:Path=Opt('-','--output','-o',help='PathtooutputMarkdownfileforoutput.Defaultsto-forstandardoutput'),no_emoji:bool=Opt(False,'--no-emoji','-NE',help="Don'tuseemoji"))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/pull.py----------------------------------------
@@ -7087,6 +7325,7 @@ A:spacy.cli.project.pull.url->RemoteStorage(project_dir, remote).pull(output_pat
 spacy.cli.project.pull.project_pull(project_dir:Path,remote:str,*,verbose:bool=False)
 spacy.cli.project.pull.project_pull_cli(remote:str=Arg('default',help='Nameorpathofremotestorage'),project_dir:Path=Arg(Path.cwd(),help='Locationofprojectdirectory.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False))
 spacy.cli.project_pull(project_dir:Path,remote:str,*,verbose:bool=False)
+spacy.cli.project_pull_cli(remote:str=Arg('default',help='Nameorpathofremotestorage'),project_dir:Path=Arg(Path.cwd(),help='Locationofprojectdirectory.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/assets.py----------------------------------------
@@ -7104,6 +7343,7 @@ spacy.cli.project.assets.fetch_asset(project_path:Path,url:str,dest:Path,checksu
 spacy.cli.project.assets.project_assets(project_dir:Path,*,sparse_checkout:bool=False)->None
 spacy.cli.project.assets.project_assets_cli(project_dir:Path=Arg(Path.cwd(),help='Pathtoclonedproject.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False),sparse_checkout:bool=Opt(False,'--sparse','-S',help='UsesparsecheckoutforassetsprovidedviaGit,toonlycheckoutandclonethefilesneeded.RequiresGitv22.2+.'))
 spacy.cli.project_assets(project_dir:Path,*,sparse_checkout:bool=False)->None
+spacy.cli.project_assets_cli(project_dir:Path=Arg(Path.cwd(),help='Pathtoclonedproject.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False),sparse_checkout:bool=Opt(False,'--sparse','-S',help='UsesparsecheckoutforassetsprovidedviaGit,toonlycheckoutandclonethefilesneeded.RequiresGitv22.2+.'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/run.py----------------------------------------
@@ -7134,6 +7374,7 @@ spacy.cli.project.run.run_commands(commands:Iterable[str]=SimpleFrozenList(),sil
 spacy.cli.project.run.update_lockfile(project_dir:Path,command:Dict[str,Any])->None
 spacy.cli.project.run.validate_subcommand(commands:Sequence[str],workflows:Sequence[str],subcommand:str)->None
 spacy.cli.project_run(project_dir:Path,subcommand:str,*,overrides:Dict[str,Any]=SimpleFrozenDict(),force:bool=False,dry:bool=False,capture:bool=False)->None
+spacy.cli.project_run_cli(ctx:typer.Context,subcommand:str=Arg(None,help=f'Nameofcommanddefinedinthe{PROJECT_FILE}'),project_dir:Path=Arg(Path.cwd(),help='Locationofprojectdirectory.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False),force:bool=Opt(False,'--force','-F',help='Forcere-runningsteps,evenifnothingchanged'),dry:bool=Opt(False,'--dry','-D',help="Performadryrunanddon'texecutescripts"),show_help:bool=Opt(False,'--help',help='Showhelpmessageandavailablesubcommands'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/dvc.py----------------------------------------
@@ -7156,6 +7397,7 @@ spacy.cli.project.dvc.project_update_dvc_cli(project_dir:Path=Arg(Path.cwd(),hel
 spacy.cli.project.dvc.run_dvc_commands(commands:Iterable[str]=SimpleFrozenList(),flags:Dict[str,bool]={})->None
 spacy.cli.project.dvc.update_dvc_config(path:Path,config:Dict[str,Any],workflow:Optional[str]=None,verbose:bool=False,silent:bool=False,force:bool=False)->bool
 spacy.cli.project_update_dvc(project_dir:Path,workflow:Optional[str]=None,*,verbose:bool=False,force:bool=False)->None
+spacy.cli.project_update_dvc_cli(project_dir:Path=Arg(Path.cwd(),help='Locationofprojectdirectory.Defaultstocurrentworkingdirectory.',exists=True,file_okay=False),workflow:Optional[str]=Arg(None,help=f'Nameofworkflowdefinedin{PROJECT_FILE}.Defaultstofirstworkflowifnotset.'),verbose:bool=Opt(False,'--verbose','-V',help='Printmoreinfo'),force:bool=Opt(False,'--force','-F',help='ForceupdateDVCconfig'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/cli/project/remote_storage.py----------------------------------------
@@ -7171,6 +7413,7 @@ A:spacy.cli.project.remote_storage.site_dir->Path(site_dir)
 A:spacy.cli.project.remote_storage.package_bytes->''.join(sorted(packages)).encode('utf8')
 A:spacy.cli.project.remote_storage.env_vars[key]->os.environ.get(value[1:], '')
 spacy.cli.project.remote_storage.RemoteStorage(self,project_root:Path,url:str,*,compression='gz')
+spacy.cli.project.remote_storage.RemoteStorage.__init__(self,project_root:Path,url:str,*,compression='gz')
 spacy.cli.project.remote_storage.RemoteStorage.encode_name(self,name:str)->str
 spacy.cli.project.remote_storage.RemoteStorage.find(self,path:Path,*,command_hash:Optional[str]=None,content_hash:Optional[str]=None)->Optional['Pathy']
 spacy.cli.project.remote_storage.RemoteStorage.make_url(self,path:Path,command_hash:str,content_hash:str)->'Pathy'
@@ -7193,6 +7436,7 @@ spacy.cli.project.clone.check_clone(name:str,dest:Path,repo:str)->None
 spacy.cli.project.clone.project_clone(name:str,dest:Path,*,repo:str=about.__projects__,branch:str=about.__projects_branch__,sparse_checkout:bool=False)->None
 spacy.cli.project.clone.project_clone_cli(name:str=Arg(...,help='Thenameofthetemplatetoclone'),dest:Optional[Path]=Arg(None,help='Wheretoclonetheproject.Defaultstocurrentworkingdirectory',exists=False),repo:str=Opt(DEFAULT_REPO,'--repo','-r',help='Therepositorytoclonefrom'),branch:Optional[str]=Opt(None,'--branch','-b',help='Thebranchtoclonefrom'),sparse_checkout:bool=Opt(False,'--sparse','-S',help='UsesparseGitcheckouttoonlycheckoutandclonethefilesneeded.RequiresGitv22.2+.'))
 spacy.cli.project_clone(name:str,dest:Path,*,repo:str=about.__projects__,branch:str=about.__projects_branch__,sparse_checkout:bool=False)->None
+spacy.cli.project_clone_cli(name:str=Arg(...,help='Thenameofthetemplatetoclone'),dest:Optional[Path]=Arg(None,help='Wheretoclonetheproject.Defaultstocurrentworkingdirectory',exists=False),repo:str=Opt(DEFAULT_REPO,'--repo','-r',help='Therepositorytoclonefrom'),branch:Optional[str]=Opt(None,'--branch','-b',help='Thebranchtoclonefrom'),sparse_checkout:bool=Opt(False,'--sparse','-S',help='UsesparseGitcheckouttoonlycheckoutandclonethefilesneeded.RequiresGitv22.2+.'))
 
 
 ----------------------------------------/home/zhang/Packages/spacy/spacy3.0.4/tokens/underscore.py----------------------------------------
@@ -7208,6 +7452,7 @@ A:spacy.tokens.underscore.nr_defined->sum((t is True for t in valid_opts))
 spacy.tokens.underscore.Underscore(self,extensions,obj,start=None,end=None)
 spacy.tokens.underscore.Underscore.__dir__(self)
 spacy.tokens.underscore.Underscore.__getattr__(self,name)
+spacy.tokens.underscore.Underscore.__init__(self,extensions,obj,start=None,end=None)
 spacy.tokens.underscore.Underscore.__setattr__(self,name,value)
 spacy.tokens.underscore.Underscore._get_key(self,name)
 spacy.tokens.underscore.Underscore.get(self,name)
@@ -7239,7 +7484,16 @@ A:spacy.tokens._serialize.self.user_data->list(msg['user_data'])
 A:spacy.tokens._serialize.path->ensure_path(path)
 A:spacy.tokens._serialize.doc_bin->DocBin(store_user_data=True).from_bytes(byte_string)
 spacy.tokens.DocBin(self,attrs:Iterable[str]=ALL_ATTRS,store_user_data:bool=False,docs:Iterable[Doc]=SimpleFrozenList())
+spacy.tokens.DocBin.__len__(self)->int
+spacy.tokens.DocBin.add(self,doc:Doc)->None
+spacy.tokens.DocBin.from_bytes(self,bytes_data:bytes)->'DocBin'
+spacy.tokens.DocBin.from_disk(self,path:Union[str,Path])->'DocBin'
+spacy.tokens.DocBin.get_docs(self,vocab:Vocab)->Iterator[Doc]
+spacy.tokens.DocBin.merge(self,other:'DocBin')->None
+spacy.tokens.DocBin.to_bytes(self)->bytes
+spacy.tokens.DocBin.to_disk(self,path:Union[str,Path])->None
 spacy.tokens._serialize.DocBin(self,attrs:Iterable[str]=ALL_ATTRS,store_user_data:bool=False,docs:Iterable[Doc]=SimpleFrozenList())
+spacy.tokens._serialize.DocBin.__init__(self,attrs:Iterable[str]=ALL_ATTRS,store_user_data:bool=False,docs:Iterable[Doc]=SimpleFrozenList())
 spacy.tokens._serialize.DocBin.__len__(self)->int
 spacy.tokens._serialize.DocBin.add(self,doc:Doc)->None
 spacy.tokens._serialize.DocBin.from_bytes(self,bytes_data:bytes)->'DocBin'
@@ -7263,6 +7517,7 @@ A:spacy.tokens._dict_proxies.doc->self.doc_ref()
 A:spacy.tokens._dict_proxies.msg->srsly.msgpack_loads(bytes_data)
 A:spacy.tokens._dict_proxies.group->SpanGroup(doc).from_bytes(value_bytes)
 spacy.tokens._dict_proxies.SpanGroups(self,doc:'Doc',items:Iterable[Tuple[str,SpanGroup]]=tuple())
+spacy.tokens._dict_proxies.SpanGroups.__init__(self,doc:'Doc',items:Iterable[Tuple[str,SpanGroup]]=tuple())
 spacy.tokens._dict_proxies.SpanGroups.__setitem__(self,key:str,value:Union[SpanGroup,Iterable['Span']])->None
 spacy.tokens._dict_proxies.SpanGroups._make_span_group(self,name:str,spans:Iterable['Span'])->SpanGroup
 spacy.tokens._dict_proxies.SpanGroups.copy(self,doc:'Doc'=None)->'SpanGroups'

@@ -1,9 +1,12 @@
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/string_cache.py----------------------------------------
 polars.StringCache(self)
+polars.StringCache.__enter__(self)->StringCache
+polars.StringCache.__exit__(self,exc_type:type[BaseException]|None,exc_val:BaseException|None,exc_tb:TracebackType|None)->None
 polars.string_cache.StringCache(self)
 polars.string_cache.StringCache.__enter__(self)->StringCache
 polars.string_cache.StringCache.__exit__(self,exc_type:type[BaseException]|None,exc_val:BaseException|None,exc_tb:TracebackType|None)->None
+polars.string_cache.StringCache.__init__(self)
 polars.string_cache.toggle_string_cache(toggle:bool)->None
 polars.toggle_string_cache(toggle:bool)->None
 
@@ -16,6 +19,7 @@ A:polars._html.str_lengths->int(os.environ.get('POLARS_FMT_STR_LEN', '15'))
 A:polars._html.template_mid->'\n\n'.join((template_select % t for t in element_props))
 A:polars._html.template->dedent('\n'.join((template_first, template_mid, template_last)))
 polars._html.HTMLFormatter(self,df:DataFrame,max_cols:int=75,max_rows:int=40)
+polars._html.HTMLFormatter.__init__(self,df:DataFrame,max_cols:int=75,max_rows:int=40)
 polars._html.HTMLFormatter.render(self)->list[str]
 polars._html.HTMLFormatter.write(self,inner:str)->None
 polars._html.HTMLFormatter.write_body(self)->None
@@ -26,6 +30,7 @@ polars._html.NotebookFormatter.write_style(self)->None
 polars._html.Tag(self,elements:list[str],tag:str,attributes:dict[str,str]|None=None)
 polars._html.Tag.__enter__(self)->None
 polars._html.Tag.__exit__(self,exc_type:type[BaseException]|None,exc_val:BaseException|None,exc_tb:TracebackType|None)->None
+polars._html.Tag.__init__(self,elements:list[str],tag:str,attributes:dict[str,str]|None=None)
 polars._html.in_vscode_notebook()->bool
 
 
@@ -66,6 +71,14 @@ A:polars.cfg.os.environ['POLARS_FMT_MAX_ROWS']->str(n)
 A:polars.cfg.os.environ['POLARS_FMT_MAX_COLS']->str(n)
 A:polars.cfg.os.environ['POLARS_FMT_STR_LEN']->str(n)
 polars.Config
+polars.Config.set_ascii_tables(cls)->type[Config]
+polars.Config.set_fmt_str_lengths(cls,n:int)->type[Config]
+polars.Config.set_global_string_cache(cls)->type[Config]
+polars.Config.set_tbl_cols(cls,n:int)->type[Config]
+polars.Config.set_tbl_rows(cls,n:int)->type[Config]
+polars.Config.set_tbl_width_chars(cls,width:int)->type[Config]
+polars.Config.set_utf8_tables(cls)->type[Config]
+polars.Config.unset_global_string_cache(cls)->type[Config]
 polars.cfg.Config
 polars.cfg.Config.set_ascii_tables(cls)->type[Config]
 polars.cfg.Config.set_fmt_str_lengths(cls,n:int)->type[Config]
@@ -191,10 +204,19 @@ A:polars.datatypes.el->py_type(el)
 polars.Boolean(DataType)
 polars.Categorical(DataType)
 polars.DataType(cls,*args:Any,**kwargs:Any)
+polars.DataType.__reduce__(self)->Any
+polars.DataType.__repr__(self)->str
+polars.DataType.string_repr(cls)->str
 polars.Date(DataType)
 polars.Datetime(self,time_unit:TimeUnit='us',time_zone:str|None=None)
+polars.Datetime.__eq__(self,other:type[DataType])->bool
+polars.Datetime.__hash__(self)->int
 polars.Duration(self,time_unit:TimeUnit='us')
+polars.Duration.__eq__(self,other:type[DataType])->bool
+polars.Duration.__hash__(self)->int
 polars.Field(self,name:str,dtype:type[DataType])
+polars.Field.__eq__(self,other:Field)->bool
+polars.Field.__repr__(self)->str
 polars.Float32(DataType)
 polars.Float64(DataType)
 polars.Int16(DataType)
@@ -202,9 +224,13 @@ polars.Int32(DataType)
 polars.Int64(DataType)
 polars.Int8(DataType)
 polars.List(self,inner:type[DataType])
+polars.List.__eq__(self,other:type[DataType])->bool
+polars.List.__hash__(self)->int
 polars.Null(DataType)
 polars.Object(DataType)
 polars.Struct(self,fields:Sequence[Field])
+polars.Struct.__eq__(self,other:type[DataType])->bool
+polars.Struct.__hash__(self)->int
 polars.Time(DataType)
 polars.UInt16(DataType)
 polars.UInt32(DataType)
@@ -215,6 +241,7 @@ polars.Utf8(DataType)
 polars.datatypes.Boolean(DataType)
 polars.datatypes.Categorical(DataType)
 polars.datatypes.DataType(cls,*args:Any,**kwargs:Any)
+polars.datatypes.DataType.__new__(cls,*args:Any,**kwargs:Any)
 polars.datatypes.DataType.__reduce__(self)->Any
 polars.datatypes.DataType.__repr__(self)->str
 polars.datatypes.DataType.string_repr(cls)->str
@@ -222,11 +249,14 @@ polars.datatypes.Date(DataType)
 polars.datatypes.Datetime(self,time_unit:TimeUnit='us',time_zone:str|None=None)
 polars.datatypes.Datetime.__eq__(self,other:type[DataType])->bool
 polars.datatypes.Datetime.__hash__(self)->int
+polars.datatypes.Datetime.__init__(self,time_unit:TimeUnit='us',time_zone:str|None=None)
 polars.datatypes.Duration(self,time_unit:TimeUnit='us')
 polars.datatypes.Duration.__eq__(self,other:type[DataType])->bool
 polars.datatypes.Duration.__hash__(self)->int
+polars.datatypes.Duration.__init__(self,time_unit:TimeUnit='us')
 polars.datatypes.Field(self,name:str,dtype:type[DataType])
 polars.datatypes.Field.__eq__(self,other:Field)->bool
+polars.datatypes.Field.__init__(self,name:str,dtype:type[DataType])
 polars.datatypes.Field.__repr__(self)->str
 polars.datatypes.Float32(DataType)
 polars.datatypes.Float64(DataType)
@@ -237,11 +267,13 @@ polars.datatypes.Int8(DataType)
 polars.datatypes.List(self,inner:type[DataType])
 polars.datatypes.List.__eq__(self,other:type[DataType])->bool
 polars.datatypes.List.__hash__(self)->int
+polars.datatypes.List.__init__(self,inner:type[DataType])
 polars.datatypes.Null(DataType)
 polars.datatypes.Object(DataType)
 polars.datatypes.Struct(self,fields:Sequence[Field])
 polars.datatypes.Struct.__eq__(self,other:type[DataType])->bool
 polars.datatypes.Struct.__hash__(self)->int
+polars.datatypes.Struct.__init__(self,fields:Sequence[Field])
 polars.datatypes.Time(DataType)
 polars.datatypes.UInt16(DataType)
 polars.datatypes.UInt32(DataType)
@@ -270,6 +302,7 @@ A:polars.internals.anonymous_scan.func_serialized->pickle.dumps(func)
 A:polars.internals.anonymous_scan.schema->polars.internals.read_parquet_schema(data)
 polars.internals._deser_and_exec(buf:bytes,with_columns:list[str]|None)->pli.DataFrame
 polars.internals._scan_ds(ds:pa.dataset.dataset)->pli.LazyFrame
+polars.internals._scan_ds_impl(ds:pa.dataset.dataset,with_columns:list[str]|None)->pli.DataFrame
 polars.internals._scan_ipc_fsspec(file:str,storage_options:dict[str,object]|None=None)->pli.LazyFrame
 polars.internals._scan_parquet_fsspec(file:str,storage_options:dict[str,object]|None=None)->pli.LazyFrame
 polars.internals.anonymous_scan._deser_and_exec(buf:bytes,with_columns:list[str]|None)->pli.DataFrame
@@ -289,11 +322,14 @@ A:polars.internals.whenthen.pywhenthen->self._pywhen.then(expr._pyexpr)
 A:polars.internals.whenthen.pw->pywhen(expr._pyexpr)
 polars.internals.when(expr:pli.Expr|bool)->When
 polars.internals.whenthen.When(self,pywhen:pywhen)
+polars.internals.whenthen.When.__init__(self,pywhen:pywhen)
 polars.internals.whenthen.When.then(self,expr:pli.Expr|pli.Series|int|float|str|None|Sequence[None|int|float|str])->WhenThen
 polars.internals.whenthen.WhenThen(self,pywhenthen:Any)
+polars.internals.whenthen.WhenThen.__init__(self,pywhenthen:Any)
 polars.internals.whenthen.WhenThen.otherwise(self,expr:pli.Expr|int|float|str|None)->pli.Expr
 polars.internals.whenthen.WhenThen.when(self,predicate:pli.Expr|bool)->WhenThenThen
 polars.internals.whenthen.WhenThenThen(self,pywhenthenthen:Any)
+polars.internals.whenthen.WhenThenThen.__init__(self,pywhenthenthen:Any)
 polars.internals.whenthen.WhenThenThen.otherwise(self,expr:pli.Expr|int|float|str|None|Sequence[int|float|str|None])->pli.Expr
 polars.internals.whenthen.WhenThenThen.then(self,expr:pli.Expr|int|float|str|None|pli.Series|Sequence[int|float|str|None])->WhenThenThen
 polars.internals.whenthen.WhenThenThen.when(self,predicate:pli.Expr|bool)->WhenThenThen
@@ -322,30 +358,29 @@ A:polars.internals.lazy_functions.dtype->py_type_to_dtype(type(value))
 A:polars.internals.lazy_functions.s->polars.internals.Series._repeat(name, value, n, dtype)
 A:polars.internals.lazy_functions.n->lit(n)
 A:polars.internals.lazy_functions.condition->polars.internals.expr_to_lit_or_expr(condition, str_to_lit=True)
+polars.any(name:str|list[str]|list[pli.Expr]|pli.Expr)->pli.Expr
+polars.apply(exprs:list[str|pli.Expr],f:Callable[[list[pli.Series]],pli.Series|Any],return_dtype:type[DataType]|None=None)->pli.Expr
+polars.arange(low:int|pli.Expr|pli.Series,high:int|pli.Expr|pli.Series,step:int=1,*,eager:bool=False)->pli.Expr | pli.Series
+polars.avg(column:str|pli.Series)->pli.Expr | float
+polars.count(column:str|pli.Series|None=None)->pli.Expr | int
+polars.cov(a:str|pli.Expr,b:str|pli.Expr)->pli.Expr
+polars.date(year:pli.Expr|str,month:pli.Expr|str,day:pli.Expr|str)->pli.Expr
+polars.datetime(year:pli.Expr|str,month:pli.Expr|str,day:pli.Expr|str,hour:pli.Expr|str|None=None,minute:pli.Expr|str|None=None,second:pli.Expr|str|None=None,millisecond:pli.Expr|str|None=None)->pli.Expr
+polars.duration(*,days:pli.Expr|str|None=None,seconds:pli.Expr|str|None=None,nanoseconds:pli.Expr|str|None=None,milliseconds:pli.Expr|str|None=None,minutes:pli.Expr|str|None=None,hours:pli.Expr|str|None=None,weeks:pli.Expr|str|None=None)->pli.Expr
+polars.exclude(columns:str|list[str]|DataType|type[DataType]|DataType|Sequence[DataType|type[DataType]])->pli.Expr
+polars.first(column:str|pli.Series|None=None)->pli.Expr | Any
+polars.fold(acc:IntoExpr,f:Callable[[pli.Series,pli.Series],pli.Series],exprs:Sequence[pli.Expr|str]|pli.Expr)->pli.Expr
+polars.groups(column:str)->pli.Expr
+polars.head(column:str|pli.Series,n:int=10)->pli.Expr | pli.Series
 polars.internals.all(name:str|list[pli.Expr]|pli.Expr|None=None)->pli.Expr
-polars.internals.any(name:str|list[str]|list[pli.Expr]|pli.Expr)->pli.Expr
-polars.internals.apply(exprs:list[str|pli.Expr],f:Callable[[list[pli.Series]],pli.Series|Any],return_dtype:type[DataType]|None=None)->pli.Expr
-polars.internals.arange(low:int|pli.Expr|pli.Series,high:int|pli.Expr|pli.Series,step:int=1,*,eager:bool=False)->pli.Expr | pli.Series
 polars.internals.arg_where(condition:pli.Expr|pli.Series,eager:bool=False)->pli.Expr | pli.Series
 polars.internals.argsort_by(exprs:pli.Expr|str|Sequence[pli.Expr|str],reverse:list[bool]|bool=False)->pli.Expr
-polars.internals.avg(column:str|pli.Series)->pli.Expr | float
 polars.internals.col(name:str|list[str]|Sequence[PolarsDataType]|pli.Series|PolarsDataType)->pli.Expr
 polars.internals.collect_all(lazy_frames:list[pli.LazyFrame],type_coercion:bool=True,predicate_pushdown:bool=True,projection_pushdown:bool=True,simplify_expression:bool=True,string_cache:bool=False,no_optimization:bool=False,slice_pushdown:bool=False)->list[pli.DataFrame]
 polars.internals.concat_list(exprs:Sequence[str|pli.Expr|pli.Series]|pli.Expr)->pli.Expr
-polars.internals.concat_str(exprs:Sequence[pli.Expr|str]|pli.Expr,sep:str='')->pli.Expr
-polars.internals.count(column:str|pli.Series|None=None)->pli.Expr | int
-polars.internals.cov(a:str|pli.Expr,b:str|pli.Expr)->pli.Expr
-polars.internals.date(year:pli.Expr|str,month:pli.Expr|str,day:pli.Expr|str)->pli.Expr
-polars.internals.datetime(year:pli.Expr|str,month:pli.Expr|str,day:pli.Expr|str,hour:pli.Expr|str|None=None,minute:pli.Expr|str|None=None,second:pli.Expr|str|None=None,millisecond:pli.Expr|str|None=None)->pli.Expr
-polars.internals.duration(*,days:pli.Expr|str|None=None,seconds:pli.Expr|str|None=None,nanoseconds:pli.Expr|str|None=None,milliseconds:pli.Expr|str|None=None,minutes:pli.Expr|str|None=None,hours:pli.Expr|str|None=None,weeks:pli.Expr|str|None=None)->pli.Expr
 polars.internals.element()->pli.Expr
-polars.internals.exclude(columns:str|list[str]|DataType|type[DataType]|DataType|Sequence[DataType|type[DataType]])->pli.Expr
-polars.internals.first(column:str|pli.Series|None=None)->pli.Expr | Any
-polars.internals.fold(acc:IntoExpr,f:Callable[[pli.Series,pli.Series],pli.Series],exprs:Sequence[pli.Expr|str]|pli.Expr)->pli.Expr
 polars.internals.format(fstring:str,*args:pli.Expr|str)->pli.Expr
-polars.internals.groups(column:str)->pli.Expr
-polars.internals.head(column:str|pli.Series,n:int=10)->pli.Expr | pli.Series
-polars.internals.last(column:str|pli.Series|None=None)->pli.Expr
+polars.internals.lazy_concat_str(exprs:Sequence[pli.Expr|str]|pli.Expr,sep:str='')->pli.Expr
 polars.internals.lazy_functions._date(year:pli.Expr|str,month:pli.Expr|str,day:pli.Expr|str)->pli.Expr
 polars.internals.lazy_functions._datetime(year:pli.Expr|str,month:pli.Expr|str,day:pli.Expr|str,hour:pli.Expr|str|None=None,minute:pli.Expr|str|None=None,second:pli.Expr|str|None=None,millisecond:pli.Expr|str|None=None)->pli.Expr
 polars.internals.lazy_functions.all(name:str|list[pli.Expr]|pli.Expr|None=None)->pli.Expr
@@ -388,24 +423,25 @@ polars.internals.lazy_functions.sum(column:str|list[pli.Expr|str]|pli.Series|pli
 polars.internals.lazy_functions.tail(column:str|pli.Series,n:int=10)->pli.Expr | pli.Series
 polars.internals.lazy_functions.to_list(name:str)->pli.Expr
 polars.internals.lazy_functions.var(column:str|pli.Series,ddof:int=1)->pli.Expr | float | None
-polars.internals.list(name:str)->pli.Expr
 polars.internals.lit(value:Any,dtype:type[DataType]|None=None)->pli.Expr
-polars.internals.map(exprs:list[str]|list[pli.Expr],f:Callable[[list[pli.Series]],pli.Series],return_dtype:type[DataType]|None=None)->pli.Expr
-polars.internals.max(column:str|list[pli.Expr|str]|pli.Series)->pli.Expr | Any
-polars.internals.mean(column:str|pli.Series)->pli.Expr | float
-polars.internals.median(column:str|pli.Series)->pli.Expr | float | int
-polars.internals.min(column:str|list[pli.Expr|str]|pli.Series)->pli.Expr | Any
-polars.internals.n_unique(column:str|pli.Series)->pli.Expr | int
-polars.internals.pearson_corr(a:str|pli.Expr,b:str|pli.Expr,ddof:int=1)->pli.Expr
-polars.internals.quantile(column:str,quantile:float,interpolation:InterpolationMethod='nearest')->pli.Expr
-polars.internals.repeat(value:float|int|str|bool|None,n:pli.Expr|int,*,eager:bool=False,name:str|None=None)->pli.Expr | pli.Series
 polars.internals.select(exprs:str|pli.Expr|Sequence[str|pli.Expr]|pli.Series)->pli.DataFrame
-polars.internals.spearman_rank_corr(a:str|pli.Expr,b:str|pli.Expr,ddof:int=1)->pli.Expr
-polars.internals.std(column:str|pli.Series,ddof:int=1)->pli.Expr | float | None
-polars.internals.struct(exprs:Sequence[pli.Expr|str|pli.Series]|pli.Expr|pli.Series,eager:bool=False)->pli.Expr | pli.Series
-polars.internals.sum(column:str|list[pli.Expr|str]|pli.Series|pli.Expr)->pli.Expr | Any
-polars.internals.tail(column:str|pli.Series,n:int=10)->pli.Expr | pli.Series
-polars.internals.var(column:str|pli.Series,ddof:int=1)->pli.Expr | float | None
+polars.last(column:str|pli.Series|None=None)->pli.Expr
+polars.list(name:str)->pli.Expr
+polars.map(exprs:list[str]|list[pli.Expr],f:Callable[[list[pli.Series]],pli.Series],return_dtype:type[DataType]|None=None)->pli.Expr
+polars.max(column:str|list[pli.Expr|str]|pli.Series)->pli.Expr | Any
+polars.mean(column:str|pli.Series)->pli.Expr | float
+polars.median(column:str|pli.Series)->pli.Expr | float | int
+polars.min(column:str|list[pli.Expr|str]|pli.Series)->pli.Expr | Any
+polars.n_unique(column:str|pli.Series)->pli.Expr | int
+polars.pearson_corr(a:str|pli.Expr,b:str|pli.Expr,ddof:int=1)->pli.Expr
+polars.quantile(column:str,quantile:float,interpolation:InterpolationMethod='nearest')->pli.Expr
+polars.repeat(value:float|int|str|bool|None,n:pli.Expr|int,*,eager:bool=False,name:str|None=None)->pli.Expr | pli.Series
+polars.spearman_rank_corr(a:str|pli.Expr,b:str|pli.Expr,ddof:int=1)->pli.Expr
+polars.std(column:str|pli.Series,ddof:int=1)->pli.Expr | float | None
+polars.struct(exprs:Sequence[pli.Expr|str|pli.Series]|pli.Expr|pli.Series,eager:bool=False)->pli.Expr | pli.Series
+polars.sum(column:str|list[pli.Expr|str]|pli.Series|pli.Expr)->pli.Expr | Any
+polars.tail(column:str|pli.Series,n:int=10)->pli.Expr | pli.Series
+polars.var(column:str|pli.Series,ddof:int=1)->pli.Expr | float | None
 
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/functions.py----------------------------------------
@@ -419,8 +455,9 @@ A:polars.internals.functions.stop->_datetime_to_pl_timestamp(high, tu)
 A:polars.internals.functions.dt_range->dt_range.cast(Date).cast(Date)
 A:polars.internals.functions.cuts_df->cuts_df.with_column(pli.col(category_label).cast(Categorical)).with_column(pli.col(category_label).cast(Categorical))
 A:polars.internals.functions.result->s.sort().to_frame().join_asof(cuts_df, left_on=var_nm, right_on=break_point_label, strategy='forward')
+polars.cut(s:pli.Series,bins:list[float],labels:list[str]|None=None,break_point_label:str='break_point',category_label:str='category')->pli.DataFrame
+polars.get_dummies(df:pli.DataFrame,*,columns:list[str]|None=None)->pli.DataFrame
 polars.internals.concat(items:Sequence[pli.DataFrame]|Sequence[pli.Series]|Sequence[pli.LazyFrame]|Sequence[pli.Expr],rechunk:bool=True,how:ConcatMethod='vertical')->pli.DataFrame | pli.Series | pli.LazyFrame | pli.Expr
-polars.internals.cut(s:pli.Series,bins:list[float],labels:list[str]|None=None,break_point_label:str='break_point',category_label:str='category')->pli.DataFrame
 polars.internals.date_range(low:date|datetime,high:date|datetime,interval:str|timedelta,closed:ClosedWindow='both',name:str|None=None,time_unit:TimeUnit|None=None)->pli.Series
 polars.internals.functions._ensure_datetime(value:date|datetime)->tuple[datetime, bool]
 polars.internals.functions._interval_granularity(interval:str)->str
@@ -428,7 +465,6 @@ polars.internals.functions.concat(items:Sequence[pli.DataFrame]|Sequence[pli.Ser
 polars.internals.functions.cut(s:pli.Series,bins:list[float],labels:list[str]|None=None,break_point_label:str='break_point',category_label:str='category')->pli.DataFrame
 polars.internals.functions.date_range(low:date|datetime,high:date|datetime,interval:str|timedelta,closed:ClosedWindow='both',name:str|None=None,time_unit:TimeUnit|None=None)->pli.Series
 polars.internals.functions.get_dummies(df:pli.DataFrame,*,columns:list[str]|None=None)->pli.DataFrame
-polars.internals.get_dummies(df:pli.DataFrame,*,columns:list[str]|None=None)->pli.DataFrame
 
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/slice.py----------------------------------------
@@ -440,8 +476,10 @@ A:polars.internals.slice.(start, stop, stride)->slice(s.start, s.stop, s.step).i
 A:polars.internals.slice.lazyobj->self._lazify(self.obj)
 A:polars.internals.slice.obj->self.obj.slice(start, slice_length)
 polars.internals.slice.LazyPolarsSlice(self,obj:'pli.LazyFrame')
+polars.internals.slice.LazyPolarsSlice.__init__(self,obj:'pli.LazyFrame')
 polars.internals.slice.LazyPolarsSlice.apply(self,s:slice)->'pli.LazyFrame'
 polars.internals.slice.PolarsSlice(self,obj:FrameOrSeries)
+polars.internals.slice.PolarsSlice.__init__(self,obj:FrameOrSeries)
 polars.internals.slice.PolarsSlice._as_original(lazy:'pli.LazyFrame',original:FrameOrSeries)->FrameOrSeries
 polars.internals.slice.PolarsSlice._lazify(obj:FrameOrSeries)->'pli.LazyFrame'
 polars.internals.slice.PolarsSlice._slice_negative(self,obj:'pli.LazyFrame')->'pli.LazyFrame'
@@ -527,6 +565,7 @@ polars.internals.read_parquet_schema(file:str|BinaryIO|Path|bytes)->dict[str, ty
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/dataframe/pivot.py----------------------------------------
 A:polars.internals.dataframe.pivot.DF->TypeVar('DF', bound='pli.DataFrame')
 polars.internals.dataframe.pivot.PivotOps(self,df:PyDataFrame,by:str|list[str],pivot_column:str|list[str],values_column:str|list[str],dataframe_class:type[DF])
+polars.internals.dataframe.pivot.PivotOps.__init__(self,df:PyDataFrame,by:str|list[str],pivot_column:str|list[str],values_column:str|list[str],dataframe_class:type[DF])
 polars.internals.dataframe.pivot.PivotOps.count(self)->DF
 polars.internals.dataframe.pivot.PivotOps.first(self)->DF
 polars.internals.dataframe.pivot.PivotOps.last(self)->DF
@@ -543,8 +582,10 @@ A:polars.internals.dataframe.groupby.groups_df->self._groups()
 A:polars.internals.dataframe.groupby.df->self.agg_list()
 A:polars.internals.dataframe.groupby.s->self.agg_list().drop_in_place(name + '_agg_list').apply(func, return_dtype)
 polars.internals.dataframe.groupby.DynamicGroupBy(self,df:DF,index_column:str,every:str,period:str|None,offset:str|None,truncate:bool=True,include_boundaries:bool=True,closed:ClosedWindow='none',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)
+polars.internals.dataframe.groupby.DynamicGroupBy.__init__(self,df:DF,index_column:str,every:str,period:str|None,offset:str|None,truncate:bool=True,include_boundaries:bool=True,closed:ClosedWindow='none',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)
 polars.internals.dataframe.groupby.DynamicGroupBy.agg(self,aggs:pli.Expr|Sequence[pli.Expr])->pli.DataFrame
 polars.internals.dataframe.groupby.GBSelection(self,df:PyDataFrame,by:str|list[str],selection:list[str]|None,dataframe_class:type[DF])
+polars.internals.dataframe.groupby.GBSelection.__init__(self,df:PyDataFrame,by:str|list[str],selection:list[str]|None,dataframe_class:type[DF])
 polars.internals.dataframe.groupby.GBSelection.agg_list(self)->DF
 polars.internals.dataframe.groupby.GBSelection.apply(self,func:Callable[[Any],Any],return_dtype:type[DataType]|None=None)->DF
 polars.internals.dataframe.groupby.GBSelection.count(self)->DF
@@ -558,6 +599,7 @@ polars.internals.dataframe.groupby.GBSelection.n_unique(self)->DF
 polars.internals.dataframe.groupby.GBSelection.quantile(self,quantile:float,interpolation:InterpolationMethod='nearest')->DF
 polars.internals.dataframe.groupby.GBSelection.sum(self)->DF
 polars.internals.dataframe.groupby.GroupBy(self,df:PyDataFrame,by:str|list[str],dataframe_class:type[DF],maintain_order:bool=False)
+polars.internals.dataframe.groupby.GroupBy.__init__(self,df:PyDataFrame,by:str|list[str],dataframe_class:type[DF],maintain_order:bool=False)
 polars.internals.dataframe.groupby.GroupBy.__iter__(self)->Iterable[Any]
 polars.internals.dataframe.groupby.GroupBy._groups(self)->DF
 polars.internals.dataframe.groupby.GroupBy._select(self,columns:str|list[str])->GBSelection[DF]
@@ -579,6 +621,7 @@ polars.internals.dataframe.groupby.GroupBy.quantile(self,quantile:float,interpol
 polars.internals.dataframe.groupby.GroupBy.sum(self)->pli.DataFrame
 polars.internals.dataframe.groupby.GroupBy.tail(self,n:int=5)->DF
 polars.internals.dataframe.groupby.RollingGroupBy(self,df:DF,index_column:str,period:str,offset:str|None,closed:ClosedWindow='none',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)
+polars.internals.dataframe.groupby.RollingGroupBy.__init__(self,df:DF,index_column:str,period:str,offset:str|None,closed:ClosedWindow='none',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)
 polars.internals.dataframe.groupby.RollingGroupBy.agg(self,aggs:pli.Expr|Sequence[pli.Expr])->pli.DataFrame
 
 
@@ -621,6 +664,138 @@ A:polars.internals.dataframe.frame.(out, is_df)->cls.__new__(cls)._df.apply(f, r
 A:polars.internals.dataframe.frame.columns->columns.get_columns().get_columns()
 A:polars.internals.dataframe.frame.acc->operation(acc, self.to_series(i))
 polars.internals.DataFrame(self,data:dict[str,Sequence[Any]]|Sequence[Any]|np.ndarray[Any,Any]|pa.Table|pd.DataFrame|pli.Series|None=None,columns:ColumnsType|None=None,orient:Orientation|None=None)
+polars.internals.DataFrame.__add__(self:DF,other:DataFrame|pli.Series|int|float|bool|str)->DF
+polars.internals.DataFrame.__contains__(self,key:str)->bool
+polars.internals.DataFrame.__copy__(self:DF)->DF
+polars.internals.DataFrame.__deepcopy__(self:DF,memo:None=None)->DF
+polars.internals.DataFrame.__eq__(self,other:Any)->DataFrame
+polars.internals.DataFrame.__ge__(self,other:Any)->DataFrame
+polars.internals.DataFrame.__getitem__(self,item:str|int|np.ndarray[Any,Any]|MultiColSelector|tuple[int,MultiColSelector]|tuple[MultiRowSelector,MultiColSelector]|tuple[MultiRowSelector,int]|tuple[MultiRowSelector,str]|tuple[int,int]|tuple[int,str])->DataFrame | pli.Series
+polars.internals.DataFrame.__getstate__(self)->list[pli.Series]
+polars.internals.DataFrame.__gt__(self,other:Any)->DataFrame
+polars.internals.DataFrame.__iter__(self)->Iterator[Any]
+polars.internals.DataFrame.__le__(self,other:Any)->DataFrame
+polars.internals.DataFrame.__len__(self)->int
+polars.internals.DataFrame.__lt__(self,other:Any)->DataFrame
+polars.internals.DataFrame.__mod__(self:DF,other:DataFrame|pli.Series|int|float|bool)->DF
+polars.internals.DataFrame.__mul__(self:DF,other:DataFrame|pli.Series|int|float|bool)->DF
+polars.internals.DataFrame.__ne__(self,other:Any)->DataFrame
+polars.internals.DataFrame.__repr__(self)->str
+polars.internals.DataFrame.__setitem__(self,key:str|list[int]|list[str]|tuple[Any,str|int],value:Any)->None
+polars.internals.DataFrame.__setstate__(self,state)->None
+polars.internals.DataFrame.__str__(self)->str
+polars.internals.DataFrame.__sub__(self:DF,other:DataFrame|pli.Series|int|float|bool)->DF
+polars.internals.DataFrame.__truediv__(self:DF,other:DataFrame|pli.Series|int|float|bool)->DF
+polars.internals.DataFrame._comp(self,other:Any,op:ComparisonOperator)->DataFrame
+polars.internals.DataFrame._compare_to_non_df(self:DF,other:Any,op:ComparisonOperator)->DF
+polars.internals.DataFrame._compare_to_other_df(self,other:DataFrame,op:ComparisonOperator)->DataFrame
+polars.internals.DataFrame._from_arrow(cls:type[DF],data:pa.Table,columns:Sequence[str]|None=None,rechunk:bool=True)->DF
+polars.internals.DataFrame._from_dict(cls:type[DF],data:Mapping[str,Sequence[object]|Mapping[str,Sequence[object]]],columns:Sequence[str]|None=None)->DF
+polars.internals.DataFrame._from_dicts(cls:type[DF],data:Sequence[dict[str,Any]],infer_schema_length:int|None=100)->DF
+polars.internals.DataFrame._from_numpy(cls:type[DF],data:np.ndarray[Any,Any],columns:Sequence[str]|None=None,orient:Orientation|None=None)->DF
+polars.internals.DataFrame._from_pandas(cls:type[DF],data:pd.DataFrame,columns:Sequence[str]|None=None,rechunk:bool=True,nan_to_none:bool=True)->DF
+polars.internals.DataFrame._from_pydf(cls:type[DF],py_df:PyDataFrame)->DF
+polars.internals.DataFrame._from_records(cls:type[DF],data:Sequence[Sequence[Any]],columns:Sequence[str]|None=None,orient:Orientation|None=None,infer_schema_length:int|None=50)->DF
+polars.internals.DataFrame._pos_idx(self,idx:int,dim:int)->int
+polars.internals.DataFrame._pos_idxs(self,idxs:np.ndarray[Any,Any]|pli.Series,dim:int)->pli.Series
+polars.internals.DataFrame._read_avro(cls:type[DF],file:str|Path|BinaryIO,columns:list[int]|list[str]|None=None,n_rows:int|None=None)->DF
+polars.internals.DataFrame._read_csv(cls:type[DF],file:str|Path|BinaryIO|bytes,has_header:bool=True,columns:list[int]|list[str]|None=None,sep:str=',',comment_char:str|None=None,quote_char:str|None='"',skip_rows:int=0,dtypes:None|(Mapping[str,PolarsDataType]|Sequence[PolarsDataType])=None,null_values:str|list[str]|dict[str,str]|None=None,ignore_errors:bool=False,parse_dates:bool=False,n_threads:int|None=None,infer_schema_length:int|None=100,batch_size:int=8192,n_rows:int|None=None,encoding:CsvEncoding='utf8',low_memory:bool=False,rechunk:bool=True,skip_rows_after_header:int=0,row_count_name:str|None=None,row_count_offset:int=0,sample_size:int=1024,eol_char:str='\n')->DF
+polars.internals.DataFrame._read_ipc(cls,file:str|Path|BinaryIO,columns:list[int]|list[str]|None=None,n_rows:int|None=None,row_count_name:str|None=None,row_count_offset:int=0,rechunk:bool=True,memory_map:bool=True)->DataFrame
+polars.internals.DataFrame._read_json(cls:type[DF],file:str|Path|IOBase,json_lines:bool=False)->DF
+polars.internals.DataFrame._read_parquet(cls:type[DF],file:str|Path|BinaryIO,columns:list[int]|list[str]|None=None,n_rows:int|None=None,parallel:ParallelStrategy='auto',row_count_name:str|None=None,row_count_offset:int=0,low_memory:bool=False)->DF
+polars.internals.DataFrame._repr_html_(self)->str
+polars.internals.DataFrame.apply(self:DF,f:Callable[[tuple[Any,...]],Any],return_dtype:type[DataType]|None=None,inference_size:int=256)->DF
+polars.internals.DataFrame.cleared(self:DF)->DF
+polars.internals.DataFrame.clone(self:DF)->DF
+polars.internals.DataFrame.columns(self)->list[str]
+polars.internals.DataFrame.columns(self,columns:Sequence[str])->None
+polars.internals.DataFrame.describe(self:DF)->DF
+polars.internals.DataFrame.drop(self:DF,name:str|list[str])->DF
+polars.internals.DataFrame.drop_in_place(self,name:str)->pli.Series
+polars.internals.DataFrame.drop_nulls(self:DF,subset:str|list[str]|None=None)->DF
+polars.internals.DataFrame.dtypes(self)->list[type[DataType]]
+polars.internals.DataFrame.estimated_size(self,unit:SizeUnit='b')->int | float
+polars.internals.DataFrame.explode(self,columns:str|list[str]|pli.Expr|list[pli.Expr])->DataFrame
+polars.internals.DataFrame.extend(self,other:DataFrame)->None
+polars.internals.DataFrame.fill_nan(self,fill_value:pli.Expr|int|float|None)->DataFrame
+polars.internals.DataFrame.fill_null(self:DF,value:Any|None=None,strategy:FillNullStrategy|None=None,limit:int|None=None)->DF
+polars.internals.DataFrame.filter(self,predicate:pli.Expr|str|pli.Series|list[bool]|np.ndarray[Any,Any])->DataFrame
+polars.internals.DataFrame.find_idx_by_name(self,name:str)->int
+polars.internals.DataFrame.fold(self,operation:Callable[[pli.Series,pli.Series],pli.Series])->pli.Series
+polars.internals.DataFrame.frame_equal(self,other:DataFrame,null_equal:bool=True)->bool
+polars.internals.DataFrame.get_column(self,name:str)->pli.Series
+polars.internals.DataFrame.get_columns(self)->list[pli.Series]
+polars.internals.DataFrame.groupby(self:DF,by:str|pli.Expr|Sequence[str|pli.Expr],maintain_order:bool=False)->GroupBy[DF]
+polars.internals.DataFrame.groupby_dynamic(self:DF,index_column:str,every:str,period:str|None=None,offset:str|None=None,truncate:bool=True,include_boundaries:bool=False,closed:ClosedWindow='left',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)->DynamicGroupBy[DF]
+polars.internals.DataFrame.groupby_rolling(self:DF,index_column:str,period:str,offset:str|None=None,closed:ClosedWindow='right',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)->RollingGroupBy[DF]
+polars.internals.DataFrame.hash_rows(self,seed:int=0,seed_1:int|None=None,seed_2:int|None=None,seed_3:int|None=None)->pli.Series
+polars.internals.DataFrame.head(self:DF,n:int=5)->DF
+polars.internals.DataFrame.height(self)->int
+polars.internals.DataFrame.hstack(self:DF,columns:list[pli.Series]|DataFrame,in_place:bool=False)->DF | None
+polars.internals.DataFrame.insert_at_idx(self,index:int,series:pli.Series)->None
+polars.internals.DataFrame.interpolate(self:DF)->DF
+polars.internals.DataFrame.is_duplicated(self)->pli.Series
+polars.internals.DataFrame.is_empty(self)->bool
+polars.internals.DataFrame.is_unique(self)->pli.Series
+polars.internals.DataFrame.join(self,other:DataFrame,left_on:str|pli.Expr|list[str|pli.Expr]|None=None,right_on:str|pli.Expr|list[str|pli.Expr]|None=None,on:str|pli.Expr|list[str|pli.Expr]|None=None,how:JoinStrategy='inner',suffix:str='_right')->DataFrame
+polars.internals.DataFrame.join_asof(self,other:DataFrame,left_on:str|None=None,right_on:str|None=None,on:str|None=None,by_left:str|list[str]|None=None,by_right:str|list[str]|None=None,by:str|list[str]|None=None,strategy:AsofJoinStrategy='backward',suffix:str='_right',tolerance:str|int|float|None=None,allow_parallel:bool=True,force_parallel:bool=False)->DataFrame
+polars.internals.DataFrame.lazy(self:DF)->pli.LazyFrame
+polars.internals.DataFrame.limit(self:DF,n:int=5)->DF
+polars.internals.DataFrame.max(self:DF,axis:int=0)->DF | pli.Series
+polars.internals.DataFrame.mean(self:DF,axis:int=0,null_strategy:NullStrategy='ignore')->DF | pli.Series
+polars.internals.DataFrame.median(self:DF)->DF
+polars.internals.DataFrame.melt(self:DF,id_vars:list[str]|str|None=None,value_vars:list[str]|str|None=None,variable_name:str|None=None,value_name:str|None=None)->DF
+polars.internals.DataFrame.min(self:DF,axis:int=0)->DF | pli.Series
+polars.internals.DataFrame.n_chunks(self,strategy:str='first')->int | list[int]
+polars.internals.DataFrame.null_count(self:DF)->DF
+polars.internals.DataFrame.partition_by(self:DF,groups:str|list[str],maintain_order:bool=True,*,as_dict:bool=False)->list[DF] | dict[Any, DF]
+polars.internals.DataFrame.pipe(self,func:Callable[...,Any],*args:Any,**kwargs:Any)->Any
+polars.internals.DataFrame.pivot(self:DF,values:list[str]|str,index:list[str]|str,columns:list[str]|str,aggregate_fn:PivotAgg|pli.Expr='first',maintain_order:bool=True,sort_columns:bool=False)->DF
+polars.internals.DataFrame.product(self:DF)->DF
+polars.internals.DataFrame.quantile(self:DF,quantile:float,interpolation:InterpolationMethod='nearest')->DF
+polars.internals.DataFrame.rechunk(self:DF)->DF
+polars.internals.DataFrame.rename(self,mapping:dict[str,str])->DataFrame
+polars.internals.DataFrame.replace(self,column:str,new_col:pli.Series)->None
+polars.internals.DataFrame.replace_at_idx(self,index:int,series:pli.Series)->None
+polars.internals.DataFrame.reverse(self:DF)->DF
+polars.internals.DataFrame.row(self,index:int)->tuple[Any]
+polars.internals.DataFrame.rows(self)->list[tuple[object, ...]]
+polars.internals.DataFrame.sample(self:DF,n:int|None=None,frac:float|None=None,with_replacement:bool=False,shuffle:bool=False,seed:int|None=None)->DF
+polars.internals.DataFrame.schema(self)->dict[str, type[DataType]]
+polars.internals.DataFrame.select(self:DF,exprs:str|pli.Expr|pli.Series|Sequence[str|pli.Expr|pli.Series])->DF
+polars.internals.DataFrame.shape(self)->tuple[int, int]
+polars.internals.DataFrame.shift(self:DF,periods:int)->DF
+polars.internals.DataFrame.shift_and_fill(self,periods:int,fill_value:int|str|float)->DataFrame
+polars.internals.DataFrame.shrink_to_fit(self:DF,in_place:bool=False)->DF | None
+polars.internals.DataFrame.slice(self:DF,offset:int,length:int|None=None)->DF
+polars.internals.DataFrame.sort(self,by:str|pli.Expr|list[str]|list[pli.Expr],reverse:bool|list[bool]=False,nulls_last:bool=False)->DataFrame
+polars.internals.DataFrame.std(self:DF,ddof:int=1)->DF
+polars.internals.DataFrame.sum(self:DF,*,axis:int=0,null_strategy:NullStrategy='ignore')->DF | pli.Series
+polars.internals.DataFrame.tail(self:DF,n:int=5)->DF
+polars.internals.DataFrame.take_every(self:DF,n:int)->DF
+polars.internals.DataFrame.to_arrow(self)->pa.Table
+polars.internals.DataFrame.to_dict(self,as_series:bool=True)->dict[str, pli.Series] | dict[str, list[Any]]
+polars.internals.DataFrame.to_dicts(self)->list[dict[str, Any]]
+polars.internals.DataFrame.to_dummies(self:DF,*,columns:list[str]|None=None)->DF
+polars.internals.DataFrame.to_numpy(self)->np.ndarray[Any, Any]
+polars.internals.DataFrame.to_pandas(self,*args:Any,date_as_object:bool=False,**kwargs:Any)->pd.DataFrame
+polars.internals.DataFrame.to_series(self,index:int=0)->pli.Series
+polars.internals.DataFrame.to_struct(self,name:str)->pli.Series
+polars.internals.DataFrame.transpose(self:DF,include_header:bool=False,header_name:str='column',column_names:Iterator[str]|Sequence[str]|None=None)->DF
+polars.internals.DataFrame.unique(self:DF,maintain_order:bool=True,subset:str|list[str]|None=None,keep:UniqueKeepStrategy='first')->DF
+polars.internals.DataFrame.unnest(self:DF,names:str|list[str])->DF
+polars.internals.DataFrame.upsample(self:DF,time_column:str,every:str,offset:str|None=None,by:str|Sequence[str]|None=None,maintain_order:bool=False)->DF
+polars.internals.DataFrame.var(self:DF,ddof:int=1)->DF
+polars.internals.DataFrame.vstack(self:DF,df:DataFrame,in_place:bool=False)->DF | None
+polars.internals.DataFrame.width(self)->int
+polars.internals.DataFrame.with_column(self,column:pli.Series|pli.Expr)->DataFrame
+polars.internals.DataFrame.with_columns(self,exprs:pli.Expr|pli.Series|Sequence[pli.Expr|pli.Series]|None=None,**named_exprs:pli.Expr|pli.Series)->DataFrame
+polars.internals.DataFrame.with_row_count(self:DF,name:str='row_nr',offset:int=0)->DF
+polars.internals.DataFrame.write_avro(self,file:BinaryIO|BytesIO|str|Path,compression:AvroCompression='uncompressed')->None
+polars.internals.DataFrame.write_csv(self,file:TextIO|BytesIO|str|Path|None=None,has_header:bool=True,sep:str=',',quote:str='"',batch_size:int=1024,datetime_format:str|None=None,date_format:str|None=None,time_format:str|None=None,float_precision:int|None=None)->str | None
+polars.internals.DataFrame.write_ipc(self,file:BinaryIO|BytesIO|str|Path,compression:IpcCompression='uncompressed')->None
+polars.internals.DataFrame.write_json(self,file:IOBase|str|Path|None=None,pretty:bool=False,row_oriented:bool=False,json_lines:bool=False,*,to_string:bool=False)->str | None
+polars.internals.DataFrame.write_parquet(self,file:str|Path|BytesIO,*,compression:ParquetCompression='lz4',compression_level:int|None=None,statistics:bool=False,row_group_size:int|None=None,use_pyarrow:bool=False,pyarrow_options:dict[str,object]|None=None)->None
 polars.internals.dataframe.frame.DataFrame(self,data:dict[str,Sequence[Any]]|Sequence[Any]|np.ndarray[Any,Any]|pa.Table|pd.DataFrame|pli.Series|None=None,columns:ColumnsType|None=None,orient:Orientation|None=None)
 polars.internals.dataframe.frame.DataFrame.__add__(self:DF,other:DataFrame|pli.Series|int|float|bool|str)->DF
 polars.internals.dataframe.frame.DataFrame.__contains__(self,key:str)->bool
@@ -631,6 +806,7 @@ polars.internals.dataframe.frame.DataFrame.__ge__(self,other:Any)->DataFrame
 polars.internals.dataframe.frame.DataFrame.__getitem__(self,item:str|int|np.ndarray[Any,Any]|MultiColSelector|tuple[int,MultiColSelector]|tuple[MultiRowSelector,MultiColSelector]|tuple[MultiRowSelector,int]|tuple[MultiRowSelector,str]|tuple[int,int]|tuple[int,str])->DataFrame | pli.Series
 polars.internals.dataframe.frame.DataFrame.__getstate__(self)->list[pli.Series]
 polars.internals.dataframe.frame.DataFrame.__gt__(self,other:Any)->DataFrame
+polars.internals.dataframe.frame.DataFrame.__init__(self,data:dict[str,Sequence[Any]]|Sequence[Any]|np.ndarray[Any,Any]|pa.Table|pd.DataFrame|pli.Series|None=None,columns:ColumnsType|None=None,orient:Orientation|None=None)
 polars.internals.dataframe.frame.DataFrame.__iter__(self)->Iterator[Any]
 polars.internals.dataframe.frame.DataFrame.__le__(self,other:Any)->DataFrame
 polars.internals.dataframe.frame.DataFrame.__len__(self)->int
@@ -783,6 +959,189 @@ A:polars.internals.expr.expr.(window_size, min_periods)->_prepare_rolling_window
 A:polars.internals.expr.expr.seed->random.randint(0, 10000)
 A:polars.internals.expr.expr.alpha->_prepare_alpha(com, span, half_life, alpha)
 polars.internals.Expr(self)
+polars.internals.Expr.__abs__(self)->Expr
+polars.internals.Expr.__add__(self,other:Any)->Expr
+polars.internals.Expr.__and__(self,other:Expr)->Expr
+polars.internals.Expr.__array_ufunc__(self,ufunc:Callable[...,Any],method:str,*inputs:Any,**kwargs:Any)->Expr
+polars.internals.Expr.__bool__(self)->Expr
+polars.internals.Expr.__eq__(self,other:Any)->Expr
+polars.internals.Expr.__floordiv__(self,other:Any)->Expr
+polars.internals.Expr.__ge__(self,other:Any)->Expr
+polars.internals.Expr.__getstate__(self)->Any
+polars.internals.Expr.__gt__(self,other:Any)->Expr
+polars.internals.Expr.__invert__(self)->Expr
+polars.internals.Expr.__le__(self,other:Any)->Expr
+polars.internals.Expr.__lt__(self,other:Any)->Expr
+polars.internals.Expr.__mod__(self,other:Any)->Expr
+polars.internals.Expr.__mul__(self,other:Any)->Expr
+polars.internals.Expr.__ne__(self,other:Any)->Expr
+polars.internals.Expr.__neg__(self)->Expr
+polars.internals.Expr.__or__(self,other:Expr)->Expr
+polars.internals.Expr.__pow__(self,power:int|float|pli.Series|Expr)->Expr
+polars.internals.Expr.__radd__(self,other:Any)->Expr
+polars.internals.Expr.__rand__(self,other:Any)->Expr
+polars.internals.Expr.__rfloordiv__(self,other:Any)->Expr
+polars.internals.Expr.__rmod__(self,other:Any)->Expr
+polars.internals.Expr.__rmul__(self,other:Any)->Expr
+polars.internals.Expr.__ror__(self,other:Any)->Expr
+polars.internals.Expr.__rpow__(self,base:int|float|Expr)->Expr
+polars.internals.Expr.__rsub__(self,other:Any)->Expr
+polars.internals.Expr.__rtruediv__(self,other:Any)->Expr
+polars.internals.Expr.__rxor__(self,other:Expr)->Expr
+polars.internals.Expr.__setstate__(self,state:Any)->None
+polars.internals.Expr.__str__(self)->str
+polars.internals.Expr.__sub__(self,other:Any)->Expr
+polars.internals.Expr.__to_expr(self,other:Any)->Expr
+polars.internals.Expr.__to_pyexpr(self,other:Any)->PyExpr
+polars.internals.Expr.__truediv__(self,other:Any)->Expr
+polars.internals.Expr.__xor__(self,other:Expr)->Expr
+polars.internals.Expr._from_pyexpr(pyexpr:PyExpr)->Expr
+polars.internals.Expr._repr_html_(self)->str
+polars.internals.Expr.abs(self)->Expr
+polars.internals.Expr.agg_groups(self)->Expr
+polars.internals.Expr.alias(self,name:str)->Expr
+polars.internals.Expr.all(self)->Expr
+polars.internals.Expr.any(self)->Expr
+polars.internals.Expr.append(self,other:Expr,upcast:bool=True)->Expr
+polars.internals.Expr.apply(self,f:Callable[[pli.Series],pli.Series]|Callable[[Any],Any],return_dtype:type[DataType]|None=None)->Expr
+polars.internals.Expr.arccos(self)->Expr
+polars.internals.Expr.arccosh(self)->Expr
+polars.internals.Expr.arcsin(self)->Expr
+polars.internals.Expr.arcsinh(self)->Expr
+polars.internals.Expr.arctan(self)->Expr
+polars.internals.Expr.arctanh(self)->Expr
+polars.internals.Expr.arg_max(self)->Expr
+polars.internals.Expr.arg_min(self)->Expr
+polars.internals.Expr.arg_sort(self,reverse:bool=False,nulls_last:bool=False)->Expr
+polars.internals.Expr.arg_unique(self)->Expr
+polars.internals.Expr.argsort(self,reverse:bool=False,nulls_last:bool=False)->Expr
+polars.internals.Expr.arr(self)->ExprListNameSpace
+polars.internals.Expr.backward_fill(self,limit:int|None=None)->Expr
+polars.internals.Expr.cast(self,dtype:PolarsDataType|type[Any],strict:bool=True)->Expr
+polars.internals.Expr.cat(self)->ExprCatNameSpace
+polars.internals.Expr.ceil(self)->Expr
+polars.internals.Expr.clip(self,min_val:int|float,max_val:int|float)->Expr
+polars.internals.Expr.clip_max(self,max_val:int|float)->Expr
+polars.internals.Expr.clip_min(self,min_val:int|float)->Expr
+polars.internals.Expr.cos(self)->Expr
+polars.internals.Expr.cosh(self)->Expr
+polars.internals.Expr.count(self)->Expr
+polars.internals.Expr.cumcount(self,reverse:bool=False)->Expr
+polars.internals.Expr.cummax(self,reverse:bool=False)->Expr
+polars.internals.Expr.cummin(self,reverse:bool=False)->Expr
+polars.internals.Expr.cumprod(self,reverse:bool=False)->Expr
+polars.internals.Expr.cumsum(self,reverse:bool=False)->Expr
+polars.internals.Expr.cumulative_eval(self,expr:Expr,min_periods:int=1,parallel:bool=False)->Expr
+polars.internals.Expr.diff(self,n:int=1,null_behavior:NullBehavior='ignore')->Expr
+polars.internals.Expr.dot(self,other:Expr|str)->Expr
+polars.internals.Expr.drop_nans(self)->Expr
+polars.internals.Expr.drop_nulls(self)->Expr
+polars.internals.Expr.dt(self)->ExprDateTimeNameSpace
+polars.internals.Expr.entropy(self,base:float=math.e,normalize:bool=True)->Expr
+polars.internals.Expr.ewm_mean(self,com:float|None=None,span:float|None=None,half_life:float|None=None,alpha:float|None=None,adjust:bool=True,min_periods:int=1)->Expr
+polars.internals.Expr.ewm_std(self,com:float|None=None,span:float|None=None,half_life:float|None=None,alpha:float|None=None,adjust:bool=True,min_periods:int=1)->Expr
+polars.internals.Expr.ewm_var(self,com:float|None=None,span:float|None=None,half_life:float|None=None,alpha:float|None=None,adjust:bool=True,min_periods:int=1)->Expr
+polars.internals.Expr.exclude(self,columns:str|list[str]|DataType|type[DataType]|DataType|Sequence[DataType|type[DataType]])->Expr
+polars.internals.Expr.exp(self)->Expr
+polars.internals.Expr.explode(self)->Expr
+polars.internals.Expr.extend_constant(self,value:int|float|str|bool|None,n:int)->Expr
+polars.internals.Expr.fill_nan(self,fill_value:str|int|float|bool|Expr|None)->Expr
+polars.internals.Expr.fill_null(self,value:Any|None=None,strategy:FillNullStrategy|None=None,limit:int|None=None)->Expr
+polars.internals.Expr.filter(self,predicate:Expr)->Expr
+polars.internals.Expr.first(self)->Expr
+polars.internals.Expr.flatten(self)->Expr
+polars.internals.Expr.floor(self)->Expr
+polars.internals.Expr.forward_fill(self,limit:int|None=None)->Expr
+polars.internals.Expr.hash(self,seed:int=0,seed_1:int|None=None,seed_2:int|None=None,seed_3:int|None=None)->Expr
+polars.internals.Expr.head(self,n:int=10)->Expr
+polars.internals.Expr.inspect(self,fmt:str='{}')->Expr
+polars.internals.Expr.interpolate(self)->Expr
+polars.internals.Expr.is_between(self,start:Expr|datetime|int,end:Expr|datetime|int,include_bounds:bool|Sequence[bool]=False)->Expr
+polars.internals.Expr.is_duplicated(self)->Expr
+polars.internals.Expr.is_finite(self)->Expr
+polars.internals.Expr.is_first(self)->Expr
+polars.internals.Expr.is_in(self,other:Expr|Sequence[Any]|str|pli.Series)->Expr
+polars.internals.Expr.is_infinite(self)->Expr
+polars.internals.Expr.is_nan(self)->Expr
+polars.internals.Expr.is_not(self)->Expr
+polars.internals.Expr.is_not_nan(self)->Expr
+polars.internals.Expr.is_not_null(self)->Expr
+polars.internals.Expr.is_null(self)->Expr
+polars.internals.Expr.is_unique(self)->Expr
+polars.internals.Expr.keep_name(self)->Expr
+polars.internals.Expr.kurtosis(self,fisher:bool=True,bias:bool=True)->Expr
+polars.internals.Expr.last(self)->Expr
+polars.internals.Expr.len(self)->Expr
+polars.internals.Expr.limit(self,n:int=10)->Expr
+polars.internals.Expr.list(self)->Expr
+polars.internals.Expr.log(self,base:float=math.e)->Expr
+polars.internals.Expr.log10(self)->Expr
+polars.internals.Expr.lower_bound(self)->Expr
+polars.internals.Expr.map(self,f:Callable[[pli.Series],pli.Series|Any],return_dtype:PolarsDataType|None=None,agg_list:bool=False)->Expr
+polars.internals.Expr.map_alias(self,f:Callable[[str],str])->Expr
+polars.internals.Expr.max(self)->Expr
+polars.internals.Expr.mean(self)->Expr
+polars.internals.Expr.median(self)->Expr
+polars.internals.Expr.meta(self)->ExprMetaNameSpace
+polars.internals.Expr.min(self)->Expr
+polars.internals.Expr.mode(self)->Expr
+polars.internals.Expr.n_unique(self)->Expr
+polars.internals.Expr.null_count(self)->Expr
+polars.internals.Expr.over(self,expr:str|Expr|list[Expr|str])->Expr
+polars.internals.Expr.pct_change(self,n:int=1)->Expr
+polars.internals.Expr.pow(self,exponent:int|float|pli.Series|Expr)->Expr
+polars.internals.Expr.prefix(self,prefix:str)->Expr
+polars.internals.Expr.product(self)->Expr
+polars.internals.Expr.quantile(self,quantile:float,interpolation:InterpolationMethod='nearest')->Expr
+polars.internals.Expr.rank(self,method:RankMethod='average',reverse:bool=False)->Expr
+polars.internals.Expr.rechunk(self)->Expr
+polars.internals.Expr.reinterpret(self,signed:bool=True)->Expr
+polars.internals.Expr.repeat_by(self,by:Expr|str)->Expr
+polars.internals.Expr.reshape(self,dims:tuple[int,...])->Expr
+polars.internals.Expr.reverse(self)->Expr
+polars.internals.Expr.rolling_apply(self,function:Callable[[pli.Series],Any],window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Expr
+polars.internals.Expr.rolling_max(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_mean(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_median(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_min(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_quantile(self,quantile:float,interpolation:InterpolationMethod='nearest',window_size:int|str=2,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_skew(self,window_size:int,bias:bool=True)->Expr
+polars.internals.Expr.rolling_std(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_sum(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.rolling_var(self,window_size:int|str,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False,by:str|None=None,closed:ClosedWindow='left')->Expr
+polars.internals.Expr.round(self,decimals:int)->Expr
+polars.internals.Expr.sample(self,frac:float|None=None,with_replacement:bool=True,shuffle:bool=False,seed:int|None=None,n:int|None=None)->Expr
+polars.internals.Expr.search_sorted(self,element:Expr|int|float)->Expr
+polars.internals.Expr.set_sorted(self,reverse:bool=False)->Expr
+polars.internals.Expr.shift(self,periods:int=1)->Expr
+polars.internals.Expr.shift_and_fill(self,periods:int,fill_value:int|float|bool|str|Expr|list[Any])->Expr
+polars.internals.Expr.shuffle(self,seed:int|None=None)->Expr
+polars.internals.Expr.sign(self)->Expr
+polars.internals.Expr.sin(self)->Expr
+polars.internals.Expr.sinh(self)->Expr
+polars.internals.Expr.skew(self,bias:bool=True)->Expr
+polars.internals.Expr.slice(self,offset:int|Expr,length:int|Expr|None=None)->Expr
+polars.internals.Expr.sort(self,reverse:bool=False,nulls_last:bool=False)->Expr
+polars.internals.Expr.sort_by(self,by:Expr|str|list[Expr|str],reverse:bool|list[bool]=False)->Expr
+polars.internals.Expr.sqrt(self)->Expr
+polars.internals.Expr.std(self,ddof:int=1)->Expr
+polars.internals.Expr.str(self)->ExprStringNameSpace
+polars.internals.Expr.struct(self)->ExprStructNameSpace
+polars.internals.Expr.suffix(self,suffix:str)->Expr
+polars.internals.Expr.sum(self)->Expr
+polars.internals.Expr.tail(self,n:int=10)->Expr
+polars.internals.Expr.take(self,indices:int|list[int]|Expr|pli.Series|np.ndarray[Any,Any])->Expr
+polars.internals.Expr.take_every(self,n:int)->Expr
+polars.internals.Expr.tan(self)->Expr
+polars.internals.Expr.tanh(self)->Expr
+polars.internals.Expr.to_physical(self)->Expr
+polars.internals.Expr.top_k(self,k:int=5,reverse:bool=False)->Expr
+polars.internals.Expr.unique(self,maintain_order:bool=False)->Expr
+polars.internals.Expr.unique_counts(self)->Expr
+polars.internals.Expr.upper_bound(self)->Expr
+polars.internals.Expr.value_counts(self,multithreaded:bool=False,sort:bool=False)->Expr
+polars.internals.Expr.var(self,ddof:int=1)->Expr
+polars.internals.Expr.where(self,predicate:Expr)->Expr
 polars.internals.expr.ensure_list_of_pyexpr(exprs:object)->list[PyExpr]
 polars.internals.expr.expr.Expr(self)
 polars.internals.expr.expr.Expr.__abs__(self)->Expr
@@ -795,6 +1154,7 @@ polars.internals.expr.expr.Expr.__floordiv__(self,other:Any)->Expr
 polars.internals.expr.expr.Expr.__ge__(self,other:Any)->Expr
 polars.internals.expr.expr.Expr.__getstate__(self)->Any
 polars.internals.expr.expr.Expr.__gt__(self,other:Any)->Expr
+polars.internals.expr.expr.Expr.__init__(self)
 polars.internals.expr.expr.Expr.__invert__(self)->Expr
 polars.internals.expr.expr.Expr.__le__(self,other:Any)->Expr
 polars.internals.expr.expr.Expr.__lt__(self,other:Any)->Expr
@@ -983,6 +1343,7 @@ polars.internals.wrap_expr(pyexpr:PyExpr)->Expr
 A:polars.internals.expr.string.pattern->polars.internals.expr_to_lit_or_expr(pattern, str_to_lit=True)
 A:polars.internals.expr.string.value->polars.internals.expr_to_lit_or_expr(value, str_to_lit=True)
 polars.internals.expr.string.ExprStringNameSpace(self,expr:pli.Expr)
+polars.internals.expr.string.ExprStringNameSpace.__init__(self,expr:pli.Expr)
 polars.internals.expr.string.ExprStringNameSpace.concat(self,delimiter:str='-')->pli.Expr
 polars.internals.expr.string.ExprStringNameSpace.contains(self,pattern:str,literal:bool=False)->pli.Expr
 polars.internals.expr.string.ExprStringNameSpace.count_match(self,pattern:str)->pli.Expr
@@ -1014,6 +1375,7 @@ polars.internals.expr.string.ExprStringNameSpace.zfill(self,alignment:int)->pli.
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/expr/struct.py----------------------------------------
 polars.internals.expr.struct.ExprStructNameSpace(self,expr:pli.Expr)
 polars.internals.expr.struct.ExprStructNameSpace.__getitem__(self,item:str|int)->pli.Expr
+polars.internals.expr.struct.ExprStructNameSpace.__init__(self,expr:pli.Expr)
 polars.internals.expr.struct.ExprStructNameSpace.field(self,name:str)->pli.Expr
 polars.internals.expr.struct.ExprStructNameSpace.rename_fields(self,names:list[str])->pli.Expr
 
@@ -1022,6 +1384,7 @@ polars.internals.expr.struct.ExprStructNameSpace.rename_fields(self,names:list[s
 A:polars.internals.expr.datetime.every->_timedelta_to_pl_duration(every)
 A:polars.internals.expr.datetime.offset->_timedelta_to_pl_duration(offset)
 polars.internals.expr.datetime.ExprDateTimeNameSpace(self,expr:pli.Expr)
+polars.internals.expr.datetime.ExprDateTimeNameSpace.__init__(self,expr:pli.Expr)
 polars.internals.expr.datetime.ExprDateTimeNameSpace.cast_time_unit(self,tu:TimeUnit)->pli.Expr
 polars.internals.expr.datetime.ExprDateTimeNameSpace.day(self)->pli.Expr
 polars.internals.expr.datetime.ExprDateTimeNameSpace.days(self)->pli.Expr
@@ -1053,6 +1416,7 @@ polars.internals.expr.datetime.ExprDateTimeNameSpace.year(self)->pli.Expr
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/expr/meta.py----------------------------------------
 polars.internals.expr.meta.ExprMetaNameSpace(self,expr:pli.Expr)
 polars.internals.expr.meta.ExprMetaNameSpace.__eq__(self,other:ExprMetaNameSpace|pli.Expr)->bool
+polars.internals.expr.meta.ExprMetaNameSpace.__init__(self,expr:pli.Expr)
 polars.internals.expr.meta.ExprMetaNameSpace.__ne__(self,other:ExprMetaNameSpace|pli.Expr)->bool
 polars.internals.expr.meta.ExprMetaNameSpace.output_name(self)->str
 polars.internals.expr.meta.ExprMetaNameSpace.pop(self)->list[pli.Expr]
@@ -1065,12 +1429,14 @@ polars.internals.expr.meta.ExprMetaNameSpace.undo_aliases(self)->pli.Expr
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/expr/categorical.py----------------------------------------
 polars.internals.expr.categorical.ExprCatNameSpace(self,expr:pli.Expr)
+polars.internals.expr.categorical.ExprCatNameSpace.__init__(self,expr:pli.Expr)
 polars.internals.expr.categorical.ExprCatNameSpace.set_ordering(self,ordering:CategoricalOrdering)->pli.Expr
 
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/expr/list.py----------------------------------------
 A:polars.internals.expr.list.other_list->copy.copy(other)
 polars.internals.expr.list.ExprListNameSpace(self,expr:pli.Expr)
+polars.internals.expr.list.ExprListNameSpace.__init__(self,expr:pli.Expr)
 polars.internals.expr.list.ExprListNameSpace.arg_max(self)->pli.Expr
 polars.internals.expr.list.ExprListNameSpace.arg_min(self)->pli.Expr
 polars.internals.expr.list.ExprListNameSpace.concat(self,other:list[pli.Expr|str]|pli.Expr|str|pli.Series|list[Any])->pli.Expr
@@ -1112,6 +1478,7 @@ A:polars.internals.series.utils.ffi_name->dtype_to_ffiname(dtype)
 A:polars.internals.series.utils.fname->name.replace('<>', ffi_name)
 polars.internals.series.utils._EmptyBytecodeHelper(self)
 polars.internals.series.utils._EmptyBytecodeHelper.__contains__(self,item:bytes)->bool
+polars.internals.series.utils._EmptyBytecodeHelper.__init__(self)
 polars.internals.series.utils._expr_lookup(namespace:str|None)->set[tuple[str | None, str, tuple[str, ...]]]
 polars.internals.series.utils._is_empty_method(func:SeriesMethod)->bool
 polars.internals.series.utils.call_expr(func:SeriesMethod)->SeriesMethod
@@ -1147,6 +1514,210 @@ A:polars.internals.series.series.pl_return_dtype->py_type_to_dtype(return_dtype)
 A:polars.internals.series.series.__abs__->call_expr(abs)
 A:polars.internals.series.series.tu->getattr(dtype, 'tu', np.datetime_data(ndtype)[0])
 polars.internals.Series(self,name:str|ArrayLike|None=None,values:ArrayLike|Sequence[Any]|None=None,dtype:type[DataType]|DataType|None=None,strict:bool=True,nan_to_null:bool=False,dtype_if_empty:type[DataType]|DataType|None=None)
+polars.internals.Series.__add__(self,other:Any)->Series
+polars.internals.Series.__and__(self,other:Series)->Series
+polars.internals.Series.__array__(self,dtype:Any=None)->np.ndarray[Any, Any]
+polars.internals.Series.__array_ufunc__(self,ufunc:np.ufunc,method:str,*inputs:Any,**kwargs:Any)->Series
+polars.internals.Series.__copy__(self)->Series
+polars.internals.Series.__deepcopy__(self,memo:None=None)->Series
+polars.internals.Series.__eq__(self,other:Any)->Series
+polars.internals.Series.__floordiv__(self,other:Any)->Series
+polars.internals.Series.__ge__(self,other:Any)->Series
+polars.internals.Series.__getitem__(self,item:int|Series|range|slice|np.ndarray[Any,Any]|list[int]|list[bool])->Any
+polars.internals.Series.__getstate__(self)->Any
+polars.internals.Series.__gt__(self,other:Any)->Series
+polars.internals.Series.__invert__(self)->Series
+polars.internals.Series.__iter__(self)->SeriesIter
+polars.internals.Series.__le__(self,other:Any)->Series
+polars.internals.Series.__len__(self)->int
+polars.internals.Series.__lt__(self,other:Any)->Series
+polars.internals.Series.__mod__(self,other:Any)->Series
+polars.internals.Series.__mul__(self,other:Any)->Series
+polars.internals.Series.__ne__(self,other:Any)->Series
+polars.internals.Series.__neg__(self)->Series
+polars.internals.Series.__or__(self,other:Series)->Series
+polars.internals.Series.__pow__(self,power:int|float|Series)->Series
+polars.internals.Series.__radd__(self,other:Any)->Series
+polars.internals.Series.__rand__(self,other:Series)->Series
+polars.internals.Series.__repr__(self)->str
+polars.internals.Series.__rfloordiv__(self,other:Any)->Series
+polars.internals.Series.__rmod__(self,other:Any)->Series
+polars.internals.Series.__rmul__(self,other:Any)->Series
+polars.internals.Series.__ror__(self,other:Series)->Series
+polars.internals.Series.__rpow__(self,other:Any)->Series
+polars.internals.Series.__rsub__(self,other:Any)->Series
+polars.internals.Series.__rtruediv__(self,other:Any)->Series
+polars.internals.Series.__rxor__(self,other:Series)->Series
+polars.internals.Series.__setitem__(self,key:int|Series|np.ndarray[Any,Any]|Sequence[object]|tuple[object],value:Any)->None
+polars.internals.Series.__setstate__(self,state:Any)->None
+polars.internals.Series.__str__(self)->str
+polars.internals.Series.__sub__(self,other:Any)->Series
+polars.internals.Series.__truediv__(self,other:Any)->Series
+polars.internals.Series.__xor__(self,other:Series)->Series
+polars.internals.Series._arithmetic(self,other:Any,op_s:str,op_ffi:str)->Series
+polars.internals.Series._comp(self,other:Any,op:ComparisonOperator)->Series
+polars.internals.Series._from_arrow(cls,name:str,values:pa.Array,rechunk:bool=True)->Series
+polars.internals.Series._from_pandas(cls,name:str,values:pd.Series|pd.DatetimeIndex,nan_to_none:bool=True)->Series
+polars.internals.Series._from_pyseries(cls,pyseries:PySeries)->Series
+polars.internals.Series._pos_idxs(self,idxs:np.ndarray[Any,Any]|Series)->Series
+polars.internals.Series._repeat(cls,name:str,val:int|float|str|bool,n:int,dtype:type[DataType])->Series
+polars.internals.Series.abs(self)->Series
+polars.internals.Series.alias(self,name:str)->Series
+polars.internals.Series.all(self)->bool
+polars.internals.Series.any(self)->bool
+polars.internals.Series.append(self,other:Series,append_chunks:bool=True)->None
+polars.internals.Series.apply(self,func:Callable[[Any],Any],return_dtype:type[DataType]|None=None)->Series
+polars.internals.Series.arccos(self)->Series
+polars.internals.Series.arccosh(self)->Series
+polars.internals.Series.arcsin(self)->Series
+polars.internals.Series.arcsinh(self)->Series
+polars.internals.Series.arctan(self)->Series
+polars.internals.Series.arctanh(self)->Series
+polars.internals.Series.arg_max(self)->int | None
+polars.internals.Series.arg_min(self)->int | None
+polars.internals.Series.arg_sort(self,reverse:bool=False,nulls_last:bool=False)->Series
+polars.internals.Series.arg_true(self)->Series
+polars.internals.Series.arg_unique(self)->Series
+polars.internals.Series.argsort(self,reverse:bool=False,nulls_last:bool=False)->Series
+polars.internals.Series.arr(self)->ListNameSpace
+polars.internals.Series.cast(self,dtype:type[DataType]|type[int]|type[float]|type[str]|type[bool]|DataType,strict:bool=True)->Series
+polars.internals.Series.cat(self)->CatNameSpace
+polars.internals.Series.ceil(self)->Series
+polars.internals.Series.chunk_lengths(self)->list[int]
+polars.internals.Series.cleared(self)->Series
+polars.internals.Series.clip(self,min_val:int|float,max_val:int|float)->Series
+polars.internals.Series.clip_max(self,max_val:int|float)->Series
+polars.internals.Series.clip_min(self,min_val:int|float)->Series
+polars.internals.Series.clone(self)->Series
+polars.internals.Series.cos(self)->Series
+polars.internals.Series.cosh(self)->Series
+polars.internals.Series.cummax(self,reverse:bool=False)->Series
+polars.internals.Series.cummin(self,reverse:bool=False)->Series
+polars.internals.Series.cumprod(self,reverse:bool=False)->Series
+polars.internals.Series.cumsum(self,reverse:bool=False)->Series
+polars.internals.Series.cumulative_eval(self,expr:pli.Expr,min_periods:int=1,parallel:bool=False)->Series
+polars.internals.Series.describe(self)->pli.DataFrame
+polars.internals.Series.diff(self,n:int=1,null_behavior:NullBehavior='ignore')->Series
+polars.internals.Series.dot(self,other:Series)->float | None
+polars.internals.Series.drop_nans(self)->Series
+polars.internals.Series.drop_nulls(self)->Series
+polars.internals.Series.dt(self)->DateTimeNameSpace
+polars.internals.Series.dtype(self)->type[DataType]
+polars.internals.Series.entropy(self,base:float=math.e,normalize:bool=False)->float | None
+polars.internals.Series.estimated_size(self,unit:SizeUnit='b')->int | float
+polars.internals.Series.ewm_mean(self,com:float|None=None,span:float|None=None,half_life:float|None=None,alpha:float|None=None,adjust:bool=True,min_periods:int=1)->Series
+polars.internals.Series.ewm_std(self,com:float|None=None,span:float|None=None,half_life:float|None=None,alpha:float|None=None,adjust:bool=True,min_periods:int=1)->Series
+polars.internals.Series.ewm_var(self,com:float|None=None,span:float|None=None,half_life:float|None=None,alpha:float|None=None,adjust:bool=True,min_periods:int=1)->Series
+polars.internals.Series.exp(self)->Series
+polars.internals.Series.explode(self)->Series
+polars.internals.Series.extend_constant(self,value:int|float|str|bool|None,n:int)->Series
+polars.internals.Series.fill_nan(self,fill_value:str|int|float|bool|pli.Expr|None)->Series
+polars.internals.Series.fill_null(self,value:Any|None=None,strategy:FillNullStrategy|None=None,limit:int|None=None)->Series
+polars.internals.Series.filter(self,predicate:Series|list[bool])->Series
+polars.internals.Series.flags(self)->dict[str, bool]
+polars.internals.Series.floor(self)->Series
+polars.internals.Series.has_validity(self)->bool
+polars.internals.Series.hash(self,seed:int=0,seed_1:int|None=None,seed_2:int|None=None,seed_3:int|None=None)->pli.Series
+polars.internals.Series.head(self,n:int=10)->Series
+polars.internals.Series.inner_dtype(self)->type[DataType] | None
+polars.internals.Series.interpolate(self)->Series
+polars.internals.Series.is_boolean(self)->bool
+polars.internals.Series.is_datelike(self)->bool
+polars.internals.Series.is_duplicated(self)->Series
+polars.internals.Series.is_empty(self)->bool
+polars.internals.Series.is_finite(self)->Series
+polars.internals.Series.is_first(self)->Series
+polars.internals.Series.is_float(self)->bool
+polars.internals.Series.is_in(self,other:Series|Sequence[Any])->Series
+polars.internals.Series.is_infinite(self)->Series
+polars.internals.Series.is_nan(self)->Series
+polars.internals.Series.is_not_nan(self)->Series
+polars.internals.Series.is_not_null(self)->Series
+polars.internals.Series.is_null(self)->Series
+polars.internals.Series.is_numeric(self)->bool
+polars.internals.Series.is_unique(self)->Series
+polars.internals.Series.is_utf8(self)->bool
+polars.internals.Series.kurtosis(self,fisher:bool=True,bias:bool=True)->float | None
+polars.internals.Series.len(self)->int
+polars.internals.Series.limit(self,n:int=10)->Series
+polars.internals.Series.log(self,base:float=math.e)->Series
+polars.internals.Series.log10(self)->Series
+polars.internals.Series.max(self)->int | float | date | datetime | timedelta | str
+polars.internals.Series.mean(self)->int | float
+polars.internals.Series.median(self)->float
+polars.internals.Series.min(self)->int | float | date | datetime | timedelta | str
+polars.internals.Series.mode(self)->Series
+polars.internals.Series.n_chunks(self)->int
+polars.internals.Series.n_unique(self)->int
+polars.internals.Series.name(self)->str
+polars.internals.Series.null_count(self)->int
+polars.internals.Series.pct_change(self,n:int=1)->Series
+polars.internals.Series.peak_max(self)->Series
+polars.internals.Series.peak_min(self)->Series
+polars.internals.Series.product(self)->int | float
+polars.internals.Series.quantile(self,quantile:float,interpolation:InterpolationMethod='nearest')->float
+polars.internals.Series.rank(self,method:RankMethod='average',reverse:bool=False)->Series
+polars.internals.Series.rechunk(self,in_place:bool=False)->Series | None
+polars.internals.Series.reinterpret(self,signed:bool=True)->Series
+polars.internals.Series.rename(self,name:str,in_place:bool=False)->Series | None
+polars.internals.Series.reshape(self,dims:tuple[int,...])->Series
+polars.internals.Series.reverse(self)->Series
+polars.internals.Series.rolling_apply(self,function:Callable[[pli.Series],Any],window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->pli.Series
+polars.internals.Series.rolling_max(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_mean(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_median(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_min(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_quantile(self,quantile:float,interpolation:InterpolationMethod='nearest',window_size:int=2,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_skew(self,window_size:int,bias:bool=True)->Series
+polars.internals.Series.rolling_std(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_sum(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.rolling_var(self,window_size:int,weights:list[float]|None=None,min_periods:int|None=None,center:bool=False)->Series
+polars.internals.Series.round(self,decimals:int)->Series
+polars.internals.Series.sample(self,n:int|None=None,frac:float|None=None,with_replacement:bool=False,shuffle:bool=False,seed:int|None=None)->Series
+polars.internals.Series.search_sorted(self,element:int|float)->int
+polars.internals.Series.series_equal(self,other:Series,null_equal:bool=False,strict:bool=False)->bool
+polars.internals.Series.set(self,filter:Series,value:int|float|str)->Series
+polars.internals.Series.set_at_idx(self,idx:Series|np.ndarray[Any,Any]|Sequence[int]|int,value:int|float|str|bool|Sequence[int]|Sequence[float]|Sequence[date]|Sequence[datetime]|date|datetime|Series|None)->Series
+polars.internals.Series.set_sorted(self,reverse:bool=False)->Series
+polars.internals.Series.shape(self)->tuple[int]
+polars.internals.Series.shift(self,periods:int=1)->Series
+polars.internals.Series.shift_and_fill(self,periods:int,fill_value:int|pli.Expr)->Series
+polars.internals.Series.shrink_to_fit(self,in_place:bool=False)->Series | None
+polars.internals.Series.shuffle(self,seed:int|None=None)->Series
+polars.internals.Series.sign(self)->Series
+polars.internals.Series.sin(self)->Series
+polars.internals.Series.sinh(self)->Series
+polars.internals.Series.skew(self,bias:bool=True)->float | None
+polars.internals.Series.slice(self,offset:int,length:int|None=None)->Series
+polars.internals.Series.sort(self,reverse:bool=False,*,in_place:bool=False)->Series | None
+polars.internals.Series.sqrt(self)->Series
+polars.internals.Series.std(self,ddof:int=1)->float | None
+polars.internals.Series.str(self)->StringNameSpace
+polars.internals.Series.struct(self)->StructNameSpace
+polars.internals.Series.sum(self)->int | float
+polars.internals.Series.tail(self,n:int=10)->Series
+polars.internals.Series.take(self,indices:int|list[int]|pli.Expr|Series|np.ndarray[Any,Any])->Series
+polars.internals.Series.take_every(self,n:int)->Series
+polars.internals.Series.tan(self)->Series
+polars.internals.Series.tanh(self)->Series
+polars.internals.Series.time_unit(self)->TimeUnit | None
+polars.internals.Series.to_arrow(self)->pa.Array
+polars.internals.Series.to_dummies(self)->pli.DataFrame
+polars.internals.Series.to_frame(self)->pli.DataFrame
+polars.internals.Series.to_list(self,use_pyarrow:bool=False)->list[Any | None]
+polars.internals.Series.to_numpy(self,*args:Any,zero_copy_only:bool=False,writable:bool=False)->np.ndarray[Any, Any]
+polars.internals.Series.to_pandas(self)->pd.Series
+polars.internals.Series.to_physical(self)->Series
+polars.internals.Series.top_k(self,k:int=5,reverse:bool=False)->Series
+polars.internals.Series.unique(self,maintain_order:bool=False)->Series
+polars.internals.Series.unique_counts(self)->Series
+polars.internals.Series.value_counts(self,sort:bool=False)->pli.DataFrame
+polars.internals.Series.var(self,ddof:int=1)->float | None
+polars.internals.Series.view(self,ignore_nulls:bool=False)->SeriesView
+polars.internals.Series.zip_with(self,mask:Series,other:Series)->Series
+polars.internals.SeriesIter(self,length:int,s:Series)
+polars.internals.SeriesIter.__iter__(self)->SeriesIter
+polars.internals.SeriesIter.__next__(self)->Any
 polars.internals.series.series.Series(self,name:str|ArrayLike|None=None,values:ArrayLike|Sequence[Any]|None=None,dtype:type[DataType]|DataType|None=None,strict:bool=True,nan_to_null:bool=False,dtype_if_empty:type[DataType]|DataType|None=None)
 polars.internals.series.series.Series.__add__(self,other:Any)->Series
 polars.internals.series.series.Series.__and__(self,other:Series)->Series
@@ -1160,6 +1731,7 @@ polars.internals.series.series.Series.__ge__(self,other:Any)->Series
 polars.internals.series.series.Series.__getitem__(self,item:int|Series|range|slice|np.ndarray[Any,Any]|list[int]|list[bool])->Any
 polars.internals.series.series.Series.__getstate__(self)->Any
 polars.internals.series.series.Series.__gt__(self,other:Any)->Series
+polars.internals.series.series.Series.__init__(self,name:str|ArrayLike|None=None,values:ArrayLike|Sequence[Any]|None=None,dtype:type[DataType]|DataType|None=None,strict:bool=True,nan_to_null:bool=False,dtype_if_empty:type[DataType]|DataType|None=None)
 polars.internals.series.series.Series.__invert__(self)->Series
 polars.internals.series.series.Series.__iter__(self)->SeriesIter
 polars.internals.series.series.Series.__le__(self,other:Any)->Series
@@ -1350,6 +1922,7 @@ polars.internals.series.series.Series.var(self,ddof:int=1)->float | None
 polars.internals.series.series.Series.view(self,ignore_nulls:bool=False)->SeriesView
 polars.internals.series.series.Series.zip_with(self,mask:Series,other:Series)->Series
 polars.internals.series.series.SeriesIter(self,length:int,s:Series)
+polars.internals.series.series.SeriesIter.__init__(self,length:int,s:Series)
 polars.internals.series.series.SeriesIter.__iter__(self)->SeriesIter
 polars.internals.series.series.SeriesIter.__next__(self)->Any
 polars.internals.series.series._resolve_datetime_dtype(dtype:PolarsDataType|None,ndtype:np.datetime64)->PolarsDataType | None
@@ -1363,12 +1936,14 @@ A:polars.internals.series._numpy.self.owned_series->getattr(obj, 'owned_series',
 A:polars.internals.series._numpy.ptr_ctype->ctypes.cast(ptr, ctypes.POINTER(ptr_type))
 polars.internals.series._numpy.SeriesView(cls,input_array:np.ndarray[Any,Any],owned_series:pli.Series)
 polars.internals.series._numpy.SeriesView.__array_finalize__(self,obj:Any)->None
+polars.internals.series._numpy.SeriesView.__new__(cls,input_array:np.ndarray[Any,Any],owned_series:pli.Series)
 polars.internals.series._numpy._ptr_to_numpy(ptr:int,len:int,ptr_type:Any)->np.ndarray[Any, Any]
 
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/series/string.py----------------------------------------
 A:polars.internals.series.string.s->polars.internals.wrap_s(self._s)
 polars.internals.series.string.StringNameSpace(self,series:pli.Series)
+polars.internals.series.string.StringNameSpace.__init__(self,series:pli.Series)
 polars.internals.series.string.StringNameSpace.concat(self,delimiter:str='-')->pli.Series
 polars.internals.series.string.StringNameSpace.contains(self,pattern:str,literal:bool=False)->pli.Series
 polars.internals.series.string.StringNameSpace.count_match(self,pattern:str)->pli.Series
@@ -1400,6 +1975,7 @@ polars.internals.series.string.StringNameSpace.zfill(self,alignment:int)->pli.Se
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/series/struct.py----------------------------------------
 polars.internals.series.struct.StructNameSpace(self,series:pli.Series)
 polars.internals.series.struct.StructNameSpace.__getitem__(self,item:int|str)->pli.Series
+polars.internals.series.struct.StructNameSpace.__init__(self,series:pli.Series)
 polars.internals.series.struct.StructNameSpace.field(self,name:str)->pli.Series
 polars.internals.series.struct.StructNameSpace.fields(self)->list[str]
 polars.internals.series.struct.StructNameSpace.rename_fields(self,names:list[str])->pli.Series
@@ -1411,6 +1987,7 @@ A:polars.internals.series.datetime.s->polars.internals.wrap_s(self._s)
 A:polars.internals.series.datetime.out->int(s.mean())
 polars.internals.series.datetime.DateTimeNameSpace(self,series:pli.Series)
 polars.internals.series.datetime.DateTimeNameSpace.__getitem__(self,item:int)->date | datetime
+polars.internals.series.datetime.DateTimeNameSpace.__init__(self,series:pli.Series)
 polars.internals.series.datetime.DateTimeNameSpace.cast_time_unit(self,tu:TimeUnit)->pli.Series
 polars.internals.series.datetime.DateTimeNameSpace.day(self)->pli.Series
 polars.internals.series.datetime.DateTimeNameSpace.days(self)->pli.Series
@@ -1448,11 +2025,13 @@ polars.internals.series.datetime.DateTimeNameSpace.year(self)->pli.Series
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/series/categorical.py----------------------------------------
 polars.internals.series.categorical.CatNameSpace(self,series:pli.Series)
+polars.internals.series.categorical.CatNameSpace.__init__(self,series:pli.Series)
 polars.internals.series.categorical.CatNameSpace.set_ordering(self,ordering:CategoricalOrdering)->pli.Series
 
 
 ----------------------------------------/home/zhang/Packages/polars/polars0.14.8/internals/series/list.py----------------------------------------
 polars.internals.series.list.ListNameSpace(self,series:pli.Series)
+polars.internals.series.list.ListNameSpace.__init__(self,series:pli.Series)
 polars.internals.series.list.ListNameSpace.arg_max(self)->pli.Series
 polars.internals.series.list.ListNameSpace.arg_min(self)->pli.Series
 polars.internals.series.list.ListNameSpace.concat(self,other:list[pli.Series]|pli.Series|list[Any])->pli.Series
@@ -1481,6 +2060,7 @@ polars.internals.series.list.ListNameSpace.unique(self)->pli.Series
 A:polars.internals.lazyframe.groupby.LDF->TypeVar('LDF', bound='pli.LazyFrame')
 A:polars.internals.lazyframe.groupby.pyexprs->ensure_list_of_pyexpr(aggs)
 polars.internals.lazyframe.groupby.LazyGroupBy(self,lgb:PyLazyGroupBy,lazyframe_class:type[LDF])
+polars.internals.lazyframe.groupby.LazyGroupBy.__init__(self,lgb:PyLazyGroupBy,lazyframe_class:type[LDF])
 polars.internals.lazyframe.groupby.LazyGroupBy.agg(self,aggs:pli.Expr|Sequence[pli.Expr])->LDF
 polars.internals.lazyframe.groupby.LazyGroupBy.apply(self,f:Callable[[pli.DataFrame],pli.DataFrame])->LDF
 polars.internals.lazyframe.groupby.LazyGroupBy.head(self,n:int=5)->LDF
@@ -1516,6 +2096,76 @@ A:polars.internals.lazyframe.frame.fill_value->polars.internals.lit(fill_value)
 A:polars.internals.lazyframe.frame.columns->polars.internals.selection_to_pyexpr_list(columns)
 A:polars.internals.lazyframe.frame.e->polars.internals.col(e)
 polars.internals.LazyFrame
+polars.internals.LazyFrame.__contains__(self:LDF,key:str)->bool
+polars.internals.LazyFrame.__copy__(self:LDF)->LDF
+polars.internals.LazyFrame.__deepcopy__(self:LDF,memo:None=None)->LDF
+polars.internals.LazyFrame.__getitem__(self:LDF,item:int|range|slice)->LazyFrame
+polars.internals.LazyFrame.__str__(self)->str
+polars.internals.LazyFrame._from_pyldf(cls:type[LDF],ldf:PyLazyFrame)->LDF
+polars.internals.LazyFrame._repr_html_(self)->str
+polars.internals.LazyFrame._scan_python_function(cls,schema:pa.schema|dict[str,type[DataType]],scan_fn:bytes)->LazyFrame
+polars.internals.LazyFrame.cache(self:LDF)->LDF
+polars.internals.LazyFrame.cleared(self)->LazyFrame
+polars.internals.LazyFrame.clone(self:LDF)->LDF
+polars.internals.LazyFrame.collect(self,type_coercion:bool=True,predicate_pushdown:bool=True,projection_pushdown:bool=True,simplify_expression:bool=True,string_cache:bool=False,no_optimization:bool=False,slice_pushdown:bool=True)->pli.DataFrame
+polars.internals.LazyFrame.columns(self)->list[str]
+polars.internals.LazyFrame.describe_optimized_plan(self,type_coercion:bool=True,predicate_pushdown:bool=True,projection_pushdown:bool=True,simplify_expression:bool=True,slice_pushdown:bool=True)->str
+polars.internals.LazyFrame.describe_plan(self)->str
+polars.internals.LazyFrame.drop(self:LDF,columns:str|list[str])->LDF
+polars.internals.LazyFrame.drop_nulls(self:LDF,subset:list[str]|str|None=None)->LDF
+polars.internals.LazyFrame.dtypes(self)->list[type[DataType]]
+polars.internals.LazyFrame.explode(self:LDF,columns:str|list[str]|pli.Expr|list[pli.Expr])->LDF
+polars.internals.LazyFrame.fetch(self,n_rows:int=500,type_coercion:bool=True,predicate_pushdown:bool=True,projection_pushdown:bool=True,simplify_expression:bool=True,string_cache:bool=False,no_optimization:bool=False,slice_pushdown:bool=True)->pli.DataFrame
+polars.internals.LazyFrame.fill_nan(self:LDF,fill_value:int|str|float|pli.Expr|None)->LDF
+polars.internals.LazyFrame.fill_null(self:LDF,value:Any|None=None,strategy:FillNullStrategy|None=None,limit:int|None=None)->LDF
+polars.internals.LazyFrame.filter(self:LDF,predicate:pli.Expr|str|pli.Series|list[bool])->LDF
+polars.internals.LazyFrame.first(self:LDF)->LDF
+polars.internals.LazyFrame.from_json(cls,json:str)->LazyFrame
+polars.internals.LazyFrame.groupby(self:LDF,by:str|list[str]|pli.Expr|list[pli.Expr],maintain_order:bool=False)->LazyGroupBy[LDF]
+polars.internals.LazyFrame.groupby_dynamic(self:LDF,index_column:str,every:str,period:str|None=None,offset:str|None=None,truncate:bool=True,include_boundaries:bool=False,closed:ClosedWindow='left',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)->LazyGroupBy[LDF]
+polars.internals.LazyFrame.groupby_rolling(self:LDF,index_column:str,period:str,offset:str|None=None,closed:ClosedWindow='right',by:str|list[str]|pli.Expr|list[pli.Expr]|None=None)->LazyGroupBy[LDF]
+polars.internals.LazyFrame.head(self:LDF,n:int=5)->LDF
+polars.internals.LazyFrame.inspect(self:LDF,fmt:str='{}')->LDF
+polars.internals.LazyFrame.interpolate(self:LDF)->LDF
+polars.internals.LazyFrame.join(self:LDF,other:LazyFrame,left_on:str|pli.Expr|list[str|pli.Expr]|None=None,right_on:str|pli.Expr|list[str|pli.Expr]|None=None,on:str|pli.Expr|list[str|pli.Expr]|None=None,how:JoinStrategy='inner',suffix:str='_right',allow_parallel:bool=True,force_parallel:bool=False)->LDF
+polars.internals.LazyFrame.join_asof(self:LDF,other:LazyFrame,left_on:str|None=None,right_on:str|None=None,on:str|None=None,by_left:str|list[str]|None=None,by_right:str|list[str]|None=None,by:str|list[str]|None=None,strategy:AsofJoinStrategy='backward',suffix:str='_right',tolerance:str|int|float|None=None,allow_parallel:bool=True,force_parallel:bool=False)->LDF
+polars.internals.LazyFrame.last(self:LDF)->LDF
+polars.internals.LazyFrame.lazy(self:LDF)->LDF
+polars.internals.LazyFrame.limit(self:LDF,n:int=5)->LDF
+polars.internals.LazyFrame.map(self:LDF,f:Callable[[pli.DataFrame],pli.DataFrame],predicate_pushdown:bool=True,projection_pushdown:bool=True,slice_pushdown:bool=True,no_optimizations:bool=False,schema:None|Schema=None,validate_output_schema:bool=True)->LDF
+polars.internals.LazyFrame.max(self:LDF)->LDF
+polars.internals.LazyFrame.mean(self:LDF)->LDF
+polars.internals.LazyFrame.median(self:LDF)->LDF
+polars.internals.LazyFrame.melt(self:LDF,id_vars:str|list[str]|None=None,value_vars:str|list[str]|None=None,variable_name:str|None=None,value_name:str|None=None)->LDF
+polars.internals.LazyFrame.min(self:LDF)->LDF
+polars.internals.LazyFrame.pipe(self,func:Callable[...,Any],*args:Any,**kwargs:Any)->Any
+polars.internals.LazyFrame.quantile(self:LDF,quantile:float,interpolation:InterpolationMethod='nearest')->LDF
+polars.internals.LazyFrame.read_json(cls,file:str|Path|IOBase)->LazyFrame
+polars.internals.LazyFrame.rename(self:LDF,mapping:dict[str,str])->LDF
+polars.internals.LazyFrame.reverse(self:LDF)->LDF
+polars.internals.LazyFrame.scan_csv(cls:type[LDF],file:str,has_header:bool=True,sep:str=',',comment_char:str|None=None,quote_char:str|None='"',skip_rows:int=0,dtypes:dict[str,PolarsDataType]|None=None,null_values:str|list[str]|dict[str,str]|None=None,ignore_errors:bool=False,cache:bool=True,with_column_names:Callable[[list[str]],list[str]]|None=None,infer_schema_length:int|None=100,n_rows:int|None=None,encoding:CsvEncoding='utf8',low_memory:bool=False,rechunk:bool=True,skip_rows_after_header:int=0,row_count_name:str|None=None,row_count_offset:int=0,parse_dates:bool=False,eol_char:str='\n')->LDF
+polars.internals.LazyFrame.scan_ipc(cls:type[LDF],file:str|Path,n_rows:int|None=None,cache:bool=True,rechunk:bool=True,row_count_name:str|None=None,row_count_offset:int=0,storage_options:dict[str,object]|None=None,memory_map:bool=True)->LDF
+polars.internals.LazyFrame.scan_ndjson(cls:type[LDF],file:str,infer_schema_length:int|None=None,batch_size:int|None=None,n_rows:int|None=None,low_memory:bool=False,rechunk:bool=True,row_count_name:str|None=None,row_count_offset:int=0)->LDF
+polars.internals.LazyFrame.scan_parquet(cls:type[LDF],file:str,n_rows:int|None=None,cache:bool=True,parallel:ParallelStrategy='auto',rechunk:bool=True,row_count_name:str|None=None,row_count_offset:int=0,storage_options:dict[str,object]|None=None,low_memory:bool=False)->LDF
+polars.internals.LazyFrame.schema(self)->Schema
+polars.internals.LazyFrame.select(self:LDF,exprs:str|pli.Expr|pli.Series|Sequence[str|pli.Expr|pli.Series])->LDF
+polars.internals.LazyFrame.shift(self:LDF,periods:int)->LDF
+polars.internals.LazyFrame.shift_and_fill(self:LDF,periods:int,fill_value:pli.Expr|int|str|float)->LDF
+polars.internals.LazyFrame.show_graph(self,optimized:bool=True,show:bool=True,output_path:str|None=None,raw_output:bool=False,figsize:tuple[float,float]=(16.0,12.0))->str | None
+polars.internals.LazyFrame.slice(self:LDF,offset:int,length:int|None=None)->LDF
+polars.internals.LazyFrame.sort(self:LDF,by:str|pli.Expr|list[str]|list[pli.Expr],reverse:bool|list[bool]=False,nulls_last:bool=False)->LDF
+polars.internals.LazyFrame.std(self:LDF,ddof:int=1)->LDF
+polars.internals.LazyFrame.sum(self:LDF)->LDF
+polars.internals.LazyFrame.tail(self:LDF,n:int=5)->LDF
+polars.internals.LazyFrame.take_every(self:LDF,n:int)->LDF
+polars.internals.LazyFrame.unique(self:LDF,maintain_order:bool=True,subset:str|list[str]|None=None,keep:UniqueKeepStrategy='first')->LDF
+polars.internals.LazyFrame.unnest(self:LDF,names:str|list[str])->LDF
+polars.internals.LazyFrame.var(self:LDF,ddof:int=1)->LDF
+polars.internals.LazyFrame.with_column(self:LDF,expr:pli.Expr)->LDF
+polars.internals.LazyFrame.with_columns(self:LDF,exprs:pli.Expr|pli.Series|Sequence[pli.Expr|pli.Series]|None=None,**named_exprs:pli.Expr|pli.Series|str)->LDF
+polars.internals.LazyFrame.with_context(self,other:LDF|list[LDF])->LDF
+polars.internals.LazyFrame.with_row_count(self:LDF,name:str='row_nr',offset:int=0)->LDF
+polars.internals.LazyFrame.write_json(self,file:IOBase|str|Path|None=None,*,to_string:bool=False)->str | None
 polars.internals.lazyframe.frame.LazyFrame
 polars.internals.lazyframe.frame.LazyFrame.__contains__(self:LDF,key:str)->bool
 polars.internals.lazyframe.frame.LazyFrame.__copy__(self:LDF)->LDF

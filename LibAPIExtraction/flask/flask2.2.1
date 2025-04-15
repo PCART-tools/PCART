@@ -21,6 +21,7 @@ flask.sessions.NullSession(SecureCookieSession)
 flask.sessions.NullSession._fail(self,*args:t.Any,**kwargs:t.Any)->'te.NoReturn'
 flask.sessions.SecureCookieSession(self,initial:t.Any=None)
 flask.sessions.SecureCookieSession.__getitem__(self,key:str)->t.Any
+flask.sessions.SecureCookieSession.__init__(self,initial:t.Any=None)
 flask.sessions.SecureCookieSession.get(self,key:str,default:t.Any=None)->t.Any
 flask.sessions.SecureCookieSession.setdefault(self,key:str,default:t.Any=None)->t.Any
 flask.sessions.SecureCookieSessionInterface(SessionInterface)
@@ -50,6 +51,7 @@ A:flask.globals.ctx->self.cv.get(None)
 A:flask.globals.__app_ctx_stack->_FakeStack('app', _cv_app)
 A:flask.globals.__request_ctx_stack->_FakeStack('request', _cv_request)
 flask.globals._FakeStack(self,name:str,cv:ContextVar[t.Any])
+flask.globals._FakeStack.__init__(self,name:str,cv:ContextVar[t.Any])
 flask.globals._FakeStack._warn(self)
 flask.globals._FakeStack.pop(self)->t.Any
 flask.globals._FakeStack.push(self,obj:t.Any)->None
@@ -67,14 +69,18 @@ A:flask.ctx.app_ctx->self.app.app_context()
 A:flask.ctx.self.session->session_interface.make_null_session(self.app)
 A:flask.ctx.request_close->getattr(self.request, 'close', None)
 A:flask.ctx.(token, app_ctx)->self._cv_tokens.pop()
+flask.after_this_request(f:ft.AfterRequestCallable)->ft.AfterRequestCallable
+flask.copy_current_request_context(f:t.Callable)->t.Callable
 flask.ctx.AppContext(self,app:'Flask')
 flask.ctx.AppContext.__enter__(self)->'AppContext'
 flask.ctx.AppContext.__exit__(self,exc_type:t.Optional[type],exc_value:t.Optional[BaseException],tb:t.Optional[TracebackType])->None
+flask.ctx.AppContext.__init__(self,app:'Flask')
 flask.ctx.AppContext.pop(self,exc:t.Optional[BaseException]=_sentinel)->None
 flask.ctx.AppContext.push(self)->None
 flask.ctx.RequestContext(self,app:'Flask',environ:dict,request:t.Optional['Request']=None,session:t.Optional['SessionMixin']=None)
 flask.ctx.RequestContext.__enter__(self)->'RequestContext'
 flask.ctx.RequestContext.__exit__(self,exc_type:t.Optional[type],exc_value:t.Optional[BaseException],tb:t.Optional[TracebackType])->None
+flask.ctx.RequestContext.__init__(self,app:'Flask',environ:dict,request:t.Optional['Request']=None,session:t.Optional['SessionMixin']=None)
 flask.ctx.RequestContext.__repr__(self)->str
 flask.ctx.RequestContext.copy(self)->'RequestContext'
 flask.ctx.RequestContext.match_request(self)->None
@@ -94,6 +100,8 @@ flask.ctx.after_this_request(f:ft.AfterRequestCallable)->ft.AfterRequestCallable
 flask.ctx.copy_current_request_context(f:t.Callable)->t.Callable
 flask.ctx.has_app_context()->bool
 flask.ctx.has_request_context()->bool
+flask.has_app_context()->bool
+flask.has_request_context()->bool
 
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/testing.py----------------------------------------
@@ -114,12 +122,15 @@ A:flask.testing.response->super().open(request, buffered=buffered, follow_redire
 A:flask.testing.cm->self._new_contexts.pop()
 A:flask.testing.kwargs['obj']->ScriptInfo(create_app=lambda : self.app)
 flask.testing.EnvironBuilder(self,app:'Flask',path:str='/',base_url:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_scheme:t.Optional[str]=None,*args:t.Any,**kwargs:t.Any)
+flask.testing.EnvironBuilder.__init__(self,app:'Flask',path:str='/',base_url:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_scheme:t.Optional[str]=None,*args:t.Any,**kwargs:t.Any)
 flask.testing.EnvironBuilder.json_dumps(self,obj:t.Any,**kwargs:t.Any)->str
 flask.testing.FlaskCliRunner(self,app:'Flask',**kwargs:t.Any)
+flask.testing.FlaskCliRunner.__init__(self,app:'Flask',**kwargs:t.Any)
 flask.testing.FlaskCliRunner.invoke(self,cli:t.Any=None,args:t.Any=None,**kwargs:t.Any)->t.Any
 flask.testing.FlaskClient(self,*args:t.Any,**kwargs:t.Any)
 flask.testing.FlaskClient.__enter__(self)->'FlaskClient'
 flask.testing.FlaskClient.__exit__(self,exc_type:t.Optional[type],exc_value:t.Optional[BaseException],tb:t.Optional[TracebackType])->None
+flask.testing.FlaskClient.__init__(self,*args:t.Any,**kwargs:t.Any)
 flask.testing.FlaskClient._copy_environ(self,other)
 flask.testing.FlaskClient._request_from_builder_args(self,args,kwargs)
 flask.testing.FlaskClient.open(self,*args:t.Any,buffered:bool=False,follow_redirects:bool=False,**kwargs:t.Any)->'TestResponse'
@@ -156,6 +167,7 @@ A:flask.scaffold.py_prefix->os.path.abspath(sys.prefix)
 A:flask.scaffold.(site_parent, site_folder)->os.path.split(package_path)
 A:flask.scaffold.(parent, folder)->os.path.split(site_parent)
 flask.scaffold.Scaffold(self,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,root_path:t.Optional[str]=None)
+flask.scaffold.Scaffold.__init__(self,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,root_path:t.Optional[str]=None)
 flask.scaffold.Scaffold.__repr__(self)->str
 flask.scaffold.Scaffold._check_setup_finished(self,f_name:str)->None
 flask.scaffold.Scaffold._get_exc_class_and_code(exc_class_or_code:t.Union[t.Type[Exception],int])->t.Tuple[t.Type[Exception], t.Optional[int]]
@@ -208,8 +220,10 @@ A:flask.debughelpers.names->', '.join((repr(x) for x in form_matches))
 A:flask.debughelpers.self.msg->''.join(buf)
 A:flask.debughelpers.src_info->repr(srcobj)
 flask.debughelpers.DebugFilesKeyError(self,request,key)
+flask.debughelpers.DebugFilesKeyError.__init__(self,request,key)
 flask.debughelpers.DebugFilesKeyError.__str__(self)
 flask.debughelpers.FormDataRoutingRedirect(self,request)
+flask.debughelpers.FormDataRoutingRedirect.__init__(self,request)
 flask.debughelpers.UnexpectedUnicodeError(AssertionError,UnicodeError)
 flask.debughelpers._dump_loader_info(loader)->t.Generator
 flask.debughelpers.attach_enctype_error_multidict(request)
@@ -217,128 +231,204 @@ flask.debughelpers.explain_template_loading_attempts(app:Flask,template,attempts
 
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/app.py----------------------------------------
-A:flask.a.T_before_first_request->typing.TypeVar('T_before_first_request', bound=ft.BeforeFirstRequestCallable)
-A:flask.a.T_shell_context_processor->typing.TypeVar('T_shell_context_processor', bound=ft.ShellContextProcessorCallable)
-A:flask.a.T_teardown->typing.TypeVar('T_teardown', bound=ft.TeardownCallable)
-A:flask.a.T_template_filter->typing.TypeVar('T_template_filter', bound=ft.TemplateFilterCallable)
-A:flask.a.T_template_global->typing.TypeVar('T_template_global', bound=ft.TemplateGlobalCallable)
-A:flask.a.T_template_test->typing.TypeVar('T_template_test', bound=ft.TemplateTestCallable)
-A:flask.a.testing->ConfigAttribute('TESTING')
-A:flask.a.secret_key->ConfigAttribute('SECRET_KEY')
-A:flask.a.permanent_session_lifetime->ConfigAttribute('PERMANENT_SESSION_LIFETIME', get_converter=_make_timedelta)
-A:flask.a.self.config['SEND_FILE_MAX_AGE_DEFAULT']->_make_timedelta(value)
-A:flask.a.default_config->ImmutableDict({'ENV': None, 'DEBUG': None, 'TESTING': False, 'PROPAGATE_EXCEPTIONS': None, 'SECRET_KEY': None, 'PERMANENT_SESSION_LIFETIME': timedelta(days=31), 'USE_X_SENDFILE': False, 'SERVER_NAME': None, 'APPLICATION_ROOT': '/', 'SESSION_COOKIE_NAME': 'session', 'SESSION_COOKIE_DOMAIN': None, 'SESSION_COOKIE_PATH': None, 'SESSION_COOKIE_HTTPONLY': True, 'SESSION_COOKIE_SECURE': False, 'SESSION_COOKIE_SAMESITE': None, 'SESSION_REFRESH_EACH_REQUEST': True, 'MAX_CONTENT_LENGTH': None, 'SEND_FILE_MAX_AGE_DEFAULT': None, 'TRAP_BAD_REQUEST_ERRORS': None, 'TRAP_HTTP_EXCEPTIONS': False, 'EXPLAIN_TEMPLATE_LOADING': False, 'PREFERRED_URL_SCHEME': 'http', 'JSON_AS_ASCII': None, 'JSON_SORT_KEYS': None, 'JSONIFY_PRETTYPRINT_REGULAR': None, 'JSONIFY_MIMETYPE': None, 'TEMPLATES_AUTO_RELOAD': None, 'MAX_COOKIE_SIZE': 4093})
-A:flask.a.instance_path->self.auto_find_instance_path()
-A:flask.a.self.config->self.make_config(instance_relative_config)
-A:flask.a.self.aborter->self.make_aborter()
-A:flask.a.self.url_map->self.url_map_class()
-A:flask.a.self._before_request_lock->Lock()
-A:flask.a.self_ref->weakref.ref(self)
-A:flask.a.fn->getattr(sys.modules['__main__'], '__file__', None)
-A:flask.a.defaults->dict(self.default_config)
-A:flask.a.defaults['DEBUG']->get_debug_flag()
-A:flask.a.(prefix, package_path)->find_package(self.import_name)
-A:flask.a.options->dict(self.jinja_options)
-A:flask.a.rv->self.ensure_sync(before_func)()
-A:flask.a.names->chain(names, reversed(_split_blueprint_path(endpoint.rpartition('.')[0])))
-A:flask.a.orig_ctx->context.copy()
-A:flask.a.self.debug->bool(debug)
-A:flask.a.server_name->self.config.get('SERVER_NAME')
-A:flask.a.(sn_host, _, sn_port)->self.config.get('SERVER_NAME').partition(':')
-A:flask.a.port->int(sn_port)
-A:flask.a.endpoint->_endpoint_from_view_func(view_func)
-A:flask.a.methods->adapter.allowed_methods()
-A:flask.a.required_methods->set(getattr(view_func, 'required_methods', ()))
-A:flask.a.provide_automatic_options->getattr(view_func, 'provide_automatic_options', None)
-A:flask.a.rule->self.url_rule_class(rule, methods=methods, **options)
-A:flask.a.old_func->self.view_functions.get(endpoint)
-A:flask.a.(exc_class, code)->self._get_exc_class_and_code(type(e))
-A:flask.a.handler->self._find_error_handler(server_error)
-A:flask.a.exc_info->sys.exc_info()
-A:flask.a.server_error->self.ensure_sync(handler)(server_error)
-A:flask.a.response->self.handle_exception(e)
-A:flask.a.req_ctx->globals._cv_request.get(None)
-A:flask.a.app_ctx->globals._cv_app.get(None)
-A:flask.a.url_adapter->self.create_url_adapter(None)
-A:flask.a.len_rv->len(rv)
-A:flask.a.ctx->self.request_context(environ)
-A:flask.a.builder->EnvironBuilder(self, *args, **kwargs)
-flask.a.Flask(self,import_name:str,static_url_path:t.Optional[str]=None,static_folder:t.Optional[t.Union[str,os.PathLike]]='static',static_host:t.Optional[str]=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:t.Optional[str]='templates',instance_path:t.Optional[str]=None,instance_relative_config:bool=False,root_path:t.Optional[str]=None)
-flask.a.Flask._check_setup_finished(self,f_name:str)->None
-flask.a.Flask._find_error_handler(self,e:Exception)->t.Optional[ft.ErrorHandlerCallable]
-flask.a.Flask.add_template_filter(self,f:ft.TemplateFilterCallable,name:t.Optional[str]=None)->None
-flask.a.Flask.add_template_global(self,f:ft.TemplateGlobalCallable,name:t.Optional[str]=None)->None
-flask.a.Flask.add_template_test(self,f:ft.TemplateTestCallable,name:t.Optional[str]=None)->None
-flask.a.Flask.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[ft.RouteCallable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
-flask.a.Flask.app_context(self)->AppContext
-flask.a.Flask.async_to_sync(self,func:t.Callable[...,t.Coroutine])->t.Callable[..., t.Any]
-flask.a.Flask.auto_find_instance_path(self)->str
-flask.a.Flask.before_first_request(self,f:T_before_first_request)->T_before_first_request
-flask.a.Flask.create_global_jinja_loader(self)->DispatchingJinjaLoader
-flask.a.Flask.create_jinja_environment(self)->Environment
-flask.a.Flask.create_url_adapter(self,request:t.Optional[Request])->t.Optional[MapAdapter]
-flask.a.Flask.debug(self)->bool
-flask.a.Flask.debug(self,value:bool)->None
-flask.a.Flask.dispatch_request(self)->ft.ResponseReturnValue
-flask.a.Flask.do_teardown_appcontext(self,exc:t.Optional[BaseException]=_sentinel)->None
-flask.a.Flask.do_teardown_request(self,exc:t.Optional[BaseException]=_sentinel)->None
-flask.a.Flask.ensure_sync(self,func:t.Callable)->t.Callable
-flask.a.Flask.env(self)->str
-flask.a.Flask.env(self,value:str)->None
-flask.a.Flask.finalize_request(self,rv:t.Union[ft.ResponseReturnValue,HTTPException],from_error_handler:bool=False)->Response
-flask.a.Flask.full_dispatch_request(self)->Response
-flask.a.Flask.got_first_request(self)->bool
-flask.a.Flask.handle_exception(self,e:Exception)->Response
-flask.a.Flask.handle_http_exception(self,e:HTTPException)->t.Union[HTTPException, ft.ResponseReturnValue]
-flask.a.Flask.handle_url_build_error(self,error:BuildError,endpoint:str,values:t.Dict[str,t.Any])->str
-flask.a.Flask.handle_user_exception(self,e:Exception)->t.Union[HTTPException, ft.ResponseReturnValue]
-flask.a.Flask.inject_url_defaults(self,endpoint:str,values:dict)->None
-flask.a.Flask.iter_blueprints(self)->t.ValuesView['Blueprint']
-flask.a.Flask.jinja_env(self)->Environment
-flask.a.Flask.json_decoder(self)->t.Type[json.JSONDecoder]
-flask.a.Flask.json_decoder(self,value:t.Type[json.JSONDecoder])->None
-flask.a.Flask.json_encoder(self)->t.Type[json.JSONEncoder]
-flask.a.Flask.json_encoder(self,value:t.Type[json.JSONEncoder])->None
-flask.a.Flask.log_exception(self,exc_info:t.Union[t.Tuple[type,BaseException,TracebackType],t.Tuple[None,None,None]])->None
-flask.a.Flask.logger(self)->logging.Logger
-flask.a.Flask.make_aborter(self)->Aborter
-flask.a.Flask.make_config(self,instance_relative:bool=False)->Config
-flask.a.Flask.make_default_options_response(self)->Response
-flask.a.Flask.make_response(self,rv:ft.ResponseReturnValue)->Response
-flask.a.Flask.make_shell_context(self)->dict
-flask.a.Flask.name(self)->str
-flask.a.Flask.open_instance_resource(self,resource:str,mode:str='rb')->t.IO[t.AnyStr]
-flask.a.Flask.preprocess_request(self)->t.Optional[ft.ResponseReturnValue]
-flask.a.Flask.process_response(self,response:Response)->Response
-flask.a.Flask.propagate_exceptions(self)->bool
-flask.a.Flask.raise_routing_exception(self,request:Request)->'te.NoReturn'
-flask.a.Flask.redirect(self,location:str,code:int=302)->BaseResponse
-flask.a.Flask.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
-flask.a.Flask.request_context(self,environ:dict)->RequestContext
-flask.a.Flask.run(self,host:t.Optional[str]=None,port:t.Optional[int]=None,debug:t.Optional[bool]=None,load_dotenv:bool=True,**options:t.Any)->None
-flask.a.Flask.select_jinja_autoescape(self,filename:str)->bool
-flask.a.Flask.send_file_max_age_default(self)->t.Optional[timedelta]
-flask.a.Flask.send_file_max_age_default(self,value:t.Union[int,timedelta,None])->None
-flask.a.Flask.session_cookie_name(self)->str
-flask.a.Flask.session_cookie_name(self,value:str)->None
-flask.a.Flask.shell_context_processor(self,f:T_shell_context_processor)->T_shell_context_processor
-flask.a.Flask.should_ignore_error(self,error:t.Optional[BaseException])->bool
-flask.a.Flask.teardown_appcontext(self,f:T_teardown)->T_teardown
-flask.a.Flask.template_filter(self,name:t.Optional[str]=None)->t.Callable[[T_template_filter], T_template_filter]
-flask.a.Flask.template_global(self,name:t.Optional[str]=None)->t.Callable[[T_template_global], T_template_global]
-flask.a.Flask.template_test(self,name:t.Optional[str]=None)->t.Callable[[T_template_test], T_template_test]
-flask.a.Flask.templates_auto_reload(self)->bool
-flask.a.Flask.templates_auto_reload(self,value:bool)->None
-flask.a.Flask.test_cli_runner(self,**kwargs:t.Any)->'FlaskCliRunner'
-flask.a.Flask.test_client(self,use_cookies:bool=True,**kwargs:t.Any)->'FlaskClient'
-flask.a.Flask.test_request_context(self,*args:t.Any,**kwargs:t.Any)->RequestContext
-flask.a.Flask.trap_http_exception(self,e:Exception)->bool
-flask.a.Flask.update_template_context(self,context:dict)->None
-flask.a.Flask.url_for(self,endpoint:str,*,_anchor:t.Optional[str]=None,_method:t.Optional[str]=None,_scheme:t.Optional[str]=None,_external:t.Optional[bool]=None,**values:t.Any)->str
-flask.a.Flask.use_x_sendfile(self)->bool
-flask.a.Flask.use_x_sendfile(self,value:bool)->None
-flask.a.Flask.wsgi_app(self,environ:dict,start_response:t.Callable)->t.Any
-flask.a._make_timedelta(value:t.Union[timedelta,int,None])->t.Optional[timedelta]
+A:flask.app.T_before_first_request->typing.TypeVar('T_before_first_request', bound=ft.BeforeFirstRequestCallable)
+A:flask.app.T_shell_context_processor->typing.TypeVar('T_shell_context_processor', bound=ft.ShellContextProcessorCallable)
+A:flask.app.T_teardown->typing.TypeVar('T_teardown', bound=ft.TeardownCallable)
+A:flask.app.T_template_filter->typing.TypeVar('T_template_filter', bound=ft.TemplateFilterCallable)
+A:flask.app.T_template_global->typing.TypeVar('T_template_global', bound=ft.TemplateGlobalCallable)
+A:flask.app.T_template_test->typing.TypeVar('T_template_test', bound=ft.TemplateTestCallable)
+A:flask.app.testing->ConfigAttribute('TESTING')
+A:flask.app.secret_key->ConfigAttribute('SECRET_KEY')
+A:flask.app.permanent_session_lifetime->ConfigAttribute('PERMANENT_SESSION_LIFETIME', get_converter=_make_timedelta)
+A:flask.app.self.config['SEND_FILE_MAX_AGE_DEFAULT']->_make_timedelta(value)
+A:flask.app.default_config->ImmutableDict({'ENV': None, 'DEBUG': None, 'TESTING': False, 'PROPAGATE_EXCEPTIONS': None, 'SECRET_KEY': None, 'PERMANENT_SESSION_LIFETIME': timedelta(days=31), 'USE_X_SENDFILE': False, 'SERVER_NAME': None, 'APPLICATION_ROOT': '/', 'SESSION_COOKIE_NAME': 'session', 'SESSION_COOKIE_DOMAIN': None, 'SESSION_COOKIE_PATH': None, 'SESSION_COOKIE_HTTPONLY': True, 'SESSION_COOKIE_SECURE': False, 'SESSION_COOKIE_SAMESITE': None, 'SESSION_REFRESH_EACH_REQUEST': True, 'MAX_CONTENT_LENGTH': None, 'SEND_FILE_MAX_AGE_DEFAULT': None, 'TRAP_BAD_REQUEST_ERRORS': None, 'TRAP_HTTP_EXCEPTIONS': False, 'EXPLAIN_TEMPLATE_LOADING': False, 'PREFERRED_URL_SCHEME': 'http', 'JSON_AS_ASCII': None, 'JSON_SORT_KEYS': None, 'JSONIFY_PRETTYPRINT_REGULAR': None, 'JSONIFY_MIMETYPE': None, 'TEMPLATES_AUTO_RELOAD': None, 'MAX_COOKIE_SIZE': 4093})
+A:flask.app.instance_path->self.auto_find_instance_path()
+A:flask.app.self.config->self.make_config(instance_relative_config)
+A:flask.app.self.aborter->self.make_aborter()
+A:flask.app.self.url_map->self.url_map_class()
+A:flask.app.self._before_request_lock->Lock()
+A:flask.app.self_ref->weakref.ref(self)
+A:flask.app.fn->getattr(sys.modules['__main__'], '__file__', None)
+A:flask.app.defaults->dict(self.default_config)
+A:flask.app.defaults['DEBUG']->get_debug_flag()
+A:flask.app.(prefix, package_path)->find_package(self.import_name)
+A:flask.app.options->dict(self.jinja_options)
+A:flask.app.rv->self.ensure_sync(before_func)()
+A:flask.app.names->chain(names, reversed(_split_blueprint_path(endpoint.rpartition('.')[0])))
+A:flask.app.orig_ctx->context.copy()
+A:flask.app.self.debug->bool(debug)
+A:flask.app.server_name->self.config.get('SERVER_NAME')
+A:flask.app.(sn_host, _, sn_port)->self.config.get('SERVER_NAME').partition(':')
+A:flask.app.port->int(sn_port)
+A:flask.app.endpoint->_endpoint_from_view_func(view_func)
+A:flask.app.methods->adapter.allowed_methods()
+A:flask.app.required_methods->set(getattr(view_func, 'required_methods', ()))
+A:flask.app.provide_automatic_options->getattr(view_func, 'provide_automatic_options', None)
+A:flask.app.rule->self.url_rule_class(rule, methods=methods, **options)
+A:flask.app.old_func->self.view_functions.get(endpoint)
+A:flask.app.(exc_class, code)->self._get_exc_class_and_code(type(e))
+A:flask.app.handler->self._find_error_handler(server_error)
+A:flask.app.exc_info->sys.exc_info()
+A:flask.app.server_error->self.ensure_sync(handler)(server_error)
+A:flask.app.response->self.handle_exception(e)
+A:flask.app.req_ctx->globals._cv_request.get(None)
+A:flask.app.app_ctx->globals._cv_app.get(None)
+A:flask.app.url_adapter->self.create_url_adapter(None)
+A:flask.app.len_rv->len(rv)
+A:flask.app.ctx->self.request_context(environ)
+A:flask.app.builder->EnvironBuilder(self, *args, **kwargs)
+flask.Flask(self,import_name:str,static_url_path:t.Optional[str]=None,static_folder:t.Optional[t.Union[str,os.PathLike]]='static',static_host:t.Optional[str]=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:t.Optional[str]='templates',instance_path:t.Optional[str]=None,instance_relative_config:bool=False,root_path:t.Optional[str]=None)
+flask.Flask._check_setup_finished(self,f_name:str)->None
+flask.Flask._find_error_handler(self,e:Exception)->t.Optional[ft.ErrorHandlerCallable]
+flask.Flask.add_template_filter(self,f:ft.TemplateFilterCallable,name:t.Optional[str]=None)->None
+flask.Flask.add_template_global(self,f:ft.TemplateGlobalCallable,name:t.Optional[str]=None)->None
+flask.Flask.add_template_test(self,f:ft.TemplateTestCallable,name:t.Optional[str]=None)->None
+flask.Flask.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[ft.RouteCallable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
+flask.Flask.app_context(self)->AppContext
+flask.Flask.async_to_sync(self,func:t.Callable[...,t.Coroutine])->t.Callable[..., t.Any]
+flask.Flask.auto_find_instance_path(self)->str
+flask.Flask.before_first_request(self,f:T_before_first_request)->T_before_first_request
+flask.Flask.create_global_jinja_loader(self)->DispatchingJinjaLoader
+flask.Flask.create_jinja_environment(self)->Environment
+flask.Flask.create_url_adapter(self,request:t.Optional[Request])->t.Optional[MapAdapter]
+flask.Flask.debug(self)->bool
+flask.Flask.debug(self,value:bool)->None
+flask.Flask.dispatch_request(self)->ft.ResponseReturnValue
+flask.Flask.do_teardown_appcontext(self,exc:t.Optional[BaseException]=_sentinel)->None
+flask.Flask.do_teardown_request(self,exc:t.Optional[BaseException]=_sentinel)->None
+flask.Flask.ensure_sync(self,func:t.Callable)->t.Callable
+flask.Flask.env(self)->str
+flask.Flask.env(self,value:str)->None
+flask.Flask.finalize_request(self,rv:t.Union[ft.ResponseReturnValue,HTTPException],from_error_handler:bool=False)->Response
+flask.Flask.full_dispatch_request(self)->Response
+flask.Flask.got_first_request(self)->bool
+flask.Flask.handle_exception(self,e:Exception)->Response
+flask.Flask.handle_http_exception(self,e:HTTPException)->t.Union[HTTPException, ft.ResponseReturnValue]
+flask.Flask.handle_url_build_error(self,error:BuildError,endpoint:str,values:t.Dict[str,t.Any])->str
+flask.Flask.handle_user_exception(self,e:Exception)->t.Union[HTTPException, ft.ResponseReturnValue]
+flask.Flask.inject_url_defaults(self,endpoint:str,values:dict)->None
+flask.Flask.iter_blueprints(self)->t.ValuesView['Blueprint']
+flask.Flask.jinja_env(self)->Environment
+flask.Flask.json_decoder(self)->t.Type[json.JSONDecoder]
+flask.Flask.json_decoder(self,value:t.Type[json.JSONDecoder])->None
+flask.Flask.json_encoder(self)->t.Type[json.JSONEncoder]
+flask.Flask.json_encoder(self,value:t.Type[json.JSONEncoder])->None
+flask.Flask.log_exception(self,exc_info:t.Union[t.Tuple[type,BaseException,TracebackType],t.Tuple[None,None,None]])->None
+flask.Flask.logger(self)->logging.Logger
+flask.Flask.make_aborter(self)->Aborter
+flask.Flask.make_config(self,instance_relative:bool=False)->Config
+flask.Flask.make_default_options_response(self)->Response
+flask.Flask.make_response(self,rv:ft.ResponseReturnValue)->Response
+flask.Flask.make_shell_context(self)->dict
+flask.Flask.name(self)->str
+flask.Flask.open_instance_resource(self,resource:str,mode:str='rb')->t.IO[t.AnyStr]
+flask.Flask.preprocess_request(self)->t.Optional[ft.ResponseReturnValue]
+flask.Flask.process_response(self,response:Response)->Response
+flask.Flask.propagate_exceptions(self)->bool
+flask.Flask.raise_routing_exception(self,request:Request)->'te.NoReturn'
+flask.Flask.redirect(self,location:str,code:int=302)->BaseResponse
+flask.Flask.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
+flask.Flask.request_context(self,environ:dict)->RequestContext
+flask.Flask.run(self,host:t.Optional[str]=None,port:t.Optional[int]=None,debug:t.Optional[bool]=None,load_dotenv:bool=True,**options:t.Any)->None
+flask.Flask.select_jinja_autoescape(self,filename:str)->bool
+flask.Flask.send_file_max_age_default(self)->t.Optional[timedelta]
+flask.Flask.send_file_max_age_default(self,value:t.Union[int,timedelta,None])->None
+flask.Flask.session_cookie_name(self)->str
+flask.Flask.session_cookie_name(self,value:str)->None
+flask.Flask.shell_context_processor(self,f:T_shell_context_processor)->T_shell_context_processor
+flask.Flask.should_ignore_error(self,error:t.Optional[BaseException])->bool
+flask.Flask.teardown_appcontext(self,f:T_teardown)->T_teardown
+flask.Flask.template_filter(self,name:t.Optional[str]=None)->t.Callable[[T_template_filter], T_template_filter]
+flask.Flask.template_global(self,name:t.Optional[str]=None)->t.Callable[[T_template_global], T_template_global]
+flask.Flask.template_test(self,name:t.Optional[str]=None)->t.Callable[[T_template_test], T_template_test]
+flask.Flask.templates_auto_reload(self)->bool
+flask.Flask.templates_auto_reload(self,value:bool)->None
+flask.Flask.test_cli_runner(self,**kwargs:t.Any)->'FlaskCliRunner'
+flask.Flask.test_client(self,use_cookies:bool=True,**kwargs:t.Any)->'FlaskClient'
+flask.Flask.test_request_context(self,*args:t.Any,**kwargs:t.Any)->RequestContext
+flask.Flask.trap_http_exception(self,e:Exception)->bool
+flask.Flask.update_template_context(self,context:dict)->None
+flask.Flask.url_for(self,endpoint:str,*,_anchor:t.Optional[str]=None,_method:t.Optional[str]=None,_scheme:t.Optional[str]=None,_external:t.Optional[bool]=None,**values:t.Any)->str
+flask.Flask.use_x_sendfile(self)->bool
+flask.Flask.use_x_sendfile(self,value:bool)->None
+flask.Flask.wsgi_app(self,environ:dict,start_response:t.Callable)->t.Any
+flask.app.Flask(self,import_name:str,static_url_path:t.Optional[str]=None,static_folder:t.Optional[t.Union[str,os.PathLike]]='static',static_host:t.Optional[str]=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:t.Optional[str]='templates',instance_path:t.Optional[str]=None,instance_relative_config:bool=False,root_path:t.Optional[str]=None)
+flask.app.Flask.__init__(self,import_name:str,static_url_path:t.Optional[str]=None,static_folder:t.Optional[t.Union[str,os.PathLike]]='static',static_host:t.Optional[str]=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:t.Optional[str]='templates',instance_path:t.Optional[str]=None,instance_relative_config:bool=False,root_path:t.Optional[str]=None)
+flask.app.Flask._check_setup_finished(self,f_name:str)->None
+flask.app.Flask._find_error_handler(self,e:Exception)->t.Optional[ft.ErrorHandlerCallable]
+flask.app.Flask.add_template_filter(self,f:ft.TemplateFilterCallable,name:t.Optional[str]=None)->None
+flask.app.Flask.add_template_global(self,f:ft.TemplateGlobalCallable,name:t.Optional[str]=None)->None
+flask.app.Flask.add_template_test(self,f:ft.TemplateTestCallable,name:t.Optional[str]=None)->None
+flask.app.Flask.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[ft.RouteCallable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
+flask.app.Flask.app_context(self)->AppContext
+flask.app.Flask.async_to_sync(self,func:t.Callable[...,t.Coroutine])->t.Callable[..., t.Any]
+flask.app.Flask.auto_find_instance_path(self)->str
+flask.app.Flask.before_first_request(self,f:T_before_first_request)->T_before_first_request
+flask.app.Flask.create_global_jinja_loader(self)->DispatchingJinjaLoader
+flask.app.Flask.create_jinja_environment(self)->Environment
+flask.app.Flask.create_url_adapter(self,request:t.Optional[Request])->t.Optional[MapAdapter]
+flask.app.Flask.debug(self)->bool
+flask.app.Flask.debug(self,value:bool)->None
+flask.app.Flask.dispatch_request(self)->ft.ResponseReturnValue
+flask.app.Flask.do_teardown_appcontext(self,exc:t.Optional[BaseException]=_sentinel)->None
+flask.app.Flask.do_teardown_request(self,exc:t.Optional[BaseException]=_sentinel)->None
+flask.app.Flask.ensure_sync(self,func:t.Callable)->t.Callable
+flask.app.Flask.env(self)->str
+flask.app.Flask.env(self,value:str)->None
+flask.app.Flask.finalize_request(self,rv:t.Union[ft.ResponseReturnValue,HTTPException],from_error_handler:bool=False)->Response
+flask.app.Flask.full_dispatch_request(self)->Response
+flask.app.Flask.got_first_request(self)->bool
+flask.app.Flask.handle_exception(self,e:Exception)->Response
+flask.app.Flask.handle_http_exception(self,e:HTTPException)->t.Union[HTTPException, ft.ResponseReturnValue]
+flask.app.Flask.handle_url_build_error(self,error:BuildError,endpoint:str,values:t.Dict[str,t.Any])->str
+flask.app.Flask.handle_user_exception(self,e:Exception)->t.Union[HTTPException, ft.ResponseReturnValue]
+flask.app.Flask.inject_url_defaults(self,endpoint:str,values:dict)->None
+flask.app.Flask.iter_blueprints(self)->t.ValuesView['Blueprint']
+flask.app.Flask.jinja_env(self)->Environment
+flask.app.Flask.json_decoder(self)->t.Type[json.JSONDecoder]
+flask.app.Flask.json_decoder(self,value:t.Type[json.JSONDecoder])->None
+flask.app.Flask.json_encoder(self)->t.Type[json.JSONEncoder]
+flask.app.Flask.json_encoder(self,value:t.Type[json.JSONEncoder])->None
+flask.app.Flask.log_exception(self,exc_info:t.Union[t.Tuple[type,BaseException,TracebackType],t.Tuple[None,None,None]])->None
+flask.app.Flask.logger(self)->logging.Logger
+flask.app.Flask.make_aborter(self)->Aborter
+flask.app.Flask.make_config(self,instance_relative:bool=False)->Config
+flask.app.Flask.make_default_options_response(self)->Response
+flask.app.Flask.make_response(self,rv:ft.ResponseReturnValue)->Response
+flask.app.Flask.make_shell_context(self)->dict
+flask.app.Flask.name(self)->str
+flask.app.Flask.open_instance_resource(self,resource:str,mode:str='rb')->t.IO[t.AnyStr]
+flask.app.Flask.preprocess_request(self)->t.Optional[ft.ResponseReturnValue]
+flask.app.Flask.process_response(self,response:Response)->Response
+flask.app.Flask.propagate_exceptions(self)->bool
+flask.app.Flask.raise_routing_exception(self,request:Request)->'te.NoReturn'
+flask.app.Flask.redirect(self,location:str,code:int=302)->BaseResponse
+flask.app.Flask.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
+flask.app.Flask.request_context(self,environ:dict)->RequestContext
+flask.app.Flask.run(self,host:t.Optional[str]=None,port:t.Optional[int]=None,debug:t.Optional[bool]=None,load_dotenv:bool=True,**options:t.Any)->None
+flask.app.Flask.select_jinja_autoescape(self,filename:str)->bool
+flask.app.Flask.send_file_max_age_default(self)->t.Optional[timedelta]
+flask.app.Flask.send_file_max_age_default(self,value:t.Union[int,timedelta,None])->None
+flask.app.Flask.session_cookie_name(self)->str
+flask.app.Flask.session_cookie_name(self,value:str)->None
+flask.app.Flask.shell_context_processor(self,f:T_shell_context_processor)->T_shell_context_processor
+flask.app.Flask.should_ignore_error(self,error:t.Optional[BaseException])->bool
+flask.app.Flask.teardown_appcontext(self,f:T_teardown)->T_teardown
+flask.app.Flask.template_filter(self,name:t.Optional[str]=None)->t.Callable[[T_template_filter], T_template_filter]
+flask.app.Flask.template_global(self,name:t.Optional[str]=None)->t.Callable[[T_template_global], T_template_global]
+flask.app.Flask.template_test(self,name:t.Optional[str]=None)->t.Callable[[T_template_test], T_template_test]
+flask.app.Flask.templates_auto_reload(self)->bool
+flask.app.Flask.templates_auto_reload(self,value:bool)->None
+flask.app.Flask.test_cli_runner(self,**kwargs:t.Any)->'FlaskCliRunner'
+flask.app.Flask.test_client(self,use_cookies:bool=True,**kwargs:t.Any)->'FlaskClient'
+flask.app.Flask.test_request_context(self,*args:t.Any,**kwargs:t.Any)->RequestContext
+flask.app.Flask.trap_http_exception(self,e:Exception)->bool
+flask.app.Flask.update_template_context(self,context:dict)->None
+flask.app.Flask.url_for(self,endpoint:str,*,_anchor:t.Optional[str]=None,_method:t.Optional[str]=None,_scheme:t.Optional[str]=None,_external:t.Optional[bool]=None,**values:t.Any)->str
+flask.app.Flask.use_x_sendfile(self)->bool
+flask.app.Flask.use_x_sendfile(self,value:bool)->None
+flask.app.Flask.wsgi_app(self,environ:dict,start_response:t.Callable)->t.Any
+flask.app._make_timedelta(value:t.Union[timedelta,int,None])->t.Optional[timedelta]
 
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/signals.py----------------------------------------
@@ -369,7 +459,20 @@ A:flask.config.d->types.ModuleType('config')
 A:flask.config.obj->load(f)
 A:flask.config.self[key]->getattr(obj, key)
 A:flask.config.key->key.lower().lower()
+flask.Config(self,root_path:str,defaults:t.Optional[dict]=None)
+flask.Config.__repr__(self)->str
+flask.Config.from_envvar(self,variable_name:str,silent:bool=False)->bool
+flask.Config.from_file(self,filename:str,load:t.Callable[[t.IO[t.Any]],t.Mapping],silent:bool=False)->bool
+flask.Config.from_mapping(self,mapping:t.Optional[t.Mapping[str,t.Any]]=None,**kwargs:t.Any)->bool
+flask.Config.from_object(self,obj:t.Union[object,str])->None
+flask.Config.from_prefixed_env(self,prefix:str='FLASK',*,loads:t.Callable[[str],t.Any]=json.loads)->bool
+flask.Config.from_pyfile(self,filename:str,silent:bool=False)->bool
+flask.Config.get_namespace(self,namespace:str,lowercase:bool=True,trim_namespace:bool=True)->t.Dict[str, t.Any]
+flask.ConfigAttribute(self,name:str,get_converter:t.Optional[t.Callable]=None)
+flask.ConfigAttribute.__get__(self,obj:t.Any,owner:t.Any=None)->t.Any
+flask.ConfigAttribute.__set__(self,obj:t.Any,value:t.Any)->None
 flask.config.Config(self,root_path:str,defaults:t.Optional[dict]=None)
+flask.config.Config.__init__(self,root_path:str,defaults:t.Optional[dict]=None)
 flask.config.Config.__repr__(self)->str
 flask.config.Config.from_envvar(self,variable_name:str,silent:bool=False)->bool
 flask.config.Config.from_file(self,filename:str,load:t.Callable[[t.IO[t.Any]],t.Mapping],silent:bool=False)->bool
@@ -380,77 +483,81 @@ flask.config.Config.from_pyfile(self,filename:str,silent:bool=False)->bool
 flask.config.Config.get_namespace(self,namespace:str,lowercase:bool=True,trim_namespace:bool=True)->t.Dict[str, t.Any]
 flask.config.ConfigAttribute(self,name:str,get_converter:t.Optional[t.Callable]=None)
 flask.config.ConfigAttribute.__get__(self,obj:t.Any,owner:t.Any=None)->t.Any
+flask.config.ConfigAttribute.__init__(self,name:str,get_converter:t.Optional[t.Callable]=None)
 flask.config.ConfigAttribute.__set__(self,obj:t.Any,value:t.Any)->None
 
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/cli.py----------------------------------------
-A:flask.cl.app->ctx.ensure_object(ScriptInfo).load_app()
-A:flask.cl.app_factory->getattr(module, attr_name, None)
-A:flask.cl.attr->getattr(module, name)
-A:flask.cl.path->dotenv.find_dotenv(name, usecwd=True)
-A:flask.cl.(fname, ext)->os.path.splitext(path)
-A:flask.cl.(path, name)->os.path.split(path)
-A:flask.cl.version_option->click.Option(['--version'], help='Show the Flask version.', expose_value=False, callback=get_version, is_flag=True, is_eager=True)
-A:flask.cl.import_name->prepare_import(path)
-A:flask.cl.app.debug->get_debug_flag()
-A:flask.cl.pass_script_info->click.make_pass_decorator(ScriptInfo, ensure=True)
-A:flask.cl.wrap_for_ctx->kwargs.pop('with_appcontext', True)
-A:flask.cl.f->with_appcontext(f)
-A:flask.cl.info->ctx.ensure_object(ScriptInfo)
-A:flask.cl._app_option->click.Option(['-A', '--app'], metavar='IMPORT', help="The Flask application or factory function to load, in the form 'module:name'. Module can be a dotted import or file path. Name is not required if it is 'app', 'application', 'create_app', or 'make_app', and can be 'name(args)' to pass arguments.", is_eager=True, expose_value=False, callback=_set_app)
-A:flask.cl.source->ctx.get_parameter_source(param.name)
-A:flask.cl._debug_option->click.Option(['--debug/--no-debug'], help='Set debug mode.', expose_value=False, callback=_set_debug)
-A:flask.cl._env_file_option->click.Option(['-e', '--env-file'], type=click.Path(exists=True, dir_okay=False), help='Load environment variables from this file. python-dotenv must be installed.', is_eager=True, expose_value=False, callback=_env_file_callback)
-A:flask.cl.params->list(extra.pop('params', None) or ())
-A:flask.cl.rv->set(super().list_commands(ctx))
-A:flask.cl.extra['obj']->ScriptInfo(create_app=self.create_app, set_debug_flag=self.set_debug_flag)
-A:flask.cl.self.path_type->click.Path(exists=True, dir_okay=False, resolve_path=True)
-A:flask.cl.value->click.STRING(value, param, ctx).lower()
-A:flask.cl.obj->import_string(value, silent=True)
-A:flask.cl.cert->ctx.params.get('cert')
-A:flask.cl.is_context->isinstance(cert, ssl.SSLContext)
-A:flask.cl.items->self.split_envvar_value(value)
-A:flask.cl.debug->get_debug_flag()
-A:flask.cl.startup->os.environ.get('PYTHONSTARTUP')
-A:flask.cl.interactive_hook->getattr(sys, '__interactivehook__', None)
-A:flask.cl.rules->sorted(rules, key=lambda rule: sorted(rule.methods))
-A:flask.cl.ignored_methods->set(() if all_methods else ('HEAD', 'OPTIONS'))
-A:flask.cl.row->'{{0:<{0}}}  {{1:<{1}}}  {{2:<{2}}}'.format(*widths)
-A:flask.cl.cli->FlaskGroup(name='flask', help="A general utility script for Flask applications.\n\nAn application to load must be given with the '--app' option,\n'FLASK_APP' environment variable, or with a 'wsgi.py' or 'app.py' file\nin the current directory.\n")
-flask.cl.AppGroup(click.Group)
-flask.cl.AppGroup.command(self,*args,**kwargs)
-flask.cl.AppGroup.group(self,*args,**kwargs)
-flask.cl.CertParamType(self)
-flask.cl.CertParamType.convert(self,value,param,ctx)
-flask.cl.FlaskGroup(self,add_default_commands:bool=True,create_app:t.Callable[...,Flask]|None=None,add_version_option:bool=True,load_dotenv:bool=True,set_debug_flag:bool=True,**extra:t.Any)
-flask.cl.FlaskGroup._load_plugin_commands(self)
-flask.cl.FlaskGroup.get_command(self,ctx,name)
-flask.cl.FlaskGroup.list_commands(self,ctx)
-flask.cl.FlaskGroup.make_context(self,info_name:str|None,args:list[str],parent:click.Context|None=None,**extra:t.Any)->click.Context
-flask.cl.FlaskGroup.parse_args(self,ctx:click.Context,args:list[str])->list[str]
-flask.cl.NoAppException(click.UsageError)
-flask.cl.ScriptInfo(self,app_import_path:str|None=None,create_app:t.Callable[...,Flask]|None=None,set_debug_flag:bool=True)
-flask.cl.ScriptInfo.load_app(self)->Flask
-flask.cl.SeparatedPathType(click.Path)
-flask.cl.SeparatedPathType.convert(self,value,param,ctx)
-flask.cl._called_with_wrong_args(f)
-flask.cl._env_file_callback(ctx:click.Context,param:click.Option,value:str|None)->str | None
-flask.cl._path_is_ancestor(path,other)
-flask.cl._set_app(ctx:click.Context,param:click.Option,value:str|None)->str | None
-flask.cl._set_debug(ctx:click.Context,param:click.Option,value:bool)->bool | None
-flask.cl._validate_key(ctx,param,value)
-flask.cl.find_app_by_string(module,app_name)
-flask.cl.find_best_app(module)
-flask.cl.get_version(ctx,param,value)
-flask.cl.load_dotenv(path:str|os.PathLike|None=None)->bool
-flask.cl.locate_app(module_name,app_name,raise_if_not_found=True)
-flask.cl.main()->None
-flask.cl.prepare_import(path)
-flask.cl.routes_command(sort:str,all_methods:bool)->None
-flask.cl.run_command(info,host,port,reload,debugger,with_threads,cert,extra_files,exclude_patterns)
-flask.cl.shell_command()->None
-flask.cl.show_server_banner(debug,app_import_path)
-flask.cl.with_appcontext(f)
+A:flask.cli.app->ctx.ensure_object(ScriptInfo).load_app()
+A:flask.cli.app_factory->getattr(module, attr_name, None)
+A:flask.cli.attr->getattr(module, name)
+A:flask.cli.path->dotenv.find_dotenv(name, usecwd=True)
+A:flask.cli.(fname, ext)->os.path.splitext(path)
+A:flask.cli.(path, name)->os.path.split(path)
+A:flask.cli.version_option->click.Option(['--version'], help='Show the Flask version.', expose_value=False, callback=get_version, is_flag=True, is_eager=True)
+A:flask.cli.import_name->prepare_import(path)
+A:flask.cli.app.debug->get_debug_flag()
+A:flask.cli.pass_script_info->click.make_pass_decorator(ScriptInfo, ensure=True)
+A:flask.cli.wrap_for_ctx->kwargs.pop('with_appcontext', True)
+A:flask.cli.f->with_appcontext(f)
+A:flask.cli.info->ctx.ensure_object(ScriptInfo)
+A:flask.cli._app_option->click.Option(['-A', '--app'], metavar='IMPORT', help="The Flask application or factory function to load, in the form 'module:name'. Module can be a dotted import or file path. Name is not required if it is 'app', 'application', 'create_app', or 'make_app', and can be 'name(args)' to pass arguments.", is_eager=True, expose_value=False, callback=_set_app)
+A:flask.cli.source->ctx.get_parameter_source(param.name)
+A:flask.cli._debug_option->click.Option(['--debug/--no-debug'], help='Set debug mode.', expose_value=False, callback=_set_debug)
+A:flask.cli._env_file_option->click.Option(['-e', '--env-file'], type=click.Path(exists=True, dir_okay=False), help='Load environment variables from this file. python-dotenv must be installed.', is_eager=True, expose_value=False, callback=_env_file_callback)
+A:flask.cli.params->list(extra.pop('params', None) or ())
+A:flask.cli.rv->set(super().list_commands(ctx))
+A:flask.cli.extra['obj']->ScriptInfo(create_app=self.create_app, set_debug_flag=self.set_debug_flag)
+A:flask.cli.self.path_type->click.Path(exists=True, dir_okay=False, resolve_path=True)
+A:flask.cli.value->click.STRING(value, param, ctx).lower()
+A:flask.cli.obj->import_string(value, silent=True)
+A:flask.cli.cert->ctx.params.get('cert')
+A:flask.cli.is_context->isinstance(cert, ssl.SSLContext)
+A:flask.cli.items->self.split_envvar_value(value)
+A:flask.cli.debug->get_debug_flag()
+A:flask.cli.startup->os.environ.get('PYTHONSTARTUP')
+A:flask.cli.interactive_hook->getattr(sys, '__interactivehook__', None)
+A:flask.cli.rules->sorted(rules, key=lambda rule: sorted(rule.methods))
+A:flask.cli.ignored_methods->set(() if all_methods else ('HEAD', 'OPTIONS'))
+A:flask.cli.row->'{{0:<{0}}}  {{1:<{1}}}  {{2:<{2}}}'.format(*widths)
+A:flask.cli.cli->FlaskGroup(name='flask', help="A general utility script for Flask applications.\n\nAn application to load must be given with the '--app' option,\n'FLASK_APP' environment variable, or with a 'wsgi.py' or 'app.py' file\nin the current directory.\n")
+flask.cli.AppGroup(click.Group)
+flask.cli.AppGroup.command(self,*args,**kwargs)
+flask.cli.AppGroup.group(self,*args,**kwargs)
+flask.cli.CertParamType(self)
+flask.cli.CertParamType.__init__(self)
+flask.cli.CertParamType.convert(self,value,param,ctx)
+flask.cli.FlaskGroup(self,add_default_commands:bool=True,create_app:t.Callable[...,Flask]|None=None,add_version_option:bool=True,load_dotenv:bool=True,set_debug_flag:bool=True,**extra:t.Any)
+flask.cli.FlaskGroup.__init__(self,add_default_commands:bool=True,create_app:t.Callable[...,Flask]|None=None,add_version_option:bool=True,load_dotenv:bool=True,set_debug_flag:bool=True,**extra:t.Any)
+flask.cli.FlaskGroup._load_plugin_commands(self)
+flask.cli.FlaskGroup.get_command(self,ctx,name)
+flask.cli.FlaskGroup.list_commands(self,ctx)
+flask.cli.FlaskGroup.make_context(self,info_name:str|None,args:list[str],parent:click.Context|None=None,**extra:t.Any)->click.Context
+flask.cli.FlaskGroup.parse_args(self,ctx:click.Context,args:list[str])->list[str]
+flask.cli.NoAppException(click.UsageError)
+flask.cli.ScriptInfo(self,app_import_path:str|None=None,create_app:t.Callable[...,Flask]|None=None,set_debug_flag:bool=True)
+flask.cli.ScriptInfo.__init__(self,app_import_path:str|None=None,create_app:t.Callable[...,Flask]|None=None,set_debug_flag:bool=True)
+flask.cli.ScriptInfo.load_app(self)->Flask
+flask.cli.SeparatedPathType(click.Path)
+flask.cli.SeparatedPathType.convert(self,value,param,ctx)
+flask.cli._called_with_wrong_args(f)
+flask.cli._env_file_callback(ctx:click.Context,param:click.Option,value:str|None)->str | None
+flask.cli._path_is_ancestor(path,other)
+flask.cli._set_app(ctx:click.Context,param:click.Option,value:str|None)->str | None
+flask.cli._set_debug(ctx:click.Context,param:click.Option,value:bool)->bool | None
+flask.cli._validate_key(ctx,param,value)
+flask.cli.find_app_by_string(module,app_name)
+flask.cli.find_best_app(module)
+flask.cli.get_version(ctx,param,value)
+flask.cli.load_dotenv(path:str|os.PathLike|None=None)->bool
+flask.cli.locate_app(module_name,app_name,raise_if_not_found=True)
+flask.cli.main()->None
+flask.cli.prepare_import(path)
+flask.cli.routes_command(sort:str,all_methods:bool)->None
+flask.cli.run_command(info,host,port,reload,debugger,with_threads,cert,extra_files,exclude_patterns)
+flask.cli.shell_command()->None
+flask.cli.show_server_banner(debug,app_import_path)
+flask.cli.with_appcontext(f)
 
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/views.py----------------------------------------
@@ -475,13 +582,19 @@ A:flask.templating.rv->stream_with_context(rv)
 A:flask.templating.result->set()
 A:flask.templating.app->globals.current_app._get_current_object()
 A:flask.templating.template->globals.current_app._get_current_object().jinja_env.from_string(source)
+flask.render_template(template_name_or_list:t.Union[str,Template,t.List[t.Union[str,Template]]],**context:t.Any)->str
+flask.render_template_string(source:str,**context:t.Any)->str
+flask.stream_template(template_name_or_list:t.Union[str,Template,t.List[t.Union[str,Template]]],**context:t.Any)->t.Iterator[str]
+flask.stream_template_string(source:str,**context:t.Any)->t.Iterator[str]
 flask.templating.DispatchingJinjaLoader(self,app:'Flask')
+flask.templating.DispatchingJinjaLoader.__init__(self,app:'Flask')
 flask.templating.DispatchingJinjaLoader._get_source_explained(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
 flask.templating.DispatchingJinjaLoader._get_source_fast(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
 flask.templating.DispatchingJinjaLoader._iter_loaders(self,template:str)->t.Generator[t.Tuple['Scaffold', BaseLoader], None, None]
 flask.templating.DispatchingJinjaLoader.get_source(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
 flask.templating.DispatchingJinjaLoader.list_templates(self)->t.List[str]
 flask.templating.Environment(self,app:'Flask',**options:t.Any)
+flask.templating.Environment.__init__(self,app:'Flask',**options:t.Any)
 flask.templating._default_template_ctx_processor()->t.Dict[str, t.Any]
 flask.templating._render(app:'Flask',template:Template,context:t.Dict[str,t.Any])->str
 flask.templating._stream(app:'Flask',template:Template,context:t.Dict[str,t.Any])->t.Iterator[str]
@@ -519,7 +632,36 @@ A:flask.blueprints.value->defaultdict(dict, {code: {exc_class: func for (exc_cla
 A:flask.blueprints.cli_resolved_group->options.get('cli_group', self.cli_group)
 A:flask.blueprints.bp_options->bp_options.copy().copy()
 A:flask.blueprints.bp_url_prefix->bp_options.copy().copy().get('url_prefix')
+flask.Blueprint(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
+flask.Blueprint._check_setup_finished(self,f_name:str)->None
+flask.Blueprint.add_app_template_filter(self,f:ft.TemplateFilterCallable,name:t.Optional[str]=None)->None
+flask.Blueprint.add_app_template_global(self,f:ft.TemplateGlobalCallable,name:t.Optional[str]=None)->None
+flask.Blueprint.add_app_template_test(self,f:ft.TemplateTestCallable,name:t.Optional[str]=None)->None
+flask.Blueprint.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[ft.RouteCallable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
+flask.Blueprint.after_app_request(self,f:T_after_request)->T_after_request
+flask.Blueprint.app_context_processor(self,f:T_template_context_processor)->T_template_context_processor
+flask.Blueprint.app_errorhandler(self,code:t.Union[t.Type[Exception],int])->t.Callable[[T_error_handler], T_error_handler]
+flask.Blueprint.app_template_filter(self,name:t.Optional[str]=None)->t.Callable[[T_template_filter], T_template_filter]
+flask.Blueprint.app_template_global(self,name:t.Optional[str]=None)->t.Callable[[T_template_global], T_template_global]
+flask.Blueprint.app_template_test(self,name:t.Optional[str]=None)->t.Callable[[T_template_test], T_template_test]
+flask.Blueprint.app_url_defaults(self,f:T_url_defaults)->T_url_defaults
+flask.Blueprint.app_url_value_preprocessor(self,f:T_url_value_preprocessor)->T_url_value_preprocessor
+flask.Blueprint.before_app_first_request(self,f:T_before_first_request)->T_before_first_request
+flask.Blueprint.before_app_request(self,f:T_before_request)->T_before_request
+flask.Blueprint.json_decoder(self)->t.Union[t.Type[json.JSONDecoder], None]
+flask.Blueprint.json_decoder(self,value:t.Union[t.Type[json.JSONDecoder],None])->None
+flask.Blueprint.json_encoder(self)->t.Union[t.Type[json.JSONEncoder], None]
+flask.Blueprint.json_encoder(self,value:t.Union[t.Type[json.JSONEncoder],None])->None
+flask.Blueprint.make_setup_state(self,app:'Flask',options:dict,first_registration:bool=False)->BlueprintSetupState
+flask.Blueprint.record(self,func:t.Callable)->None
+flask.Blueprint.record_once(self,func:t.Callable)->None
+flask.Blueprint.register(self,app:'Flask',options:dict)->None
+flask.Blueprint.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
+flask.Blueprint.teardown_app_request(self,f:T_teardown)->T_teardown
+flask.BlueprintSetupState(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
+flask.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,**options:t.Any)->None
 flask.blueprints.Blueprint(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
+flask.blueprints.Blueprint.__init__(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
 flask.blueprints.Blueprint._check_setup_finished(self,f_name:str)->None
 flask.blueprints.Blueprint.add_app_template_filter(self,f:ft.TemplateFilterCallable,name:t.Optional[str]=None)->None
 flask.blueprints.Blueprint.add_app_template_global(self,f:ft.TemplateGlobalCallable,name:t.Optional[str]=None)->None
@@ -546,6 +688,7 @@ flask.blueprints.Blueprint.register(self,app:'Flask',options:dict)->None
 flask.blueprints.Blueprint.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
 flask.blueprints.Blueprint.teardown_app_request(self,f:T_teardown)->T_teardown
 flask.blueprints.BlueprintSetupState(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
+flask.blueprints.BlueprintSetupState.__init__(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
 flask.blueprints.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,**options:t.Any)->None
 
 
@@ -575,6 +718,10 @@ A:flask.helpers.mod->sys.modules.get(import_name)
 A:flask.helpers.loader->pkgutil.get_loader(import_name)
 A:flask.helpers.filepath->getattr(mod, '__file__', None)
 A:flask.helpers.self.lock->RLock()
+flask.abort(code:t.Union[int,'BaseResponse'],*args:t.Any,**kwargs:t.Any)->'te.NoReturn'
+flask.flash(message:str,category:str='message')->None
+flask.get_flashed_messages(with_categories:bool=False,category_filter:t.Iterable[str]=())->t.Union[t.List[str], t.List[t.Tuple[str, str]]]
+flask.get_template_attribute(template_name:str,attribute:str)->t.Any
 flask.helpers._prepare_send_file_kwargs(**kwargs:t.Any)->t.Dict[str, t.Any]
 flask.helpers._split_blueprint_path(name:str)->t.List[str]
 flask.helpers.abort(code:t.Union[int,'BaseResponse'],*args:t.Any,**kwargs:t.Any)->'te.NoReturn'
@@ -589,6 +736,7 @@ flask.helpers.is_ip(value:str)->bool
 flask.helpers.locked_cached_property(self,fget:t.Callable[[t.Any],t.Any],name:t.Optional[str]=None,doc:t.Optional[str]=None)
 flask.helpers.locked_cached_property.__delete__(self,obj:object)->None
 flask.helpers.locked_cached_property.__get__(self,obj:object,type:type=None)->t.Any
+flask.helpers.locked_cached_property.__init__(self,fget:t.Callable[[t.Any],t.Any],name:t.Optional[str]=None,doc:t.Optional[str]=None)
 flask.helpers.locked_cached_property.__set__(self,obj:object,value:t.Any)->None
 flask.helpers.make_response(*args:t.Any)->'Response'
 flask.helpers.redirect(location:str,code:int=302,Response:t.Optional[t.Type['BaseResponse']]=None)->'BaseResponse'
@@ -596,6 +744,12 @@ flask.helpers.send_file(path_or_file:t.Union[os.PathLike,str,t.BinaryIO],mimetyp
 flask.helpers.send_from_directory(directory:t.Union[os.PathLike,str],path:t.Union[os.PathLike,str],**kwargs:t.Any)->'Response'
 flask.helpers.stream_with_context(generator_or_function:t.Union[t.Iterator[t.AnyStr],t.Callable[...,t.Iterator[t.AnyStr]]])->t.Iterator[t.AnyStr]
 flask.helpers.url_for(endpoint:str,*,_anchor:t.Optional[str]=None,_method:t.Optional[str]=None,_scheme:t.Optional[str]=None,_external:t.Optional[bool]=None,**values:t.Any)->str
+flask.make_response(*args:t.Any)->'Response'
+flask.redirect(location:str,code:int=302,Response:t.Optional[t.Type['BaseResponse']]=None)->'BaseResponse'
+flask.send_file(path_or_file:t.Union[os.PathLike,str,t.BinaryIO],mimetype:t.Optional[str]=None,as_attachment:bool=False,download_name:t.Optional[str]=None,conditional:bool=True,etag:t.Union[bool,str]=True,last_modified:t.Optional[t.Union[datetime,int,float]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None)->'Response'
+flask.send_from_directory(directory:t.Union[os.PathLike,str],path:t.Union[os.PathLike,str],**kwargs:t.Any)->'Response'
+flask.stream_with_context(generator_or_function:t.Union[t.Iterator[t.AnyStr],t.Callable[...,t.Iterator[t.AnyStr]]])->t.Iterator[t.AnyStr]
+flask.url_for(endpoint:str,*,_anchor:t.Optional[str]=None,_method:t.Optional[str]=None,_scheme:t.Optional[str]=None,_external:t.Optional[bool]=None,**values:t.Any)->str
 
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/__init__.py----------------------------------------
@@ -605,11 +759,13 @@ flask.__init__.__getattr__(name)
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/json/provider.py----------------------------------------
 A:flask.json.provider.self._app->weakref.proxy(app)
 A:flask.json.provider.obj->self._prepare_response_obj(args, kwargs)
+flask.json._default(o:t.Any)->t.Any
 flask.json.provider.DefaultJSONProvider(JSONProvider)
 flask.json.provider.DefaultJSONProvider.dumps(self,obj:t.Any,**kwargs:t.Any)->str
 flask.json.provider.DefaultJSONProvider.loads(self,s:str|bytes,**kwargs:t.Any)->t.Any
 flask.json.provider.DefaultJSONProvider.response(self,*args:t.Any,**kwargs:t.Any)->Response
 flask.json.provider.JSONProvider(self,app:Flask)
+flask.json.provider.JSONProvider.__init__(self,app:Flask)
 flask.json.provider.JSONProvider._prepare_response_obj(self,args:t.Tuple[t.Any,...],kwargs:t.Dict[str,t.Any])->t.Any
 flask.json.provider.JSONProvider.dump(self,obj:t.Any,fp:t.IO[str],**kwargs:t.Any)->None
 flask.json.provider.JSONProvider.dumps(self,obj:t.Any,**kwargs:t.Any)->str
@@ -623,6 +779,7 @@ flask.json.provider._default(o:t.Any)->t.Any
 A:flask.json.tag.key->next(iter(value))
 A:flask.json.tag.tag->tag_class(self)
 flask.json.tag.JSONTag(self,serializer:'TaggedJSONSerializer')
+flask.json.tag.JSONTag.__init__(self,serializer:'TaggedJSONSerializer')
 flask.json.tag.JSONTag.check(self,value:t.Any)->bool
 flask.json.tag.JSONTag.tag(self,value:t.Any)->t.Any
 flask.json.tag.JSONTag.to_json(self,value:t.Any)->t.Any
@@ -658,6 +815,7 @@ flask.json.tag.TagUUID.check(self,value:t.Any)->bool
 flask.json.tag.TagUUID.to_json(self,value:t.Any)->t.Any
 flask.json.tag.TagUUID.to_python(self,value:t.Any)->t.Any
 flask.json.tag.TaggedJSONSerializer(self)
+flask.json.tag.TaggedJSONSerializer.__init__(self)
 flask.json.tag.TaggedJSONSerializer.dumps(self,value:t.Any)->str
 flask.json.tag.TaggedJSONSerializer.loads(self,value:str)->t.Any
 flask.json.tag.TaggedJSONSerializer.register(self,tag_class:t.Type[JSONTag],force:bool=False,index:t.Optional[int]=None)->None
@@ -667,7 +825,9 @@ flask.json.tag.TaggedJSONSerializer.untag(self,value:t.Dict[str,t.Any])->t.Any
 
 ----------------------------------------/home/zhang/Packages/flask/flask2.2.1/json/__init__.py----------------------------------------
 flask.json.__init__.JSONDecoder(self,**kwargs)
+flask.json.__init__.JSONDecoder.__init__(self,**kwargs)
 flask.json.__init__.JSONEncoder(self,**kwargs)
+flask.json.__init__.JSONEncoder.__init__(self,**kwargs)
 flask.json.__init__.JSONEncoder.default(self,o:t.Any)->t.Any
 flask.json.__init__.dump(obj:t.Any,fp:t.IO[str],*,app:Flask|None=None,**kwargs:t.Any)->None
 flask.json.__init__.dumps(obj:t.Any,*,app:Flask|None=None,**kwargs:t.Any)->str

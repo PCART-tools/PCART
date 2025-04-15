@@ -10,8 +10,24 @@ A:faker.generator.result->self.__config['arguments'].pop(group)
 A:faker.generator.(formatter, argument_group)->list(matches.groups())
 A:faker.generator.formatted->str(self.format(formatter))
 faker.Generator(self,**config:Dict)
+faker.Generator.__format_token(self,matches)
+faker.Generator.add_provider(self,provider:'BaseProvider')->None
+faker.Generator.del_arguments(self,group:str,argument:Optional[str]=None)->Any
+faker.Generator.format(self,formatter:str,*args:Any,**kwargs:Any)->str
+faker.Generator.get_arguments(self,group:str,argument:Optional[str]=None)->Any
+faker.Generator.get_formatter(self,formatter:str)->Callable
+faker.Generator.get_providers(self)->List['BaseProvider']
+faker.Generator.parse(self,text:str)->str
+faker.Generator.provider(self,name:str)->Optional['BaseProvider']
+faker.Generator.random(self)->random_module.Random
+faker.Generator.random(self,value:random_module.Random)->None
+faker.Generator.seed(cls,seed:Optional[Hashable]=None)->None
+faker.Generator.seed_instance(self,seed:Optional[Hashable]=None)->'Generator'
+faker.Generator.set_arguments(self,group:str,argument:str,value:Optional[Any]=None)->None
+faker.Generator.set_formatter(self,name:str,method:Callable)->None
 faker.generator.Generator(self,**config:Dict)
 faker.generator.Generator.__format_token(self,matches)
+faker.generator.Generator.__init__(self,**config:Dict)
 faker.generator.Generator.add_provider(self,provider:'BaseProvider')->None
 faker.generator.Generator.del_arguments(self,group:str,argument:Optional[str]=None)->Any
 faker.generator.Generator.format(self,formatter:str,*args:Any,**kwargs:Any)->str
@@ -38,6 +54,9 @@ A:faker.factory.provider_module->import_module(provider_path)
 A:faker.factory.available_locales->list_module(provider_module)
 A:faker.factory.locale->getattr(provider_module, 'default_locale', DEFAULT_LOCALE)
 faker.Factory
+faker.Factory._find_provider_class(cls,provider_path:str,locale:Optional[str]=None)->Any
+faker.Factory._get_provider_class(cls,provider:str,locale:Optional[str]='')->Tuple[Any, Optional[str]]
+faker.Factory.create(cls,locale:Optional[str]=None,providers:Optional[List[str]]=None,generator:Generator=None,includes:Optional[List[str]]=None,use_weighting:bool=True,**config:Any)->Generator
 faker.factory.Factory
 faker.factory.Factory._find_provider_class(cls,provider_path:str,locale:Optional[str]=None)->Any
 faker.factory.Factory._get_provider_class(cls,provider:str,locale:Optional[str]='')->Tuple[Any, Optional[str]]
@@ -68,6 +87,7 @@ A:faker.cli.parser->argparse.ArgumentParser(prog=self.prog_name, description=f'{
 A:faker.cli.arguments->argparse.ArgumentParser(prog=self.prog_name, description=f'{self.prog_name} version {VERSION}', epilog=epilog, formatter_class=formatter_class).parse_args(self.argv[1:])
 A:faker.cli.command->Command(argv)
 faker.cli.Command(self,argv:Optional[str]=None)
+faker.cli.Command.__init__(self,argv:Optional[str]=None)
 faker.cli.Command.execute(self)->None
 faker.cli.execute_from_command_line(argv:Optional[str]=None)->None
 faker.cli.print_doc(provider_or_field:Optional[str]=None,args:Optional[List[T]]=None,lang:str=DEFAULT_LOCALE,output:Optional[Union[TextIO,TextIOWrapper]]=None,seed:Optional[float]=None,includes:Optional[List[str]]=None)->None
@@ -99,12 +119,31 @@ A:faker.proxy.state->self.__dict__.copy()
 A:faker.proxy.generated->self._seen.setdefault(key, {self._sentinel})
 A:faker.proxy.retval->function(*args, **kwargs)
 faker.Faker(self,locale:Optional[Union[str,Sequence[str],Dict[str,Union[int,float]]]]=None,providers:Optional[List[str]]=None,generator:Optional[Generator]=None,includes:Optional[List[str]]=None,use_weighting:bool=True,**config:Any)
+faker.Faker.__deepcopy__(self,memodict:Dict={})->'Faker'
+faker.Faker.__dir__(self)
+faker.Faker.__getattr__(self,attr:str)->Any
+faker.Faker.__getattribute__(self,attr:str)->Any
+faker.Faker.__getitem__(self,locale:str)->Generator
+faker.Faker.__setstate__(self,state:Any)->None
+faker.Faker._map_provider_method(self,method_name:str)->Tuple[List[Factory], Optional[List[float]]]
+faker.Faker._select_factory(self,method_name:str)->Factory
+faker.Faker.factories(self)->List[Generator]
+faker.Faker.items(self)->List[Tuple[str, Generator]]
+faker.Faker.locales(self)->List[str]
+faker.Faker.random(self)->Random
+faker.Faker.random(self,value:Random)->None
+faker.Faker.seed(cls,seed:Optional[Hashable]=None)->None
+faker.Faker.seed_instance(self,seed:Optional[Hashable]=None)->None
+faker.Faker.seed_locale(self,locale:str,seed:Optional[Hashable]=None)->None
+faker.Faker.unique(self)->'UniqueProxy'
+faker.Faker.weights(self)->Optional[List[Union[int, float]]]
 faker.proxy.Faker(self,locale:Optional[Union[str,Sequence[str],Dict[str,Union[int,float]]]]=None,providers:Optional[List[str]]=None,generator:Optional[Generator]=None,includes:Optional[List[str]]=None,use_weighting:bool=True,**config:Any)
 faker.proxy.Faker.__deepcopy__(self,memodict:Dict={})->'Faker'
 faker.proxy.Faker.__dir__(self)
 faker.proxy.Faker.__getattr__(self,attr:str)->Any
 faker.proxy.Faker.__getattribute__(self,attr:str)->Any
 faker.proxy.Faker.__getitem__(self,locale:str)->Generator
+faker.proxy.Faker.__init__(self,locale:Optional[Union[str,Sequence[str],Dict[str,Union[int,float]]]]=None,providers:Optional[List[str]]=None,generator:Optional[Generator]=None,includes:Optional[List[str]]=None,use_weighting:bool=True,**config:Any)
 faker.proxy.Faker.__setstate__(self,state:Any)->None
 faker.proxy.Faker._map_provider_method(self,method_name:str)->Tuple[List[Factory], Optional[List[float]]]
 faker.proxy.Faker._select_factory(self,method_name:str)->Factory
@@ -121,6 +160,7 @@ faker.proxy.Faker.weights(self)->Optional[List[Union[int, float]]]
 faker.proxy.UniqueProxy(self,proxy:Faker)
 faker.proxy.UniqueProxy.__getattr__(self,name:str)->Any
 faker.proxy.UniqueProxy.__getstate__(self)
+faker.proxy.UniqueProxy.__init__(self,proxy:Faker)
 faker.proxy.UniqueProxy.__setstate__(self,state)
 faker.proxy.UniqueProxy._wrap(self,name:str,function:Callable)->Callable
 faker.proxy.UniqueProxy.clear(self)->None
@@ -130,6 +170,7 @@ faker.proxy.UniqueProxy.clear(self)->None
 faker.exceptions.BaseFakerException(Exception)
 faker.exceptions.UniquenessException(BaseFakerException)
 faker.exceptions.UnsupportedFeature(self,msg:str,name:str)
+faker.exceptions.UnsupportedFeature.__init__(self,msg:str,name:str)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/__main__.py----------------------------------------
@@ -141,6 +182,7 @@ A:faker.documentor.default->repr(default)
 A:faker.documentor.example->self.generator.format(name, *faker_args, **faker_kwargs)
 A:faker.documentor.self.max_name_len->max(self.max_name_len, len(signature))
 faker.documentor.Documentor(self,generator:Union[Generator,Faker])
+faker.documentor.Documentor.__init__(self,generator:Union[Generator,Faker])
 faker.documentor.Documentor.get_formatters(self,locale:Optional[str]=None,excludes:Optional[List[str]]=None,**kwargs:Any)->List[Tuple[BaseProvider, Dict[str, str]]]
 faker.documentor.Documentor.get_provider_formatters(self,provider:BaseProvider,prefix:str='fake.',with_args:bool=True,with_defaults:bool=True)->Dict[str, str]
 faker.documentor.Documentor.get_provider_name(provider_class:BaseProvider)->str
@@ -220,6 +262,7 @@ A:faker.providers.__init__.text->re.compile('@').sub(lambda x: str(self.random_d
 A:faker.providers.__init__.letters->letters.upper().upper()
 A:faker.providers.__init__.generator->Generator()
 faker.providers.__init__.BaseProvider(self,generator:Any)
+faker.providers.__init__.BaseProvider.__init__(self,generator:Any)
 faker.providers.__init__.BaseProvider.bothify(self,text:str='##??',letters:str=string.ascii_letters)->str
 faker.providers.__init__.BaseProvider.hexify(self,text:str='^^^^',upper:bool=False)->str
 faker.providers.__init__.BaseProvider.language_code(self)->str
@@ -242,6 +285,7 @@ faker.providers.__init__.BaseProvider.random_sample(self,elements:ElementsType=(
 faker.providers.__init__.BaseProvider.random_uppercase_letter(self)->str
 faker.providers.__init__.BaseProvider.randomize_nb_elements(self,number:int=10,le:bool=False,ge:bool=False,min:Optional[int]=None,max:Optional[int]=None)->int
 faker.providers.__init__.DynamicProvider(self,provider_name:str,elements:Optional[List]=None,generator:Optional[Any]=None)
+faker.providers.__init__.DynamicProvider.__init__(self,provider_name:str,elements:Optional[List]=None,generator:Optional[Any]=None)
 faker.providers.__init__.DynamicProvider.add_element(self,element:str)->None
 faker.providers.__init__.DynamicProvider.get_random_value(self)->Any
 
@@ -984,6 +1028,7 @@ faker.providers.person.pt_PT.__init__.Provider.prefix(self)->str
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/person/fr_QC/__init__.py----------------------------------------
 faker.providers.person.fr_QC.__init__.Provider(self,*args:Any,**kwargs:Any)
+faker.providers.person.fr_QC.__init__.Provider.__init__(self,*args:Any,**kwargs:Any)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/person/es/__init__.py----------------------------------------
@@ -1957,6 +2002,7 @@ A:faker.providers.credit_card.__init__.number->self.numerify(number)
 A:faker.providers.credit_card.__init__.expire_date->self.generator.date_time_between(start, end)
 A:faker.providers.credit_card.__init__.tpl->tpl.format(provider=card.name, owner=self.generator.parse('{{first_name}} {{last_name}}'), number=self.credit_card_number(card), expire_date=self.credit_card_expire(), security=card.security_code, security_nb=self.credit_card_security_code(card)).format(provider=card.name, owner=self.generator.parse('{{first_name}} {{last_name}}'), number=self.credit_card_number(card), expire_date=self.credit_card_expire(), security=card.security_code, security_nb=self.credit_card_security_code(card))
 faker.providers.credit_card.__init__.CreditCard(self,name:str,prefixes:List[str],length:int=16,security_code:str='CVC',security_code_length:int=3)
+faker.providers.credit_card.__init__.CreditCard.__init__(self,name:str,prefixes:List[str],length:int=16,security_code:str='CVC',security_code_length:int=3)
 faker.providers.credit_card.__init__.Provider(BaseProvider)
 faker.providers.credit_card.__init__.Provider._credit_card_type(self,card_type:Optional[CardType]=None)->CreditCard
 faker.providers.credit_card.__init__.Provider._generate_number(self,prefix:str,length:int)->str
@@ -2305,7 +2351,20 @@ A:faker.providers.color.color.v1->max(v1, 0)
 A:faker.providers.color.color.v2->min(v2, 360)
 A:faker.providers.color.color.(r, g, b)->colorsys.hsv_to_rgb(h / 360, s / 100, v / 100)
 faker.providers.color.RandomColor(self,generator:Optional['Generator']=None,seed:Optional[Hashable]=None)
+faker.providers.color.RandomColor.generate(self,hue:Optional[HueType]=None,luminosity:Optional[str]=None,color_format:str='hex')->str
+faker.providers.color.RandomColor.get_color_info(self,hue:int)->Dict[str, Sequence[Tuple[int, int]]]
+faker.providers.color.RandomColor.get_hue_range(self,color_input:Optional[HueType])->Tuple[int, int]
+faker.providers.color.RandomColor.get_minimum_brightness(self,h:int,s:int)->int
+faker.providers.color.RandomColor.get_saturation_range(self,hue:int)->Tuple[int, int]
+faker.providers.color.RandomColor.hsv_to_hsl(cls,hsv:Tuple[int,int,int])->Tuple[int, int, int]
+faker.providers.color.RandomColor.hsv_to_rgb(cls,hsv:Tuple[int,int,int])->Tuple[int, int, int]
+faker.providers.color.RandomColor.pick_brightness(self,h:int,s:int,luminosity:Optional[str])->int
+faker.providers.color.RandomColor.pick_hue(self,hue:Optional[HueType])->int
+faker.providers.color.RandomColor.pick_saturation(self,hue:int,hue_name:Optional[HueType],luminosity:Optional[str])->int
+faker.providers.color.RandomColor.random_within(self,r:Sequence[int])->int
+faker.providers.color.RandomColor.set_format(self,hsv:Tuple[int,int,int],color_format:str)->str
 faker.providers.color.color.RandomColor(self,generator:Optional['Generator']=None,seed:Optional[Hashable]=None)
+faker.providers.color.color.RandomColor.__init__(self,generator:Optional['Generator']=None,seed:Optional[Hashable]=None)
 faker.providers.color.color.RandomColor.generate(self,hue:Optional[HueType]=None,luminosity:Optional[str]=None,color_format:str='hex')->str
 faker.providers.color.color.RandomColor.get_color_info(self,hue:int)->Dict[str, Sequence[Tuple[int, int]]]
 faker.providers.color.color.RandomColor.get_hue_range(self,color_input:Optional[HueType])->Tuple[int, int]
@@ -2954,12 +3013,19 @@ A:faker.providers.isbn.isbn.body->''.join([part for part in [self.group, self.re
 A:faker.providers.isbn.isbn.weights->range(1, 10)
 faker.providers.isbn.ISBN(self,ean:Optional[str]=None,group:Optional[str]=None,registrant:Optional[str]=None,publication:Optional[str]=None)
 faker.providers.isbn.ISBN10(self,*args:Any,**kwargs:Any)
+faker.providers.isbn.ISBN10._check_digit(self)->str
+faker.providers.isbn.ISBN10.format(self,separator:str='')->str
 faker.providers.isbn.ISBN13(self,*args:Any,**kwargs:Any)
+faker.providers.isbn.ISBN13._check_digit(self)->str
+faker.providers.isbn.ISBN13.format(self,separator:str='')->str
 faker.providers.isbn.isbn.ISBN(self,ean:Optional[str]=None,group:Optional[str]=None,registrant:Optional[str]=None,publication:Optional[str]=None)
+faker.providers.isbn.isbn.ISBN.__init__(self,ean:Optional[str]=None,group:Optional[str]=None,registrant:Optional[str]=None,publication:Optional[str]=None)
 faker.providers.isbn.isbn.ISBN10(self,*args:Any,**kwargs:Any)
+faker.providers.isbn.isbn.ISBN10.__init__(self,*args:Any,**kwargs:Any)
 faker.providers.isbn.isbn.ISBN10._check_digit(self)->str
 faker.providers.isbn.isbn.ISBN10.format(self,separator:str='')->str
 faker.providers.isbn.isbn.ISBN13(self,*args:Any,**kwargs:Any)
+faker.providers.isbn.isbn.ISBN13.__init__(self,*args:Any,**kwargs:Any)
 faker.providers.isbn.isbn.ISBN13._check_digit(self)->str
 faker.providers.isbn.isbn.ISBN13.format(self,separator:str='')->str
 
@@ -3022,6 +3088,53 @@ A:faker.providers.date_time.__init__.start_date_->self._parse_date_time(start_da
 A:faker.providers.date_time.__init__.end_date_->self._parse_date_time(end_date, tzinfo=tzinfo)
 A:faker.providers.date_time.__init__.precision_->self._parse_timedelta((end_date_ - start_date_) / 30 if precision is None else precision)
 A:faker.providers.date_time.__init__.dob->self.date_time_ad(tzinfo=tzinfo, start_datetime=start_date, end_datetime=end_date).date()
+faker.providers.date_dttime.__init__.ParseError(ValueError)
+faker.providers.date_dttime.__init__.Provider(BaseProvider)
+faker.providers.date_dttime.__init__.Provider._parse_date(cls,value:DateParseType)->dtdate
+faker.providers.date_dttime.__init__.Provider._parse_date_dttime(cls,value:DateParseType,tzinfo:Optional[TzInfo]=None)->int
+faker.providers.date_dttime.__init__.Provider._parse_date_string(cls,value:str)->Dict[str, float]
+faker.providers.date_dttime.__init__.Provider._parse_end_datedttime(cls,value:Optional[DateParseType])->int
+faker.providers.date_dttime.__init__.Provider._parse_start_datedttime(cls,value:Optional[DateParseType])->int
+faker.providers.date_dttime.__init__.Provider.am_pm(self)->str
+faker.providers.date_dttime.__init__.Provider.century(self)->str
+faker.providers.date_dttime.__init__.Provider.date(self,pattern:str='%Y-%m-%d',end_datetime:Optional[DateParseType]=None)->str
+faker.providers.date_dttime.__init__.Provider.date_between(self,start_date:DateParseType='-30y',end_date:DateParseType='today')->dtdate
+faker.providers.date_dttime.__init__.Provider.date_between_dates(self,date_start:Optional[DateParseType]=None,date_end:Optional[DateParseType]=None)->dtdate
+faker.providers.date_dttime.__init__.Provider.date_dttime(self,tzinfo:Optional[TzInfo]=None,end_datetime:Optional[DateParseType]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_ad(self,tzinfo:Optional[TzInfo]=None,end_datetime:Optional[DateParseType]=None,start_datetime:Optional[DateParseType]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_between(self,start_date:DateParseType='-30y',end_date:DateParseType='now',tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_between_dates(self,datetime_start:Optional[DateParseType]=None,datetime_end:Optional[DateParseType]=None,tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_this_century(self,before_now:bool=True,after_now:bool=False,tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_this_decade(self,before_now:bool=True,after_now:bool=False,tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_this_month(self,before_now:bool=True,after_now:bool=False,tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_dttime_this_year(self,before_now:bool=True,after_now:bool=False,tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.date_object(self,end_datetime:datetime=None)->dtdate
+faker.providers.date_dttime.__init__.Provider.date_of_birth(self,tzinfo:Optional[TzInfo]=None,minimum_age:int=0,maximum_age:int=115)->dtdate
+faker.providers.date_dttime.__init__.Provider.date_this_century(self,before_today:bool=True,after_today:bool=False)->dtdate
+faker.providers.date_dttime.__init__.Provider.date_this_decade(self,before_today:bool=True,after_today:bool=False)->dtdate
+faker.providers.date_dttime.__init__.Provider.date_this_month(self,before_today:bool=True,after_today:bool=False)->dtdate
+faker.providers.date_dttime.__init__.Provider.date_this_year(self,before_today:bool=True,after_today:bool=False)->dtdate
+faker.providers.date_dttime.__init__.Provider.day_of_month(self)->str
+faker.providers.date_dttime.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.__init__.Provider.dttime(self,pattern:str='%H:%M:%S',end_datetime:Optional[DateParseType]=None)->str
+faker.providers.date_dttime.__init__.Provider.dttime_delta(self,end_datetime:Optional[DateParseType]=None)->timedelta
+faker.providers.date_dttime.__init__.Provider.dttime_object(self,end_datetime:Optional[DateParseType]=None)->dttime
+faker.providers.date_dttime.__init__.Provider.dttime_series(self,start_date:DateParseType='-30d',end_date:DateParseType='now',precision:Optional[float]=None,distrib:Optional[Callable[[datetime],float]]=None,tzinfo:Optional[TzInfo]=None)->Iterator[Tuple[datetime, Any]]
+faker.providers.date_dttime.__init__.Provider.dttimezone(self)->str
+faker.providers.date_dttime.__init__.Provider.future_date(self,end_date:DateParseType='+30d',tzinfo:Optional[TzInfo]=None)->dtdate
+faker.providers.date_dttime.__init__.Provider.future_datedttime(self,end_date:DateParseType='+30d',tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.iso8601(self,tzinfo:Optional[TzInfo]=None,end_datetime:Optional[DateParseType]=None)->str
+faker.providers.date_dttime.__init__.Provider.month(self)->str
+faker.providers.date_dttime.__init__.Provider.month_name(self)->str
+faker.providers.date_dttime.__init__.Provider.past_date(self,start_date:DateParseType='-30d',tzinfo:Optional[TzInfo]=None)->dtdate
+faker.providers.date_dttime.__init__.Provider.past_datedttime(self,start_date:DateParseType='-30d',tzinfo:Optional[TzInfo]=None)->datetime
+faker.providers.date_dttime.__init__.Provider.pydttimezone(self,*args:Any,**kwargs:Any)->Optional[TzInfo]
+faker.providers.date_dttime.__init__.Provider.unix_dttime(self,end_datetime:Optional[DateParseType]=None,start_datetime:Optional[DateParseType]=None)->int
+faker.providers.date_dttime.__init__.Provider.year(self)->str
+faker.providers.date_dttime.__init__.change_year(current_date:dtdate,year_diff:int)->dtdate
+faker.providers.date_dttime.__init__.convert_dttimestamp_to_datedttime(timestamp:Union[int,float],tzinfo:TzInfo)->datetime
+faker.providers.date_dttime.__init__.datedttime_to_dttimestamp(dt:Union[dtdate,datetime])->int
+faker.providers.date_dttime.__init__.dttimestamp_to_datedttime(timestamp:Union[int,float],tzinfo:Optional[TzInfo])->datetime
 faker.providers.date_time.__init__.ParseError(ValueError)
 faker.providers.date_time.__init__.Provider(BaseProvider)
 faker.providers.date_time.__init__.Provider._parse_date(cls,value:DateParseType)->dtdate
@@ -3075,6 +3188,9 @@ faker.providers.date_time.__init__.timestamp_to_datetime(timestamp:Union[int,flo
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/ro_RO/__init__.py----------------------------------------
 A:faker.providers.date_time.ro_RO.__init__.day->self.date('%w')
 A:faker.providers.date_time.ro_RO.__init__.month->self.month()
+faker.providers.date_dttime.ro_RO.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.ro_RO.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.ro_RO.__init__.Provider.month_name(self)
 faker.providers.date_time.ro_RO.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.ro_RO.__init__.Provider.day_of_week(self)
 faker.providers.date_time.ro_RO.__init__.Provider.month_name(self)
@@ -3083,6 +3199,9 @@ faker.providers.date_time.ro_RO.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/hu_HU/__init__.py----------------------------------------
 A:faker.providers.date_time.hu_HU.__init__.day->self.date('%w')
 A:faker.providers.date_time.hu_HU.__init__.month->self.month()
+faker.providers.date_dttime.hu_HU.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.hu_HU.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.hu_HU.__init__.Provider.month_name(self)->str
 faker.providers.date_time.hu_HU.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.hu_HU.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.hu_HU.__init__.Provider.month_name(self)->str
@@ -3091,6 +3210,9 @@ faker.providers.date_time.hu_HU.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/sk_SK/__init__.py----------------------------------------
 A:faker.providers.date_time.sk_SK.__init__.day->self.date('%w')
 A:faker.providers.date_time.sk_SK.__init__.month->self.month()
+faker.providers.date_dttime.sk_SK.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.sk_SK.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.sk_SK.__init__.Provider.month_name(self)
 faker.providers.date_time.sk_SK.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.sk_SK.__init__.Provider.day_of_week(self)
 faker.providers.date_time.sk_SK.__init__.Provider.month_name(self)
@@ -3099,6 +3221,9 @@ faker.providers.date_time.sk_SK.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/es_ES/__init__.py----------------------------------------
 A:faker.providers.date_time.es_ES.__init__.day->self.date('%w')
 A:faker.providers.date_time.es_ES.__init__.month->self.month()
+faker.providers.date_dttime.es_ES.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.es_ES.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.es_ES.__init__.Provider.month_name(self)
 faker.providers.date_time.es_ES.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.es_ES.__init__.Provider.day_of_week(self)
 faker.providers.date_time.es_ES.__init__.Provider.month_name(self)
@@ -3107,6 +3232,9 @@ faker.providers.date_time.es_ES.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/hi_IN/__init__.py----------------------------------------
 A:faker.providers.date_time.hi_IN.__init__.day->self.date('%w')
 A:faker.providers.date_time.hi_IN.__init__.month->self.month()
+faker.providers.date_dttime.hi_IN.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.hi_IN.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.hi_IN.__init__.Provider.month_name(self)->str
 faker.providers.date_time.hi_IN.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.hi_IN.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.hi_IN.__init__.Provider.month_name(self)->str
@@ -3115,6 +3243,9 @@ faker.providers.date_time.hi_IN.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/pt_PT/__init__.py----------------------------------------
 A:faker.providers.date_time.pt_PT.__init__.day->self.date('%w')
 A:faker.providers.date_time.pt_PT.__init__.month->self.month()
+faker.providers.date_dttime.pt_PT.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.pt_PT.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.pt_PT.__init__.Provider.month_name(self)
 faker.providers.date_time.pt_PT.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.pt_PT.__init__.Provider.day_of_week(self)
 faker.providers.date_time.pt_PT.__init__.Provider.month_name(self)
@@ -3124,6 +3255,10 @@ faker.providers.date_time.pt_PT.__init__.Provider.month_name(self)
 A:faker.providers.date_time.ar_AA.__init__.month->self.date('%m')
 A:faker.providers.date_time.ar_AA.__init__.date->self.date('%p')
 A:faker.providers.date_time.ar_AA.__init__.day->self.date('%w')
+faker.providers.date_dttime.ar_AA.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.ar_AA.__init__.Provider.am_pm(self)->str
+faker.providers.date_dttime.ar_AA.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.ar_AA.__init__.Provider.month_name(self)->str
 faker.providers.date_time.ar_AA.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.ar_AA.__init__.Provider.am_pm(self)->str
 faker.providers.date_time.ar_AA.__init__.Provider.day_of_week(self)->str
@@ -3133,6 +3268,9 @@ faker.providers.date_time.ar_AA.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/sl_SI/__init__.py----------------------------------------
 A:faker.providers.date_time.sl_SI.__init__.day->self.date('%w')
 A:faker.providers.date_time.sl_SI.__init__.month->self.month()
+faker.providers.date_dttime.sl_SI.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.sl_SI.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.sl_SI.__init__.Provider.month_name(self)->str
 faker.providers.date_time.sl_SI.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.sl_SI.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.sl_SI.__init__.Provider.month_name(self)->str
@@ -3141,18 +3279,25 @@ faker.providers.date_time.sl_SI.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/fr_FR/__init__.py----------------------------------------
 A:faker.providers.date_time.fr_FR.__init__.day->self.date('%w')
 A:faker.providers.date_time.fr_FR.__init__.month->self.month()
+faker.providers.date_dttime.fr_FR.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.fr_FR.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.fr_FR.__init__.Provider.month_name(self)->str
 faker.providers.date_time.fr_FR.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.fr_FR.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.fr_FR.__init__.Provider.month_name(self)->str
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/tl_PH/__init__.py----------------------------------------
+faker.providers.date_dttime.tl_PH.__init__.Provider(FilPhProvider)
 faker.providers.date_time.tl_PH.__init__.Provider(FilPhProvider)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/az_AZ/__init__.py----------------------------------------
 A:faker.providers.date_time.az_AZ.__init__.day->self.date('%w')
 A:faker.providers.date_time.az_AZ.__init__.month->self.month()
+faker.providers.date_dttime.az_AZ.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.az_AZ.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.az_AZ.__init__.Provider.month_name(self)
 faker.providers.date_time.az_AZ.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.az_AZ.__init__.Provider.day_of_week(self)
 faker.providers.date_time.az_AZ.__init__.Provider.month_name(self)
@@ -3161,6 +3306,9 @@ faker.providers.date_time.az_AZ.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/hy_AM/__init__.py----------------------------------------
 A:faker.providers.date_time.hy_AM.__init__.day->self.date('%w')
 A:faker.providers.date_time.hy_AM.__init__.month->self.month()
+faker.providers.date_dttime.hy_AM.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.hy_AM.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.hy_AM.__init__.Provider.month_name(self)
 faker.providers.date_time.hy_AM.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.hy_AM.__init__.Provider.day_of_week(self)
 faker.providers.date_time.hy_AM.__init__.Provider.month_name(self)
@@ -3169,6 +3317,9 @@ faker.providers.date_time.hy_AM.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/ko_KR/__init__.py----------------------------------------
 A:faker.providers.date_time.ko_KR.__init__.day->self.date('%w')
 A:faker.providers.date_time.ko_KR.__init__.month->self.month()
+faker.providers.date_dttime.ko_KR.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.ko_KR.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.ko_KR.__init__.Provider.month_name(self)->str
 faker.providers.date_time.ko_KR.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.ko_KR.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.ko_KR.__init__.Provider.month_name(self)->str
@@ -3177,6 +3328,9 @@ faker.providers.date_time.ko_KR.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/nl_NL/__init__.py----------------------------------------
 A:faker.providers.date_time.nl_NL.__init__.day->self.date('%w')
 A:faker.providers.date_time.nl_NL.__init__.month->self.month()
+faker.providers.date_dttime.nl_NL.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.nl_NL.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.nl_NL.__init__.Provider.month_name(self)
 faker.providers.date_time.nl_NL.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.nl_NL.__init__.Provider.day_of_week(self)
 faker.providers.date_time.nl_NL.__init__.Provider.month_name(self)
@@ -3185,6 +3339,9 @@ faker.providers.date_time.nl_NL.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/cs_CZ/__init__.py----------------------------------------
 A:faker.providers.date_time.cs_CZ.__init__.day->self.date('%w')
 A:faker.providers.date_time.cs_CZ.__init__.month->self.month()
+faker.providers.date_dttime.cs_CZ.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.cs_CZ.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.cs_CZ.__init__.Provider.month_name(self)
 faker.providers.date_time.cs_CZ.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.cs_CZ.__init__.Provider.day_of_week(self)
 faker.providers.date_time.cs_CZ.__init__.Provider.month_name(self)
@@ -3193,6 +3350,9 @@ faker.providers.date_time.cs_CZ.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/tr_TR/__init__.py----------------------------------------
 A:faker.providers.date_time.tr_TR.__init__.day->self.date('%w')
 A:faker.providers.date_time.tr_TR.__init__.month->self.month()
+faker.providers.date_dttime.tr_TR.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.tr_TR.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.tr_TR.__init__.Provider.month_name(self)
 faker.providers.date_time.tr_TR.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.tr_TR.__init__.Provider.day_of_week(self)
 faker.providers.date_time.tr_TR.__init__.Provider.month_name(self)
@@ -3201,18 +3361,25 @@ faker.providers.date_time.tr_TR.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/bn_BD/__init__.py----------------------------------------
 A:faker.providers.date_time.bn_BD.__init__.day->self.date('%w')
 A:faker.providers.date_time.bn_BD.__init__.month->self.month()
+faker.providers.date_dttime.bn_BD.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.bn_BD.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.bn_BD.__init__.Provider.month_name(self)->str
 faker.providers.date_time.bn_BD.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.bn_BD.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.bn_BD.__init__.Provider.month_name(self)->str
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/en_US/__init__.py----------------------------------------
+faker.providers.date_dttime.en_US.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.en_US.__init__.Provider(DateTimeProvider)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/hr_HR/__init__.py----------------------------------------
 A:faker.providers.date_time.hr_HR.__init__.day->self.date('%w')
 A:faker.providers.date_time.hr_HR.__init__.month->self.month()
+faker.providers.date_dttime.hr_HR.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.hr_HR.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.hr_HR.__init__.Provider.month_name(self)->str
 faker.providers.date_time.hr_HR.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.hr_HR.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.hr_HR.__init__.Provider.month_name(self)->str
@@ -3221,6 +3388,9 @@ faker.providers.date_time.hr_HR.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/id_ID/__init__.py----------------------------------------
 A:faker.providers.date_time.id_ID.__init__.day->self.date('%w')
 A:faker.providers.date_time.id_ID.__init__.month->self.month()
+faker.providers.date_dttime.id_ID.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.id_ID.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.id_ID.__init__.Provider.month_name(self)->str
 faker.providers.date_time.id_ID.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.id_ID.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.id_ID.__init__.Provider.month_name(self)->str
@@ -3229,6 +3399,9 @@ faker.providers.date_time.id_ID.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/el_GR/__init__.py----------------------------------------
 A:faker.providers.date_time.el_GR.__init__.day->self.date('%w')
 A:faker.providers.date_time.el_GR.__init__.month->self.month()
+faker.providers.date_dttime.el_GR.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.el_GR.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.el_GR.__init__.Provider.month_name(self)
 faker.providers.date_time.el_GR.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.el_GR.__init__.Provider.day_of_week(self)
 faker.providers.date_time.el_GR.__init__.Provider.month_name(self)
@@ -3237,6 +3410,9 @@ faker.providers.date_time.el_GR.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/de_AT/__init__.py----------------------------------------
 A:faker.providers.date_time.de_AT.__init__.day->self.date('%w')
 A:faker.providers.date_time.de_AT.__init__.month->self.month()
+faker.providers.date_dttime.de_AT.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.de_AT.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.de_AT.__init__.Provider.month_name(self)
 faker.providers.date_time.de_AT.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.de_AT.__init__.Provider.day_of_week(self)
 faker.providers.date_time.de_AT.__init__.Provider.month_name(self)
@@ -3245,18 +3421,25 @@ faker.providers.date_time.de_AT.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/pl_PL/__init__.py----------------------------------------
 A:faker.providers.date_time.pl_PL.__init__.day->self.date('%w')
 A:faker.providers.date_time.pl_PL.__init__.month->self.month()
+faker.providers.date_dttime.pl_PL.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.pl_PL.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.pl_PL.__init__.Provider.month_name(self)
 faker.providers.date_time.pl_PL.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.pl_PL.__init__.Provider.day_of_week(self)
 faker.providers.date_time.pl_PL.__init__.Provider.month_name(self)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/en_PH/__init__.py----------------------------------------
+faker.providers.date_dttime.en_PH.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.en_PH.__init__.Provider(DateTimeProvider)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/ru_RU/__init__.py----------------------------------------
 A:faker.providers.date_time.ru_RU.__init__.day->self.date('%w')
 A:faker.providers.date_time.ru_RU.__init__.month->self.month()
+faker.providers.date_dttime.ru_RU.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.ru_RU.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.ru_RU.__init__.Provider.month_name(self)->str
 faker.providers.date_time.ru_RU.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.ru_RU.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.ru_RU.__init__.Provider.month_name(self)->str
@@ -3265,6 +3448,9 @@ faker.providers.date_time.ru_RU.__init__.Provider.month_name(self)->str
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/de_DE/__init__.py----------------------------------------
 A:faker.providers.date_time.de_DE.__init__.day->self.date('%w')
 A:faker.providers.date_time.de_DE.__init__.month->self.month()
+faker.providers.date_dttime.de_DE.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.de_DE.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.de_DE.__init__.Provider.month_name(self)
 faker.providers.date_time.de_DE.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.de_DE.__init__.Provider.day_of_week(self)
 faker.providers.date_time.de_DE.__init__.Provider.month_name(self)
@@ -3273,18 +3459,25 @@ faker.providers.date_time.de_DE.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/fil_PH/__init__.py----------------------------------------
 A:faker.providers.date_time.fil_PH.__init__.day->self.date('%w')
 A:faker.providers.date_time.fil_PH.__init__.month->self.month()
+faker.providers.date_dttime.fil_PH.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.fil_PH.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.fil_PH.__init__.Provider.month_name(self)
 faker.providers.date_time.fil_PH.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.fil_PH.__init__.Provider.day_of_week(self)
 faker.providers.date_time.fil_PH.__init__.Provider.month_name(self)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/ar_EG/__init__.py----------------------------------------
+faker.providers.date_dttime.ar_EG.__init__.Provider(ArabicDateTimeProvider)
 faker.providers.date_time.ar_EG.__init__.Provider(ArabicDateTimeProvider)
 
 
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/pt_BR/__init__.py----------------------------------------
 A:faker.providers.date_time.pt_BR.__init__.day->self.date('%w')
 A:faker.providers.date_time.pt_BR.__init__.month->self.month()
+faker.providers.date_dttime.pt_BR.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.pt_BR.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.pt_BR.__init__.Provider.month_name(self)
 faker.providers.date_time.pt_BR.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.pt_BR.__init__.Provider.day_of_week(self)
 faker.providers.date_time.pt_BR.__init__.Provider.month_name(self)
@@ -3293,6 +3486,9 @@ faker.providers.date_time.pt_BR.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/it_IT/__init__.py----------------------------------------
 A:faker.providers.date_time.it_IT.__init__.day->self.date('%w')
 A:faker.providers.date_time.it_IT.__init__.month->self.month()
+faker.providers.date_dttime.it_IT.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.it_IT.__init__.Provider.day_of_week(self)
+faker.providers.date_dttime.it_IT.__init__.Provider.month_name(self)
 faker.providers.date_time.it_IT.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.it_IT.__init__.Provider.day_of_week(self)
 faker.providers.date_time.it_IT.__init__.Provider.month_name(self)
@@ -3301,6 +3497,9 @@ faker.providers.date_time.it_IT.__init__.Provider.month_name(self)
 ----------------------------------------/home/zhang/Packages/faker/faker12.0.1/providers/date_time/ta_IN/__init__.py----------------------------------------
 A:faker.providers.date_time.ta_IN.__init__.day->self.date('%w')
 A:faker.providers.date_time.ta_IN.__init__.month->self.month()
+faker.providers.date_dttime.ta_IN.__init__.Provider(DateTimeProvider)
+faker.providers.date_dttime.ta_IN.__init__.Provider.day_of_week(self)->str
+faker.providers.date_dttime.ta_IN.__init__.Provider.month_name(self)->str
 faker.providers.date_time.ta_IN.__init__.Provider(DateTimeProvider)
 faker.providers.date_time.ta_IN.__init__.Provider.day_of_week(self)->str
 faker.providers.date_time.ta_IN.__init__.Provider.month_name(self)->str
@@ -3313,6 +3512,13 @@ A:faker.providers.date_time.th_TH.__init__.year_G->int(dt_obj.strftime('%G'))
 A:faker.providers.date_time.th_TH.__init__.fmt_len->len(fmt)
 A:faker.providers.date_time.th_TH.__init__.thaidate_text->thaidate_text.translate(_HA_TH_DIGITS).translate(_HA_TH_DIGITS)
 A:faker.providers.date_time.th_TH.__init__.text->text.translate(_HA_TH_DIGITS).translate(_HA_TH_DIGITS)
+faker.providers.date_dttime.th_TH.__init__.Provider(DateParseTypeProvider)
+faker.providers.date_dttime.th_TH.__init__.Provider.century(self,thai_digit:bool=False,buddhist_era:bool=True)->str
+faker.providers.date_dttime.th_TH.__init__.Provider.date(self,pattern:str='%-d%b%Y',end_datetime:Optional[DateParseType]=None,thai_digit:bool=False,buddhist_era:bool=True)->str
+faker.providers.date_dttime.th_TH.__init__.Provider.dttime(self,pattern:str='%H:%M:%S',end_datetime:Optional[DateParseType]=None,thai_digit:bool=False)->str
+faker.providers.date_dttime.th_TH.__init__._std_strfdttime(dt_obj:datetime,fmt_char:str)->str
+faker.providers.date_dttime.th_TH.__init__._thai_strfdttime(dt_obj:datetime,fmt_char:str,buddhist_era:bool=True)->str
+faker.providers.date_dttime.th_TH.__init__.thai_strfdttime(dt_obj:datetime,fmt:str='%-d%b%Y',thai_digit:bool=False,buddhist_era:bool=True)->str
 faker.providers.date_time.th_TH.__init__.Provider(DateParseTypeProvider)
 faker.providers.date_time.th_TH.__init__.Provider.century(self,thai_digit:bool=False,buddhist_era:bool=True)->str
 faker.providers.date_time.th_TH.__init__.Provider.date(self,pattern:str='%-d%b%Y',end_datetime:Optional[DateParseType]=None,thai_digit:bool=False,buddhist_era:bool=True)->str
@@ -3859,6 +4065,7 @@ A:faker.sphinx.validator.self._errors->set()
 A:faker.sphinx.validator.self._tree->ast.parse(command, mode='eval')
 A:faker.sphinx.validator.is_valid->self._is_node_using_ordereddict(node.func)
 faker.sphinx.validator.SampleCodeValidator(self,command)
+faker.sphinx.validator.SampleCodeValidator.__init__(self,command)
 faker.sphinx.validator.SampleCodeValidator._is_node_using_ordereddict(self,node)
 faker.sphinx.validator.SampleCodeValidator._is_whitelisted(self,node)
 faker.sphinx.validator.SampleCodeValidator._log_error(self,msg)
@@ -3893,6 +4100,7 @@ A:faker.sphinx.docstring.command->_command_template.format(method=self._method, 
 A:faker.sphinx.docstring.validator->SampleCodeValidator(command)
 A:faker.sphinx.docstring.results->'\n'.join([self._stringify_result(eval(command, eval_scope)) for _ in range(sample.size)])
 faker.sphinx.docstring.ProviderMethodDocstring(self,app,what,name,obj,options,lines)
+faker.sphinx.docstring.ProviderMethodDocstring.__init__(self,app,what,name,obj,options,lines)
 faker.sphinx.docstring.ProviderMethodDocstring._beautify_kwargs(self,kwargs)
 faker.sphinx.docstring.ProviderMethodDocstring._generate_eval_scope(self)
 faker.sphinx.docstring.ProviderMethodDocstring._generate_samples(self)
