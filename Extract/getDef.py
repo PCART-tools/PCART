@@ -1,3 +1,8 @@
+## @package getDef 
+#  Extract API definitions from lib source code 
+#
+#  More details (TODO)
+
 import os
 import re
 from Path.getPath import *
@@ -5,15 +10,25 @@ from Extract.extractDef import *
 from Extract.extractCall import *
 from Tool.tool import getAst
 
+
+## Regular expression match class 
+#
+#  Match a given pattern from code text
 class RegexMatch:
+    
+    ## The constructor
     def __init__(self,code_text,pattern):
         self._code_text=code_text
         self._pattern=pattern
         self._result=[]
 
+    ## Return the match result
+    #  @param self The object pointer
     def get_result(self):
         return self._result
 
+    ## Perform the regular expressions
+    #  @param self The object pointer
     def regex_match(self):
         obj=re.compile(self._pattern,re.DOTALL)
         lst=obj.findall(self._code_text)
@@ -31,8 +46,9 @@ class RegexMatch:
             return 0
 
 
-
-#获取.py文件的Assign语句
+## Extract all assign node from a .py file's AST
+## 通过AST获取.py文件的Assign语句
+#  @param root_node The ast node of the .py file
 def getAssign(root_node):
     #找出树中所有的模块名
     import_visitor=Import()
@@ -59,9 +75,11 @@ def getAssign(root_node):
 
 
 
-
-#通过解析__init__.py,把源码中的部分API路径缩短
-#缩短API路径可能会将不同文件中的API还原成相同的形式，比如A.b.f,A.c.f都还原成A.f
+## Shorten the API path based on __init__.py and import alias 
+## 通过解析__init__.py和import别名,把源码中的部分API路径缩短
+#  @param lst An API path. Initially, lst is the fully qualified API name. 
+#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name. 
+#  缩短API路径可能会将不同文件中的API还原成相同的形式，比如A.b.f,A.c.f都还原成A.f
 def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的API路径
     absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
     relativePath=[v for v in fileDict.values()][0] #pkg/file.py 
@@ -105,8 +123,13 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
     lst[0]=api 
     shortenPath(lst,{absolutePath:relativePath})
 
-
-#递归访问类中所有节点，主要解决嵌套类的问题
+## Extract class method definitions from a give class.
+## 抽取类中方法定义。递归访问类中所有节点，主要解决嵌套类的问题
+#  @param lst List of lib API definitions extracted from a lib source file 
+#  @param root The class type ast node
+#  @param prefix The related path of a source file. The related path begins with the lib name   
+#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name. 
+#  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
     className=root.name
     flagInit=0
@@ -178,7 +201,12 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
 
 
 
-
+## Extract all lib API definitions from a source file
+#  @param codeText The code text of a source file, read by f.read()
+#  @param libApi List of lib API definitions extracted from a lib source file 
+#  @param prefix The related path of a source file. The related path begins with the lib name   
+#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name. 
+#  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文件名
     rootNode=ast.parse(codeText,filename='<unknown>',mode='exec')
     for node in ast.iter_child_nodes(rootNode):
@@ -205,12 +233,13 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文�
 
 
 
-
-#filePath是库下所有文件对应的路径
+## Extract all lib API definitions from a specified version
+#  @param args The arguments include the lib name, lib version, and the lib path 
 def getDefFunction(args):
     libName, version, libPath=args
     fileObj=Path('DF')
     fileObj.getPath(libPath)
+    #filePath是库下所有文件对应的路径
     filePath=fileObj.path
     if not os.path.exists(f"LibAPIExtraction/{libName}"):
         try:

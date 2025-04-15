@@ -1,7 +1,17 @@
+## @package getCall
+#  Extract API calls from project source code
+#
+#  More details (TODO)
+
 import ast
 from Extract.extractCall import *
 
 
+## Extract method calls in a custom class inherited from a lib class
+#  @param root The ast node of the parsed project file 
+#  @param importDict Module names identified from import statements 
+#  @param libName The target lib name (e.g., torch) 
+#  @return list of extracted inherited method calls 
 def getSelfAPI(root,importDict,libName):
     ansLst=[]
     for node in ast.iter_child_nodes(root):
@@ -42,13 +52,20 @@ def getSelfAPI(root,importDict,libName):
     return ansLst
 
 
-    
-#A=polars()
-#A=A.a(x)
-#A=A.b(y)
-#A=A.a(z)
-#A.a(z)-->A.b(y).a(z)-->A.a(x).b(y).a(z)-->polars.a(x).b(y).a(z)
-#存在的异常情况：中间函数的返回值可能会改变
+## Restore the conventional API call path by modifying the first name of API prefix 
+#
+#  For example: 
+#  A=polars()
+#  A=A.a(x)
+#  A=A.b(y)
+#  A=A.a(z)
+#  A.a(z)-->A.b(y).a(z)-->A.a(x).b(y).a(z)-->polars.a(x).b(y).a(z)
+#  存在的异常情况：中间函数的返回值可能会改变
+#  @param prefix Prefix of the API call (e.g., A.a(z), A is the prefix)
+#  @param callName API call item in source code 
+#  @param paraStr Parameter string
+#  @param codeLst Source file code list
+#  @return The conventional API call path  
 def modifyFirstName(prefix, callName, paraStr, codeLst):
     name_parts=callName.split('.') #按.进行字段拆分
     # print(callName)
@@ -114,9 +131,12 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
 
 
 
-
-# 每次传进来一个.py文件，抽取所有的调用API
-# 返回值是一个字典，key是还原后的API+参数，value是还原前的API+参数
+## Extract all API calls from a given .py file
+## 每次传进来一个.py文件，抽取所有的调用API
+#  @param filePath The .py file path
+#  @param libName The target lib name (e.g., torch) 
+#  @return A dictionary, where the key is the restored API call path + parameters, the value is the original API call + parameters 
+#  @return 返回值是一个字典，key是还原后的API+参数，value是还原前的API+参数
 def getCallFunction(filePath,libName):
     with open(filePath,'r',encoding='UTF-8') as f:
         codeText=f.read()
@@ -142,7 +162,7 @@ def getCallFunction(filePath,libName):
         apiFormatDict={} #保存还原前的API后还原后的API的对应关系
         selfAPIs=[] #保存通过self调用的API
         for callName,paraStr,callState,lineno in all_func_calls:
-            # print(f"{callName}({paraStr})")
+            #print(f"{callName}({paraStr})")
             name_parts=callName.split('.') #按.进行字段拆分
             if 'self' in name_parts[0]:
                 selfAPIs.append((callName,paraStr,callState,lineno))
