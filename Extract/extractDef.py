@@ -1,4 +1,13 @@
+## @package extractDef
+#  Provides some class definitions for extracting lib APIs
+#
+#  More details (TODO)
+ 
 import ast
+
+## Function definition node visitor
+#
+#  Inherits from ast.NodeVisitor 
 class FunctionDefVisitor(ast.NodeVisitor):
     def __init__(self):
         self._defNodes=[]
@@ -10,7 +19,9 @@ class FunctionDefVisitor(ast.NodeVisitor):
         self._defNodes.append(node)
 
 
-
+## From import statement node visitor
+#
+#  Inherits from ast.NodeVisitor 
 class FromImport(ast.NodeVisitor):
     def __init__(self, currentLevel):
         self._importDict={}
@@ -40,7 +51,10 @@ class FromImport(ast.NodeVisitor):
                 else:
                     self._importDict[key]=dic['name']
 
-
+## Get prefix and relative path of a source file
+#
+#  The prefix denotes the fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
+#  the relative path denotes the relative path of a source file, e.g., lib/a/b/c.py   
 class Def2format:
     def __init__(self):
         self._prefix=''
@@ -54,7 +68,7 @@ class Def2format:
     def relativePath(self):
         return self._relativePath
     
-    
+    # Get the relative path and prefix of a source file 
     def toFormat(self,filePath):
         s=filePath.split(f"site-packages/")[-1]
         self._relativePath=s
