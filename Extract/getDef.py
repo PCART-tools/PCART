@@ -78,7 +78,7 @@ def getAssign(root_node):
 ## Shorten the API path based on __init__.py and import alias 
 ## 通过解析__init__.py和import别名,把源码中的部分API路径缩短
 #  @param lst An API path. Initially, lst is the fully qualified API name. 
-#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name. 
+#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  缩短API路径可能会将不同文件中的API还原成相同的形式，比如A.b.f,A.c.f都还原成A.f
 def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的API路径
     absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
@@ -127,8 +127,8 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
 ## 抽取类中方法定义。递归访问类中所有节点，主要解决嵌套类的问题
 #  @param lst List of lib API definitions extracted from a lib source file 
 #  @param root The class type ast node
-#  @param prefix The related path of a source file. The related path begins with the lib name   
-#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name. 
+#  @param prefix The fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
+#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
     className=root.name
@@ -204,8 +204,8 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
 ## Extract all lib API definitions from a source file
 #  @param codeText The code text of a source file, read by f.read()
 #  @param libApi List of lib API definitions extracted from a lib source file 
-#  @param prefix The related path of a source file. The related path begins with the lib name   
-#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name. 
+#  @param prefix The fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
+#  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文件名
     rootNode=ast.parse(codeText,filename='<unknown>',mode='exec')
