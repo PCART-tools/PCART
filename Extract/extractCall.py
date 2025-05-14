@@ -1,5 +1,5 @@
 ## @package extractCall 
-#  Provide some class definitions for extracting lib API calls
+#  Provide some class definitions for extracting lib API calls from project souce files
 #
 #  More details (TODO)
 
