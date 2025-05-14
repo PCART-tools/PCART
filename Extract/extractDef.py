@@ -1,5 +1,5 @@
 ## @package extractDef
-#  Provides some class definitions for extracting lib APIs
+#  Provides some class definitions for extracting lib API definitions from lib source files
 #
 #  More details (TODO)
  
