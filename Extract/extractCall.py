@@ -1,5 +1,14 @@
+## @package extractCall 
+#  Provide some class definitions for extracting lib API calls
+#
+#  More details (TODO)
+
 import ast
-#访问import节点和importFrom节点
+
+## Import and ImportFrom node visitor
+## 访问import节点和importFrom节点
+#
+#  Inherits from ast.NodeVisitor  
 class Import(ast.NodeVisitor):
     def __init__(self):
         self._md_name={}
@@ -25,8 +34,10 @@ class Import(ast.NodeVisitor):
                     self._md_name[it["asname"]]=node.module+'.'+it["name"]
 
 
-
-#从根节点开始，直接找根节点的孩子，Call存在于Expr和Assign节点中
+## Extract all call type nodes from a project source file
+#
+#  Use DFS algorithm to traverse the call type node from the root node. Each API call is stored in a tuple (API name, parameters, call statement, line no) 
+#  从根节点开始，直接找根节点的孩子，Call存在于Expr和Assign节点中。每个API调用存储为四元组(API名称,参数,调用语句,行号)
 class GetFuncCall:
     def __init__(self):
         self._func_call=[] #list中每个元素都是一个tuple
@@ -59,9 +70,11 @@ class GetFuncCall:
                 # print(node.lineno,'<-->',callState)
             return
 
-
-#找到所有的Assign节点
-#对于Assign节点，只需要关注等号左右两边的名字   
+## Get all assign nodes from a project source file 
+## 找到所有的Assign节点
+#
+#  For an assign node, extract the values before (the variable name) and after (the value expression) the assignment operator 
+#  对于Assign节点，只需要关注等号左右两边的名字   
 class AssignVisitor(ast.NodeVisitor):
     def __init__(self):
         self._targetCall={}

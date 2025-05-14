@@ -1,5 +1,14 @@
+## @package getPath 
+#  Provide the class definition for obtaining source files and directories from a project/lib 
+#
+#  More details (TODO)
+
 import os
 import copy
+
+## The Path class definition
+#
+#  provide functionalities for obtaining the paths of source files and directories  
 class Path:
     def __init__(self,mode):
         #mode='D' 表示只获取根目录下的一级子目录
