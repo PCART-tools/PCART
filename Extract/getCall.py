@@ -1,5 +1,5 @@
 ## @package getCall
-#  Extract API calls from project source code
+#  Extract lib API calls from project source code
 #
 #  More details (TODO)
 
