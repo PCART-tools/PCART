@@ -154,8 +154,13 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
                         paraNode=ast.keyword(arg=paraName,value=ast.Name(id=s))
                         newKeyLst.append(paraNode)
 
+            #保留API调用中存在的单独self或者cls参数
+            try:
+                if 'self' == posLst[0].id or 'cls' == posLst[0].id:
+                    newPosLst.insert(0,posLst[0])
+            except Exception as e:
+                pass
             node.args=newPosLst
-            
              
             #再对带参数名使用的参数进行处理(位置参数或关键字参数)
             for para in keyLst:
