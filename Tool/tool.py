@@ -1,8 +1,14 @@
+## @package tool
+#  Provides utility functions for processing API calls and source files
+#
+#  More details (TODO)  
+
 import re
 import os
 import ast
 import json
 from Path.getPath import Path
+
 #将参数字符串拆分成单个的参数
 #apiName(x,y="<bold>Hello, World!</bold>",z:int,w=(p1,p2={1,(1m,23)}),device: Union[Device, int] = None, abbreviated: bool ={'a','b'}) -> str
 #默认按逗号进行拆分,也可按'.'进行拆分，比如a.b.c
@@ -506,3 +512,18 @@ def getSourceCodePath(configPath):
     targetSourceCodePath=findPythonDir(f"{targetEnvPath}/lib")+f"/site-packages/{libName}" 
 
     return currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath
+
+
+#展开单行条件返回语句为多行if-else结构
+class ConditionalReturnTransformer(ast.NodeTransformer):
+    def visit_Return(self, node):
+        #检查return语句是否为单行条件语句（IfExp)
+        if isinstance(node, ast.Return) and isinstance(node.value, ast.IfExp):
+            ifExp = node.value
+            newIf = ast.If(
+                           test=ifExp.test,
+                           body=[ast.Return(value=ifExp.body)],
+                           orelse=[ast.Return(value=ifExp.orelse)]
+                          )
+            return newIf
+        return node
