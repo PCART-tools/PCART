@@ -1,10 +1,17 @@
+## @package preprocess 
+#  Preprocesses project source files for preparing API parameter compatibility issue detection and repair   
+#
+#  More details (TODO)
+
 import re
 import ast
 import shutil
 import subprocess
 from Path.getPath import *
 from Extract.getCall import getCallFunction
-from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2
+from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer
+
+
 #计算字符串中各类括号的个数
 def countBracket(s):
     minL=0
@@ -50,6 +57,20 @@ def oneLine(filePath):
         print(f"oneLine --> {filePath} parse to ast failed: {e}")
     
 
+#展开单行条件return语句为多行if-else结构
+def expandConditionalReturn(filePath):
+    try:
+        root=getAst(filePath)
+        transformer = ConditionalReturnTransformer()
+        new_root = transformer.visit(root)
+        #print(ast.unparse(new_root)) 
+        #重写回文件
+        with open(filePath,'w',encoding='UTF-8') as fw:
+            newCode=ast.unparse(root)
+            fw.write(f"{newCode}\n")
+    except Exception as e:
+        print(f"expandConditionalReturn --> {filePath} parse to ast failed: {e}")
+ 
 
 def getListVar(root,ansLst):
     for node in ast.iter_child_nodes(root):
@@ -85,8 +106,6 @@ def getDictVar(root,ansLst):
                 ansLst.append(s1)
 
         getDictVar(node,ansLst)    
-
-
 
 
 
@@ -194,12 +213,6 @@ def convertLocalVar(filePath,libName):
 
 
 
-
-
-
-
-
-
 def findAssignCall(root):
     assignLst=[]
     for node in ast.walk(root):
@@ -242,6 +255,16 @@ def getImportLine(codeLst):
     
     return index
 
+#抽取项目中第三方库装饰器调用
+def extractDecorator(root):
+    decoratorLst = []
+    for n in ast.walk(root):
+        if isinstance(n, (ast.FunctionDef, ast.ClassDef)) and n.decorator_list:
+            for decorator in n.decorator_list:
+                if isinstance(decorator, ast.Call): # and isinstance(decorator.func.value, ast.Name):
+                    decoratorLst.append(ast.unparse(decorator.func))
+
+    return decoratorLst 
 
 
 
@@ -354,6 +377,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     insertStartLine=0 #记录每次插桩的行
     preInsertAPI='' #记录上一个插桩的API是哪个
     preInsertAPICount=0 #记录上一个插桩行中出现了几次被插的API
+    decoratorLine = list() #记录装饰器出现的行号 -- 2025.5.12
     for callState,paraStr in callDict.items(): #key是api调用表达式，value是list,保存所有参数
         flag=0 #标记API是否找到了插桩的位置
         lineno=int(callState.split('#_')[-1]) #这个lineno是原项目中的行数
@@ -366,7 +390,12 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         
         i=insertStartLine #从第i行开始向后找
         while i<len(codeLst):
-            if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i] and codeLst[i].replace(' ','')[0]!='@': 
+            #if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i] and codeLst[i].replace(' ','')[0]!='@':  #2025.5.12
+            #API调用在i行代码中，且i行代码不是函数定义语句、插桩语句paraValueDict和运行覆盖检查语句apiCoveredSet
+            if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i]:
+                #记录装饰器出现的行号--2025.5.12
+                if codeLst[i].replace(' ','')[0]=='@':
+                    decoratorLine.append(i)              
                 if callAPI!=preInsertAPI:#只有当前API不等于上一个被插API时，才需要重新计算preAPICount
                     preInsertAPICount=codeLst[i].replace(' ','').count(callAPI)
                     preInsertAPI=callAPI
@@ -416,6 +445,10 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 #插入的时候要考虑是否含有elif,如果有elif要把它插在elif后面
                 #因为不能以相同的所以把字典插在if和elif之间
                 if 'elif' not in codeLst[i]:
+                    #处理两个连续的装饰器@ -- 2025.5.12
+                    #不能在两个连续的decorator之间插入桩点
+                    if len(decoratorLine) > 1 and decoratorLine[-1] - decoratorLine[-2] == 3 and codeLst[i].replace(' ','')[0]=='@':
+                        i = insertStartLine 
                     codeLst.insert(i,dicString3)
                     codeLst.insert(i,dicString2)
                     if dicString1:
@@ -449,7 +482,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                             else:
                                 insertStartLine=j+2
                             break
-                
+  
                 break
             
             i+=1
@@ -719,7 +752,8 @@ def saveStructure(projPath,libName):
             continue
         newBody=[]
         constantVar = []
-        nonConstantVar = [] 
+        nonConstantVar = []
+        decoratorLst = extractDecorator(root)
         for node in root.body:
             # if isinstance(node,ast.Expr) or isinstance(node,ast.Assign) or isinstance(node,ast.If):
             #     continue
@@ -744,12 +778,17 @@ def saveStructure(projPath,libName):
             #         continue
             #     newBody.append(node) 
             
-            #保留包含常量的赋值语句，例如:
+            #保留包含常量的赋值语句和装饰器调用相关的赋值语句，例如:
+            # Case 1:
             #1.  a = 1
             #2.  b = 1
             #3.  c = a + b
             #4.  c = func(a,b)
             #仅保留1，2，3行代码
+            # Case 2:
+            #1. app = Flask(__name__)
+            #2. @app.route("/")
+            #保留 app = Flask(__name__)以解决NameError 
             if isinstance(node,ast.Assign):
                 flag = 0
                 for n in ast.walk(node):
@@ -758,6 +797,11 @@ def saveStructure(projPath,libName):
                         value = n.value
                         valueAstContent = ast.dump(n.value)
                         targetAstContent = ast.dump(n.targets[0])
+                        #如果赋值语句的变量名在装饰器列表中出现过，则保留该赋值语句 2025.5.13 
+                        if isinstance(n.targets[0], ast.Name):
+                            varName = n.targets[0].id
+                            if any(varName in decorator for decorator in decoratorLst):
+                                continue
                         if isinstance(value, ast.Constant):
                             pattern = r"id='([^']*)'"
                             targetMatches = re.findall(pattern, targetAstContent)
@@ -775,7 +819,6 @@ def saveStructure(projPath,libName):
                             pattern = r"id='([^']*)'"
                             valueMatches = re.findall(pattern, valueAstContent)
                             targetMatches = re.findall(pattern, targetAstContent)
-                            #print(matches)
                             if not len(valueMatches):
                                 if targetMatches[0] in nonConstantVar:
                                     flag=1
@@ -896,7 +939,11 @@ def codeProcess(projPath,runCommand,runPath,libName):
     filePath=[file for file in pathObj.path if file.endswith('.py')]
     for file in filePath:#下面的所有操作都是对项目副本进行的
         oneLine(file)
-     
+    
+    #处理单行条件返回语句
+    for file in filePath:
+        expandConditionalReturn(file) 
+
     #处理局部变量
     for file in filePath:
         convertLocalVar(file,libName) 
