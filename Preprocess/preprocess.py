@@ -9,6 +9,7 @@ import shutil
 import subprocess
 from Path.getPath import *
 from Extract.getCall import getCallFunction
+from Extract.extractCall import WithVisitor
 from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer
 
 
@@ -280,6 +281,13 @@ def addDictSingle(callAPI,filePath):
     parameterLst=get_parameter(paraStr,space=0) #项目参数不去空格
     root=getAst(filePath)
     targetLst=findAssignCall(root)
+
+    #找出树中所有withitem call节点 -- 2025/5/19
+    withitem_visitor = WithVisitor()
+    withitem_visitor.visit(root)
+    withitem_call_names = withitem_visitor.get_withitem_call() #dict
+
+    decoratorLine = list() #记录装饰器出现的行号 -- 2025.5.12
     for i in range(len(codeLst)): #每次只会往列表中插入一个元素
         if callAPI.replace(' ','') in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i]:
             spaceNum=countSpace(codeLst[i])
@@ -297,6 +305,11 @@ def addDictSingle(callAPI,filePath):
                 dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
             elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
                 dicString1=f'paraValueDict[\"@{key}\"]={l[-2]}\n'
+
+            #判断API是否为withitem中的别名调用 -- 2025/5/19 
+            if firstPart and firstPart.split('.')[0] in withitem_call_names:
+                dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
+            #     dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
             
             #再保存API的参数值 
             dicString2=f'paraValueDict[\"{key}\"]'+'=['
@@ -318,6 +331,10 @@ def addDictSingle(callAPI,filePath):
 
             #插入的时候要考虑是否含有elif,如果有elif要把它插在elif后面
             if 'elif' not in codeLst[i]:
+                #处理两个连续的装饰器@ -- 2025.5.12
+                #不能在两个连续的decorator之间插入桩点
+                if len(decoratorLine) > 1 and decoratorLine[-1] - decoratorLine[-2] == 3 and codeLst[i].replace(' ','')[0]=='@':
+                    i = insertStartLine
                 codeLst.insert(i,dicString2)
                 if dicString1:
                     codeLst.insert(i,dicString1)
@@ -374,6 +391,12 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     _,callDict=getCallFunction(fileAbsolutePath,libName)
 
     targetLst=findAssignCall(root) #用来区分调用者是否来自赋值语句，比如a.f(), tf.f(), or self.f()
+ 
+    #找出树中所有withitem call节点 -- 2025/5/19
+    withitem_visitor = WithVisitor()
+    withitem_visitor.visit(root)
+    withitem_call_names = withitem_visitor.get_withitem_call() #dict
+
     insertStartLine=0 #记录每次插桩的行
     preInsertAPI='' #记录上一个插桩的API是哪个
     preInsertAPICount=0 #记录上一个插桩行中出现了几次被插的API
@@ -390,7 +413,6 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         
         i=insertStartLine #从第i行开始向后找
         while i<len(codeLst):
-            #if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i] and codeLst[i].replace(' ','')[0]!='@':  #2025.5.12
             #API调用在i行代码中，且i行代码不是函数定义语句、插桩语句paraValueDict和运行覆盖检查语句apiCoveredSet
             if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i]:
                 #记录装饰器出现的行号--2025.5.12
@@ -410,6 +432,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                         firstPart+=it+'.'
                 firstPart=firstPart.rstrip('.')
                 dicString1=''
+                
                 #判断API是否具有上文依赖，比如self.f(x), a(x).b(y)中的a(x)，或者a.f(x)中的a
                 #df.a(x).b(y)这种情况如何解决
                 #a.b.c(x)
@@ -419,6 +442,11 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
                 elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
                     dicString1=f'paraValueDict[\"@{key}\"]={l[-2]}\n'
+               
+                #判断API是否为withitem中的别名调用 -- 2025/5/19 
+                if firstPart and firstPart.split('.')[0] in withitem_call_names:
+                    dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
+                #     dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
 
                 #再保存API的参数值
                 dicString2=f'paraValueDict[\"{key}\"]=['
@@ -757,7 +785,10 @@ def saveStructure(projPath,libName):
         for node in root.body:
             # if isinstance(node,ast.Expr) or isinstance(node,ast.Assign) or isinstance(node,ast.If):
             #     continue
-            if isinstance(node,ast.Import) or isinstance(node,ast.ImportFrom) or isinstance(node,ast.ClassDef) or isinstance(node,ast.FunctionDef):
+            #if isinstance(node,ast.Import) or isinstance(node,ast.ImportFrom) or isinstance(node,ast.ClassDef) or isinstance(node,ast.FunctionDef):
+            
+            #增加AsyncFunctionDef节点信息保存 -- 2025/5/19 
+            if isinstance(node,ast.Import) or isinstance(node,ast.ImportFrom) or isinstance(node,ast.ClassDef) or isinstance(node,ast.FunctionDef) or isinstance(node,ast.AsyncFunctionDef):
                 newBody.append(node)
 
 
@@ -793,14 +824,13 @@ def saveStructure(projPath,libName):
                 flag = 0
                 for n in ast.walk(node):
                     if isinstance(n,ast.Assign):
-                        #print(ast.unparse(n))
                         value = n.value
                         valueAstContent = ast.dump(n.value)
                         targetAstContent = ast.dump(n.targets[0])
                         #如果赋值语句的变量名在装饰器列表中出现过，则保留该赋值语句 2025.5.13 
                         if isinstance(n.targets[0], ast.Name):
                             varName = n.targets[0].id
-                            if any(varName in decorator for decorator in decoratorLst):
+                            if any(varName in decorator.split('.') for decorator in decoratorLst):
                                 continue
                         if isinstance(value, ast.Constant):
                             pattern = r"id='([^']*)'"
