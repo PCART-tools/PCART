@@ -178,7 +178,11 @@ for key in paraValueDict.keys():
         k='@{}'.format(key)
         firstPart=lst2[0]
         if k in paraValueDict:
-            s='paraValueDict["{}"]'.format(k)+'.'+s
+            #新增类Contenxt Manager对象动态匹配支持 -- 2025/5/20
+            if isinstance(eval('paraValueDict.get(k)'),str):
+                s=eval('paraValueDict.get(k)')+'.'+s
+            else:
+                s='paraValueDict.get(k)'+'.'+s
         else: #比如torch.func(x),还有类似于tornado.web.Application()的形式
             prefix=''
             for it in lst2:

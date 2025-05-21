@@ -128,7 +128,31 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
     else: #若没有找到赋值语句，则直接结束
         return callName
 
+## Resotre the conventional API call path in the withitem (including AsyncWith) call form
+#
+#  For example:
+#  async with Client("test.mosquitto.org") as client:
+#      await client.publish("temperature", payload="25.3")
+#  client.publish("temperature", payload="25.3") --> Client("test.mosquitto.org").publish("temperature", payload="25.3")
+#  @param callName API call item in source code
+#  @param withitemCallName A dict stores the alias and its counterpart withitem call name
+#  @return The conventional API call path
+def modifyWithName(callName, withitemCallName):
+    name_parts = callName.split('.') #按.进行字段拆分
+    firstModify = callName
+    modifyFlag = 0
+    if name_parts[0] in withitemCallName:
+        firstModify = withitemCallName[name_parts[0]] + '.' + '.'.join(name_parts[1:])
+        modifyFlag = 1
 
+    #找到了withitem call，重新试探一下前面是否还有withitem call语句
+    if modifyFlag:
+        return modifyWithName(firstModify, withitemCallName)
+    #若没有，则直接结束 
+    else:
+        return callName 
+        
+          
 
 
 ## Extract all API calls from a given .py file
@@ -146,12 +170,16 @@ def getCallFunction(filePath,libName):
         #     print(it)
     try:
         root_node=ast.parse(codeText,filename='<unknown>',mode='exec')
-
+    
         #找出树中所有的模块名
         import_visitor=Import()
         import_visitor.visit(root_node)
         md_names=import_visitor.get_md_name() #dict
 
+        #找出树中所有withitem call节点 -- 2025/5/19
+        withitem_visitor = WithVisitor()
+        withitem_visitor.visit(root_node)
+        withitem_call_names = withitem_visitor.get_withitem_call() #dict
 
         # 找出树中所有的Call节点
         call_visitor=GetFuncCall()
@@ -207,15 +235,20 @@ def getCallFunction(filePath,libName):
             #         index-=1
             
             
-            # #再将import的别名还原成真名
-            # #from faker import Fake as A
-            # # A(x).b(y) --> faker.Fake(x).b(y)
+            # #先通过赋值语句进行还原
             firstModify=modifyFirstName(callName,callName,paraStr,codeLst)
-            # print(callName, '-->', firstModify) 
             secondModify=firstModify
             # if 'save' in firstModify:
             #     print(firstModify)
 
+            # #再将withitem call的别名还原为真名（如有）-- 2025/5/19
+            if len(withitem_call_names) !=0:
+                firstModify = modifyWithName(callName, withitem_call_names)
+                secondModify = firstModify
+
+            # #最后将import的别名还原成真名
+            # #from faker import Fake as A
+            # # A(x).b(y) --> faker.Fake(x).b(y)
             #2024-1-29修改 
             name_parts=secondModify.split('.')
             firstParts=name_parts[0]
@@ -229,7 +262,9 @@ def getCallFunction(filePath,libName):
             if temp in md_names:
                 secondModify=(md_names[temp]+res+'.'+'.'.join(name_parts[1:])).rstrip('.') #当nameparts只有一个元素的会在最后多个点，需要去掉
                 # if 'save' in secondModify:
-                #     print(secondModify) 
+                #     print(secondModify)
+            
+
             #函数名和参数分开放，key和value都是tuple
             apiFormatDict[(secondModify,paraStr,callState,lineno)]=(callName,paraStr,callState,lineno)
         
@@ -243,7 +278,6 @@ def getCallFunction(filePath,libName):
                         if callName in callLst and name_parts[-1] not in defLst:
                             name=bases[0]+'.'+'.'.join(name_parts[1:])
                             apiFormatDict[(name,paraStr,callState,lineno)]=(callName,paraStr,callState,lineno)
-
 
         #把和指定第三方库相关的callAPI都筛选出来
         callDict={} #词字典用于之后的匹配和变更分析

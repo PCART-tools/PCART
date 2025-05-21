@@ -137,7 +137,9 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
     flagCall=0
     #首先抽取当前类中的所有函数
     for n in ast.iter_child_nodes(root): 
-        if isinstance(n,ast.FunctionDef):
+        #if isinstance(n,ast.FunctionDef):
+        # Add the support of extracting AsyncFunctionDef type node -- 2025/5/19
+        if isinstance(n,(ast.FunctionDef, ast.AsyncFunctionDef)):
             if 'overload' in ast.unparse(n.decorator_list) and not pyiFlag: #非pyi文件中，遇到带有overload装饰器的就跳过
                 continue
             funcName=n.name
@@ -213,7 +215,9 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文�
         if isinstance(node, ast.ClassDef): #抽取类内API
             getClass(libApi,node,prefix,fileDict,pyiFlag)
 
-        if isinstance(node,ast.FunctionDef): #再抽取类外的API
+        #if isinstance(node,ast.FunctionDef): #再抽取类外的API
+        # Add the support of extracting AsyncFunctionDef type node -- 2025/5/19
+        if isinstance(node,(ast.FunctionDef, ast.AsyncFunctionDef)):
             if 'overload' in ast.unparse(node.decorator_list) and not pyiFlag: #遇到含overload装饰器的就跳过 
                 continue
             funcName=node.name
