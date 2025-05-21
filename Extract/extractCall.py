@@ -88,3 +88,21 @@ class AssignVisitor(ast.NodeVisitor):
             valueExpr=ast.unparse(node.value)
             self._targetCall[targetName]=valueExpr
 
+## Get all with nodes from a project souce file
+## 找到所有的with节点
+#
+#  For an withitem node, extract the call name in the context_expr and its alias name (if any) in the optional_vars
+#  对于withitem节点，提取其中的call节点和别名（如果有）
+class WithVisitor(ast.NodeVisitor):
+    def __init__(self):
+        self._withitemCall={}
+    
+    def get_withitem_call(self):
+        return self._withitemCall
+
+    def visit_withitem(self, node):
+        if isinstance(node.context_expr, ast.Call):
+            if node.optional_vars:
+                callName =  ast.unparse(node.context_expr)
+                aliasName = ast.unparse(node.optional_vars)
+                self._withitemCall[aliasName] = callName
