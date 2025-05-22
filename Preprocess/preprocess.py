@@ -1,5 +1,5 @@
 ## @package preprocess 
-#  Preprocesses project source files for preparing API parameter compatibility issue detection and repair   
+#  Preprocess project source files for preparing API parameter compatibility issue detection and repair   
 #
 #  More details (TODO)
 
@@ -12,8 +12,10 @@ from Extract.getCall import getCallFunction
 from Extract.extractCall import WithVisitor
 from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer
 
-
-#计算字符串中各类括号的个数
+## Count the number of different types of brackets ((), [], {}) in a string
+## 计算字符串中各类括号((), [], {})的个数
+#  @param s The string
+#  @return (minL, minR, midL, midR, huaL, huaR) minL, minR: the number of "(" and ")"; midL, midR: the number of "[" and "]"; huaL, huaR: the number of "{" and "}" 
 def countBracket(s):
     minL=0
     minR=0
@@ -45,7 +47,9 @@ def countBracket(s):
     return minL,minR,midL,midR,huaL,huaR
 
 
-#把代码中换行写的参数调用，合并成一行，目的是便于插入字典语句
+## Convert the multi-line parameter calls in the code into a single line to facilitate insertion into dictionary statements 
+## 把代码中换行写的参数调用，合并成一行，目的是便于插入字典语句
+#  @param filePath The source file path
 def oneLine(filePath):
     try:
         root=getAst(filePath)
@@ -57,8 +61,9 @@ def oneLine(filePath):
     except Exception as e:
         print(f"oneLine --> {filePath} parse to ast failed: {e}")
     
-
-#展开单行条件return语句为多行if-else结构
+## Expand the single-line conditional return statement into a multi-line if-else structure  
+## 展开单行条件return语句为多行if-else结构
+#  @param filePath The source file path 
 def expandConditionalReturn(filePath):
     try:
         root=getAst(filePath)
@@ -475,8 +480,9 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 if 'elif' not in codeLst[i]:
                     #处理两个连续的装饰器@ -- 2025.5.12
                     #不能在两个连续的decorator之间插入桩点
-                    if len(decoratorLine) > 1 and decoratorLine[-1] - decoratorLine[-2] == 3 and codeLst[i].replace(' ','')[0]=='@':
-                        i = insertStartLine 
+                    if len(decoratorLine) > 1 and  codeLst[i].replace(' ','')[0]=='@':
+                        if decoratorLine[-1] - decoratorLine[-2] == 3 or decoratorLine[-1] - decoratorLine[-2] ==4:
+                            i = insertStartLine 
                     codeLst.insert(i,dicString3)
                     codeLst.insert(i,dicString2)
                     if dicString1:
@@ -936,9 +942,13 @@ def codeProcess(projPath,runCommand,runPath,libName):
 
     #清除Copy和Dynamic中遗留的项目信息，然后把新项目的信息拷贝进去
     # print(projPath)
+    if not os.path.isdir('Copy'):
+        os.mkdir('Copy') 
     shutil.rmtree('Copy')
     shutil.copytree(projPath,f'Copy/{projName}',ignore=ignore_sym_links)
     os.mkdir('Copy/pkl')
+    if not os.path.isdir('Dynamic'):
+        os.mkdir('Dynamic') 
     shutil.rmtree('Dynamic')
     shutil.copytree(projPath,f'Dynamic/{projName}',ignore=ignore_sym_links)
     
@@ -954,7 +964,9 @@ def codeProcess(projPath,runCommand,runPath,libName):
     modifyFromImport(f'Dynamic/{projName}/{prefix}/dynamicMatch.py',libImportLst)
     modifyFromImport(f'Dynamic/{projName}/{prefix}/verifySingle.py',libImportLst)
     
-    #情况data中的数据 
+    #情况data中的数据
+    if not os.path.isdir('data'):
+        os.mkdir('data') 
     shutil.rmtree('data')
     os.mkdir('data')
     
