@@ -8,7 +8,7 @@ import ast
 import shutil
 import subprocess
 from Path.getPath import *
-from Extract.getCall import getCallFunction
+from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
 from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer
 
@@ -450,8 +450,10 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                
                 #判断API是否为withitem中的别名调用 -- 2025/5/19 
                 if firstPart and firstPart.split('.')[0] in withitem_call_names:
-                    dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
-                #     dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                    initialCallName = modifyWithName(firstPart, withitem_call_names).rstrip('.')
+                    initialCallName = initialCallName.rstrip('.')
+                    #dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
+                    dicString1=f'paraValueDict[\"@{key}\"]=\"{initialCallName}\"\n'
 
                 #再保存API的参数值
                 dicString2=f'paraValueDict[\"{key}\"]=['
