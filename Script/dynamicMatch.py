@@ -3,8 +3,7 @@ import json
 import inspect
 import copy
 import dill
-#给API填上具体的参数和函数名依赖
-#去掉API中的参数部分
+
 #给文件取名字
 def getFileName(fileName,extension):
     #step1:先把fileName中的非法字符去除
@@ -17,6 +16,7 @@ def getFileName(fileName,extension):
     fileName+=extension 
     return fileName
 
+#去掉API中的参数部分
 def removeParameter(s,flag=0): 
     if '->' in s: #若有返回值，则把返回值也去掉
         s=s.split('->')[0] 
@@ -171,9 +171,12 @@ lst2=departAPI2(callAPI) #拆分成a(x), b(y), c(z)
 
 lastAPI=lst2[-1]
 s=removeParameter(lastAPI,1)
+
 #给API填上参数的具体值
 for key in paraValueDict.keys():
-    if callAPI.replace(' ','')==key.replace(' ',''):
+    #if callAPI.replace(' ','')==key.replace(' ',''):
+    # 2025/5/25 Fix inconsistency between callAPI name and the key name
+    if getFileName(callAPI,'')==getFileName(key,''): 
         #把函数的上文依赖给填上,比如self.a(x)中的self, a.b(2).c(3)中的a.b(2)
         k='@{}'.format(key)
         firstPart=lst2[0]
@@ -195,7 +198,6 @@ for key in paraValueDict.keys():
 
 
 # print(s)
-#再寻找赋值依赖，比如a=func(1), a.b(2)
 api=s
 err=''
 try:
