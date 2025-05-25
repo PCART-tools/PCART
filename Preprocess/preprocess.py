@@ -10,7 +10,7 @@ import subprocess
 from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
-from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer
+from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName
 
 ## Count the number of different types of brackets ((), [], {}) in a string
 ## 计算字符串中各类括号((), [], {})的个数
@@ -428,7 +428,9 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     preInsertAPI=callAPI
                 flag=1
                 spaceNum=countSpace(codeLst[i])
-                key=callState.replace('"','\\"') #把字符串中的"改成\"
+                #key=callState.replace('"','\\"') #把字符串中的"改成\"
+                key=getFileName(callState,'') # 2025/5/25 Fix inconsistency between callAPI name and the key name 
+                key=key.replace('"','\\"') #把字符串中的"改成\"
                 l=departAPI(callState)
                 l2=departAPI2(callState)
                 firstPart=''

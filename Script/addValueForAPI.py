@@ -1,7 +1,19 @@
-#给API填上具体的参数和函数名依赖
 import sys
 import inspect
 import dill
+
+#给文件取名字
+def getFileName(fileName,extension):
+    #step1:先把fileName中的非法字符去除
+    fileName=fileName.replace(' ','')
+    fileName=fileName.replace('/','')
+    fileName=fileName.replace('\\','')
+    length=255-len(extension)
+    if len(fileName)>length:
+        fileName=fileName[0:length] #如果超出了长度，就进行截断
+    fileName+=extension
+    return fileName
+
 #去掉API中的参数部分
 def removeParameter(s,flag=0): 
     if '->' in s: #若有返回值，则把返回值也去掉
@@ -244,6 +256,7 @@ def getLastAPIParameter(apiStr):
 pklPath=sys.argv[1]
 with open(pklPath,'rb') as fr:
     paraValueDict=dill.load(fr)
+print("load pkl successfully")
 
 
 callAPI=sys.argv[2]
@@ -254,11 +267,18 @@ cnt=0
 s=''
 #给API填上参数的具体值
 for key in paraValueDict.keys():
-    if callAPI.replace(' ','')==key.replace(' ',''):
+    #if callAPI.replace(' ','')==key.replace(' ',''):
+    if getFileName(callAPI,'')==getFileName(key,''): # 2025/5/25 Fix inconsistency between callAPI name and the key name
+        # 2025/5/25 将复杂API参数键替换为简单键，例如复杂的引号符号
+        newKey = "callKey"  
+        if newKey not in paraValueDict:
+            paraValueDict[newKey] = paraValueDict[key]  
+
         lastAPI=lst2[-1]
         paraStr=getLastAPIParameter(lastAPI)
         paraLst=get_parameter(paraStr)
         s=removeParameter(lastAPI,1)+'('
+
         #先把API的参数值填上
         for i in range(len(paraLst)):
             para=paraLst[i]
@@ -270,7 +290,7 @@ for key in paraValueDict.keys():
                     para=''
             else:
                 para='' #若para中不含等于号则置为空表示不含参数名
-            s+='{}paraValueDict["{}"][{}],'.format(para,key,i) #参数key=paraValueDict['API'][i]
+            s+='{}paraValueDict["{}"][{}],'.format(para,newKey,i) #参数key=paraValueDict['API'][i]
         
         s=s.rstrip(',')+')'
 
@@ -278,7 +298,12 @@ for key in paraValueDict.keys():
         k='@{}'.format(key)
         firstPart=lst2[0]    
         if k in paraValueDict:
-            s='paraValueDict["{}"]'.format(k)+'.'+s
+            # 2025/5/25 将复杂API参数键替换为简单键，例如复杂的引号符号
+            newK = '@' + newKey 
+            if newK not in paraValueDict:
+                paraValueDict[newK] = paraValueDict[k] 
+
+            s='paraValueDict["{}"]'.format(newK)+'.'+s
         else:#比如torch.func(x),还有类似于tornado.web.Application()的形式
             prefix=''
             for it in lst2:
@@ -289,6 +314,10 @@ for key in paraValueDict.keys():
             s=prefix+s
         break
 
+#重新保存修改后的字典，以便后续动态运行加载 -- 2025/5/25
+with open(pklPath,'wb') as fw:
+    dill.dump(paraValueDict,fw)
+print("save pkl successfully")
 
 api=s
 try:
