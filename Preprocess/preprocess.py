@@ -771,7 +771,54 @@ def modifyFromImport(filePath,importStatement):
         for it in codeLst:
             fw.write(it)
 
-
+def saveConstantAssign(astNode, constantVar, nonConstantVar, decoratorLst):
+    flag = 0
+    astBody = []
+    for n in ast.walk(astNode):
+        if isinstance(n,ast.Assign):
+            value = n.value
+            valueAstContent = ast.dump(n.value)
+            targetAstContent = ast.dump(n.targets[0])
+            if isinstance(n.targets[0], ast.Name):
+                varName = n.targets[0].id
+                #如果赋值语句的变量名在装饰器列表中出现过，则保留该赋值语句 2025/5/13 
+                if any(varName in decorator.split('.') for decorator in decoratorLst):
+                    continue
+                #如果赋值语句的变量名是常量变量名，则保留该赋值语句 2025/5/31 
+                if isinstance(value, ast.Constant):
+                    if varName in nonConstantVar:
+                        flag=1
+                        break
+                    else:   
+                        targets = n.targets
+                        if targets:
+                            target = targets[0]
+                            if isinstance(target, ast.Name):
+                                constantVar.append(target.id)
+                else:
+                    # 使用正则表达式匹配单引号包围的内容
+                    pattern = r"id='([^']*)'"
+                    valueMatches = re.findall(pattern, valueAstContent)
+                    targetMatches = re.findall(pattern, targetAstContent)
+                    if not len(valueMatches):
+                        if targetMatches[0] in nonConstantVar:
+                            flag=1
+                            break
+                    else:
+                        for match in valueMatches:
+                            if match not in constantVar:
+                                nonConstantVar.append(targetMatches[0])
+                                flag=1
+                                break
+            else:
+                flag=1
+                break
+    if flag==1:
+        return flag
+    else:
+        astBody.append(astNode)
+        return astBody
+ 
 
 #保存项目的结构信息
 def saveStructure(projPath,libName):
@@ -792,34 +839,13 @@ def saveStructure(projPath,libName):
         constantVar = []
         nonConstantVar = []
         decoratorLst = extractDecorator(root)
+        #保留Import语句、函数和类定义
         for node in root.body:
-            # if isinstance(node,ast.Expr) or isinstance(node,ast.Assign) or isinstance(node,ast.If):
-            #     continue
-            #if isinstance(node,ast.Import) or isinstance(node,ast.ImportFrom) or isinstance(node,ast.ClassDef) or isinstance(node,ast.FunctionDef):
-            
             #增加AsyncFunctionDef节点信息保存 -- 2025/5/19 
             if isinstance(node,ast.Import) or isinstance(node,ast.ImportFrom) or isinstance(node,ast.ClassDef) or isinstance(node,ast.FunctionDef) or isinstance(node,ast.AsyncFunctionDef):
                 newBody.append(node)
 
-
-            #保留不含第三方库调用的赋值语句
-            # if isinstance(node,ast.Assign):
-            #     flag=0
-            #     for n in ast.walk(node):
-            #         if isinstance(n,ast.Call):
-            #             callState=ast.unparse(n)
-            #             callState=callState.replace(' ','').replace('"','').replace("'",'')
-            #             for it in callLst:
-            #                 if callState==it.replace(' ','').replace('"','').replace("'",''):
-            #                     flag=1
-            #                     break
-            #             if flag==1:
-            #                 break
-            #     if flag==1:
-            #         continue
-            #     newBody.append(node) 
-            
-            #保留包含常量的赋值语句和装饰器调用相关的赋值语句，例如:
+            #保留包含常量的全局赋值语句和装饰器调用相关的赋值语句，例如:
             # Case 1:
             #1.  a = 1
             #2.  b = 1
@@ -831,48 +857,22 @@ def saveStructure(projPath,libName):
             #2. @app.route("/")
             #保留 app = Flask(__name__)以解决NameError 
             if isinstance(node,ast.Assign):
-                flag = 0
-                for n in ast.walk(node):
-                    if isinstance(n,ast.Assign):
-                        value = n.value
-                        valueAstContent = ast.dump(n.value)
-                        targetAstContent = ast.dump(n.targets[0])
-                        #如果赋值语句的变量名在装饰器列表中出现过，则保留该赋值语句 2025.5.13 
-                        if isinstance(n.targets[0], ast.Name):
-                            varName = n.targets[0].id
-                            if any(varName in decorator.split('.') for decorator in decoratorLst):
-                                continue
-                        if isinstance(value, ast.Constant):
-                            pattern = r"id='([^']*)'"
-                            targetMatches = re.findall(pattern, targetAstContent)
-                            if targetMatches[0] in nonConstantVar:
-                                flag=1
-                                break
-                            else:   
-                                targets = n.targets
-                                if targets:
-                                    target = targets[0]
-                                    if isinstance(target, ast.Name):
-                                        constantVar.append(target.id)
-                        else:
-                            # 使用正则表达式匹配单引号包围的内容
-                            pattern = r"id='([^']*)'"
-                            valueMatches = re.findall(pattern, valueAstContent)
-                            targetMatches = re.findall(pattern, targetAstContent)
-                            if not len(valueMatches):
-                                if targetMatches[0] in nonConstantVar:
-                                    flag=1
-                                    break
-                            else:
-                                for match in valueMatches:
-                                    if match not in constantVar:
-                                        nonConstantVar.append(targetMatches[0])
-                                        flag=1
-                                        break
-             
-                if flag==1:
+                result = saveConstantAssign(node,constantVar,nonConstantVar,decoratorLst)
+                if result==1:
                     continue
-                newBody.append(node)
+                else:
+                   newBody+=result
+
+        #保留包含常量的局部赋值语句
+        for node in ast.walk(root):
+            if isinstance(node,ast.Assign):
+                result = saveConstantAssign(node,constantVar,nonConstantVar,decoratorLst)
+                if result==1:
+                    continue
+                else:
+                   for item in result:
+                       if ast.dump(item) not in [ast.dump(i) for i in newBody]: 
+                           newBody.append(item)
     
         root.body=newBody
         newFile=ast.unparse(root)
