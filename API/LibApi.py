@@ -1,4 +1,4 @@
-## @package API 
+## @package LibApi 
 #  Provide some class definitions for API objects
 #
 #  More details (TODO)
