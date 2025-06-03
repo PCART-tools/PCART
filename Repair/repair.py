@@ -1,8 +1,13 @@
+## @package repair 
+#  Repair and validate API parameter compatibility issues   
+#
+#  More details (TODO)
+
 import os
 import ast
 import subprocess
 from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter
-from Change.API import Parameter
+from API.LibApi import Parameter
 from Change.changeAnalyze import para2Obj
 
     
