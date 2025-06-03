@@ -1,3 +1,8 @@
+## @package map 
+#  Dynamic mapping and static mapping of API parameter definitions   
+#
+#  More details (TODO)
+
 import os
 import json
 import shutil
@@ -8,7 +13,11 @@ from Tool.tool import removeParameter,getFileName
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import addDictSingle
 
-#判断一个callAPI最后一个名字是否为库中的别名
+## Check the last name in an API call is an alias or not
+## 判断一个callAPI最后一个名字是否为库中的别名
+#  @param callApi The called API to be check
+#  @param assignDict The assign dict stores the alias of APIs
+#  @return realName The real name of the called API or None
 def isAlias(callApi,assignDict):
     capilst=callApi.split('.')
     candidate={}
@@ -22,7 +31,13 @@ def isAlias(callApi,assignDict):
         return realName
     return None
 
-
+## Static mapping of API signatures
+## API签名静态匹配
+#  @param formatAPI The called API
+#  @param libName The upgraded lib 
+#  @param version The upgraded lib's version 
+#  @param builtinFlag Built-in API flag
+#  @return ansDict Mapped API signatures 
 def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传出参数
     libAPIs,assignDict,libAPIIns=loadLib(libName,version)
     Fuzz=fuzzyMatch()
@@ -53,7 +68,19 @@ def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传�
     return ansDict 
 
 
-
+## Dynamic mapping of API signatures
+## API签名动态匹配 
+#  @param callAPI The called API
+#  @param runCommand Project's run command
+#  @param runPath Project's run path
+#  @param projName Project name
+#  @param copyFile project's copied file
+#  @param version  The lib's version
+#  @param virtualEnv The lib's virtual environment
+#  @param lock The lock flag 
+#  @param errLst Error list
+#  @param curr=1 Current version flag
+#  @return dynamicMatchDict Mapped API signatures 
 def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1):
     pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径 
     pklFile=getFileName(callAPI,'.pkl')
@@ -153,10 +180,22 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
         return dynamicMatchDict
 
 
-
-#建立invoked API与 lib API之间的映射关系，从而获取其参数定义
-#先进行动态匹配，动态匹配的结果是保存在api_dynamic.json文件中的
-#动态匹配的成功包括3步：1.加载PKL； 2.动态脚本执行成功，3.动态获取参数成功（部分内置api无法获取参数）
+## Construct the mapping between the invoked API and the lib API to obtain its signature 
+## 建立invoked API与 lib API之间的映射关系，从而获取其参数定义
+## 先进行动态匹配，动态匹配的结果是保存在api_dynamic.json文件中的
+## 动态匹配的成功包括3步：1.加载PKL； 2.动态脚本执行成功，3.动态获取参数成功（部分内置api无法获取参数）
+#  @param callAPI The called API
+#  @param runCommand Project's run command
+#  @param runPath Project's run path
+#  @param projName Project name
+#  @param libName The lib's name
+#  @param copyFile project's copied file
+#  @param version  The lib's version
+#  @param virtualEnv The lib's virtual environment
+#  @param lock The lock flag 
+#  @param errLst Error list
+#  @param curr=1 Current version flag
+#  @ans Mapped API signatures 
 def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,version,virtualEnv,lock,errLst,curr=1):
     dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr)
     ans={}

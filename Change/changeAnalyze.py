@@ -1,8 +1,13 @@
+## @package changeAnalyze 
+#  Analyze API parameter changes and compatibility 
+#
+#  More details (TODO)
+
 import os
 import re
 import copy
 import subprocess
-from Change.API import Parameter 
+from API.LibApi import Parameter 
 from Tool.tool import get_parameter,removeParameter,getFileName
 
 

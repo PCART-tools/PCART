@@ -1,3 +1,8 @@
+## @package API 
+#  Provide some class definitions for API objects
+#
+#  More details (TODO)
+
 import copy
 import re
 from Tool.tool import get_parameter

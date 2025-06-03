@@ -1,3 +1,8 @@
+## @package loadData
+#  Provide utility functions for loading and processing lib APIs 
+#
+#  More details (TODO) 
+
 import re
 import json
 import time
@@ -6,7 +11,13 @@ from API.LibApi import *
 from Tool.tool import cmp
 
 
-#把之前抽取出来的库API加载到字典中，在项目API与库API匹配的时候需要用到
+## Load the extracted definitions of lib APIs for static signature mapping
+## 把之前抽取出来的库API加载到字典中，在项目API与库API匹配的时候需要用到
+#  @param libName The upgraded lib name
+#  @version version The lib's version
+#  @return tempLst The APIs' definitions
+#  @return assignDict The assign dict stores the alias of APIs
+#  @return libAPIins The built-in APIs' definitions 
 def loadLib(libName,version):
     f=open(f'LibAPIExtraction/{libName}/{libName}{version}','r')
     lst=f.readlines()
@@ -59,7 +70,7 @@ def func(libApiObjLst,libApiName):
     return lst
 
 
-#这个应该和loadlib合并到一起
+## 这个应该和loadlib合并到一起
 def getAPILst(filePath):
     # pattern_v='.*?Torch(.*).txt'
     pattern_v='\d+\.(?:\d+\.)*\d+'
@@ -82,8 +93,8 @@ def getAPILst(filePath):
 
 
 
-#遍历所有版本的库API，将其整理成一个json格式的文件
-#{APIName: {'1.1.0': [LibAPI1,LibAPI2,...]}, {...}, {...}}
+## 遍历所有版本的库API，将其整理成一个json格式的文件
+## {APIName: {'1.1.0': [LibAPI1,LibAPI2,...]}, {...}, {...}}
 def lib2json(sourceFilePath,saveFilePath):
     pathObj=Path('F') #只获取当前目录下的一级子文件
     pathObj.getPath(sourceFilePath)
