@@ -1,10 +1,15 @@
-## @file addValueForAPI
-#  A dynamic script loads parameter values (pkl) for a single API call  
+## @file addValueForAPI.py
+## @brief A dynamic script loads parameter values (pkl) for a single API call  
+## @ingroup script
+## @page add_value_for_api Load Values for API Call
+##
+## Used by Change/changeAnalyze.py
 
 import sys
 import inspect
 import dill
 
+## @cond SCRIPT_ONLY
 ## Normalize file name
 ## 给文件取名字
 def getFileName(fileName,extension):
@@ -17,7 +22,10 @@ def getFileName(fileName,extension):
         fileName=fileName[0:length] #如果超出了长度，就进行截断
     fileName+=extension
     return fileName
+## @endcond
 
+
+## @cond SCRIPT_ONLY
 #去掉API中的参数部分
 def removeParameter(s,flag=0): 
     if '->' in s: #若有返回值，则把返回值也去掉
@@ -60,9 +68,10 @@ def removeParameter(s,flag=0):
         ans=s[0:pos]
 
     return ans
+## @endcond
 
 
-
+## @cond SCRIPT_ONLY
 #拆分API，比如a.b(x).c(y).d(z)
 #拆成3个API，分别是a.b(x),a.b(x).c(y), a.b(x).c(y).d(z)
 #还有特殊的调用形式a.b['x'](y)
@@ -102,9 +111,10 @@ def departAPI(s):
             ansLst.append(stack[0:i+1])
 
     return ansLst
+## @endcond
 
 
-
+## @cond SCRIPT_ONLY
 def departAPI2(s,separator='.'):
     ansLst=[]
     lst=[]
@@ -146,9 +156,10 @@ def departAPI2(s,separator='.'):
             ansLst.append(''.join(lst))
 
     return ansLst
+## @endcond
 
 
-
+## @cond SCRIPT_ONLY
 #将参数字符串拆分成单个的参数
 #apiName(x,y=1,z:int,w=(p1,p2={1,(1m,23)}),device: Union[Device, int] = None, abbreviated: bool ={'a','b'}) -> str
 #默认按逗号进行拆分,也可按'.'进行拆分，比如a.b.c
@@ -229,9 +240,10 @@ def get_parameter(p_string,separator=','):
 
 
     return parameters
+## @endcond
 
 
-
+## @cond SCRIPT_ONLY
 #获取最后一个API参数
 #a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4)
 #获取c的参数1,2,3,4
@@ -253,7 +265,7 @@ def getLastAPIParameter(apiStr):
     if pos!=len(apiStr):
         ans=apiStr[pos+1:-1]
     return ans  
-
+## @endcond
 
 
 #首先加载PKL

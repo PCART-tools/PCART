@@ -542,7 +542,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         spaceNum=0
         lineno=getImportLine(codeLst)
         codeLst.insert(lineno,'import dill\n')
-        codeLst.insert(lineno,'from fixTool import *\n')
+        codeLst.insert(lineno,'from codeUtils import *\n')
         mainLineno=0
         #计算__main__第一个非空行开头的空格数
         for i in range(len(codeLst)):
@@ -1015,4 +1015,4 @@ def codeProcess(projPath,runCommand,runPath,libName):
         fw.write('paraValueDict={}\n')
         fw.write('apiCoveredSet=set()\n')
     
-    shutil.copy2('Script/fixTool.py',f'Copy/{projName}/{runPath}') 
+    shutil.copy2('Script/codeUtils.py',f'Copy/{projName}/{runPath}') 

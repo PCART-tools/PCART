@@ -1,4 +1,4 @@
-## @package extractLibAPI
+## @file extractLibAPI.py
 #  Extract library Python APIs
 #
 #  This script takes the configuration file (e.g., config.json) as the input, and extracts library APIs from the current and target versions. 
