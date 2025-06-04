@@ -1,4 +1,4 @@
-## @package main 
+## @file main.py 
 #  PCART's main function entry   
 # 
 #  More details (TODO)

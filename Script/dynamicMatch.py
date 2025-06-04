@@ -1,5 +1,9 @@
-## @file dynamicMatch
-#  A dynamic script dynamically maps the signature of a single API call 
+## @file dynamicMatch.py
+## @brief A dynamic script dynamically maps the signature of a single API call 
+## @ingroup script
+## @page dynamic_match Dynamic Mapping of API Signature
+##
+## Used by Map/map.py
 
 import sys
 import json
@@ -7,6 +11,8 @@ import inspect
 import copy
 import dill
 
+
+## @cond SCRIPT_ONLY
 ## Normalize file name 
 ## 给文件取名字
 def getFileName(fileName,extension):
@@ -19,7 +25,11 @@ def getFileName(fileName,extension):
         fileName=fileName[0:length] #如果超出了长度，就进行截断
     fileName+=extension 
     return fileName
+## @endcond
 
+
+
+## @cond SCRIPT_ONLY
 #去掉API中的参数部分
 def removeParameter(s,flag=0): 
     if '->' in s: #若有返回值，则把返回值也去掉
@@ -62,8 +72,10 @@ def removeParameter(s,flag=0):
         ans=s[0:pos]
 
     return ans
+## @endcond
 
 
+## @cond SCRIPT_ONLY
 #拆分API，比如a.b(x).c(y).d(z)
 #拆成3个API，分别是a.b(x),a.b(x).c(y), a.b(x).c(y).d(z)
 #还有特殊的调用形式a.b['x'](y)
@@ -103,9 +115,10 @@ def departAPI(s):
             ansLst.append(stack[0:i+1])
 
     return ansLst
+## @endcond
 
 
-
+## @cond SCRIPT_ONLY
 def departAPI2(s,separator='.'):
     ansLst=[]
     lst=[]
@@ -147,12 +160,7 @@ def departAPI2(s,separator='.'):
             ansLst.append(''.join(lst))
 
     return ansLst
-
-
-
-
-
-
+## @endcond
 
 
 

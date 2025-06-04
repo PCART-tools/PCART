@@ -1,8 +1,13 @@
-## @file fixTool 
-#  A dynamic script provides utility functions for generating pkl file  
+## @file codeUtils.py 
+## @brief A dynamic script provides utility functions for generating pkl file 
+## @ingroup script
+## @page code_utils Code Utils
+##
+## Used by Preprocess/preprocess.py
 
 import dill
 
+## @cond SCRIPT_ONLY
 ## Normalize file name
 ## 给文件取名字
 def getFileName(fileName,extension):
@@ -15,4 +20,4 @@ def getFileName(fileName,extension):
         fileName=fileName[0:length] #如果超出了长度，就进行截断
     fileName+=extension 
     return fileName
-
+## @endcond
