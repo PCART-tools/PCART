@@ -1,8 +1,12 @@
+## @file addValueForAPI
+#  A dynamic script loads parameter values (pkl) for a single API call  
+
 import sys
 import inspect
 import dill
 
-#给文件取名字
+## Normalize file name
+## 给文件取名字
 def getFileName(fileName,extension):
     #step1:先把fileName中的非法字符去除
     fileName=fileName.replace(' ','')

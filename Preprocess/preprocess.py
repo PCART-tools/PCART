@@ -961,7 +961,7 @@ def codeProcess(projPath,runCommand,runPath,libName):
     
     shutil.copy2('Script/addValueForAPI.py',f'Dynamic/{projName}/{prefix}')
     shutil.copy2('Script/dynamicMatch.py',f'Dynamic/{projName}/{prefix}')
-    shutil.copy2('Verify/verifySingle.py',f'Dynamic/{projName}/{prefix}')
+    shutil.copy2('Script/verifySingle.py',f'Dynamic/{projName}/{prefix}')
     
     #更新脚本中的from ... import ...语句,因为加载pkl的时候需要依赖于项目的结构信息
     modifyFromImport(f'Dynamic/{projName}/{prefix}/addValueForAPI.py',libImportLst)
@@ -1015,4 +1015,4 @@ def codeProcess(projPath,runCommand,runPath,libName):
         fw.write('paraValueDict={}\n')
         fw.write('apiCoveredSet=set()\n')
     
-    shutil.copy2('Tool/fixTool.py',f'Copy/{projName}/{runPath}') 
+    shutil.copy2('Script/fixTool.py',f'Copy/{projName}/{runPath}') 

@@ -1,5 +1,10 @@
+## @file fixTool 
+#  A dynamic script provides utility functions for generating pkl file  
+
 import dill
-#给文件取名字
+
+## Normalize file name
+## 给文件取名字
 def getFileName(fileName,extension):
     #step1:先把fileName中的非法字符去除
     fileName=fileName.replace(' ','')
