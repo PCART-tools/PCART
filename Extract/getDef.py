@@ -52,7 +52,10 @@ class RegexMatch:
 def getAssign(root_node):
     #找出树中所有的模块名
     import_visitor=Import()
-    import_visitor.visit(root_node)
+    try:
+        import_visitor.visit(root_node)
+    except Exception as e:
+        print(f"import visit failed: {e}")
     md_names=import_visitor.get_md_name() #dict
 
     #找出所有的Assign节点
