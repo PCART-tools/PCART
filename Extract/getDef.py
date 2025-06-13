@@ -98,7 +98,7 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
         try:
             root=getAst(initPath)
         except Exception as e:
-            print(f"shortenPath --> ast.parse failed:{e}")
+            print(f"shortenPath --> ast.parse failed: {e}")
             return
         currentLevel=relativePath.split('/')[-1]
         obj=FromImport(currentLevel)
@@ -213,7 +213,12 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文件名
-    rootNode=ast.parse(codeText,filename='<unknown>',mode='exec')
+    try:
+        rootNode=ast.parse(codeText,filename='<unknown>',mode='exec')
+    except Exception as e:
+        file = list(fileDict.keys())[0]
+        print(f"{file} ast.parse falied: {e}")
+        return
     for node in ast.iter_child_nodes(rootNode):
         if isinstance(node, ast.ClassDef): #抽取类内API
             getClass(libApi,node,prefix,fileDict,pyiFlag)
@@ -291,9 +296,7 @@ def getDefFunction(args):
             try:
                 root_node=ast.parse(code_text,filename='<unknown>',mode='exec')
             except Exception as e:
-                print(f'{file} ast parse falied')
-                print(e)
-                print('\n\n')
+                print(f'{file} ast.parse failed: {e}')
                 continue
             assignDict=getAssign(root_node) #抽取.py中的所有Assign Node
             f.write('\n'+'-' * 40 + f"{file}" + '-' * 40+'\n')
