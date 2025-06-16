@@ -1,5 +1,5 @@
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/threaded.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/threaded.py----------------------------------------
 A:dask.threaded.cache->dict()
 A:dask.threaded.dependencies->dict(((k, get_dependencies(dsk, k)) for k in dsk))
 A:dask.threaded.waiting->dict(((k, v) for (k, v) in waiting.items() if v))
@@ -37,15 +37,13 @@ dask.threaded.state_to_networkx(dsk,state)
 dask.threaded.visualize(dsk,state,filename='dask')
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/compatibility.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/utils.py----------------------------------------
-dask.utils.deepmap(func,seq)
-dask.utils.raises(err,lamda)
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/compatibility.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/core.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/core.py----------------------------------------
 A:dask.core.v->list(v)
 A:dask.core.result->dict(((t, builtins.set()) for t in terms))
 A:dask.core.nxt->compatibility.builtins.set()
@@ -65,10 +63,12 @@ dask.istask(x)
 dask.set(d,key,val,args=[])
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/utils.py----------------------------------------
+dask.utils.deepmap(func,seq)
+dask.utils.raises(err,lamda)
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/dot.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/dot.py----------------------------------------
 A:dask.dot.data_attributes->dict()
 A:dask.dot.function_attributes->dict()
 A:dask.dot.g->networkx.DiGraph()
@@ -82,47 +82,10 @@ dask.dot.to_networkx(d,data_attributes=None,function_attributes=None)
 dask.dot.write_networkx_to_dot(dg,filename='mydask')
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/array/into.py----------------------------------------
-A:dask.array.into.block->a._get_block(*[0] * a.ndim)
-A:dask.array.into.dask->merge({name: x}, getem(name, blockshape, x.shape))
-A:dask.array.into.result->get(x.dask, x.keys(), **kwargs)
-A:dask.array.into.lock->Lock()
-A:dask.array.into.ind->tuple([slice(loc[i], loc[i + 1]) for (i, loc) in zip(args, locs)])
-A:dask.array.into.update->insert_to_ooc(out, arr)
-A:dask.array.into.dsk->merge(arr.dask, update)
-A:dask.array.into.s->list(x.shape)
-dask.array.into.array_to_dask(x,name=None,blockshape=None,**kwargs)
-dask.array.into.dask_to_float(x,**kwargs)
-dask.array.into.dask_to_numpy(x,**kwargs)
-dask.array.into.discover_dask_array(a,**kwargs)
-dask.array.into.insert_to_ooc(out,arr)
-dask.array.into.resize(x,shape)
-dask.array.into.resize(x,size)
-dask.array.into.resize(x,size)
-dask.array.into.store_Array_in_ooc_data(out,arr,**kwargs)
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/array/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/array/blaze.py----------------------------------------
-A:dask.array.blaze.func->many(binop=np.tensordot, reduction=sum, axes=(expr._left_axes, expr._right_axes))
-A:dask.array.blaze.chunk->symbol('chunk', DataShape(*tuple(map(first, data.blockdims)) + (leaf.dshape.measure,)))
-A:dask.array.blaze.((chunk, chunk_expr), (agg, agg_expr))->split(expr._child, expr, chunk=chunk)
-A:dask.array.blaze.inds->tuple(range(ndim(leaf)))
-A:dask.array.blaze.tmp->atop(curry(compute_it, chunk_expr, [chunk], **kwargs), next(names), inds, data, inds)
-A:dask.array.blaze.ALPHABET->alphabet.upper()
-A:dask.array.blaze.left_index->list(alphabet[:ndim(lhs)])
-A:dask.array.blaze.right_index->list(ALPHABET[:ndim(rhs)])
-A:dask.array.blaze.out->next(names)
-A:dask.array.blaze.dsk->dask_slice(out, data.name, data.shape, data.blockdims, index)
-dask.array.blaze.compute_it(expr,leaves,*data,**kwargs)
-dask.array.blaze.compute_up(expr,data,**kwargs)
-dask.array.blaze.compute_up(expr,data,**kwargs)
-dask.array.blaze.compute_up(expr,data,**kwargs)
-dask.array.blaze.compute_up(expr,lhs,rhs,**kwargs)
-dask.array.blaze.elemwise_array(expr,*data,**kwargs)
-dask.array.blaze.many(a,b,binop=None,reduction=None,**kwargs)
-
-
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/array/core.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/array/core.py----------------------------------------
 A:dask.array.core.numblocks->dict([(a.name, a.numblocks) for (a, ind) in arginds])
 A:dask.array.core.A->map(leftfunc, A)
 A:dask.array.core.B->map(rightfunc, B)
@@ -190,5 +153,42 @@ dask.array.get(dsk,keys,get=threaded.get,**kwargs)
 dask.array.getem(arr,blocksize,shape)
 
 
-----------------------------------------/home/zhang/Packages/dask/dask0.2.0/array/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/array/blaze.py----------------------------------------
+A:dask.array.blaze.func->many(binop=np.tensordot, reduction=sum, axes=(expr._left_axes, expr._right_axes))
+A:dask.array.blaze.chunk->symbol('chunk', DataShape(*tuple(map(first, data.blockdims)) + (leaf.dshape.measure,)))
+A:dask.array.blaze.((chunk, chunk_expr), (agg, agg_expr))->split(expr._child, expr, chunk=chunk)
+A:dask.array.blaze.inds->tuple(range(ndim(leaf)))
+A:dask.array.blaze.tmp->atop(curry(compute_it, chunk_expr, [chunk], **kwargs), next(names), inds, data, inds)
+A:dask.array.blaze.ALPHABET->alphabet.upper()
+A:dask.array.blaze.left_index->list(alphabet[:ndim(lhs)])
+A:dask.array.blaze.right_index->list(ALPHABET[:ndim(rhs)])
+A:dask.array.blaze.out->next(names)
+A:dask.array.blaze.dsk->dask_slice(out, data.name, data.shape, data.blockdims, index)
+dask.array.blaze.compute_it(expr,leaves,*data,**kwargs)
+dask.array.blaze.compute_up(expr,data,**kwargs)
+dask.array.blaze.compute_up(expr,data,**kwargs)
+dask.array.blaze.compute_up(expr,data,**kwargs)
+dask.array.blaze.compute_up(expr,lhs,rhs,**kwargs)
+dask.array.blaze.elemwise_array(expr,*data,**kwargs)
+dask.array.blaze.many(a,b,binop=None,reduction=None,**kwargs)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/dask0.2.0/lib/python3.6/site-packages/dask/array/into.py----------------------------------------
+A:dask.array.into.block->a._get_block(*[0] * a.ndim)
+A:dask.array.into.dask->merge({name: x}, getem(name, blockshape, x.shape))
+A:dask.array.into.result->get(x.dask, x.keys(), **kwargs)
+A:dask.array.into.lock->Lock()
+A:dask.array.into.ind->tuple([slice(loc[i], loc[i + 1]) for (i, loc) in zip(args, locs)])
+A:dask.array.into.update->insert_to_ooc(out, arr)
+A:dask.array.into.dsk->merge(arr.dask, update)
+A:dask.array.into.s->list(x.shape)
+dask.array.into.array_to_dask(x,name=None,blockshape=None,**kwargs)
+dask.array.into.dask_to_float(x,**kwargs)
+dask.array.into.dask_to_numpy(x,**kwargs)
+dask.array.into.discover_dask_array(a,**kwargs)
+dask.array.into.insert_to_ooc(out,arr)
+dask.array.into.resize(x,shape)
+dask.array.into.resize(x,size)
+dask.array.into.resize(x,size)
+dask.array.into.store_Array_in_ooc_data(out,arr,**kwargs)
 

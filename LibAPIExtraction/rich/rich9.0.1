@@ -1,171 +1,79 @@
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/prompt.py----------------------------------------
-A:rich.prompt.PromptType->TypeVar('PromptType')
-A:rich.prompt.DefaultType->TypeVar('DefaultType')
-A:rich.prompt._prompt->cls(prompt, console=console, password=password, choices=choices, show_default=show_default, show_choices=show_choices)
-A:rich.prompt.prompt->self.make_prompt(default)
-A:rich.prompt._choices->'/'.join(self.choices)
-A:rich.prompt._default->self.render_default(default)
-A:rich.prompt.value->value.strip().lower().strip().lower()
-A:rich.prompt.return_value->self.process_response(value)
-A:rich.prompt.result->IntPrompt.ask(':rocket: Enter a number between [b]1[/b] and [b]10[/b]', default=5)
-A:rich.prompt.password->Prompt.ask('Please enter a password [cyan](must be at least 5 characters)', password=True)
-A:rich.prompt.fruit->Prompt.ask('Enter a fruit', choices=['apple', 'orange', 'pear'])
-rich.prompt.Confirm(PromptBase[bool])
-rich.prompt.Confirm.process_response(self,value:str)->bool
-rich.prompt.Confirm.render_default(self,default:DefaultType)->Text
-rich.prompt.FloatPrompt(PromptBase[int])
-rich.prompt.IntPrompt(PromptBase[int])
-rich.prompt.InvalidResponse(self,message:TextType)
-rich.prompt.InvalidResponse.__init__(self,message:TextType)
-rich.prompt.InvalidResponse.__rich__(self)->TextType
-rich.prompt.Prompt(PromptBase[str])
-rich.prompt.PromptBase(self,prompt:TextType='',*,console:Console=None,password:bool=False,choices:List[str]=None,show_default:bool=True,show_choices:bool=True)
-rich.prompt.PromptBase.__init__(self,prompt:TextType='',*,console:Console=None,password:bool=False,choices:List[str]=None,show_default:bool=True,show_choices:bool=True)
-rich.prompt.PromptBase.ask(cls,prompt:TextType='',*,console:Console=None,password:bool=False,choices:List[str]=None,show_default:bool=True,show_choices:bool=True,default:Any=...,stream:TextIO=None)->Any
-rich.prompt.PromptBase.check_choice(self,value:str)->bool
-rich.prompt.PromptBase.get_input(cls,console:Console,prompt:TextType,password:bool,stream:TextIO=None)->str
-rich.prompt.PromptBase.make_prompt(self,default:DefaultType)->Text
-rich.prompt.PromptBase.on_validate_error(self,value:str,error:InvalidResponse)->None
-rich.prompt.PromptBase.pre_prompt(self)->None
-rich.prompt.PromptBase.process_response(self,value:str)->PromptType
-rich.prompt.PromptBase.render_default(self,default:DefaultType)->Text
-rich.prompt.PromptError(Exception)
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/rule.py----------------------------------------
+A:rich.rule.chars_len->cell_len(characters)
+A:rich.rule.rule_text->Text(end=self.end)
+A:rich.rule.title_text->Console().render_str(self.title, style='rule.text')
+A:rich.rule.title_text.plain->Console().render_str(self.title, style='rule.text').plain.replace('\n', ' ')
+A:rich.rule.left->Text(characters * (side_width // chars_len + 1))
+A:rich.rule.right->Text(characters * (side_width // chars_len + 1))
+A:rich.rule.rule_text.plain->set_cell_size(rule_text.plain, width)
+A:rich.rule.console->Console()
+rich.rule.Rule(self,title:Union[str,Text]='',*,characters:str='─',style:Union[str,Style]='rule.line',end:str='\n')
+rich.rule.Rule.__init__(self,title:Union[str,Text]='',*,characters:str='─',style:Union[str,Style]='rule.line',end:str='\n')
+rich.rule.Rule.__repr__(self)->str
+rich.rule.Rule.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/containers.py----------------------------------------
-A:rich.containers.T->TypeVar('T')
-A:rich.containers._min->max((dimension.minimum for dimension in dimensions))
-A:rich.containers._max->max((dimension.maximum for dimension in dimensions))
-A:rich.containers.words->line.split(' ')
-A:rich.containers.words_size->sum((cell_len(word.plain) for word in words))
-A:rich.containers.style->word.get_style_at_offset(console, -1)
-A:rich.containers.next_style->next_word.get_style_at_offset(console, 0)
-A:rich.containers.self[line_index]->Text('').join(tokens)
-rich.containers.Lines(self,lines:Iterable['Text']=())
-rich.containers.Lines.__getitem__(self,index)
-rich.containers.Lines.__init__(self,lines:Iterable['Text']=())
-rich.containers.Lines.__iter__(self)->Iterator['Text']
-rich.containers.Lines.__len__(self)->int
-rich.containers.Lines.__repr__(self)->str
-rich.containers.Lines.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.containers.Lines.__setitem__(self,index:int,value:'Text')->'Lines'
-rich.containers.Lines.append(self,line:'Text')->None
-rich.containers.Lines.extend(self,lines:Iterable['Text'])->None
-rich.containers.Lines.justify(self,console:'Console',width:int,justify:'JustifyMethod'='left',overflow:'OverflowMethod'='fold')->None
-rich.containers.Renderables(self,renderables:Iterable['RenderableType']=None)
-rich.containers.Renderables.__init__(self,renderables:Iterable['RenderableType']=None)
-rich.containers.Renderables.__iter__(self)->Iterable['RenderableType']
-rich.containers.Renderables.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.containers.Renderables.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
-rich.containers.Renderables.append(self,renderable:'RenderableType')->None
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/__main__.py----------------------------------------
+A:rich.__main__.text->Console(file=io.StringIO(), force_terminal=True).file.getvalue()
+A:rich.__main__.table->Table(show_header=False, pad_edge=False, box=None, expand=True)
+A:rich.__main__.color_table->Table(box=None, expand=False, show_header=False, show_edge=False, pad_edge=False, padding=0)
+A:rich.__main__.lorem_table->rich.table.Table.grid(padding=1, collapse_padding=True)
+A:rich.__main__.example_table->Table(title='Star Wars box office', show_header=True, header_style='bold magenta')
+A:rich.__main__.console->Console(file=io.StringIO(), force_terminal=True)
+A:rich.__main__.test_card->make_test_card()
+A:rich.__main__.console.file->io.StringIO()
+A:rich.__main__.start->process_time()
+A:rich.__main__.taken->round((process_time() - start) * 1000.0, 1)
+rich.__main__.ColorBox(self,start:int=16)
+rich.__main__.ColorBox.__init__(self,start:int=16)
+rich.__main__.ColorBox.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.__main__.ColorBox.__rich_measure__(self,console:'Console',max_width:int)->Measurement
+rich.__main__.make_test_card()->Table
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/color.py----------------------------------------
-A:rich.color.RE_COLOR->re.compile('^\n\\#([0-9a-f]{6})$|\ncolor\\(([0-9]{1,3})\\)$|\nrgb\\(([\\d\\s,]+)\\)$\n', re.VERBOSE)
-A:rich.color.attrs->self.get_ansi_codes(foreground=True)
-A:rich.color.color->ColorTriplet(int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16))
-A:rich.color.color_number->_palettes.WINDOWS_PALETTE.match(triplet)
-A:rich.color.color_match->re.compile('^\n\\#([0-9a-f]{6})$|\ncolor\\(([0-9]{1,3})\\)$|\nrgb\\(([\\d\\s,]+)\\)$\n', re.VERBOSE).match(color)
-A:rich.color.(color_24, color_8, color_rgb)->re.compile('^\n\\#([0-9a-f]{6})$|\ncolor\\(([0-9]{1,3})\\)$|\nrgb\\(([\\d\\s,]+)\\)$\n', re.VERBOSE).match(color).groups()
-A:rich.color.triplet->ColorTriplet(*EIGHT_BIT_PALETTE[self.number])
-A:rich.color.number->int(color_8)
-A:rich.color.components->color_rgb.split(',')
-A:rich.color.(_h, l, s)->rgb_to_hls(red, green, blue)
-A:rich.color.gray->round(l * 25.0)
-A:rich.color.new_color->ColorTriplet(int(r1 + (r2 - r1) * cross_fade), int(g1 + (g2 - g1) * cross_fade), int(b1 + (b2 - b1) * cross_fade))
-A:rich.color.console->Console()
-A:rich.color.table->Table(show_footer=False, show_edge=True)
-A:rich.color.colors->sorted(((v, k) for (k, v) in ANSI_COLOR_NAMES.items()))
-A:rich.color.color_cell->Text(' ' * 10, style=f'on {name}')
-rich.color.Color(NamedTuple)
-rich.color.Color.__repr__(self)->str
-rich.color.Color.__str__(self)->str
-rich.color.Color.default(cls)->'Color'
-rich.color.Color.downgrade(self,system:ColorSystem)->'Color'
-rich.color.Color.from_rgb(cls,red:float,green:float,blue:float)->'Color'
-rich.color.Color.from_triplet(cls,triplet:'ColorTriplet')->'Color'
-rich.color.Color.get_ansi_codes(self,foreground:bool=True)->Tuple[str, ...]
-rich.color.Color.get_truecolor(self,theme:'TerminalTheme'=None,foreground=True)->ColorTriplet
-rich.color.Color.is_default(self)->bool
-rich.color.Color.is_system_defined(self)->bool
-rich.color.Color.parse(cls,color:str)->'Color'
-rich.color.Color.system(self)->ColorSystem
-rich.color.ColorParseError(Exception)
-rich.color.ColorSystem(IntEnum)
-rich.color.ColorType(IntEnum)
-rich.color.blend_rgb(color1:ColorTriplet,color2:ColorTriplet,cross_fade:float=0.5)->ColorTriplet
-rich.color.parse_rgb_hex(hex_color:str)->ColorTriplet
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/jupyter.py----------------------------------------
+A:rich.jupyter.console->get_console()
+A:rich.jupyter.segments->list(console.render(self, console.options))
+A:rich.jupyter.html->_render_segments(segments)
+A:rich.jupyter.text->escape(text)
+A:rich.jupyter.rule->style.get_html_style(theme)
+A:rich.jupyter.code->''.join(fragments)
+A:rich.jupyter.jupyter_renderable->JupyterRenderable(html)
+rich.jupyter.JupyterMixin
+rich.jupyter.JupyterMixin._repr_html_(self)->str
+rich.jupyter.JupyterRenderable(self,html:str)
+rich.jupyter.JupyterRenderable.__init__(self,html:str)
+rich.jupyter.JupyterRenderable._repr_html_(self)->str
+rich.jupyter.JupyterRenderable.render(cls,rich_renderable:'RenderableType')->str
+rich.jupyter._render_segments(segments:Iterable[Segment])->str
+rich.jupyter.display(segments:Iterable[Segment])->None
+rich.jupyter.print(*args,**kwargs)->None
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_emoji_replace.py----------------------------------------
-A:rich._emoji_replace.(emoji_code, emoji_name)->match.groups()
-rich._emoji_replace._emoji_replace(text:str,_emoji_sub=re.compile('(:(\\S*?):)').sub)->str
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_loop.py----------------------------------------
+A:rich._loop.T->TypeVar('T')
+A:rich._loop.iter_values->iter(values)
+A:rich._loop.value->next(iter_values)
+A:rich._loop.previous_value->next(iter_values)
+rich._loop.loop_first(values:Iterable[T])->Iterable[Tuple[bool, T]]
+rich._loop.loop_first_last(values:Iterable[T])->Iterable[Tuple[bool, bool, T]]
+rich._loop.loop_last(values:Iterable[T])->Iterable[Tuple[bool, T]]
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_pick.py----------------------------------------
-rich._pick.pick_bool(*values:Optional[bool])->bool
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/__init__.py----------------------------------------
+A:rich.__init__._console->Console()
+A:rich.__init__._inspect->Inspect(obj, title=title, help=help, methods=methods, docs=docs, private=private, dunder=dunder, sort=sort, all=all)
+rich.__init__.get_console()->'Console'
+rich.__init__.inspect(obj:Any,*,console:'Console'=None,title:str=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=False)
+rich.__init__.print(*objects:Any,sep='',end='\n',file:IO[str]=None,flush:bool=False)
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/syntax.py----------------------------------------
-A:rich.syntax.self._pygments_style_class->get_style_by_name('default')
-A:rich.syntax.self._background_style->style.Style.null()
-A:rich.syntax.pygments_style->self._pygments_style_class.style_for_token(token_type)
-A:rich.syntax.style->self._theme.get_style_for_token(token_type)
-A:rich.syntax.self._missing_style->style.Style.null()
-A:rich.syntax.token->tuple(token_type)
-A:rich.syntax._style->get_style(token)
-A:rich.syntax.theme->PygmentsSyntaxTheme(name)
-A:rich.syntax.self._theme->self.get_theme(theme)
-A:rich.syntax.code->code.expandtabs(self.tab_size).expandtabs(self.tab_size)
-A:rich.syntax.(_, ext)->os.path.splitext(path)
-A:rich.syntax.extension->ext.lstrip('.').lower()
-A:rich.syntax.lexer->get_lexer_by_name(self.lexer_name)
-A:rich.syntax.base_style->self._get_base_style()
-A:rich.syntax.text->self.highlight(code)
-A:rich.syntax.foreground_color->self._get_token_color(Token.Text)
-A:rich.syntax.new_color->blend_rgb(background_color.get_truecolor(), foreground_color.get_truecolor(), cross_fade=blend)
-A:rich.syntax.background_style->self._get_base_style()
-A:rich.syntax.number_style->style.Style.chain(background_style, self._theme.get_style_for_token(Token.Text), Style(color=self._get_line_numbers_color()))
-A:rich.syntax.highlight_number_style->style.Style.chain(background_style, self._theme.get_style_for_token(Token.Text), Style(bold=True, color=self._get_line_numbers_color(0.9)))
-A:rich.syntax.lines->self.highlight(code).split('\n')
-A:rich.syntax.line_offset->max(0, start_line - 1)
-A:rich.syntax.render_options->options.update(width=code_width)
-A:rich.syntax.(background_style, number_style, highlight_number_style)->self._get_number_styles(console)
-A:rich.syntax.padding->_Segment(' ' * numbers_column_width + ' ', background_style)
-A:rich.syntax.new_line->_Segment('\n')
-A:rich.syntax.wrapped_lines->Console(force_terminal=args.force_color, width=args.width).render_lines(line, render_options, style=background_style, pad=not transparent_background)
-A:rich.syntax.segments->list(line.render(console, end=''))
-A:rich.syntax.parser->argparse.ArgumentParser(description='Render syntax to the console with Rich')
-A:rich.syntax.args->argparse.ArgumentParser(description='Render syntax to the console with Rich').parse_args()
-A:rich.syntax.console->Console(force_terminal=args.force_color, width=args.width)
-A:rich.syntax.syntax->Syntax.from_path(args.path, line_numbers=args.line_numbers, word_wrap=args.word_wrap, theme=args.theme, background_color=args.background_color)
-rich.syntax.ANSISyntaxTheme(self,style_map:Dict[TokenType,Style])
-rich.syntax.ANSISyntaxTheme.__init__(self,style_map:Dict[TokenType,Style])
-rich.syntax.ANSISyntaxTheme.get_background_style(self)->Style
-rich.syntax.ANSISyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
-rich.syntax.PygmentsSyntaxTheme(self,theme:Union[str,Type[PygmentsStyle]])
-rich.syntax.PygmentsSyntaxTheme.__init__(self,theme:Union[str,Type[PygmentsStyle]])
-rich.syntax.PygmentsSyntaxTheme.get_background_style(self)->Style
-rich.syntax.PygmentsSyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
-rich.syntax.Syntax(self,code:str,lexer_name:str,*,theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,start_line:int=1,line_range:Tuple[int,int]=None,highlight_lines:Set[int]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:str=None)
-rich.syntax.Syntax.__init__(self,code:str,lexer_name:str,*,theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,start_line:int=1,line_range:Tuple[int,int]=None,highlight_lines:Set[int]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:str=None)
-rich.syntax.Syntax.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.syntax.Syntax.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
-rich.syntax.Syntax._get_base_style(self)->Style
-rich.syntax.Syntax._get_line_numbers_color(self,blend:float=0.3)->Color
-rich.syntax.Syntax._get_number_styles(self,console:Console)->Tuple[Style, Style, Style]
-rich.syntax.Syntax._get_token_color(self,token_type:TokenType)->Optional[Color]
-rich.syntax.Syntax._numbers_column_width(self)->int
-rich.syntax.Syntax.from_path(cls,path:str,encoding:str='utf-8',theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,line_range:Tuple[int,int]=None,start_line:int=1,highlight_lines:Set[int]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:str=None)->'Syntax'
-rich.syntax.Syntax.get_theme(cls,name:Union[str,SyntaxTheme])->SyntaxTheme
-rich.syntax.Syntax.highlight(self,code:str)->Text
-rich.syntax.SyntaxTheme(ABC)
-rich.syntax.SyntaxTheme.get_background_style(self)->Style
-rich.syntax.SyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/protocol.py----------------------------------------
+rich.protocol.is_renderable(test_renderable:Any)->bool
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/text.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/text.py----------------------------------------
 A:rich.text._re_whitespace->re.compile('\\s+$')
 A:rich.text.span1->Span(start, min(end, offset), style)
 A:rich.text.span2->Span(span1.end, end, style)
@@ -262,43 +170,209 @@ rich.text.Text.truncate(self,max_width:int,*,overflow:Optional['OverflowMethod']
 rich.text.Text.wrap(self,console:'Console',width:int,*,justify:'JustifyMethod'=None,overflow:'OverflowMethod'=None,tab_size:int=8,no_wrap:bool=None)->Lines
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/align.py----------------------------------------
-A:rich.align.rendered->Console().render(Constrain(self.renderable, width=self.width), options)
-A:rich.align.lines->segment.Segment.set_shape(lines, width, height)
-A:rich.align.(width, height)->segment.Segment.get_shape(lines)
-A:rich.align.new_line->segment.Segment.line()
-A:rich.align.pad->Segment(' ' * excess_space)
-A:rich.align.iter_segments->segment.Segment.apply_style(iter_segments, style)
-A:rich.align.style->Console().get_style(self.style)
-A:rich.align.measurement->measure.Measurement.get(console, self.renderable, max_width)
-A:rich.align.console->Console()
-rich.align.Align(self,renderable:'RenderableType',align:AlignValues,style:StyleType=None,*,pad:bool=True,width:int=None)
-rich.align.Align.__init__(self,renderable:'RenderableType',align:AlignValues,style:StyleType=None,*,pad:bool=True,width:int=None)
-rich.align.Align.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.align.Align.__rich_measure__(self,console:'Console',max_width:int)->Measurement
-rich.align.Align.center(cls,renderable:'RenderableType',style:StyleType=None,*,pad:bool=True,width:int=None)->'Align'
-rich.align.Align.left(cls,renderable:'RenderableType',style:StyleType=None,*,pad:bool=True,width:int=None)->'Align'
-rich.align.Align.right(cls,renderable:'RenderableType',style:StyleType=None,*,pad:bool=True,width:int=None)->'Align'
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_stack.py----------------------------------------
+A:rich._stack.T->TypeVar('T')
+rich._stack.Stack(List[T])
+rich._stack.Stack.push(self,item:T)->None
+rich._stack.Stack.top(self)->T
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/filesize.py----------------------------------------
-rich.filesize._to_str(size:int,suffixes:Iterable[str],base:int)->str
-rich.filesize.decimal(size:int)->str
-rich.filesize.pick_unit_and_suffix(size:int,suffixes:List[str],base:int)->Tuple[int, str]
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/syntax.py----------------------------------------
+A:rich.syntax.self._pygments_style_class->get_style_by_name('default')
+A:rich.syntax.self._background_style->style.Style.null()
+A:rich.syntax.pygments_style->self._pygments_style_class.style_for_token(token_type)
+A:rich.syntax.style->self._theme.get_style_for_token(token_type)
+A:rich.syntax.self._missing_style->style.Style.null()
+A:rich.syntax.token->tuple(token_type)
+A:rich.syntax._style->get_style(token)
+A:rich.syntax.theme->PygmentsSyntaxTheme(name)
+A:rich.syntax.self._theme->self.get_theme(theme)
+A:rich.syntax.code->code.expandtabs(self.tab_size).expandtabs(self.tab_size)
+A:rich.syntax.(_, ext)->os.path.splitext(path)
+A:rich.syntax.extension->ext.lstrip('.').lower()
+A:rich.syntax.lexer->get_lexer_by_name(self.lexer_name)
+A:rich.syntax.base_style->self._get_base_style()
+A:rich.syntax.text->self.highlight(code)
+A:rich.syntax.foreground_color->self._get_token_color(Token.Text)
+A:rich.syntax.new_color->blend_rgb(background_color.get_truecolor(), foreground_color.get_truecolor(), cross_fade=blend)
+A:rich.syntax.background_style->self._get_base_style()
+A:rich.syntax.number_style->style.Style.chain(background_style, self._theme.get_style_for_token(Token.Text), Style(color=self._get_line_numbers_color()))
+A:rich.syntax.highlight_number_style->style.Style.chain(background_style, self._theme.get_style_for_token(Token.Text), Style(bold=True, color=self._get_line_numbers_color(0.9)))
+A:rich.syntax.lines->self.highlight(code).split('\n')
+A:rich.syntax.line_offset->max(0, start_line - 1)
+A:rich.syntax.render_options->options.update(width=code_width)
+A:rich.syntax.(background_style, number_style, highlight_number_style)->self._get_number_styles(console)
+A:rich.syntax.padding->_Segment(' ' * numbers_column_width + ' ', background_style)
+A:rich.syntax.new_line->_Segment('\n')
+A:rich.syntax.wrapped_lines->Console(force_terminal=args.force_color, width=args.width).render_lines(line, render_options, style=background_style, pad=not transparent_background)
+A:rich.syntax.segments->list(line.render(console, end=''))
+A:rich.syntax.parser->argparse.ArgumentParser(description='Render syntax to the console with Rich')
+A:rich.syntax.args->argparse.ArgumentParser(description='Render syntax to the console with Rich').parse_args()
+A:rich.syntax.console->Console(force_terminal=args.force_color, width=args.width)
+A:rich.syntax.syntax->Syntax.from_path(args.path, line_numbers=args.line_numbers, word_wrap=args.word_wrap, theme=args.theme, background_color=args.background_color)
+rich.syntax.ANSISyntaxTheme(self,style_map:Dict[TokenType,Style])
+rich.syntax.ANSISyntaxTheme.__init__(self,style_map:Dict[TokenType,Style])
+rich.syntax.ANSISyntaxTheme.get_background_style(self)->Style
+rich.syntax.ANSISyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
+rich.syntax.PygmentsSyntaxTheme(self,theme:Union[str,Type[PygmentsStyle]])
+rich.syntax.PygmentsSyntaxTheme.__init__(self,theme:Union[str,Type[PygmentsStyle]])
+rich.syntax.PygmentsSyntaxTheme.get_background_style(self)->Style
+rich.syntax.PygmentsSyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
+rich.syntax.Syntax(self,code:str,lexer_name:str,*,theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,start_line:int=1,line_range:Tuple[int,int]=None,highlight_lines:Set[int]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:str=None)
+rich.syntax.Syntax.__init__(self,code:str,lexer_name:str,*,theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,start_line:int=1,line_range:Tuple[int,int]=None,highlight_lines:Set[int]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:str=None)
+rich.syntax.Syntax.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.syntax.Syntax.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
+rich.syntax.Syntax._get_base_style(self)->Style
+rich.syntax.Syntax._get_line_numbers_color(self,blend:float=0.3)->Color
+rich.syntax.Syntax._get_number_styles(self,console:Console)->Tuple[Style, Style, Style]
+rich.syntax.Syntax._get_token_color(self,token_type:TokenType)->Optional[Color]
+rich.syntax.Syntax._numbers_column_width(self)->int
+rich.syntax.Syntax.from_path(cls,path:str,encoding:str='utf-8',theme:Union[str,SyntaxTheme]=DEFAULT_THEME,dedent:bool=False,line_numbers:bool=False,line_range:Tuple[int,int]=None,start_line:int=1,highlight_lines:Set[int]=None,code_width:Optional[int]=None,tab_size:int=4,word_wrap:bool=False,background_color:str=None)->'Syntax'
+rich.syntax.Syntax.get_theme(cls,name:Union[str,SyntaxTheme])->SyntaxTheme
+rich.syntax.Syntax.highlight(self,code:str)->Text
+rich.syntax.SyntaxTheme(ABC)
+rich.syntax.SyntaxTheme.get_background_style(self)->Style
+rich.syntax.SyntaxTheme.get_style_for_token(self,token_type:TokenType)->Style
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_windows.py----------------------------------------
-A:rich._windows.windll->LibraryLoader(ctypes.WinDLL)
-A:rich._windows.features->get_windows_console_features()
-A:rich._windows.handle->_GetStdHandle(STDOUT)
-A:rich._windows.console_mode->ctypes.wintypes.DWORD()
-A:rich._windows.result->_GetConsoleMode(handle, console_mode)
-A:rich._windows.vt->bool(result and console_mode.value & ENABLE_VIRTUAL_TERMINAL_PROCESSING)
-A:rich._windows.win_version->sys.getwindowsversion()
-rich._windows.WindowsConsoleFeatures
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_palettes.py----------------------------------------
+A:rich._palettes.WINDOWS_PALETTE->Palette([(0, 0, 0), (128, 0, 0), (0, 128, 0), (128, 128, 0), (0, 0, 128), (128, 0, 128), (0, 128, 128), (192, 192, 192)])
+A:rich._palettes.STANDARD_PALETTE->Palette([(0, 0, 0), (170, 0, 0), (0, 170, 0), (170, 85, 0), (0, 0, 170), (170, 0, 170), (0, 170, 170), (170, 170, 170), (85, 85, 85), (255, 85, 85), (85, 255, 85), (255, 255, 85), (85, 85, 255), (255, 85, 255), (85, 255, 255), (255, 255, 255)])
+A:rich._palettes.EIGHT_BIT_PALETTE->Palette([(0, 0, 0), (128, 0, 0), (0, 128, 0), (128, 128, 0), (0, 0, 128), (128, 0, 128), (0, 128, 128), (192, 192, 192), (128, 128, 128), (255, 0, 0), (0, 255, 0), (255, 255, 0), (0, 0, 255), (255, 0, 255), (0, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 95), (0, 0, 135), (0, 0, 175), (0, 0, 215), (0, 0, 255), (0, 95, 0), (0, 95, 95), (0, 95, 135), (0, 95, 175), (0, 95, 215), (0, 95, 255), (0, 135, 0), (0, 135, 95), (0, 135, 135), (0, 135, 175), (0, 135, 215), (0, 135, 255), (0, 175, 0), (0, 175, 95), (0, 175, 135), (0, 175, 175), (0, 175, 215), (0, 175, 255), (0, 215, 0), (0, 215, 95), (0, 215, 135), (0, 215, 175), (0, 215, 215), (0, 215, 255), (0, 255, 0), (0, 255, 95), (0, 255, 135), (0, 255, 175), (0, 255, 215), (0, 255, 255), (95, 0, 0), (95, 0, 95), (95, 0, 135), (95, 0, 175), (95, 0, 215), (95, 0, 255), (95, 95, 0), (95, 95, 95), (95, 95, 135), (95, 95, 175), (95, 95, 215), (95, 95, 255), (95, 135, 0), (95, 135, 95), (95, 135, 135), (95, 135, 175), (95, 135, 215), (95, 135, 255), (95, 175, 0), (95, 175, 95), (95, 175, 135), (95, 175, 175), (95, 175, 215), (95, 175, 255), (95, 215, 0), (95, 215, 95), (95, 215, 135), (95, 215, 175), (95, 215, 215), (95, 215, 255), (95, 255, 0), (95, 255, 95), (95, 255, 135), (95, 255, 175), (95, 255, 215), (95, 255, 255), (135, 0, 0), (135, 0, 95), (135, 0, 135), (135, 0, 175), (135, 0, 215), (135, 0, 255), (135, 95, 0), (135, 95, 95), (135, 95, 135), (135, 95, 175), (135, 95, 215), (135, 95, 255), (135, 135, 0), (135, 135, 95), (135, 135, 135), (135, 135, 175), (135, 135, 215), (135, 135, 255), (135, 175, 0), (135, 175, 95), (135, 175, 135), (135, 175, 175), (135, 175, 215), (135, 175, 255), (135, 215, 0), (135, 215, 95), (135, 215, 135), (135, 215, 175), (135, 215, 215), (135, 215, 255), (135, 255, 0), (135, 255, 95), (135, 255, 135), (135, 255, 175), (135, 255, 215), (135, 255, 255), (175, 0, 0), (175, 0, 95), (175, 0, 135), (175, 0, 175), (175, 0, 215), (175, 0, 255), (175, 95, 0), (175, 95, 95), (175, 95, 135), (175, 95, 175), (175, 95, 215), (175, 95, 255), (175, 135, 0), (175, 135, 95), (175, 135, 135), (175, 135, 175), (175, 135, 215), (175, 135, 255), (175, 175, 0), (175, 175, 95), (175, 175, 135), (175, 175, 175), (175, 175, 215), (175, 175, 255), (175, 215, 0), (175, 215, 95), (175, 215, 135), (175, 215, 175), (175, 215, 215), (175, 215, 255), (175, 255, 0), (175, 255, 95), (175, 255, 135), (175, 255, 175), (175, 255, 215), (175, 255, 255), (215, 0, 0), (215, 0, 95), (215, 0, 135), (215, 0, 175), (215, 0, 215), (215, 0, 255), (215, 95, 0), (215, 95, 95), (215, 95, 135), (215, 95, 175), (215, 95, 215), (215, 95, 255), (215, 135, 0), (215, 135, 95), (215, 135, 135), (215, 135, 175), (215, 135, 215), (215, 135, 255), (215, 175, 0), (215, 175, 95), (215, 175, 135), (215, 175, 175), (215, 175, 215), (215, 175, 255), (215, 215, 0), (215, 215, 95), (215, 215, 135), (215, 215, 175), (215, 215, 215), (215, 215, 255), (215, 255, 0), (215, 255, 95), (215, 255, 135), (215, 255, 175), (215, 255, 215), (215, 255, 255), (255, 0, 0), (255, 0, 95), (255, 0, 135), (255, 0, 175), (255, 0, 215), (255, 0, 255), (255, 95, 0), (255, 95, 95), (255, 95, 135), (255, 95, 175), (255, 95, 215), (255, 95, 255), (255, 135, 0), (255, 135, 95), (255, 135, 135), (255, 135, 175), (255, 135, 215), (255, 135, 255), (255, 175, 0), (255, 175, 95), (255, 175, 135), (255, 175, 175), (255, 175, 215), (255, 175, 255), (255, 215, 0), (255, 215, 95), (255, 215, 135), (255, 215, 175), (255, 215, 215), (255, 215, 255), (255, 255, 0), (255, 255, 95), (255, 255, 135), (255, 255, 175), (255, 255, 215), (255, 255, 255), (8, 8, 8), (18, 18, 18), (28, 28, 28), (38, 38, 38), (48, 48, 48), (58, 58, 58), (68, 68, 68), (78, 78, 78), (88, 88, 88), (98, 98, 98), (108, 108, 108), (118, 118, 118), (128, 128, 128), (138, 138, 138), (148, 148, 148), (158, 158, 158), (168, 168, 168), (178, 178, 178), (188, 188, 188), (198, 198, 198), (208, 208, 208), (218, 218, 218), (228, 228, 228), (238, 238, 238)])
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/console.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/columns.py----------------------------------------
+A:rich.columns.self.renderables->list(renderables or [])
+A:rich.columns.(_top, right, _bottom, left)->padding.Padding.unpack(self.padding)
+A:rich.columns.width_padding->max(left, right)
+A:rich.columns.column_count->len(renderables)
+A:rich.columns.item_count->len(renderables)
+A:rich.columns.width_renderables->list(zip(renderable_widths, renderables))
+A:rich.columns.table->table.Table.grid(padding=self.padding, collapse_padding=True, pad_edge=False)
+A:rich.columns.widths[column_no]->max(widths[column_no], renderable_width)
+A:rich.columns.get_renderable->itemgetter(1)
+A:rich.columns.console->Console()
+A:rich.columns.columns->Columns(files, padding=(0, 1), expand=False, equal=False)
+rich.columns.Columns(self,renderables:Iterable[RenderableType]=None,padding:PaddingDimensions=(0,1),*,width:int=None,expand:bool=False,equal:bool=False,column_first:bool=False,right_to_left:bool=False,align:AlignValues=None,title:TextType=None)
+rich.columns.Columns.__init__(self,renderables:Iterable[RenderableType]=None,padding:PaddingDimensions=(0,1),*,width:int=None,expand:bool=False,equal:bool=False,column_first:bool=False,right_to_left:bool=False,align:AlignValues=None,title:TextType=None)
+rich.columns.Columns.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.columns.Columns.add_renderable(self,renderable:RenderableType)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/pager.py----------------------------------------
+A:rich.pager.console->Console()
+rich.pager.Pager(ABC)
+rich.pager.Pager.show(self,content:str)->None
+rich.pager.SystemPager(Pager)
+rich.pager.SystemPager.show(self,content:str)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_ratio.py----------------------------------------
+A:rich._ratio.total_ratio->sum(ratios)
+A:rich._ratio.distributed->max(minimum, ceil(ratio * total_remaining / total_ratio))
+rich._ratio.ratio_distribute(total:int,ratios:List[int],minimums:List[int]=None)->List[int]
+rich._ratio.ratio_reduce(total:int,ratios:List[int],maximums:List[int],values:List[int])->List[int]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/terminal_theme.py----------------------------------------
+A:rich.terminal_theme.self.background_color->ColorTriplet(*background)
+A:rich.terminal_theme.self.foreground_color->ColorTriplet(*foreground)
+A:rich.terminal_theme.self.ansi_colors->Palette(normal + (bright or normal))
+A:rich.terminal_theme.DEFAULT_TERMINAL_THEME->TerminalTheme((255, 255, 255), (0, 0, 0), [(0, 0, 0), (128, 0, 0), (0, 128, 0), (128, 128, 0), (0, 0, 128), (128, 0, 128), (0, 128, 128), (192, 192, 192)], [(128, 128, 128), (255, 0, 0), (0, 255, 0), (255, 255, 0), (0, 0, 255), (255, 0, 255), (0, 255, 255), (255, 255, 255)])
+rich.terminal_theme.TerminalTheme(self,background:_ColorTuple,foreground:_ColorTuple,normal:List[_ColorTuple],bright:List[_ColorTuple]=None)
+rich.terminal_theme.TerminalTheme.__init__(self,background:_ColorTuple,foreground:_ColorTuple,normal:List[_ColorTuple],bright:List[_ColorTuple]=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/highlighter.py----------------------------------------
+A:rich.highlighter.highlight_text->text.copy()
+A:rich.highlighter.console->Console()
+rich.highlighter.Highlighter(self,text:Union[str,Text])
+rich.highlighter.Highlighter.__call__(self,text:Union[str,Text])
+rich.highlighter.Highlighter.highlight(self,text:Text)->None
+rich.highlighter.NullHighlighter(Highlighter)
+rich.highlighter.NullHighlighter.highlight(self,text:Text)->None
+rich.highlighter.RegexHighlighter(Highlighter)
+rich.highlighter.RegexHighlighter.highlight(self,text:Text)->None
+rich.highlighter.ReprHighlighter(RegexHighlighter)
+rich.highlighter._combine_regex(*regexes:str)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/styled.py----------------------------------------
+A:rich.styled.style->console.get_style(self.style)
+A:rich.styled.rendered_segments->console.render(self.renderable, options)
+A:rich.styled.segments->segment.Segment.apply_style(rendered_segments, style)
+A:rich.styled.panel->Styled(Panel('hello'), 'on blue')
+rich.styled.Styled(self,renderable:'RenderableType',style:'StyleType')
+rich.styled.Styled.__init__(self,renderable:'RenderableType',style:'StyleType')
+rich.styled.Styled.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.styled.Styled.__rich_measure__(self,console:'Console',max_width:int)->Measurement
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/style.py----------------------------------------
+A:rich.style.self._set_attributes->sum((bold is not None, dim is not None and 2, italic is not None and 4, underline is not None and 8, blink is not None and 16, blink2 is not None and 32, reverse is not None and 64, conceal is not None and 128, strike is not None and 256, underline2 is not None and 512, frame is not None and 1024, encircle is not None and 2048, overline is not None and 4096))
+A:rich.style.self._hash->hash((self._color, self._bgcolor, self._attributes, self._set_attributes, link))
+A:rich.style.bold->_Bit(0)
+A:rich.style.dim->_Bit(1)
+A:rich.style.italic->_Bit(2)
+A:rich.style.underline->_Bit(3)
+A:rich.style.blink->_Bit(4)
+A:rich.style.blink2->_Bit(5)
+A:rich.style.reverse->_Bit(6)
+A:rich.style.conceal->_Bit(7)
+A:rich.style.strike->_Bit(8)
+A:rich.style.underline2->_Bit(9)
+A:rich.style.frame->_Bit(10)
+A:rich.style.encircle->_Bit(11)
+A:rich.style.overline->_Bit(12)
+A:rich.style.self._ansi->';'.join(sgr)
+A:rich.style.words->iter(style_definition.split())
+A:rich.style.word->next(words, '')
+A:rich.style.attribute->style_attributes.get(word)
+A:rich.style.style->self.__new__(Style)
+A:rich.style.color->color.Color.from_triplet(blend_rgb(foreground_color, theme.background_color, 0.5))
+A:rich.style.theme_color->bgcolor.get_truecolor(theme, foreground=False)
+A:rich.style.iter_styles->iter(styles)
+A:rich.style.attrs->self._make_ansi_codes(color_system)
+A:rich.style.new_style->self.__new__(Style)
+A:rich.style.NULL_STYLE->Style()
+rich.style.Style(self,*,color:Union[Color,str]=None,bgcolor:Union[Color,str]=None,bold:bool=None,dim:bool=None,italic:bool=None,underline:bool=None,blink:bool=None,blink2:bool=None,reverse:bool=None,conceal:bool=None,strike:bool=None,underline2:bool=None,frame:bool=None,encircle:bool=None,overline:bool=None,link:str=None)
+rich.style.Style.__add__(self,style:Optional['Style'])->'Style'
+rich.style.Style.__bool__(self)->bool
+rich.style.Style.__eq__(self,other:Any)->bool
+rich.style.Style.__hash__(self)->int
+rich.style.Style.__init__(self,*,color:Union[Color,str]=None,bgcolor:Union[Color,str]=None,bold:bool=None,dim:bool=None,italic:bool=None,underline:bool=None,blink:bool=None,blink2:bool=None,reverse:bool=None,conceal:bool=None,strike:bool=None,underline2:bool=None,frame:bool=None,encircle:bool=None,overline:bool=None,link:str=None)
+rich.style.Style.__repr__(self)->str
+rich.style.Style.__str__(self)->str
+rich.style.Style._make_ansi_codes(self,color_system:ColorSystem)->str
+rich.style.Style.background_style(self)->'Style'
+rich.style.Style.bgcolor(self)->Optional[Color]
+rich.style.Style.chain(cls,*styles:'Style')->'Style'
+rich.style.Style.color(self)->Optional[Color]
+rich.style.Style.combine(cls,styles:Iterable['Style'])->'Style'
+rich.style.Style.copy(self)->'Style'
+rich.style.Style.get_html_style(self,theme:TerminalTheme=None)->str
+rich.style.Style.link(self)->Optional[str]
+rich.style.Style.link_id(self)->str
+rich.style.Style.normalize(cls,style:str)->str
+rich.style.Style.null(cls)->'Style'
+rich.style.Style.parse(cls,style_definition:str)->'Style'
+rich.style.Style.pick_first(cls,*values:Optional[StyleType])->StyleType
+rich.style.Style.render(self,text:str='',*,color_system:Optional[ColorSystem]=ColorSystem.TRUECOLOR,legacy_windows:bool=False)->str
+rich.style.Style.test(self,text:Optional[str]=None)->None
+rich.style.Style.transparent_background(self)->bool
+rich.style.Style.update_link(self,link:str=None)->'Style'
+rich.style.StyleStack(self,default_style:'Style')
+rich.style.StyleStack.__init__(self,default_style:'Style')
+rich.style.StyleStack.__repr__(self)->str
+rich.style.StyleStack.current(self)->Style
+rich.style.StyleStack.pop(self)->Style
+rich.style.StyleStack.push(self,style:Style)->None
+rich.style._Bit(self,bit_no:int)
+rich.style._Bit.__get__(self,obj:'Style',objtype:Type['Style'])->Optional[bool]
+rich.style._Bit.__init__(self,bit_no:int)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/console.py----------------------------------------
 A:rich.console.options->replace(self)
 A:rich.console._null_highlighter->NullHighlighter()
 A:rich.console.self._result->self._console.end_capture()
@@ -486,45 +560,279 @@ rich.console.get_windows_console_features()->'WindowsConsoleFeatures'
 rich.console.render_group(fit:bool=True)->Callable
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/terminal_theme.py----------------------------------------
-A:rich.terminal_theme.self.background_color->ColorTriplet(*background)
-A:rich.terminal_theme.self.foreground_color->ColorTriplet(*foreground)
-A:rich.terminal_theme.self.ansi_colors->Palette(normal + (bright or normal))
-A:rich.terminal_theme.DEFAULT_TERMINAL_THEME->TerminalTheme((255, 255, 255), (0, 0, 0), [(0, 0, 0), (128, 0, 0), (0, 128, 0), (128, 128, 0), (0, 0, 128), (128, 0, 128), (0, 128, 128), (192, 192, 192)], [(128, 128, 128), (255, 0, 0), (0, 255, 0), (255, 255, 0), (0, 0, 255), (255, 0, 255), (0, 255, 255), (255, 255, 255)])
-rich.terminal_theme.TerminalTheme(self,background:_ColorTuple,foreground:_ColorTuple,normal:List[_ColorTuple],bright:List[_ColorTuple]=None)
-rich.terminal_theme.TerminalTheme.__init__(self,background:_ColorTuple,foreground:_ColorTuple,normal:List[_ColorTuple],bright:List[_ColorTuple]=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/color.py----------------------------------------
+A:rich.color.RE_COLOR->re.compile('^\n\\#([0-9a-f]{6})$|\ncolor\\(([0-9]{1,3})\\)$|\nrgb\\(([\\d\\s,]+)\\)$\n', re.VERBOSE)
+A:rich.color.attrs->self.get_ansi_codes(foreground=True)
+A:rich.color.color->ColorTriplet(int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16))
+A:rich.color.color_number->_palettes.WINDOWS_PALETTE.match(triplet)
+A:rich.color.color_match->re.compile('^\n\\#([0-9a-f]{6})$|\ncolor\\(([0-9]{1,3})\\)$|\nrgb\\(([\\d\\s,]+)\\)$\n', re.VERBOSE).match(color)
+A:rich.color.(color_24, color_8, color_rgb)->re.compile('^\n\\#([0-9a-f]{6})$|\ncolor\\(([0-9]{1,3})\\)$|\nrgb\\(([\\d\\s,]+)\\)$\n', re.VERBOSE).match(color).groups()
+A:rich.color.triplet->ColorTriplet(*EIGHT_BIT_PALETTE[self.number])
+A:rich.color.number->int(color_8)
+A:rich.color.components->color_rgb.split(',')
+A:rich.color.(_h, l, s)->rgb_to_hls(red, green, blue)
+A:rich.color.gray->round(l * 25.0)
+A:rich.color.new_color->ColorTriplet(int(r1 + (r2 - r1) * cross_fade), int(g1 + (g2 - g1) * cross_fade), int(b1 + (b2 - b1) * cross_fade))
+A:rich.color.console->Console()
+A:rich.color.table->Table(show_footer=False, show_edge=True)
+A:rich.color.colors->sorted(((v, k) for (k, v) in ANSI_COLOR_NAMES.items()))
+A:rich.color.color_cell->Text(' ' * 10, style=f'on {name}')
+rich.color.Color(NamedTuple)
+rich.color.Color.__repr__(self)->str
+rich.color.Color.__str__(self)->str
+rich.color.Color.default(cls)->'Color'
+rich.color.Color.downgrade(self,system:ColorSystem)->'Color'
+rich.color.Color.from_rgb(cls,red:float,green:float,blue:float)->'Color'
+rich.color.Color.from_triplet(cls,triplet:'ColorTriplet')->'Color'
+rich.color.Color.get_ansi_codes(self,foreground:bool=True)->Tuple[str, ...]
+rich.color.Color.get_truecolor(self,theme:'TerminalTheme'=None,foreground=True)->ColorTriplet
+rich.color.Color.is_default(self)->bool
+rich.color.Color.is_system_defined(self)->bool
+rich.color.Color.parse(cls,color:str)->'Color'
+rich.color.Color.system(self)->ColorSystem
+rich.color.ColorParseError(Exception)
+rich.color.ColorSystem(IntEnum)
+rich.color.ColorType(IntEnum)
+rich.color.blend_rgb(color1:ColorTriplet,color2:ColorTriplet,cross_fade:float=0.5)->ColorTriplet
+rich.color.parse_rgb_hex(hex_color:str)->ColorTriplet
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/styled.py----------------------------------------
-A:rich.styled.style->console.get_style(self.style)
-A:rich.styled.rendered_segments->console.render(self.renderable, options)
-A:rich.styled.segments->segment.Segment.apply_style(rendered_segments, style)
-A:rich.styled.panel->Styled(Panel('hello'), 'on blue')
-rich.styled.Styled(self,renderable:'RenderableType',style:'StyleType')
-rich.styled.Styled.__init__(self,renderable:'RenderableType',style:'StyleType')
-rich.styled.Styled.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.styled.Styled.__rich_measure__(self,console:'Console',max_width:int)->Measurement
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/scope.py----------------------------------------
+A:rich.scope.highlighter->ReprHighlighter()
+A:rich.scope.items_table->table.Table.grid(padding=(0, 1), expand=False)
+A:rich.scope.key_text->text.Text.assemble((key, 'scope.key.special' if key.startswith('__') else 'scope.key'), (' =', 'scope.equals'))
+rich.scope.render_scope(scope:Mapping,*,title:TextType=None,sort_keys:bool=True)->'ConsoleRenderable'
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/columns.py----------------------------------------
-A:rich.columns.self.renderables->list(renderables or [])
-A:rich.columns.(_top, right, _bottom, left)->padding.Padding.unpack(self.padding)
-A:rich.columns.width_padding->max(left, right)
-A:rich.columns.column_count->len(renderables)
-A:rich.columns.item_count->len(renderables)
-A:rich.columns.width_renderables->list(zip(renderable_widths, renderables))
-A:rich.columns.table->table.Table.grid(padding=self.padding, collapse_padding=True, pad_edge=False)
-A:rich.columns.widths[column_no]->max(widths[column_no], renderable_width)
-A:rich.columns.get_renderable->itemgetter(1)
-A:rich.columns.console->Console()
-A:rich.columns.columns->Columns(files, padding=(0, 1), expand=False, equal=False)
-rich.columns.Columns(self,renderables:Iterable[RenderableType]=None,padding:PaddingDimensions=(0,1),*,width:int=None,expand:bool=False,equal:bool=False,column_first:bool=False,right_to_left:bool=False,align:AlignValues=None,title:TextType=None)
-rich.columns.Columns.__init__(self,renderables:Iterable[RenderableType]=None,padding:PaddingDimensions=(0,1),*,width:int=None,expand:bool=False,equal:bool=False,column_first:bool=False,right_to_left:bool=False,align:AlignValues=None,title:TextType=None)
-rich.columns.Columns.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.columns.Columns.add_renderable(self,renderable:RenderableType)->None
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/pretty.py----------------------------------------
+A:rich.pretty.pretty_str->pretty_repr(self._object, max_width=max_width, indent_size=self.indent_size)
+A:rich.pretty.pretty_text->self.highlighter(pretty_text)
+A:rich.pretty.text_width->max((cell_len(line) for line in pretty_str.splitlines()))
+A:rich.pretty._CONTAINERS->tuple(_BRACES.keys())
+A:rich.pretty.repr_text->''.join(self.iter_tokens())
+A:rich.pretty.lines[line_no:line_no + 1]->_Line(node=child, whitespace=child_whitespace, suffix='' if child.last else ',').expand(indent_size)
+A:rich.pretty.repr_str->traverse(_object).render(max_width=max_width, indent_size=indent_size, expand_all=expand_all)
+A:rich.pretty.line->_Line(node=child, whitespace=child_whitespace, suffix='' if child.last else ',')
+A:rich.pretty.obj_repr->repr(obj)
+A:rich.pretty.obj_type->type(obj)
+A:rich.pretty.obj_id->id(obj)
+A:rich.pretty.(open_brace, close_brace, empty)->_BRACES[obj_type](obj)
+A:rich.pretty.node->traverse(_object)
+A:rich.pretty.child_node->_traverse(child)
+A:rich.pretty.child_node.key_repr->to_repr(key)
+A:rich.pretty.node.is_tuple->isinstance(obj, tuple)
+A:rich.pretty.d->defaultdict(int)
+rich.pretty.Node
+rich.pretty.Node.__str__(self)->str
+rich.pretty.Node.check_length(self,start_length:int,max_length:int)->bool
+rich.pretty.Node.iter_tokens(self)->Iterable[str]
+rich.pretty.Node.render(self,max_width:int=80,indent_size:int=4,expand_all:bool=False)->str
+rich.pretty.Pretty(self,_object:Any,highlighter:'HighlighterType'=None,*,indent_size:int=4,justify:'JustifyMethod'=None,overflow:Optional['OverflowMethod']='crop',no_wrap:Optional[bool]=False)
+rich.pretty.Pretty.__init__(self,_object:Any,highlighter:'HighlighterType'=None,*,indent_size:int=4,justify:'JustifyMethod'=None,overflow:Optional['OverflowMethod']='crop',no_wrap:Optional[bool]=False)
+rich.pretty.Pretty.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.pretty.Pretty.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
+rich.pretty._Line
+rich.pretty._Line.__str__(self)->str
+rich.pretty._Line.check_length(self,max_length:int)->bool
+rich.pretty._Line.expand(self,indent_size:int)->Iterable['_Line']
+rich.pretty._Line.expandable(self)->bool
+rich.pretty._get_braces_for_array(_object:array)->Tuple[str, str, str]
+rich.pretty._get_braces_for_defaultdict(_object:defaultdict)->Tuple[str, str, str]
+rich.pretty.install(console:'Console'=None,overflow:'OverflowMethod'='ignore',crop:bool=False)->None
+rich.pretty.pretty_repr(_object:Any,*,max_width:int=80,indent_size:int=4,expand_all:bool=False)->str
+rich.pretty.traverse(_object:Any)->Node
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/box.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_inspect.py----------------------------------------
+A:rich._inspect.(paragraph, _, _)->highlighter(_doc).partition('\n\n')
+A:rich._inspect.doc->highlighter(_doc)
+A:rich._inspect.self.highlighter->ReprHighlighter()
+A:rich._inspect.title_text->self.highlighter(title_str)
+A:rich._inspect.source_filename->getfile(obj)
+A:rich._inspect.callable_name->Text(name, style='inspect.callable')
+A:rich._inspect.signature_text->self.highlighter(_signature)
+A:rich._inspect.qual_signature->text.Text.assemble(('def ', 'inspect.def'), (qualname, 'inspect.callable'), signature_text)
+A:rich._inspect.keys->dir(obj)
+A:rich._inspect.total_items->len(keys)
+A:rich._inspect.items_table->table.Table.grid(padding=(0, 1), expand=False)
+A:rich._inspect._doc->_first_paragraph(_doc)
+A:rich._inspect.doc_text->highlighter(doc_text)
+A:rich._inspect.key_text->text.Text.assemble((key, 'inspect.attr.dunder' if key.startswith('__') else 'inspect.attr'), (' =', 'inspect.equals'))
+A:rich._inspect.warning->text.Text.assemble((key, 'inspect.attr.dunder' if key.startswith('__') else 'inspect.attr'), (' =', 'inspect.equals')).copy()
+A:rich._inspect._signature_text->self._get_signature(key, value)
+A:rich._inspect.docs->getdoc(value)
+A:rich._inspect.inspect->Inspect({}, docs=True, methods=True, dunder=True)
+A:rich._inspect.t->Text('Hello, World')
+A:rich._inspect.f->Foo()
+rich.Inspect(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
+rich.Inspect.__rich__(self)->Panel
+rich.Inspect._get_signature(self,name:str,obj:Any)->Text
+rich.Inspect._make_title(self,obj:Any)->Text
+rich.Inspect._render(self)->Iterable[RenderableType]
+rich._inspect.Inspect(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
+rich._inspect.Inspect.__init__(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
+rich._inspect.Inspect.__rich__(self)->Panel
+rich._inspect.Inspect._get_signature(self,name:str,obj:Any)->Text
+rich._inspect.Inspect._make_title(self,obj:Any)->Text
+rich._inspect.Inspect._render(self)->Iterable[RenderableType]
+rich._inspect._first_paragraph(doc:str)->str
+rich._inspect._reformat_doc(doc:str)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_log_render.py----------------------------------------
+A:rich._log_render.output->table.Table.grid(padding=(0, 1))
+A:rich._log_render.log_time->datetime.datetime.now()
+A:rich._log_render.log_time_display->datetime.datetime.now().strftime(time_format or self.time_format)
+A:rich._log_render.path_text->Text()
+rich._log_render.LogRender(self,show_time:bool=True,show_level:bool=False,show_path:bool=True,time_format:str='[%x%X]')
+rich._log_render.LogRender.__init__(self,show_time:bool=True,show_level:bool=False,show_path:bool=True,time_format:str='[%x%X]')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/panel.py----------------------------------------
+A:rich.panel.title_text.plain->title_text.plain.replace('\n', ' ')
+A:rich.panel._padding->padding.Padding.unpack(self.padding)
+A:rich.panel.style->console.get_style(self.style)
+A:rich.panel.box->self.box.substitute(options, safe=safe_box)
+A:rich.panel.child_width->min(options.max_width, max(child_width, title_text.cell_len + 2))
+A:rich.panel.child_options->options.update(width=child_width)
+A:rich.panel.lines->console.render_lines(renderable, child_options, style=style)
+A:rich.panel.line_start->Segment(box.mid_left, border_style)
+A:rich.panel.line_end->Segment(f'{box.mid_right}', border_style)
+A:rich.panel.new_line->segment.Segment.line()
+A:rich.panel.(_, right, _, left)->padding.Padding.unpack(self.padding)
+A:rich.panel.c->Console()
+A:rich.panel.p->Panel(Panel.fit(Text.from_markup('[bold magenta]Hello World!'), box=ROUNDED, safe_box=True, style='on red'), title='[b]Hello, World', box=DOUBLE)
+rich.panel.Panel(self,renderable:'RenderableType',box:Box=ROUNDED,*,title:TextType=None,title_align:AlignValues='center',safe_box:Optional[bool]=None,expand:bool=True,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,padding:PaddingDimensions=(0,1))
+rich.panel.Panel.__init__(self,renderable:'RenderableType',box:Box=ROUNDED,*,title:TextType=None,title_align:AlignValues='center',safe_box:Optional[bool]=None,expand:bool=True,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,padding:PaddingDimensions=(0,1))
+rich.panel.Panel.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.panel.Panel.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
+rich.panel.Panel._title(self)->Optional[Text]
+rich.panel.Panel.fit(cls,renderable:'RenderableType',box:Box=ROUNDED,*,title:TextType=None,title_align:AlignValues='center',safe_box:Optional[bool]=None,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,padding:PaddingDimensions=(0,1))
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/measure.py----------------------------------------
+A:rich.measure.minimum->min(max(0, minimum), maximum)
+A:rich.measure.width->max(0, width)
+A:rich.measure.measurement->measurement.with_maximum(max_width).with_maximum(max_width)
+A:rich.measure.renderable->renderable.__rich__().__rich__()
+A:rich.measure.get_console_width->getattr(renderable, '__rich_measure__', None)
+A:rich.measure.render_width->get_console_width(console, _max_width).normalize().with_maximum(_max_width)
+A:rich.measure.measured_width->Measurement(max(measurements, key=itemgetter(0)).minimum, max(measurements, key=itemgetter(1)).maximum)
+rich.measure.Measurement(NamedTuple)
+rich.measure.Measurement.clamp(self,min_width:int=None,max_width:int=None)->'Measurement'
+rich.measure.Measurement.get(cls,console:'Console',renderable:'RenderableType',max_width:int=None)->'Measurement'
+rich.measure.Measurement.normalize(self)->'Measurement'
+rich.measure.Measurement.span(self)->int
+rich.measure.Measurement.with_maximum(self,width:int)->'Measurement'
+rich.measure.Measurement.with_minimum(self,width:int)->'Measurement'
+rich.measure.measure_renderables(console:'Console',renderables:Iterable['RenderableType'],max_width:int)->'Measurement'
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/table.py----------------------------------------
+A:rich.table.self._padding->padding.Padding.unpack(padding)
+A:rich.table.self.row_styles->list(row_styles or [])
+A:rich.table.max_width->sum(self._calculate_column_widths(console, max_width - extra_width))
+A:rich.table.measurement->measurement.clamp(None if column.min_width is None else column.min_width + padding_width, None if column.max_width is None else column.max_width + padding_width).clamp(None if column.min_width is None else column.min_width + padding_width, None if column.max_width is None else column.max_width + padding_width)
+A:rich.table.column->Column(_index=index)
+A:rich.table.widths->ratio_reduce(excess_width, ratios, max_reduce, widths)
+A:rich.table.render_options->options.update(width=width, justify=column.justify, no_wrap=column.no_wrap, overflow=column.overflow)
+A:rich.table.flex_widths->ratio_distribute(flexible_width, ratios, flex_minimum)
+A:rich.table.iter_flex_widths->iter(flex_widths)
+A:rich.table.table_width->sum(widths)
+A:rich.table.pad_widths->ratio_distribute(_max_width - table_width, widths)
+A:rich.table.total_width->sum(widths)
+A:rich.table.max_column->max((width for (width, allow_wrap) in zip(widths, wrapable) if allow_wrap))
+A:rich.table.second_max_column->max((width if allow_wrap and width != max_column else 0 for (width, allow_wrap) in zip(widths, wrapable)))
+A:rich.table.any_padding->any(padding)
+A:rich.table.left->max(0, left - right)
+A:rich.table.bottom->max(0, top - bottom)
+A:rich.table._padding->Padding(renderable, (top, right, bottom, left))
+A:rich.table.pad_left->max(0, pad_left - pad_right)
+A:rich.table.padding_width->self._get_padding_width(column._index)
+A:rich.table.(_min, _max)->get_render_width(console, cell.renderable, max_width)
+A:rich.table.table_style->Console().get_style(self.style or '')
+A:rich.table.new_line->segment.Segment.line()
+A:rich.table.row_style->get_style(get_row_style(index - 1 if show_header else index))
+A:rich.table.lines->Console().render_lines(cell.renderable, render_options, style=cell_style)
+A:rich.table.max_height->max(max_height, len(lines))
+A:rich.table.table->Table(title='Star Wars Movies', caption='Rich example table', caption_justify='right')
+A:rich.table.console->Console()
+A:rich.table.highlight->ReprHighlighter()
+rich.table.Column
+rich.table.Column.cells(self)->Iterable['RenderableType']
+rich.table.Column.flexible(self)->bool
+rich.table.Table(self,*headers:Union[Column,str],title:TextType=None,caption:TextType=None,width:int=None,min_width:int=None,box:Optional[box.Box]=box.HEAVY_HEAD,safe_box:Optional[bool]=None,padding:PaddingDimensions=(0,1),collapse_padding:bool=False,pad_edge:bool=True,expand:bool=False,show_header:bool=True,show_footer:bool=False,show_edge:bool=True,show_lines:bool=False,leading:int=0,style:StyleType='none',row_styles:Iterable[StyleType]=None,header_style:StyleType=None,footer_style:StyleType=None,border_style:StyleType=None,title_style:StyleType=None,caption_style:StyleType=None,title_justify:'JustifyMethod'='center',caption_justify:'JustifyMethod'='center')
+rich.table.Table.__init__(self,*headers:Union[Column,str],title:TextType=None,caption:TextType=None,width:int=None,min_width:int=None,box:Optional[box.Box]=box.HEAVY_HEAD,safe_box:Optional[bool]=None,padding:PaddingDimensions=(0,1),collapse_padding:bool=False,pad_edge:bool=True,expand:bool=False,show_header:bool=True,show_footer:bool=False,show_edge:bool=True,show_lines:bool=False,leading:int=0,style:StyleType='none',row_styles:Iterable[StyleType]=None,header_style:StyleType=None,footer_style:StyleType=None,border_style:StyleType=None,title_style:StyleType=None,caption_style:StyleType=None,title_justify:'JustifyMethod'='center',caption_justify:'JustifyMethod'='center')
+rich.table.Table.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.table.Table.__rich_measure__(self,console:'Console',max_width:int)->Measurement
+rich.table.Table._calculate_column_widths(self,console:'Console',max_width:int)->List[int]
+rich.table.Table._collapse_widths(cls,widths:List[int],wrapable:List[bool],max_width:int)->List[int]
+rich.table.Table._extra_width(self)->int
+rich.table.Table._get_cells(self,column_index:int,column:Column)->Iterable[_Cell]
+rich.table.Table._get_padding_width(self,column_index:int)->int
+rich.table.Table._measure_column(self,console:'Console',column:Column,max_width:int)->Measurement
+rich.table.Table._render(self,console:'Console',options:'ConsoleOptions',widths:List[int])->'RenderResult'
+rich.table.Table.add_column(self,header:'RenderableType'='',footer:'RenderableType'='',*,header_style:StyleType=None,footer_style:StyleType=None,style:StyleType=None,justify:'JustifyMethod'='left',overflow:'OverflowMethod'='ellipsis',width:int=None,min_width:int=None,max_width:int=None,ratio:int=None,no_wrap:bool=False)->None
+rich.table.Table.add_row(self,*renderables:Optional['RenderableType'],style:StyleType=None)->None
+rich.table.Table.expand(self)->int
+rich.table.Table.expand(self,expand:bool)->None
+rich.table.Table.get_row_style(self,index:int)->StyleType
+rich.table.Table.grid(cls,padding:PaddingDimensions=0,collapse_padding:bool=True,pad_edge:bool=False,expand:bool=False)->'Table'
+rich.table.Table.padding(self)->Tuple[int, int, int, int]
+rich.table.Table.padding(self,padding:PaddingDimensions)->'Table'
+rich.table.Table.row_count(self)->int
+rich.table._Cell(NamedTuple)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_wrap.py----------------------------------------
+A:rich._wrap.re_word->re.compile('\\s*\\S+\\s*')
+A:rich._wrap.word_match->re.compile('\\s*\\S+\\s*').match(text, end)
+A:rich._wrap.(start, end)->re.compile('\\s*\\S+\\s*').match(text, end).span()
+A:rich._wrap.word->re.compile('\\s*\\S+\\s*').match(text, end).group(0)
+A:rich._wrap.word_length->_cell_len(word.rstrip())
+A:rich._wrap.line_position->_cell_len(word)
+A:rich._wrap.console->Console(width=10)
+rich._wrap.divide_line(text:str,width:int,fold:bool=True)->List[int]
+rich._wrap.words(text:str)->Iterable[Tuple[int, int, str]]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/align.py----------------------------------------
+A:rich.align.rendered->Console().render(Constrain(self.renderable, width=self.width), options)
+A:rich.align.lines->segment.Segment.set_shape(lines, width, height)
+A:rich.align.(width, height)->segment.Segment.get_shape(lines)
+A:rich.align.new_line->segment.Segment.line()
+A:rich.align.pad->Segment(' ' * excess_space)
+A:rich.align.iter_segments->segment.Segment.apply_style(iter_segments, style)
+A:rich.align.style->Console().get_style(self.style)
+A:rich.align.measurement->measure.Measurement.get(console, self.renderable, max_width)
+A:rich.align.console->Console()
+rich.align.Align(self,renderable:'RenderableType',align:AlignValues,style:StyleType=None,*,pad:bool=True,width:int=None)
+rich.align.Align.__init__(self,renderable:'RenderableType',align:AlignValues,style:StyleType=None,*,pad:bool=True,width:int=None)
+rich.align.Align.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.align.Align.__rich_measure__(self,console:'Console',max_width:int)->Measurement
+rich.align.Align.center(cls,renderable:'RenderableType',style:StyleType=None,*,pad:bool=True,width:int=None)->'Align'
+rich.align.Align.left(cls,renderable:'RenderableType',style:StyleType=None,*,pad:bool=True,width:int=None)->'Align'
+rich.align.Align.right(cls,renderable:'RenderableType',style:StyleType=None,*,pad:bool=True,width:int=None)->'Align'
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/logging.py----------------------------------------
+A:rich.logging.self._log_render->LogRender(show_time=show_time, show_level=show_level, show_path=show_path)
+A:rich.logging.message->record.getMessage()
+A:rich.logging.log_time->datetime.datetime.fromtimestamp(record.created)
+A:rich.logging.level->Text()
+A:rich.logging.traceback->traceback.Traceback.from_exception(exc_type, exc_value, exc_traceback, width=self.tracebacks_width, extra_lines=self.tracebacks_extra_lines, theme=self.tracebacks_theme, word_wrap=self.tracebacks_word_wrap)
+A:rich.logging.message_text->self.highlighter(message_text)
+A:rich.logging.log->logging.getLogger('rich')
+rich.logging.RichHandler(self,level:int=logging.NOTSET,console:Console=None,*,show_time:bool=True,show_level:bool=True,show_path:bool=True,enable_link_path:bool=True,highlighter:Highlighter=None,markup:bool=False,rich_tracebacks:bool=False,tracebacks_width:Optional[int]=None,tracebacks_extra_lines:int=3,tracebacks_theme:Optional[str]=None,tracebacks_word_wrap:bool=True)
+rich.logging.RichHandler.__init__(self,level:int=logging.NOTSET,console:Console=None,*,show_time:bool=True,show_level:bool=True,show_path:bool=True,enable_link_path:bool=True,highlighter:Highlighter=None,markup:bool=False,rich_tracebacks:bool=False,tracebacks_width:Optional[int]=None,tracebacks_extra_lines:int=3,tracebacks_theme:Optional[str]=None,tracebacks_word_wrap:bool=True)
+rich.logging.RichHandler.emit(self,record:LogRecord)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_pick.py----------------------------------------
+rich._pick.pick_bool(*values:Optional[bool])->bool
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/box.py----------------------------------------
 A:rich.box.(line1, line2, line3, line4, line5, line6, line7, line8)->LEGACY_WINDOWS_SUBSTITUTIONS.get(box, box).splitlines()
 A:rich.box.(self.top_left, self.top, self.top_divider, self.top_right)->iter(line1)
 A:rich.box.(self.head_left, _, self.head_vertical, self.head_right)->iter(line2)
@@ -550,7 +858,417 @@ rich.box.Box.get_top(self,widths:Iterable[int])->str
 rich.box.Box.substitute(self,options:'ConsoleOptions',safe:bool=True)->'Box'
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/progress.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_lru_cache.py----------------------------------------
+A:rich._lru_cache.CacheKey->TypeVar('CacheKey')
+A:rich._lru_cache.CacheValue->TypeVar('CacheValue')
+rich._lru_cache.LRUCache(self,cache_size:int)
+rich._lru_cache.LRUCache.__getitem__(self:Dict[CacheKey,CacheValue],key:CacheKey)->CacheValue
+rich._lru_cache.LRUCache.__init__(self,cache_size:int)
+rich._lru_cache.LRUCache.__setitem__(self,key:CacheKey,value:CacheValue)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/color_triplet.py----------------------------------------
+rich.color_triplet.ColorTriplet(NamedTuple)
+rich.color_triplet.ColorTriplet.hex(self)->str
+rich.color_triplet.ColorTriplet.normalized(self)->Tuple[float, float, float]
+rich.color_triplet.ColorTriplet.rgb(self)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/themes.py----------------------------------------
+A:rich.themes.DEFAULT->Theme(DEFAULT_STYLES)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/constrain.py----------------------------------------
+A:rich.constrain.child_options->options.update(width=min(self.width, options.max_width))
+A:rich.constrain.max_width->min(self.width, max_width)
+A:rich.constrain.measurement->measure.Measurement.get(console, self.renderable, max_width)
+rich.constrain.Constrain(self,renderable:'RenderableType',width:Optional[int]=80)
+rich.constrain.Constrain.__init__(self,renderable:'RenderableType',width:Optional[int]=80)
+rich.constrain.Constrain.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.constrain.Constrain.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/markdown.py----------------------------------------
+A:rich.markdown.self.style->MarkdownContext(console, options, style, inline_code_lexer=self.inline_code_lexer, inline_code_theme=self.inline_code_theme).enter_style(self.style_name)
+A:rich.markdown.self.text->Text(justify='left')
+A:rich.markdown.heading->cls(node.level)
+A:rich.markdown.code->str(self.text).rstrip()
+A:rich.markdown.syntax->Panel(Syntax(code, self.lexer_name, theme=self.theme), border_style='dim', box=box.SQUARE)
+A:rich.markdown.render_options->options.update(width=options.max_width - number_width)
+A:rich.markdown.lines->Console(force_terminal=args.force_color, width=args.width).render_lines(self.elements, render_options, style=self.style)
+A:rich.markdown.new_line->Segment('\n')
+A:rich.markdown.padding->Segment(' ' * number_width, number_style)
+A:rich.markdown.style->Console(force_terminal=args.force_color, width=args.width).get_style(self.style, default='none')
+A:rich.markdown.bullet_style->Console(force_terminal=args.force_color, width=args.width).get_style('markdown.item.bullet', default='none')
+A:rich.markdown.bullet->Segment(' • ', bullet_style)
+A:rich.markdown.number_style->Console(force_terminal=args.force_color, width=args.width).get_style('markdown.item.number', default='none')
+A:rich.markdown.numeral->Segment(f'{number}'.rjust(number_width - 1) + ' ', number_style)
+A:rich.markdown.link_style->Console(force_terminal=args.force_color, width=args.width).get_style('markdown.link', default='none')
+A:rich.markdown.self._syntax->Syntax('', inline_code_lexer, theme=inline_code_theme)
+A:rich.markdown.highlight_text->self._syntax.highlight(text)
+A:rich.markdown.parser->argparse.ArgumentParser(description='Render Markdown to the console with Rich')
+A:rich.markdown.self.parsed->argparse.ArgumentParser(description='Render Markdown to the console with Rich').parse(markup)
+A:rich.markdown.context->MarkdownContext(console, options, style, inline_code_lexer=self.inline_code_lexer, inline_code_theme=self.inline_code_theme)
+A:rich.markdown.nodes->self.parsed.walker()
+A:rich.markdown.element->element_class.create(self, current)
+A:rich.markdown.args->argparse.ArgumentParser(description='Render Markdown to the console with Rich').parse_args()
+A:rich.markdown.markdown->Markdown(markdown_file.read(), justify='full' if args.justify else 'left', code_theme=args.code_theme, hyperlinks=args.hyperlinks, inline_code_lexer=args.inline_code_lexer)
+A:rich.markdown.console->Console(force_terminal=args.force_color, width=args.width)
+rich.markdown.BlockQuote(self)
+rich.markdown.BlockQuote.__init__(self)
+rich.markdown.BlockQuote.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.BlockQuote.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
+rich.markdown.CodeBlock(self,lexer_name:str,theme:str)
+rich.markdown.CodeBlock.__init__(self,lexer_name:str,theme:str)
+rich.markdown.CodeBlock.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.CodeBlock.create(cls,markdown:'Markdown',node:Any)->'CodeBlock'
+rich.markdown.Heading(self,level:int)
+rich.markdown.Heading.__init__(self,level:int)
+rich.markdown.Heading.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.Heading.create(cls,markdown:'Markdown',node:Any)->'Heading'
+rich.markdown.Heading.on_enter(self,context:'MarkdownContext')->None
+rich.markdown.HorizontalRule(MarkdownElement)
+rich.markdown.HorizontalRule.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.ImageItem(self,destination:str,hyperlinks:bool)
+rich.markdown.ImageItem.__init__(self,destination:str,hyperlinks:bool)
+rich.markdown.ImageItem.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.ImageItem.create(cls,markdown:'Markdown',node:Any)->'MarkdownElement'
+rich.markdown.ImageItem.on_enter(self,context:'MarkdownContext')->None
+rich.markdown.ListElement(self,list_type:str,list_start:Optional[int])
+rich.markdown.ListElement.__init__(self,list_type:str,list_start:Optional[int])
+rich.markdown.ListElement.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.ListElement.create(cls,markdown:'Markdown',node:Any)->'ListElement'
+rich.markdown.ListElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
+rich.markdown.ListItem(self)
+rich.markdown.ListItem.__init__(self)
+rich.markdown.ListItem.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
+rich.markdown.ListItem.render_bullet(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.ListItem.render_number(self,console:Console,options:ConsoleOptions,number:int,last_number:int)->RenderResult
+rich.markdown.Markdown(self,markup:str,code_theme:str='monokai',justify:JustifyMethod=None,style:Union[str,Style]='none',hyperlinks:bool=True,inline_code_lexer:str=None,inline_code_theme:str=None)
+rich.markdown.Markdown.__init__(self,markup:str,code_theme:str='monokai',justify:JustifyMethod=None,style:Union[str,Style]='none',hyperlinks:bool=True,inline_code_lexer:str=None,inline_code_theme:str=None)
+rich.markdown.Markdown.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.MarkdownContext(self,console:Console,options:ConsoleOptions,style:Style,inline_code_lexer:str=None,inline_code_theme:str='monokai')
+rich.markdown.MarkdownContext.__init__(self,console:Console,options:ConsoleOptions,style:Style,inline_code_lexer:str=None,inline_code_theme:str='monokai')
+rich.markdown.MarkdownContext.current_style(self)->Style
+rich.markdown.MarkdownContext.enter_style(self,style_name:Union[str,Style])->Style
+rich.markdown.MarkdownContext.leave_style(self)->Style
+rich.markdown.MarkdownContext.on_text(self,text:str,node_type:str)->None
+rich.markdown.MarkdownElement
+rich.markdown.MarkdownElement.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.markdown.MarkdownElement.create(cls,markdown:'Markdown',node:Any)->'MarkdownElement'
+rich.markdown.MarkdownElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
+rich.markdown.MarkdownElement.on_enter(self,context:'MarkdownContext')
+rich.markdown.MarkdownElement.on_leave(self,context:'MarkdownContext')->None
+rich.markdown.MarkdownElement.on_text(self,context:'MarkdownContext',text:TextType)->None
+rich.markdown.Paragraph(self,justify:JustifyMethod)
+rich.markdown.Paragraph.__init__(self,justify:JustifyMethod)
+rich.markdown.Paragraph.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.markdown.Paragraph.create(cls,markdown:'Markdown',node)->'Paragraph'
+rich.markdown.TextElement(MarkdownElement)
+rich.markdown.TextElement.on_enter(self,context:'MarkdownContext')->None
+rich.markdown.TextElement.on_leave(self,context:'MarkdownContext')->None
+rich.markdown.TextElement.on_text(self,context:'MarkdownContext',text:TextType)->None
+rich.markdown.UnknownElement(MarkdownElement)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/containers.py----------------------------------------
+A:rich.containers.T->TypeVar('T')
+A:rich.containers._min->max((dimension.minimum for dimension in dimensions))
+A:rich.containers._max->max((dimension.maximum for dimension in dimensions))
+A:rich.containers.words->line.split(' ')
+A:rich.containers.words_size->sum((cell_len(word.plain) for word in words))
+A:rich.containers.style->word.get_style_at_offset(console, -1)
+A:rich.containers.next_style->next_word.get_style_at_offset(console, 0)
+A:rich.containers.self[line_index]->Text('').join(tokens)
+rich.containers.Lines(self,lines:Iterable['Text']=())
+rich.containers.Lines.__getitem__(self,index)
+rich.containers.Lines.__init__(self,lines:Iterable['Text']=())
+rich.containers.Lines.__iter__(self)->Iterator['Text']
+rich.containers.Lines.__len__(self)->int
+rich.containers.Lines.__repr__(self)->str
+rich.containers.Lines.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.containers.Lines.__setitem__(self,index:int,value:'Text')->'Lines'
+rich.containers.Lines.append(self,line:'Text')->None
+rich.containers.Lines.extend(self,lines:Iterable['Text'])->None
+rich.containers.Lines.justify(self,console:'Console',width:int,justify:'JustifyMethod'='left',overflow:'OverflowMethod'='fold')->None
+rich.containers.Renderables(self,renderables:Iterable['RenderableType']=None)
+rich.containers.Renderables.__init__(self,renderables:Iterable['RenderableType']=None)
+rich.containers.Renderables.__iter__(self)->Iterable['RenderableType']
+rich.containers.Renderables.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.containers.Renderables.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
+rich.containers.Renderables.append(self,renderable:'RenderableType')->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/segment.py----------------------------------------
+A:rich.segment.(_text, new_line, text)->set_cell_size(text, length - line_length).partition('\n')
+A:rich.segment.new_line_segment->cls('\n')
+A:rich.segment.cropped_line->adjust_line_length(line, length, style=style, pad=pad)
+A:rich.segment.line_length->sum((segment.cell_length for segment in line))
+A:rich.segment.text->set_cell_size(text, length - line_length)
+A:rich.segment.height->len(lines)
+A:rich.segment.iter_segments->iter(segments)
+A:rich.segment.last_segment->_Segment(last_segment.text + segment.text, last_segment.style)
+A:rich.segment.lines->Segment.set_shape(lines, 50, 4, style=Style.parse('on blue'))
+rich.segment.Segment(NamedTuple)
+rich.segment.Segment.__bool__(self)->bool
+rich.segment.Segment.__repr__(self)->str
+rich.segment.Segment.adjust_line_length(cls,line:List['Segment'],length:int,style:Style=None,pad:bool=True)->List['Segment']
+rich.segment.Segment.apply_style(cls,segments:Iterable['Segment'],style:Style=None)->Iterable['Segment']
+rich.segment.Segment.cell_length(self)->int
+rich.segment.Segment.control(cls,text:str)->'Segment'
+rich.segment.Segment.filter_control(cls,segments:Iterable['Segment'],is_control=False)->Iterable['Segment']
+rich.segment.Segment.get_line_length(cls,line:List['Segment'])->int
+rich.segment.Segment.get_shape(cls,lines:List[List['Segment']])->Tuple[int, int]
+rich.segment.Segment.line(cls)->'Segment'
+rich.segment.Segment.set_shape(cls,lines:List[List['Segment']],width:int,height:int=None,style:Style=None)->List[List['Segment']]
+rich.segment.Segment.simplify(cls,segments:Iterable['Segment'])->Iterable['Segment']
+rich.segment.Segment.split_and_crop_lines(cls,segments:Iterable['Segment'],length:int,style:Style=None,pad:bool=True,include_new_lines:bool=True)->Iterable[List['Segment']]
+rich.segment.Segment.split_lines(cls,segments:Iterable['Segment'])->Iterable[List['Segment']]
+rich.segment.Segment.strip_links(cls,segments:Iterable['Segment'])->Iterable['Segment']
+rich.segment.Segment.strip_styles(cls,segments:Iterable['Segment'])->Iterable['Segment']
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/bar.py----------------------------------------
+A:rich.bar.self.begin->max(begin, 0)
+A:rich.bar.self.end->min(end, size)
+A:rich.bar.self.style->Style(color=color, bgcolor=bgcolor)
+A:rich.bar.width->min(self.width or options.max_width, options.max_width)
+A:rich.bar.prefix_complete_eights->int(width * 8 * self.begin / self.size)
+A:rich.bar.body_complete_eights->int(width * 8 * self.end / self.size)
+rich.bar.Bar(self,size:float,begin:float,end:float,*,width:int=None,color:Union[Color,str]='default',bgcolor:Union[Color,str]='default')
+rich.bar.Bar.__init__(self,size:float,begin:float,end:float,*,width:int=None,color:Union[Color,str]='default',bgcolor:Union[Color,str]='default')
+rich.bar.Bar.__repr__(self)->str
+rich.bar.Bar.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.bar.Bar.__rich_measure__(self,console:Console,max_width:int)->Measurement
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/progress_bar.py----------------------------------------
+A:rich.progress_bar.completed->min(self.total, max(0, self.completed))
+A:rich.progress_bar.color->blend_rgb(fore_color, back_color, cross_fade=fade)
+A:rich.progress_bar.fore_style->Console().get_style(self.pulse_style, default='white')
+A:rich.progress_bar.back_style->Console().get_style(self.style, default='black')
+A:rich.progress_bar.pulse_segments->self._get_pulse_segments(fore_style, back_style, console.color_system, ascii=ascii)
+A:rich.progress_bar.segment_count->len(pulse_segments)
+A:rich.progress_bar.width->min(self.width or options.max_width, options.max_width)
+A:rich.progress_bar.style->Console().get_style(self.style)
+A:rich.progress_bar.complete_style->Console().get_style(self.complete_style if self.completed < self.total else self.finished_style)
+A:rich.progress_bar.console->Console()
+A:rich.progress_bar.bar->ProgressBar(width=50, total=100)
+rich.progress_bar.ProgressBar(self,total:float=100,completed:float=0,width:int=None,pulse:bool=False,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',animation_time:float=None)
+rich.progress_bar.ProgressBar.__init__(self,total:float=100,completed:float=0,width:int=None,pulse:bool=False,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',animation_time:float=None)
+rich.progress_bar.ProgressBar.__repr__(self)->str
+rich.progress_bar.ProgressBar.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.progress_bar.ProgressBar.__rich_measure__(self,console:Console,max_width:int)->Measurement
+rich.progress_bar.ProgressBar._get_pulse_segments(self,fore_style:Style,back_style:Style,color_system:str,ascii:bool=False)->List[Segment]
+rich.progress_bar.ProgressBar._render_pulse(self,console:Console,width:int,ascii:bool=False)->Iterable[Segment]
+rich.progress_bar.ProgressBar.percentage_completed(self)->float
+rich.progress_bar.ProgressBar.update(self,completed:float,total:float=None)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/padding.py----------------------------------------
+A:rich.padding.(self.top, self.right, self.bottom, self.left)->self.unpack(pad)
+A:rich.padding.(pad_top, pad_right)->cast(Tuple[int, int], pad)
+A:rich.padding.(top, right, bottom, left)->cast(Tuple[int, int, int, int], pad)
+A:rich.padding.style->console.get_style(self.style)
+A:rich.padding.width->min(Measurement.get(console, self.renderable, options.max_width).maximum + self.left + self.right, options.max_width)
+A:rich.padding.child_options->options.update(width=width - self.left - self.right)
+A:rich.padding.lines->segment.Segment.set_shape(lines, child_options.max_width, style=style)
+A:rich.padding.blank_line->Segment(' ' * width + '\n', style)
+A:rich.padding.new_line->segment.Segment.line()
+A:rich.padding.(measure_min, measure_max)->measure.Measurement.get(console, self.renderable, max(0, max_width - extra_width))
+A:rich.padding.measurement->measurement.with_maximum(max_width).with_maximum(max_width)
+rich.padding.Padding(self,renderable:'RenderableType',pad:'PaddingDimensions'=(0,0,0,0),*,style:Union[str,Style]='none',expand:bool=True)
+rich.padding.Padding.__init__(self,renderable:'RenderableType',pad:'PaddingDimensions'=(0,0,0,0),*,style:Union[str,Style]='none',expand:bool=True)
+rich.padding.Padding.__repr__(self)->str
+rich.padding.Padding.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.padding.Padding.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
+rich.padding.Padding.indent(cls,renderable:'RenderableType',level:int)->'Padding'
+rich.padding.Padding.unpack(pad:'PaddingDimensions')->Tuple[int, int, int, int]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_emoji_codes.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/errors.py----------------------------------------
+rich.errors.ConsoleError(Exception)
+rich.errors.MarkupError(ConsoleError)
+rich.errors.MissingStyle(StyleError)
+rich.errors.NotRenderableError(ConsoleError)
+rich.errors.StyleError(Exception)
+rich.errors.StyleStackError(ConsoleError)
+rich.errors.StyleSyntaxError(ConsoleError)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/live_render.py----------------------------------------
+A:rich.live_render.style->console.get_style(self.style)
+A:rich.live_render.lines->segment.Segment.set_shape(lines, width, height)
+A:rich.live_render.shape->segment.Segment.get_shape(lines)
+rich.live_render.LiveRender(self,renderable:RenderableType,style:StyleType='')
+rich.live_render.LiveRender.__init__(self,renderable:RenderableType,style:StyleType='')
+rich.live_render.LiveRender.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.live_render.LiveRender.position_cursor(self)->Control
+rich.live_render.LiveRender.restore_cursor(self)->Control
+rich.live_render.LiveRender.set_renderable(self,renderable:RenderableType)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/tabulate.py----------------------------------------
+A:rich.tabulate.table->Table(show_header=False, title=title, caption=caption, box=box.ROUNDED, border_style='blue')
+A:rich.tabulate.highlighter->ReprHighlighter()
+rich.tabulate.tabulate_mapping(mapping:Mapping,title:str=None,caption:str=None,title_justify:Optional[JustifyMethod]=None,caption_justify:Optional[JustifyMethod]=None)->Table
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/theme.py----------------------------------------
+A:rich.theme.config->configparser.ConfigParser()
+A:rich.theme.theme->Theme()
+rich.theme.Theme(self,styles:Mapping[str,StyleType]=None,inherit:bool=True)
+rich.theme.Theme.__init__(self,styles:Mapping[str,StyleType]=None,inherit:bool=True)
+rich.theme.Theme.config(self)->str
+rich.theme.Theme.from_file(cls,config_file:IO[str],source:str=None,inherit:bool=True)->'Theme'
+rich.theme.Theme.read(cls,path:str,inherit:bool=True)->'Theme'
+rich.theme.ThemeStack(self,theme:Theme)
+rich.theme.ThemeStack.__init__(self,theme:Theme)
+rich.theme.ThemeStack.pop_theme(self)->None
+rich.theme.ThemeStack.push_theme(self,theme:Theme,inherit:bool=True)->None
+rich.theme.ThemeStackError(Exception)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/markup.py----------------------------------------
+A:rich.markup.RE_TAGS->re.compile('\n(\\\\\\[)|\n\\[([a-z#\\/].*?)\\]\n', re.VERBOSE)
+A:rich.markup.(escape_open, tag_text)->match.groups()
+A:rich.markup.(start, end)->match.span()
+A:rich.markup.(text, equals, parameters)->tag_text.partition('=')
+A:rich.markup.text->Text(style=style)
+A:rich.markup.style_name->normalize(style_name)
+A:rich.markup.(start, open_tag)->pop()
+A:rich.markup.normalized_tag->Tag(normalize(tag.name), tag.parameters)
+A:rich.markup.text_length->len(text)
+A:rich.markup.(start, tag)->style_stack.pop()
+A:rich.markup.text.spans->sorted(spans)
+A:rich.markup.console->Console(highlight=False)
+rich.markup.Tag(NamedTuple)
+rich.markup.Tag.__str__(self)->str
+rich.markup.Tag.markup(self)->str
+rich.markup._parse(markup:str)->Iterable[Tuple[int, Optional[str], Optional[Tag]]]
+rich.markup.escape(markup:str)->str
+rich.markup.render(markup:str,style:Union[str,Style]='',emoji:bool=True)->Text
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/default_styles.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_windows.py----------------------------------------
+A:rich._windows.windll->LibraryLoader(ctypes.WinDLL)
+A:rich._windows.features->get_windows_console_features()
+A:rich._windows.handle->_GetStdHandle(STDOUT)
+A:rich._windows.console_mode->ctypes.wintypes.DWORD()
+A:rich._windows.result->_GetConsoleMode(handle, console_mode)
+A:rich._windows.vt->bool(result and console_mode.value & ENABLE_VIRTUAL_TERMINAL_PROCESSING)
+A:rich._windows.win_version->sys.getwindowsversion()
+rich._windows.WindowsConsoleFeatures
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_emoji_replace.py----------------------------------------
+A:rich._emoji_replace.(emoji_code, emoji_name)->match.groups()
+rich._emoji_replace._emoji_replace(text:str,_emoji_sub=re.compile('(:(\\S*?):)').sub)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/traceback.py----------------------------------------
+A:rich.traceback.(exc_type, exc_value, traceback)->sys.exc_info()
+A:rich.traceback.trace->Trace(stacks=stacks)
+A:rich.traceback.self.theme->syntax.Syntax.get_theme(theme or 'ansi_dark')
+A:rich.traceback.rich_traceback->cls.extract(exc_type, exc_value, traceback)
+A:rich.traceback.stack->Stack(exc_type=str(exc_type.__name__), exc_value=str(exc_value))
+A:rich.traceback.stack.syntax_error->_SyntaxError(offset=exc_value.offset or 0, filename=exc_value.filename or '?', lineno=exc_value.lineno or 0, line=exc_value.text or '', msg=exc_value.msg)
+A:rich.traceback.frame->Frame(filename=frame_summary.f_code.co_filename or '?', lineno=line_no, name=frame_summary.f_code.co_name, locals={key: pretty.traverse(value) for (key, value) in frame_summary.f_locals.items()} if show_locals else None)
+A:rich.traceback.background_style->theme.get_background_style()
+A:rich.traceback.traceback_theme->Theme({'pretty': token_style(TextToken), 'pygments.text': token_style(Token), 'pygments.string': token_style(String), 'pygments.function': token_style(Name.Function), 'pygments.number': token_style(Number), 'repr.str': token_style(String), 'repr.brace': token_style(TextToken) + Style(bold=True), 'repr.number': token_style(Number), 'repr.bool_true': token_style(Keyword.Constant), 'repr.bool_false': token_style(Keyword.Constant), 'repr.none': token_style(Keyword.Constant), 'scope.border': token_style(String.Delimiter), 'scope.equals': token_style(Operator), 'scope.key': token_style(Name), 'scope.key.special': token_style(Name.Constant) + Style(dim=True)})
+A:rich.traceback.highlighter->ReprHighlighter()
+A:rich.traceback.stack_renderable->Constrain(stack_renderable, self.width)
+A:rich.traceback.path_highlighter->PathHighlighter()
+A:rich.traceback.text->text.Text.assemble(path_highlighter(Text(frame.filename, style='pygments.string')), (':', 'pygments.text'), (str(frame.lineno), 'pygments.number'), ' in ', (frame.name, 'pygments.function'), style='pygments.text')
+A:rich.traceback.syntax_error_text->highlighter(syntax_error.line.rstrip())
+A:rich.traceback.offset->min(syntax_error.offset - 1, len(syntax_error_text))
+A:rich.traceback.code->read_code(frame.filename)
+A:rich.traceback.lexer->guess_lexer_for_filename(frame.filename, code)
+A:rich.traceback.syntax->Syntax(code, lexer_name, theme=theme, line_numbers=True, line_range=(frame.lineno - self.extra_lines, frame.lineno + self.extra_lines), highlight_lines={frame.lineno}, word_wrap=self.word_wrap, code_width=88)
+A:rich.traceback.console->Console()
+rich.traceback.Frame
+rich.traceback.PathHighlighter(RegexHighlighter)
+rich.traceback.Stack
+rich.traceback.Trace
+rich.traceback.Traceback(self,trace:Trace=None,width:Optional[int]=88,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)
+rich.traceback.Traceback.__init__(self,trace:Trace=None,width:Optional[int]=88,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)
+rich.traceback.Traceback.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.traceback.Traceback._render_stack(self,stack:Stack)->RenderResult
+rich.traceback.Traceback._render_syntax_error(self,syntax_error:_SyntaxError)->RenderResult
+rich.traceback.Traceback.extract(cls,exc_type:Type[BaseException],exc_value:BaseException,traceback:Optional[TracebackType],show_locals:bool=False)->Trace
+rich.traceback.Traceback.from_exception(cls,exc_type:Type,exc_value:BaseException,traceback:Optional[TracebackType],width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)->'Traceback'
+rich.traceback._SyntaxError
+rich.traceback.install(*,console:Console=None,width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)->Callable
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/control.py----------------------------------------
+A:rich.control.self._control_codes->segment.Segment.control(control_codes)
+rich.control.Control(self,control_codes:str)
+rich.control.Control.__init__(self,control_codes:str)
+rich.control.Control.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
+rich.control.Control.__str__(self)->str
+rich.control.strip_control_codes(text:str,_translate_table=_CONTROL_TRANSLATE)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/filesize.py----------------------------------------
+rich.filesize._to_str(size:int,suffixes:Iterable[str],base:int)->str
+rich.filesize.decimal(size:int)->str
+rich.filesize.pick_unit_and_suffix(size:int,suffixes:List[str],base:int)->Tuple[int, str]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/emoji.py----------------------------------------
+A:rich.emoji.console->Console(record=True)
+A:rich.emoji.columns->Columns((f':{name}: {name}' for name in sorted(EMOJI.keys()) if '\u200d' not in name), column_first=True)
+rich.emoji.Emoji(self,name:str,style:Union[str,Style]='none')
+rich.emoji.Emoji.__init__(self,name:str,style:Union[str,Style]='none')
+rich.emoji.Emoji.__repr__(self)->str
+rich.emoji.Emoji.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
+rich.emoji.Emoji.__str__(self)->str
+rich.emoji.Emoji.replace(cls,text:str)->str
+rich.emoji.NoEmoji(Exception)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/prompt.py----------------------------------------
+A:rich.prompt.PromptType->TypeVar('PromptType')
+A:rich.prompt.DefaultType->TypeVar('DefaultType')
+A:rich.prompt._prompt->cls(prompt, console=console, password=password, choices=choices, show_default=show_default, show_choices=show_choices)
+A:rich.prompt.prompt->self.make_prompt(default)
+A:rich.prompt._choices->'/'.join(self.choices)
+A:rich.prompt._default->self.render_default(default)
+A:rich.prompt.value->value.strip().lower().strip().lower()
+A:rich.prompt.return_value->self.process_response(value)
+A:rich.prompt.result->IntPrompt.ask(':rocket: Enter a number between [b]1[/b] and [b]10[/b]', default=5)
+A:rich.prompt.password->Prompt.ask('Please enter a password [cyan](must be at least 5 characters)', password=True)
+A:rich.prompt.fruit->Prompt.ask('Enter a fruit', choices=['apple', 'orange', 'pear'])
+rich.prompt.Confirm(PromptBase[bool])
+rich.prompt.Confirm.process_response(self,value:str)->bool
+rich.prompt.Confirm.render_default(self,default:DefaultType)->Text
+rich.prompt.FloatPrompt(PromptBase[int])
+rich.prompt.IntPrompt(PromptBase[int])
+rich.prompt.InvalidResponse(self,message:TextType)
+rich.prompt.InvalidResponse.__init__(self,message:TextType)
+rich.prompt.InvalidResponse.__rich__(self)->TextType
+rich.prompt.Prompt(PromptBase[str])
+rich.prompt.PromptBase(self,prompt:TextType='',*,console:Console=None,password:bool=False,choices:List[str]=None,show_default:bool=True,show_choices:bool=True)
+rich.prompt.PromptBase.__init__(self,prompt:TextType='',*,console:Console=None,password:bool=False,choices:List[str]=None,show_default:bool=True,show_choices:bool=True)
+rich.prompt.PromptBase.ask(cls,prompt:TextType='',*,console:Console=None,password:bool=False,choices:List[str]=None,show_default:bool=True,show_choices:bool=True,default:Any=...,stream:TextIO=None)->Any
+rich.prompt.PromptBase.check_choice(self,value:str)->bool
+rich.prompt.PromptBase.get_input(cls,console:Console,prompt:TextType,password:bool,stream:TextIO=None)->str
+rich.prompt.PromptBase.make_prompt(self,default:DefaultType)->Text
+rich.prompt.PromptBase.on_validate_error(self,value:str,error:InvalidResponse)->None
+rich.prompt.PromptBase.pre_prompt(self)->None
+rich.prompt.PromptBase.process_response(self,value:str)->PromptType
+rich.prompt.PromptBase.render_default(self,default:DefaultType)->Text
+rich.prompt.PromptError(Exception)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/progress.py----------------------------------------
 A:rich.progress.TaskID->NewType('TaskID', int)
 A:rich.progress.ProgressType->TypeVar('ProgressType')
 A:rich.progress.self.done->Event()
@@ -661,209 +1379,10 @@ rich.progress._TrackThread.run(self)->None
 rich.progress.track(sequence:Union[Sequence[ProgressType],Iterable[ProgressType]],description='Working...',total:int=None,auto_refresh=True,console:Optional[Console]=None,transient:bool=False,get_time:Callable[[],float]=None,refresh_per_second:int=None,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',update_period:float=0.1)->Iterable[ProgressType]
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/jupyter.py----------------------------------------
-A:rich.jupyter.console->get_console()
-A:rich.jupyter.segments->list(console.render(self, console.options))
-A:rich.jupyter.html->_render_segments(segments)
-A:rich.jupyter.text->escape(text)
-A:rich.jupyter.rule->style.get_html_style(theme)
-A:rich.jupyter.code->''.join(fragments)
-A:rich.jupyter.jupyter_renderable->JupyterRenderable(html)
-rich.jupyter.JupyterMixin
-rich.jupyter.JupyterMixin._repr_html_(self)->str
-rich.jupyter.JupyterRenderable(self,html:str)
-rich.jupyter.JupyterRenderable.__init__(self,html:str)
-rich.jupyter.JupyterRenderable._repr_html_(self)->str
-rich.jupyter.JupyterRenderable.render(cls,rich_renderable:'RenderableType')->str
-rich.jupyter._render_segments(segments:Iterable[Segment])->str
-rich.jupyter.display(segments:Iterable[Segment])->None
-rich.jupyter.print(*args,**kwargs)->None
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/_cell_widths.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/measure.py----------------------------------------
-A:rich.measure.minimum->min(max(0, minimum), maximum)
-A:rich.measure.width->max(0, width)
-A:rich.measure.measurement->measurement.with_maximum(max_width).with_maximum(max_width)
-A:rich.measure.renderable->renderable.__rich__().__rich__()
-A:rich.measure.get_console_width->getattr(renderable, '__rich_measure__', None)
-A:rich.measure.render_width->get_console_width(console, _max_width).normalize().with_maximum(_max_width)
-A:rich.measure.measured_width->Measurement(max(measurements, key=itemgetter(0)).minimum, max(measurements, key=itemgetter(1)).maximum)
-rich.measure.Measurement(NamedTuple)
-rich.measure.Measurement.clamp(self,min_width:int=None,max_width:int=None)->'Measurement'
-rich.measure.Measurement.get(cls,console:'Console',renderable:'RenderableType',max_width:int=None)->'Measurement'
-rich.measure.Measurement.normalize(self)->'Measurement'
-rich.measure.Measurement.span(self)->int
-rich.measure.Measurement.with_maximum(self,width:int)->'Measurement'
-rich.measure.Measurement.with_minimum(self,width:int)->'Measurement'
-rich.measure.measure_renderables(console:'Console',renderables:Iterable['RenderableType'],max_width:int)->'Measurement'
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/logging.py----------------------------------------
-A:rich.logging.self._log_render->LogRender(show_time=show_time, show_level=show_level, show_path=show_path)
-A:rich.logging.message->record.getMessage()
-A:rich.logging.log_time->datetime.datetime.fromtimestamp(record.created)
-A:rich.logging.level->Text()
-A:rich.logging.traceback->traceback.Traceback.from_exception(exc_type, exc_value, exc_traceback, width=self.tracebacks_width, extra_lines=self.tracebacks_extra_lines, theme=self.tracebacks_theme, word_wrap=self.tracebacks_word_wrap)
-A:rich.logging.message_text->self.highlighter(message_text)
-A:rich.logging.log->logging.getLogger('rich')
-rich.logging.RichHandler(self,level:int=logging.NOTSET,console:Console=None,*,show_time:bool=True,show_level:bool=True,show_path:bool=True,enable_link_path:bool=True,highlighter:Highlighter=None,markup:bool=False,rich_tracebacks:bool=False,tracebacks_width:Optional[int]=None,tracebacks_extra_lines:int=3,tracebacks_theme:Optional[str]=None,tracebacks_word_wrap:bool=True)
-rich.logging.RichHandler.__init__(self,level:int=logging.NOTSET,console:Console=None,*,show_time:bool=True,show_level:bool=True,show_path:bool=True,enable_link_path:bool=True,highlighter:Highlighter=None,markup:bool=False,rich_tracebacks:bool=False,tracebacks_width:Optional[int]=None,tracebacks_extra_lines:int=3,tracebacks_theme:Optional[str]=None,tracebacks_word_wrap:bool=True)
-rich.logging.RichHandler.emit(self,record:LogRecord)->None
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/panel.py----------------------------------------
-A:rich.panel.title_text.plain->title_text.plain.replace('\n', ' ')
-A:rich.panel._padding->padding.Padding.unpack(self.padding)
-A:rich.panel.style->console.get_style(self.style)
-A:rich.panel.box->self.box.substitute(options, safe=safe_box)
-A:rich.panel.child_width->min(options.max_width, max(child_width, title_text.cell_len + 2))
-A:rich.panel.child_options->options.update(width=child_width)
-A:rich.panel.lines->console.render_lines(renderable, child_options, style=style)
-A:rich.panel.line_start->Segment(box.mid_left, border_style)
-A:rich.panel.line_end->Segment(f'{box.mid_right}', border_style)
-A:rich.panel.new_line->segment.Segment.line()
-A:rich.panel.(_, right, _, left)->padding.Padding.unpack(self.padding)
-A:rich.panel.c->Console()
-A:rich.panel.p->Panel(Panel.fit(Text.from_markup('[bold magenta]Hello World!'), box=ROUNDED, safe_box=True, style='on red'), title='[b]Hello, World', box=DOUBLE)
-rich.panel.Panel(self,renderable:'RenderableType',box:Box=ROUNDED,*,title:TextType=None,title_align:AlignValues='center',safe_box:Optional[bool]=None,expand:bool=True,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,padding:PaddingDimensions=(0,1))
-rich.panel.Panel.__init__(self,renderable:'RenderableType',box:Box=ROUNDED,*,title:TextType=None,title_align:AlignValues='center',safe_box:Optional[bool]=None,expand:bool=True,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,padding:PaddingDimensions=(0,1))
-rich.panel.Panel.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.panel.Panel.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
-rich.panel.Panel._title(self)->Optional[Text]
-rich.panel.Panel.fit(cls,renderable:'RenderableType',box:Box=ROUNDED,*,title:TextType=None,title_align:AlignValues='center',safe_box:Optional[bool]=None,style:StyleType='none',border_style:StyleType='none',width:Optional[int]=None,padding:PaddingDimensions=(0,1))
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/protocol.py----------------------------------------
-rich.protocol.is_renderable(test_renderable:Any)->bool
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/emoji.py----------------------------------------
-A:rich.emoji.console->Console(record=True)
-A:rich.emoji.columns->Columns((f':{name}: {name}' for name in sorted(EMOJI.keys()) if '\u200d' not in name), column_first=True)
-rich.emoji.Emoji(self,name:str,style:Union[str,Style]='none')
-rich.emoji.Emoji.__init__(self,name:str,style:Union[str,Style]='none')
-rich.emoji.Emoji.__repr__(self)->str
-rich.emoji.Emoji.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.emoji.Emoji.__str__(self)->str
-rich.emoji.Emoji.replace(cls,text:str)->str
-rich.emoji.NoEmoji(Exception)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/markdown.py----------------------------------------
-A:rich.markdown.self.style->MarkdownContext(console, options, style, inline_code_lexer=self.inline_code_lexer, inline_code_theme=self.inline_code_theme).enter_style(self.style_name)
-A:rich.markdown.self.text->Text(justify='left')
-A:rich.markdown.heading->cls(node.level)
-A:rich.markdown.code->str(self.text).rstrip()
-A:rich.markdown.syntax->Panel(Syntax(code, self.lexer_name, theme=self.theme), border_style='dim', box=box.SQUARE)
-A:rich.markdown.render_options->options.update(width=options.max_width - number_width)
-A:rich.markdown.lines->Console(force_terminal=args.force_color, width=args.width).render_lines(self.elements, render_options, style=self.style)
-A:rich.markdown.new_line->Segment('\n')
-A:rich.markdown.padding->Segment(' ' * number_width, number_style)
-A:rich.markdown.style->Console(force_terminal=args.force_color, width=args.width).get_style(self.style, default='none')
-A:rich.markdown.bullet_style->Console(force_terminal=args.force_color, width=args.width).get_style('markdown.item.bullet', default='none')
-A:rich.markdown.bullet->Segment(' • ', bullet_style)
-A:rich.markdown.number_style->Console(force_terminal=args.force_color, width=args.width).get_style('markdown.item.number', default='none')
-A:rich.markdown.numeral->Segment(f'{number}'.rjust(number_width - 1) + ' ', number_style)
-A:rich.markdown.link_style->Console(force_terminal=args.force_color, width=args.width).get_style('markdown.link', default='none')
-A:rich.markdown.self._syntax->Syntax('', inline_code_lexer, theme=inline_code_theme)
-A:rich.markdown.highlight_text->self._syntax.highlight(text)
-A:rich.markdown.parser->argparse.ArgumentParser(description='Render Markdown to the console with Rich')
-A:rich.markdown.self.parsed->argparse.ArgumentParser(description='Render Markdown to the console with Rich').parse(markup)
-A:rich.markdown.context->MarkdownContext(console, options, style, inline_code_lexer=self.inline_code_lexer, inline_code_theme=self.inline_code_theme)
-A:rich.markdown.nodes->self.parsed.walker()
-A:rich.markdown.element->element_class.create(self, current)
-A:rich.markdown.args->argparse.ArgumentParser(description='Render Markdown to the console with Rich').parse_args()
-A:rich.markdown.markdown->Markdown(markdown_file.read(), justify='full' if args.justify else 'left', code_theme=args.code_theme, hyperlinks=args.hyperlinks, inline_code_lexer=args.inline_code_lexer)
-A:rich.markdown.console->Console(force_terminal=args.force_color, width=args.width)
-rich.markdown.BlockQuote(self)
-rich.markdown.BlockQuote.__init__(self)
-rich.markdown.BlockQuote.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.BlockQuote.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
-rich.markdown.CodeBlock(self,lexer_name:str,theme:str)
-rich.markdown.CodeBlock.__init__(self,lexer_name:str,theme:str)
-rich.markdown.CodeBlock.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.CodeBlock.create(cls,markdown:'Markdown',node:Any)->'CodeBlock'
-rich.markdown.Heading(self,level:int)
-rich.markdown.Heading.__init__(self,level:int)
-rich.markdown.Heading.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.Heading.create(cls,markdown:'Markdown',node:Any)->'Heading'
-rich.markdown.Heading.on_enter(self,context:'MarkdownContext')->None
-rich.markdown.HorizontalRule(MarkdownElement)
-rich.markdown.HorizontalRule.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.ImageItem(self,destination:str,hyperlinks:bool)
-rich.markdown.ImageItem.__init__(self,destination:str,hyperlinks:bool)
-rich.markdown.ImageItem.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.ImageItem.create(cls,markdown:'Markdown',node:Any)->'MarkdownElement'
-rich.markdown.ImageItem.on_enter(self,context:'MarkdownContext')->None
-rich.markdown.ListElement(self,list_type:str,list_start:Optional[int])
-rich.markdown.ListElement.__init__(self,list_type:str,list_start:Optional[int])
-rich.markdown.ListElement.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.ListElement.create(cls,markdown:'Markdown',node:Any)->'ListElement'
-rich.markdown.ListElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
-rich.markdown.ListItem(self)
-rich.markdown.ListItem.__init__(self)
-rich.markdown.ListItem.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
-rich.markdown.ListItem.render_bullet(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.ListItem.render_number(self,console:Console,options:ConsoleOptions,number:int,last_number:int)->RenderResult
-rich.markdown.Markdown(self,markup:str,code_theme:str='monokai',justify:JustifyMethod=None,style:Union[str,Style]='none',hyperlinks:bool=True,inline_code_lexer:str=None,inline_code_theme:str=None)
-rich.markdown.Markdown.__init__(self,markup:str,code_theme:str='monokai',justify:JustifyMethod=None,style:Union[str,Style]='none',hyperlinks:bool=True,inline_code_lexer:str=None,inline_code_theme:str=None)
-rich.markdown.Markdown.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.MarkdownContext(self,console:Console,options:ConsoleOptions,style:Style,inline_code_lexer:str=None,inline_code_theme:str='monokai')
-rich.markdown.MarkdownContext.__init__(self,console:Console,options:ConsoleOptions,style:Style,inline_code_lexer:str=None,inline_code_theme:str='monokai')
-rich.markdown.MarkdownContext.current_style(self)->Style
-rich.markdown.MarkdownContext.enter_style(self,style_name:Union[str,Style])->Style
-rich.markdown.MarkdownContext.leave_style(self)->Style
-rich.markdown.MarkdownContext.on_text(self,text:str,node_type:str)->None
-rich.markdown.MarkdownElement
-rich.markdown.MarkdownElement.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.markdown.MarkdownElement.create(cls,markdown:'Markdown',node:Any)->'MarkdownElement'
-rich.markdown.MarkdownElement.on_child_close(self,context:'MarkdownContext',child:'MarkdownElement')->bool
-rich.markdown.MarkdownElement.on_enter(self,context:'MarkdownContext')
-rich.markdown.MarkdownElement.on_leave(self,context:'MarkdownContext')->None
-rich.markdown.MarkdownElement.on_text(self,context:'MarkdownContext',text:TextType)->None
-rich.markdown.Paragraph(self,justify:JustifyMethod)
-rich.markdown.Paragraph.__init__(self,justify:JustifyMethod)
-rich.markdown.Paragraph.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.markdown.Paragraph.create(cls,markdown:'Markdown',node)->'Paragraph'
-rich.markdown.TextElement(MarkdownElement)
-rich.markdown.TextElement.on_enter(self,context:'MarkdownContext')->None
-rich.markdown.TextElement.on_leave(self,context:'MarkdownContext')->None
-rich.markdown.TextElement.on_text(self,context:'MarkdownContext',text:TextType)->None
-rich.markdown.UnknownElement(MarkdownElement)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/errors.py----------------------------------------
-rich.errors.ConsoleError(Exception)
-rich.errors.MarkupError(ConsoleError)
-rich.errors.MissingStyle(StyleError)
-rich.errors.NotRenderableError(ConsoleError)
-rich.errors.StyleError(Exception)
-rich.errors.StyleStackError(ConsoleError)
-rich.errors.StyleSyntaxError(ConsoleError)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/markup.py----------------------------------------
-A:rich.markup.RE_TAGS->re.compile('\n(\\\\\\[)|\n\\[([a-z#\\/].*?)\\]\n', re.VERBOSE)
-A:rich.markup.(escape_open, tag_text)->match.groups()
-A:rich.markup.(start, end)->match.span()
-A:rich.markup.(text, equals, parameters)->tag_text.partition('=')
-A:rich.markup.text->Text(style=style)
-A:rich.markup.style_name->normalize(style_name)
-A:rich.markup.(start, open_tag)->pop()
-A:rich.markup.normalized_tag->Tag(normalize(tag.name), tag.parameters)
-A:rich.markup.text_length->len(text)
-A:rich.markup.(start, tag)->style_stack.pop()
-A:rich.markup.text.spans->sorted(spans)
-A:rich.markup.console->Console(highlight=False)
-rich.markup.Tag(NamedTuple)
-rich.markup.Tag.__str__(self)->str
-rich.markup.Tag.markup(self)->str
-rich.markup._parse(markup:str)->Iterable[Tuple[int, Optional[str], Optional[Tag]]]
-rich.markup.escape(markup:str)->str
-rich.markup.render(markup:str,style:Union[str,Style]='',emoji:bool=True)->Text
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/cells.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/cells.py----------------------------------------
 A:rich.cells.cached_result->_cache.get(text, None)
 A:rich.cells.total_size->sum((_get_size(character) for character in text))
 A:rich.cells.codepoint->ord(character)
@@ -876,530 +1395,11 @@ rich.cells.get_character_cell_size(character:str)->int
 rich.cells.set_cell_size(text:str,total:int)->str
 
 
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_lru_cache.py----------------------------------------
-A:rich._lru_cache.CacheKey->TypeVar('CacheKey')
-A:rich._lru_cache.CacheValue->TypeVar('CacheValue')
-rich._lru_cache.LRUCache(self,cache_size:int)
-rich._lru_cache.LRUCache.__getitem__(self:Dict[CacheKey,CacheValue],key:CacheKey)->CacheValue
-rich._lru_cache.LRUCache.__init__(self,cache_size:int)
-rich._lru_cache.LRUCache.__setitem__(self,key:CacheKey,value:CacheValue)->None
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_loop.py----------------------------------------
-A:rich._loop.T->TypeVar('T')
-A:rich._loop.iter_values->iter(values)
-A:rich._loop.value->next(iter_values)
-A:rich._loop.previous_value->next(iter_values)
-rich._loop.loop_first(values:Iterable[T])->Iterable[Tuple[bool, T]]
-rich._loop.loop_first_last(values:Iterable[T])->Iterable[Tuple[bool, bool, T]]
-rich._loop.loop_last(values:Iterable[T])->Iterable[Tuple[bool, T]]
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/progress_bar.py----------------------------------------
-A:rich.progress_bar.completed->min(self.total, max(0, self.completed))
-A:rich.progress_bar.color->blend_rgb(fore_color, back_color, cross_fade=fade)
-A:rich.progress_bar.fore_style->Console().get_style(self.pulse_style, default='white')
-A:rich.progress_bar.back_style->Console().get_style(self.style, default='black')
-A:rich.progress_bar.pulse_segments->self._get_pulse_segments(fore_style, back_style, console.color_system, ascii=ascii)
-A:rich.progress_bar.segment_count->len(pulse_segments)
-A:rich.progress_bar.width->min(self.width or options.max_width, options.max_width)
-A:rich.progress_bar.style->Console().get_style(self.style)
-A:rich.progress_bar.complete_style->Console().get_style(self.complete_style if self.completed < self.total else self.finished_style)
-A:rich.progress_bar.console->Console()
-A:rich.progress_bar.bar->ProgressBar(width=50, total=100)
-rich.progress_bar.ProgressBar(self,total:float=100,completed:float=0,width:int=None,pulse:bool=False,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',animation_time:float=None)
-rich.progress_bar.ProgressBar.__init__(self,total:float=100,completed:float=0,width:int=None,pulse:bool=False,style:StyleType='bar.back',complete_style:StyleType='bar.complete',finished_style:StyleType='bar.finished',pulse_style:StyleType='bar.pulse',animation_time:float=None)
-rich.progress_bar.ProgressBar.__repr__(self)->str
-rich.progress_bar.ProgressBar.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.progress_bar.ProgressBar.__rich_measure__(self,console:Console,max_width:int)->Measurement
-rich.progress_bar.ProgressBar._get_pulse_segments(self,fore_style:Style,back_style:Style,color_system:str,ascii:bool=False)->List[Segment]
-rich.progress_bar.ProgressBar._render_pulse(self,console:Console,width:int,ascii:bool=False)->Iterable[Segment]
-rich.progress_bar.ProgressBar.percentage_completed(self)->float
-rich.progress_bar.ProgressBar.update(self,completed:float,total:float=None)->None
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/tabulate.py----------------------------------------
-A:rich.tabulate.table->Table(show_header=False, title=title, caption=caption, box=box.ROUNDED, border_style='blue')
-A:rich.tabulate.highlighter->ReprHighlighter()
-rich.tabulate.tabulate_mapping(mapping:Mapping,title:str=None,caption:str=None,title_justify:Optional[JustifyMethod]=None,caption_justify:Optional[JustifyMethod]=None)->Table
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/rule.py----------------------------------------
-A:rich.rule.chars_len->cell_len(characters)
-A:rich.rule.rule_text->Text(end=self.end)
-A:rich.rule.title_text->Console().render_str(self.title, style='rule.text')
-A:rich.rule.title_text.plain->Console().render_str(self.title, style='rule.text').plain.replace('\n', ' ')
-A:rich.rule.left->Text(characters * (side_width // chars_len + 1))
-A:rich.rule.right->Text(characters * (side_width // chars_len + 1))
-A:rich.rule.rule_text.plain->set_cell_size(rule_text.plain, width)
-A:rich.rule.console->Console()
-rich.rule.Rule(self,title:Union[str,Text]='',*,characters:str='─',style:Union[str,Style]='rule.line',end:str='\n')
-rich.rule.Rule.__init__(self,title:Union[str,Text]='',*,characters:str='─',style:Union[str,Style]='rule.line',end:str='\n')
-rich.rule.Rule.__repr__(self)->str
-rich.rule.Rule.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_inspect.py----------------------------------------
-A:rich._inspect.(paragraph, _, _)->highlighter(_doc).partition('\n\n')
-A:rich._inspect.doc->highlighter(_doc)
-A:rich._inspect.self.highlighter->ReprHighlighter()
-A:rich._inspect.title_text->self.highlighter(title_str)
-A:rich._inspect.source_filename->getfile(obj)
-A:rich._inspect.callable_name->Text(name, style='inspect.callable')
-A:rich._inspect.signature_text->self.highlighter(_signature)
-A:rich._inspect.qual_signature->text.Text.assemble(('def ', 'inspect.def'), (qualname, 'inspect.callable'), signature_text)
-A:rich._inspect.keys->dir(obj)
-A:rich._inspect.total_items->len(keys)
-A:rich._inspect.items_table->table.Table.grid(padding=(0, 1), expand=False)
-A:rich._inspect._doc->_first_paragraph(_doc)
-A:rich._inspect.doc_text->highlighter(doc_text)
-A:rich._inspect.key_text->text.Text.assemble((key, 'inspect.attr.dunder' if key.startswith('__') else 'inspect.attr'), (' =', 'inspect.equals'))
-A:rich._inspect.warning->text.Text.assemble((key, 'inspect.attr.dunder' if key.startswith('__') else 'inspect.attr'), (' =', 'inspect.equals')).copy()
-A:rich._inspect._signature_text->self._get_signature(key, value)
-A:rich._inspect.docs->getdoc(value)
-A:rich._inspect.inspect->Inspect({}, docs=True, methods=True, dunder=True)
-A:rich._inspect.t->Text('Hello, World')
-A:rich._inspect.f->Foo()
-rich.Inspect(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
-rich.Inspect.__rich__(self)->Panel
-rich.Inspect._get_signature(self,name:str,obj:Any)->Text
-rich.Inspect._make_title(self,obj:Any)->Text
-rich.Inspect._render(self)->Iterable[RenderableType]
-rich._inspect.Inspect(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
-rich._inspect.Inspect.__init__(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
-rich._inspect.Inspect.__rich__(self)->Panel
-rich._inspect.Inspect._get_signature(self,name:str,obj:Any)->Text
-rich._inspect.Inspect._make_title(self,obj:Any)->Text
-rich._inspect.Inspect._render(self)->Iterable[RenderableType]
-rich._inspect._first_paragraph(doc:str)->str
-rich._inspect._reformat_doc(doc:str)->str
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/segment.py----------------------------------------
-A:rich.segment.(_text, new_line, text)->set_cell_size(text, length - line_length).partition('\n')
-A:rich.segment.new_line_segment->cls('\n')
-A:rich.segment.cropped_line->adjust_line_length(line, length, style=style, pad=pad)
-A:rich.segment.line_length->sum((segment.cell_length for segment in line))
-A:rich.segment.text->set_cell_size(text, length - line_length)
-A:rich.segment.height->len(lines)
-A:rich.segment.iter_segments->iter(segments)
-A:rich.segment.last_segment->_Segment(last_segment.text + segment.text, last_segment.style)
-A:rich.segment.lines->Segment.set_shape(lines, 50, 4, style=Style.parse('on blue'))
-rich.segment.Segment(NamedTuple)
-rich.segment.Segment.__bool__(self)->bool
-rich.segment.Segment.__repr__(self)->str
-rich.segment.Segment.adjust_line_length(cls,line:List['Segment'],length:int,style:Style=None,pad:bool=True)->List['Segment']
-rich.segment.Segment.apply_style(cls,segments:Iterable['Segment'],style:Style=None)->Iterable['Segment']
-rich.segment.Segment.cell_length(self)->int
-rich.segment.Segment.control(cls,text:str)->'Segment'
-rich.segment.Segment.filter_control(cls,segments:Iterable['Segment'],is_control=False)->Iterable['Segment']
-rich.segment.Segment.get_line_length(cls,line:List['Segment'])->int
-rich.segment.Segment.get_shape(cls,lines:List[List['Segment']])->Tuple[int, int]
-rich.segment.Segment.line(cls)->'Segment'
-rich.segment.Segment.set_shape(cls,lines:List[List['Segment']],width:int,height:int=None,style:Style=None)->List[List['Segment']]
-rich.segment.Segment.simplify(cls,segments:Iterable['Segment'])->Iterable['Segment']
-rich.segment.Segment.split_and_crop_lines(cls,segments:Iterable['Segment'],length:int,style:Style=None,pad:bool=True,include_new_lines:bool=True)->Iterable[List['Segment']]
-rich.segment.Segment.split_lines(cls,segments:Iterable['Segment'])->Iterable[List['Segment']]
-rich.segment.Segment.strip_links(cls,segments:Iterable['Segment'])->Iterable['Segment']
-rich.segment.Segment.strip_styles(cls,segments:Iterable['Segment'])->Iterable['Segment']
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_emoji_codes.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/highlighter.py----------------------------------------
-A:rich.highlighter.highlight_text->text.copy()
-A:rich.highlighter.console->Console()
-rich.highlighter.Highlighter(self,text:Union[str,Text])
-rich.highlighter.Highlighter.__call__(self,text:Union[str,Text])
-rich.highlighter.Highlighter.highlight(self,text:Text)->None
-rich.highlighter.NullHighlighter(Highlighter)
-rich.highlighter.NullHighlighter.highlight(self,text:Text)->None
-rich.highlighter.RegexHighlighter(Highlighter)
-rich.highlighter.RegexHighlighter.highlight(self,text:Text)->None
-rich.highlighter.ReprHighlighter(RegexHighlighter)
-rich.highlighter._combine_regex(*regexes:str)->str
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_ratio.py----------------------------------------
-A:rich._ratio.total_ratio->sum(ratios)
-A:rich._ratio.distributed->max(minimum, ceil(ratio * total_remaining / total_ratio))
-rich._ratio.ratio_distribute(total:int,ratios:List[int],minimums:List[int]=None)->List[int]
-rich._ratio.ratio_reduce(total:int,ratios:List[int],maximums:List[int],values:List[int])->List[int]
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/color_triplet.py----------------------------------------
-rich.color_triplet.ColorTriplet(NamedTuple)
-rich.color_triplet.ColorTriplet.hex(self)->str
-rich.color_triplet.ColorTriplet.normalized(self)->Tuple[float, float, float]
-rich.color_triplet.ColorTriplet.rgb(self)->str
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_wrap.py----------------------------------------
-A:rich._wrap.re_word->re.compile('\\s*\\S+\\s*')
-A:rich._wrap.word_match->re.compile('\\s*\\S+\\s*').match(text, end)
-A:rich._wrap.(start, end)->re.compile('\\s*\\S+\\s*').match(text, end).span()
-A:rich._wrap.word->re.compile('\\s*\\S+\\s*').match(text, end).group(0)
-A:rich._wrap.word_length->_cell_len(word.rstrip())
-A:rich._wrap.line_position->_cell_len(word)
-A:rich._wrap.console->Console(width=10)
-rich._wrap.divide_line(text:str,width:int,fold:bool=True)->List[int]
-rich._wrap.words(text:str)->Iterable[Tuple[int, int, str]]
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/pager.py----------------------------------------
-A:rich.pager.console->Console()
-rich.pager.Pager(ABC)
-rich.pager.Pager.show(self,content:str)->None
-rich.pager.SystemPager(Pager)
-rich.pager.SystemPager.show(self,content:str)->None
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/scope.py----------------------------------------
-A:rich.scope.highlighter->ReprHighlighter()
-A:rich.scope.items_table->table.Table.grid(padding=(0, 1), expand=False)
-A:rich.scope.key_text->text.Text.assemble((key, 'scope.key.special' if key.startswith('__') else 'scope.key'), (' =', 'scope.equals'))
-rich.scope.render_scope(scope:Mapping,*,title:TextType=None,sort_keys:bool=True)->'ConsoleRenderable'
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/control.py----------------------------------------
-A:rich.control.self._control_codes->segment.Segment.control(control_codes)
-rich.control.Control(self,control_codes:str)
-rich.control.Control.__init__(self,control_codes:str)
-rich.control.Control.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.control.Control.__str__(self)->str
-rich.control.strip_control_codes(text:str,_translate_table=_CONTROL_TRANSLATE)->str
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_cell_widths.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/padding.py----------------------------------------
-A:rich.padding.(self.top, self.right, self.bottom, self.left)->self.unpack(pad)
-A:rich.padding.(pad_top, pad_right)->cast(Tuple[int, int], pad)
-A:rich.padding.(top, right, bottom, left)->cast(Tuple[int, int, int, int], pad)
-A:rich.padding.style->console.get_style(self.style)
-A:rich.padding.width->min(Measurement.get(console, self.renderable, options.max_width).maximum + self.left + self.right, options.max_width)
-A:rich.padding.child_options->options.update(width=width - self.left - self.right)
-A:rich.padding.lines->segment.Segment.set_shape(lines, child_options.max_width, style=style)
-A:rich.padding.blank_line->Segment(' ' * width + '\n', style)
-A:rich.padding.new_line->segment.Segment.line()
-A:rich.padding.(measure_min, measure_max)->measure.Measurement.get(console, self.renderable, max(0, max_width - extra_width))
-A:rich.padding.measurement->measurement.with_maximum(max_width).with_maximum(max_width)
-rich.padding.Padding(self,renderable:'RenderableType',pad:'PaddingDimensions'=(0,0,0,0),*,style:Union[str,Style]='none',expand:bool=True)
-rich.padding.Padding.__init__(self,renderable:'RenderableType',pad:'PaddingDimensions'=(0,0,0,0),*,style:Union[str,Style]='none',expand:bool=True)
-rich.padding.Padding.__repr__(self)->str
-rich.padding.Padding.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.padding.Padding.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
-rich.padding.Padding.indent(cls,renderable:'RenderableType',level:int)->'Padding'
-rich.padding.Padding.unpack(pad:'PaddingDimensions')->Tuple[int, int, int, int]
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/themes.py----------------------------------------
-A:rich.themes.DEFAULT->Theme(DEFAULT_STYLES)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/table.py----------------------------------------
-A:rich.table.self._padding->padding.Padding.unpack(padding)
-A:rich.table.self.row_styles->list(row_styles or [])
-A:rich.table.max_width->sum(self._calculate_column_widths(console, max_width - extra_width))
-A:rich.table.measurement->measurement.clamp(None if column.min_width is None else column.min_width + padding_width, None if column.max_width is None else column.max_width + padding_width).clamp(None if column.min_width is None else column.min_width + padding_width, None if column.max_width is None else column.max_width + padding_width)
-A:rich.table.column->Column(_index=index)
-A:rich.table.widths->ratio_reduce(excess_width, ratios, max_reduce, widths)
-A:rich.table.render_options->options.update(width=width, justify=column.justify, no_wrap=column.no_wrap, overflow=column.overflow)
-A:rich.table.flex_widths->ratio_distribute(flexible_width, ratios, flex_minimum)
-A:rich.table.iter_flex_widths->iter(flex_widths)
-A:rich.table.table_width->sum(widths)
-A:rich.table.pad_widths->ratio_distribute(_max_width - table_width, widths)
-A:rich.table.total_width->sum(widths)
-A:rich.table.max_column->max((width for (width, allow_wrap) in zip(widths, wrapable) if allow_wrap))
-A:rich.table.second_max_column->max((width if allow_wrap and width != max_column else 0 for (width, allow_wrap) in zip(widths, wrapable)))
-A:rich.table.any_padding->any(padding)
-A:rich.table.left->max(0, left - right)
-A:rich.table.bottom->max(0, top - bottom)
-A:rich.table._padding->Padding(renderable, (top, right, bottom, left))
-A:rich.table.pad_left->max(0, pad_left - pad_right)
-A:rich.table.padding_width->self._get_padding_width(column._index)
-A:rich.table.(_min, _max)->get_render_width(console, cell.renderable, max_width)
-A:rich.table.table_style->Console().get_style(self.style or '')
-A:rich.table.new_line->segment.Segment.line()
-A:rich.table.row_style->get_style(get_row_style(index - 1 if show_header else index))
-A:rich.table.lines->Console().render_lines(cell.renderable, render_options, style=cell_style)
-A:rich.table.max_height->max(max_height, len(lines))
-A:rich.table.table->Table(title='Star Wars Movies', caption='Rich example table', caption_justify='right')
-A:rich.table.console->Console()
-A:rich.table.highlight->ReprHighlighter()
-rich.table.Column
-rich.table.Column.cells(self)->Iterable['RenderableType']
-rich.table.Column.flexible(self)->bool
-rich.table.Table(self,*headers:Union[Column,str],title:TextType=None,caption:TextType=None,width:int=None,min_width:int=None,box:Optional[box.Box]=box.HEAVY_HEAD,safe_box:Optional[bool]=None,padding:PaddingDimensions=(0,1),collapse_padding:bool=False,pad_edge:bool=True,expand:bool=False,show_header:bool=True,show_footer:bool=False,show_edge:bool=True,show_lines:bool=False,leading:int=0,style:StyleType='none',row_styles:Iterable[StyleType]=None,header_style:StyleType=None,footer_style:StyleType=None,border_style:StyleType=None,title_style:StyleType=None,caption_style:StyleType=None,title_justify:'JustifyMethod'='center',caption_justify:'JustifyMethod'='center')
-rich.table.Table.__init__(self,*headers:Union[Column,str],title:TextType=None,caption:TextType=None,width:int=None,min_width:int=None,box:Optional[box.Box]=box.HEAVY_HEAD,safe_box:Optional[bool]=None,padding:PaddingDimensions=(0,1),collapse_padding:bool=False,pad_edge:bool=True,expand:bool=False,show_header:bool=True,show_footer:bool=False,show_edge:bool=True,show_lines:bool=False,leading:int=0,style:StyleType='none',row_styles:Iterable[StyleType]=None,header_style:StyleType=None,footer_style:StyleType=None,border_style:StyleType=None,title_style:StyleType=None,caption_style:StyleType=None,title_justify:'JustifyMethod'='center',caption_justify:'JustifyMethod'='center')
-rich.table.Table.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.table.Table.__rich_measure__(self,console:'Console',max_width:int)->Measurement
-rich.table.Table._calculate_column_widths(self,console:'Console',max_width:int)->List[int]
-rich.table.Table._collapse_widths(cls,widths:List[int],wrapable:List[bool],max_width:int)->List[int]
-rich.table.Table._extra_width(self)->int
-rich.table.Table._get_cells(self,column_index:int,column:Column)->Iterable[_Cell]
-rich.table.Table._get_padding_width(self,column_index:int)->int
-rich.table.Table._measure_column(self,console:'Console',column:Column,max_width:int)->Measurement
-rich.table.Table._render(self,console:'Console',options:'ConsoleOptions',widths:List[int])->'RenderResult'
-rich.table.Table.add_column(self,header:'RenderableType'='',footer:'RenderableType'='',*,header_style:StyleType=None,footer_style:StyleType=None,style:StyleType=None,justify:'JustifyMethod'='left',overflow:'OverflowMethod'='ellipsis',width:int=None,min_width:int=None,max_width:int=None,ratio:int=None,no_wrap:bool=False)->None
-rich.table.Table.add_row(self,*renderables:Optional['RenderableType'],style:StyleType=None)->None
-rich.table.Table.expand(self)->int
-rich.table.Table.expand(self,expand:bool)->None
-rich.table.Table.get_row_style(self,index:int)->StyleType
-rich.table.Table.grid(cls,padding:PaddingDimensions=0,collapse_padding:bool=True,pad_edge:bool=False,expand:bool=False)->'Table'
-rich.table.Table.padding(self)->Tuple[int, int, int, int]
-rich.table.Table.padding(self,padding:PaddingDimensions)->'Table'
-rich.table.Table.row_count(self)->int
-rich.table._Cell(NamedTuple)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/theme.py----------------------------------------
-A:rich.theme.config->configparser.ConfigParser()
-A:rich.theme.theme->Theme()
-rich.theme.Theme(self,styles:Mapping[str,StyleType]=None,inherit:bool=True)
-rich.theme.Theme.__init__(self,styles:Mapping[str,StyleType]=None,inherit:bool=True)
-rich.theme.Theme.config(self)->str
-rich.theme.Theme.from_file(cls,config_file:IO[str],source:str=None,inherit:bool=True)->'Theme'
-rich.theme.Theme.read(cls,path:str,inherit:bool=True)->'Theme'
-rich.theme.ThemeStack(self,theme:Theme)
-rich.theme.ThemeStack.__init__(self,theme:Theme)
-rich.theme.ThemeStack.pop_theme(self)->None
-rich.theme.ThemeStack.push_theme(self,theme:Theme,inherit:bool=True)->None
-rich.theme.ThemeStackError(Exception)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/default_styles.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/traceback.py----------------------------------------
-A:rich.traceback.(exc_type, exc_value, traceback)->sys.exc_info()
-A:rich.traceback.trace->Trace(stacks=stacks)
-A:rich.traceback.self.theme->syntax.Syntax.get_theme(theme or 'ansi_dark')
-A:rich.traceback.rich_traceback->cls.extract(exc_type, exc_value, traceback)
-A:rich.traceback.stack->Stack(exc_type=str(exc_type.__name__), exc_value=str(exc_value))
-A:rich.traceback.stack.syntax_error->_SyntaxError(offset=exc_value.offset or 0, filename=exc_value.filename or '?', lineno=exc_value.lineno or 0, line=exc_value.text or '', msg=exc_value.msg)
-A:rich.traceback.frame->Frame(filename=frame_summary.f_code.co_filename or '?', lineno=line_no, name=frame_summary.f_code.co_name, locals={key: pretty.traverse(value) for (key, value) in frame_summary.f_locals.items()} if show_locals else None)
-A:rich.traceback.background_style->theme.get_background_style()
-A:rich.traceback.traceback_theme->Theme({'pretty': token_style(TextToken), 'pygments.text': token_style(Token), 'pygments.string': token_style(String), 'pygments.function': token_style(Name.Function), 'pygments.number': token_style(Number), 'repr.str': token_style(String), 'repr.brace': token_style(TextToken) + Style(bold=True), 'repr.number': token_style(Number), 'repr.bool_true': token_style(Keyword.Constant), 'repr.bool_false': token_style(Keyword.Constant), 'repr.none': token_style(Keyword.Constant), 'scope.border': token_style(String.Delimiter), 'scope.equals': token_style(Operator), 'scope.key': token_style(Name), 'scope.key.special': token_style(Name.Constant) + Style(dim=True)})
-A:rich.traceback.highlighter->ReprHighlighter()
-A:rich.traceback.stack_renderable->Constrain(stack_renderable, self.width)
-A:rich.traceback.path_highlighter->PathHighlighter()
-A:rich.traceback.text->text.Text.assemble(path_highlighter(Text(frame.filename, style='pygments.string')), (':', 'pygments.text'), (str(frame.lineno), 'pygments.number'), ' in ', (frame.name, 'pygments.function'), style='pygments.text')
-A:rich.traceback.syntax_error_text->highlighter(syntax_error.line.rstrip())
-A:rich.traceback.offset->min(syntax_error.offset - 1, len(syntax_error_text))
-A:rich.traceback.code->read_code(frame.filename)
-A:rich.traceback.lexer->guess_lexer_for_filename(frame.filename, code)
-A:rich.traceback.syntax->Syntax(code, lexer_name, theme=theme, line_numbers=True, line_range=(frame.lineno - self.extra_lines, frame.lineno + self.extra_lines), highlight_lines={frame.lineno}, word_wrap=self.word_wrap, code_width=88)
-A:rich.traceback.console->Console()
-rich.traceback.Frame
-rich.traceback.PathHighlighter(RegexHighlighter)
-rich.traceback.Stack
-rich.traceback.Trace
-rich.traceback.Traceback(self,trace:Trace=None,width:Optional[int]=88,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)
-rich.traceback.Traceback.__init__(self,trace:Trace=None,width:Optional[int]=88,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)
-rich.traceback.Traceback.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.traceback.Traceback._render_stack(self,stack:Stack)->RenderResult
-rich.traceback.Traceback._render_syntax_error(self,syntax_error:_SyntaxError)->RenderResult
-rich.traceback.Traceback.extract(cls,exc_type:Type[BaseException],exc_value:BaseException,traceback:Optional[TracebackType],show_locals:bool=False)->Trace
-rich.traceback.Traceback.from_exception(cls,exc_type:Type,exc_value:BaseException,traceback:Optional[TracebackType],width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)->'Traceback'
-rich.traceback._SyntaxError
-rich.traceback.install(*,console:Console=None,width:Optional[int]=100,extra_lines:int=3,theme:Optional[str]=None,word_wrap:bool=False,show_locals:bool=False)->Callable
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/__main__.py----------------------------------------
-A:rich.__main__.text->Console(file=io.StringIO(), force_terminal=True).file.getvalue()
-A:rich.__main__.table->Table(show_header=False, pad_edge=False, box=None, expand=True)
-A:rich.__main__.color_table->Table(box=None, expand=False, show_header=False, show_edge=False, pad_edge=False, padding=0)
-A:rich.__main__.lorem_table->rich.table.Table.grid(padding=1, collapse_padding=True)
-A:rich.__main__.example_table->Table(title='Star Wars box office', show_header=True, header_style='bold magenta')
-A:rich.__main__.console->Console(file=io.StringIO(), force_terminal=True)
-A:rich.__main__.test_card->make_test_card()
-A:rich.__main__.console.file->io.StringIO()
-A:rich.__main__.start->process_time()
-A:rich.__main__.taken->round((process_time() - start) * 1000.0, 1)
-rich.__main__.ColorBox(self,start:int=16)
-rich.__main__.ColorBox.__init__(self,start:int=16)
-rich.__main__.ColorBox.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.__main__.ColorBox.__rich_measure__(self,console:'Console',max_width:int)->Measurement
-rich.__main__.make_test_card()->Table
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/bar.py----------------------------------------
-A:rich.bar.self.begin->max(begin, 0)
-A:rich.bar.self.end->min(end, size)
-A:rich.bar.self.style->Style(color=color, bgcolor=bgcolor)
-A:rich.bar.width->min(self.width or options.max_width, options.max_width)
-A:rich.bar.prefix_complete_eights->int(width * 8 * self.begin / self.size)
-A:rich.bar.body_complete_eights->int(width * 8 * self.end / self.size)
-rich.bar.Bar(self,size:float,begin:float,end:float,*,width:int=None,color:Union[Color,str]='default',bgcolor:Union[Color,str]='default')
-rich.bar.Bar.__init__(self,size:float,begin:float,end:float,*,width:int=None,color:Union[Color,str]='default',bgcolor:Union[Color,str]='default')
-rich.bar.Bar.__repr__(self)->str
-rich.bar.Bar.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.bar.Bar.__rich_measure__(self,console:Console,max_width:int)->Measurement
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/style.py----------------------------------------
-A:rich.style.self._set_attributes->sum((bold is not None, dim is not None and 2, italic is not None and 4, underline is not None and 8, blink is not None and 16, blink2 is not None and 32, reverse is not None and 64, conceal is not None and 128, strike is not None and 256, underline2 is not None and 512, frame is not None and 1024, encircle is not None and 2048, overline is not None and 4096))
-A:rich.style.self._hash->hash((self._color, self._bgcolor, self._attributes, self._set_attributes, link))
-A:rich.style.bold->_Bit(0)
-A:rich.style.dim->_Bit(1)
-A:rich.style.italic->_Bit(2)
-A:rich.style.underline->_Bit(3)
-A:rich.style.blink->_Bit(4)
-A:rich.style.blink2->_Bit(5)
-A:rich.style.reverse->_Bit(6)
-A:rich.style.conceal->_Bit(7)
-A:rich.style.strike->_Bit(8)
-A:rich.style.underline2->_Bit(9)
-A:rich.style.frame->_Bit(10)
-A:rich.style.encircle->_Bit(11)
-A:rich.style.overline->_Bit(12)
-A:rich.style.self._ansi->';'.join(sgr)
-A:rich.style.words->iter(style_definition.split())
-A:rich.style.word->next(words, '')
-A:rich.style.attribute->style_attributes.get(word)
-A:rich.style.style->self.__new__(Style)
-A:rich.style.color->color.Color.from_triplet(blend_rgb(foreground_color, theme.background_color, 0.5))
-A:rich.style.theme_color->bgcolor.get_truecolor(theme, foreground=False)
-A:rich.style.iter_styles->iter(styles)
-A:rich.style.attrs->self._make_ansi_codes(color_system)
-A:rich.style.new_style->self.__new__(Style)
-A:rich.style.NULL_STYLE->Style()
-rich.style.Style(self,*,color:Union[Color,str]=None,bgcolor:Union[Color,str]=None,bold:bool=None,dim:bool=None,italic:bool=None,underline:bool=None,blink:bool=None,blink2:bool=None,reverse:bool=None,conceal:bool=None,strike:bool=None,underline2:bool=None,frame:bool=None,encircle:bool=None,overline:bool=None,link:str=None)
-rich.style.Style.__add__(self,style:Optional['Style'])->'Style'
-rich.style.Style.__bool__(self)->bool
-rich.style.Style.__eq__(self,other:Any)->bool
-rich.style.Style.__hash__(self)->int
-rich.style.Style.__init__(self,*,color:Union[Color,str]=None,bgcolor:Union[Color,str]=None,bold:bool=None,dim:bool=None,italic:bool=None,underline:bool=None,blink:bool=None,blink2:bool=None,reverse:bool=None,conceal:bool=None,strike:bool=None,underline2:bool=None,frame:bool=None,encircle:bool=None,overline:bool=None,link:str=None)
-rich.style.Style.__repr__(self)->str
-rich.style.Style.__str__(self)->str
-rich.style.Style._make_ansi_codes(self,color_system:ColorSystem)->str
-rich.style.Style.background_style(self)->'Style'
-rich.style.Style.bgcolor(self)->Optional[Color]
-rich.style.Style.chain(cls,*styles:'Style')->'Style'
-rich.style.Style.color(self)->Optional[Color]
-rich.style.Style.combine(cls,styles:Iterable['Style'])->'Style'
-rich.style.Style.copy(self)->'Style'
-rich.style.Style.get_html_style(self,theme:TerminalTheme=None)->str
-rich.style.Style.link(self)->Optional[str]
-rich.style.Style.link_id(self)->str
-rich.style.Style.normalize(cls,style:str)->str
-rich.style.Style.null(cls)->'Style'
-rich.style.Style.parse(cls,style_definition:str)->'Style'
-rich.style.Style.pick_first(cls,*values:Optional[StyleType])->StyleType
-rich.style.Style.render(self,text:str='',*,color_system:Optional[ColorSystem]=ColorSystem.TRUECOLOR,legacy_windows:bool=False)->str
-rich.style.Style.test(self,text:Optional[str]=None)->None
-rich.style.Style.transparent_background(self)->bool
-rich.style.Style.update_link(self,link:str=None)->'Style'
-rich.style.StyleStack(self,default_style:'Style')
-rich.style.StyleStack.__init__(self,default_style:'Style')
-rich.style.StyleStack.__repr__(self)->str
-rich.style.StyleStack.current(self)->Style
-rich.style.StyleStack.pop(self)->Style
-rich.style.StyleStack.push(self,style:Style)->None
-rich.style._Bit(self,bit_no:int)
-rich.style._Bit.__get__(self,obj:'Style',objtype:Type['Style'])->Optional[bool]
-rich.style._Bit.__init__(self,bit_no:int)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/__init__.py----------------------------------------
-A:rich.__init__._console->Console()
-A:rich.__init__._inspect->Inspect(obj, title=title, help=help, methods=methods, docs=docs, private=private, dunder=dunder, sort=sort, all=all)
-rich.__init__.get_console()->'Console'
-rich.__init__.inspect(obj:Any,*,console:'Console'=None,title:str=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=False)
-rich.__init__.print(*objects:Any,sep='',end='\n',file:IO[str]=None,flush:bool=False)
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/pretty.py----------------------------------------
-A:rich.pretty.pretty_str->pretty_repr(self._object, max_width=max_width, indent_size=self.indent_size)
-A:rich.pretty.pretty_text->self.highlighter(pretty_text)
-A:rich.pretty.text_width->max((cell_len(line) for line in pretty_str.splitlines()))
-A:rich.pretty._CONTAINERS->tuple(_BRACES.keys())
-A:rich.pretty.repr_text->''.join(self.iter_tokens())
-A:rich.pretty.lines[line_no:line_no + 1]->_Line(node=child, whitespace=child_whitespace, suffix='' if child.last else ',').expand(indent_size)
-A:rich.pretty.repr_str->traverse(_object).render(max_width=max_width, indent_size=indent_size, expand_all=expand_all)
-A:rich.pretty.line->_Line(node=child, whitespace=child_whitespace, suffix='' if child.last else ',')
-A:rich.pretty.obj_repr->repr(obj)
-A:rich.pretty.obj_type->type(obj)
-A:rich.pretty.obj_id->id(obj)
-A:rich.pretty.(open_brace, close_brace, empty)->_BRACES[obj_type](obj)
-A:rich.pretty.node->traverse(_object)
-A:rich.pretty.child_node->_traverse(child)
-A:rich.pretty.child_node.key_repr->to_repr(key)
-A:rich.pretty.node.is_tuple->isinstance(obj, tuple)
-A:rich.pretty.d->defaultdict(int)
-rich.pretty.Node
-rich.pretty.Node.__str__(self)->str
-rich.pretty.Node.check_length(self,start_length:int,max_length:int)->bool
-rich.pretty.Node.iter_tokens(self)->Iterable[str]
-rich.pretty.Node.render(self,max_width:int=80,indent_size:int=4,expand_all:bool=False)->str
-rich.pretty.Pretty(self,_object:Any,highlighter:'HighlighterType'=None,*,indent_size:int=4,justify:'JustifyMethod'=None,overflow:Optional['OverflowMethod']='crop',no_wrap:Optional[bool]=False)
-rich.pretty.Pretty.__init__(self,_object:Any,highlighter:'HighlighterType'=None,*,indent_size:int=4,justify:'JustifyMethod'=None,overflow:Optional['OverflowMethod']='crop',no_wrap:Optional[bool]=False)
-rich.pretty.Pretty.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.pretty.Pretty.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
-rich.pretty._Line
-rich.pretty._Line.__str__(self)->str
-rich.pretty._Line.check_length(self,max_length:int)->bool
-rich.pretty._Line.expand(self,indent_size:int)->Iterable['_Line']
-rich.pretty._Line.expandable(self)->bool
-rich.pretty._get_braces_for_array(_object:array)->Tuple[str, str, str]
-rich.pretty._get_braces_for_defaultdict(_object:defaultdict)->Tuple[str, str, str]
-rich.pretty.install(console:'Console'=None,overflow:'OverflowMethod'='ignore',crop:bool=False)->None
-rich.pretty.pretty_repr(_object:Any,*,max_width:int=80,indent_size:int=4,expand_all:bool=False)->str
-rich.pretty.traverse(_object:Any)->Node
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/constrain.py----------------------------------------
-A:rich.constrain.child_options->options.update(width=min(self.width, options.max_width))
-A:rich.constrain.max_width->min(self.width, max_width)
-A:rich.constrain.measurement->measure.Measurement.get(console, self.renderable, max_width)
-rich.constrain.Constrain(self,renderable:'RenderableType',width:Optional[int]=80)
-rich.constrain.Constrain.__init__(self,renderable:'RenderableType',width:Optional[int]=80)
-rich.constrain.Constrain.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.constrain.Constrain.__rich_measure__(self,console:'Console',max_width:int)->'Measurement'
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/palette.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/rich9.0.1/lib/python3.9/site-packages/rich/palette.py----------------------------------------
 A:rich.palette.red_mean->int((red1 + red2) / 2)
 A:rich.palette.min_index->min(range(len(self._colors)), key=get_color_distance)
 rich.palette.Palette(self,colors:Sequence[Tuple[int,int,int]])
 rich.palette.Palette.__getitem__(self,number:int)->ColorTriplet
 rich.palette.Palette.__init__(self,colors:Sequence[Tuple[int,int,int]])
 rich.palette.Palette.match(self,color:Tuple[int,int,int])->int
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_palettes.py----------------------------------------
-A:rich._palettes.WINDOWS_PALETTE->Palette([(0, 0, 0), (128, 0, 0), (0, 128, 0), (128, 128, 0), (0, 0, 128), (128, 0, 128), (0, 128, 128), (192, 192, 192)])
-A:rich._palettes.STANDARD_PALETTE->Palette([(0, 0, 0), (170, 0, 0), (0, 170, 0), (170, 85, 0), (0, 0, 170), (170, 0, 170), (0, 170, 170), (170, 170, 170), (85, 85, 85), (255, 85, 85), (85, 255, 85), (255, 255, 85), (85, 85, 255), (255, 85, 255), (85, 255, 255), (255, 255, 255)])
-A:rich._palettes.EIGHT_BIT_PALETTE->Palette([(0, 0, 0), (128, 0, 0), (0, 128, 0), (128, 128, 0), (0, 0, 128), (128, 0, 128), (0, 128, 128), (192, 192, 192), (128, 128, 128), (255, 0, 0), (0, 255, 0), (255, 255, 0), (0, 0, 255), (255, 0, 255), (0, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 95), (0, 0, 135), (0, 0, 175), (0, 0, 215), (0, 0, 255), (0, 95, 0), (0, 95, 95), (0, 95, 135), (0, 95, 175), (0, 95, 215), (0, 95, 255), (0, 135, 0), (0, 135, 95), (0, 135, 135), (0, 135, 175), (0, 135, 215), (0, 135, 255), (0, 175, 0), (0, 175, 95), (0, 175, 135), (0, 175, 175), (0, 175, 215), (0, 175, 255), (0, 215, 0), (0, 215, 95), (0, 215, 135), (0, 215, 175), (0, 215, 215), (0, 215, 255), (0, 255, 0), (0, 255, 95), (0, 255, 135), (0, 255, 175), (0, 255, 215), (0, 255, 255), (95, 0, 0), (95, 0, 95), (95, 0, 135), (95, 0, 175), (95, 0, 215), (95, 0, 255), (95, 95, 0), (95, 95, 95), (95, 95, 135), (95, 95, 175), (95, 95, 215), (95, 95, 255), (95, 135, 0), (95, 135, 95), (95, 135, 135), (95, 135, 175), (95, 135, 215), (95, 135, 255), (95, 175, 0), (95, 175, 95), (95, 175, 135), (95, 175, 175), (95, 175, 215), (95, 175, 255), (95, 215, 0), (95, 215, 95), (95, 215, 135), (95, 215, 175), (95, 215, 215), (95, 215, 255), (95, 255, 0), (95, 255, 95), (95, 255, 135), (95, 255, 175), (95, 255, 215), (95, 255, 255), (135, 0, 0), (135, 0, 95), (135, 0, 135), (135, 0, 175), (135, 0, 215), (135, 0, 255), (135, 95, 0), (135, 95, 95), (135, 95, 135), (135, 95, 175), (135, 95, 215), (135, 95, 255), (135, 135, 0), (135, 135, 95), (135, 135, 135), (135, 135, 175), (135, 135, 215), (135, 135, 255), (135, 175, 0), (135, 175, 95), (135, 175, 135), (135, 175, 175), (135, 175, 215), (135, 175, 255), (135, 215, 0), (135, 215, 95), (135, 215, 135), (135, 215, 175), (135, 215, 215), (135, 215, 255), (135, 255, 0), (135, 255, 95), (135, 255, 135), (135, 255, 175), (135, 255, 215), (135, 255, 255), (175, 0, 0), (175, 0, 95), (175, 0, 135), (175, 0, 175), (175, 0, 215), (175, 0, 255), (175, 95, 0), (175, 95, 95), (175, 95, 135), (175, 95, 175), (175, 95, 215), (175, 95, 255), (175, 135, 0), (175, 135, 95), (175, 135, 135), (175, 135, 175), (175, 135, 215), (175, 135, 255), (175, 175, 0), (175, 175, 95), (175, 175, 135), (175, 175, 175), (175, 175, 215), (175, 175, 255), (175, 215, 0), (175, 215, 95), (175, 215, 135), (175, 215, 175), (175, 215, 215), (175, 215, 255), (175, 255, 0), (175, 255, 95), (175, 255, 135), (175, 255, 175), (175, 255, 215), (175, 255, 255), (215, 0, 0), (215, 0, 95), (215, 0, 135), (215, 0, 175), (215, 0, 215), (215, 0, 255), (215, 95, 0), (215, 95, 95), (215, 95, 135), (215, 95, 175), (215, 95, 215), (215, 95, 255), (215, 135, 0), (215, 135, 95), (215, 135, 135), (215, 135, 175), (215, 135, 215), (215, 135, 255), (215, 175, 0), (215, 175, 95), (215, 175, 135), (215, 175, 175), (215, 175, 215), (215, 175, 255), (215, 215, 0), (215, 215, 95), (215, 215, 135), (215, 215, 175), (215, 215, 215), (215, 215, 255), (215, 255, 0), (215, 255, 95), (215, 255, 135), (215, 255, 175), (215, 255, 215), (215, 255, 255), (255, 0, 0), (255, 0, 95), (255, 0, 135), (255, 0, 175), (255, 0, 215), (255, 0, 255), (255, 95, 0), (255, 95, 95), (255, 95, 135), (255, 95, 175), (255, 95, 215), (255, 95, 255), (255, 135, 0), (255, 135, 95), (255, 135, 135), (255, 135, 175), (255, 135, 215), (255, 135, 255), (255, 175, 0), (255, 175, 95), (255, 175, 135), (255, 175, 175), (255, 175, 215), (255, 175, 255), (255, 215, 0), (255, 215, 95), (255, 215, 135), (255, 215, 175), (255, 215, 215), (255, 215, 255), (255, 255, 0), (255, 255, 95), (255, 255, 135), (255, 255, 175), (255, 255, 215), (255, 255, 255), (8, 8, 8), (18, 18, 18), (28, 28, 28), (38, 38, 38), (48, 48, 48), (58, 58, 58), (68, 68, 68), (78, 78, 78), (88, 88, 88), (98, 98, 98), (108, 108, 108), (118, 118, 118), (128, 128, 128), (138, 138, 138), (148, 148, 148), (158, 158, 158), (168, 168, 168), (178, 178, 178), (188, 188, 188), (198, 198, 198), (208, 208, 208), (218, 218, 218), (228, 228, 228), (238, 238, 238)])
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/live_render.py----------------------------------------
-A:rich.live_render.style->console.get_style(self.style)
-A:rich.live_render.lines->segment.Segment.set_shape(lines, width, height)
-A:rich.live_render.shape->segment.Segment.get_shape(lines)
-rich.live_render.LiveRender(self,renderable:RenderableType,style:StyleType='')
-rich.live_render.LiveRender.__init__(self,renderable:RenderableType,style:StyleType='')
-rich.live_render.LiveRender.__rich_console__(self,console:Console,options:ConsoleOptions)->RenderResult
-rich.live_render.LiveRender.position_cursor(self)->Control
-rich.live_render.LiveRender.restore_cursor(self)->Control
-rich.live_render.LiveRender.set_renderable(self,renderable:RenderableType)->None
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_stack.py----------------------------------------
-A:rich._stack.T->TypeVar('T')
-rich._stack.Stack(List[T])
-rich._stack.Stack.push(self,item:T)->None
-rich._stack.Stack.top(self)->T
-
-
-----------------------------------------/home/zhang/Packages/rich/rich9.0.1/_log_render.py----------------------------------------
-A:rich._log_render.output->table.Table.grid(padding=(0, 1))
-A:rich._log_render.log_time->datetime.datetime.now()
-A:rich._log_render.log_time_display->datetime.datetime.now().strftime(time_format or self.time_format)
-A:rich._log_render.path_text->Text()
-rich._log_render.LogRender(self,show_time:bool=True,show_level:bool=False,show_path:bool=True,time_format:str='[%x%X]')
-rich._log_render.LogRender.__init__(self,show_time:bool=True,show_level:bool=False,show_path:bool=True,time_format:str='[%x%X]')
 

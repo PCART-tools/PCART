@@ -1,26 +1,14 @@
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/objectives.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/losses.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/losses.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/regularizers.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/metrics.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/activations.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/initializers.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/metrics.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/optimizers.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/optimizers.py----------------------------------------
 A:keras.optimizers.then_expression->tensorflow.scalar_mul(c / n, g)
 A:keras.optimizers.g_shape->copy.copy(then_expression.dense_shape)
 A:keras.optimizers.condition->tensorflow.cast(condition, 'bool')
@@ -99,424 +87,82 @@ keras.optimizers.get(identifier)
 keras.optimizers.serialize(optimizer)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/callbacks.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/regularizers.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/models.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/models.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/constraints.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/callbacks.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/metrics_utils.py----------------------------------------
-A:keras.utils.metrics_utils.update_op->update_state_fn(*args, **kwargs)
-A:keras.utils.metrics_utils.result_t->K.identity(result_fn(*args, **kwargs))
-A:keras.utils.metrics_utils.(_, top_k_idx)->tensorflow.nn.top_k(x, k, sorted=False)
-A:keras.utils.metrics_utils.top_k_mask->K.sum(K.one_hot(top_k_idx, x.shape[-1]), axis=-2)
-A:keras.utils.metrics_utils.thresholds->to_list(thresholds)
-A:keras.utils.metrics_utils.label->K.expand_dims(label, 0)
-A:keras.utils.metrics_utils.pred->K.expand_dims(pred, 0)
-A:keras.utils.metrics_utils.are_different->K.concatenate([label, pred], axis=0)
-A:keras.utils.metrics_utils.label_and_pred->K.cast(label_and_pred, dtype=K.floatx())
-A:keras.utils.metrics_utils.y_true->K.cast(y_true, dtype=K.floatx())
-A:keras.utils.metrics_utils.y_pred->filter_top_k(y_pred, top_k)
-A:keras.utils.metrics_utils.sample_weight->K.cast(sample_weight, dtype=K.floatx())
-A:keras.utils.metrics_utils.(y_pred, y_true)->losses_utils.squeeze_or_expand_dimensions(y_pred, y_true=y_true)
-A:keras.utils.metrics_utils.(y_pred, y_true, sample_weight)->losses_utils.squeeze_or_expand_dimensions(y_pred, y_true=y_true, sample_weight=sample_weight)
-A:keras.utils.metrics_utils.num_thresholds->len(thresholds)
-A:keras.utils.metrics_utils.num_predictions->K.size(y_pred)
-A:keras.utils.metrics_utils.predictions_2d->K.reshape(y_pred, [1, -1])
-A:keras.utils.metrics_utils.labels_2d->K.reshape(K.cast(y_true, dtype='bool'), [1, -1])
-A:keras.utils.metrics_utils.thresh_tiled->K.tile(K.expand_dims(K.constant(thresholds), 1), K.cast(K.stack([1, num_predictions]), dtype='int32'))
-A:keras.utils.metrics_utils.preds_tiled->K.tile(predictions_2d, [num_thresholds, 1])
-A:keras.utils.metrics_utils.pred_is_pos->K.greater(preds_tiled, thresh_tiled)
-A:keras.utils.metrics_utils.label_is_pos->K.tile(labels_2d, [num_thresholds, 1])
-A:keras.utils.metrics_utils.weights->losses_utils.broadcast_weights(y_pred, K.cast(sample_weight, dtype=K.floatx()))
-A:keras.utils.metrics_utils.weights_tiled->K.tile(K.reshape(weights, [1, -1]), [num_thresholds, 1])
-A:keras.utils.metrics_utils.pred_is_neg->K.equal(pred_is_pos, K.zeros_like(pred_is_pos, dtype=pred_is_pos.dtype))
-A:keras.utils.metrics_utils.label_is_neg->K.equal(label_is_pos, K.zeros_like(label_is_pos, dtype=label_is_pos.dtype))
-keras.utils.metrics_utils.AUCCurve(Enum)
-keras.utils.metrics_utils.AUCCurve.from_str(key)
-keras.utils.metrics_utils.AUCSummationMethod(Enum)
-keras.utils.metrics_utils.AUCSummationMethod.from_str(key)
-keras.utils.metrics_utils.ConfusionMatrix(Enum)
-keras.utils.metrics_utils.Reduction(object)
-keras.utils.metrics_utils.assert_thresholds_range(thresholds)
-keras.utils.metrics_utils.filter_top_k(x,k)
-keras.utils.metrics_utils.parse_init_thresholds(thresholds,default_threshold=0.5)
-keras.utils.metrics_utils.result_wrapper(result_fn)
-keras.utils.metrics_utils.to_list(x)
-keras.utils.metrics_utils.update_confusion_matrix_variables(variables_to_update,y_true,y_pred,thresholds=0.5,top_k=None,class_id=None,sample_weight=None)
-keras.utils.metrics_utils.update_state_wrapper(update_state_fn)
-keras.utils.metrics_utils.weighted_assign_add(label,pred,weights,var)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/initializers.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/data_utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/activations.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/io_utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/objectives.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/losses_utils.py----------------------------------------
-A:keras.utils.losses_utils.y_pred_rank->K.ndim(y_pred)
-A:keras.utils.losses_utils.y_pred_shape->K.int_shape(y_pred)
-A:keras.utils.losses_utils.y_true_rank->K.ndim(y_true)
-A:keras.utils.losses_utils.y_true_shape->K.int_shape(y_true)
-A:keras.utils.losses_utils.y_pred->K.expand_dims(y_pred, -1)
-A:keras.utils.losses_utils.y_true->K.squeeze(y_true, -1)
-A:keras.utils.losses_utils.weights_rank->K.ndim(sample_weight)
-A:keras.utils.losses_utils.sample_weight->broadcast_weights(losses, sample_weight)
-A:keras.utils.losses_utils.loss->K.cast(loss, input_dtype)
-A:keras.utils.losses_utils.weights_shape->K.int_shape(sample_weight)
-A:keras.utils.losses_utils.values_shape->K.int_shape(values)
-A:keras.utils.losses_utils.values_rank->K.ndim(values)
-A:keras.utils.losses_utils.input_dtype->K.dtype(losses)
-A:keras.utils.losses_utils.losses->K.cast(losses, K.floatx())
-A:keras.utils.losses_utils.(losses, _, sample_weight)->squeeze_or_expand_dimensions(losses, None, sample_weight)
-keras.utils.losses_utils.Reduction(object)
-keras.utils.losses_utils.Reduction.all(cls)
-keras.utils.losses_utils.Reduction.validate(cls,key)
-keras.utils.losses_utils._num_elements(losses)
-keras.utils.losses_utils.broadcast_weights(values,sample_weight)
-keras.utils.losses_utils.compute_weighted_loss(losses,sample_weight=None,reduction=Reduction.SUM_OVER_BATCH_SIZE,name=None)
-keras.utils.losses_utils.reduce_weighted_loss(weighted_losses,reduction=Reduction.SUM_OVER_BATCH_SIZE)
-keras.utils.losses_utils.squeeze_or_expand_dimensions(y_pred,y_true=None,sample_weight=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/constraints.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/test_utils.py----------------------------------------
-A:keras.utils.test_utils.y->layer(x)
-A:keras.utils.test_utils.X->numpy.zeros((samples,) + input_shape, dtype=np.float32)
-A:keras.utils.test_utils.X[i]->numpy.random.normal(loc=y_loc[i], scale=0.7, size=input_shape)
-A:keras.utils.test_utils.y_loc->numpy.random.random((samples,))
-A:keras.utils.test_utils.y[i]->numpy.random.normal(loc=y_loc[i], scale=0.7, size=output_shape)
-A:keras.utils.test_utils.input_dtype->K.floatx()
-A:keras.utils.test_utils.input_data_shape->list(input_shape)
-A:keras.utils.test_utils.input_data_shape[i]->numpy.random.randint(1, 4)
-A:keras.utils.test_utils.input_data->input_data.astype(input_dtype).astype(input_dtype)
-A:keras.utils.test_utils.layer->layer.__class__.from_config(layer_config).__class__.from_config(layer_config)
-A:keras.utils.test_utils.weights->Model(x, y).get_weights()
-A:keras.utils.test_utils.expected_output_shape->layer.__class__.from_config(layer_config).__class__.from_config(layer_config).compute_output_shape(input_shape)
-A:keras.utils.test_utils.x->Input(shape=input_shape[1:], dtype=input_dtype)
-A:keras.utils.test_utils.model->Model(x, y)
-A:keras.utils.test_utils.actual_output->Model(x, y).predict(input_data)
-A:keras.utils.test_utils.model_config->Model(x, y).get_config()
-A:keras.utils.test_utils.recovered_model->Model(x, y).__class__.from_config(model_config)
-A:keras.utils.test_utils._output->Model(x, y).__class__.from_config(model_config).predict(input_data)
-A:keras.utils.test_utils.layer_config->layer.__class__.from_config(layer_config).__class__.from_config(layer_config).get_config()
-keras.utils.test_utils.get_test_data(num_train=1000,num_test=500,input_shape=(10,),output_shape=(2,),classification=True,num_classes=2)
-keras.utils.test_utils.layer_test(layer_cls,kwargs={},input_shape=None,input_dtype=None,input_data=None,expected_output=None,expected_output_dtype=None,fixed_batch_size=False)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/preprocessing/image.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/conv_utils.py----------------------------------------
-A:keras.utils.conv_utils.value_tuple->tuple(value)
-A:keras.utils.conv_utils.padding->value.lower()
-A:keras.utils.conv_utils.kernel->numpy.asarray(kernel)
-keras.utils.conv_utils.conv_input_length(output_length,filter_size,padding,stride)
-keras.utils.conv_utils.conv_output_length(input_length,filter_size,padding,stride,dilation=1)
-keras.utils.conv_utils.convert_kernel(kernel)
-keras.utils.conv_utils.deconv_length(dim_size,stride_size,kernel_size,padding,output_padding,dilation=1)
-keras.utils.conv_utils.normalize_padding(value)
-keras.utils.conv_utils.normalize_tuple(value,n,name)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/preprocessing/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/generic_utils.py----------------------------------------
-A:keras.utils.generic_utils.object_list->to_list(object_list)
-A:keras.utils.generic_utils.iterable->to_list(iterable_or_element, allow_tuple=True)
-A:keras.utils.generic_utils.start->start.tolist().tolist()
-A:keras.utils.generic_utils.unknown->set(input_dict.keys()).difference(expected_values)
-A:keras.utils.generic_utils.arg_spec->inspect.getfullargspec(fn)
-A:keras.utils.generic_utils.signature->inspect.signature(fn)
-A:keras.utils.generic_utils.parameter->inspect.signature(fn).parameters.get(name)
-keras.utils.generic_utils.check_for_unexpected_keys(name,input_dict,expected_values)
-keras.utils.generic_utils.has_arg(fn,name,accept_all=False)
-keras.utils.generic_utils.is_all_none(iterable_or_element)
-keras.utils.generic_utils.object_list_uid(object_list)
-keras.utils.generic_utils.slice_arrays(arrays,start=None,stop=None)
-keras.utils.generic_utils.to_list(x,allow_tuple=False)
-keras.utils.generic_utils.transpose_shape(shape,target_format,spatial_axes)
-keras.utils.generic_utils.unpack_singleton(x)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/preprocessing/text.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/layer_utils.py----------------------------------------
-A:keras.utils.layer_utils.weight_ids->set()
-A:keras.utils.layer_utils.original_kernel->K.get_value(layer.kernel)
-A:keras.utils.layer_utils.converted_kernel->convert_kernel(original_kernel)
-A:keras.utils.layer_utils.(kernel, bias)->dense.get_weights()
-A:keras.utils.layer_utils.ki->numpy.transpose(ki, (1, 2, 0))
-A:keras.utils.layer_utils.kernel[:, i]->numpy.reshape(ki, (np.prod(previous_feature_map_shape),))
-keras.utils.layer_utils.convert_all_kernels_in_model(model)
-keras.utils.layer_utils.convert_dense_weights_data_format(dense,previous_feature_map_shape,target_data_format='channels_first')
-keras.utils.layer_utils.count_params(weights)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/preprocessing/sequence.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/np_utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/cifar.py----------------------------------------
+A:keras.datasets.cifar.d->six.moves.cPickle.load(f, encoding='bytes')
+A:keras.datasets.cifar.data->data.reshape(data.shape[0], 3, 32, 32).reshape(data.shape[0], 3, 32, 32)
+keras.datasets.cifar.load_batch(fpath,label_key='labels')
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/multi_gpu_utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/reuters.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/utils/vis_utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/fashion_mnist.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/callbacks/tensorboard_v1.py----------------------------------------
-A:keras.callbacks.tensorboard_v1.self.sess->K.get_session()
-A:keras.callbacks.tensorboard_v1.mapped_weight_name->weight.name.replace(':', '_')
-A:keras.callbacks.tensorboard_v1.grads->model.optimizer.get_gradients(model.total_loss, weight)
-A:keras.callbacks.tensorboard_v1.w_img->tensorflow.reshape(w_img, [1, shape[0], 1, 1])
-A:keras.callbacks.tensorboard_v1.shape->K.int_shape(w_img)
-A:keras.callbacks.tensorboard_v1.self.merged->tensorflow.summary.merge_all()
-A:keras.callbacks.tensorboard_v1.self.writer->tensorflow.summary.FileWriter(self.log_dir)
-A:keras.callbacks.tensorboard_v1.self.embeddings_data->standardize_input_data(self.embeddings_data, model.input_names)
-A:keras.callbacks.tensorboard_v1.self.batch_idbatch_id->tensorflow.placeholder(tf.int32)
-A:keras.callbacks.tensorboard_v1.self.stepstep->tensorflow.placeholder(tf.int32)
-A:keras.callbacks.tensorboard_v1.embedding_size->numpy.prod(embedding_input.shape[1:])
-A:keras.callbacks.tensorboard_v1.embedding_input->tensorflow.reshape(embedding_input, (step, int(embedding_size)))
-A:keras.callbacks.tensorboard_v1.embedding->tensorflow.contrib.tensorboard.plugins.projector.ProjectorConfig().embeddings.add()
-A:keras.callbacks.tensorboard_v1.batch->slice(i, i + step)
-A:keras.callbacks.tensorboard_v1.self.saver->tensorflow.train.Saver(list(embeddings_vars.values()))
-A:keras.callbacks.tensorboard_v1.config->tensorflow.contrib.tensorboard.plugins.projector.ProjectorConfig()
-A:keras.callbacks.tensorboard_v1.step->min(self.batch_size, n_samples - i)
-A:keras.callbacks.tensorboard_v1.feed_dict->dict(zip(tensors, batch_val))
-A:keras.callbacks.tensorboard_v1.result->self.sess.run([self.merged], feed_dict=feed_dict)
-A:keras.callbacks.tensorboard_v1.summary->tensorflow.Summary()
-A:keras.callbacks.tensorboard_v1.summary_value->tensorflow.Summary().value.add()
-A:keras.callbacks.tensorboard_v1.summary_value.simple_value->value.item()
-keras.callbacks.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=32,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch')
-keras.callbacks.TensorBoard._write_logs(self,logs,index)
-keras.callbacks.TensorBoard.on_batch_end(self,batch,logs=None)
-keras.callbacks.TensorBoard.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.TensorBoard.on_train_end(self,_)
-keras.callbacks.TensorBoard.set_model(self,model)
-keras.callbacks.tensorboard_v1.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=32,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch')
-keras.callbacks.tensorboard_v1.TensorBoard.__init__(self,log_dir='./logs',histogram_freq=0,batch_size=32,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch')
-keras.callbacks.tensorboard_v1.TensorBoard._write_logs(self,logs,index)
-keras.callbacks.tensorboard_v1.TensorBoard.on_batch_end(self,batch,logs=None)
-keras.callbacks.tensorboard_v1.TensorBoard.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.tensorboard_v1.TensorBoard.on_train_end(self,_)
-keras.callbacks.tensorboard_v1.TensorBoard.set_model(self,model)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/cifar100.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/callbacks/callbacks.py----------------------------------------
-A:keras.callbacks.callbacks.self._delta_ts->defaultdict(lambda : deque([], maxlen=self.queue_length))
-A:keras.callbacks.callbacks.hook_name->'on_{mode}_batch_{hook}'.format(mode=mode, hook=hook)
-A:keras.callbacks.callbacks.self._t_enter_batch->time.time()
-A:keras.callbacks.callbacks.t_before_callbacks->time.time()
-A:keras.callbacks.callbacks.batch_hook->getattr(callback, hook_name)
-A:keras.callbacks.callbacks.delta_t_median->numpy.median(self._delta_ts[hook_name])
-A:keras.callbacks.callbacks.self.stateful_metrics->set()
-A:keras.callbacks.callbacks.batch_size->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get('size', 0)
-A:keras.callbacks.callbacks.loss->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get('loss')
-A:keras.callbacks.callbacks.self.progbar->Progbar(target=self.target, verbose=self.verbose, stateful_metrics=self.stateful_metrics)
-A:keras.callbacks.callbacks.filepath->self.filepath.format(epoch=epoch + 1, **logs)
-A:keras.callbacks.callbacks.current->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get(self.monitor)
-A:keras.callbacks.callbacks.self.best_weights->self.model.get_weights()
-A:keras.callbacks.callbacks.monitor_value->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get(self.monitor)
-A:keras.callbacks.callbacks.send[k]->v.item()
-A:keras.callbacks.callbacks.lr->self.schedule(epoch)
-A:keras.callbacks.callbacks.logs['lr']->K.get_value(self.model.optimizer.lr)
-A:keras.callbacks.callbacks.min_delta->kwargs.pop('epsilon')
-A:keras.callbacks.callbacks.old_lr->float(K.get_value(self.model.optimizer.lr))
-A:keras.callbacks.callbacks.new_lr->max(new_lr, self.min_lr)
-A:keras.callbacks.callbacks.self.csv_file->io.open(self.filename, mode + self.file_flags, **self._open_args)
-A:keras.callbacks.callbacks.self.keys->sorted(logs.keys())
-A:keras.callbacks.callbacks.logs->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys])
-A:keras.callbacks.callbacks.self.writer->csv.DictWriter(self.csv_file, fieldnames=fieldnames, dialect=CustomDialect)
-A:keras.callbacks.callbacks.row_dict->OrderedDict({'epoch': epoch})
-keras.callbacks.BaseLogger(self,stateful_metrics=None)
-keras.callbacks.BaseLogger.on_batch_end(self,batch,logs=None)
-keras.callbacks.BaseLogger.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.BaseLogger.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.CSVLogger(self,filename,separator=',',append=False)
-keras.callbacks.CSVLogger.__del__(self)
-keras.callbacks.CSVLogger.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.CSVLogger.on_train_begin(self,logs=None)
-keras.callbacks.CSVLogger.on_train_end(self,logs=None)
-keras.callbacks.Callback(self)
-keras.callbacks.Callback.on_batch_begin(self,batch,logs=None)
-keras.callbacks.Callback.on_batch_end(self,batch,logs=None)
-keras.callbacks.Callback.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.Callback.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.Callback.on_predict_batch_begin(self,batch,logs=None)
-keras.callbacks.Callback.on_predict_batch_end(self,batch,logs=None)
-keras.callbacks.Callback.on_predict_begin(self,logs=None)
-keras.callbacks.Callback.on_predict_end(self,logs=None)
-keras.callbacks.Callback.on_test_batch_begin(self,batch,logs=None)
-keras.callbacks.Callback.on_test_batch_end(self,batch,logs=None)
-keras.callbacks.Callback.on_test_begin(self,logs=None)
-keras.callbacks.Callback.on_test_end(self,logs=None)
-keras.callbacks.Callback.on_train_batch_begin(self,batch,logs=None)
-keras.callbacks.Callback.on_train_batch_end(self,batch,logs=None)
-keras.callbacks.Callback.on_train_begin(self,logs=None)
-keras.callbacks.Callback.on_train_end(self,logs=None)
-keras.callbacks.Callback.set_model(self,model)
-keras.callbacks.Callback.set_params(self,params)
-keras.callbacks.CallbackList(self,callbacks=None,queue_length=10)
-keras.callbacks.CallbackList.__iter__(self)
-keras.callbacks.CallbackList._call_batch_hook(self,mode,hook,batch,logs=None)
-keras.callbacks.CallbackList._call_begin_hook(self,mode)
-keras.callbacks.CallbackList._call_end_hook(self,mode)
-keras.callbacks.CallbackList._reset_batch_timing(self)
-keras.callbacks.CallbackList.append(self,callback)
-keras.callbacks.CallbackList.on_batch_begin(self,batch,logs=None)
-keras.callbacks.CallbackList.on_batch_end(self,batch,logs=None)
-keras.callbacks.CallbackList.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.CallbackList.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.CallbackList.on_predict_batch_begin(self,batch,logs=None)
-keras.callbacks.CallbackList.on_predict_batch_end(self,batch,logs=None)
-keras.callbacks.CallbackList.on_predict_begin(self,logs=None)
-keras.callbacks.CallbackList.on_predict_end(self,logs=None)
-keras.callbacks.CallbackList.on_test_batch_begin(self,batch,logs=None)
-keras.callbacks.CallbackList.on_test_batch_end(self,batch,logs=None)
-keras.callbacks.CallbackList.on_test_begin(self,logs=None)
-keras.callbacks.CallbackList.on_test_end(self,logs=None)
-keras.callbacks.CallbackList.on_train_batch_begin(self,batch,logs=None)
-keras.callbacks.CallbackList.on_train_batch_end(self,batch,logs=None)
-keras.callbacks.CallbackList.on_train_begin(self,logs=None)
-keras.callbacks.CallbackList.on_train_end(self,logs=None)
-keras.callbacks.CallbackList.set_model(self,model)
-keras.callbacks.CallbackList.set_params(self,params)
-keras.callbacks.EarlyStopping(self,monitor='val_loss',min_delta=0,patience=0,verbose=0,mode='auto',baseline=None,restore_best_weights=False)
-keras.callbacks.EarlyStopping.get_monitor_value(self,logs)
-keras.callbacks.EarlyStopping.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.EarlyStopping.on_train_begin(self,logs=None)
-keras.callbacks.EarlyStopping.on_train_end(self,logs=None)
-keras.callbacks.History(Callback)
-keras.callbacks.History.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.History.on_train_begin(self,logs=None)
-keras.callbacks.LambdaCallback(self,on_epoch_begin=None,on_epoch_end=None,on_batch_begin=None,on_batch_end=None,on_train_begin=None,on_train_end=None,**kwargs)
-keras.callbacks.LearningRateScheduler(self,schedule,verbose=0)
-keras.callbacks.LearningRateScheduler.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.LearningRateScheduler.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.ModelCheckpoint(self,filepath,monitor='val_loss',verbose=0,save_best_only=False,save_weights_only=False,mode='auto',period=1)
-keras.callbacks.ModelCheckpoint.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.ProgbarLogger(self,count_mode='samples',stateful_metrics=None)
-keras.callbacks.ProgbarLogger.on_batch_begin(self,batch,logs=None)
-keras.callbacks.ProgbarLogger.on_batch_end(self,batch,logs=None)
-keras.callbacks.ProgbarLogger.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.ProgbarLogger.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.ProgbarLogger.on_train_begin(self,logs=None)
-keras.callbacks.ReduceLROnPlateau(self,monitor='val_loss',factor=0.1,patience=10,verbose=0,mode='auto',min_delta=0.0001,cooldown=0,min_lr=0,**kwargs)
-keras.callbacks.ReduceLROnPlateau._reset(self)
-keras.callbacks.ReduceLROnPlateau.in_cooldown(self)
-keras.callbacks.ReduceLROnPlateau.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.ReduceLROnPlateau.on_train_begin(self,logs=None)
-keras.callbacks.RemoteMonitor(self,root='http://localhost:9000',path='/publish/epoch/end/',field='data',headers=None,send_as_json=False)
-keras.callbacks.RemoteMonitor.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.TerminateOnNaN(Callback)
-keras.callbacks.TerminateOnNaN.on_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.BaseLogger(self,stateful_metrics=None)
-keras.callbacks.callbacks.BaseLogger.__init__(self,stateful_metrics=None)
-keras.callbacks.callbacks.BaseLogger.on_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.BaseLogger.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.callbacks.BaseLogger.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.CSVLogger(self,filename,separator=',',append=False)
-keras.callbacks.callbacks.CSVLogger.__del__(self)
-keras.callbacks.callbacks.CSVLogger.__init__(self,filename,separator=',',append=False)
-keras.callbacks.callbacks.CSVLogger.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.CSVLogger.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.CSVLogger.on_train_end(self,logs=None)
-keras.callbacks.callbacks.Callback(self)
-keras.callbacks.callbacks.Callback.__init__(self)
-keras.callbacks.callbacks.Callback.on_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.callbacks.Callback.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.Callback.on_predict_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_predict_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_predict_begin(self,logs=None)
-keras.callbacks.callbacks.Callback.on_predict_end(self,logs=None)
-keras.callbacks.callbacks.Callback.on_test_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_test_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_test_begin(self,logs=None)
-keras.callbacks.callbacks.Callback.on_test_end(self,logs=None)
-keras.callbacks.callbacks.Callback.on_train_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_train_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.Callback.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.Callback.on_train_end(self,logs=None)
-keras.callbacks.callbacks.Callback.set_model(self,model)
-keras.callbacks.callbacks.Callback.set_params(self,params)
-keras.callbacks.callbacks.CallbackList(self,callbacks=None,queue_length=10)
-keras.callbacks.callbacks.CallbackList.__init__(self,callbacks=None,queue_length=10)
-keras.callbacks.callbacks.CallbackList.__iter__(self)
-keras.callbacks.callbacks.CallbackList._call_batch_hook(self,mode,hook,batch,logs=None)
-keras.callbacks.callbacks.CallbackList._call_begin_hook(self,mode)
-keras.callbacks.callbacks.CallbackList._call_end_hook(self,mode)
-keras.callbacks.callbacks.CallbackList._reset_batch_timing(self)
-keras.callbacks.callbacks.CallbackList.append(self,callback)
-keras.callbacks.callbacks.CallbackList.on_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_predict_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_predict_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_predict_begin(self,logs=None)
-keras.callbacks.callbacks.CallbackList.on_predict_end(self,logs=None)
-keras.callbacks.callbacks.CallbackList.on_test_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_test_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_test_begin(self,logs=None)
-keras.callbacks.callbacks.CallbackList.on_test_end(self,logs=None)
-keras.callbacks.callbacks.CallbackList.on_train_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_train_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.CallbackList.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.CallbackList.on_train_end(self,logs=None)
-keras.callbacks.callbacks.CallbackList.set_model(self,model)
-keras.callbacks.callbacks.CallbackList.set_params(self,params)
-keras.callbacks.callbacks.EarlyStopping(self,monitor='val_loss',min_delta=0,patience=0,verbose=0,mode='auto',baseline=None,restore_best_weights=False)
-keras.callbacks.callbacks.EarlyStopping.__init__(self,monitor='val_loss',min_delta=0,patience=0,verbose=0,mode='auto',baseline=None,restore_best_weights=False)
-keras.callbacks.callbacks.EarlyStopping.get_monitor_value(self,logs)
-keras.callbacks.callbacks.EarlyStopping.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.EarlyStopping.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.EarlyStopping.on_train_end(self,logs=None)
-keras.callbacks.callbacks.History(Callback)
-keras.callbacks.callbacks.History.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.History.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.LambdaCallback(self,on_epoch_begin=None,on_epoch_end=None,on_batch_begin=None,on_batch_end=None,on_train_begin=None,on_train_end=None,**kwargs)
-keras.callbacks.callbacks.LambdaCallback.__init__(self,on_epoch_begin=None,on_epoch_end=None,on_batch_begin=None,on_batch_end=None,on_train_begin=None,on_train_end=None,**kwargs)
-keras.callbacks.callbacks.LearningRateScheduler(self,schedule,verbose=0)
-keras.callbacks.callbacks.LearningRateScheduler.__init__(self,schedule,verbose=0)
-keras.callbacks.callbacks.LearningRateScheduler.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.callbacks.LearningRateScheduler.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.ModelCheckpoint(self,filepath,monitor='val_loss',verbose=0,save_best_only=False,save_weights_only=False,mode='auto',period=1)
-keras.callbacks.callbacks.ModelCheckpoint.__init__(self,filepath,monitor='val_loss',verbose=0,save_best_only=False,save_weights_only=False,mode='auto',period=1)
-keras.callbacks.callbacks.ModelCheckpoint.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.ProgbarLogger(self,count_mode='samples',stateful_metrics=None)
-keras.callbacks.callbacks.ProgbarLogger.__init__(self,count_mode='samples',stateful_metrics=None)
-keras.callbacks.callbacks.ProgbarLogger.on_batch_begin(self,batch,logs=None)
-keras.callbacks.callbacks.ProgbarLogger.on_batch_end(self,batch,logs=None)
-keras.callbacks.callbacks.ProgbarLogger.on_epoch_begin(self,epoch,logs=None)
-keras.callbacks.callbacks.ProgbarLogger.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.ProgbarLogger.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.ReduceLROnPlateau(self,monitor='val_loss',factor=0.1,patience=10,verbose=0,mode='auto',min_delta=0.0001,cooldown=0,min_lr=0,**kwargs)
-keras.callbacks.callbacks.ReduceLROnPlateau.__init__(self,monitor='val_loss',factor=0.1,patience=10,verbose=0,mode='auto',min_delta=0.0001,cooldown=0,min_lr=0,**kwargs)
-keras.callbacks.callbacks.ReduceLROnPlateau._reset(self)
-keras.callbacks.callbacks.ReduceLROnPlateau.in_cooldown(self)
-keras.callbacks.callbacks.ReduceLROnPlateau.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.ReduceLROnPlateau.on_train_begin(self,logs=None)
-keras.callbacks.callbacks.RemoteMonitor(self,root='http://localhost:9000',path='/publish/epoch/end/',field='data',headers=None,send_as_json=False)
-keras.callbacks.callbacks.RemoteMonitor.__init__(self,root='http://localhost:9000',path='/publish/epoch/end/',field='data',headers=None,send_as_json=False)
-keras.callbacks.callbacks.RemoteMonitor.on_epoch_end(self,epoch,logs=None)
-keras.callbacks.callbacks.TerminateOnNaN(Callback)
-keras.callbacks.callbacks.TerminateOnNaN.on_batch_end(self,batch,logs=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/mnist.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/callbacks/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/boston_housing.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/callbacks/tensorboard_v2.py----------------------------------------
-keras.callbacks.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=None,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch',**kwargs)
-keras.callbacks.TensorBoard.set_model(self,model)
-keras.callbacks.tensorboard_v2.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=None,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch',**kwargs)
-keras.callbacks.tensorboard_v2.TensorBoard.__init__(self,log_dir='./logs',histogram_freq=0,batch_size=None,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch',**kwargs)
-keras.callbacks.tensorboard_v2.TensorBoard.set_model(self,model)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/imdb.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/training_generator.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/datasets/cifar10.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/input_layer.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/sequential.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/training_generator.py----------------------------------------
 A:keras.engine.training_generator.do_validation->bool(validation_data)
 A:keras.engine.training_generator.use_sequence_api->is_sequence(generator)
 A:keras.engine.training_generator.steps_per_epoch->len(generator)
@@ -540,7 +186,32 @@ keras.engine.training_generator.fit_generator(model,generator,steps_per_epoch=No
 keras.engine.training_generator.predict_generator(model,generator,steps=None,callbacks=None,max_queue_size=10,workers=1,use_multiprocessing=False,verbose=0)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/training_utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/training.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/training_arrays.py----------------------------------------
+A:keras.engine.training_arrays.num_train_samples->check_num_samples(fit_inputs, batch_size=batch_size, steps=steps_per_epoch, steps_name='steps_per_epoch')
+A:keras.engine.training_arrays.index_array->numpy.arange(num_samples)
+A:keras.engine.training_arrays.model.history->cbks.History()
+A:keras.engine.training_arrays.callbacks->cbks.CallbackList(callbacks)
+A:keras.engine.training_arrays.callback_model->model._get_callback_model()
+A:keras.engine.training_arrays.callback_metrics->list(model.metrics_names)
+A:keras.engine.training_arrays.outs->to_list(outs)
+A:keras.engine.training_arrays.val_outs->to_list(val_outs)
+A:keras.engine.training_arrays.batches->make_batches(num_samples, batch_size)
+A:keras.engine.training_arrays.ins_batch->slice_arrays(ins, batch_ids)
+A:keras.engine.training_arrays.ins_batch[i]->ins_batch[i].toarray().toarray()
+A:keras.engine.training_arrays.num_samples->check_num_samples(ins, batch_size=batch_size, steps=steps, steps_name='steps')
+A:keras.engine.training_arrays.progbar->Progbar(target=num_samples)
+A:keras.engine.training_arrays.batch_outs->f(ins_batch)
+A:keras.engine.training_arrays.outs[i]->float(batch_out)
+A:keras.engine.training_arrays.batch_logs[l]->float(o)
+keras.engine.training_arrays.fit_loop(model,fit_function,fit_inputs,out_labels=None,batch_size=None,epochs=100,verbose=1,callbacks=None,val_function=None,val_inputs=None,shuffle=True,initial_epoch=0,steps_per_epoch=None,validation_steps=None,validation_freq=1)
+keras.engine.training_arrays.predict_loop(model,f,ins,batch_size=32,verbose=0,steps=None,callbacks=None)
+keras.engine.training_arrays.test_loop(model,f,ins,batch_size=None,verbose=0,steps=None,callbacks=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/training_utils.py----------------------------------------
 A:keras.engine.training_utils.shape->K.int_shape(x)
 A:keras.engine.training_utils.x->numpy.expand_dims(x, 1)
 A:keras.engine.training_utils.set_x->set_of_lengths(inputs)
@@ -600,65 +271,61 @@ keras.engine.training_utils.standardize_weights(y,sample_weight=None,class_weigh
 keras.engine.training_utils.weighted_masked_objective(fn)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/input_layer.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/topology.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/base_layer.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/network.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/sequential.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/saving.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/training_arrays.py----------------------------------------
-A:keras.engine.training_arrays.num_train_samples->check_num_samples(fit_inputs, batch_size=batch_size, steps=steps_per_epoch, steps_name='steps_per_epoch')
-A:keras.engine.training_arrays.index_array->numpy.arange(num_samples)
-A:keras.engine.training_arrays.model.history->cbks.History()
-A:keras.engine.training_arrays.callbacks->cbks.CallbackList(callbacks)
-A:keras.engine.training_arrays.callback_model->model._get_callback_model()
-A:keras.engine.training_arrays.callback_metrics->list(model.metrics_names)
-A:keras.engine.training_arrays.outs->to_list(outs)
-A:keras.engine.training_arrays.val_outs->to_list(val_outs)
-A:keras.engine.training_arrays.batches->make_batches(num_samples, batch_size)
-A:keras.engine.training_arrays.ins_batch->slice_arrays(ins, batch_ids)
-A:keras.engine.training_arrays.ins_batch[i]->ins_batch[i].toarray().toarray()
-A:keras.engine.training_arrays.num_samples->check_num_samples(ins, batch_size=batch_size, steps=steps, steps_name='steps')
-A:keras.engine.training_arrays.progbar->Progbar(target=num_samples)
-A:keras.engine.training_arrays.batch_outs->f(ins_batch)
-A:keras.engine.training_arrays.outs[i]->float(batch_out)
-A:keras.engine.training_arrays.batch_logs[l]->float(o)
-keras.engine.training_arrays.fit_loop(model,fit_function,fit_inputs,out_labels=None,batch_size=None,epochs=100,verbose=1,callbacks=None,val_function=None,val_inputs=None,shuffle=True,initial_epoch=0,steps_per_epoch=None,validation_steps=None,validation_freq=1)
-keras.engine.training_arrays.predict_loop(model,f,ins,batch_size=32,verbose=0,steps=None,callbacks=None)
-keras.engine.training_arrays.test_loop(model,f,ins,batch_size=None,verbose=0,steps=None,callbacks=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/engine/base_layer.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/network.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/inception_resnet_v2.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/training.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/nasnet.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/topology.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/vgg16.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/engine/saving.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/resnet.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/preprocessing/text.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/imagenet_utils.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/preprocessing/sequence.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/mobilenet.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/preprocessing/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/densenet.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/preprocessing/image.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/resnet_v2.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/cntk_backend.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/mobilenet_v2.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/xception.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/resnet50.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/vgg19.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/applications/inception_v3.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/cntk_backend.py----------------------------------------
 A:keras.backend.cntk_backend.dev->cntk.device.use_default_device()
 A:keras.backend.cntk_backend._LEARNING_PHASE_PLACEHOLDER->cntk.constant(shape=(), dtype=np.float32, value=1.0, name='_keras_learning_phase')
 A:keras.backend.cntk_backend._UID_PREFIXES->defaultdict(int)
@@ -981,7 +648,321 @@ keras.backend.cntk_backend.zeros(shape,dtype=None,name=None)
 keras.backend.cntk_backend.zeros_like(x,dtype=None,name=None)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/numpy_backend.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py----------------------------------------
+A:keras.backend.tensorflow_backend._SYMBOLIC_SCOPE->threading.local()
+A:keras.backend.tensorflow_backend.out->tensorflow.matmul(x, y)
+A:keras.backend.tensorflow_backend.value->tensorflow.random_normal_initializer(mean, scale, seed=seed)(shape, dtype=dtype)
+A:keras.backend.tensorflow_backend.data_format->normalize_data_format(data_format)
+A:keras.backend.tensorflow_backend.lp->tensorflow.python.keras.backend.learning_phase()
+A:keras.backend.tensorflow_backend.int_lp->tensorflow.cast(lp, 'int32', name='learning_phase')
+A:keras.backend.tensorflow_backend.session->get_session()
+A:keras.backend.tensorflow_backend.variables->tensorflow.global_variables()
+A:keras.backend.tensorflow_backend.is_initialized->get_session().run([tf.is_variable_initialized(v) for v in candidate_vars])
+A:keras.backend.tensorflow_backend.self.device->tensorflow.python.framework.device.DeviceSpec.from_string(device_str)
+A:keras.backend.tensorflow_backend.g->get_graph()
+A:keras.backend.tensorflow_backend.op->tensorflow.print(message, x, output_stream=sys.stdout)
+A:keras.backend.tensorflow_backend.device_type->device_type.lower().lower()
+A:keras.backend.tensorflow_backend.device->_get_current_tf_device()
+A:keras.backend.tensorflow_backend.devices->get_session().list_devices()
+A:keras.backend.tensorflow_backend._LOCAL_DEVICES->tensorflow.config.experimental_list_devices()
+A:keras.backend.tensorflow_backend.explicitly_on_cpu->_is_current_explicit_device('cpu')
+A:keras.backend.tensorflow_backend.v->tensorflow.ones(shape=shape, dtype=dtype, name=name)
+A:keras.backend.tensorflow_backend.v._keras_shape->int_shape(value)
+A:keras.backend.tensorflow_backend.dtype->floatx()
+A:keras.backend.tensorflow_backend.x->tensorflow.nn.bias_add(x, bias)
+A:keras.backend.tensorflow_backend.shape->int_shape(x)
+A:keras.backend.tensorflow_backend.eval_fn->function([], [x])
+A:keras.backend.tensorflow_backend.seed->numpy.random.randint(10000000.0)
+A:keras.backend.tensorflow_backend.decay->tensorflow.python.ops.math_ops.cast(decay, x.dtype.base_dtype)
+A:keras.backend.tensorflow_backend.x_shape->int_shape(x)
+A:keras.backend.tensorflow_backend.y_shape->shape(y)
+A:keras.backend.tensorflow_backend.y_permute_dim->list(range(ndim(y)))
+A:keras.backend.tensorflow_backend.xt->tensorflow.reshape(x, [-1, x_shape[-1]])
+A:keras.backend.tensorflow_backend.yt->tensorflow.reshape(tf.transpose(y, perm=y_permute_dim), [y_shape[-2], -1])
+A:keras.backend.tensorflow_backend.x_ndim->len(x_shape)
+A:keras.backend.tensorflow_backend.y_ndim->len(y_shape)
+A:keras.backend.tensorflow_backend.axes->list(axes)
+A:keras.backend.tensorflow_backend.y->tensorflow.reshape(y, y_squashed_shape)
+A:keras.backend.tensorflow_backend.pattern->transpose_shape(pattern, data_format, spatial_axes=(1, 2, 3))
+A:keras.backend.tensorflow_backend.x_squashed_dim->tensorflow.reduce_prod(x_mid_dims)
+A:keras.backend.tensorflow_backend.x_squashed_shape->tensorflow.stack([x_shape[0], x_squashed_dim, x_shape[-1]])
+A:keras.backend.tensorflow_backend.y_squashed_dim->tensorflow.reduce_prod(y_trail_dims)
+A:keras.backend.tensorflow_backend.y_squashed_shape->tensorflow.stack([y_shape[0], y_shape[1], y_squashed_dim])
+A:keras.backend.tensorflow_backend.result->cast(result, dtype)
+A:keras.backend.tensorflow_backend.output_shape->tensorflow.stack(list(output_shape))
+A:keras.backend.tensorflow_backend.m->tensorflow.reduce_mean(x, axis, True)
+A:keras.backend.tensorflow_backend.devs_squared->tensorflow.square(x - m)
+A:keras.backend.tensorflow_backend.zero->_to_tensor(0.0, x.dtype.base_dtype)
+A:keras.backend.tensorflow_backend.inf->_to_tensor(np.inf, x.dtype.base_dtype)
+A:keras.backend.tensorflow_backend.(mean, var)->tensorflow.nn.moments(x, reduction_axes, None, None, False)
+A:keras.backend.tensorflow_backend.normed->tensorflow.nn.batch_normalization(x, broadcast_mean, broadcast_var, broadcast_beta, broadcast_gamma, epsilon)
+A:keras.backend.tensorflow_backend.target_shape->tensorflow.stack(target_shape)
+A:keras.backend.tensorflow_backend.broadcast_mean->tensorflow.reshape(mean, target_shape)
+A:keras.backend.tensorflow_backend.broadcast_var->tensorflow.reshape(var, target_shape)
+A:keras.backend.tensorflow_backend.broadcast_gamma->tensorflow.reshape(gamma, target_shape)
+A:keras.backend.tensorflow_backend.broadcast_beta->tensorflow.reshape(beta, target_shape)
+A:keras.backend.tensorflow_backend.gamma->tensorflow.cast(gamma, tf.float32)
+A:keras.backend.tensorflow_backend.beta->tensorflow.cast(beta, tf.float32)
+A:keras.backend.tensorflow_backend.mean->tensorflow.cast(mean, tf.float32)
+A:keras.backend.tensorflow_backend.var->tensorflow.cast(var, tf.float32)
+A:keras.backend.tensorflow_backend.(y, _, _)->fused_batch_norm(x, gamma, beta, epsilon=epsilon, mean=mean, variance=var, data_format=tf_data_format, is_training=False)
+A:keras.backend.tensorflow_backend.rank->ndim(tensors[0])
+A:keras.backend.tensorflow_backend.original_shape->int_shape(x)
+A:keras.backend.tensorflow_backend.output->permute_dimensions(output, (2, 0, 1, 3))
+A:keras.backend.tensorflow_backend.splits->tensorflow.split(value=x, num_or_size_splits=x_shape[axis], axis=axis)
+A:keras.backend.tensorflow_backend.x_rep->tensorflow.reshape(x_rep, x_shape)
+A:keras.backend.tensorflow_backend.reps->tensorflow.constant(reps, dtype='int32')
+A:keras.backend.tensorflow_backend.x_rep._keras_shape->tuple(x_shape)
+A:keras.backend.tensorflow_backend.start->tensorflow.cond(start < 0, true_fn=lambda : tf.constant(0, dtype=start.dtype), false_fn=lambda : start)
+A:keras.backend.tensorflow_backend.n->tuple(n)
+A:keras.backend.tensorflow_backend.(last_output, outputs, new_states)->tensorflow.python.keras.backend.rnn(step_function, inputs, initial_states, go_backwards=go_backwards, mask=mask, constants=constants, unroll=unroll, input_length=input_length)
+A:keras.backend.tensorflow_backend.reachable->tensorflow.python.keras.utils.tf_utils.get_reachable_from_inputs([learning_phase()], targets=[last_output])
+A:keras.backend.tensorflow_backend.condition->tensorflow.tile(condition, tile_shape)
+A:keras.backend.tensorflow_backend.cond_ndim->ndim(condition)
+A:keras.backend.tensorflow_backend.then_expression->then_expression()
+A:keras.backend.tensorflow_backend.else_expression->else_expression()
+A:keras.backend.tensorflow_backend.expr_ndim->ndim(then_expression)
+A:keras.backend.tensorflow_backend.cond_shape->tensorflow.concat([tf.shape(condition), [1] * ndim_diff], axis=0)
+A:keras.backend.tensorflow_backend.expr_shape->tensorflow.shape(then_expression)
+A:keras.backend.tensorflow_backend.zero_expr_shape->tensorflow.ones_like(expr_shape)
+A:keras.backend.tensorflow_backend.tile_shape->tensorflow.where(shape_diff > 0, expr_shape, zero_expr_shape)
+A:keras.backend.tensorflow_backend.training->learning_phase()
+A:keras.backend.tensorflow_backend.negative_part->tensorflow.nn.relu(-x)
+A:keras.backend.tensorflow_backend.max_value->_to_tensor(max_value, x.dtype.base_dtype)
+A:keras.backend.tensorflow_backend.alpha->_to_tensor(alpha, x.dtype.base_dtype)
+A:keras.backend.tensorflow_backend.res->tensorflow.nn.elu(x)
+A:keras.backend.tensorflow_backend.kernel_shape->int_shape(kernel)
+A:keras.backend.tensorflow_backend.padding->_preprocess_padding(padding)
+A:keras.backend.tensorflow_backend.(x, tf_data_format)->_preprocess_conv3d_input(x, data_format)
+A:keras.backend.tensorflow_backend.depthwise_kernel->tensorflow.expand_dims(depthwise_kernel, 0)
+A:keras.backend.tensorflow_backend.pointwise_kernel->tensorflow.expand_dims(pointwise_kernel, 0)
+A:keras.backend.tensorflow_backend.slice_length->py_slice(i * stride, i * stride + kernel_size[0])
+A:keras.backend.tensorflow_backend.x_aggregate->concatenate(xs, axis=0)
+A:keras.backend.tensorflow_backend.slice_row->py_slice(i * stride_row, i * stride_row + kernel_size[0])
+A:keras.backend.tensorflow_backend.slice_col->py_slice(j * stride_col, j * stride_col + kernel_size[1])
+A:keras.backend.tensorflow_backend.bias_shape->int_shape(bias)
+A:keras.backend.tensorflow_backend.new_shape->transpose_shape(new_shape, data_format, spatial_axes=(1,))
+A:keras.backend.tensorflow_backend.label_shape->tensorflow.cast(label_shape, tf.int64)
+A:keras.backend.tensorflow_backend.num_batches_tns->tensorflow.stack([label_shape[0]])
+A:keras.backend.tensorflow_backend.max_num_labels_tns->tensorflow.stack([label_shape[1]])
+A:keras.backend.tensorflow_backend.init->tensorflow.cast(tf.fill([1, label_shape[1]], 0), tf.bool)
+A:keras.backend.tensorflow_backend.dense_mask->tensorflow.python.ops.functional_ops.scan(range_less_than, label_lengths, initializer=init, parallel_iterations=1)
+A:keras.backend.tensorflow_backend.label_array->tensorflow.reshape(tf.tile(tf.range(label_shape[1]), num_batches_tns), label_shape)
+A:keras.backend.tensorflow_backend.label_ind->tensorflow.boolean_mask(label_array, dense_mask)
+A:keras.backend.tensorflow_backend.tmp->tensorflow.tile(tf.range(label_shape[0]), max_num_labels_tns)
+A:keras.backend.tensorflow_backend.batch_array->tensorflow.transpose(tf.reshape(tmp, reverse(label_shape, 0)))
+A:keras.backend.tensorflow_backend.batch_ind->tensorflow.boolean_mask(batch_array, dense_mask)
+A:keras.backend.tensorflow_backend.indices->tensorflow.cast(indices, tf.int64)
+A:keras.backend.tensorflow_backend.vals_sparse->tensorflow.gather_nd(labels, indices)
+A:keras.backend.tensorflow_backend.label_length->tensorflow.cast(tf.squeeze(label_length, axis=-1), tf.int32)
+A:keras.backend.tensorflow_backend.input_length->tensorflow.cast(input_length, tf.int32)
+A:keras.backend.tensorflow_backend.sparse_labels->tensorflow.cast(ctc_label_dense_to_sparse(y_true, label_length), tf.int32)
+A:keras.backend.tensorflow_backend.y_pred->tensorflow.python.ops.math_ops.log(tf.transpose(y_pred, perm=[1, 0, 2]) + epsilon())
+A:keras.backend.tensorflow_backend.(decoded, log_prob)->tensorflow.python.ops.ctc_ops.ctc_beam_search_decoder(inputs=y_pred, sequence_length=input_length, beam_width=beam_width, top_paths=top_paths, merge_repeated=merge_repeated)
+A:keras.backend.tensorflow_backend.dense_tensor->tensorflow.sparse.to_dense(st, default_value=-1)
+keras.backend.tensorflow_backend._TfDeviceCaptureOp(self)
+keras.backend.tensorflow_backend._TfDeviceCaptureOp.__init__(self)
+keras.backend.tensorflow_backend._TfDeviceCaptureOp._set_device(self,device)
+keras.backend.tensorflow_backend._TfDeviceCaptureOp._set_device_from_string(self,device_str)
+keras.backend.tensorflow_backend._broadcast_normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
+keras.backend.tensorflow_backend._fused_normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
+keras.backend.tensorflow_backend._get_available_gpus()
+keras.backend.tensorflow_backend._get_current_tf_device()
+keras.backend.tensorflow_backend._has_compat_v1()
+keras.backend.tensorflow_backend._has_nchw_support()
+keras.backend.tensorflow_backend._is_current_explicit_device(device_type)
+keras.backend.tensorflow_backend._is_tf_1()
+keras.backend.tensorflow_backend._preprocess_conv1d_input(x,data_format)
+keras.backend.tensorflow_backend._preprocess_conv2d_input(x,data_format,force_transpose=False)
+keras.backend.tensorflow_backend._preprocess_conv3d_input(x,data_format)
+keras.backend.tensorflow_backend._preprocess_padding(padding)
+keras.backend.tensorflow_backend._regular_normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
+keras.backend.tensorflow_backend._to_tensor(x,dtype)
+keras.backend.tensorflow_backend.abs(x)
+keras.backend.tensorflow_backend.all(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.any(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.arange(start,stop=None,step=1,dtype='int32')
+keras.backend.tensorflow_backend.argmax(x,axis=-1)
+keras.backend.tensorflow_backend.argmin(x,axis=-1)
+keras.backend.tensorflow_backend.batch_dot(x,y,axes=None)
+keras.backend.tensorflow_backend.batch_flatten(x)
+keras.backend.tensorflow_backend.batch_get_value(ops)
+keras.backend.tensorflow_backend.batch_normalization(x,mean,var,beta,gamma,axis=-1,epsilon=0.001)
+keras.backend.tensorflow_backend.batch_set_value(tuples)
+keras.backend.tensorflow_backend.bias_add(x,bias,data_format=None)
+keras.backend.tensorflow_backend.binary_crossentropy(target,output,from_logits=False)
+keras.backend.tensorflow_backend.cast(x,dtype)
+keras.backend.tensorflow_backend.cast_to_floatx(x)
+keras.backend.tensorflow_backend.categorical_crossentropy(target,output,from_logits=False,axis=-1)
+keras.backend.tensorflow_backend.clear_session()
+keras.backend.tensorflow_backend.clip(x,min_value,max_value)
+keras.backend.tensorflow_backend.concatenate(tensors,axis=-1)
+keras.backend.tensorflow_backend.constant(value,dtype=None,shape=None,name=None)
+keras.backend.tensorflow_backend.control_dependencies(control_inputs)
+keras.backend.tensorflow_backend.conv1d(x,kernel,strides=1,padding='valid',data_format=None,dilation_rate=1)
+keras.backend.tensorflow_backend.conv2d(x,kernel,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
+keras.backend.tensorflow_backend.conv2d_transpose(x,kernel,output_shape,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
+keras.backend.tensorflow_backend.conv3d(x,kernel,strides=(1,1,1),padding='valid',data_format=None,dilation_rate=(1,1,1))
+keras.backend.tensorflow_backend.conv3d_transpose(x,kernel,output_shape,strides=(1,1,1),padding='valid',data_format=None)
+keras.backend.tensorflow_backend.cos(x)
+keras.backend.tensorflow_backend.count_params(x)
+keras.backend.tensorflow_backend.ctc_batch_cost(y_true,y_pred,input_length,label_length)
+keras.backend.tensorflow_backend.ctc_decode(y_pred,input_length,greedy=True,beam_width=100,top_paths=1,merge_repeated=False)
+keras.backend.tensorflow_backend.ctc_label_dense_to_sparse(labels,label_lengths)
+keras.backend.tensorflow_backend.cumprod(x,axis=0)
+keras.backend.tensorflow_backend.cumsum(x,axis=0)
+keras.backend.tensorflow_backend.depthwise_conv2d(x,depthwise_kernel,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
+keras.backend.tensorflow_backend.dot(x,y)
+keras.backend.tensorflow_backend.dropout(x,level,noise_shape=None,seed=None)
+keras.backend.tensorflow_backend.dtype(x)
+keras.backend.tensorflow_backend.eager(func)
+keras.backend.tensorflow_backend.elu(x,alpha=1.0)
+keras.backend.tensorflow_backend.epsilon()
+keras.backend.tensorflow_backend.equal(x,y)
+keras.backend.tensorflow_backend.eval(x)
+keras.backend.tensorflow_backend.exp(x)
+keras.backend.tensorflow_backend.expand_dims(x,axis=-1)
+keras.backend.tensorflow_backend.eye(size,dtype=None,name=None)
+keras.backend.tensorflow_backend.flatten(x)
+keras.backend.tensorflow_backend.floatx()
+keras.backend.tensorflow_backend.foldl(fn,elems,initializer=None,name=None)
+keras.backend.tensorflow_backend.foldr(fn,elems,initializer=None,name=None)
+keras.backend.tensorflow_backend.function(inputs,outputs,updates=None,**kwargs)
+keras.backend.tensorflow_backend.gather(reference,indices)
+keras.backend.tensorflow_backend.get_session()
+keras.backend.tensorflow_backend.get_uid(prefix='')
+keras.backend.tensorflow_backend.get_value(x)
+keras.backend.tensorflow_backend.get_variable_shape(x)
+keras.backend.tensorflow_backend.gradients(loss,variables)
+keras.backend.tensorflow_backend.greater(x,y)
+keras.backend.tensorflow_backend.greater_equal(x,y)
+keras.backend.tensorflow_backend.hard_sigmoid(x)
+keras.backend.tensorflow_backend.identity(x,name=None)
+keras.backend.tensorflow_backend.image_data_format()
+keras.backend.tensorflow_backend.in_test_phase(x,alt,training=None)
+keras.backend.tensorflow_backend.in_top_k(predictions,targets,k)
+keras.backend.tensorflow_backend.in_train_phase(x,alt,training=None)
+keras.backend.tensorflow_backend.int_shape(x)
+keras.backend.tensorflow_backend.is_keras_tensor(x)
+keras.backend.tensorflow_backend.is_placeholder(x)
+keras.backend.tensorflow_backend.is_sparse(tensor)
+keras.backend.tensorflow_backend.is_symbolic(x)
+keras.backend.tensorflow_backend.is_tensor(x)
+keras.backend.tensorflow_backend.is_variable(x)
+keras.backend.tensorflow_backend.l2_normalize(x,axis=None)
+keras.backend.tensorflow_backend.learning_phase()
+keras.backend.tensorflow_backend.less(x,y)
+keras.backend.tensorflow_backend.less_equal(x,y)
+keras.backend.tensorflow_backend.local_conv1d(inputs,kernel,kernel_size,strides,data_format=None)
+keras.backend.tensorflow_backend.local_conv2d(inputs,kernel,kernel_size,strides,output_shape,data_format=None)
+keras.backend.tensorflow_backend.log(x)
+keras.backend.tensorflow_backend.logsumexp(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.manual_variable_initialization(value)
+keras.backend.tensorflow_backend.map_fn(fn,elems,name=None,dtype=None)
+keras.backend.tensorflow_backend.max(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.maximum(x,y)
+keras.backend.tensorflow_backend.mean(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.min(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.minimum(x,y)
+keras.backend.tensorflow_backend.moving_average_update(x,value,momentum)
+keras.backend.tensorflow_backend.ndim(x)
+keras.backend.tensorflow_backend.normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
+keras.backend.tensorflow_backend.normalize_data_format(value)
+keras.backend.tensorflow_backend.not_equal(x,y)
+keras.backend.tensorflow_backend.one_hot(indices,num_classes)
+keras.backend.tensorflow_backend.ones(shape,dtype=None,name=None)
+keras.backend.tensorflow_backend.ones_like(x,dtype=None,name=None)
+keras.backend.tensorflow_backend.permute_dimensions(x,pattern)
+keras.backend.tensorflow_backend.placeholder(shape=None,ndim=None,dtype=None,sparse=False,name=None)
+keras.backend.tensorflow_backend.pool2d(x,pool_size,strides=(1,1),padding='valid',data_format=None,pool_mode='max')
+keras.backend.tensorflow_backend.pool3d(x,pool_size,strides=(1,1,1),padding='valid',data_format=None,pool_mode='max')
+keras.backend.tensorflow_backend.pow(x,a)
+keras.backend.tensorflow_backend.print_tensor(x,message='')
+keras.backend.tensorflow_backend.prod(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.random_binomial(shape,p=0.0,dtype=None,seed=None)
+keras.backend.tensorflow_backend.random_normal(shape,mean=0.0,stddev=1.0,dtype=None,seed=None)
+keras.backend.tensorflow_backend.random_normal_variable(shape,mean,scale,dtype=None,name=None,seed=None)
+keras.backend.tensorflow_backend.random_uniform(shape,minval=0.0,maxval=1.0,dtype=None,seed=None)
+keras.backend.tensorflow_backend.random_uniform_variable(shape,low,high,dtype=None,name=None,seed=None)
+keras.backend.tensorflow_backend.relu(x,alpha=0.0,max_value=None,threshold=0.0)
+keras.backend.tensorflow_backend.repeat(x,n)
+keras.backend.tensorflow_backend.repeat_elements(x,rep,axis)
+keras.backend.tensorflow_backend.reset_uids()
+keras.backend.tensorflow_backend.reshape(x,shape)
+keras.backend.tensorflow_backend.resize_images(x,height_factor,width_factor,data_format,interpolation='nearest')
+keras.backend.tensorflow_backend.resize_volumes(x,depth_factor,height_factor,width_factor,data_format)
+keras.backend.tensorflow_backend.reverse(x,axes)
+keras.backend.tensorflow_backend.rnn(step_function,inputs,initial_states,go_backwards=False,mask=None,constants=None,unroll=False,input_length=None)
+keras.backend.tensorflow_backend.round(x)
+keras.backend.tensorflow_backend.separable_conv1d(x,depthwise_kernel,pointwise_kernel,strides=1,padding='valid',data_format=None,dilation_rate=1)
+keras.backend.tensorflow_backend.separable_conv2d(x,depthwise_kernel,pointwise_kernel,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
+keras.backend.tensorflow_backend.set_epsilon(e)
+keras.backend.tensorflow_backend.set_floatx(floatx)
+keras.backend.tensorflow_backend.set_image_data_format(data_format)
+keras.backend.tensorflow_backend.set_learning_phase(value)
+keras.backend.tensorflow_backend.set_session(session)
+keras.backend.tensorflow_backend.set_value(x,value)
+keras.backend.tensorflow_backend.shape(x)
+keras.backend.tensorflow_backend.sigmoid(x)
+keras.backend.tensorflow_backend.sign(x)
+keras.backend.tensorflow_backend.sin(x)
+keras.backend.tensorflow_backend.size(x,name=None)
+keras.backend.tensorflow_backend.slice(x,start,size)
+keras.backend.tensorflow_backend.softmax(x,axis=-1)
+keras.backend.tensorflow_backend.softplus(x)
+keras.backend.tensorflow_backend.softsign(x)
+keras.backend.tensorflow_backend.sparse_categorical_crossentropy(target,output,from_logits=False,axis=-1)
+keras.backend.tensorflow_backend.spatial_2d_padding(x,padding=((1,1),(1,1)),data_format=None)
+keras.backend.tensorflow_backend.spatial_3d_padding(x,padding=((1,1),(1,1),(1,1)),data_format=None)
+keras.backend.tensorflow_backend.sqrt(x)
+keras.backend.tensorflow_backend.square(x)
+keras.backend.tensorflow_backend.squeeze(x,axis)
+keras.backend.tensorflow_backend.stack(x,axis=0)
+keras.backend.tensorflow_backend.std(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.stop_gradient(variables)
+keras.backend.tensorflow_backend.sum(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.switch(condition,then_expression,else_expression)
+keras.backend.tensorflow_backend.symbolic(func)
+keras.backend.tensorflow_backend.tanh(x)
+keras.backend.tensorflow_backend.temporal_padding(x,padding=(1,1))
+keras.backend.tensorflow_backend.tile(x,n)
+keras.backend.tensorflow_backend.to_dense(tensor)
+keras.backend.tensorflow_backend.transpose(x)
+keras.backend.tensorflow_backend.truncated_normal(shape,mean=0.0,stddev=1.0,dtype=None,seed=None)
+keras.backend.tensorflow_backend.update(x,new_x)
+keras.backend.tensorflow_backend.update_add(x,increment)
+keras.backend.tensorflow_backend.update_sub(x,decrement)
+keras.backend.tensorflow_backend.v1_variable_initialization()
+keras.backend.tensorflow_backend.var(x,axis=None,keepdims=False)
+keras.backend.tensorflow_backend.variable(value,dtype=None,name=None,constraint=None)
+keras.backend.tensorflow_backend.zeros(shape,dtype=None,name=None)
+keras.backend.tensorflow_backend.zeros_like(x,dtype=None,name=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/common.py----------------------------------------
+A:keras.backend.common._EPSILON->float(e)
+A:keras.backend.common._FLOATX->str(floatx)
+A:keras.backend.common._IMAGE_DATA_FORMAT->str(data_format)
+A:keras.backend.common.value->image_data_format()
+A:keras.backend.common.data_format->image_data_format().lower()
+keras.backend.common.cast_to_floatx(x)
+keras.backend.common.eager(func)
+keras.backend.common.epsilon()
+keras.backend.common.floatx()
+keras.backend.common.image_data_format()
+keras.backend.common.image_dim_ordering()
+keras.backend.common.normalize_data_format(value)
+keras.backend.common.set_epsilon(e)
+keras.backend.common.set_floatx(floatx)
+keras.backend.common.set_image_data_format(data_format)
+keras.backend.common.set_image_dim_ordering(dim_ordering)
+keras.backend.common.symbolic(func)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/numpy_backend.py----------------------------------------
 A:keras.backend.numpy_backend.w->numpy.insert(w, 2 * j + 1, 0, axis=i)
 A:keras.backend.numpy_backend.x->repeat_elements(x, width_factor, axis=3)
 A:keras.backend.numpy_backend.dilation_rate->kwargs.pop('dilation_rate', 1)
@@ -1107,7 +1088,22 @@ keras.backend.numpy_backend.zeros(shape,dtype=floatx(),name=None)
 keras.backend.numpy_backend.zeros_like(x,dtype=floatx(),name=None)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/theano_backend.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/load_backend.py----------------------------------------
+A:keras.backend.load_backend._keras_dir->os.path.join(_keras_base_dir, '.keras')
+A:keras.backend.load_backend._keras_base_dir->os.path.expanduser('~')
+A:keras.backend.load_backend._config_path->os.path.expanduser(os.path.join(_keras_dir, 'keras.json'))
+A:keras.backend.load_backend._config->json.load(f)
+A:keras.backend.load_backend._floatx->json.load(f).get('floatx', floatx())
+A:keras.backend.load_backend._epsilon->json.load(f).get('epsilon', epsilon())
+A:keras.backend.load_backend._backend->json.load(f).get('backend', _BACKEND)
+A:keras.backend.load_backend._image_data_format->json.load(f).get('image_data_format', image_data_format())
+A:keras.backend.load_backend.backend_module->importlib.import_module(_BACKEND)
+A:keras.backend.load_backend.namespace->globals()
+keras.backend.backend()
+keras.backend.load_backend.backend()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/backend/theano_backend.py----------------------------------------
 A:keras.backend.theano_backend.theano.config.floatX->floatx()
 A:keras.backend.theano_backend._LEARNING_PHASE->theano.tensor.scalar(dtype='uint8', name='keras_learning_phase')
 A:keras.backend.theano_backend._UID_PREFIXES->defaultdict(int)
@@ -1407,468 +1403,22 @@ keras.backend.theano_backend.zeros(shape,dtype=None,name=None)
 keras.backend.theano_backend.zeros_like(x,dtype=None,name=None)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/common.py----------------------------------------
-A:keras.backend.common._EPSILON->float(e)
-A:keras.backend.common._FLOATX->str(floatx)
-A:keras.backend.common._IMAGE_DATA_FORMAT->str(data_format)
-A:keras.backend.common.value->image_data_format()
-A:keras.backend.common.data_format->image_data_format().lower()
-keras.backend.common.cast_to_floatx(x)
-keras.backend.common.eager(func)
-keras.backend.common.epsilon()
-keras.backend.common.floatx()
-keras.backend.common.image_data_format()
-keras.backend.common.image_dim_ordering()
-keras.backend.common.normalize_data_format(value)
-keras.backend.common.set_epsilon(e)
-keras.backend.common.set_floatx(floatx)
-keras.backend.common.set_image_data_format(data_format)
-keras.backend.common.set_image_dim_ordering(dim_ordering)
-keras.backend.common.symbolic(func)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/wrappers/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/load_backend.py----------------------------------------
-A:keras.backend.load_backend._keras_dir->os.path.join(_keras_base_dir, '.keras')
-A:keras.backend.load_backend._keras_base_dir->os.path.expanduser('~')
-A:keras.backend.load_backend._config_path->os.path.expanduser(os.path.join(_keras_dir, 'keras.json'))
-A:keras.backend.load_backend._config->json.load(f)
-A:keras.backend.load_backend._floatx->json.load(f).get('floatx', floatx())
-A:keras.backend.load_backend._epsilon->json.load(f).get('epsilon', epsilon())
-A:keras.backend.load_backend._backend->json.load(f).get('backend', _BACKEND)
-A:keras.backend.load_backend._image_data_format->json.load(f).get('image_data_format', image_data_format())
-A:keras.backend.load_backend.backend_module->importlib.import_module(_BACKEND)
-A:keras.backend.load_backend.namespace->globals()
-keras.backend.backend()
-keras.backend.load_backend.backend()
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/wrappers/scikit_learn.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/optimizers/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/backend/tensorflow_backend.py----------------------------------------
-A:keras.backend.tensorflow_backend._SYMBOLIC_SCOPE->threading.local()
-A:keras.backend.tensorflow_backend.out->tensorflow.matmul(x, y)
-A:keras.backend.tensorflow_backend.value->tensorflow.random_normal_initializer(mean, scale, seed=seed)(shape, dtype=dtype)
-A:keras.backend.tensorflow_backend.data_format->normalize_data_format(data_format)
-A:keras.backend.tensorflow_backend.lp->tensorflow.python.keras.backend.learning_phase()
-A:keras.backend.tensorflow_backend.int_lp->tensorflow.cast(lp, 'int32', name='learning_phase')
-A:keras.backend.tensorflow_backend.session->get_session()
-A:keras.backend.tensorflow_backend.variables->tensorflow.global_variables()
-A:keras.backend.tensorflow_backend.is_initialized->get_session().run([tf.is_variable_initialized(v) for v in candidate_vars])
-A:keras.backend.tensorflow_backend.self.device->tensorflow.python.framework.device.DeviceSpec.from_string(device_str)
-A:keras.backend.tensorflow_backend.g->get_graph()
-A:keras.backend.tensorflow_backend.op->tensorflow.print(message, x, output_stream=sys.stdout)
-A:keras.backend.tensorflow_backend.device_type->device_type.lower().lower()
-A:keras.backend.tensorflow_backend.device->_get_current_tf_device()
-A:keras.backend.tensorflow_backend.devices->get_session().list_devices()
-A:keras.backend.tensorflow_backend._LOCAL_DEVICES->tensorflow.config.experimental_list_devices()
-A:keras.backend.tensorflow_backend.explicitly_on_cpu->_is_current_explicit_device('cpu')
-A:keras.backend.tensorflow_backend.v->tensorflow.ones(shape=shape, dtype=dtype, name=name)
-A:keras.backend.tensorflow_backend.v._keras_shape->int_shape(value)
-A:keras.backend.tensorflow_backend.dtype->floatx()
-A:keras.backend.tensorflow_backend.x->tensorflow.nn.bias_add(x, bias)
-A:keras.backend.tensorflow_backend.shape->int_shape(x)
-A:keras.backend.tensorflow_backend.eval_fn->function([], [x])
-A:keras.backend.tensorflow_backend.seed->numpy.random.randint(10000000.0)
-A:keras.backend.tensorflow_backend.decay->tensorflow.python.ops.math_ops.cast(decay, x.dtype.base_dtype)
-A:keras.backend.tensorflow_backend.x_shape->int_shape(x)
-A:keras.backend.tensorflow_backend.y_shape->shape(y)
-A:keras.backend.tensorflow_backend.y_permute_dim->list(range(ndim(y)))
-A:keras.backend.tensorflow_backend.xt->tensorflow.reshape(x, [-1, x_shape[-1]])
-A:keras.backend.tensorflow_backend.yt->tensorflow.reshape(tf.transpose(y, perm=y_permute_dim), [y_shape[-2], -1])
-A:keras.backend.tensorflow_backend.x_ndim->len(x_shape)
-A:keras.backend.tensorflow_backend.y_ndim->len(y_shape)
-A:keras.backend.tensorflow_backend.axes->list(axes)
-A:keras.backend.tensorflow_backend.y->tensorflow.reshape(y, y_squashed_shape)
-A:keras.backend.tensorflow_backend.pattern->transpose_shape(pattern, data_format, spatial_axes=(1, 2, 3))
-A:keras.backend.tensorflow_backend.x_squashed_dim->tensorflow.reduce_prod(x_mid_dims)
-A:keras.backend.tensorflow_backend.x_squashed_shape->tensorflow.stack([x_shape[0], x_squashed_dim, x_shape[-1]])
-A:keras.backend.tensorflow_backend.y_squashed_dim->tensorflow.reduce_prod(y_trail_dims)
-A:keras.backend.tensorflow_backend.y_squashed_shape->tensorflow.stack([y_shape[0], y_shape[1], y_squashed_dim])
-A:keras.backend.tensorflow_backend.result->cast(result, dtype)
-A:keras.backend.tensorflow_backend.output_shape->tensorflow.stack(list(output_shape))
-A:keras.backend.tensorflow_backend.m->tensorflow.reduce_mean(x, axis, True)
-A:keras.backend.tensorflow_backend.devs_squared->tensorflow.square(x - m)
-A:keras.backend.tensorflow_backend.zero->_to_tensor(0.0, x.dtype.base_dtype)
-A:keras.backend.tensorflow_backend.inf->_to_tensor(np.inf, x.dtype.base_dtype)
-A:keras.backend.tensorflow_backend.(mean, var)->tensorflow.nn.moments(x, reduction_axes, None, None, False)
-A:keras.backend.tensorflow_backend.normed->tensorflow.nn.batch_normalization(x, broadcast_mean, broadcast_var, broadcast_beta, broadcast_gamma, epsilon)
-A:keras.backend.tensorflow_backend.target_shape->tensorflow.stack(target_shape)
-A:keras.backend.tensorflow_backend.broadcast_mean->tensorflow.reshape(mean, target_shape)
-A:keras.backend.tensorflow_backend.broadcast_var->tensorflow.reshape(var, target_shape)
-A:keras.backend.tensorflow_backend.broadcast_gamma->tensorflow.reshape(gamma, target_shape)
-A:keras.backend.tensorflow_backend.broadcast_beta->tensorflow.reshape(beta, target_shape)
-A:keras.backend.tensorflow_backend.gamma->tensorflow.cast(gamma, tf.float32)
-A:keras.backend.tensorflow_backend.beta->tensorflow.cast(beta, tf.float32)
-A:keras.backend.tensorflow_backend.mean->tensorflow.cast(mean, tf.float32)
-A:keras.backend.tensorflow_backend.var->tensorflow.cast(var, tf.float32)
-A:keras.backend.tensorflow_backend.(y, _, _)->fused_batch_norm(x, gamma, beta, epsilon=epsilon, mean=mean, variance=var, data_format=tf_data_format, is_training=False)
-A:keras.backend.tensorflow_backend.rank->ndim(tensors[0])
-A:keras.backend.tensorflow_backend.original_shape->int_shape(x)
-A:keras.backend.tensorflow_backend.output->permute_dimensions(output, (2, 0, 1, 3))
-A:keras.backend.tensorflow_backend.splits->tensorflow.split(value=x, num_or_size_splits=x_shape[axis], axis=axis)
-A:keras.backend.tensorflow_backend.x_rep->tensorflow.reshape(x_rep, x_shape)
-A:keras.backend.tensorflow_backend.reps->tensorflow.constant(reps, dtype='int32')
-A:keras.backend.tensorflow_backend.x_rep._keras_shape->tuple(x_shape)
-A:keras.backend.tensorflow_backend.start->tensorflow.cond(start < 0, true_fn=lambda : tf.constant(0, dtype=start.dtype), false_fn=lambda : start)
-A:keras.backend.tensorflow_backend.n->tuple(n)
-A:keras.backend.tensorflow_backend.(last_output, outputs, new_states)->tensorflow.python.keras.backend.rnn(step_function, inputs, initial_states, go_backwards=go_backwards, mask=mask, constants=constants, unroll=unroll, input_length=input_length)
-A:keras.backend.tensorflow_backend.reachable->tensorflow.python.keras.utils.tf_utils.get_reachable_from_inputs([learning_phase()], targets=[last_output])
-A:keras.backend.tensorflow_backend.condition->tensorflow.tile(condition, tile_shape)
-A:keras.backend.tensorflow_backend.cond_ndim->ndim(condition)
-A:keras.backend.tensorflow_backend.then_expression->then_expression()
-A:keras.backend.tensorflow_backend.else_expression->else_expression()
-A:keras.backend.tensorflow_backend.expr_ndim->ndim(then_expression)
-A:keras.backend.tensorflow_backend.cond_shape->tensorflow.concat([tf.shape(condition), [1] * ndim_diff], axis=0)
-A:keras.backend.tensorflow_backend.expr_shape->tensorflow.shape(then_expression)
-A:keras.backend.tensorflow_backend.zero_expr_shape->tensorflow.ones_like(expr_shape)
-A:keras.backend.tensorflow_backend.tile_shape->tensorflow.where(shape_diff > 0, expr_shape, zero_expr_shape)
-A:keras.backend.tensorflow_backend.training->learning_phase()
-A:keras.backend.tensorflow_backend.negative_part->tensorflow.nn.relu(-x)
-A:keras.backend.tensorflow_backend.max_value->_to_tensor(max_value, x.dtype.base_dtype)
-A:keras.backend.tensorflow_backend.alpha->_to_tensor(alpha, x.dtype.base_dtype)
-A:keras.backend.tensorflow_backend.res->tensorflow.nn.elu(x)
-A:keras.backend.tensorflow_backend.kernel_shape->int_shape(kernel)
-A:keras.backend.tensorflow_backend.padding->_preprocess_padding(padding)
-A:keras.backend.tensorflow_backend.(x, tf_data_format)->_preprocess_conv3d_input(x, data_format)
-A:keras.backend.tensorflow_backend.depthwise_kernel->tensorflow.expand_dims(depthwise_kernel, 0)
-A:keras.backend.tensorflow_backend.pointwise_kernel->tensorflow.expand_dims(pointwise_kernel, 0)
-A:keras.backend.tensorflow_backend.slice_length->py_slice(i * stride, i * stride + kernel_size[0])
-A:keras.backend.tensorflow_backend.x_aggregate->concatenate(xs, axis=0)
-A:keras.backend.tensorflow_backend.slice_row->py_slice(i * stride_row, i * stride_row + kernel_size[0])
-A:keras.backend.tensorflow_backend.slice_col->py_slice(j * stride_col, j * stride_col + kernel_size[1])
-A:keras.backend.tensorflow_backend.bias_shape->int_shape(bias)
-A:keras.backend.tensorflow_backend.new_shape->transpose_shape(new_shape, data_format, spatial_axes=(1,))
-A:keras.backend.tensorflow_backend.label_shape->tensorflow.cast(label_shape, tf.int64)
-A:keras.backend.tensorflow_backend.num_batches_tns->tensorflow.stack([label_shape[0]])
-A:keras.backend.tensorflow_backend.max_num_labels_tns->tensorflow.stack([label_shape[1]])
-A:keras.backend.tensorflow_backend.init->tensorflow.cast(tf.fill([1, label_shape[1]], 0), tf.bool)
-A:keras.backend.tensorflow_backend.dense_mask->tensorflow.python.ops.functional_ops.scan(range_less_than, label_lengths, initializer=init, parallel_iterations=1)
-A:keras.backend.tensorflow_backend.label_array->tensorflow.reshape(tf.tile(tf.range(label_shape[1]), num_batches_tns), label_shape)
-A:keras.backend.tensorflow_backend.label_ind->tensorflow.boolean_mask(label_array, dense_mask)
-A:keras.backend.tensorflow_backend.tmp->tensorflow.tile(tf.range(label_shape[0]), max_num_labels_tns)
-A:keras.backend.tensorflow_backend.batch_array->tensorflow.transpose(tf.reshape(tmp, reverse(label_shape, 0)))
-A:keras.backend.tensorflow_backend.batch_ind->tensorflow.boolean_mask(batch_array, dense_mask)
-A:keras.backend.tensorflow_backend.indices->tensorflow.cast(indices, tf.int64)
-A:keras.backend.tensorflow_backend.vals_sparse->tensorflow.gather_nd(labels, indices)
-A:keras.backend.tensorflow_backend.label_length->tensorflow.cast(tf.squeeze(label_length, axis=-1), tf.int32)
-A:keras.backend.tensorflow_backend.input_length->tensorflow.cast(input_length, tf.int32)
-A:keras.backend.tensorflow_backend.sparse_labels->tensorflow.cast(ctc_label_dense_to_sparse(y_true, label_length), tf.int32)
-A:keras.backend.tensorflow_backend.y_pred->tensorflow.python.ops.math_ops.log(tf.transpose(y_pred, perm=[1, 0, 2]) + epsilon())
-A:keras.backend.tensorflow_backend.(decoded, log_prob)->tensorflow.python.ops.ctc_ops.ctc_beam_search_decoder(inputs=y_pred, sequence_length=input_length, beam_width=beam_width, top_paths=top_paths, merge_repeated=merge_repeated)
-A:keras.backend.tensorflow_backend.dense_tensor->tensorflow.sparse.to_dense(st, default_value=-1)
-keras.backend.tensorflow_backend._TfDeviceCaptureOp(self)
-keras.backend.tensorflow_backend._TfDeviceCaptureOp.__init__(self)
-keras.backend.tensorflow_backend._TfDeviceCaptureOp._set_device(self,device)
-keras.backend.tensorflow_backend._TfDeviceCaptureOp._set_device_from_string(self,device_str)
-keras.backend.tensorflow_backend._broadcast_normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
-keras.backend.tensorflow_backend._fused_normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
-keras.backend.tensorflow_backend._get_available_gpus()
-keras.backend.tensorflow_backend._get_current_tf_device()
-keras.backend.tensorflow_backend._has_compat_v1()
-keras.backend.tensorflow_backend._has_nchw_support()
-keras.backend.tensorflow_backend._is_current_explicit_device(device_type)
-keras.backend.tensorflow_backend._is_tf_1()
-keras.backend.tensorflow_backend._preprocess_conv1d_input(x,data_format)
-keras.backend.tensorflow_backend._preprocess_conv2d_input(x,data_format,force_transpose=False)
-keras.backend.tensorflow_backend._preprocess_conv3d_input(x,data_format)
-keras.backend.tensorflow_backend._preprocess_padding(padding)
-keras.backend.tensorflow_backend._regular_normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
-keras.backend.tensorflow_backend._to_tensor(x,dtype)
-keras.backend.tensorflow_backend.abs(x)
-keras.backend.tensorflow_backend.all(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.any(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.arange(start,stop=None,step=1,dtype='int32')
-keras.backend.tensorflow_backend.argmax(x,axis=-1)
-keras.backend.tensorflow_backend.argmin(x,axis=-1)
-keras.backend.tensorflow_backend.batch_dot(x,y,axes=None)
-keras.backend.tensorflow_backend.batch_flatten(x)
-keras.backend.tensorflow_backend.batch_get_value(ops)
-keras.backend.tensorflow_backend.batch_normalization(x,mean,var,beta,gamma,axis=-1,epsilon=0.001)
-keras.backend.tensorflow_backend.batch_set_value(tuples)
-keras.backend.tensorflow_backend.bias_add(x,bias,data_format=None)
-keras.backend.tensorflow_backend.binary_crossentropy(target,output,from_logits=False)
-keras.backend.tensorflow_backend.cast(x,dtype)
-keras.backend.tensorflow_backend.cast_to_floatx(x)
-keras.backend.tensorflow_backend.categorical_crossentropy(target,output,from_logits=False,axis=-1)
-keras.backend.tensorflow_backend.clear_session()
-keras.backend.tensorflow_backend.clip(x,min_value,max_value)
-keras.backend.tensorflow_backend.concatenate(tensors,axis=-1)
-keras.backend.tensorflow_backend.constant(value,dtype=None,shape=None,name=None)
-keras.backend.tensorflow_backend.control_dependencies(control_inputs)
-keras.backend.tensorflow_backend.conv1d(x,kernel,strides=1,padding='valid',data_format=None,dilation_rate=1)
-keras.backend.tensorflow_backend.conv2d(x,kernel,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
-keras.backend.tensorflow_backend.conv2d_transpose(x,kernel,output_shape,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
-keras.backend.tensorflow_backend.conv3d(x,kernel,strides=(1,1,1),padding='valid',data_format=None,dilation_rate=(1,1,1))
-keras.backend.tensorflow_backend.conv3d_transpose(x,kernel,output_shape,strides=(1,1,1),padding='valid',data_format=None)
-keras.backend.tensorflow_backend.cos(x)
-keras.backend.tensorflow_backend.count_params(x)
-keras.backend.tensorflow_backend.ctc_batch_cost(y_true,y_pred,input_length,label_length)
-keras.backend.tensorflow_backend.ctc_decode(y_pred,input_length,greedy=True,beam_width=100,top_paths=1,merge_repeated=False)
-keras.backend.tensorflow_backend.ctc_label_dense_to_sparse(labels,label_lengths)
-keras.backend.tensorflow_backend.cumprod(x,axis=0)
-keras.backend.tensorflow_backend.cumsum(x,axis=0)
-keras.backend.tensorflow_backend.depthwise_conv2d(x,depthwise_kernel,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
-keras.backend.tensorflow_backend.dot(x,y)
-keras.backend.tensorflow_backend.dropout(x,level,noise_shape=None,seed=None)
-keras.backend.tensorflow_backend.dtype(x)
-keras.backend.tensorflow_backend.eager(func)
-keras.backend.tensorflow_backend.elu(x,alpha=1.0)
-keras.backend.tensorflow_backend.epsilon()
-keras.backend.tensorflow_backend.equal(x,y)
-keras.backend.tensorflow_backend.eval(x)
-keras.backend.tensorflow_backend.exp(x)
-keras.backend.tensorflow_backend.expand_dims(x,axis=-1)
-keras.backend.tensorflow_backend.eye(size,dtype=None,name=None)
-keras.backend.tensorflow_backend.flatten(x)
-keras.backend.tensorflow_backend.floatx()
-keras.backend.tensorflow_backend.foldl(fn,elems,initializer=None,name=None)
-keras.backend.tensorflow_backend.foldr(fn,elems,initializer=None,name=None)
-keras.backend.tensorflow_backend.function(inputs,outputs,updates=None,**kwargs)
-keras.backend.tensorflow_backend.gather(reference,indices)
-keras.backend.tensorflow_backend.get_session()
-keras.backend.tensorflow_backend.get_uid(prefix='')
-keras.backend.tensorflow_backend.get_value(x)
-keras.backend.tensorflow_backend.get_variable_shape(x)
-keras.backend.tensorflow_backend.gradients(loss,variables)
-keras.backend.tensorflow_backend.greater(x,y)
-keras.backend.tensorflow_backend.greater_equal(x,y)
-keras.backend.tensorflow_backend.hard_sigmoid(x)
-keras.backend.tensorflow_backend.identity(x,name=None)
-keras.backend.tensorflow_backend.image_data_format()
-keras.backend.tensorflow_backend.in_test_phase(x,alt,training=None)
-keras.backend.tensorflow_backend.in_top_k(predictions,targets,k)
-keras.backend.tensorflow_backend.in_train_phase(x,alt,training=None)
-keras.backend.tensorflow_backend.int_shape(x)
-keras.backend.tensorflow_backend.is_keras_tensor(x)
-keras.backend.tensorflow_backend.is_placeholder(x)
-keras.backend.tensorflow_backend.is_sparse(tensor)
-keras.backend.tensorflow_backend.is_symbolic(x)
-keras.backend.tensorflow_backend.is_tensor(x)
-keras.backend.tensorflow_backend.is_variable(x)
-keras.backend.tensorflow_backend.l2_normalize(x,axis=None)
-keras.backend.tensorflow_backend.learning_phase()
-keras.backend.tensorflow_backend.less(x,y)
-keras.backend.tensorflow_backend.less_equal(x,y)
-keras.backend.tensorflow_backend.local_conv1d(inputs,kernel,kernel_size,strides,data_format=None)
-keras.backend.tensorflow_backend.local_conv2d(inputs,kernel,kernel_size,strides,output_shape,data_format=None)
-keras.backend.tensorflow_backend.log(x)
-keras.backend.tensorflow_backend.logsumexp(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.manual_variable_initialization(value)
-keras.backend.tensorflow_backend.map_fn(fn,elems,name=None,dtype=None)
-keras.backend.tensorflow_backend.max(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.maximum(x,y)
-keras.backend.tensorflow_backend.mean(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.min(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.minimum(x,y)
-keras.backend.tensorflow_backend.moving_average_update(x,value,momentum)
-keras.backend.tensorflow_backend.ndim(x)
-keras.backend.tensorflow_backend.normalize_batch_in_training(x,gamma,beta,reduction_axes,epsilon=0.001)
-keras.backend.tensorflow_backend.normalize_data_format(value)
-keras.backend.tensorflow_backend.not_equal(x,y)
-keras.backend.tensorflow_backend.one_hot(indices,num_classes)
-keras.backend.tensorflow_backend.ones(shape,dtype=None,name=None)
-keras.backend.tensorflow_backend.ones_like(x,dtype=None,name=None)
-keras.backend.tensorflow_backend.permute_dimensions(x,pattern)
-keras.backend.tensorflow_backend.placeholder(shape=None,ndim=None,dtype=None,sparse=False,name=None)
-keras.backend.tensorflow_backend.pool2d(x,pool_size,strides=(1,1),padding='valid',data_format=None,pool_mode='max')
-keras.backend.tensorflow_backend.pool3d(x,pool_size,strides=(1,1,1),padding='valid',data_format=None,pool_mode='max')
-keras.backend.tensorflow_backend.pow(x,a)
-keras.backend.tensorflow_backend.print_tensor(x,message='')
-keras.backend.tensorflow_backend.prod(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.random_binomial(shape,p=0.0,dtype=None,seed=None)
-keras.backend.tensorflow_backend.random_normal(shape,mean=0.0,stddev=1.0,dtype=None,seed=None)
-keras.backend.tensorflow_backend.random_normal_variable(shape,mean,scale,dtype=None,name=None,seed=None)
-keras.backend.tensorflow_backend.random_uniform(shape,minval=0.0,maxval=1.0,dtype=None,seed=None)
-keras.backend.tensorflow_backend.random_uniform_variable(shape,low,high,dtype=None,name=None,seed=None)
-keras.backend.tensorflow_backend.relu(x,alpha=0.0,max_value=None,threshold=0.0)
-keras.backend.tensorflow_backend.repeat(x,n)
-keras.backend.tensorflow_backend.repeat_elements(x,rep,axis)
-keras.backend.tensorflow_backend.reset_uids()
-keras.backend.tensorflow_backend.reshape(x,shape)
-keras.backend.tensorflow_backend.resize_images(x,height_factor,width_factor,data_format,interpolation='nearest')
-keras.backend.tensorflow_backend.resize_volumes(x,depth_factor,height_factor,width_factor,data_format)
-keras.backend.tensorflow_backend.reverse(x,axes)
-keras.backend.tensorflow_backend.rnn(step_function,inputs,initial_states,go_backwards=False,mask=None,constants=None,unroll=False,input_length=None)
-keras.backend.tensorflow_backend.round(x)
-keras.backend.tensorflow_backend.separable_conv1d(x,depthwise_kernel,pointwise_kernel,strides=1,padding='valid',data_format=None,dilation_rate=1)
-keras.backend.tensorflow_backend.separable_conv2d(x,depthwise_kernel,pointwise_kernel,strides=(1,1),padding='valid',data_format=None,dilation_rate=(1,1))
-keras.backend.tensorflow_backend.set_epsilon(e)
-keras.backend.tensorflow_backend.set_floatx(floatx)
-keras.backend.tensorflow_backend.set_image_data_format(data_format)
-keras.backend.tensorflow_backend.set_learning_phase(value)
-keras.backend.tensorflow_backend.set_session(session)
-keras.backend.tensorflow_backend.set_value(x,value)
-keras.backend.tensorflow_backend.shape(x)
-keras.backend.tensorflow_backend.sigmoid(x)
-keras.backend.tensorflow_backend.sign(x)
-keras.backend.tensorflow_backend.sin(x)
-keras.backend.tensorflow_backend.size(x,name=None)
-keras.backend.tensorflow_backend.slice(x,start,size)
-keras.backend.tensorflow_backend.softmax(x,axis=-1)
-keras.backend.tensorflow_backend.softplus(x)
-keras.backend.tensorflow_backend.softsign(x)
-keras.backend.tensorflow_backend.sparse_categorical_crossentropy(target,output,from_logits=False,axis=-1)
-keras.backend.tensorflow_backend.spatial_2d_padding(x,padding=((1,1),(1,1)),data_format=None)
-keras.backend.tensorflow_backend.spatial_3d_padding(x,padding=((1,1),(1,1),(1,1)),data_format=None)
-keras.backend.tensorflow_backend.sqrt(x)
-keras.backend.tensorflow_backend.square(x)
-keras.backend.tensorflow_backend.squeeze(x,axis)
-keras.backend.tensorflow_backend.stack(x,axis=0)
-keras.backend.tensorflow_backend.std(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.stop_gradient(variables)
-keras.backend.tensorflow_backend.sum(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.switch(condition,then_expression,else_expression)
-keras.backend.tensorflow_backend.symbolic(func)
-keras.backend.tensorflow_backend.tanh(x)
-keras.backend.tensorflow_backend.temporal_padding(x,padding=(1,1))
-keras.backend.tensorflow_backend.tile(x,n)
-keras.backend.tensorflow_backend.to_dense(tensor)
-keras.backend.tensorflow_backend.transpose(x)
-keras.backend.tensorflow_backend.truncated_normal(shape,mean=0.0,stddev=1.0,dtype=None,seed=None)
-keras.backend.tensorflow_backend.update(x,new_x)
-keras.backend.tensorflow_backend.update_add(x,increment)
-keras.backend.tensorflow_backend.update_sub(x,decrement)
-keras.backend.tensorflow_backend.v1_variable_initialization()
-keras.backend.tensorflow_backend.var(x,axis=None,keepdims=False)
-keras.backend.tensorflow_backend.variable(value,dtype=None,name=None,constraint=None)
-keras.backend.tensorflow_backend.zeros(shape,dtype=None,name=None)
-keras.backend.tensorflow_backend.zeros_like(x,dtype=None,name=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/optimizers/schedules/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/mobilenet_v2.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/legacy/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/vgg19.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/resnet.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/imagenet_utils.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/nasnet.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/inception_v3.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/mobilenet.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/densenet.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/resnet50.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/inception_resnet_v2.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/vgg16.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/resnet_v2.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/applications/xception.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/imdb.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/boston_housing.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/cifar100.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/fashion_mnist.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/cifar.py----------------------------------------
-A:keras.datasets.cifar.d->six.moves.cPickle.load(f, encoding='bytes')
-A:keras.datasets.cifar.data->data.reshape(data.shape[0], 3, 32, 32).reshape(data.shape[0], 3, 32, 32)
-keras.datasets.cifar.load_batch(fpath,label_key='labels')
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/cifar10.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/mnist.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/datasets/reuters.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/optimizers/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/optimizers/schedules/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/wrappers/scikit_learn.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/wrappers/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/local.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/advanced_activations.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/cudnn_recurrent.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/convolutional.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/convolutional_recurrent.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/core.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/recurrent.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/embeddings.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/noise.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/merge.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/wrappers.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/pooling.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/normalization.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/experimental/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/layers/experimental/preprocessing/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/legacy/layers.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/legacy/layers.py----------------------------------------
 A:keras.legacy.layers.self.init->initializers.get(init)
 A:keras.legacy.layers.self.W_regularizer->regularizers.get(W_regularizer)
 A:keras.legacy.layers.self.b_regularizer->regularizers.get(b_regularizer)
@@ -1933,7 +1483,7 @@ keras.legacy.layers.Recurrent.reset_states(self,states=None)
 keras.legacy.layers.Recurrent.step(self,inputs,states)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/legacy/interfaces.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/legacy/interfaces.py----------------------------------------
 A:keras.legacy.interfaces.(args, kwargs, converted)->preprocessor(args, kwargs)
 A:keras.legacy.interfaces.value->kwargs.pop('forget_bias_init')
 A:keras.legacy.interfaces.str_val->str(value)
@@ -1998,5 +1548,455 @@ keras.legacy.interfaces.separable_conv2d_args_preprocessor(args,kwargs)
 keras.legacy.interfaces.zeropadding2d_args_preprocessor(args,kwargs)
 
 
-----------------------------------------/home/zhang/Packages/keras/keras2.4.2/legacy/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/callbacks/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/callbacks/tensorboard_v2.py----------------------------------------
+keras.callbacks.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=None,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch',**kwargs)
+keras.callbacks.TensorBoard.set_model(self,model)
+keras.callbacks.tensorboard_v2.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=None,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch',**kwargs)
+keras.callbacks.tensorboard_v2.TensorBoard.__init__(self,log_dir='./logs',histogram_freq=0,batch_size=None,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch',**kwargs)
+keras.callbacks.tensorboard_v2.TensorBoard.set_model(self,model)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/callbacks/callbacks.py----------------------------------------
+A:keras.callbacks.callbacks.self._delta_ts->defaultdict(lambda : deque([], maxlen=self.queue_length))
+A:keras.callbacks.callbacks.hook_name->'on_{mode}_batch_{hook}'.format(mode=mode, hook=hook)
+A:keras.callbacks.callbacks.self._t_enter_batch->time.time()
+A:keras.callbacks.callbacks.t_before_callbacks->time.time()
+A:keras.callbacks.callbacks.batch_hook->getattr(callback, hook_name)
+A:keras.callbacks.callbacks.delta_t_median->numpy.median(self._delta_ts[hook_name])
+A:keras.callbacks.callbacks.self.stateful_metrics->set()
+A:keras.callbacks.callbacks.batch_size->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get('size', 0)
+A:keras.callbacks.callbacks.loss->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get('loss')
+A:keras.callbacks.callbacks.self.progbar->Progbar(target=self.target, verbose=self.verbose, stateful_metrics=self.stateful_metrics)
+A:keras.callbacks.callbacks.filepath->self.filepath.format(epoch=epoch + 1, **logs)
+A:keras.callbacks.callbacks.current->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get(self.monitor)
+A:keras.callbacks.callbacks.self.best_weights->self.model.get_weights()
+A:keras.callbacks.callbacks.monitor_value->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys]).get(self.monitor)
+A:keras.callbacks.callbacks.send[k]->v.item()
+A:keras.callbacks.callbacks.lr->self.schedule(epoch)
+A:keras.callbacks.callbacks.logs['lr']->K.get_value(self.model.optimizer.lr)
+A:keras.callbacks.callbacks.min_delta->kwargs.pop('epsilon')
+A:keras.callbacks.callbacks.old_lr->float(K.get_value(self.model.optimizer.lr))
+A:keras.callbacks.callbacks.new_lr->max(new_lr, self.min_lr)
+A:keras.callbacks.callbacks.self.csv_file->io.open(self.filename, mode + self.file_flags, **self._open_args)
+A:keras.callbacks.callbacks.self.keys->sorted(logs.keys())
+A:keras.callbacks.callbacks.logs->dict([(k, logs[k] if k in logs else 'NA') for k in self.keys])
+A:keras.callbacks.callbacks.self.writer->csv.DictWriter(self.csv_file, fieldnames=fieldnames, dialect=CustomDialect)
+A:keras.callbacks.callbacks.row_dict->OrderedDict({'epoch': epoch})
+keras.callbacks.BaseLogger(self,stateful_metrics=None)
+keras.callbacks.BaseLogger.on_batch_end(self,batch,logs=None)
+keras.callbacks.BaseLogger.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.BaseLogger.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.CSVLogger(self,filename,separator=',',append=False)
+keras.callbacks.CSVLogger.__del__(self)
+keras.callbacks.CSVLogger.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.CSVLogger.on_train_begin(self,logs=None)
+keras.callbacks.CSVLogger.on_train_end(self,logs=None)
+keras.callbacks.Callback(self)
+keras.callbacks.Callback.on_batch_begin(self,batch,logs=None)
+keras.callbacks.Callback.on_batch_end(self,batch,logs=None)
+keras.callbacks.Callback.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.Callback.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.Callback.on_predict_batch_begin(self,batch,logs=None)
+keras.callbacks.Callback.on_predict_batch_end(self,batch,logs=None)
+keras.callbacks.Callback.on_predict_begin(self,logs=None)
+keras.callbacks.Callback.on_predict_end(self,logs=None)
+keras.callbacks.Callback.on_test_batch_begin(self,batch,logs=None)
+keras.callbacks.Callback.on_test_batch_end(self,batch,logs=None)
+keras.callbacks.Callback.on_test_begin(self,logs=None)
+keras.callbacks.Callback.on_test_end(self,logs=None)
+keras.callbacks.Callback.on_train_batch_begin(self,batch,logs=None)
+keras.callbacks.Callback.on_train_batch_end(self,batch,logs=None)
+keras.callbacks.Callback.on_train_begin(self,logs=None)
+keras.callbacks.Callback.on_train_end(self,logs=None)
+keras.callbacks.Callback.set_model(self,model)
+keras.callbacks.Callback.set_params(self,params)
+keras.callbacks.CallbackList(self,callbacks=None,queue_length=10)
+keras.callbacks.CallbackList.__iter__(self)
+keras.callbacks.CallbackList._call_batch_hook(self,mode,hook,batch,logs=None)
+keras.callbacks.CallbackList._call_begin_hook(self,mode)
+keras.callbacks.CallbackList._call_end_hook(self,mode)
+keras.callbacks.CallbackList._reset_batch_timing(self)
+keras.callbacks.CallbackList.append(self,callback)
+keras.callbacks.CallbackList.on_batch_begin(self,batch,logs=None)
+keras.callbacks.CallbackList.on_batch_end(self,batch,logs=None)
+keras.callbacks.CallbackList.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.CallbackList.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.CallbackList.on_predict_batch_begin(self,batch,logs=None)
+keras.callbacks.CallbackList.on_predict_batch_end(self,batch,logs=None)
+keras.callbacks.CallbackList.on_predict_begin(self,logs=None)
+keras.callbacks.CallbackList.on_predict_end(self,logs=None)
+keras.callbacks.CallbackList.on_test_batch_begin(self,batch,logs=None)
+keras.callbacks.CallbackList.on_test_batch_end(self,batch,logs=None)
+keras.callbacks.CallbackList.on_test_begin(self,logs=None)
+keras.callbacks.CallbackList.on_test_end(self,logs=None)
+keras.callbacks.CallbackList.on_train_batch_begin(self,batch,logs=None)
+keras.callbacks.CallbackList.on_train_batch_end(self,batch,logs=None)
+keras.callbacks.CallbackList.on_train_begin(self,logs=None)
+keras.callbacks.CallbackList.on_train_end(self,logs=None)
+keras.callbacks.CallbackList.set_model(self,model)
+keras.callbacks.CallbackList.set_params(self,params)
+keras.callbacks.EarlyStopping(self,monitor='val_loss',min_delta=0,patience=0,verbose=0,mode='auto',baseline=None,restore_best_weights=False)
+keras.callbacks.EarlyStopping.get_monitor_value(self,logs)
+keras.callbacks.EarlyStopping.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.EarlyStopping.on_train_begin(self,logs=None)
+keras.callbacks.EarlyStopping.on_train_end(self,logs=None)
+keras.callbacks.History(Callback)
+keras.callbacks.History.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.History.on_train_begin(self,logs=None)
+keras.callbacks.LambdaCallback(self,on_epoch_begin=None,on_epoch_end=None,on_batch_begin=None,on_batch_end=None,on_train_begin=None,on_train_end=None,**kwargs)
+keras.callbacks.LearningRateScheduler(self,schedule,verbose=0)
+keras.callbacks.LearningRateScheduler.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.LearningRateScheduler.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.ModelCheckpoint(self,filepath,monitor='val_loss',verbose=0,save_best_only=False,save_weights_only=False,mode='auto',period=1)
+keras.callbacks.ModelCheckpoint.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.ProgbarLogger(self,count_mode='samples',stateful_metrics=None)
+keras.callbacks.ProgbarLogger.on_batch_begin(self,batch,logs=None)
+keras.callbacks.ProgbarLogger.on_batch_end(self,batch,logs=None)
+keras.callbacks.ProgbarLogger.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.ProgbarLogger.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.ProgbarLogger.on_train_begin(self,logs=None)
+keras.callbacks.ReduceLROnPlateau(self,monitor='val_loss',factor=0.1,patience=10,verbose=0,mode='auto',min_delta=0.0001,cooldown=0,min_lr=0,**kwargs)
+keras.callbacks.ReduceLROnPlateau._reset(self)
+keras.callbacks.ReduceLROnPlateau.in_cooldown(self)
+keras.callbacks.ReduceLROnPlateau.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.ReduceLROnPlateau.on_train_begin(self,logs=None)
+keras.callbacks.RemoteMonitor(self,root='http://localhost:9000',path='/publish/epoch/end/',field='data',headers=None,send_as_json=False)
+keras.callbacks.RemoteMonitor.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.TerminateOnNaN(Callback)
+keras.callbacks.TerminateOnNaN.on_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.BaseLogger(self,stateful_metrics=None)
+keras.callbacks.callbacks.BaseLogger.__init__(self,stateful_metrics=None)
+keras.callbacks.callbacks.BaseLogger.on_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.BaseLogger.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.callbacks.BaseLogger.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.CSVLogger(self,filename,separator=',',append=False)
+keras.callbacks.callbacks.CSVLogger.__del__(self)
+keras.callbacks.callbacks.CSVLogger.__init__(self,filename,separator=',',append=False)
+keras.callbacks.callbacks.CSVLogger.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.CSVLogger.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.CSVLogger.on_train_end(self,logs=None)
+keras.callbacks.callbacks.Callback(self)
+keras.callbacks.callbacks.Callback.__init__(self)
+keras.callbacks.callbacks.Callback.on_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.callbacks.Callback.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.Callback.on_predict_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_predict_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_predict_begin(self,logs=None)
+keras.callbacks.callbacks.Callback.on_predict_end(self,logs=None)
+keras.callbacks.callbacks.Callback.on_test_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_test_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_test_begin(self,logs=None)
+keras.callbacks.callbacks.Callback.on_test_end(self,logs=None)
+keras.callbacks.callbacks.Callback.on_train_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_train_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.Callback.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.Callback.on_train_end(self,logs=None)
+keras.callbacks.callbacks.Callback.set_model(self,model)
+keras.callbacks.callbacks.Callback.set_params(self,params)
+keras.callbacks.callbacks.CallbackList(self,callbacks=None,queue_length=10)
+keras.callbacks.callbacks.CallbackList.__init__(self,callbacks=None,queue_length=10)
+keras.callbacks.callbacks.CallbackList.__iter__(self)
+keras.callbacks.callbacks.CallbackList._call_batch_hook(self,mode,hook,batch,logs=None)
+keras.callbacks.callbacks.CallbackList._call_begin_hook(self,mode)
+keras.callbacks.callbacks.CallbackList._call_end_hook(self,mode)
+keras.callbacks.callbacks.CallbackList._reset_batch_timing(self)
+keras.callbacks.callbacks.CallbackList.append(self,callback)
+keras.callbacks.callbacks.CallbackList.on_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_predict_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_predict_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_predict_begin(self,logs=None)
+keras.callbacks.callbacks.CallbackList.on_predict_end(self,logs=None)
+keras.callbacks.callbacks.CallbackList.on_test_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_test_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_test_begin(self,logs=None)
+keras.callbacks.callbacks.CallbackList.on_test_end(self,logs=None)
+keras.callbacks.callbacks.CallbackList.on_train_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_train_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.CallbackList.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.CallbackList.on_train_end(self,logs=None)
+keras.callbacks.callbacks.CallbackList.set_model(self,model)
+keras.callbacks.callbacks.CallbackList.set_params(self,params)
+keras.callbacks.callbacks.EarlyStopping(self,monitor='val_loss',min_delta=0,patience=0,verbose=0,mode='auto',baseline=None,restore_best_weights=False)
+keras.callbacks.callbacks.EarlyStopping.__init__(self,monitor='val_loss',min_delta=0,patience=0,verbose=0,mode='auto',baseline=None,restore_best_weights=False)
+keras.callbacks.callbacks.EarlyStopping.get_monitor_value(self,logs)
+keras.callbacks.callbacks.EarlyStopping.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.EarlyStopping.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.EarlyStopping.on_train_end(self,logs=None)
+keras.callbacks.callbacks.History(Callback)
+keras.callbacks.callbacks.History.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.History.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.LambdaCallback(self,on_epoch_begin=None,on_epoch_end=None,on_batch_begin=None,on_batch_end=None,on_train_begin=None,on_train_end=None,**kwargs)
+keras.callbacks.callbacks.LambdaCallback.__init__(self,on_epoch_begin=None,on_epoch_end=None,on_batch_begin=None,on_batch_end=None,on_train_begin=None,on_train_end=None,**kwargs)
+keras.callbacks.callbacks.LearningRateScheduler(self,schedule,verbose=0)
+keras.callbacks.callbacks.LearningRateScheduler.__init__(self,schedule,verbose=0)
+keras.callbacks.callbacks.LearningRateScheduler.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.callbacks.LearningRateScheduler.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.ModelCheckpoint(self,filepath,monitor='val_loss',verbose=0,save_best_only=False,save_weights_only=False,mode='auto',period=1)
+keras.callbacks.callbacks.ModelCheckpoint.__init__(self,filepath,monitor='val_loss',verbose=0,save_best_only=False,save_weights_only=False,mode='auto',period=1)
+keras.callbacks.callbacks.ModelCheckpoint.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.ProgbarLogger(self,count_mode='samples',stateful_metrics=None)
+keras.callbacks.callbacks.ProgbarLogger.__init__(self,count_mode='samples',stateful_metrics=None)
+keras.callbacks.callbacks.ProgbarLogger.on_batch_begin(self,batch,logs=None)
+keras.callbacks.callbacks.ProgbarLogger.on_batch_end(self,batch,logs=None)
+keras.callbacks.callbacks.ProgbarLogger.on_epoch_begin(self,epoch,logs=None)
+keras.callbacks.callbacks.ProgbarLogger.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.ProgbarLogger.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.ReduceLROnPlateau(self,monitor='val_loss',factor=0.1,patience=10,verbose=0,mode='auto',min_delta=0.0001,cooldown=0,min_lr=0,**kwargs)
+keras.callbacks.callbacks.ReduceLROnPlateau.__init__(self,monitor='val_loss',factor=0.1,patience=10,verbose=0,mode='auto',min_delta=0.0001,cooldown=0,min_lr=0,**kwargs)
+keras.callbacks.callbacks.ReduceLROnPlateau._reset(self)
+keras.callbacks.callbacks.ReduceLROnPlateau.in_cooldown(self)
+keras.callbacks.callbacks.ReduceLROnPlateau.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.ReduceLROnPlateau.on_train_begin(self,logs=None)
+keras.callbacks.callbacks.RemoteMonitor(self,root='http://localhost:9000',path='/publish/epoch/end/',field='data',headers=None,send_as_json=False)
+keras.callbacks.callbacks.RemoteMonitor.__init__(self,root='http://localhost:9000',path='/publish/epoch/end/',field='data',headers=None,send_as_json=False)
+keras.callbacks.callbacks.RemoteMonitor.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.callbacks.TerminateOnNaN(Callback)
+keras.callbacks.callbacks.TerminateOnNaN.on_batch_end(self,batch,logs=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/callbacks/tensorboard_v1.py----------------------------------------
+A:keras.callbacks.tensorboard_v1.self.sess->K.get_session()
+A:keras.callbacks.tensorboard_v1.mapped_weight_name->weight.name.replace(':', '_')
+A:keras.callbacks.tensorboard_v1.grads->model.optimizer.get_gradients(model.total_loss, weight)
+A:keras.callbacks.tensorboard_v1.w_img->tensorflow.reshape(w_img, [1, shape[0], 1, 1])
+A:keras.callbacks.tensorboard_v1.shape->K.int_shape(w_img)
+A:keras.callbacks.tensorboard_v1.self.merged->tensorflow.summary.merge_all()
+A:keras.callbacks.tensorboard_v1.self.writer->tensorflow.summary.FileWriter(self.log_dir)
+A:keras.callbacks.tensorboard_v1.self.embeddings_data->standardize_input_data(self.embeddings_data, model.input_names)
+A:keras.callbacks.tensorboard_v1.self.batch_idbatch_id->tensorflow.placeholder(tf.int32)
+A:keras.callbacks.tensorboard_v1.self.stepstep->tensorflow.placeholder(tf.int32)
+A:keras.callbacks.tensorboard_v1.embedding_size->numpy.prod(embedding_input.shape[1:])
+A:keras.callbacks.tensorboard_v1.embedding_input->tensorflow.reshape(embedding_input, (step, int(embedding_size)))
+A:keras.callbacks.tensorboard_v1.embedding->tensorflow.contrib.tensorboard.plugins.projector.ProjectorConfig().embeddings.add()
+A:keras.callbacks.tensorboard_v1.batch->slice(i, i + step)
+A:keras.callbacks.tensorboard_v1.self.saver->tensorflow.train.Saver(list(embeddings_vars.values()))
+A:keras.callbacks.tensorboard_v1.config->tensorflow.contrib.tensorboard.plugins.projector.ProjectorConfig()
+A:keras.callbacks.tensorboard_v1.step->min(self.batch_size, n_samples - i)
+A:keras.callbacks.tensorboard_v1.feed_dict->dict(zip(tensors, batch_val))
+A:keras.callbacks.tensorboard_v1.result->self.sess.run([self.merged], feed_dict=feed_dict)
+A:keras.callbacks.tensorboard_v1.summary->tensorflow.Summary()
+A:keras.callbacks.tensorboard_v1.summary_value->tensorflow.Summary().value.add()
+A:keras.callbacks.tensorboard_v1.summary_value.simple_value->value.item()
+keras.callbacks.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=32,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch')
+keras.callbacks.TensorBoard._write_logs(self,logs,index)
+keras.callbacks.TensorBoard.on_batch_end(self,batch,logs=None)
+keras.callbacks.TensorBoard.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.TensorBoard.on_train_end(self,_)
+keras.callbacks.TensorBoard.set_model(self,model)
+keras.callbacks.tensorboard_v1.TensorBoard(self,log_dir='./logs',histogram_freq=0,batch_size=32,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch')
+keras.callbacks.tensorboard_v1.TensorBoard.__init__(self,log_dir='./logs',histogram_freq=0,batch_size=32,write_graph=True,write_grads=False,write_images=False,embeddings_freq=0,embeddings_layer_names=None,embeddings_metadata=None,embeddings_data=None,update_freq='epoch')
+keras.callbacks.tensorboard_v1.TensorBoard._write_logs(self,logs,index)
+keras.callbacks.tensorboard_v1.TensorBoard.on_batch_end(self,batch,logs=None)
+keras.callbacks.tensorboard_v1.TensorBoard.on_epoch_end(self,epoch,logs=None)
+keras.callbacks.tensorboard_v1.TensorBoard.on_train_end(self,_)
+keras.callbacks.tensorboard_v1.TensorBoard.set_model(self,model)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/vis_utils.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/generic_utils.py----------------------------------------
+A:keras.utils.generic_utils.object_list->to_list(object_list)
+A:keras.utils.generic_utils.iterable->to_list(iterable_or_element, allow_tuple=True)
+A:keras.utils.generic_utils.start->start.tolist().tolist()
+A:keras.utils.generic_utils.unknown->set(input_dict.keys()).difference(expected_values)
+A:keras.utils.generic_utils.arg_spec->inspect.getfullargspec(fn)
+A:keras.utils.generic_utils.signature->inspect.signature(fn)
+A:keras.utils.generic_utils.parameter->inspect.signature(fn).parameters.get(name)
+keras.utils.generic_utils.check_for_unexpected_keys(name,input_dict,expected_values)
+keras.utils.generic_utils.has_arg(fn,name,accept_all=False)
+keras.utils.generic_utils.is_all_none(iterable_or_element)
+keras.utils.generic_utils.object_list_uid(object_list)
+keras.utils.generic_utils.slice_arrays(arrays,start=None,stop=None)
+keras.utils.generic_utils.to_list(x,allow_tuple=False)
+keras.utils.generic_utils.transpose_shape(shape,target_format,spatial_axes)
+keras.utils.generic_utils.unpack_singleton(x)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/io_utils.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/layer_utils.py----------------------------------------
+A:keras.utils.layer_utils.weight_ids->set()
+A:keras.utils.layer_utils.original_kernel->K.get_value(layer.kernel)
+A:keras.utils.layer_utils.converted_kernel->convert_kernel(original_kernel)
+A:keras.utils.layer_utils.(kernel, bias)->dense.get_weights()
+A:keras.utils.layer_utils.ki->numpy.transpose(ki, (1, 2, 0))
+A:keras.utils.layer_utils.kernel[:, i]->numpy.reshape(ki, (np.prod(previous_feature_map_shape),))
+keras.utils.layer_utils.convert_all_kernels_in_model(model)
+keras.utils.layer_utils.convert_dense_weights_data_format(dense,previous_feature_map_shape,target_data_format='channels_first')
+keras.utils.layer_utils.count_params(weights)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/data_utils.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/metrics_utils.py----------------------------------------
+A:keras.utils.metrics_utils.update_op->update_state_fn(*args, **kwargs)
+A:keras.utils.metrics_utils.result_t->K.identity(result_fn(*args, **kwargs))
+A:keras.utils.metrics_utils.(_, top_k_idx)->tensorflow.nn.top_k(x, k, sorted=False)
+A:keras.utils.metrics_utils.top_k_mask->K.sum(K.one_hot(top_k_idx, x.shape[-1]), axis=-2)
+A:keras.utils.metrics_utils.thresholds->to_list(thresholds)
+A:keras.utils.metrics_utils.label->K.expand_dims(label, 0)
+A:keras.utils.metrics_utils.pred->K.expand_dims(pred, 0)
+A:keras.utils.metrics_utils.are_different->K.concatenate([label, pred], axis=0)
+A:keras.utils.metrics_utils.label_and_pred->K.cast(label_and_pred, dtype=K.floatx())
+A:keras.utils.metrics_utils.y_true->K.cast(y_true, dtype=K.floatx())
+A:keras.utils.metrics_utils.y_pred->filter_top_k(y_pred, top_k)
+A:keras.utils.metrics_utils.sample_weight->K.cast(sample_weight, dtype=K.floatx())
+A:keras.utils.metrics_utils.(y_pred, y_true)->losses_utils.squeeze_or_expand_dimensions(y_pred, y_true=y_true)
+A:keras.utils.metrics_utils.(y_pred, y_true, sample_weight)->losses_utils.squeeze_or_expand_dimensions(y_pred, y_true=y_true, sample_weight=sample_weight)
+A:keras.utils.metrics_utils.num_thresholds->len(thresholds)
+A:keras.utils.metrics_utils.num_predictions->K.size(y_pred)
+A:keras.utils.metrics_utils.predictions_2d->K.reshape(y_pred, [1, -1])
+A:keras.utils.metrics_utils.labels_2d->K.reshape(K.cast(y_true, dtype='bool'), [1, -1])
+A:keras.utils.metrics_utils.thresh_tiled->K.tile(K.expand_dims(K.constant(thresholds), 1), K.cast(K.stack([1, num_predictions]), dtype='int32'))
+A:keras.utils.metrics_utils.preds_tiled->K.tile(predictions_2d, [num_thresholds, 1])
+A:keras.utils.metrics_utils.pred_is_pos->K.greater(preds_tiled, thresh_tiled)
+A:keras.utils.metrics_utils.label_is_pos->K.tile(labels_2d, [num_thresholds, 1])
+A:keras.utils.metrics_utils.weights->losses_utils.broadcast_weights(y_pred, K.cast(sample_weight, dtype=K.floatx()))
+A:keras.utils.metrics_utils.weights_tiled->K.tile(K.reshape(weights, [1, -1]), [num_thresholds, 1])
+A:keras.utils.metrics_utils.pred_is_neg->K.equal(pred_is_pos, K.zeros_like(pred_is_pos, dtype=pred_is_pos.dtype))
+A:keras.utils.metrics_utils.label_is_neg->K.equal(label_is_pos, K.zeros_like(label_is_pos, dtype=label_is_pos.dtype))
+keras.utils.metrics_utils.AUCCurve(Enum)
+keras.utils.metrics_utils.AUCCurve.from_str(key)
+keras.utils.metrics_utils.AUCSummationMethod(Enum)
+keras.utils.metrics_utils.AUCSummationMethod.from_str(key)
+keras.utils.metrics_utils.ConfusionMatrix(Enum)
+keras.utils.metrics_utils.Reduction(object)
+keras.utils.metrics_utils.assert_thresholds_range(thresholds)
+keras.utils.metrics_utils.filter_top_k(x,k)
+keras.utils.metrics_utils.parse_init_thresholds(thresholds,default_threshold=0.5)
+keras.utils.metrics_utils.result_wrapper(result_fn)
+keras.utils.metrics_utils.to_list(x)
+keras.utils.metrics_utils.update_confusion_matrix_variables(variables_to_update,y_true,y_pred,thresholds=0.5,top_k=None,class_id=None,sample_weight=None)
+keras.utils.metrics_utils.update_state_wrapper(update_state_fn)
+keras.utils.metrics_utils.weighted_assign_add(label,pred,weights,var)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/conv_utils.py----------------------------------------
+A:keras.utils.conv_utils.value_tuple->tuple(value)
+A:keras.utils.conv_utils.padding->value.lower()
+A:keras.utils.conv_utils.kernel->numpy.asarray(kernel)
+keras.utils.conv_utils.conv_input_length(output_length,filter_size,padding,stride)
+keras.utils.conv_utils.conv_output_length(input_length,filter_size,padding,stride,dilation=1)
+keras.utils.conv_utils.convert_kernel(kernel)
+keras.utils.conv_utils.deconv_length(dim_size,stride_size,kernel_size,padding,output_padding,dilation=1)
+keras.utils.conv_utils.normalize_padding(value)
+keras.utils.conv_utils.normalize_tuple(value,n,name)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/multi_gpu_utils.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/losses_utils.py----------------------------------------
+A:keras.utils.losses_utils.y_pred_rank->K.ndim(y_pred)
+A:keras.utils.losses_utils.y_pred_shape->K.int_shape(y_pred)
+A:keras.utils.losses_utils.y_true_rank->K.ndim(y_true)
+A:keras.utils.losses_utils.y_true_shape->K.int_shape(y_true)
+A:keras.utils.losses_utils.y_pred->K.expand_dims(y_pred, -1)
+A:keras.utils.losses_utils.y_true->K.squeeze(y_true, -1)
+A:keras.utils.losses_utils.weights_rank->K.ndim(sample_weight)
+A:keras.utils.losses_utils.sample_weight->broadcast_weights(losses, sample_weight)
+A:keras.utils.losses_utils.loss->K.cast(loss, input_dtype)
+A:keras.utils.losses_utils.weights_shape->K.int_shape(sample_weight)
+A:keras.utils.losses_utils.values_shape->K.int_shape(values)
+A:keras.utils.losses_utils.values_rank->K.ndim(values)
+A:keras.utils.losses_utils.input_dtype->K.dtype(losses)
+A:keras.utils.losses_utils.losses->K.cast(losses, K.floatx())
+A:keras.utils.losses_utils.(losses, _, sample_weight)->squeeze_or_expand_dimensions(losses, None, sample_weight)
+keras.utils.losses_utils.Reduction(object)
+keras.utils.losses_utils.Reduction.all(cls)
+keras.utils.losses_utils.Reduction.validate(cls,key)
+keras.utils.losses_utils._num_elements(losses)
+keras.utils.losses_utils.broadcast_weights(values,sample_weight)
+keras.utils.losses_utils.compute_weighted_loss(losses,sample_weight=None,reduction=Reduction.SUM_OVER_BATCH_SIZE,name=None)
+keras.utils.losses_utils.reduce_weighted_loss(weighted_losses,reduction=Reduction.SUM_OVER_BATCH_SIZE)
+keras.utils.losses_utils.squeeze_or_expand_dimensions(y_pred,y_true=None,sample_weight=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/np_utils.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/utils/test_utils.py----------------------------------------
+A:keras.utils.test_utils.y->layer(x)
+A:keras.utils.test_utils.X->numpy.zeros((samples,) + input_shape, dtype=np.float32)
+A:keras.utils.test_utils.X[i]->numpy.random.normal(loc=y_loc[i], scale=0.7, size=input_shape)
+A:keras.utils.test_utils.y_loc->numpy.random.random((samples,))
+A:keras.utils.test_utils.y[i]->numpy.random.normal(loc=y_loc[i], scale=0.7, size=output_shape)
+A:keras.utils.test_utils.input_dtype->K.floatx()
+A:keras.utils.test_utils.input_data_shape->list(input_shape)
+A:keras.utils.test_utils.input_data_shape[i]->numpy.random.randint(1, 4)
+A:keras.utils.test_utils.input_data->input_data.astype(input_dtype).astype(input_dtype)
+A:keras.utils.test_utils.layer->layer.__class__.from_config(layer_config).__class__.from_config(layer_config)
+A:keras.utils.test_utils.weights->Model(x, y).get_weights()
+A:keras.utils.test_utils.expected_output_shape->layer.__class__.from_config(layer_config).__class__.from_config(layer_config).compute_output_shape(input_shape)
+A:keras.utils.test_utils.x->Input(shape=input_shape[1:], dtype=input_dtype)
+A:keras.utils.test_utils.model->Model(x, y)
+A:keras.utils.test_utils.actual_output->Model(x, y).predict(input_data)
+A:keras.utils.test_utils.model_config->Model(x, y).get_config()
+A:keras.utils.test_utils.recovered_model->Model(x, y).__class__.from_config(model_config)
+A:keras.utils.test_utils._output->Model(x, y).__class__.from_config(model_config).predict(input_data)
+A:keras.utils.test_utils.layer_config->layer.__class__.from_config(layer_config).__class__.from_config(layer_config).get_config()
+keras.utils.test_utils.get_test_data(num_train=1000,num_test=500,input_shape=(10,),output_shape=(2,),classification=True,num_classes=2)
+keras.utils.test_utils.layer_test(layer_cls,kwargs={},input_shape=None,input_dtype=None,input_data=None,expected_output=None,expected_output_dtype=None,fixed_batch_size=False)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/convolutional_recurrent.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/local.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/noise.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/core.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/pooling.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/embeddings.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/convolutional.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/cudnn_recurrent.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/normalization.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/recurrent.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/advanced_activations.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/wrappers.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/merge.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/experimental/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/keras2.4.2/lib/python3.6/site-packages/keras/layers/experimental/preprocessing/__init__.py----------------------------------------
 

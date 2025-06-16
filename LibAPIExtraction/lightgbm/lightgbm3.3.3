@@ -1,5 +1,9 @@
 
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/dask.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/__init__.py----------------------------------------
+A:lightgbm.__init__.__version__->_version_path.read_text(encoding='utf-8').strip()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/dask.py----------------------------------------
 A:lightgbm.dask._HostWorkers->namedtuple('_HostWorkers', ['default', 'all'])
 A:lightgbm.dask.TRAINSET->auto()
 A:lightgbm.dask.SAMPLE_WEIGHT->auto()
@@ -137,7 +141,51 @@ lightgbm.dask._train(client:Client,data:_DaskMatrixLike,label:_DaskCollection,pa
 lightgbm.dask._train_part(params:Dict[str,Any],model_factory:Type[LGBMModel],list_of_parts:List[Dict[str,_DaskPart]],machines:str,local_listen_port:int,num_machines:int,return_model:bool,time_out:int=120,**kwargs:Any)->Optional[LGBMModel]
 
 
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/sklearn.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/engine.py----------------------------------------
+A:lightgbm.engine.params->copy.deepcopy(params)
+A:lightgbm.engine.num_boost_round->copy.deepcopy(params).pop(alias)
+A:lightgbm.engine.early_stopping_rounds->copy.deepcopy(params).pop(alias)
+A:lightgbm.engine.first_metric_only->copy.deepcopy(params).get('first_metric_only', False)
+A:lightgbm.engine.predictor->init_model._to_predictor(dict(init_model.params, **params))
+A:lightgbm.engine.callbacks->set(callbacks)
+A:lightgbm.engine.callbacks_before_iter->sorted(callbacks_before_iter, key=attrgetter('order'))
+A:lightgbm.engine.callbacks_after_iter->sorted(callbacks_after_iter, key=attrgetter('order'))
+A:lightgbm.engine.booster->Booster(params=params, train_set=train_set)
+A:lightgbm.engine.booster.best_score->collections.defaultdict(collections.OrderedDict)
+A:lightgbm.engine.full_data->full_data.construct().construct()
+A:lightgbm.engine.num_data->full_data.construct().construct().num_data()
+A:lightgbm.engine.group_info->numpy.array(full_data.get_group(), dtype=np.int32, copy=False)
+A:lightgbm.engine.flatted_group->numpy.repeat(range(len(group_info)), repeats=group_info)
+A:lightgbm.engine.folds->zip(train_id, test_id)
+A:lightgbm.engine.group_kfold->_LGBMGroupKFold(n_splits=nfold)
+A:lightgbm.engine.skf->_LGBMStratifiedKFold(n_splits=nfold, shuffle=shuffle, random_state=seed)
+A:lightgbm.engine.randidx->numpy.arange(num_data)
+A:lightgbm.engine.kstep->int(num_data / nfold)
+A:lightgbm.engine.ret->CVBooster()
+A:lightgbm.engine.train_set->full_data.construct().construct().subset(sorted(train_idx))
+A:lightgbm.engine.valid_set->full_data.construct().construct().subset(sorted(test_idx))
+A:lightgbm.engine.(train_set, valid_set, tparam)->fpreproc(train_set, valid_set, params.copy())
+A:lightgbm.engine.cvbooster->Booster(tparam, train_set)
+A:lightgbm.engine.cvmap->collections.OrderedDict()
+A:lightgbm.engine.results->collections.defaultdict(list)
+A:lightgbm.engine.cvfolds->_make_n_folds(train_set, folds=folds, nfold=nfold, params=params, seed=seed, fpreproc=fpreproc, stratified=stratified, shuffle=shuffle, eval_train_metric=eval_train_metric)
+A:lightgbm.engine.res->_agg_cv_result(cvfolds.eval_valid(feval), eval_train_metric)
+lightgbm.CVBooster(self)
+lightgbm.CVBooster.__getattr__(self,name)
+lightgbm.CVBooster._append(self,booster)
+lightgbm.cv(params,train_set,num_boost_round=100,folds=None,nfold=5,stratified=True,shuffle=True,metrics=None,fobj=None,feval=None,init_model=None,feature_name='auto',categorical_feature='auto',early_stopping_rounds=None,fpreproc=None,verbose_eval=None,show_stdv=True,seed=0,callbacks=None,eval_train_metric=False,return_cvbooster=False)
+lightgbm.engine.CVBooster(self)
+lightgbm.engine.CVBooster.__getattr__(self,name)
+lightgbm.engine.CVBooster.__init__(self)
+lightgbm.engine.CVBooster._append(self,booster)
+lightgbm.engine._agg_cv_result(raw_results,eval_train_metric=False)
+lightgbm.engine._make_n_folds(full_data,folds,nfold,params,seed,fpreproc=None,stratified=True,shuffle=True,eval_train_metric=False)
+lightgbm.engine.cv(params,train_set,num_boost_round=100,folds=None,nfold=5,stratified=True,shuffle=True,metrics=None,fobj=None,feval=None,init_model=None,feature_name='auto',categorical_feature='auto',early_stopping_rounds=None,fpreproc=None,verbose_eval=None,show_stdv=True,seed=0,callbacks=None,eval_train_metric=False,return_cvbooster=False)
+lightgbm.engine.train(params:Dict[str,Any],train_set:Dataset,num_boost_round:int=100,valid_sets:Optional[List[Dataset]]=None,valid_names:Optional[List[str]]=None,fobj:Optional[_LGBM_CustomObjectiveFunction]=None,feval:Optional[Union[_LGBM_CustomMetricFunction,List[_LGBM_CustomMetricFunction]]]=None,init_model:Optional[Union[str,Path,Booster]]=None,feature_name:Union[List[str],str]='auto',categorical_feature:Union[List[str],List[int],str]='auto',early_stopping_rounds:Optional[int]=None,evals_result:Optional[Dict[str,Any]]=None,verbose_eval:Union[bool,int,str]='warn',learning_rates:Optional[Union[List[float],Callable[[int],float]]]=None,keep_training_booster:bool=False,callbacks:Optional[List[Callable]]=None)->Booster
+lightgbm.train(params:Dict[str,Any],train_set:Dataset,num_boost_round:int=100,valid_sets:Optional[List[Dataset]]=None,valid_names:Optional[List[str]]=None,fobj:Optional[_LGBM_CustomObjectiveFunction]=None,feval:Optional[Union[_LGBM_CustomMetricFunction,List[_LGBM_CustomMetricFunction]]]=None,init_model:Optional[Union[str,Path,Booster]]=None,feature_name:Union[List[str],str]='auto',categorical_feature:Union[List[str],List[int],str]='auto',early_stopping_rounds:Optional[int]=None,evals_result:Optional[Dict[str,Any]]=None,verbose_eval:Union[bool,int,str]='warn',learning_rates:Optional[Union[List[float],Callable[[int],float]]]=None,keep_training_booster:bool=False,callbacks:Optional[List[Callable]]=None)->Booster
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/sklearn.py----------------------------------------
 A:lightgbm.sklearn.labels->dataset.get_label()
 A:lightgbm.sklearn.argc->len(signature(self.func).parameters)
 A:lightgbm.sklearn.(grad, hess)->self.func(labels, preds, dataset.get_group())
@@ -231,7 +279,7 @@ lightgbm.sklearn._ObjectiveFunctionWrapper(self,func)
 lightgbm.sklearn._ObjectiveFunctionWrapper.__init__(self,func)
 
 
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/basic.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/basic.py----------------------------------------
 A:lightgbm.basic.sample_cnt->_get_sample_count(total_nrow, param_str)
 A:lightgbm.basic.msg->''.join(msg_normalized)
 A:lightgbm.basic.lib_path->find_lib_path()
@@ -623,56 +671,37 @@ lightgbm.basic.register_logger(logger:Logger)->None
 lightgbm.register_logger(logger:Logger)->None
 
 
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/libpath.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/compat.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/libpath.py----------------------------------------
 A:lightgbm.libpath.dll_path_joined->'\n'.join(map(str, dll_path))
 lightgbm.libpath.find_lib_path()->List[str]
 
 
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/engine.py----------------------------------------
-A:lightgbm.engine.params->copy.deepcopy(params)
-A:lightgbm.engine.num_boost_round->copy.deepcopy(params).pop(alias)
-A:lightgbm.engine.early_stopping_rounds->copy.deepcopy(params).pop(alias)
-A:lightgbm.engine.first_metric_only->copy.deepcopy(params).get('first_metric_only', False)
-A:lightgbm.engine.predictor->init_model._to_predictor(dict(init_model.params, **params))
-A:lightgbm.engine.callbacks->set(callbacks)
-A:lightgbm.engine.callbacks_before_iter->sorted(callbacks_before_iter, key=attrgetter('order'))
-A:lightgbm.engine.callbacks_after_iter->sorted(callbacks_after_iter, key=attrgetter('order'))
-A:lightgbm.engine.booster->Booster(params=params, train_set=train_set)
-A:lightgbm.engine.booster.best_score->collections.defaultdict(collections.OrderedDict)
-A:lightgbm.engine.full_data->full_data.construct().construct()
-A:lightgbm.engine.num_data->full_data.construct().construct().num_data()
-A:lightgbm.engine.group_info->numpy.array(full_data.get_group(), dtype=np.int32, copy=False)
-A:lightgbm.engine.flatted_group->numpy.repeat(range(len(group_info)), repeats=group_info)
-A:lightgbm.engine.folds->zip(train_id, test_id)
-A:lightgbm.engine.group_kfold->_LGBMGroupKFold(n_splits=nfold)
-A:lightgbm.engine.skf->_LGBMStratifiedKFold(n_splits=nfold, shuffle=shuffle, random_state=seed)
-A:lightgbm.engine.randidx->numpy.arange(num_data)
-A:lightgbm.engine.kstep->int(num_data / nfold)
-A:lightgbm.engine.ret->CVBooster()
-A:lightgbm.engine.train_set->full_data.construct().construct().subset(sorted(train_idx))
-A:lightgbm.engine.valid_set->full_data.construct().construct().subset(sorted(test_idx))
-A:lightgbm.engine.(train_set, valid_set, tparam)->fpreproc(train_set, valid_set, params.copy())
-A:lightgbm.engine.cvbooster->Booster(tparam, train_set)
-A:lightgbm.engine.cvmap->collections.OrderedDict()
-A:lightgbm.engine.results->collections.defaultdict(list)
-A:lightgbm.engine.cvfolds->_make_n_folds(train_set, folds=folds, nfold=nfold, params=params, seed=seed, fpreproc=fpreproc, stratified=stratified, shuffle=shuffle, eval_train_metric=eval_train_metric)
-A:lightgbm.engine.res->_agg_cv_result(cvfolds.eval_valid(feval), eval_train_metric)
-lightgbm.CVBooster(self)
-lightgbm.CVBooster.__getattr__(self,name)
-lightgbm.CVBooster._append(self,booster)
-lightgbm.cv(params,train_set,num_boost_round=100,folds=None,nfold=5,stratified=True,shuffle=True,metrics=None,fobj=None,feval=None,init_model=None,feature_name='auto',categorical_feature='auto',early_stopping_rounds=None,fpreproc=None,verbose_eval=None,show_stdv=True,seed=0,callbacks=None,eval_train_metric=False,return_cvbooster=False)
-lightgbm.engine.CVBooster(self)
-lightgbm.engine.CVBooster.__getattr__(self,name)
-lightgbm.engine.CVBooster.__init__(self)
-lightgbm.engine.CVBooster._append(self,booster)
-lightgbm.engine._agg_cv_result(raw_results,eval_train_metric=False)
-lightgbm.engine._make_n_folds(full_data,folds,nfold,params,seed,fpreproc=None,stratified=True,shuffle=True,eval_train_metric=False)
-lightgbm.engine.cv(params,train_set,num_boost_round=100,folds=None,nfold=5,stratified=True,shuffle=True,metrics=None,fobj=None,feval=None,init_model=None,feature_name='auto',categorical_feature='auto',early_stopping_rounds=None,fpreproc=None,verbose_eval=None,show_stdv=True,seed=0,callbacks=None,eval_train_metric=False,return_cvbooster=False)
-lightgbm.engine.train(params:Dict[str,Any],train_set:Dataset,num_boost_round:int=100,valid_sets:Optional[List[Dataset]]=None,valid_names:Optional[List[str]]=None,fobj:Optional[_LGBM_CustomObjectiveFunction]=None,feval:Optional[Union[_LGBM_CustomMetricFunction,List[_LGBM_CustomMetricFunction]]]=None,init_model:Optional[Union[str,Path,Booster]]=None,feature_name:Union[List[str],str]='auto',categorical_feature:Union[List[str],List[int],str]='auto',early_stopping_rounds:Optional[int]=None,evals_result:Optional[Dict[str,Any]]=None,verbose_eval:Union[bool,int,str]='warn',learning_rates:Optional[Union[List[float],Callable[[int],float]]]=None,keep_training_booster:bool=False,callbacks:Optional[List[Callable]]=None)->Booster
-lightgbm.train(params:Dict[str,Any],train_set:Dataset,num_boost_round:int=100,valid_sets:Optional[List[Dataset]]=None,valid_names:Optional[List[str]]=None,fobj:Optional[_LGBM_CustomObjectiveFunction]=None,feval:Optional[Union[_LGBM_CustomMetricFunction,List[_LGBM_CustomMetricFunction]]]=None,init_model:Optional[Union[str,Path,Booster]]=None,feature_name:Union[List[str],str]='auto',categorical_feature:Union[List[str],List[int],str]='auto',early_stopping_rounds:Optional[int]=None,evals_result:Optional[Dict[str,Any]]=None,verbose_eval:Union[bool,int,str]='warn',learning_rates:Optional[Union[List[float],Callable[[int],float]]]=None,keep_training_booster:bool=False,callbacks:Optional[List[Callable]]=None)->Booster
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/callback.py----------------------------------------
+A:lightgbm.callback.CallbackEnv->collections.namedtuple('CallbackEnv', ['model', 'params', 'iteration', 'begin_iteration', 'end_iteration', 'evaluation_result_list'])
+A:lightgbm.callback.result->'\t'.join([_format_eval_result(x, show_stdv) for x in env.evaluation_result_list])
+A:lightgbm.callback.new_param->value(env.iteration - env.begin_iteration)
+A:lightgbm.callback.best_score_str->'\t'.join([_format_eval_result(x) for x in best_score_list[i]])
+A:lightgbm.callback.eval_name_splitted->env.evaluation_result_list[i][1].split(' ')
+A:lightgbm.callback.eval_result_str->'\t'.join([_format_eval_result(x) for x in best_score_list[i]])
+lightgbm.callback.EarlyStopException(self,best_iteration:int,best_score:float)
+lightgbm.callback.EarlyStopException.__init__(self,best_iteration:int,best_score:float)
+lightgbm.callback._format_eval_result(value:list,show_stdv:bool=True)->str
+lightgbm.callback.early_stopping(stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True)->Callable
+lightgbm.callback.log_evaluation(period:int=1,show_stdv:bool=True)->Callable
+lightgbm.callback.print_evaluation(period:int=1,show_stdv:bool=True)->Callable
+lightgbm.callback.record_evaluation(eval_result:Dict[str,Dict[str,List[Any]]])->Callable
+lightgbm.callback.reset_parameter(**kwargs:Union[list,Callable])->Callable
+lightgbm.early_stopping(stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True)->Callable
+lightgbm.log_evaluation(period:int=1,show_stdv:bool=True)->Callable
+lightgbm.print_evaluation(period:int=1,show_stdv:bool=True)->Callable
+lightgbm.record_evaluation(eval_result:Dict[str,Dict[str,List[Any]]])->Callable
+lightgbm.reset_parameter(**kwargs:Union[list,Callable])->Callable
 
 
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/plotting.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/lightgbm3.3.3/lib/python3.6/site-packages/lightgbm/plotting.py----------------------------------------
 A:lightgbm.plotting.importance->booster.feature_importance(importance_type=importance_type)
 A:lightgbm.plotting.feature_name->booster.feature_name()
 A:lightgbm.plotting.tuples->sorted(zip(feature_name, importance), key=lambda x: x[1])
@@ -711,33 +740,4 @@ lightgbm.plotting.plot_importance(booster:Union[Booster,LGBMModel],ax=None,heigh
 lightgbm.plotting.plot_metric(booster:Union[Dict,LGBMModel],metric:Optional[str]=None,dataset_names:Optional[List[str]]=None,ax=None,xlim:Optional[Tuple[float,float]]=None,ylim:Optional[Tuple[float,float]]=None,title:Optional[str]='Metricduringtraining',xlabel:Optional[str]='Iterations',ylabel:Optional[str]='@metric@',figsize:Optional[Tuple[float,float]]=None,dpi:Optional[int]=None,grid:bool=True)->Any
 lightgbm.plotting.plot_split_value_histogram(booster:Union[Booster,LGBMModel],feature:Union[int,str],bins:Union[int,str,None]=None,ax=None,width_coef:float=0.8,xlim:Optional[Tuple[float,float]]=None,ylim:Optional[Tuple[float,float]]=None,title:Optional[str]='Splitvaluehistogramforfeaturewith@index/name@@feature@',xlabel:Optional[str]='Featuresplitvalue',ylabel:Optional[str]='Count',figsize:Optional[Tuple[float,float]]=None,dpi:Optional[int]=None,grid:bool=True,**kwargs:Any)->Any
 lightgbm.plotting.plot_tree(booster:Union[Booster,LGBMModel],ax=None,tree_index:int=0,figsize:Optional[Tuple[float,float]]=None,dpi:Optional[int]=None,show_info:Optional[List[str]]=None,precision:Optional[int]=3,orientation:str='horizontal',**kwargs:Any)->Any
-
-
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/callback.py----------------------------------------
-A:lightgbm.callback.CallbackEnv->collections.namedtuple('CallbackEnv', ['model', 'params', 'iteration', 'begin_iteration', 'end_iteration', 'evaluation_result_list'])
-A:lightgbm.callback.result->'\t'.join([_format_eval_result(x, show_stdv) for x in env.evaluation_result_list])
-A:lightgbm.callback.new_param->value(env.iteration - env.begin_iteration)
-A:lightgbm.callback.best_score_str->'\t'.join([_format_eval_result(x) for x in best_score_list[i]])
-A:lightgbm.callback.eval_name_splitted->env.evaluation_result_list[i][1].split(' ')
-A:lightgbm.callback.eval_result_str->'\t'.join([_format_eval_result(x) for x in best_score_list[i]])
-lightgbm.callback.EarlyStopException(self,best_iteration:int,best_score:float)
-lightgbm.callback.EarlyStopException.__init__(self,best_iteration:int,best_score:float)
-lightgbm.callback._format_eval_result(value:list,show_stdv:bool=True)->str
-lightgbm.callback.early_stopping(stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True)->Callable
-lightgbm.callback.log_evaluation(period:int=1,show_stdv:bool=True)->Callable
-lightgbm.callback.print_evaluation(period:int=1,show_stdv:bool=True)->Callable
-lightgbm.callback.record_evaluation(eval_result:Dict[str,Dict[str,List[Any]]])->Callable
-lightgbm.callback.reset_parameter(**kwargs:Union[list,Callable])->Callable
-lightgbm.early_stopping(stopping_rounds:int,first_metric_only:bool=False,verbose:bool=True)->Callable
-lightgbm.log_evaluation(period:int=1,show_stdv:bool=True)->Callable
-lightgbm.print_evaluation(period:int=1,show_stdv:bool=True)->Callable
-lightgbm.record_evaluation(eval_result:Dict[str,Dict[str,List[Any]]])->Callable
-lightgbm.reset_parameter(**kwargs:Union[list,Callable])->Callable
-
-
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/compat.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/lightgbm/lightgbm3.3.3/__init__.py----------------------------------------
-A:lightgbm.__init__.__version__->_version_path.read_text(encoding='utf-8').strip()
 

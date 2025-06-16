@@ -1,5 +1,5 @@
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_datetime.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_datetime.py----------------------------------------
 A:loguru._datetime.pattern->re.compile('(?:{0})|\\[(?:{0}|!UTC)\\]'.format(tokens))
 A:loguru._datetime.dt->self.astimezone(timezone.utc)
 A:loguru._datetime.(year, month, day, hour, minute, second, weekday, yearday, _)->self.astimezone(timezone.utc).timetuple()
@@ -16,70 +16,158 @@ loguru._datetime.datetime(datetime_)
 loguru._datetime.datetime.__format__(self,spec)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_simple_sinks.py----------------------------------------
-A:loguru._simple_sinks.self._flushable->callable(getattr(stream, 'flush', None))
-A:loguru._simple_sinks.self._stoppable->callable(getattr(stream, 'stop', None))
-A:loguru._simple_sinks.self._completable->asyncio.iscoroutinefunction(getattr(stream, 'complete', None))
-A:loguru._simple_sinks.message->str(message)
-A:loguru._simple_sinks.record->logging.getLogger().makeRecord(record['name'], record['level'].no, record['file'].path, record['line'], message, (), (exc.type, exc.value, exc.traceback) if exc else None, record['function'], {'extra': record['extra']})
-A:loguru._simple_sinks.self._tasks->weakref.WeakSet()
-A:loguru._simple_sinks.coro->self._function(message)
-A:loguru._simple_sinks.task->asyncio.get_event_loop().create_task(coro)
-A:loguru._simple_sinks.loop->asyncio.get_event_loop()
-A:loguru._simple_sinks.state->self.__dict__.copy()
-loguru._simple_sinks.AsyncSink(self,function,loop,error_interceptor)
-loguru._simple_sinks.AsyncSink.__getstate__(self)
-loguru._simple_sinks.AsyncSink.__init__(self,function,loop,error_interceptor)
-loguru._simple_sinks.AsyncSink.__setstate__(self,state)
-loguru._simple_sinks.AsyncSink.stop(self)
-loguru._simple_sinks.AsyncSink.write(self,message)
-loguru._simple_sinks.CallableSink(self,function)
-loguru._simple_sinks.CallableSink.__init__(self,function)
-loguru._simple_sinks.CallableSink.stop(self)
-loguru._simple_sinks.CallableSink.write(self,message)
-loguru._simple_sinks.StandardSink(self,handler)
-loguru._simple_sinks.StandardSink.__init__(self,handler)
-loguru._simple_sinks.StandardSink.stop(self)
-loguru._simple_sinks.StandardSink.write(self,message)
-loguru._simple_sinks.StreamSink(self,stream)
-loguru._simple_sinks.StreamSink.__init__(self,stream)
-loguru._simple_sinks.StreamSink.stop(self)
-loguru._simple_sinks.StreamSink.write(self,message)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/__init__.py----------------------------------------
+A:loguru.__init__.logger->_Logger(_Core(), None, 0, False, False, False, False, True, None, {})
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_string_parsers.py----------------------------------------
-A:loguru._string_parsers.size->size.strip().strip()
-A:loguru._string_parsers.reg->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I)
-A:loguru._string_parsers.match->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I).match(daytime)
-A:loguru._string_parsers.(s, u, i, b)->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I).match(daytime).groups()
-A:loguru._string_parsers.s->float(s)
-A:loguru._string_parsers.duration->duration.strip().strip()
-A:loguru._string_parsers.value->float(value)
-A:loguru._string_parsers.unit->next((u for (r, u) in units if re.fullmatch(r, unit, flags=re.I)))
-A:loguru._string_parsers.frequency->frequency.strip().lower().strip().lower()
-A:loguru._string_parsers.day->parse_day(day)
-A:loguru._string_parsers.time->parse_time(time)
-A:loguru._string_parsers.dt->datetime.datetime.strptime(time, format_)
-A:loguru._string_parsers.daytime->daytime.strip().strip()
-A:loguru._string_parsers.(day, time)->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I).match(daytime).groups()
-loguru._string_parsers.Frequencies
-loguru._string_parsers.Frequencies.daily(t)
-loguru._string_parsers.Frequencies.hourly(t)
-loguru._string_parsers.Frequencies.monthly(t)
-loguru._string_parsers.Frequencies.weekly(t)
-loguru._string_parsers.Frequencies.yearly(t)
-loguru._string_parsers.parse_day(day)
-loguru._string_parsers.parse_daytime(daytime)
-loguru._string_parsers.parse_duration(duration)
-loguru._string_parsers.parse_frequency(frequency)
-loguru._string_parsers.parse_size(size)
-loguru._string_parsers.parse_time(time)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/__init__.pyi----------------------------------------
+loguru.__init__.Level(NamedTuple)
+loguru.__init__.LevelConfig(TypedDict,total=False)
+loguru.__init__.Logger
+loguru.__init__.Logger.add(self,sink:Callable[[Message],Awaitable[None]],*,level:Union[str,int]=...,format:Union[str,FormatFunction]=...,filter:Optional[Union[str,FilterFunction,FilterDict]]=...,colorize:Optional[bool]=...,serialize:bool=...,backtrace:bool=...,diagnose:bool=...,enqueue:bool=...,catch:bool=...,loop:Optional[AbstractEventLoop]=...)->int
+loguru.__init__.Logger.add(self,sink:Union[TextIO,Writable,Callable[[Message],None],Handler],*,level:Union[str,int]=...,format:Union[str,FormatFunction]=...,filter:Optional[Union[str,FilterFunction,FilterDict]]=...,colorize:Optional[bool]=...,serialize:bool=...,backtrace:bool=...,diagnose:bool=...,enqueue:bool=...,catch:bool=...)->int
+loguru.__init__.Logger.add(self,sink:Union[str,PathLike[str]],*,level:Union[str,int]=...,format:Union[str,FormatFunction]=...,filter:Optional[Union[str,FilterFunction,FilterDict]]=...,colorize:Optional[bool]=...,serialize:bool=...,backtrace:bool=...,diagnose:bool=...,enqueue:bool=...,catch:bool=...,rotation:Optional[Union[str,int,time,timedelta,RotationFunction]]=...,retention:Optional[Union[str,int,timedelta,RetentionFunction]]=...,compression:Optional[Union[str,CompressionFunction]]=...,delay:bool=...,mode:str=...,buffering:int=...,encoding:str=...,**kwargs:Any)->int
+loguru.__init__.Logger.bind(__self,**kwargs:Any)->Logger
+loguru.__init__.Logger.catch(self,exception:Union[Type[BaseException],Tuple[Type[BaseException],...]]=...,*,level:Union[str,int]=...,reraise:bool=...,onerror:Optional[Callable[[BaseException],None]]=...,exclude:Optional[Union[Type[BaseException],Tuple[Type[BaseException],...]]]=...,message:str=...)->Catcher
+loguru.__init__.Logger.catch(self,exception:_F)->_F
+loguru.__init__.Logger.complete(self)->AwaitableCompleter
+loguru.__init__.Logger.configure(self,*,handlers:Sequence[Dict[str,Any]]=...,levels:Optional[Sequence[LevelConfig]]=...,extra:Optional[Dict[Any,Any]]=...,patcher:Optional[PatcherFunction]=...,activation:Optional[Sequence[ActivationConfig]]=...)->List[int]
+loguru.__init__.Logger.contextualize(__self,**kwargs:Any)->Contextualizer
+loguru.__init__.Logger.critical(__self,__message:Any)->None
+loguru.__init__.Logger.critical(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.debug(__self,__message:Any)->None
+loguru.__init__.Logger.debug(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.disable(self,name:Union[str,None])->None
+loguru.__init__.Logger.enable(self,name:Union[str,None])->None
+loguru.__init__.Logger.error(__self,__message:Any)->None
+loguru.__init__.Logger.error(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.exception(__self,__message:Any)->None
+loguru.__init__.Logger.exception(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.info(__self,__message:Any)->None
+loguru.__init__.Logger.info(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.level(self,name:str)->Level
+loguru.__init__.Logger.level(self,name:str,no:Optional[int]=...,color:Optional[str]=...,icon:Optional[str]=...)->Level
+loguru.__init__.Logger.level(self,name:str,no:int=...,color:Optional[str]=...,icon:Optional[str]=...)->Level
+loguru.__init__.Logger.log(__self,__level:Union[int,str],__message:Any)->None
+loguru.__init__.Logger.log(__self,__level:Union[int,str],__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.opt(self,*,exception:Optional[Union[bool,ExcInfo,BaseException]]=...,record:bool=...,lazy:bool=...,colors:bool=...,raw:bool=...,capture:bool=...,depth:int=...,ansi:bool=...)->Logger
+loguru.__init__.Logger.parse(self,file:BinaryIO,pattern:Union[bytes,Pattern[bytes]],*,cast:Union[Dict[str,Callable[[bytes],Any]],Callable[[Dict[str,bytes]],None]]=...,chunk:int=...)->Generator[Dict[str, Any], None, None]
+loguru.__init__.Logger.parse(self,file:Union[str,PathLike[str],TextIO],pattern:Union[str,Pattern[str]],*,cast:Union[Dict[str,Callable[[str],Any]],Callable[[Dict[str,str]],None]]=...,chunk:int=...)->Generator[Dict[str, Any], None, None]
+loguru.__init__.Logger.patch(self,patcher:PatcherFunction)->Logger
+loguru.__init__.Logger.remove(self,handler_id:Optional[int]=...)->None
+loguru.__init__.Logger.start(self,*args:Any,**kwargs:Any)
+loguru.__init__.Logger.stop(self,*args:Any,**kwargs:Any)
+loguru.__init__.Logger.success(__self,__message:Any)->None
+loguru.__init__.Logger.success(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.trace(__self,__message:Any)->None
+loguru.__init__.Logger.trace(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Logger.warning(__self,__message:Any)->None
+loguru.__init__.Logger.warning(__self,__message:str,*args:Any,**kwargs:Any)->None
+loguru.__init__.Message(str)
+loguru.__init__.Record(TypedDict)
+loguru.__init__.RecordException(NamedTuple)
+loguru.__init__.RecordFile(_RecordAttribute)
+loguru.__init__.RecordLevel(_RecordAttribute)
+loguru.__init__.RecordProcess(_RecordAttribute)
+loguru.__init__.RecordThread(_RecordAttribute)
+loguru.__init__.Writable(Protocol)
+loguru.__init__.Writable.write(self,message:Message)->None
+loguru.__init__._GeneratorContextManager(self,func:_F)
+loguru.__init__._GeneratorContextManager.__call__(self,func:_F)
+loguru.__init__._HandlerConfig(TypedDict,total=False)
+loguru.__init__._RecordAttribute
+loguru.__init__._RecordAttribute.__format__(self,spec:str)->str
+loguru.__init__._RecordAttribute.__repr__(self)->str
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_ctime_functions.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_recattrs.py----------------------------------------
+A:loguru._recattrs.pickled_value->pickle.dumps(self.value)
+A:loguru._recattrs.value->pickle.loads(pickled_value)
+loguru._recattrs.RecordException(namedtuple('RecordException',('type','value','traceback')))
+loguru._recattrs.RecordException.__reduce__(self)
+loguru._recattrs.RecordException.__repr__(self)
+loguru._recattrs.RecordException._from_pickled_value(cls,type_,pickled_value,traceback_)
+loguru._recattrs.RecordFile(self,name,path)
+loguru._recattrs.RecordFile.__format__(self,spec)
+loguru._recattrs.RecordFile.__init__(self,name,path)
+loguru._recattrs.RecordFile.__repr__(self)
+loguru._recattrs.RecordLevel(self,name,no,icon)
+loguru._recattrs.RecordLevel.__format__(self,spec)
+loguru._recattrs.RecordLevel.__init__(self,name,no,icon)
+loguru._recattrs.RecordLevel.__repr__(self)
+loguru._recattrs.RecordProcess(self,id_,name)
+loguru._recattrs.RecordProcess.__format__(self,spec)
+loguru._recattrs.RecordProcess.__init__(self,id_,name)
+loguru._recattrs.RecordProcess.__repr__(self)
+loguru._recattrs.RecordThread(self,id_,name)
+loguru._recattrs.RecordThread.__format__(self,spec)
+loguru._recattrs.RecordThread.__init__(self,id_,name)
+loguru._recattrs.RecordThread.__repr__(self)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_logger.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_colorama.py----------------------------------------
+loguru._colorama.should_colorize(stream)
+loguru._colorama.should_wrap(stream)
+loguru._colorama.wrap(stream)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_better_exceptions.py----------------------------------------
+A:loguru._better_exceptions._builtins->set(dir(builtins))
+A:loguru._better_exceptions.source->'\n    '.join(lines)
+A:loguru._better_exceptions.self._syntax_highlighter->SyntaxHighlighter(style)
+A:loguru._better_exceptions.self._lib_dirs->self._get_lib_dirs()
+A:loguru._better_exceptions.self._pipe_char->self._get_char('│', '|')
+A:loguru._better_exceptions.self._cap_char->self._get_char('└', '->')
+A:loguru._better_exceptions.schemes->sysconfig.get_scheme_names()
+A:loguru._better_exceptions.filepath->os.path.abspath(file).lower()
+A:loguru._better_exceptions.relevant_values->self._get_relevant_values(source, frame)
+A:loguru._better_exceptions.values->self._format_relevant_values(list(relevant_values), colorize)
+A:loguru._better_exceptions.value->inspect.getattr_static(value, string)
+A:loguru._better_exceptions.value_lines->inspect.getattr_static(value, string).split('\n')
+A:loguru._better_exceptions.arrows->self._theme['arrows'].format(arrows)
+A:loguru._better_exceptions.value_line->self._theme['value'].format(value_line)
+A:loguru._better_exceptions.v->repr(v)
+A:loguru._better_exceptions.match->re.match(regex, frame)
+A:loguru._better_exceptions.(file, line, function)->re.match(regex, frame).group('file', 'line', 'function')
+A:loguru._better_exceptions.is_mine->self._is_file_mine(file)
+A:loguru._better_exceptions.(dirname, basename)->os.path.split(file)
+A:loguru._better_exceptions.dirname->self._theme['dirname'].format(dirname)
+A:loguru._better_exceptions.basename->self._theme['basename'].format(basename)
+A:loguru._better_exceptions.line->self._theme['line'].format(line)
+A:loguru._better_exceptions.function->self._theme['function'].format(function)
+A:loguru._better_exceptions.location->pattern.format(file, line, function)
+A:loguru._better_exceptions.seen->set()
+A:loguru._better_exceptions.cause->self._theme['cause'].format(cause)
+A:loguru._better_exceptions.context->self._theme['context'].format(context)
+A:loguru._better_exceptions.(frames, final_source)->self._extract_frames(exc_traceback, is_first, limit=tracebacklimit, from_decorator=from_decorator)
+A:loguru._better_exceptions.exception_only->traceback.format_exception_only(exc_type, exc_value)
+A:loguru._better_exceptions.(exception_type, exception_value)->self._theme['exception_type'].format(error_message).split(':', 1)
+A:loguru._better_exceptions.exception_type->self._theme['exception_type'].format(exception_type)
+A:loguru._better_exceptions.exception_value->self._theme['exception_value'].format(exception_value)
+A:loguru._better_exceptions.error_message->self._theme['exception_type'].format(error_message)
+A:loguru._better_exceptions.final_source->self._syntax_highlighter.highlight(final_source)
+A:loguru._better_exceptions.has_introduction->bool(frames)
+A:loguru._better_exceptions.frames_lines->self._format_locations(frames_lines, has_introduction=has_introduction)
+A:loguru._better_exceptions.introduction->self._theme['introduction'].format(introduction)
+loguru._better_exceptions.ExceptionFormatter(self,colorize=False,backtrace=False,diagnose=True,theme=None,style=None,max_length=128,encoding='ascii',hidden_frames_filename=None,prefix='')
+loguru._better_exceptions.ExceptionFormatter.__init__(self,colorize=False,backtrace=False,diagnose=True,theme=None,style=None,max_length=128,encoding='ascii',hidden_frames_filename=None,prefix='')
+loguru._better_exceptions.ExceptionFormatter._extract_frames(self,tb,is_first,*,limit=None,from_decorator=False)
+loguru._better_exceptions.ExceptionFormatter._format_exception(self,value,tb,*,seen=None,is_first=False,from_decorator=False)
+loguru._better_exceptions.ExceptionFormatter._format_locations(self,frames_lines,*,has_introduction)
+loguru._better_exceptions.ExceptionFormatter._format_relevant_values(self,relevant_values,colorize)
+loguru._better_exceptions.ExceptionFormatter._format_value(self,v)
+loguru._better_exceptions.ExceptionFormatter._get_char(self,char,default)
+loguru._better_exceptions.ExceptionFormatter._get_lib_dirs()
+loguru._better_exceptions.ExceptionFormatter._get_relevant_values(self,source,frame)
+loguru._better_exceptions.ExceptionFormatter._is_file_mine(self,file)
+loguru._better_exceptions.ExceptionFormatter.format_exception(self,type_,value,tb,*,from_decorator=False)
+loguru._better_exceptions.SyntaxHighlighter(self,style=None)
+loguru._better_exceptions.SyntaxHighlighter.__init__(self,style=None)
+loguru._better_exceptions.SyntaxHighlighter.highlight(self,source)
+loguru._better_exceptions.SyntaxHighlighter.tokenize(source)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_logger.py----------------------------------------
 A:loguru._logger.Level->namedtuple('Level', ['name', 'no', 'color', 'icon'])
 A:loguru._logger.start_time->aware_now()
 A:loguru._logger.context->ContextVar('loguru_context', default={})
@@ -198,323 +286,84 @@ loguru._logger.Logger.trace(__self,__message,*args,**kwargs)
 loguru._logger.Logger.warning(__self,__message,*args,**kwargs)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_colorama.py----------------------------------------
-loguru._colorama.should_colorize(stream)
-loguru._colorama.should_wrap(stream)
-loguru._colorama.wrap(stream)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_ctime_functions.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/__init__.py----------------------------------------
-A:loguru.__init__.logger->_Logger(_Core(), None, 0, False, False, False, False, True, None, {})
-
-
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/__init__.pyi----------------------------------------
-loguru.__init__.Level(NamedTuple)
-loguru.__init__.LevelConfig(TypedDict,total=False)
-loguru.__init__.Logger
-loguru.__init__.Logger.add(self,sink:Callable[[Message],Awaitable[None]],*,level:Union[str,int]=...,format:Union[str,FormatFunction]=...,filter:Optional[Union[str,FilterFunction,FilterDict]]=...,colorize:Optional[bool]=...,serialize:bool=...,backtrace:bool=...,diagnose:bool=...,enqueue:bool=...,catch:bool=...,loop:Optional[AbstractEventLoop]=...)->int
-loguru.__init__.Logger.add(self,sink:Union[TextIO,Writable,Callable[[Message],None],Handler],*,level:Union[str,int]=...,format:Union[str,FormatFunction]=...,filter:Optional[Union[str,FilterFunction,FilterDict]]=...,colorize:Optional[bool]=...,serialize:bool=...,backtrace:bool=...,diagnose:bool=...,enqueue:bool=...,catch:bool=...)->int
-loguru.__init__.Logger.add(self,sink:Union[str,PathLike[str]],*,level:Union[str,int]=...,format:Union[str,FormatFunction]=...,filter:Optional[Union[str,FilterFunction,FilterDict]]=...,colorize:Optional[bool]=...,serialize:bool=...,backtrace:bool=...,diagnose:bool=...,enqueue:bool=...,catch:bool=...,rotation:Optional[Union[str,int,time,timedelta,RotationFunction]]=...,retention:Optional[Union[str,int,timedelta,RetentionFunction]]=...,compression:Optional[Union[str,CompressionFunction]]=...,delay:bool=...,mode:str=...,buffering:int=...,encoding:str=...,**kwargs:Any)->int
-loguru.__init__.Logger.bind(__self,**kwargs:Any)->Logger
-loguru.__init__.Logger.catch(self,exception:Union[Type[BaseException],Tuple[Type[BaseException],...]]=...,*,level:Union[str,int]=...,reraise:bool=...,onerror:Optional[Callable[[BaseException],None]]=...,exclude:Optional[Union[Type[BaseException],Tuple[Type[BaseException],...]]]=...,message:str=...)->Catcher
-loguru.__init__.Logger.catch(self,exception:_F)->_F
-loguru.__init__.Logger.complete(self)->AwaitableCompleter
-loguru.__init__.Logger.configure(self,*,handlers:Sequence[Dict[str,Any]]=...,levels:Optional[Sequence[LevelConfig]]=...,extra:Optional[Dict[Any,Any]]=...,patcher:Optional[PatcherFunction]=...,activation:Optional[Sequence[ActivationConfig]]=...)->List[int]
-loguru.__init__.Logger.contextualize(__self,**kwargs:Any)->Contextualizer
-loguru.__init__.Logger.critical(__self,__message:Any)->None
-loguru.__init__.Logger.critical(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.debug(__self,__message:Any)->None
-loguru.__init__.Logger.debug(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.disable(self,name:Union[str,None])->None
-loguru.__init__.Logger.enable(self,name:Union[str,None])->None
-loguru.__init__.Logger.error(__self,__message:Any)->None
-loguru.__init__.Logger.error(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.exception(__self,__message:Any)->None
-loguru.__init__.Logger.exception(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.info(__self,__message:Any)->None
-loguru.__init__.Logger.info(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.level(self,name:str)->Level
-loguru.__init__.Logger.level(self,name:str,no:Optional[int]=...,color:Optional[str]=...,icon:Optional[str]=...)->Level
-loguru.__init__.Logger.level(self,name:str,no:int=...,color:Optional[str]=...,icon:Optional[str]=...)->Level
-loguru.__init__.Logger.log(__self,__level:Union[int,str],__message:Any)->None
-loguru.__init__.Logger.log(__self,__level:Union[int,str],__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.opt(self,*,exception:Optional[Union[bool,ExcInfo,BaseException]]=...,record:bool=...,lazy:bool=...,colors:bool=...,raw:bool=...,capture:bool=...,depth:int=...,ansi:bool=...)->Logger
-loguru.__init__.Logger.parse(self,file:BinaryIO,pattern:Union[bytes,Pattern[bytes]],*,cast:Union[Dict[str,Callable[[bytes],Any]],Callable[[Dict[str,bytes]],None]]=...,chunk:int=...)->Generator[Dict[str, Any], None, None]
-loguru.__init__.Logger.parse(self,file:Union[str,PathLike[str],TextIO],pattern:Union[str,Pattern[str]],*,cast:Union[Dict[str,Callable[[str],Any]],Callable[[Dict[str,str]],None]]=...,chunk:int=...)->Generator[Dict[str, Any], None, None]
-loguru.__init__.Logger.patch(self,patcher:PatcherFunction)->Logger
-loguru.__init__.Logger.remove(self,handler_id:Optional[int]=...)->None
-loguru.__init__.Logger.start(self,*args:Any,**kwargs:Any)
-loguru.__init__.Logger.stop(self,*args:Any,**kwargs:Any)
-loguru.__init__.Logger.success(__self,__message:Any)->None
-loguru.__init__.Logger.success(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.trace(__self,__message:Any)->None
-loguru.__init__.Logger.trace(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Logger.warning(__self,__message:Any)->None
-loguru.__init__.Logger.warning(__self,__message:str,*args:Any,**kwargs:Any)->None
-loguru.__init__.Message(str)
-loguru.__init__.Record(TypedDict)
-loguru.__init__.RecordException(NamedTuple)
-loguru.__init__.RecordFile(_RecordAttribute)
-loguru.__init__.RecordLevel(_RecordAttribute)
-loguru.__init__.RecordProcess(_RecordAttribute)
-loguru.__init__.RecordThread(_RecordAttribute)
-loguru.__init__.Writable(Protocol)
-loguru.__init__.Writable.write(self,message:Message)->None
-loguru.__init__._GeneratorContextManager(self,func:_F)
-loguru.__init__._GeneratorContextManager.__call__(self,func:_F)
-loguru.__init__._HandlerConfig(TypedDict,total=False)
-loguru.__init__._RecordAttribute
-loguru.__init__._RecordAttribute.__format__(self,spec:str)->str
-loguru.__init__._RecordAttribute.__repr__(self)->str
-
-
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_locks_machinery.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_locks_machinery.py----------------------------------------
 A:loguru._locks_machinery.logger_locks->weakref.WeakSet()
 A:loguru._locks_machinery.handler_locks->weakref.WeakSet()
 A:loguru._locks_machinery.lock->threading.Lock()
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_recattrs.py----------------------------------------
-A:loguru._recattrs.pickled_value->pickle.dumps(self.value)
-A:loguru._recattrs.value->pickle.loads(pickled_value)
-loguru._recattrs.RecordException(namedtuple('RecordException',('type','value','traceback')))
-loguru._recattrs.RecordException.__reduce__(self)
-loguru._recattrs.RecordException.__repr__(self)
-loguru._recattrs.RecordException._from_pickled_value(cls,type_,pickled_value,traceback_)
-loguru._recattrs.RecordFile(self,name,path)
-loguru._recattrs.RecordFile.__format__(self,spec)
-loguru._recattrs.RecordFile.__init__(self,name,path)
-loguru._recattrs.RecordFile.__repr__(self)
-loguru._recattrs.RecordLevel(self,name,no,icon)
-loguru._recattrs.RecordLevel.__format__(self,spec)
-loguru._recattrs.RecordLevel.__init__(self,name,no,icon)
-loguru._recattrs.RecordLevel.__repr__(self)
-loguru._recattrs.RecordProcess(self,id_,name)
-loguru._recattrs.RecordProcess.__format__(self,spec)
-loguru._recattrs.RecordProcess.__init__(self,id_,name)
-loguru._recattrs.RecordProcess.__repr__(self)
-loguru._recattrs.RecordThread(self,id_,name)
-loguru._recattrs.RecordThread.__format__(self,spec)
-loguru._recattrs.RecordThread.__init__(self,id_,name)
-loguru._recattrs.RecordThread.__repr__(self)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_string_parsers.py----------------------------------------
+A:loguru._string_parsers.size->size.strip().strip()
+A:loguru._string_parsers.reg->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I)
+A:loguru._string_parsers.match->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I).match(daytime)
+A:loguru._string_parsers.(s, u, i, b)->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I).match(daytime).groups()
+A:loguru._string_parsers.s->float(s)
+A:loguru._string_parsers.duration->duration.strip().strip()
+A:loguru._string_parsers.value->float(value)
+A:loguru._string_parsers.unit->next((u for (r, u) in units if re.fullmatch(r, unit, flags=re.I)))
+A:loguru._string_parsers.frequency->frequency.strip().lower().strip().lower()
+A:loguru._string_parsers.day->parse_day(day)
+A:loguru._string_parsers.time->parse_time(time)
+A:loguru._string_parsers.dt->datetime.datetime.strptime(time, format_)
+A:loguru._string_parsers.daytime->daytime.strip().strip()
+A:loguru._string_parsers.(day, time)->re.compile('^(.*?)\\s+at\\s+(.*)$', flags=re.I).match(daytime).groups()
+loguru._string_parsers.Frequencies
+loguru._string_parsers.Frequencies.daily(t)
+loguru._string_parsers.Frequencies.hourly(t)
+loguru._string_parsers.Frequencies.monthly(t)
+loguru._string_parsers.Frequencies.weekly(t)
+loguru._string_parsers.Frequencies.yearly(t)
+loguru._string_parsers.parse_day(day)
+loguru._string_parsers.parse_daytime(daytime)
+loguru._string_parsers.parse_duration(duration)
+loguru._string_parsers.parse_frequency(frequency)
+loguru._string_parsers.parse_size(size)
+loguru._string_parsers.parse_time(time)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_defaults.py----------------------------------------
-A:loguru._defaults.LOGURU_AUTOINIT->env('LOGURU_AUTOINIT', bool, True)
-A:loguru._defaults.LOGURU_FORMAT->env('LOGURU_FORMAT', str, '<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>')
-A:loguru._defaults.LOGURU_FILTER->env('LOGURU_FILTER', str, None)
-A:loguru._defaults.LOGURU_LEVEL->env('LOGURU_LEVEL', str, 'DEBUG')
-A:loguru._defaults.LOGURU_COLORIZE->env('LOGURU_COLORIZE', bool, None)
-A:loguru._defaults.LOGURU_SERIALIZE->env('LOGURU_SERIALIZE', bool, False)
-A:loguru._defaults.LOGURU_BACKTRACE->env('LOGURU_BACKTRACE', bool, True)
-A:loguru._defaults.LOGURU_DIAGNOSE->env('LOGURU_DIAGNOSE', bool, True)
-A:loguru._defaults.LOGURU_ENQUEUE->env('LOGURU_ENQUEUE', bool, False)
-A:loguru._defaults.LOGURU_CATCH->env('LOGURU_CATCH', bool, True)
-A:loguru._defaults.LOGURU_TRACE_NO->env('LOGURU_TRACE_NO', int, 5)
-A:loguru._defaults.LOGURU_TRACE_COLOR->env('LOGURU_TRACE_COLOR', str, '<cyan><bold>')
-A:loguru._defaults.LOGURU_TRACE_ICON->env('LOGURU_TRACE_ICON', str, '✏️')
-A:loguru._defaults.LOGURU_DEBUG_NO->env('LOGURU_DEBUG_NO', int, 10)
-A:loguru._defaults.LOGURU_DEBUG_COLOR->env('LOGURU_DEBUG_COLOR', str, '<blue><bold>')
-A:loguru._defaults.LOGURU_DEBUG_ICON->env('LOGURU_DEBUG_ICON', str, '🐞')
-A:loguru._defaults.LOGURU_INFO_NO->env('LOGURU_INFO_NO', int, 20)
-A:loguru._defaults.LOGURU_INFO_COLOR->env('LOGURU_INFO_COLOR', str, '<bold>')
-A:loguru._defaults.LOGURU_INFO_ICON->env('LOGURU_INFO_ICON', str, 'ℹ️')
-A:loguru._defaults.LOGURU_SUCCESS_NO->env('LOGURU_SUCCESS_NO', int, 25)
-A:loguru._defaults.LOGURU_SUCCESS_COLOR->env('LOGURU_SUCCESS_COLOR', str, '<green><bold>')
-A:loguru._defaults.LOGURU_SUCCESS_ICON->env('LOGURU_SUCCESS_ICON', str, '✔️')
-A:loguru._defaults.LOGURU_WARNING_NO->env('LOGURU_WARNING_NO', int, 30)
-A:loguru._defaults.LOGURU_WARNING_COLOR->env('LOGURU_WARNING_COLOR', str, '<yellow><bold>')
-A:loguru._defaults.LOGURU_WARNING_ICON->env('LOGURU_WARNING_ICON', str, '⚠️')
-A:loguru._defaults.LOGURU_ERROR_NO->env('LOGURU_ERROR_NO', int, 40)
-A:loguru._defaults.LOGURU_ERROR_COLOR->env('LOGURU_ERROR_COLOR', str, '<red><bold>')
-A:loguru._defaults.LOGURU_ERROR_ICON->env('LOGURU_ERROR_ICON', str, '❌')
-A:loguru._defaults.LOGURU_CRITICAL_NO->env('LOGURU_CRITICAL_NO', int, 50)
-A:loguru._defaults.LOGURU_CRITICAL_COLOR->env('LOGURU_CRITICAL_COLOR', str, '<RED><bold>')
-A:loguru._defaults.LOGURU_CRITICAL_ICON->env('LOGURU_CRITICAL_ICON', str, '☠️')
-loguru._defaults.env(key,type_,default=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_get_frame.py----------------------------------------
+loguru._get_frame.get_frame_fallback(n)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_handler.py----------------------------------------
-A:loguru._handler.colored->_colorizer.Colorizer.prepare_format(format_)
-A:loguru._handler.self._lock->create_handler_lock()
-A:loguru._handler.self._memoize_dynamic_format->memoize(prepare_stripped_format)
-A:loguru._handler.self._decolorized_format->self._formatter.strip()
-A:loguru._handler.self._queue->multiprocessing.SimpleQueue()
-A:loguru._handler.self._confirmation_event->multiprocessing.Event()
-A:loguru._handler.self._confirmation_lock->multiprocessing.Lock()
-A:loguru._handler.self._owner_process->multiprocessing.current_process()
-A:loguru._handler.self._thread->Thread(target=self._queued_writer, daemon=True, name='loguru-writer-%d' % self._id)
-A:loguru._handler.dynamic_format->self._formatter(record)
-A:loguru._handler.formatter_record->record.copy()
-A:loguru._handler.lines->formatter.format_exception(type_, value, tb, from_decorator=from_decorator)
-A:loguru._handler.formatter_record['exception']->''.join(lines)
-A:loguru._handler.formatted->self._serialize_record(formatted, record)
-A:loguru._handler.precomputed_format->self._memoize_dynamic_format(dynamic_format)
-A:loguru._handler.(_, precomputed_format)->self._memoize_dynamic_format(dynamic_format, ansi_level)
-A:loguru._handler.(formatter, precomputed_format)->self._memoize_dynamic_format(dynamic_format, ansi_level)
-A:loguru._handler.coloring_message->self._formatter.make_coloring_message(record['message'], ansi_level=ansi_level, colored_message=colored_message)
-A:loguru._handler.str_record->Message(formatted)
-A:loguru._handler.self._precolorized_formats[level_id]->self._formatter.colorize(ansi_code)
-A:loguru._handler.lock->create_handler_lock()
-A:loguru._handler.message->queue.get()
-A:loguru._handler.state->self.__dict__.copy()
-loguru._handler.Handler(self,*,sink,name,levelno,formatter,is_formatter_dynamic,filter_,colorize,serialize,enqueue,error_interceptor,exception_formatter,id_,levels_ansi_codes)
-loguru._handler.Handler.__getstate__(self)
-loguru._handler.Handler.__init__(self,*,sink,name,levelno,formatter,is_formatter_dynamic,filter_,colorize,serialize,enqueue,error_interceptor,exception_formatter,id_,levels_ansi_codes)
-loguru._handler.Handler.__repr__(self)
-loguru._handler.Handler.__setstate__(self,state)
-loguru._handler.Handler._queued_writer(self)
-loguru._handler.Handler._serialize_record(text,record)
-loguru._handler.Handler.complete_queue(self)
-loguru._handler.Handler.emit(self,record,level_id,from_decorator,is_raw,colored_message)
-loguru._handler.Handler.levelno(self)
-loguru._handler.Handler.stop(self)
-loguru._handler.Handler.update_format(self,level_id)
-loguru._handler.Message(str)
-loguru._handler.memoize(function)
-loguru._handler.prepare_colored_format(format_,ansi_level)
-loguru._handler.prepare_stripped_format(format_)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_simple_sinks.py----------------------------------------
+A:loguru._simple_sinks.self._flushable->callable(getattr(stream, 'flush', None))
+A:loguru._simple_sinks.self._stoppable->callable(getattr(stream, 'stop', None))
+A:loguru._simple_sinks.self._completable->asyncio.iscoroutinefunction(getattr(stream, 'complete', None))
+A:loguru._simple_sinks.message->str(message)
+A:loguru._simple_sinks.record->logging.getLogger().makeRecord(record['name'], record['level'].no, record['file'].path, record['line'], message, (), (exc.type, exc.value, exc.traceback) if exc else None, record['function'], {'extra': record['extra']})
+A:loguru._simple_sinks.self._tasks->weakref.WeakSet()
+A:loguru._simple_sinks.coro->self._function(message)
+A:loguru._simple_sinks.task->asyncio.get_event_loop().create_task(coro)
+A:loguru._simple_sinks.loop->asyncio.get_event_loop()
+A:loguru._simple_sinks.state->self.__dict__.copy()
+loguru._simple_sinks.AsyncSink(self,function,loop,error_interceptor)
+loguru._simple_sinks.AsyncSink.__getstate__(self)
+loguru._simple_sinks.AsyncSink.__init__(self,function,loop,error_interceptor)
+loguru._simple_sinks.AsyncSink.__setstate__(self,state)
+loguru._simple_sinks.AsyncSink.complete(self)
+loguru._simple_sinks.AsyncSink.stop(self)
+loguru._simple_sinks.AsyncSink.write(self,message)
+loguru._simple_sinks.CallableSink(self,function)
+loguru._simple_sinks.CallableSink.__init__(self,function)
+loguru._simple_sinks.CallableSink.complete(self)
+loguru._simple_sinks.CallableSink.stop(self)
+loguru._simple_sinks.CallableSink.write(self,message)
+loguru._simple_sinks.StandardSink(self,handler)
+loguru._simple_sinks.StandardSink.__init__(self,handler)
+loguru._simple_sinks.StandardSink.complete(self)
+loguru._simple_sinks.StandardSink.stop(self)
+loguru._simple_sinks.StandardSink.write(self,message)
+loguru._simple_sinks.StreamSink(self,stream)
+loguru._simple_sinks.StreamSink.__init__(self,stream)
+loguru._simple_sinks.StreamSink.complete(self)
+loguru._simple_sinks.StreamSink.stop(self)
+loguru._simple_sinks.StreamSink.write(self,message)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_error_interceptor.py----------------------------------------
-A:loguru._error_interceptor.(type_, value, traceback_)->sys.exc_info()
-A:loguru._error_interceptor.record_repr->str(record)
-loguru._error_interceptor.ErrorInterceptor(self,should_catch,handler_id)
-loguru._error_interceptor.ErrorInterceptor.__init__(self,should_catch,handler_id)
-loguru._error_interceptor.ErrorInterceptor.print(self,record=None,*,exception=None)
-loguru._error_interceptor.ErrorInterceptor.should_catch(self)
-
-
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_filters.py----------------------------------------
-loguru._filters.filter_by_level(record,level_per_module)
-loguru._filters.filter_by_name(record,parent,length)
-loguru._filters.filter_none(record)
-
-
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_better_exceptions.py----------------------------------------
-A:loguru._better_exceptions._builtins->set(dir(builtins))
-A:loguru._better_exceptions.source->'\n    '.join(lines)
-A:loguru._better_exceptions.self._syntax_highlighter->SyntaxHighlighter(style)
-A:loguru._better_exceptions.self._lib_dirs->self._get_lib_dirs()
-A:loguru._better_exceptions.self._pipe_char->self._get_char('│', '|')
-A:loguru._better_exceptions.self._cap_char->self._get_char('└', '->')
-A:loguru._better_exceptions.schemes->sysconfig.get_scheme_names()
-A:loguru._better_exceptions.filepath->os.path.abspath(file).lower()
-A:loguru._better_exceptions.relevant_values->self._get_relevant_values(source, frame)
-A:loguru._better_exceptions.values->self._format_relevant_values(list(relevant_values), colorize)
-A:loguru._better_exceptions.value->inspect.getattr_static(value, string)
-A:loguru._better_exceptions.value_lines->inspect.getattr_static(value, string).split('\n')
-A:loguru._better_exceptions.arrows->self._theme['arrows'].format(arrows)
-A:loguru._better_exceptions.value_line->self._theme['value'].format(value_line)
-A:loguru._better_exceptions.v->repr(v)
-A:loguru._better_exceptions.match->re.match(regex, frame)
-A:loguru._better_exceptions.(file, line, function)->re.match(regex, frame).group('file', 'line', 'function')
-A:loguru._better_exceptions.is_mine->self._is_file_mine(file)
-A:loguru._better_exceptions.(dirname, basename)->os.path.split(file)
-A:loguru._better_exceptions.dirname->self._theme['dirname'].format(dirname)
-A:loguru._better_exceptions.basename->self._theme['basename'].format(basename)
-A:loguru._better_exceptions.line->self._theme['line'].format(line)
-A:loguru._better_exceptions.function->self._theme['function'].format(function)
-A:loguru._better_exceptions.location->pattern.format(file, line, function)
-A:loguru._better_exceptions.seen->set()
-A:loguru._better_exceptions.cause->self._theme['cause'].format(cause)
-A:loguru._better_exceptions.context->self._theme['context'].format(context)
-A:loguru._better_exceptions.(frames, final_source)->self._extract_frames(exc_traceback, is_first, limit=tracebacklimit, from_decorator=from_decorator)
-A:loguru._better_exceptions.exception_only->traceback.format_exception_only(exc_type, exc_value)
-A:loguru._better_exceptions.(exception_type, exception_value)->self._theme['exception_type'].format(error_message).split(':', 1)
-A:loguru._better_exceptions.exception_type->self._theme['exception_type'].format(exception_type)
-A:loguru._better_exceptions.exception_value->self._theme['exception_value'].format(exception_value)
-A:loguru._better_exceptions.error_message->self._theme['exception_type'].format(error_message)
-A:loguru._better_exceptions.final_source->self._syntax_highlighter.highlight(final_source)
-A:loguru._better_exceptions.has_introduction->bool(frames)
-A:loguru._better_exceptions.frames_lines->self._format_locations(frames_lines, has_introduction=has_introduction)
-A:loguru._better_exceptions.introduction->self._theme['introduction'].format(introduction)
-loguru._better_exceptions.ExceptionFormatter(self,colorize=False,backtrace=False,diagnose=True,theme=None,style=None,max_length=128,encoding='ascii',hidden_frames_filename=None,prefix='')
-loguru._better_exceptions.ExceptionFormatter.__init__(self,colorize=False,backtrace=False,diagnose=True,theme=None,style=None,max_length=128,encoding='ascii',hidden_frames_filename=None,prefix='')
-loguru._better_exceptions.ExceptionFormatter._extract_frames(self,tb,is_first,*,limit=None,from_decorator=False)
-loguru._better_exceptions.ExceptionFormatter._format_exception(self,value,tb,*,seen=None,is_first=False,from_decorator=False)
-loguru._better_exceptions.ExceptionFormatter._format_locations(self,frames_lines,*,has_introduction)
-loguru._better_exceptions.ExceptionFormatter._format_relevant_values(self,relevant_values,colorize)
-loguru._better_exceptions.ExceptionFormatter._format_value(self,v)
-loguru._better_exceptions.ExceptionFormatter._get_char(self,char,default)
-loguru._better_exceptions.ExceptionFormatter._get_lib_dirs()
-loguru._better_exceptions.ExceptionFormatter._get_relevant_values(self,source,frame)
-loguru._better_exceptions.ExceptionFormatter._is_file_mine(self,file)
-loguru._better_exceptions.ExceptionFormatter.format_exception(self,type_,value,tb,*,from_decorator=False)
-loguru._better_exceptions.SyntaxHighlighter(self,style=None)
-loguru._better_exceptions.SyntaxHighlighter.__init__(self,style=None)
-loguru._better_exceptions.SyntaxHighlighter.highlight(self,source)
-loguru._better_exceptions.SyntaxHighlighter.tokenize(source)
-
-
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_file_sink.py----------------------------------------
-A:loguru._file_sink.creation_datetime->_datetime.datetime.fromtimestamp(creation_time)
-A:loguru._file_sink.date->FileDateFormatter(creation_datetime)
-A:loguru._file_sink.renamed_path->generate_rename_path(root, ext, creation_time)
-A:loguru._file_sink.path_out->'{}{}'.format(path_in, ext)
-A:loguru._file_sink.creation_time->get_ctime(old_path)
-A:loguru._file_sink.(root, ext_before)->os.path.splitext(path_in)
-A:loguru._file_sink.t->_datetime.datetime.now().timestamp()
-A:loguru._file_sink.filepath->os.path.realpath(file.name)
-A:loguru._file_sink.start_timelimit->_datetime.datetime.fromtimestamp(creation_time)
-A:loguru._file_sink.limit->self._step_forward(limit)
-A:loguru._file_sink.record_time->message.record['time'].replace(tzinfo=None)
-A:loguru._file_sink.self._limit->self._step_forward(self._limit)
-A:loguru._file_sink.self._path->str(path)
-A:loguru._file_sink.self._glob_patterns->self._make_glob_patterns(self._path)
-A:loguru._file_sink.self._rotation_function->self._make_rotation_function(rotation)
-A:loguru._file_sink.self._retention_function->self._make_retention_function(retention)
-A:loguru._file_sink.self._compression_function->self._make_compression_function(compression)
-A:loguru._file_sink.path->self._prepare_new_path()
-A:loguru._file_sink.dirname->os.path.dirname(path)
-A:loguru._file_sink.self._file->open(path, **self._kwargs)
-A:loguru._file_sink.new_path->self._prepare_new_path()
-A:loguru._file_sink.(root, ext)->os.path.splitext(escaped)
-A:loguru._file_sink.file->open(new_path, **self._kwargs)
-A:loguru._file_sink.formatter->string.Formatter()
-A:loguru._file_sink.tokens->string.Formatter().parse(path)
-A:loguru._file_sink.escaped->''.join((glob.escape(text) + '*' * (name is not None) for (text, name, *_) in tokens))
-A:loguru._file_sink.size->string_parsers.parse_size(rotation)
-A:loguru._file_sink.interval->string_parsers.parse_duration(retention)
-A:loguru._file_sink.frequency->string_parsers.parse_frequency(rotation)
-A:loguru._file_sink.daytime->string_parsers.parse_daytime(rotation)
-A:loguru._file_sink.time->datetime.time(0, 0, 0)
-A:loguru._file_sink.step_forward->partial(Rotation.forward_interval, interval=rotation)
-A:loguru._file_sink.ext->compression.strip().lstrip('.')
-A:loguru._file_sink.compress->partial(Compression.write_compress, opener=zipfile.ZipFile, mode='w', compression=zipfile.ZIP_DEFLATED)
-loguru._file_sink.Compression
-loguru._file_sink.Compression.add_compress(path_in,path_out,opener,**kwargs)
-loguru._file_sink.Compression.compression(path_in,ext,compress_function)
-loguru._file_sink.Compression.copy_compress(path_in,path_out,opener,**kwargs)
-loguru._file_sink.Compression.write_compress(path_in,path_out,opener,**kwargs)
-loguru._file_sink.FileDateFormatter(self,datetime=None)
-loguru._file_sink.FileDateFormatter.__format__(self,spec)
-loguru._file_sink.FileDateFormatter.__init__(self,datetime=None)
-loguru._file_sink.FileSink(self,path,*,rotation=None,retention=None,compression=None,delay=False,mode='a',buffering=1,encoding=None,**kwargs)
-loguru._file_sink.FileSink.__init__(self,path,*,rotation=None,retention=None,compression=None,delay=False,mode='a',buffering=1,encoding=None,**kwargs)
-loguru._file_sink.FileSink._initialize_file(self)
-loguru._file_sink.FileSink._make_compression_function(compression)
-loguru._file_sink.FileSink._make_glob_patterns(path)
-loguru._file_sink.FileSink._make_retention_function(retention)
-loguru._file_sink.FileSink._make_rotation_function(rotation)
-loguru._file_sink.FileSink._prepare_new_path(self)
-loguru._file_sink.FileSink._terminate_file(self,*,is_rotating=False)
-loguru._file_sink.FileSink.stop(self)
-loguru._file_sink.FileSink.write(self,message)
-loguru._file_sink.Retention
-loguru._file_sink.Retention.retention_age(logs,seconds)
-loguru._file_sink.Retention.retention_count(logs,number)
-loguru._file_sink.Rotation
-loguru._file_sink.Rotation.RotationTime(self,step_forward,time_init=None)
-loguru._file_sink.Rotation.RotationTime.__init__(self,step_forward,time_init=None)
-loguru._file_sink.Rotation.forward_day(t)
-loguru._file_sink.Rotation.forward_interval(t,interval)
-loguru._file_sink.Rotation.forward_weekday(t,weekday)
-loguru._file_sink.Rotation.rotation_size(message,file,size_limit)
-loguru._file_sink.generate_rename_path(root,ext,creation_time)
-
-
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_colorizer.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_colorizer.py----------------------------------------
 A:loguru._colorizer._style->ansi_escape({'b': Style.BOLD, 'd': Style.DIM, 'n': Style.NORMAL, 'h': Style.HIDE, 'i': Style.ITALIC, 'l': Style.BLINK, 's': Style.STRIKE, 'u': Style.UNDERLINE, 'v': Style.REVERSE, 'bold': Style.BOLD, 'dim': Style.DIM, 'normal': Style.NORMAL, 'hide': Style.HIDE, 'italic': Style.ITALIC, 'blink': Style.BLINK, 'strike': Style.STRIKE, 'underline': Style.UNDERLINE, 'reverse': Style.REVERSE})
 A:loguru._colorizer._foreground->ansi_escape({'k': Fore.BLACK, 'r': Fore.RED, 'g': Fore.GREEN, 'y': Fore.YELLOW, 'e': Fore.BLUE, 'm': Fore.MAGENTA, 'c': Fore.CYAN, 'w': Fore.WHITE, 'lk': Fore.LIGHTBLACK_EX, 'lr': Fore.LIGHTRED_EX, 'lg': Fore.LIGHTGREEN_EX, 'ly': Fore.LIGHTYELLOW_EX, 'le': Fore.LIGHTBLUE_EX, 'lm': Fore.LIGHTMAGENTA_EX, 'lc': Fore.LIGHTCYAN_EX, 'lw': Fore.LIGHTWHITE_EX, 'black': Fore.BLACK, 'red': Fore.RED, 'green': Fore.GREEN, 'yellow': Fore.YELLOW, 'blue': Fore.BLUE, 'magenta': Fore.MAGENTA, 'cyan': Fore.CYAN, 'white': Fore.WHITE, 'light-black': Fore.LIGHTBLACK_EX, 'light-red': Fore.LIGHTRED_EX, 'light-green': Fore.LIGHTGREEN_EX, 'light-yellow': Fore.LIGHTYELLOW_EX, 'light-blue': Fore.LIGHTBLUE_EX, 'light-magenta': Fore.LIGHTMAGENTA_EX, 'light-cyan': Fore.LIGHTCYAN_EX, 'light-white': Fore.LIGHTWHITE_EX})
 A:loguru._colorizer._background->ansi_escape({'K': Back.BLACK, 'R': Back.RED, 'G': Back.GREEN, 'Y': Back.YELLOW, 'E': Back.BLUE, 'M': Back.MAGENTA, 'C': Back.CYAN, 'W': Back.WHITE, 'LK': Back.LIGHTBLACK_EX, 'LR': Back.LIGHTRED_EX, 'LG': Back.LIGHTGREEN_EX, 'LY': Back.LIGHTYELLOW_EX, 'LE': Back.LIGHTBLUE_EX, 'LM': Back.LIGHTMAGENTA_EX, 'LC': Back.LIGHTCYAN_EX, 'LW': Back.LIGHTWHITE_EX, 'BLACK': Back.BLACK, 'RED': Back.RED, 'GREEN': Back.GREEN, 'YELLOW': Back.YELLOW, 'BLUE': Back.BLUE, 'MAGENTA': Back.MAGENTA, 'CYAN': Back.CYAN, 'WHITE': Back.WHITE, 'LIGHT-BLACK': Back.LIGHTBLACK_EX, 'LIGHT-RED': Back.LIGHTRED_EX, 'LIGHT-GREEN': Back.LIGHTGREEN_EX, 'LIGHT-YELLOW': Back.LIGHTYELLOW_EX, 'LIGHT-BLUE': Back.LIGHTBLUE_EX, 'LIGHT-MAGENTA': Back.LIGHTMAGENTA_EX, 'LIGHT-CYAN': Back.LIGHTCYAN_EX, 'LIGHT-WHITE': Back.LIGHTWHITE_EX})
@@ -571,6 +420,163 @@ loguru._colorizer.TokenType
 loguru._colorizer.ansi_escape(codes)
 
 
-----------------------------------------/home/zhang/Packages/loguru/loguru0.5.2/_get_frame.py----------------------------------------
-loguru._get_frame.get_frame_fallback(n)
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_handler.py----------------------------------------
+A:loguru._handler.colored->_colorizer.Colorizer.prepare_format(format_)
+A:loguru._handler.self._lock->create_handler_lock()
+A:loguru._handler.self._memoize_dynamic_format->memoize(prepare_stripped_format)
+A:loguru._handler.self._decolorized_format->self._formatter.strip()
+A:loguru._handler.self._queue->multiprocessing.SimpleQueue()
+A:loguru._handler.self._confirmation_event->multiprocessing.Event()
+A:loguru._handler.self._confirmation_lock->multiprocessing.Lock()
+A:loguru._handler.self._owner_process->multiprocessing.current_process()
+A:loguru._handler.self._thread->Thread(target=self._queued_writer, daemon=True, name='loguru-writer-%d' % self._id)
+A:loguru._handler.dynamic_format->self._formatter(record)
+A:loguru._handler.formatter_record->record.copy()
+A:loguru._handler.lines->formatter.format_exception(type_, value, tb, from_decorator=from_decorator)
+A:loguru._handler.formatter_record['exception']->''.join(lines)
+A:loguru._handler.formatted->self._serialize_record(formatted, record)
+A:loguru._handler.precomputed_format->self._memoize_dynamic_format(dynamic_format)
+A:loguru._handler.(_, precomputed_format)->self._memoize_dynamic_format(dynamic_format, ansi_level)
+A:loguru._handler.(formatter, precomputed_format)->self._memoize_dynamic_format(dynamic_format, ansi_level)
+A:loguru._handler.coloring_message->self._formatter.make_coloring_message(record['message'], ansi_level=ansi_level, colored_message=colored_message)
+A:loguru._handler.str_record->Message(formatted)
+A:loguru._handler.self._precolorized_formats[level_id]->self._formatter.colorize(ansi_code)
+A:loguru._handler.lock->create_handler_lock()
+A:loguru._handler.message->queue.get()
+A:loguru._handler.state->self.__dict__.copy()
+loguru._handler.Handler(self,*,sink,name,levelno,formatter,is_formatter_dynamic,filter_,colorize,serialize,enqueue,error_interceptor,exception_formatter,id_,levels_ansi_codes)
+loguru._handler.Handler.__getstate__(self)
+loguru._handler.Handler.__init__(self,*,sink,name,levelno,formatter,is_formatter_dynamic,filter_,colorize,serialize,enqueue,error_interceptor,exception_formatter,id_,levels_ansi_codes)
+loguru._handler.Handler.__repr__(self)
+loguru._handler.Handler.__setstate__(self,state)
+loguru._handler.Handler._queued_writer(self)
+loguru._handler.Handler._serialize_record(text,record)
+loguru._handler.Handler.complete_async(self)
+loguru._handler.Handler.complete_queue(self)
+loguru._handler.Handler.emit(self,record,level_id,from_decorator,is_raw,colored_message)
+loguru._handler.Handler.levelno(self)
+loguru._handler.Handler.stop(self)
+loguru._handler.Handler.update_format(self,level_id)
+loguru._handler.Message(str)
+loguru._handler.memoize(function)
+loguru._handler.prepare_colored_format(format_,ansi_level)
+loguru._handler.prepare_stripped_format(format_)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_file_sink.py----------------------------------------
+A:loguru._file_sink.creation_datetime->_datetime.datetime.fromtimestamp(creation_time)
+A:loguru._file_sink.date->FileDateFormatter(creation_datetime)
+A:loguru._file_sink.renamed_path->generate_rename_path(root, ext, creation_time)
+A:loguru._file_sink.path_out->'{}{}'.format(path_in, ext)
+A:loguru._file_sink.creation_time->get_ctime(old_path)
+A:loguru._file_sink.(root, ext_before)->os.path.splitext(path_in)
+A:loguru._file_sink.t->_datetime.datetime.now().timestamp()
+A:loguru._file_sink.filepath->os.path.realpath(file.name)
+A:loguru._file_sink.start_timelimit->_datetime.datetime.fromtimestamp(creation_time)
+A:loguru._file_sink.limit->self._step_forward(limit)
+A:loguru._file_sink.record_time->message.record['time'].replace(tzinfo=None)
+A:loguru._file_sink.self._limit->self._step_forward(self._limit)
+A:loguru._file_sink.self._path->str(path)
+A:loguru._file_sink.self._glob_patterns->self._make_glob_patterns(self._path)
+A:loguru._file_sink.self._rotation_function->self._make_rotation_function(rotation)
+A:loguru._file_sink.self._retention_function->self._make_retention_function(retention)
+A:loguru._file_sink.self._compression_function->self._make_compression_function(compression)
+A:loguru._file_sink.path->self._prepare_new_path()
+A:loguru._file_sink.dirname->os.path.dirname(path)
+A:loguru._file_sink.self._file->open(path, **self._kwargs)
+A:loguru._file_sink.new_path->self._prepare_new_path()
+A:loguru._file_sink.(root, ext)->os.path.splitext(escaped)
+A:loguru._file_sink.file->open(new_path, **self._kwargs)
+A:loguru._file_sink.formatter->string.Formatter()
+A:loguru._file_sink.tokens->string.Formatter().parse(path)
+A:loguru._file_sink.escaped->''.join((glob.escape(text) + '*' * (name is not None) for (text, name, *_) in tokens))
+A:loguru._file_sink.size->string_parsers.parse_size(rotation)
+A:loguru._file_sink.interval->string_parsers.parse_duration(retention)
+A:loguru._file_sink.frequency->string_parsers.parse_frequency(rotation)
+A:loguru._file_sink.daytime->string_parsers.parse_daytime(rotation)
+A:loguru._file_sink.time->datetime.time(0, 0, 0)
+A:loguru._file_sink.step_forward->partial(Rotation.forward_interval, interval=rotation)
+A:loguru._file_sink.ext->compression.strip().lstrip('.')
+A:loguru._file_sink.compress->partial(Compression.write_compress, opener=zipfile.ZipFile, mode='w', compression=zipfile.ZIP_DEFLATED)
+loguru._file_sink.Compression
+loguru._file_sink.Compression.add_compress(path_in,path_out,opener,**kwargs)
+loguru._file_sink.Compression.compression(path_in,ext,compress_function)
+loguru._file_sink.Compression.copy_compress(path_in,path_out,opener,**kwargs)
+loguru._file_sink.Compression.write_compress(path_in,path_out,opener,**kwargs)
+loguru._file_sink.FileDateFormatter(self,datetime=None)
+loguru._file_sink.FileDateFormatter.__format__(self,spec)
+loguru._file_sink.FileDateFormatter.__init__(self,datetime=None)
+loguru._file_sink.FileSink(self,path,*,rotation=None,retention=None,compression=None,delay=False,mode='a',buffering=1,encoding=None,**kwargs)
+loguru._file_sink.FileSink.__init__(self,path,*,rotation=None,retention=None,compression=None,delay=False,mode='a',buffering=1,encoding=None,**kwargs)
+loguru._file_sink.FileSink._initialize_file(self)
+loguru._file_sink.FileSink._make_compression_function(compression)
+loguru._file_sink.FileSink._make_glob_patterns(path)
+loguru._file_sink.FileSink._make_retention_function(retention)
+loguru._file_sink.FileSink._make_rotation_function(rotation)
+loguru._file_sink.FileSink._prepare_new_path(self)
+loguru._file_sink.FileSink._terminate_file(self,*,is_rotating=False)
+loguru._file_sink.FileSink.complete(self)
+loguru._file_sink.FileSink.stop(self)
+loguru._file_sink.FileSink.write(self,message)
+loguru._file_sink.Retention
+loguru._file_sink.Retention.retention_age(logs,seconds)
+loguru._file_sink.Retention.retention_count(logs,number)
+loguru._file_sink.Rotation
+loguru._file_sink.Rotation.RotationTime(self,step_forward,time_init=None)
+loguru._file_sink.Rotation.RotationTime.__init__(self,step_forward,time_init=None)
+loguru._file_sink.Rotation.forward_day(t)
+loguru._file_sink.Rotation.forward_interval(t,interval)
+loguru._file_sink.Rotation.forward_weekday(t,weekday)
+loguru._file_sink.Rotation.rotation_size(message,file,size_limit)
+loguru._file_sink.generate_rename_path(root,ext,creation_time)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_error_interceptor.py----------------------------------------
+A:loguru._error_interceptor.(type_, value, traceback_)->sys.exc_info()
+A:loguru._error_interceptor.record_repr->str(record)
+loguru._error_interceptor.ErrorInterceptor(self,should_catch,handler_id)
+loguru._error_interceptor.ErrorInterceptor.__init__(self,should_catch,handler_id)
+loguru._error_interceptor.ErrorInterceptor.print(self,record=None,*,exception=None)
+loguru._error_interceptor.ErrorInterceptor.should_catch(self)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_defaults.py----------------------------------------
+A:loguru._defaults.LOGURU_AUTOINIT->env('LOGURU_AUTOINIT', bool, True)
+A:loguru._defaults.LOGURU_FORMAT->env('LOGURU_FORMAT', str, '<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>')
+A:loguru._defaults.LOGURU_FILTER->env('LOGURU_FILTER', str, None)
+A:loguru._defaults.LOGURU_LEVEL->env('LOGURU_LEVEL', str, 'DEBUG')
+A:loguru._defaults.LOGURU_COLORIZE->env('LOGURU_COLORIZE', bool, None)
+A:loguru._defaults.LOGURU_SERIALIZE->env('LOGURU_SERIALIZE', bool, False)
+A:loguru._defaults.LOGURU_BACKTRACE->env('LOGURU_BACKTRACE', bool, True)
+A:loguru._defaults.LOGURU_DIAGNOSE->env('LOGURU_DIAGNOSE', bool, True)
+A:loguru._defaults.LOGURU_ENQUEUE->env('LOGURU_ENQUEUE', bool, False)
+A:loguru._defaults.LOGURU_CATCH->env('LOGURU_CATCH', bool, True)
+A:loguru._defaults.LOGURU_TRACE_NO->env('LOGURU_TRACE_NO', int, 5)
+A:loguru._defaults.LOGURU_TRACE_COLOR->env('LOGURU_TRACE_COLOR', str, '<cyan><bold>')
+A:loguru._defaults.LOGURU_TRACE_ICON->env('LOGURU_TRACE_ICON', str, '✏️')
+A:loguru._defaults.LOGURU_DEBUG_NO->env('LOGURU_DEBUG_NO', int, 10)
+A:loguru._defaults.LOGURU_DEBUG_COLOR->env('LOGURU_DEBUG_COLOR', str, '<blue><bold>')
+A:loguru._defaults.LOGURU_DEBUG_ICON->env('LOGURU_DEBUG_ICON', str, '🐞')
+A:loguru._defaults.LOGURU_INFO_NO->env('LOGURU_INFO_NO', int, 20)
+A:loguru._defaults.LOGURU_INFO_COLOR->env('LOGURU_INFO_COLOR', str, '<bold>')
+A:loguru._defaults.LOGURU_INFO_ICON->env('LOGURU_INFO_ICON', str, 'ℹ️')
+A:loguru._defaults.LOGURU_SUCCESS_NO->env('LOGURU_SUCCESS_NO', int, 25)
+A:loguru._defaults.LOGURU_SUCCESS_COLOR->env('LOGURU_SUCCESS_COLOR', str, '<green><bold>')
+A:loguru._defaults.LOGURU_SUCCESS_ICON->env('LOGURU_SUCCESS_ICON', str, '✔️')
+A:loguru._defaults.LOGURU_WARNING_NO->env('LOGURU_WARNING_NO', int, 30)
+A:loguru._defaults.LOGURU_WARNING_COLOR->env('LOGURU_WARNING_COLOR', str, '<yellow><bold>')
+A:loguru._defaults.LOGURU_WARNING_ICON->env('LOGURU_WARNING_ICON', str, '⚠️')
+A:loguru._defaults.LOGURU_ERROR_NO->env('LOGURU_ERROR_NO', int, 40)
+A:loguru._defaults.LOGURU_ERROR_COLOR->env('LOGURU_ERROR_COLOR', str, '<red><bold>')
+A:loguru._defaults.LOGURU_ERROR_ICON->env('LOGURU_ERROR_ICON', str, '❌')
+A:loguru._defaults.LOGURU_CRITICAL_NO->env('LOGURU_CRITICAL_NO', int, 50)
+A:loguru._defaults.LOGURU_CRITICAL_COLOR->env('LOGURU_CRITICAL_COLOR', str, '<RED><bold>')
+A:loguru._defaults.LOGURU_CRITICAL_ICON->env('LOGURU_CRITICAL_ICON', str, '☠️')
+loguru._defaults.env(key,type_,default=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/loguru0.5.2/lib/python3.6/site-packages/loguru/_filters.py----------------------------------------
+loguru._filters.filter_by_level(record,level_per_module)
+loguru._filters.filter_by_name(record,parent,length)
+loguru._filters.filter_none(record)
 

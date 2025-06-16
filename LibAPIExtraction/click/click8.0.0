@@ -1,459 +1,50 @@
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/_winconsole.py----------------------------------------
-A:click._winconsole.c_ssize_p->POINTER(c_ssize_t)
-A:click._winconsole.GetCommandLineW->WINFUNCTYPE(LPWSTR)(('GetCommandLineW', windll.kernel32))
-A:click._winconsole.CommandLineToArgvW->WINFUNCTYPE(POINTER(LPWSTR), LPCWSTR, POINTER(c_int))(('CommandLineToArgvW', windll.shell32))
-A:click._winconsole.LocalFree->WINFUNCTYPE(c_void_p, c_void_p)(('LocalFree', windll.kernel32))
-A:click._winconsole.STDIN_HANDLE->GetStdHandle(-10)
-A:click._winconsole.STDOUT_HANDLE->GetStdHandle(-11)
-A:click._winconsole.STDERR_HANDLE->GetStdHandle(-12)
-A:click._winconsole.buf->get_buffer(b)
-A:click._winconsole.bytes_to_be_read->len(b)
-A:click._winconsole.buffer->get_buffer(b, writable=True)
-A:click._winconsole.code_units_read->c_ulong()
-A:click._winconsole.rv->ReadConsoleW(HANDLE(self.handle), buffer, code_units_to_be_read, byref(code_units_read), None)
-A:click._winconsole.bytes_to_be_written->len(b)
-A:click._winconsole.code_units_written->c_ulong()
-A:click._winconsole.text_stream->_NonClosingTextIOWrapper(io.BufferedWriter(_WindowsConsoleWriter(STDERR_HANDLE)), 'utf-16-le', 'strict', line_buffering=True)
-A:click._winconsole.fileno->f.fileno()
-A:click._winconsole.handle->msvcrt.get_osfhandle(fileno)
-A:click._winconsole.func->_stream_factories.get(f.fileno())
-A:click._winconsole.b->getattr(f, 'buffer', None)
-click._winconsole.ConsoleStream(self,text_stream:t.TextIO,byte_stream:t.BinaryIO)
-click._winconsole.ConsoleStream.__getattr__(self,name:str)->t.Any
-click._winconsole.ConsoleStream.__init__(self,text_stream:t.TextIO,byte_stream:t.BinaryIO)
-click._winconsole.ConsoleStream.__repr__(self)
-click._winconsole.ConsoleStream.isatty(self)->bool
-click._winconsole.ConsoleStream.name(self)->str
-click._winconsole.ConsoleStream.write(self,x:t.AnyStr)->int
-click._winconsole.ConsoleStream.writelines(self,lines:t.Iterable[t.AnyStr])->None
-click._winconsole._WindowsConsoleRawIOBase(self,handle)
-click._winconsole._WindowsConsoleRawIOBase.__init__(self,handle)
-click._winconsole._WindowsConsoleRawIOBase.isatty(self)
-click._winconsole._WindowsConsoleReader(_WindowsConsoleRawIOBase)
-click._winconsole._WindowsConsoleReader.readable(self)
-click._winconsole._WindowsConsoleReader.readinto(self,b)
-click._winconsole._WindowsConsoleWriter(_WindowsConsoleRawIOBase)
-click._winconsole._WindowsConsoleWriter._get_error_message(errno)
-click._winconsole._WindowsConsoleWriter.writable(self)
-click._winconsole._WindowsConsoleWriter.write(self,b)
-click._winconsole._get_text_stderr(buffer_stream:t.BinaryIO)->t.TextIO
-click._winconsole._get_text_stdin(buffer_stream:t.BinaryIO)->t.TextIO
-click._winconsole._get_text_stdout(buffer_stream:t.BinaryIO)->t.TextIO
-click._winconsole._get_windows_console_stream(f:t.TextIO,encoding:t.Optional[str],errors:t.Optional[str])->t.Optional[t.TextIO]
-click._winconsole._is_console(f:t.TextIO)->bool
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/decorators.py----------------------------------------
+A:click.decorators.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
+A:click.decorators.FC->typing.TypeVar('FC', t.Callable[..., t.Any], Command)
+A:click.decorators.ctx->get_current_context()
+A:click.decorators.obj->get_current_context().find_object(object_type)
+A:click.decorators.help->inspect.cleandoc(help)
+A:click.decorators.cmd->_make_command(f, name, attrs, cls)
+A:click.decorators.ArgumentClass->attrs.pop('cls', Argument)
+A:click.decorators.option_attrs->attrs.copy()
+A:click.decorators.option_attrs['help']->inspect.cleandoc(option_attrs['help'])
+A:click.decorators.OptionClass->attrs.copy().pop('cls', Option)
+A:click.decorators.message->_('%(prog)s, version %(version)s')
+A:click.decorators.frame->inspect.currentframe()
+A:click.decorators.package_name->f_globals.get('__package__')
+A:click.decorators.version->importlib_metadata.version(package_name)
+click.argument(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
+click.command(name:t.Optional[str]=None,cls:t.Optional[t.Type[Command]]=None,**attrs:t.Any)->t.Callable[[F], Command]
+click.confirmation_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.decorators._make_command(f:F,name:t.Optional[str],attrs:t.MutableMapping[str,t.Any],cls:t.Type[Command])->Command
+click.decorators._param_memo(f:FC,param:Parameter)->None
+click.decorators.argument(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
+click.decorators.command(name:t.Optional[str]=None,cls:t.Optional[t.Type[Command]]=None,**attrs:t.Any)->t.Callable[[F], Command]
+click.decorators.confirmation_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.decorators.group(name:t.Optional[str]=None,**attrs:t.Any)->t.Callable[[F], Group]
+click.decorators.help_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.decorators.make_pass_decorator(object_type:t.Type,ensure:bool=False)->'t.Callable[[F], F]'
+click.decorators.option(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
+click.decorators.pass_context(f:F)->F
+click.decorators.pass_meta_key(key:str,*,doc_description:t.Optional[str]=None)->'t.Callable[[F], F]'
+click.decorators.pass_obj(f:F)->F
+click.decorators.password_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.decorators.version_option(version:t.Optional[str]=None,*param_decls:str,package_name:t.Optional[str]=None,prog_name:t.Optional[str]=None,message:t.Optional[str]=None,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.group(name:t.Optional[str]=None,**attrs:t.Any)->t.Callable[[F], Group]
+click.help_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.make_pass_decorator(object_type:t.Type,ensure:bool=False)->'t.Callable[[F], F]'
+click.option(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
+click.pass_context(f:F)->F
+click.pass_obj(f:F)->F
+click.password_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
+click.version_option(version:t.Optional[str]=None,*param_decls:str,package_name:t.Optional[str]=None,prog_name:t.Optional[str]=None,message:t.Optional[str]=None,**kwargs:t.Any)->t.Callable[[FC], FC]
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/types.py----------------------------------------
-A:click.types.info_dict->super().to_info_dict()
-A:click.types.value->value.strip().strip()
-A:click.types.enc->_get_argv_encoding()
-A:click.types.fs_enc->get_filesystem_encoding()
-A:click.types.choices_str->', '.join(map(repr, self.choices))
-A:click.types.normed_value->normed_value.casefold().casefold()
-A:click.types.str_choices->map(str, self.choices)
-A:click.types.incomplete->incomplete.lower().lower()
-A:click.types.converted->self._try_to_convert_date(value, format)
-A:click.types.formats_str->', '.join(map(repr, self.formats))
-A:click.types.rv->os.path.realpath(rv)
-A:click.types.norm->value.strip().strip().strip().lower()
-A:click.types.lazy->self.resolve_lazy_flag(value)
-A:click.types.(f, should_close)->open_stream(value, self.mode, self.encoding, self.errors, atomic=self.atomic)
-A:click.types.self.name->_('path')
-A:click.types.st->os.stat(rv)
-A:click.types.len_type->len(self.types)
-A:click.types.len_value->len(value)
-A:click.types.ty->type(default)
-A:click.types.UNPROCESSED->UnprocessedParamType()
-A:click.types.STRING->StringParamType()
-A:click.types.INT->IntParamType()
-A:click.types.FLOAT->FloatParamType()
-A:click.types.BOOL->BoolParamType()
-A:click.types.UUID->UUIDParameterType()
-click.Choice(self,choices:t.Sequence[str],case_sensitive:bool=True)
-click.Choice.__repr__(self)->str
-click.Choice.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.Choice.get_metavar(self,param:'Parameter')->str
-click.Choice.get_missing_message(self,param:'Parameter')->str
-click.Choice.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.Choice.to_info_dict(self)->t.Dict[str, t.Any]
-click.DateTime(self,formats:t.Optional[t.Sequence[str]]=None)
-click.DateTime.__repr__(self)->str
-click.DateTime._try_to_convert_date(self,value:t.Any,format:str)->t.Optional[datetime]
-click.DateTime.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.DateTime.get_metavar(self,param:'Parameter')->str
-click.DateTime.to_info_dict(self)->t.Dict[str, t.Any]
-click.File(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
-click.File.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.File.resolve_lazy_flag(self,value:t.Any)->bool
-click.File.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.File.to_info_dict(self)->t.Dict[str, t.Any]
-click.FloatRange(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
-click.FloatRange._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
-click.IntRange(_NumberRangeBase,IntParamType)
-click.IntRange._clamp(self,bound:int,dir:'te.Literal[1,-1]',open:bool)->int
-click.ParamType(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
-click.ParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.ParamType.fail(self,message:str,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)->t.NoReturn
-click.ParamType.get_metavar(self,param:'Parameter')->t.Optional[str]
-click.ParamType.get_missing_message(self,param:'Parameter')->t.Optional[str]
-click.ParamType.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.ParamType.split_envvar_value(self,rv:str)->t.Sequence[str]
-click.ParamType.to_info_dict(self)->t.Dict[str, t.Any]
-click.Path(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
-click.Path.coerce_path_result(self,rv:t.Any)->t.Any
-click.Path.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.Path.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.Path.to_info_dict(self)->t.Dict[str, t.Any]
-click.Tuple(self,types:t.Sequence[t.Union[t.Type,ParamType]])
-click.Tuple.arity(self)->int
-click.Tuple.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.Tuple.name(self)->str
-click.Tuple.to_info_dict(self)->t.Dict[str, t.Any]
-click.UUIDParameterType(ParamType)
-click.UUIDParameterType.__repr__(self)->str
-click.UUIDParameterType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.BoolParamType(ParamType)
-click.types.BoolParamType.__repr__(self)->str
-click.types.BoolParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.Choice(self,choices:t.Sequence[str],case_sensitive:bool=True)
-click.types.Choice.__init__(self,choices:t.Sequence[str],case_sensitive:bool=True)
-click.types.Choice.__repr__(self)->str
-click.types.Choice.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.Choice.get_metavar(self,param:'Parameter')->str
-click.types.Choice.get_missing_message(self,param:'Parameter')->str
-click.types.Choice.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.types.Choice.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.CompositeParamType(ParamType)
-click.types.CompositeParamType.arity(self)->int
-click.types.DateTime(self,formats:t.Optional[t.Sequence[str]]=None)
-click.types.DateTime.__init__(self,formats:t.Optional[t.Sequence[str]]=None)
-click.types.DateTime.__repr__(self)->str
-click.types.DateTime._try_to_convert_date(self,value:t.Any,format:str)->t.Optional[datetime]
-click.types.DateTime.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.DateTime.get_metavar(self,param:'Parameter')->str
-click.types.DateTime.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.File(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
-click.types.File.__init__(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
-click.types.File.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.File.resolve_lazy_flag(self,value:t.Any)->bool
-click.types.File.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.types.File.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.FloatParamType(_NumberParamTypeBase)
-click.types.FloatParamType.__repr__(self)->str
-click.types.FloatRange(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
-click.types.FloatRange.__init__(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
-click.types.FloatRange._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
-click.types.FuncParamType(self,func:t.Callable[[t.Any],t.Any])
-click.types.FuncParamType.__init__(self,func:t.Callable[[t.Any],t.Any])
-click.types.FuncParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.FuncParamType.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.IntParamType(_NumberParamTypeBase)
-click.types.IntParamType.__repr__(self)->str
-click.types.IntRange(_NumberRangeBase,IntParamType)
-click.types.IntRange._clamp(self,bound:int,dir:'te.Literal[1,-1]',open:bool)->int
-click.types.ParamType(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
-click.types.ParamType.__call__(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
-click.types.ParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.ParamType.fail(self,message:str,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)->t.NoReturn
-click.types.ParamType.get_metavar(self,param:'Parameter')->t.Optional[str]
-click.types.ParamType.get_missing_message(self,param:'Parameter')->t.Optional[str]
-click.types.ParamType.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.types.ParamType.split_envvar_value(self,rv:str)->t.Sequence[str]
-click.types.ParamType.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.Path(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
-click.types.Path.__init__(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
-click.types.Path.coerce_path_result(self,rv:t.Any)->t.Any
-click.types.Path.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.Path.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
-click.types.Path.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.StringParamType(ParamType)
-click.types.StringParamType.__repr__(self)->str
-click.types.StringParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.Tuple(self,types:t.Sequence[t.Union[t.Type,ParamType]])
-click.types.Tuple.__init__(self,types:t.Sequence[t.Union[t.Type,ParamType]])
-click.types.Tuple.arity(self)->int
-click.types.Tuple.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.Tuple.name(self)->str
-click.types.Tuple.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.UUIDParameterType(ParamType)
-click.types.UUIDParameterType.__repr__(self)->str
-click.types.UUIDParameterType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types.UnprocessedParamType(ParamType)
-click.types.UnprocessedParamType.__repr__(self)->str
-click.types.UnprocessedParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types._NumberParamTypeBase(ParamType)
-click.types._NumberParamTypeBase.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types._NumberRangeBase(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
-click.types._NumberRangeBase.__init__(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
-click.types._NumberRangeBase.__repr__(self)->str
-click.types._NumberRangeBase._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
-click.types._NumberRangeBase._describe_range(self)->str
-click.types._NumberRangeBase.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
-click.types._NumberRangeBase.to_info_dict(self)->t.Dict[str, t.Any]
-click.types.convert_type(ty:t.Optional[t.Any],default:t.Optional[t.Any]=None)->ParamType
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/globals.py----------------------------------------
-A:click.globals._local->local()
-A:click.globals.ctx->get_current_context(silent=True)
-click.get_current_context(silent:bool=False)->t.Optional['Context']
-click.globals.get_current_context(silent:bool=False)->t.Optional['Context']
-click.globals.pop_context()->None
-click.globals.push_context(ctx:'Context')->None
-click.globals.resolve_color_default(color:t.Optional[bool]=None)->t.Optional[bool]
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/testing.py----------------------------------------
-A:click.testing.rv->dict(self.env)
-A:click.testing.input->input.encode(charset).encode(charset)
-A:click.testing.bytes_input->make_input_stream(input, self.charset)
-A:click.testing.env->self.make_env(env)
-A:click.testing.bytes_output->io.BytesIO()
-A:click.testing.bytes_inputecho_input->tempfile.mkdtemp(dir=temp_dir).cast(t.BinaryIO, EchoingStdin(bytes_input, bytes_output))
-A:click.testing.sys.stdintext_input->_NamedTextIOWrapper(bytes_input, encoding=self.charset, name='<stdin>', mode='r')
-A:click.testing.sys.stdout->_NamedTextIOWrapper(bytes_output, encoding=self.charset, name='<stdout>', mode='w')
-A:click.testing.bytes_error->io.BytesIO()
-A:click.testing.sys.stderr->_NamedTextIOWrapper(bytes_error, encoding=self.charset, name='<stderr>', mode='w', errors='backslashreplace')
-A:click.testing.val->text_input.readline().rstrip('\r\n')
-A:click.testing.char->sys.stdin.read(1)
-A:click.testing.old_env[key]->os.environ.get(key)
-A:click.testing.args->shlex.split(args)
-A:click.testing.prog_name->self.get_default_prog_name(cli)
-A:click.testing.return_value->cli.main(args=args or (), prog_name=prog_name, **extra)
-A:click.testing.exc_info->sys.exc_info()
-A:click.testing.e_code->tempfile.mkdtemp(dir=temp_dir).cast(t.Optional[t.Union[int, t.Any]], e.code)
-A:click.testing.stdout->outstreams[0].getvalue()
-A:click.testing.stderr->outstreams[1].getvalue()
-A:click.testing.cwd->os.getcwd()
-A:click.testing.t->tempfile.mkdtemp(dir=temp_dir)
-click.testing.CliRunner(self,charset:str='utf-8',env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,echo_stdin:bool=False,mix_stderr:bool=True)
-click.testing.CliRunner.__init__(self,charset:str='utf-8',env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,echo_stdin:bool=False,mix_stderr:bool=True)
-click.testing.CliRunner.get_default_prog_name(self,cli:'BaseCommand')->str
-click.testing.CliRunner.invoke(self,cli:'BaseCommand',args:t.Optional[t.Union[str,t.Sequence[str]]]=None,input:t.Optional[t.Union[str,bytes,t.IO]]=None,env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,catch_exceptions:bool=True,color:bool=False,**extra:t.Any)->Result
-click.testing.CliRunner.isolated_filesystem(self,temp_dir:t.Optional[t.Union[str,os.PathLike]]=None)->t.Iterator[str]
-click.testing.CliRunner.isolation(self,input:t.Optional[t.Union[str,bytes,t.IO]]=None,env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,color:bool=False)->t.Iterator[t.Tuple[io.BytesIO, t.Optional[io.BytesIO]]]
-click.testing.CliRunner.make_env(self,overrides:t.Optional[t.Mapping[str,t.Optional[str]]]=None)->t.Mapping[str, t.Optional[str]]
-click.testing.EchoingStdin(self,input:t.BinaryIO,output:t.BinaryIO)
-click.testing.EchoingStdin.__getattr__(self,x:str)->t.Any
-click.testing.EchoingStdin.__init__(self,input:t.BinaryIO,output:t.BinaryIO)
-click.testing.EchoingStdin.__iter__(self)->t.Iterator[bytes]
-click.testing.EchoingStdin.__repr__(self)->str
-click.testing.EchoingStdin._echo(self,rv:bytes)->bytes
-click.testing.EchoingStdin.read(self,n:int=-1)->bytes
-click.testing.EchoingStdin.read1(self,n:int=-1)->bytes
-click.testing.EchoingStdin.readline(self,n:int=-1)->bytes
-click.testing.EchoingStdin.readlines(self)->t.List[bytes]
-click.testing.Result(self,runner:'CliRunner',stdout_bytes:bytes,stderr_bytes:t.Optional[bytes],return_value:t.Any,exit_code:int,exception:t.Optional[BaseException],exc_info:t.Optional[t.Tuple[t.Type[BaseException],BaseException,TracebackType]]=None)
-click.testing.Result.__init__(self,runner:'CliRunner',stdout_bytes:bytes,stderr_bytes:t.Optional[bytes],return_value:t.Any,exit_code:int,exception:t.Optional[BaseException],exc_info:t.Optional[t.Tuple[t.Type[BaseException],BaseException,TracebackType]]=None)
-click.testing.Result.__repr__(self)->str
-click.testing.Result.output(self)->str
-click.testing.Result.stderr(self)->str
-click.testing.Result.stdout(self)->str
-click.testing._NamedTextIOWrapper(self,buffer:t.BinaryIO,name:str,mode:str,**kwargs:t.Any)
-click.testing._NamedTextIOWrapper.__init__(self,buffer:t.BinaryIO,name:str,mode:str,**kwargs:t.Any)
-click.testing._NamedTextIOWrapper.mode(self)->str
-click.testing._NamedTextIOWrapper.name(self)->str
-click.testing._pause_echo(stream:t.Optional[EchoingStdin])->t.Iterator[None]
-click.testing.make_input_stream(input:t.Optional[t.Union[str,bytes,t.IO]],charset:str)->t.BinaryIO
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/utils.py----------------------------------------
-A:click.utils.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
-A:click.utils.paragraph_end->help.find('\n\n')
-A:click.utils.words->help.split()
-A:click.utils.(self._f, self.should_close)->open_stream(filename, mode, encoding, errors)
-A:click.utils.(rv, self.should_close)->open_stream(self.name, self.mode, self.encoding, self.errors, atomic=self.atomic)
-A:click.utils.file->auto_wrap_for_ansi(file)
-A:click.utils.binary_file->_find_binary_writer(file)
-A:click.utils.color->resolve_color_default(color)
-A:click.utils.out->strip_ansi(out)
-A:click.utils.opener->_compat.text_streams.get(name)
-A:click.utils.(f, should_close)->open_stream(filename, mode, encoding, errors, atomic=atomic)
-A:click.utils.f->typing.cast(t.IO, KeepOpenFile(f))
-A:click.utils.filename->os.path.basename(filename)
-A:click.utils.folder->os.path.expanduser('~')
-A:click.utils.py_module->typing.cast(str, _main.__package__)
-A:click.utils.arg->os.path.expandvars(arg)
-A:click.utils.matches->glob(arg, recursive=glob_recursive)
-click.echo(message:t.Optional[t.Any]=None,file:t.Optional[t.IO]=None,nl:bool=True,err:bool=False,color:t.Optional[bool]=None)->None
-click.format_filename(filename:t.Union[str,bytes,os.PathLike],shorten:bool=False)->str
-click.get_app_dir(app_name:str,roaming:bool=True,force_posix:bool=False)->str
-click.get_binary_stream(name:"te.Literal['stdin','stdout','stderr']")->t.BinaryIO
-click.get_os_args()->t.Sequence[str]
-click.get_text_stream(name:"te.Literal['stdin','stdout','stderr']",encoding:t.Optional[str]=None,errors:t.Optional[str]='strict')->t.TextIO
-click.open_file(filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:bool=False,atomic:bool=False)->t.IO
-click.utils.KeepOpenFile(self,file:t.IO)
-click.utils.KeepOpenFile.__enter__(self)->'KeepOpenFile'
-click.utils.KeepOpenFile.__exit__(self,exc_type,exc_value,tb)
-click.utils.KeepOpenFile.__getattr__(self,name:str)->t.Any
-click.utils.KeepOpenFile.__init__(self,file:t.IO)
-click.utils.KeepOpenFile.__iter__(self)->t.Iterator[t.AnyStr]
-click.utils.KeepOpenFile.__repr__(self)->str
-click.utils.LazyFile(self,filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',atomic:bool=False)
-click.utils.LazyFile.__enter__(self)->'LazyFile'
-click.utils.LazyFile.__exit__(self,exc_type,exc_value,tb)
-click.utils.LazyFile.__getattr__(self,name:str)->t.Any
-click.utils.LazyFile.__init__(self,filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',atomic:bool=False)
-click.utils.LazyFile.__iter__(self)->t.Iterator[t.AnyStr]
-click.utils.LazyFile.__repr__(self)->str
-click.utils.LazyFile.close(self)->None
-click.utils.LazyFile.close_intelligently(self)->None
-click.utils.LazyFile.open(self)->t.IO
-click.utils.PacifyFlushWrapper(self,wrapped:t.IO)
-click.utils.PacifyFlushWrapper.__getattr__(self,attr:str)->t.Any
-click.utils.PacifyFlushWrapper.__init__(self,wrapped:t.IO)
-click.utils.PacifyFlushWrapper.flush(self)->None
-click.utils._detect_program_name(path:t.Optional[str]=None,_main:ModuleType=sys.modules['__main__'])->str
-click.utils._expand_args(args:t.Iterable[str],*,user:bool=True,env:bool=True,glob_recursive:bool=True)->t.List[str]
-click.utils._posixify(name:str)->str
-click.utils.echo(message:t.Optional[t.Any]=None,file:t.Optional[t.IO]=None,nl:bool=True,err:bool=False,color:t.Optional[bool]=None)->None
-click.utils.format_filename(filename:t.Union[str,bytes,os.PathLike],shorten:bool=False)->str
-click.utils.get_app_dir(app_name:str,roaming:bool=True,force_posix:bool=False)->str
-click.utils.get_binary_stream(name:"te.Literal['stdin','stdout','stderr']")->t.BinaryIO
-click.utils.get_os_args()->t.Sequence[str]
-click.utils.get_text_stream(name:"te.Literal['stdin','stdout','stderr']",encoding:t.Optional[str]=None,errors:t.Optional[str]='strict')->t.TextIO
-click.utils.make_default_short_help(help:str,max_length:int=45)->str
-click.utils.make_str(value:t.Any)->str
-click.utils.open_file(filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:bool=False,atomic:bool=False)->t.IO
-click.utils.safecall(func:F)->F
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/_termui_impl.py----------------------------------------
-A:click._termui_impl.V->int(self.eta).TypeVar('V')
-A:click._termui_impl.file->_default_text_stdout()
-A:click._termui_impl.length->length_hint(iterable, -1)
-A:click._termui_impl.iterable->int(self.eta).cast(t.Iterable[V], range(length))
-A:click._termui_impl.self.iter->iter(iterable)
-A:click._termui_impl.self.startself.last_eta->time.time()
-A:click._termui_impl.t->int(self.eta)
-A:click._termui_impl.pos->str(self.pos)
-A:click._termui_impl.bar_length->int(self.pct * self.width)
-A:click._termui_impl.chars->list(self.empty_char * (self.width or 1))
-A:click._termui_impl.bar->''.join(chars)
-A:click._termui_impl.item_info->self.item_show_func(self.current_item)
-A:click._termui_impl.clutter_length->term_len(self.format_progress_line())
-A:click._termui_impl.new_width->max(0, shutil.get_terminal_size().columns - clutter_length)
-A:click._termui_impl.line->''.join(buf)
-A:click._termui_impl.line_len->term_len(line)
-A:click._termui_impl.self.last_eta->time.time()
-A:click._termui_impl.stdout->_default_text_stdout()
-A:click._termui_impl.pager_cmd->(os.environ.get('PAGER', None) or '').strip()
-A:click._termui_impl.(fd, filename)->tempfile.mkstemp()
-A:click._termui_impl.env->dict(os.environ)
-A:click._termui_impl.cmd_detail->cmd.rsplit('/', 1)[-1].split()
-A:click._termui_impl.c->subprocess.Popen(['xdg-open', url])
-A:click._termui_impl.stdin->int(self.eta).cast(t.BinaryIO, c.stdin)
-A:click._termui_impl.encoding->get_best_encoding(sys.stdout)
-A:click._termui_impl.text->strip_ansi(text)
-A:click._termui_impl.(_, filename)->tempfile.mkstemp()
-A:click._termui_impl.rv->func()
-A:click._termui_impl.editor->self.get_editor()
-A:click._termui_impl.environ->os.environ.copy()
-A:click._termui_impl.exit_code->subprocess.Popen(['xdg-open', url]).wait()
-A:click._termui_impl.data->strip_ansi(text).encode('utf-8')
-A:click._termui_impl.(fd, name)->tempfile.mkstemp(prefix='editor-', suffix=self.extension)
-A:click._termui_impl.timestamp->os.path.getmtime(name)
-A:click._termui_impl.url->_unquote_file(url)
-A:click._termui_impl.null->open('/dev/null', 'w')
-A:click._termui_impl.f->open('/dev/tty')
-A:click._termui_impl.fd->sys.stdin.fileno()
-A:click._termui_impl.old_settings->termios.tcgetattr(fd)
-A:click._termui_impl.ch->os.read(fd, 32).decode(get_best_encoding(sys.stdin), 'replace')
-click._termui_impl.Editor(self,editor:t.Optional[str]=None,env:t.Optional[t.Mapping[str,str]]=None,require_save:bool=True,extension:str='.txt')
-click._termui_impl.Editor.__init__(self,editor:t.Optional[str]=None,env:t.Optional[t.Mapping[str,str]]=None,require_save:bool=True,extension:str='.txt')
-click._termui_impl.Editor.edit(self,text:t.Optional[t.AnyStr])->t.Optional[t.AnyStr]
-click._termui_impl.Editor.edit_file(self,filename:str)->None
-click._termui_impl.Editor.get_editor(self)->str
-click._termui_impl.ProgressBar(self,iterable:t.Optional[t.Iterable[V]],length:t.Optional[int]=None,fill_char:str='#',empty_char:str='',bar_template:str='%(bar)s',info_sep:str='',show_eta:bool=True,show_percent:t.Optional[bool]=None,show_pos:bool=False,item_show_func:t.Optional[t.Callable[[t.Optional[V]],t.Optional[str]]]=None,label:t.Optional[str]=None,file:t.Optional[t.TextIO]=None,color:t.Optional[bool]=None,update_min_steps:int=1,width:int=30)
-click._termui_impl.ProgressBar.__enter__(self)->'ProgressBar'
-click._termui_impl.ProgressBar.__exit__(self,exc_type,exc_value,tb)
-click._termui_impl.ProgressBar.__init__(self,iterable:t.Optional[t.Iterable[V]],length:t.Optional[int]=None,fill_char:str='#',empty_char:str='',bar_template:str='%(bar)s',info_sep:str='',show_eta:bool=True,show_percent:t.Optional[bool]=None,show_pos:bool=False,item_show_func:t.Optional[t.Callable[[t.Optional[V]],t.Optional[str]]]=None,label:t.Optional[str]=None,file:t.Optional[t.TextIO]=None,color:t.Optional[bool]=None,update_min_steps:int=1,width:int=30)
-click._termui_impl.ProgressBar.__iter__(self)->t.Iterable[V]
-click._termui_impl.ProgressBar.__next__(self)->V
-click._termui_impl.ProgressBar.eta(self)->float
-click._termui_impl.ProgressBar.finish(self)->None
-click._termui_impl.ProgressBar.format_bar(self)->str
-click._termui_impl.ProgressBar.format_eta(self)->str
-click._termui_impl.ProgressBar.format_pct(self)->str
-click._termui_impl.ProgressBar.format_pos(self)->str
-click._termui_impl.ProgressBar.format_progress_line(self)->str
-click._termui_impl.ProgressBar.generator(self)->t.Iterator[V]
-click._termui_impl.ProgressBar.make_step(self,n_steps:int)->None
-click._termui_impl.ProgressBar.pct(self)->float
-click._termui_impl.ProgressBar.render_finish(self)->None
-click._termui_impl.ProgressBar.render_progress(self)->None
-click._termui_impl.ProgressBar.time_per_iteration(self)->float
-click._termui_impl.ProgressBar.update(self,n_steps:int,current_item:t.Optional[V]=None)->None
-click._termui_impl._nullpager(stream:t.TextIO,generator:t.Iterable[str],color:t.Optional[bool])->None
-click._termui_impl._pipepager(generator:t.Iterable[str],cmd:str,color:t.Optional[bool])->None
-click._termui_impl._tempfilepager(generator:t.Iterable[str],cmd:str,color:t.Optional[bool])->None
-click._termui_impl._translate_ch_to_exc(ch:str)->t.Optional[BaseException]
-click._termui_impl.open_url(url:str,wait:bool=False,locate:bool=False)->int
-click._termui_impl.pager(generator:t.Iterable[str],color:t.Optional[bool]=None)->None
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/parser.py----------------------------------------
-A:click.parser.V->typing.TypeVar('V')
-A:click.parser._flag_needs_value->object()
-A:click.parser.args->deque(args)
-A:click.parser.nargs_spec->deque(nargs_spec)
-A:click.parser.nargs->_fetch(nargs_spec)
-A:click.parser.spos->len(rv)
-A:click.parser.rv[spos]->tuple(args)
-A:click.parser.rv[spos + 1:]->reversed(rv[spos + 1:])
-A:click.parser.(prefix, opt)->split_opt(opt)
-A:click.parser.lex->shlex.shlex(string, posix=True)
-A:click.parser.self.prefixes->set()
-A:click.parser.(prefix, value)->split_opt(opt)
-A:click.parser.holes->sum((1 for x in value if x is None))
-A:click.parser.option->self._short_opt.get(opt)
-A:click.parser.state->ParsingState(args)
-A:click.parser.(pargs, args)->_unpack_args(state.largs + state.rargs, [x.nargs for x in self._args])
-A:click.parser.arg->ParsingState(args).rargs.pop(0)
-A:click.parser.arglen->len(arg)
-A:click.parser.possibilities->get_close_matches(opt, self._long_opt)
-A:click.parser.value->tuple(state.rargs[:nargs])
-A:click.parser.opt->normalize_opt(f'{prefix}{ch}', self.ctx)
-A:click.parser.(long_opt, explicit_value)->ParsingState(args).rargs.pop(0).split('=', 1)
-A:click.parser.norm_long_opt->normalize_opt(long_opt, self.ctx)
-click.OptionParser(self,ctx:t.Optional['Context']=None)
-click.OptionParser._get_value_from_state(self,option_name:str,option:Option,state:ParsingState)->t.Any
-click.OptionParser._match_long_opt(self,opt:str,explicit_value:t.Optional[str],state:ParsingState)->None
-click.OptionParser._match_short_opt(self,arg:str,state:ParsingState)->None
-click.OptionParser._process_args_for_args(self,state:ParsingState)->None
-click.OptionParser._process_args_for_options(self,state:ParsingState)->None
-click.OptionParser._process_opts(self,arg:str,state:ParsingState)->None
-click.OptionParser.add_argument(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)->None
-click.OptionParser.add_option(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)->None
-click.OptionParser.parse_args(self,args:t.List[str])->t.Tuple[t.Dict[str, t.Any], t.List[str], t.List['CoreParameter']]
-click.parser.Argument(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)
-click.parser.Argument.__init__(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)
-click.parser.Argument.process(self,value:t.Union[t.Optional[str],t.Sequence[t.Optional[str]]],state:'ParsingState')->None
-click.parser.Option(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)
-click.parser.Option.__init__(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)
-click.parser.Option.process(self,value:str,state:'ParsingState')->None
-click.parser.Option.takes_value(self)->bool
-click.parser.OptionParser(self,ctx:t.Optional['Context']=None)
-click.parser.OptionParser.__init__(self,ctx:t.Optional['Context']=None)
-click.parser.OptionParser._get_value_from_state(self,option_name:str,option:Option,state:ParsingState)->t.Any
-click.parser.OptionParser._match_long_opt(self,opt:str,explicit_value:t.Optional[str],state:ParsingState)->None
-click.parser.OptionParser._match_short_opt(self,arg:str,state:ParsingState)->None
-click.parser.OptionParser._process_args_for_args(self,state:ParsingState)->None
-click.parser.OptionParser._process_args_for_options(self,state:ParsingState)->None
-click.parser.OptionParser._process_opts(self,arg:str,state:ParsingState)->None
-click.parser.OptionParser.add_argument(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)->None
-click.parser.OptionParser.add_option(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)->None
-click.parser.OptionParser.parse_args(self,args:t.List[str])->t.Tuple[t.Dict[str, t.Any], t.List[str], t.List['CoreParameter']]
-click.parser.ParsingState(self,rargs:t.List[str])
-click.parser.ParsingState.__init__(self,rargs:t.List[str])
-click.parser._unpack_args(args:t.Sequence[str],nargs_spec:t.Sequence[int])->t.Tuple[t.Sequence[t.Union[str, t.Sequence[t.Optional[str]], None]], t.List[str]]
-click.parser.normalize_opt(opt:str,ctx:t.Optional['Context'])->str
-click.parser.split_arg_string(string:str)->t.List[str]
-click.parser.split_opt(opt:str)->t.Tuple[str, str]
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/core.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/core.py----------------------------------------
 A:click.core.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
 A:click.core.V->typing.TypeVar('V')
 A:click.core.multi->typing.cast(MultiCommand, ctx.command)
@@ -766,13 +357,180 @@ click.core.batch(iterable:t.Iterable[V],batch_size:int)->t.List[t.Tuple[V, ...]]
 click.core.iter_params_for_processing(invocation_order:t.Sequence['Parameter'],declaration_order:t.Sequence['Parameter'])->t.List['Parameter']
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/_unicodefun.py----------------------------------------
-A:click._unicodefun.good_locales->set()
-A:click._unicodefun.locale->line.strip()
-click._unicodefun._verify_python_env()->None
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/utils.py----------------------------------------
+A:click.utils.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
+A:click.utils.paragraph_end->help.find('\n\n')
+A:click.utils.words->help.split()
+A:click.utils.(self._f, self.should_close)->open_stream(filename, mode, encoding, errors)
+A:click.utils.(rv, self.should_close)->open_stream(self.name, self.mode, self.encoding, self.errors, atomic=self.atomic)
+A:click.utils.file->auto_wrap_for_ansi(file)
+A:click.utils.binary_file->_find_binary_writer(file)
+A:click.utils.color->resolve_color_default(color)
+A:click.utils.out->strip_ansi(out)
+A:click.utils.opener->_compat.text_streams.get(name)
+A:click.utils.(f, should_close)->open_stream(filename, mode, encoding, errors, atomic=atomic)
+A:click.utils.f->typing.cast(t.IO, KeepOpenFile(f))
+A:click.utils.filename->os.path.basename(filename)
+A:click.utils.folder->os.path.expanduser('~')
+A:click.utils.py_module->typing.cast(str, _main.__package__)
+A:click.utils.arg->os.path.expandvars(arg)
+A:click.utils.matches->glob(arg, recursive=glob_recursive)
+click.echo(message:t.Optional[t.Any]=None,file:t.Optional[t.IO]=None,nl:bool=True,err:bool=False,color:t.Optional[bool]=None)->None
+click.format_filename(filename:t.Union[str,bytes,os.PathLike],shorten:bool=False)->str
+click.get_app_dir(app_name:str,roaming:bool=True,force_posix:bool=False)->str
+click.get_binary_stream(name:"te.Literal['stdin','stdout','stderr']")->t.BinaryIO
+click.get_os_args()->t.Sequence[str]
+click.get_text_stream(name:"te.Literal['stdin','stdout','stderr']",encoding:t.Optional[str]=None,errors:t.Optional[str]='strict')->t.TextIO
+click.open_file(filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:bool=False,atomic:bool=False)->t.IO
+click.utils.KeepOpenFile(self,file:t.IO)
+click.utils.KeepOpenFile.__enter__(self)->'KeepOpenFile'
+click.utils.KeepOpenFile.__exit__(self,exc_type,exc_value,tb)
+click.utils.KeepOpenFile.__getattr__(self,name:str)->t.Any
+click.utils.KeepOpenFile.__init__(self,file:t.IO)
+click.utils.KeepOpenFile.__iter__(self)->t.Iterator[t.AnyStr]
+click.utils.KeepOpenFile.__repr__(self)->str
+click.utils.LazyFile(self,filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',atomic:bool=False)
+click.utils.LazyFile.__enter__(self)->'LazyFile'
+click.utils.LazyFile.__exit__(self,exc_type,exc_value,tb)
+click.utils.LazyFile.__getattr__(self,name:str)->t.Any
+click.utils.LazyFile.__init__(self,filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',atomic:bool=False)
+click.utils.LazyFile.__iter__(self)->t.Iterator[t.AnyStr]
+click.utils.LazyFile.__repr__(self)->str
+click.utils.LazyFile.close(self)->None
+click.utils.LazyFile.close_intelligently(self)->None
+click.utils.LazyFile.open(self)->t.IO
+click.utils.PacifyFlushWrapper(self,wrapped:t.IO)
+click.utils.PacifyFlushWrapper.__getattr__(self,attr:str)->t.Any
+click.utils.PacifyFlushWrapper.__init__(self,wrapped:t.IO)
+click.utils.PacifyFlushWrapper.flush(self)->None
+click.utils._detect_program_name(path:t.Optional[str]=None,_main:ModuleType=sys.modules['__main__'])->str
+click.utils._expand_args(args:t.Iterable[str],*,user:bool=True,env:bool=True,glob_recursive:bool=True)->t.List[str]
+click.utils._posixify(name:str)->str
+click.utils.echo(message:t.Optional[t.Any]=None,file:t.Optional[t.IO]=None,nl:bool=True,err:bool=False,color:t.Optional[bool]=None)->None
+click.utils.format_filename(filename:t.Union[str,bytes,os.PathLike],shorten:bool=False)->str
+click.utils.get_app_dir(app_name:str,roaming:bool=True,force_posix:bool=False)->str
+click.utils.get_binary_stream(name:"te.Literal['stdin','stdout','stderr']")->t.BinaryIO
+click.utils.get_os_args()->t.Sequence[str]
+click.utils.get_text_stream(name:"te.Literal['stdin','stdout','stderr']",encoding:t.Optional[str]=None,errors:t.Optional[str]='strict')->t.TextIO
+click.utils.make_default_short_help(help:str,max_length:int=45)->str
+click.utils.make_str(value:t.Any)->str
+click.utils.open_file(filename:str,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:bool=False,atomic:bool=False)->t.IO
+click.utils.safecall(func:F)->F
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/_compat.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/exceptions.py----------------------------------------
+A:click.exceptions.file->get_text_stderr()
+A:click.exceptions.hint->_('unknown error')
+A:click.exceptions.param_hint->_join_param_hints(param_hint)
+A:click.exceptions.msg_extra->self.param.type.get_missing_message(self.param)
+A:click.exceptions.missing->_('Missing {param_type}').format(param_type=param_type)
+A:click.exceptions.message->_('No such option: {name}').format(name=option_name)
+A:click.exceptions.possibility_str->', '.join(sorted(self.possibilities))
+A:click.exceptions.suggest->ngettext('Did you mean {possibility}?', '(Possible options: {possibilities})', len(self.possibilities)).format(possibility=possibility_str, possibilities=possibility_str)
+A:click.exceptions.self.ui_filename->os.fsdecode(filename)
+click.Abort(RuntimeError)
+click.BadArgumentUsage(UsageError)
+click.BadOptionUsage(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
+click.BadParameter(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
+click.BadParameter.format_message(self)->str
+click.ClickException(self,message:str)
+click.ClickException.__str__(self)->str
+click.ClickException.format_message(self)->str
+click.ClickException.show(self,file:t.Optional[t.IO]=None)->None
+click.FileError(self,filename:str,hint:t.Optional[str]=None)
+click.FileError.format_message(self)->str
+click.MissingParameter(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
+click.MissingParameter.__str__(self)->str
+click.MissingParameter.format_message(self)->str
+click.NoSuchOption(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
+click.NoSuchOption.format_message(self)->str
+click.UsageError(self,message:str,ctx:t.Optional['Context']=None)
+click.UsageError.show(self,file:t.Optional[t.IO]=None)->None
+click.exceptions.Abort(RuntimeError)
+click.exceptions.BadArgumentUsage(UsageError)
+click.exceptions.BadOptionUsage(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
+click.exceptions.BadOptionUsage.__init__(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
+click.exceptions.BadParameter(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
+click.exceptions.BadParameter.__init__(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
+click.exceptions.BadParameter.format_message(self)->str
+click.exceptions.ClickException(self,message:str)
+click.exceptions.ClickException.__init__(self,message:str)
+click.exceptions.ClickException.__str__(self)->str
+click.exceptions.ClickException.format_message(self)->str
+click.exceptions.ClickException.show(self,file:t.Optional[t.IO]=None)->None
+click.exceptions.Exit(self,code:int=0)
+click.exceptions.Exit.__init__(self,code:int=0)
+click.exceptions.FileError(self,filename:str,hint:t.Optional[str]=None)
+click.exceptions.FileError.__init__(self,filename:str,hint:t.Optional[str]=None)
+click.exceptions.FileError.format_message(self)->str
+click.exceptions.MissingParameter(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
+click.exceptions.MissingParameter.__init__(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
+click.exceptions.MissingParameter.__str__(self)->str
+click.exceptions.MissingParameter.format_message(self)->str
+click.exceptions.NoSuchOption(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
+click.exceptions.NoSuchOption.__init__(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
+click.exceptions.NoSuchOption.format_message(self)->str
+click.exceptions.UsageError(self,message:str,ctx:t.Optional['Context']=None)
+click.exceptions.UsageError.__init__(self,message:str,ctx:t.Optional['Context']=None)
+click.exceptions.UsageError.show(self,file:t.Optional[t.IO]=None)->None
+click.exceptions._join_param_hints(param_hint:t.Optional[t.Union[t.Sequence[str],str]])->t.Optional[str]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/testing.py----------------------------------------
+A:click.testing.rv->dict(self.env)
+A:click.testing.input->input.encode(charset).encode(charset)
+A:click.testing.bytes_input->make_input_stream(input, self.charset)
+A:click.testing.env->self.make_env(env)
+A:click.testing.bytes_output->io.BytesIO()
+A:click.testing.bytes_inputecho_input->tempfile.mkdtemp(dir=temp_dir).cast(t.BinaryIO, EchoingStdin(bytes_input, bytes_output))
+A:click.testing.sys.stdintext_input->_NamedTextIOWrapper(bytes_input, encoding=self.charset, name='<stdin>', mode='r')
+A:click.testing.sys.stdout->_NamedTextIOWrapper(bytes_output, encoding=self.charset, name='<stdout>', mode='w')
+A:click.testing.bytes_error->io.BytesIO()
+A:click.testing.sys.stderr->_NamedTextIOWrapper(bytes_error, encoding=self.charset, name='<stderr>', mode='w', errors='backslashreplace')
+A:click.testing.val->text_input.readline().rstrip('\r\n')
+A:click.testing.char->sys.stdin.read(1)
+A:click.testing.old_env[key]->os.environ.get(key)
+A:click.testing.args->shlex.split(args)
+A:click.testing.prog_name->self.get_default_prog_name(cli)
+A:click.testing.return_value->cli.main(args=args or (), prog_name=prog_name, **extra)
+A:click.testing.exc_info->sys.exc_info()
+A:click.testing.e_code->tempfile.mkdtemp(dir=temp_dir).cast(t.Optional[t.Union[int, t.Any]], e.code)
+A:click.testing.stdout->outstreams[0].getvalue()
+A:click.testing.stderr->outstreams[1].getvalue()
+A:click.testing.cwd->os.getcwd()
+A:click.testing.t->tempfile.mkdtemp(dir=temp_dir)
+click.testing.CliRunner(self,charset:str='utf-8',env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,echo_stdin:bool=False,mix_stderr:bool=True)
+click.testing.CliRunner.__init__(self,charset:str='utf-8',env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,echo_stdin:bool=False,mix_stderr:bool=True)
+click.testing.CliRunner.get_default_prog_name(self,cli:'BaseCommand')->str
+click.testing.CliRunner.invoke(self,cli:'BaseCommand',args:t.Optional[t.Union[str,t.Sequence[str]]]=None,input:t.Optional[t.Union[str,bytes,t.IO]]=None,env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,catch_exceptions:bool=True,color:bool=False,**extra:t.Any)->Result
+click.testing.CliRunner.isolated_filesystem(self,temp_dir:t.Optional[t.Union[str,os.PathLike]]=None)->t.Iterator[str]
+click.testing.CliRunner.isolation(self,input:t.Optional[t.Union[str,bytes,t.IO]]=None,env:t.Optional[t.Mapping[str,t.Optional[str]]]=None,color:bool=False)->t.Iterator[t.Tuple[io.BytesIO, t.Optional[io.BytesIO]]]
+click.testing.CliRunner.make_env(self,overrides:t.Optional[t.Mapping[str,t.Optional[str]]]=None)->t.Mapping[str, t.Optional[str]]
+click.testing.EchoingStdin(self,input:t.BinaryIO,output:t.BinaryIO)
+click.testing.EchoingStdin.__getattr__(self,x:str)->t.Any
+click.testing.EchoingStdin.__init__(self,input:t.BinaryIO,output:t.BinaryIO)
+click.testing.EchoingStdin.__iter__(self)->t.Iterator[bytes]
+click.testing.EchoingStdin.__repr__(self)->str
+click.testing.EchoingStdin._echo(self,rv:bytes)->bytes
+click.testing.EchoingStdin.read(self,n:int=-1)->bytes
+click.testing.EchoingStdin.read1(self,n:int=-1)->bytes
+click.testing.EchoingStdin.readline(self,n:int=-1)->bytes
+click.testing.EchoingStdin.readlines(self)->t.List[bytes]
+click.testing.Result(self,runner:'CliRunner',stdout_bytes:bytes,stderr_bytes:t.Optional[bytes],return_value:t.Any,exit_code:int,exception:t.Optional[BaseException],exc_info:t.Optional[t.Tuple[t.Type[BaseException],BaseException,TracebackType]]=None)
+click.testing.Result.__init__(self,runner:'CliRunner',stdout_bytes:bytes,stderr_bytes:t.Optional[bytes],return_value:t.Any,exit_code:int,exception:t.Optional[BaseException],exc_info:t.Optional[t.Tuple[t.Type[BaseException],BaseException,TracebackType]]=None)
+click.testing.Result.__repr__(self)->str
+click.testing.Result.output(self)->str
+click.testing.Result.stderr(self)->str
+click.testing.Result.stdout(self)->str
+click.testing._NamedTextIOWrapper(self,buffer:t.BinaryIO,name:str,mode:str,**kwargs:t.Any)
+click.testing._NamedTextIOWrapper.__init__(self,buffer:t.BinaryIO,name:str,mode:str,**kwargs:t.Any)
+click.testing._NamedTextIOWrapper.mode(self)->str
+click.testing._NamedTextIOWrapper.name(self)->str
+click.testing._pause_echo(stream:t.Optional[EchoingStdin])->t.Iterator[None]
+click.testing.make_input_stream(input:t.Optional[t.Union[str,bytes,t.IO]],charset:str)->t.BinaryIO
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/_compat.py----------------------------------------
 A:click._compat.CYGWIN->sys.platform.startswith('cygwin')
 A:click._compat._ansi_re->re.compile('\\033\\[[;?0-9]*[a-zA-Z]')
 A:click._compat.encoding->get_best_encoding(stream)
@@ -846,7 +604,89 @@ click._compat.strip_ansi(value:str)->str
 click._compat.term_len(x:str)->int
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/shell_completion.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/_termui_impl.py----------------------------------------
+A:click._termui_impl.V->int(self.eta).TypeVar('V')
+A:click._termui_impl.file->_default_text_stdout()
+A:click._termui_impl.length->length_hint(iterable, -1)
+A:click._termui_impl.iterable->int(self.eta).cast(t.Iterable[V], range(length))
+A:click._termui_impl.self.iter->iter(iterable)
+A:click._termui_impl.self.startself.last_eta->time.time()
+A:click._termui_impl.t->int(self.eta)
+A:click._termui_impl.pos->str(self.pos)
+A:click._termui_impl.bar_length->int(self.pct * self.width)
+A:click._termui_impl.chars->list(self.empty_char * (self.width or 1))
+A:click._termui_impl.bar->''.join(chars)
+A:click._termui_impl.item_info->self.item_show_func(self.current_item)
+A:click._termui_impl.clutter_length->term_len(self.format_progress_line())
+A:click._termui_impl.new_width->max(0, shutil.get_terminal_size().columns - clutter_length)
+A:click._termui_impl.line->''.join(buf)
+A:click._termui_impl.line_len->term_len(line)
+A:click._termui_impl.self.last_eta->time.time()
+A:click._termui_impl.stdout->_default_text_stdout()
+A:click._termui_impl.pager_cmd->(os.environ.get('PAGER', None) or '').strip()
+A:click._termui_impl.(fd, filename)->tempfile.mkstemp()
+A:click._termui_impl.env->dict(os.environ)
+A:click._termui_impl.cmd_detail->cmd.rsplit('/', 1)[-1].split()
+A:click._termui_impl.c->subprocess.Popen(['xdg-open', url])
+A:click._termui_impl.stdin->int(self.eta).cast(t.BinaryIO, c.stdin)
+A:click._termui_impl.encoding->get_best_encoding(sys.stdout)
+A:click._termui_impl.text->strip_ansi(text)
+A:click._termui_impl.(_, filename)->tempfile.mkstemp()
+A:click._termui_impl.rv->func()
+A:click._termui_impl.editor->self.get_editor()
+A:click._termui_impl.environ->os.environ.copy()
+A:click._termui_impl.exit_code->subprocess.Popen(['xdg-open', url]).wait()
+A:click._termui_impl.data->strip_ansi(text).encode('utf-8')
+A:click._termui_impl.(fd, name)->tempfile.mkstemp(prefix='editor-', suffix=self.extension)
+A:click._termui_impl.timestamp->os.path.getmtime(name)
+A:click._termui_impl.url->_unquote_file(url)
+A:click._termui_impl.null->open('/dev/null', 'w')
+A:click._termui_impl.f->open('/dev/tty')
+A:click._termui_impl.fd->sys.stdin.fileno()
+A:click._termui_impl.old_settings->termios.tcgetattr(fd)
+A:click._termui_impl.ch->os.read(fd, 32).decode(get_best_encoding(sys.stdin), 'replace')
+click._termui_impl.Editor(self,editor:t.Optional[str]=None,env:t.Optional[t.Mapping[str,str]]=None,require_save:bool=True,extension:str='.txt')
+click._termui_impl.Editor.__init__(self,editor:t.Optional[str]=None,env:t.Optional[t.Mapping[str,str]]=None,require_save:bool=True,extension:str='.txt')
+click._termui_impl.Editor.edit(self,text:t.Optional[t.AnyStr])->t.Optional[t.AnyStr]
+click._termui_impl.Editor.edit_file(self,filename:str)->None
+click._termui_impl.Editor.get_editor(self)->str
+click._termui_impl.ProgressBar(self,iterable:t.Optional[t.Iterable[V]],length:t.Optional[int]=None,fill_char:str='#',empty_char:str='',bar_template:str='%(bar)s',info_sep:str='',show_eta:bool=True,show_percent:t.Optional[bool]=None,show_pos:bool=False,item_show_func:t.Optional[t.Callable[[t.Optional[V]],t.Optional[str]]]=None,label:t.Optional[str]=None,file:t.Optional[t.TextIO]=None,color:t.Optional[bool]=None,update_min_steps:int=1,width:int=30)
+click._termui_impl.ProgressBar.__enter__(self)->'ProgressBar'
+click._termui_impl.ProgressBar.__exit__(self,exc_type,exc_value,tb)
+click._termui_impl.ProgressBar.__init__(self,iterable:t.Optional[t.Iterable[V]],length:t.Optional[int]=None,fill_char:str='#',empty_char:str='',bar_template:str='%(bar)s',info_sep:str='',show_eta:bool=True,show_percent:t.Optional[bool]=None,show_pos:bool=False,item_show_func:t.Optional[t.Callable[[t.Optional[V]],t.Optional[str]]]=None,label:t.Optional[str]=None,file:t.Optional[t.TextIO]=None,color:t.Optional[bool]=None,update_min_steps:int=1,width:int=30)
+click._termui_impl.ProgressBar.__iter__(self)->t.Iterable[V]
+click._termui_impl.ProgressBar.__next__(self)->V
+click._termui_impl.ProgressBar.eta(self)->float
+click._termui_impl.ProgressBar.finish(self)->None
+click._termui_impl.ProgressBar.format_bar(self)->str
+click._termui_impl.ProgressBar.format_eta(self)->str
+click._termui_impl.ProgressBar.format_pct(self)->str
+click._termui_impl.ProgressBar.format_pos(self)->str
+click._termui_impl.ProgressBar.format_progress_line(self)->str
+click._termui_impl.ProgressBar.generator(self)->t.Iterator[V]
+click._termui_impl.ProgressBar.make_step(self,n_steps:int)->None
+click._termui_impl.ProgressBar.pct(self)->float
+click._termui_impl.ProgressBar.render_finish(self)->None
+click._termui_impl.ProgressBar.render_progress(self)->None
+click._termui_impl.ProgressBar.time_per_iteration(self)->float
+click._termui_impl.ProgressBar.update(self,n_steps:int,current_item:t.Optional[V]=None)->None
+click._termui_impl._nullpager(stream:t.TextIO,generator:t.Iterable[str],color:t.Optional[bool])->None
+click._termui_impl._pipepager(generator:t.Iterable[str],cmd:str,color:t.Optional[bool])->None
+click._termui_impl._tempfilepager(generator:t.Iterable[str],cmd:str,color:t.Optional[bool])->None
+click._termui_impl._translate_ch_to_exc(ch:str)->t.Optional[BaseException]
+click._termui_impl.open_url(url:str,wait:bool=False,locate:bool=False)->int
+click._termui_impl.pager(generator:t.Iterable[str],color:t.Optional[bool]=None)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/_textwrap.py----------------------------------------
+A:click._textwrap.space_left->max(width - cur_len, 1)
+click._textwrap.TextWrapper(textwrap.TextWrapper)
+click._textwrap.TextWrapper._handle_long_word(self,reversed_chunks:t.List[str],cur_line:t.List[str],cur_len:int,width:int)->None
+click._textwrap.TextWrapper.extra_indent(self,indent:str)->t.Iterator[None]
+click._textwrap.TextWrapper.indent_only(self,text:str)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/shell_completion.py----------------------------------------
 A:click.shell_completion.(shell, _, instruction)->instruction.partition('_')
 A:click.shell_completion.comp_cls->get_completion_class(shell)
 A:click.shell_completion.comp->comp_cls(cli, ctx_args, prog_name, complete_var)
@@ -897,7 +737,157 @@ click.shell_completion.get_completion_class(shell:str)->t.Optional[t.Type[ShellC
 click.shell_completion.shell_complete(cli:BaseCommand,ctx_args:t.Dict[str,t.Any],prog_name:str,complete_var:str,instruction:str)->int
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/formatting.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/types.py----------------------------------------
+A:click.types.info_dict->super().to_info_dict()
+A:click.types.value->value.strip().strip()
+A:click.types.enc->_get_argv_encoding()
+A:click.types.fs_enc->get_filesystem_encoding()
+A:click.types.choices_str->', '.join(map(repr, self.choices))
+A:click.types.normed_value->normed_value.casefold().casefold()
+A:click.types.str_choices->map(str, self.choices)
+A:click.types.incomplete->incomplete.lower().lower()
+A:click.types.converted->self._try_to_convert_date(value, format)
+A:click.types.formats_str->', '.join(map(repr, self.formats))
+A:click.types.rv->os.path.realpath(rv)
+A:click.types.norm->value.strip().strip().strip().lower()
+A:click.types.lazy->self.resolve_lazy_flag(value)
+A:click.types.(f, should_close)->open_stream(value, self.mode, self.encoding, self.errors, atomic=self.atomic)
+A:click.types.self.name->_('path')
+A:click.types.st->os.stat(rv)
+A:click.types.len_type->len(self.types)
+A:click.types.len_value->len(value)
+A:click.types.ty->type(default)
+A:click.types.UNPROCESSED->UnprocessedParamType()
+A:click.types.STRING->StringParamType()
+A:click.types.INT->IntParamType()
+A:click.types.FLOAT->FloatParamType()
+A:click.types.BOOL->BoolParamType()
+A:click.types.UUID->UUIDParameterType()
+click.Choice(self,choices:t.Sequence[str],case_sensitive:bool=True)
+click.Choice.__repr__(self)->str
+click.Choice.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.Choice.get_metavar(self,param:'Parameter')->str
+click.Choice.get_missing_message(self,param:'Parameter')->str
+click.Choice.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.Choice.to_info_dict(self)->t.Dict[str, t.Any]
+click.DateTime(self,formats:t.Optional[t.Sequence[str]]=None)
+click.DateTime.__repr__(self)->str
+click.DateTime._try_to_convert_date(self,value:t.Any,format:str)->t.Optional[datetime]
+click.DateTime.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.DateTime.get_metavar(self,param:'Parameter')->str
+click.DateTime.to_info_dict(self)->t.Dict[str, t.Any]
+click.File(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
+click.File.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.File.resolve_lazy_flag(self,value:t.Any)->bool
+click.File.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.File.to_info_dict(self)->t.Dict[str, t.Any]
+click.FloatRange(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
+click.FloatRange._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
+click.IntRange(_NumberRangeBase,IntParamType)
+click.IntRange._clamp(self,bound:int,dir:'te.Literal[1,-1]',open:bool)->int
+click.ParamType(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
+click.ParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.ParamType.fail(self,message:str,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)->t.NoReturn
+click.ParamType.get_metavar(self,param:'Parameter')->t.Optional[str]
+click.ParamType.get_missing_message(self,param:'Parameter')->t.Optional[str]
+click.ParamType.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.ParamType.split_envvar_value(self,rv:str)->t.Sequence[str]
+click.ParamType.to_info_dict(self)->t.Dict[str, t.Any]
+click.Path(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
+click.Path.coerce_path_result(self,rv:t.Any)->t.Any
+click.Path.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.Path.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.Path.to_info_dict(self)->t.Dict[str, t.Any]
+click.Tuple(self,types:t.Sequence[t.Union[t.Type,ParamType]])
+click.Tuple.arity(self)->int
+click.Tuple.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.Tuple.name(self)->str
+click.Tuple.to_info_dict(self)->t.Dict[str, t.Any]
+click.UUIDParameterType(ParamType)
+click.UUIDParameterType.__repr__(self)->str
+click.UUIDParameterType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.BoolParamType(ParamType)
+click.types.BoolParamType.__repr__(self)->str
+click.types.BoolParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.Choice(self,choices:t.Sequence[str],case_sensitive:bool=True)
+click.types.Choice.__init__(self,choices:t.Sequence[str],case_sensitive:bool=True)
+click.types.Choice.__repr__(self)->str
+click.types.Choice.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.Choice.get_metavar(self,param:'Parameter')->str
+click.types.Choice.get_missing_message(self,param:'Parameter')->str
+click.types.Choice.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.types.Choice.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.CompositeParamType(ParamType)
+click.types.CompositeParamType.arity(self)->int
+click.types.DateTime(self,formats:t.Optional[t.Sequence[str]]=None)
+click.types.DateTime.__init__(self,formats:t.Optional[t.Sequence[str]]=None)
+click.types.DateTime.__repr__(self)->str
+click.types.DateTime._try_to_convert_date(self,value:t.Any,format:str)->t.Optional[datetime]
+click.types.DateTime.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.DateTime.get_metavar(self,param:'Parameter')->str
+click.types.DateTime.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.File(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
+click.types.File.__init__(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
+click.types.File.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.File.resolve_lazy_flag(self,value:t.Any)->bool
+click.types.File.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.types.File.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.FloatParamType(_NumberParamTypeBase)
+click.types.FloatParamType.__repr__(self)->str
+click.types.FloatRange(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
+click.types.FloatRange.__init__(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
+click.types.FloatRange._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
+click.types.FuncParamType(self,func:t.Callable[[t.Any],t.Any])
+click.types.FuncParamType.__init__(self,func:t.Callable[[t.Any],t.Any])
+click.types.FuncParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.FuncParamType.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.IntParamType(_NumberParamTypeBase)
+click.types.IntParamType.__repr__(self)->str
+click.types.IntRange(_NumberRangeBase,IntParamType)
+click.types.IntRange._clamp(self,bound:int,dir:'te.Literal[1,-1]',open:bool)->int
+click.types.ParamType(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
+click.types.ParamType.__call__(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
+click.types.ParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.ParamType.fail(self,message:str,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)->t.NoReturn
+click.types.ParamType.get_metavar(self,param:'Parameter')->t.Optional[str]
+click.types.ParamType.get_missing_message(self,param:'Parameter')->t.Optional[str]
+click.types.ParamType.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.types.ParamType.split_envvar_value(self,rv:str)->t.Sequence[str]
+click.types.ParamType.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.Path(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
+click.types.Path.__init__(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
+click.types.Path.coerce_path_result(self,rv:t.Any)->t.Any
+click.types.Path.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.Path.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
+click.types.Path.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.StringParamType(ParamType)
+click.types.StringParamType.__repr__(self)->str
+click.types.StringParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.Tuple(self,types:t.Sequence[t.Union[t.Type,ParamType]])
+click.types.Tuple.__init__(self,types:t.Sequence[t.Union[t.Type,ParamType]])
+click.types.Tuple.arity(self)->int
+click.types.Tuple.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.Tuple.name(self)->str
+click.types.Tuple.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.UUIDParameterType(ParamType)
+click.types.UUIDParameterType.__repr__(self)->str
+click.types.UUIDParameterType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types.UnprocessedParamType(ParamType)
+click.types.UnprocessedParamType.__repr__(self)->str
+click.types.UnprocessedParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types._NumberParamTypeBase(ParamType)
+click.types._NumberParamTypeBase.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types._NumberRangeBase(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
+click.types._NumberRangeBase.__init__(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
+click.types._NumberRangeBase.__repr__(self)->str
+click.types._NumberRangeBase._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
+click.types._NumberRangeBase._describe_range(self)->str
+click.types._NumberRangeBase.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
+click.types._NumberRangeBase.to_info_dict(self)->t.Dict[str, t.Any]
+click.types.convert_type(ty:t.Optional[t.Any],default:t.Optional[t.Any]=None)->ParamType
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/formatting.py----------------------------------------
 A:click.formatting.widths[idx]->max(widths.get(idx, 0), term_len(col))
 A:click.formatting.text->text.expandtabs().expandtabs()
 A:click.formatting.wrapper->TextWrapper(width, initial_indent=initial_indent, subsequent_indent=subsequent_indent, replace_whitespace=False)
@@ -941,118 +931,7 @@ click.formatting.wrap_text(text:str,width:int=78,initial_indent:str='',subsequen
 click.wrap_text(text:str,width:int=78,initial_indent:str='',subsequent_indent:str='',preserve_paragraphs:bool=False)->str
 
 
-----------------------------------------/home/zhang/Packages/click/click8.0.0/exceptions.py----------------------------------------
-A:click.exceptions.file->get_text_stderr()
-A:click.exceptions.hint->_('unknown error')
-A:click.exceptions.param_hint->_join_param_hints(param_hint)
-A:click.exceptions.msg_extra->self.param.type.get_missing_message(self.param)
-A:click.exceptions.missing->_('Missing {param_type}').format(param_type=param_type)
-A:click.exceptions.message->_('No such option: {name}').format(name=option_name)
-A:click.exceptions.possibility_str->', '.join(sorted(self.possibilities))
-A:click.exceptions.suggest->ngettext('Did you mean {possibility}?', '(Possible options: {possibilities})', len(self.possibilities)).format(possibility=possibility_str, possibilities=possibility_str)
-A:click.exceptions.self.ui_filename->os.fsdecode(filename)
-click.Abort(RuntimeError)
-click.BadArgumentUsage(UsageError)
-click.BadOptionUsage(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
-click.BadParameter(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
-click.BadParameter.format_message(self)->str
-click.ClickException(self,message:str)
-click.ClickException.__str__(self)->str
-click.ClickException.format_message(self)->str
-click.ClickException.show(self,file:t.Optional[t.IO]=None)->None
-click.FileError(self,filename:str,hint:t.Optional[str]=None)
-click.FileError.format_message(self)->str
-click.MissingParameter(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
-click.MissingParameter.__str__(self)->str
-click.MissingParameter.format_message(self)->str
-click.NoSuchOption(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
-click.NoSuchOption.format_message(self)->str
-click.UsageError(self,message:str,ctx:t.Optional['Context']=None)
-click.UsageError.show(self,file:t.Optional[t.IO]=None)->None
-click.exceptions.Abort(RuntimeError)
-click.exceptions.BadArgumentUsage(UsageError)
-click.exceptions.BadOptionUsage(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
-click.exceptions.BadOptionUsage.__init__(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
-click.exceptions.BadParameter(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
-click.exceptions.BadParameter.__init__(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
-click.exceptions.BadParameter.format_message(self)->str
-click.exceptions.ClickException(self,message:str)
-click.exceptions.ClickException.__init__(self,message:str)
-click.exceptions.ClickException.__str__(self)->str
-click.exceptions.ClickException.format_message(self)->str
-click.exceptions.ClickException.show(self,file:t.Optional[t.IO]=None)->None
-click.exceptions.Exit(self,code:int=0)
-click.exceptions.Exit.__init__(self,code:int=0)
-click.exceptions.FileError(self,filename:str,hint:t.Optional[str]=None)
-click.exceptions.FileError.__init__(self,filename:str,hint:t.Optional[str]=None)
-click.exceptions.FileError.format_message(self)->str
-click.exceptions.MissingParameter(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
-click.exceptions.MissingParameter.__init__(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
-click.exceptions.MissingParameter.__str__(self)->str
-click.exceptions.MissingParameter.format_message(self)->str
-click.exceptions.NoSuchOption(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
-click.exceptions.NoSuchOption.__init__(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
-click.exceptions.NoSuchOption.format_message(self)->str
-click.exceptions.UsageError(self,message:str,ctx:t.Optional['Context']=None)
-click.exceptions.UsageError.__init__(self,message:str,ctx:t.Optional['Context']=None)
-click.exceptions.UsageError.show(self,file:t.Optional[t.IO]=None)->None
-click.exceptions._join_param_hints(param_hint:t.Optional[t.Union[t.Sequence[str],str]])->t.Optional[str]
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/_textwrap.py----------------------------------------
-A:click._textwrap.space_left->max(width - cur_len, 1)
-click._textwrap.TextWrapper(textwrap.TextWrapper)
-click._textwrap.TextWrapper._handle_long_word(self,reversed_chunks:t.List[str],cur_line:t.List[str],cur_len:int,width:int)->None
-click._textwrap.TextWrapper.extra_indent(self,indent:str)->t.Iterator[None]
-click._textwrap.TextWrapper.indent_only(self,text:str)->str
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/decorators.py----------------------------------------
-A:click.decorators.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
-A:click.decorators.FC->typing.TypeVar('FC', t.Callable[..., t.Any], Command)
-A:click.decorators.ctx->get_current_context()
-A:click.decorators.obj->get_current_context().find_object(object_type)
-A:click.decorators.help->inspect.cleandoc(help)
-A:click.decorators.cmd->_make_command(f, name, attrs, cls)
-A:click.decorators.ArgumentClass->attrs.pop('cls', Argument)
-A:click.decorators.option_attrs->attrs.copy()
-A:click.decorators.option_attrs['help']->inspect.cleandoc(option_attrs['help'])
-A:click.decorators.OptionClass->attrs.copy().pop('cls', Option)
-A:click.decorators.message->_('%(prog)s, version %(version)s')
-A:click.decorators.frame->inspect.currentframe()
-A:click.decorators.package_name->f_globals.get('__package__')
-A:click.decorators.version->importlib_metadata.version(package_name)
-click.argument(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
-click.command(name:t.Optional[str]=None,cls:t.Optional[t.Type[Command]]=None,**attrs:t.Any)->t.Callable[[F], Command]
-click.confirmation_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.decorators._make_command(f:F,name:t.Optional[str],attrs:t.MutableMapping[str,t.Any],cls:t.Type[Command])->Command
-click.decorators._param_memo(f:FC,param:Parameter)->None
-click.decorators.argument(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
-click.decorators.command(name:t.Optional[str]=None,cls:t.Optional[t.Type[Command]]=None,**attrs:t.Any)->t.Callable[[F], Command]
-click.decorators.confirmation_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.decorators.group(name:t.Optional[str]=None,**attrs:t.Any)->t.Callable[[F], Group]
-click.decorators.help_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.decorators.make_pass_decorator(object_type:t.Type,ensure:bool=False)->'t.Callable[[F], F]'
-click.decorators.option(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
-click.decorators.pass_context(f:F)->F
-click.decorators.pass_meta_key(key:str,*,doc_description:t.Optional[str]=None)->'t.Callable[[F], F]'
-click.decorators.pass_obj(f:F)->F
-click.decorators.password_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.decorators.version_option(version:t.Optional[str]=None,*param_decls:str,package_name:t.Optional[str]=None,prog_name:t.Optional[str]=None,message:t.Optional[str]=None,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.group(name:t.Optional[str]=None,**attrs:t.Any)->t.Callable[[F], Group]
-click.help_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.make_pass_decorator(object_type:t.Type,ensure:bool=False)->'t.Callable[[F], F]'
-click.option(*param_decls:str,**attrs:t.Any)->t.Callable[[FC], FC]
-click.pass_context(f:F)->F
-click.pass_obj(f:F)->F
-click.password_option(*param_decls:str,**kwargs:t.Any)->t.Callable[[FC], FC]
-click.version_option(version:t.Optional[str]=None,*param_decls:str,package_name:t.Optional[str]=None,prog_name:t.Optional[str]=None,message:t.Optional[str]=None,**kwargs:t.Any)->t.Callable[[FC], FC]
-
-
-----------------------------------------/home/zhang/Packages/click/click8.0.0/termui.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/termui.py----------------------------------------
 A:click.termui.V->typing.TypeVar('V')
 A:click.termui.value_proc->convert_type(type, default)
 A:click.termui.prompt->_build_prompt(text, prompt_suffix, show_default, 'y/n' if default is None else 'Y/n' if default else 'y/N')
@@ -1097,4 +976,125 @@ click.termui.secho(message:t.Optional[t.Any]=None,file:t.Optional[t.IO]=None,nl:
 click.termui.style(text:t.Any,fg:t.Optional[t.Union[int,t.Tuple[int,int,int],str]]=None,bg:t.Optional[t.Union[int,t.Tuple[int,int,int],str]]=None,bold:t.Optional[bool]=None,dim:t.Optional[bool]=None,underline:t.Optional[bool]=None,overline:t.Optional[bool]=None,italic:t.Optional[bool]=None,blink:t.Optional[bool]=None,reverse:t.Optional[bool]=None,strikethrough:t.Optional[bool]=None,reset:bool=True)->str
 click.termui.unstyle(text:str)->str
 click.unstyle(text:str)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/parser.py----------------------------------------
+A:click.parser.V->typing.TypeVar('V')
+A:click.parser._flag_needs_value->object()
+A:click.parser.args->deque(args)
+A:click.parser.nargs_spec->deque(nargs_spec)
+A:click.parser.nargs->_fetch(nargs_spec)
+A:click.parser.spos->len(rv)
+A:click.parser.rv[spos]->tuple(args)
+A:click.parser.rv[spos + 1:]->reversed(rv[spos + 1:])
+A:click.parser.(prefix, opt)->split_opt(opt)
+A:click.parser.lex->shlex.shlex(string, posix=True)
+A:click.parser.self.prefixes->set()
+A:click.parser.(prefix, value)->split_opt(opt)
+A:click.parser.holes->sum((1 for x in value if x is None))
+A:click.parser.option->self._short_opt.get(opt)
+A:click.parser.state->ParsingState(args)
+A:click.parser.(pargs, args)->_unpack_args(state.largs + state.rargs, [x.nargs for x in self._args])
+A:click.parser.arg->ParsingState(args).rargs.pop(0)
+A:click.parser.arglen->len(arg)
+A:click.parser.possibilities->get_close_matches(opt, self._long_opt)
+A:click.parser.value->tuple(state.rargs[:nargs])
+A:click.parser.opt->normalize_opt(f'{prefix}{ch}', self.ctx)
+A:click.parser.(long_opt, explicit_value)->ParsingState(args).rargs.pop(0).split('=', 1)
+A:click.parser.norm_long_opt->normalize_opt(long_opt, self.ctx)
+click.OptionParser(self,ctx:t.Optional['Context']=None)
+click.OptionParser._get_value_from_state(self,option_name:str,option:Option,state:ParsingState)->t.Any
+click.OptionParser._match_long_opt(self,opt:str,explicit_value:t.Optional[str],state:ParsingState)->None
+click.OptionParser._match_short_opt(self,arg:str,state:ParsingState)->None
+click.OptionParser._process_args_for_args(self,state:ParsingState)->None
+click.OptionParser._process_args_for_options(self,state:ParsingState)->None
+click.OptionParser._process_opts(self,arg:str,state:ParsingState)->None
+click.OptionParser.add_argument(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)->None
+click.OptionParser.add_option(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)->None
+click.OptionParser.parse_args(self,args:t.List[str])->t.Tuple[t.Dict[str, t.Any], t.List[str], t.List['CoreParameter']]
+click.parser.Argument(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)
+click.parser.Argument.__init__(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)
+click.parser.Argument.process(self,value:t.Union[t.Optional[str],t.Sequence[t.Optional[str]]],state:'ParsingState')->None
+click.parser.Option(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)
+click.parser.Option.__init__(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)
+click.parser.Option.process(self,value:str,state:'ParsingState')->None
+click.parser.Option.takes_value(self)->bool
+click.parser.OptionParser(self,ctx:t.Optional['Context']=None)
+click.parser.OptionParser.__init__(self,ctx:t.Optional['Context']=None)
+click.parser.OptionParser._get_value_from_state(self,option_name:str,option:Option,state:ParsingState)->t.Any
+click.parser.OptionParser._match_long_opt(self,opt:str,explicit_value:t.Optional[str],state:ParsingState)->None
+click.parser.OptionParser._match_short_opt(self,arg:str,state:ParsingState)->None
+click.parser.OptionParser._process_args_for_args(self,state:ParsingState)->None
+click.parser.OptionParser._process_args_for_options(self,state:ParsingState)->None
+click.parser.OptionParser._process_opts(self,arg:str,state:ParsingState)->None
+click.parser.OptionParser.add_argument(self,obj:'CoreArgument',dest:t.Optional[str],nargs:int=1)->None
+click.parser.OptionParser.add_option(self,obj:'CoreOption',opts:t.Sequence[str],dest:t.Optional[str],action:t.Optional[str]=None,nargs:int=1,const:t.Optional[t.Any]=None)->None
+click.parser.OptionParser.parse_args(self,args:t.List[str])->t.Tuple[t.Dict[str, t.Any], t.List[str], t.List['CoreParameter']]
+click.parser.ParsingState(self,rargs:t.List[str])
+click.parser.ParsingState.__init__(self,rargs:t.List[str])
+click.parser._unpack_args(args:t.Sequence[str],nargs_spec:t.Sequence[int])->t.Tuple[t.Sequence[t.Union[str, t.Sequence[t.Optional[str]], None]], t.List[str]]
+click.parser.normalize_opt(opt:str,ctx:t.Optional['Context'])->str
+click.parser.split_arg_string(string:str)->t.List[str]
+click.parser.split_opt(opt:str)->t.Tuple[str, str]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/_winconsole.py----------------------------------------
+A:click._winconsole.c_ssize_p->POINTER(c_ssize_t)
+A:click._winconsole.GetCommandLineW->WINFUNCTYPE(LPWSTR)(('GetCommandLineW', windll.kernel32))
+A:click._winconsole.CommandLineToArgvW->WINFUNCTYPE(POINTER(LPWSTR), LPCWSTR, POINTER(c_int))(('CommandLineToArgvW', windll.shell32))
+A:click._winconsole.LocalFree->WINFUNCTYPE(c_void_p, c_void_p)(('LocalFree', windll.kernel32))
+A:click._winconsole.STDIN_HANDLE->GetStdHandle(-10)
+A:click._winconsole.STDOUT_HANDLE->GetStdHandle(-11)
+A:click._winconsole.STDERR_HANDLE->GetStdHandle(-12)
+A:click._winconsole.buf->get_buffer(b)
+A:click._winconsole.bytes_to_be_read->len(b)
+A:click._winconsole.buffer->get_buffer(b, writable=True)
+A:click._winconsole.code_units_read->c_ulong()
+A:click._winconsole.rv->ReadConsoleW(HANDLE(self.handle), buffer, code_units_to_be_read, byref(code_units_read), None)
+A:click._winconsole.bytes_to_be_written->len(b)
+A:click._winconsole.code_units_written->c_ulong()
+A:click._winconsole.text_stream->_NonClosingTextIOWrapper(io.BufferedWriter(_WindowsConsoleWriter(STDERR_HANDLE)), 'utf-16-le', 'strict', line_buffering=True)
+A:click._winconsole.fileno->f.fileno()
+A:click._winconsole.handle->msvcrt.get_osfhandle(fileno)
+A:click._winconsole.func->_stream_factories.get(f.fileno())
+A:click._winconsole.b->getattr(f, 'buffer', None)
+click._winconsole.ConsoleStream(self,text_stream:t.TextIO,byte_stream:t.BinaryIO)
+click._winconsole.ConsoleStream.__getattr__(self,name:str)->t.Any
+click._winconsole.ConsoleStream.__init__(self,text_stream:t.TextIO,byte_stream:t.BinaryIO)
+click._winconsole.ConsoleStream.__repr__(self)
+click._winconsole.ConsoleStream.isatty(self)->bool
+click._winconsole.ConsoleStream.name(self)->str
+click._winconsole.ConsoleStream.write(self,x:t.AnyStr)->int
+click._winconsole.ConsoleStream.writelines(self,lines:t.Iterable[t.AnyStr])->None
+click._winconsole._WindowsConsoleRawIOBase(self,handle)
+click._winconsole._WindowsConsoleRawIOBase.__init__(self,handle)
+click._winconsole._WindowsConsoleRawIOBase.isatty(self)
+click._winconsole._WindowsConsoleReader(_WindowsConsoleRawIOBase)
+click._winconsole._WindowsConsoleReader.readable(self)
+click._winconsole._WindowsConsoleReader.readinto(self,b)
+click._winconsole._WindowsConsoleWriter(_WindowsConsoleRawIOBase)
+click._winconsole._WindowsConsoleWriter._get_error_message(errno)
+click._winconsole._WindowsConsoleWriter.writable(self)
+click._winconsole._WindowsConsoleWriter.write(self,b)
+click._winconsole._get_text_stderr(buffer_stream:t.BinaryIO)->t.TextIO
+click._winconsole._get_text_stdin(buffer_stream:t.BinaryIO)->t.TextIO
+click._winconsole._get_text_stdout(buffer_stream:t.BinaryIO)->t.TextIO
+click._winconsole._get_windows_console_stream(f:t.TextIO,encoding:t.Optional[str],errors:t.Optional[str])->t.Optional[t.TextIO]
+click._winconsole._is_console(f:t.TextIO)->bool
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/_unicodefun.py----------------------------------------
+A:click._unicodefun.good_locales->set()
+A:click._unicodefun.locale->line.strip()
+click._unicodefun._verify_python_env()->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/click8.0.0/lib/python3.6/site-packages/click/globals.py----------------------------------------
+A:click.globals._local->local()
+A:click.globals.ctx->get_current_context(silent=True)
+click.get_current_context(silent:bool=False)->t.Optional['Context']
+click.globals.get_current_context(silent:bool=False)->t.Optional['Context']
+click.globals.pop_context()->None
+click.globals.push_context(ctx:'Context')->None
+click.globals.resolve_color_default(color:t.Optional[bool]=None)->t.Optional[bool]
 
