@@ -1,5 +1,9 @@
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/dask.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/__init__.py----------------------------------------
+A:xgboost.__init__.__version__->_py_version()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/dask.py----------------------------------------
 A:xgboost.dask.dd->LazyLoader('dd', globals(), 'dask.dataframe')
 A:xgboost.dask.da->LazyLoader('da', globals(), 'dask.array')
 A:xgboost.dask.dask->LazyLoader('dask', globals(), 'dask')
@@ -74,6 +78,7 @@ xgboost.dask.DaskDMatrix(self,client:'distributed.Client',data:_DataT,label:Opti
 xgboost.dask.DaskDMatrix.__await__(self)->Generator
 xgboost.dask.DaskDMatrix.__init__(self,client:'distributed.Client',data:_DataT,label:Optional[_DaskCollection]=None,*,weight:Optional[_DaskCollection]=None,base_margin:Optional[_DaskCollection]=None,missing:float=None,silent:bool=False,feature_names:Optional[FeatureNames]=None,feature_types:FeatureTypes=None,group:Optional[_DaskCollection]=None,qid:Optional[_DaskCollection]=None,label_lower_bound:Optional[_DaskCollection]=None,label_upper_bound:Optional[_DaskCollection]=None,feature_weights:Optional[_DaskCollection]=None,enable_categorical:bool=False)
 xgboost.dask.DaskDMatrix._create_fn_args(self,worker_addr:str)->Dict[str, Any]
+xgboost.dask.DaskDMatrix._map_local_data(self,client:'distributed.Client',data:_DataT,label:Optional[_DaskCollection]=None,weights:Optional[_DaskCollection]=None,base_margin:Optional[_DaskCollection]=None,qid:Optional[_DaskCollection]=None,feature_weights:Optional[_DaskCollection]=None,label_lower_bound:Optional[_DaskCollection]=None,label_upper_bound:Optional[_DaskCollection]=None)->'DaskDMatrix'
 xgboost.dask.DaskDMatrix.num_col(self)->int
 xgboost.dask.DaskDeviceQuantileDMatrix(self,*args:Any,**kwargs:Any)
 xgboost.dask.DaskDeviceQuantileDMatrix.__init__(self,*args:Any,**kwargs:Any)
@@ -89,12 +94,17 @@ xgboost.dask.DaskQuantileDMatrix._create_fn_args(self,worker_addr:str)->Dict[str
 xgboost.dask.DaskScikitLearnBase(XGBModel)
 xgboost.dask.DaskScikitLearnBase.__await__(self)->Awaitable[Any]
 xgboost.dask.DaskScikitLearnBase.__getstate__(self)->Dict
+xgboost.dask.DaskScikitLearnBase._apply_async(self,X:_DataT,iteration_range:Optional[Tuple[int,int]]=None)->Any
 xgboost.dask.DaskScikitLearnBase._client_sync(self,func:Callable,**kwargs:Any)->Any
+xgboost.dask.DaskScikitLearnBase._predict_async(self,data:_DataT,output_margin:bool,validate_features:bool,base_margin:Optional[_DaskCollection],iteration_range:Optional[Tuple[int,int]])->Any
 xgboost.dask.DaskScikitLearnBase.apply(self,X:_DataT,ntree_limit:Optional[int]=None,iteration_range:Optional[Tuple[int,int]]=None)->Any
 xgboost.dask.DaskScikitLearnBase.client(self)->'distributed.Client'
 xgboost.dask.DaskScikitLearnBase.client(self,clt:'distributed.Client')->None
 xgboost.dask.DaskScikitLearnBase.predict(self,X:_DataT,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[_DaskCollection]=None,iteration_range:Optional[Tuple[int,int]]=None)->Any
 xgboost.dask.DaskXGBClassifier(DaskScikitLearnBase,XGBClassifierBase)
+xgboost.dask.DaskXGBClassifier._fit_async(self,X:_DataT,y:_DaskCollection,sample_weight:Optional[_DaskCollection],base_margin:Optional[_DaskCollection],eval_set:Optional[Sequence[Tuple[_DaskCollection,_DaskCollection]]],eval_metric:Optional[Union[str,Sequence[str],Metric]],sample_weight_eval_set:Optional[Sequence[_DaskCollection]],base_margin_eval_set:Optional[Sequence[_DaskCollection]],early_stopping_rounds:Optional[int],verbose:Union[int,bool],xgb_model:Optional[Union[Booster,XGBModel]],feature_weights:Optional[_DaskCollection],callbacks:Optional[Sequence[TrainingCallback]])->'DaskXGBClassifier'
+xgboost.dask.DaskXGBClassifier._predict_async(self,data:_DataT,output_margin:bool,validate_features:bool,base_margin:Optional[_DaskCollection],iteration_range:Optional[Tuple[int,int]])->_DaskCollection
+xgboost.dask.DaskXGBClassifier._predict_proba_async(self,X:_DataT,validate_features:bool,base_margin:Optional[_DaskCollection],iteration_range:Optional[Tuple[int,int]])->_DaskCollection
 xgboost.dask.DaskXGBClassifier.fit(self,X:_DataT,y:_DaskCollection,*,sample_weight:Optional[_DaskCollection]=None,base_margin:Optional[_DaskCollection]=None,eval_set:Optional[Sequence[Tuple[_DaskCollection,_DaskCollection]]]=None,eval_metric:Optional[Union[str,Sequence[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,verbose:Union[int,bool]=True,xgb_model:Optional[Union[Booster,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[_DaskCollection]]=None,base_margin_eval_set:Optional[Sequence[_DaskCollection]]=None,feature_weights:Optional[_DaskCollection]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'DaskXGBClassifier'
 xgboost.dask.DaskXGBClassifier.predict_proba(self,X:_DaskCollection,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[_DaskCollection]=None,iteration_range:Optional[Tuple[int,int]]=None)->Any
 xgboost.dask.DaskXGBRFClassifier(self,*,learning_rate:Optional[float]=1,subsample:Optional[float]=0.8,colsample_bynode:Optional[float]=0.8,reg_lambda:Optional[float]=1e-05,**kwargs:Any)
@@ -109,450 +119,44 @@ xgboost.dask.DaskXGBRFRegressor.get_num_boosting_rounds(self)->int
 xgboost.dask.DaskXGBRFRegressor.get_xgb_params(self)->Dict[str, Any]
 xgboost.dask.DaskXGBRanker(self,*,objective:str='rank:pairwise',**kwargs:Any)
 xgboost.dask.DaskXGBRanker.__init__(self,*,objective:str='rank:pairwise',**kwargs:Any)
+xgboost.dask.DaskXGBRanker._fit_async(self,X:_DataT,y:_DaskCollection,group:Optional[_DaskCollection],qid:Optional[_DaskCollection],sample_weight:Optional[_DaskCollection],base_margin:Optional[_DaskCollection],eval_set:Optional[Sequence[Tuple[_DaskCollection,_DaskCollection]]],sample_weight_eval_set:Optional[Sequence[_DaskCollection]],base_margin_eval_set:Optional[Sequence[_DaskCollection]],eval_group:Optional[Sequence[_DaskCollection]],eval_qid:Optional[Sequence[_DaskCollection]],eval_metric:Optional[Union[str,Sequence[str],Metric]],early_stopping_rounds:Optional[int],verbose:Union[int,bool],xgb_model:Optional[Union[XGBModel,Booster]],feature_weights:Optional[_DaskCollection],callbacks:Optional[Sequence[TrainingCallback]])->'DaskXGBRanker'
 xgboost.dask.DaskXGBRanker.fit(self,X:_DataT,y:_DaskCollection,*,group:Optional[_DaskCollection]=None,qid:Optional[_DaskCollection]=None,sample_weight:Optional[_DaskCollection]=None,base_margin:Optional[_DaskCollection]=None,eval_set:Optional[Sequence[Tuple[_DaskCollection,_DaskCollection]]]=None,eval_group:Optional[Sequence[_DaskCollection]]=None,eval_qid:Optional[Sequence[_DaskCollection]]=None,eval_metric:Optional[Union[str,Sequence[str],Callable]]=None,early_stopping_rounds:int=None,verbose:Union[int,bool]=False,xgb_model:Optional[Union[XGBModel,Booster]]=None,sample_weight_eval_set:Optional[Sequence[_DaskCollection]]=None,base_margin_eval_set:Optional[Sequence[_DaskCollection]]=None,feature_weights:Optional[_DaskCollection]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'DaskXGBRanker'
 xgboost.dask.DaskXGBRegressor(DaskScikitLearnBase,XGBRegressorBase)
+xgboost.dask.DaskXGBRegressor._fit_async(self,X:_DataT,y:_DaskCollection,sample_weight:Optional[_DaskCollection],base_margin:Optional[_DaskCollection],eval_set:Optional[Sequence[Tuple[_DaskCollection,_DaskCollection]]],eval_metric:Optional[Union[str,Sequence[str],Metric]],sample_weight_eval_set:Optional[Sequence[_DaskCollection]],base_margin_eval_set:Optional[Sequence[_DaskCollection]],early_stopping_rounds:Optional[int],verbose:Union[int,bool],xgb_model:Optional[Union[Booster,XGBModel]],feature_weights:Optional[_DaskCollection],callbacks:Optional[Sequence[TrainingCallback]])->_DaskCollection
 xgboost.dask.DaskXGBRegressor.fit(self,X:_DataT,y:_DaskCollection,*,sample_weight:Optional[_DaskCollection]=None,base_margin:Optional[_DaskCollection]=None,eval_set:Optional[Sequence[Tuple[_DaskCollection,_DaskCollection]]]=None,eval_metric:Optional[Union[str,Sequence[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,verbose:Union[int,bool]=True,xgb_model:Optional[Union[Booster,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[_DaskCollection]]=None,base_margin_eval_set:Optional[Sequence[_DaskCollection]]=None,feature_weights:Optional[_DaskCollection]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'DaskXGBRegressor'
 xgboost.dask._assert_dask_support()->None
+xgboost.dask._async_wrap_evaluation_matrices(client:Optional['distributed.Client'],tree_method:Optional[str],max_bin:Optional[int],**kwargs:Any)->Tuple[DaskDMatrix, Optional[List[Tuple[DaskDMatrix, str]]]]
 xgboost.dask._can_output_df(is_df:bool,output_shape:Tuple)->bool
 xgboost.dask._create_dmatrix(feature_names:Optional[FeatureNames],feature_types:Optional[Union[Any,List[Any]]],feature_weights:Optional[Any],missing:float,nthread:int,enable_categorical:bool,parts:Optional[_DataParts])->DMatrix
 xgboost.dask._create_quantile_dmatrix(feature_names:Optional[FeatureNames],feature_types:Optional[Union[Any,List[Any]]],feature_weights:Optional[Any],missing:float,nthread:int,parts:Optional[_DataParts],max_bin:int,enable_categorical:bool,ref:Optional[DMatrix]=None)->QuantileDMatrix
+xgboost.dask._direct_predict_impl(mapped_predict:Callable,booster:'distributed.Future',data:_DataT,base_margin:Optional[_DaskCollection],output_shape:Tuple[int,...],meta:Dict[int,str])->_DaskCollection
 xgboost.dask._dmatrix_from_list_of_parts(is_quantile:bool,**kwargs:Any)->DMatrix
 xgboost.dask._get_dask_config()->Optional[Dict[str, Any]]
+xgboost.dask._get_model_future(client:'distributed.Client',model:Union[Booster,Dict,'distributed.Future'])->'distributed.Future'
+xgboost.dask._get_rabit_args(n_workers:int,dconfig:Optional[Dict[str,Any]],client:'distributed.Client')->Dict[str, Union[str, int]]
 xgboost.dask._get_worker_parts(list_of_parts:_DataParts)->Dict[str, List[Any]]
 xgboost.dask._get_workers_from_data(dtrain:DaskDMatrix,evals:Optional[Sequence[Tuple[DaskDMatrix,str]]])->List[str]
 xgboost.dask._infer_predict_output(booster:Booster,features:int,is_df:bool,inplace:bool,**kwargs:Any)->Tuple[Tuple[int, ...], Dict[int, str]]
+xgboost.dask._inplace_predict_async(client:'distributed.Client',global_config:Dict[str,Any],model:Union[Booster,Dict,'distributed.Future'],data:_DataT,iteration_range:Tuple[int,int],predict_type:str,missing:float,validate_features:bool,base_margin:Optional[_DaskCollection],strict_shape:bool)->_DaskCollection
 xgboost.dask._maybe_dataframe(data:Any,prediction:Any,columns:List[int],is_df:bool)->Any
+xgboost.dask._predict_async(client:'distributed.Client',global_config:Dict[str,Any],model:Union[Booster,Dict,'distributed.Future'],data:_DataT,output_margin:bool,missing:float,pred_leaf:bool,pred_contribs:bool,approx_contribs:bool,pred_interactions:bool,validate_features:bool,iteration_range:Tuple[int,int],strict_shape:bool)->_DaskCollection
 xgboost.dask._set_worker_client(model:'DaskScikitLearnBase',client:'distributed.Client')->Generator
 xgboost.dask._start_tracker(n_workers:int,addr_from_dask:Optional[str],addr_from_user:Optional[Tuple[str,int]])->Dict[str, Union[int, str]]
+xgboost.dask._train_async(client:'distributed.Client',global_config:Dict[str,Any],dconfig:Optional[Dict[str,Any]],params:Dict[str,Any],dtrain:DaskDMatrix,num_boost_round:int,evals:Optional[Sequence[Tuple[DaskDMatrix,str]]],obj:Optional[Objective],feval:Optional[Metric],early_stopping_rounds:Optional[int],verbose_eval:Union[int,bool],xgb_model:Optional[Booster],callbacks:Optional[Sequence[TrainingCallback]],custom_metric:Optional[Metric])->Optional[TrainReturnT]
 xgboost.dask._try_start_tracker(n_workers:int,addrs:List[Union[Optional[str],Optional[Tuple[str,int]]]])->Dict[str, Union[int, str]]
 xgboost.dask._xgb_get_client(client:Optional['distributed.Client'])->'distributed.Client'
 xgboost.dask.dconcat(value:Sequence[_T])->_T
 xgboost.dask.inplace_predict(client:Optional['distributed.Client'],model:Union[TrainReturnT,Booster,'distributed.Future'],data:_DataT,iteration_range:Tuple[int,int]=(0,0),predict_type:str='value',missing:float=numpy.nan,validate_features:bool=True,base_margin:Optional[_DaskCollection]=None,strict_shape:bool=False)->Any
+xgboost.dask.map_worker_partitions(client:Optional['distributed.Client'],func:Callable[...,_MapRetT],*refs:Any,workers:Sequence[str])->List[_MapRetT]
 xgboost.dask.predict(client:Optional['distributed.Client'],model:Union[TrainReturnT,Booster,'distributed.Future'],data:Union[DaskDMatrix,_DataT],output_margin:bool=False,missing:float=numpy.nan,pred_leaf:bool=False,pred_contribs:bool=False,approx_contribs:bool=False,pred_interactions:bool=False,validate_features:bool=True,iteration_range:Tuple[int,int]=(0,0),strict_shape:bool=False)->Any
 xgboost.dask.train(client:'distributed.Client',params:Dict[str,Any],dtrain:DaskDMatrix,num_boost_round:int=10,*,evals:Optional[Sequence[Tuple[DaskDMatrix,str]]]=None,obj:Optional[Objective]=None,feval:Optional[Metric]=None,early_stopping_rounds:Optional[int]=None,xgb_model:Optional[Booster]=None,verbose_eval:Union[int,bool]=True,callbacks:Optional[Sequence[TrainingCallback]]=None,custom_metric:Optional[Metric]=None)->Any
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/federated.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/federated.py----------------------------------------
 xgboost.federated.run_federated_server(port:int,world_size:int,server_key_path:str='',server_cert_path:str='',client_cert_path:str='')->None
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/collective.py----------------------------------------
-A:xgboost.collective.LOGGER->logging.getLogger('[xgboost.collective]')
-A:xgboost.collective.config->from_pystr_to_cstr(json.dumps(args))
-A:xgboost.collective.ret->core._LIB.XGCommunicatorGetWorldSize()
-A:xgboost.collective.is_dist->core._LIB.XGCommunicatorIsDistributed()
-A:xgboost.collective.msg->str(msg)
-A:xgboost.collective.name_str->ctypes.c_char_p()
-A:xgboost.collective.rank->get_rank()
-A:xgboost.collective.length->ctypes.c_ulong()
-A:xgboost.collective.s->pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL)
-A:xgboost.collective.length.value->len(s)
-A:xgboost.collective.dptr->(ctypes.c_char * length.value)()
-A:xgboost.collective.data->pickle.loads(dptr.raw)
-A:xgboost.collective.buf->buf.copy().copy()
-xgboost.collective.CommunicatorContext(self,**args:Any)
-xgboost.collective.CommunicatorContext.__enter__(self)->Dict[str, Any]
-xgboost.collective.CommunicatorContext.__exit__(self,*args:List)->None
-xgboost.collective.CommunicatorContext.__init__(self,**args:Any)
-xgboost.collective.Op(IntEnum)
-xgboost.collective.allreduce(data:np.ndarray,op:Op)->np.ndarray
-xgboost.collective.broadcast(data:_T,root:int)->_T
-xgboost.collective.communicator_print(msg:Any)->None
-xgboost.collective.finalize()->None
-xgboost.collective.get_processor_name()->str
-xgboost.collective.get_rank()->int
-xgboost.collective.get_world_size()->int
-xgboost.collective.init(**args:Any)->None
-xgboost.collective.is_distributed()->int
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/testing.py----------------------------------------
-A:xgboost.testing.PytestSkip->TypedDict('PytestSkip', {'condition': bool, 'reason': str})
-A:xgboost.testing.(conn, _)->server.accept()
-A:xgboost.testing.msg->conn.recv(3).decode()
-xgboost.testing.has_ipv6()->bool
-xgboost.testing.skip_ipv6()->PytestSkip
-xgboost.testing.timeout(sec:int,*args:Any,enable:bool=True,**kwargs:Any)->Any
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/_typing.py----------------------------------------
-A:xgboost._typing.CTypeT->TypeVar('CTypeT', ctypes.c_void_p, ctypes.c_char_p, ctypes.c_int, ctypes.c_float, ctypes.c_uint, ctypes.c_size_t)
-A:xgboost._typing._T->TypeVar('_T')
-A:xgboost._typing._F->TypeVar('_F', bound=Callable[..., Any])
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/sklearn.py----------------------------------------
-A:xgboost.sklearn.labels->dmatrix.get_label()
-A:xgboost.sklearn.y_true->dmatrix.get_label()
-A:xgboost.sklearn.cls.__doc__->''.join(full_doc)
-A:xgboost.sklearn.train_dmatrix->create_dmatrix(data=X, label=y, group=group, qid=qid, weight=sample_weight, base_margin=base_margin, feature_weights=feature_weights, missing=missing, enable_categorical=enable_categorical, feature_types=feature_types, ref=None)
-A:xgboost.sklearn.sample_weight_eval_set->validate_or_none(sample_weight_eval_set, 'sample_weight_eval_set')
-A:xgboost.sklearn.base_margin_eval_set->validate_or_none(base_margin_eval_set, 'base_margin_eval_set')
-A:xgboost.sklearn.eval_group->validate_or_none(eval_group, 'eval_group')
-A:xgboost.sklearn.eval_qid->validate_or_none(eval_qid, 'eval_qid')
-A:xgboost.sklearn.m->create_dmatrix(data=valid_X, label=valid_y, weight=sample_weight_eval_set[i], group=eval_group[i], qid=eval_qid[i], base_margin=base_margin_eval_set[i], missing=missing, enable_categorical=enable_categorical, feature_types=feature_types, ref=train_dmatrix)
-A:xgboost.sklearn.nevals->len(evals)
-A:xgboost.sklearn.evals->list(zip(evals, eval_names))
-A:xgboost.sklearn.parameters->self.get_xgb_params()
-A:xgboost.sklearn.params->self.get_xgb_params()
-A:xgboost.sklearn.cp->copy.copy(self)
-A:xgboost.sklearn.params['random_state']->params['random_state'].randint(np.iinfo(np.int32).max).randint(np.iinfo(np.int32).max)
-A:xgboost.sklearn.meta['_le']->self._le.to_json()
-A:xgboost.sklearn.meta['classes_']->self.classes_.tolist()
-A:xgboost.sklearn.meta['_estimator_type']->self._get_type()
-A:xgboost.sklearn.meta_str->self.get_booster().attr('scikit_learn')
-A:xgboost.sklearn.self._Booster->train(params, train_dmatrix, self.get_num_boosting_rounds(), early_stopping_rounds=early_stopping_rounds, evals=evals, evals_result=evals_result, custom_metric=metric, verbose_eval=verbose, xgb_model=model, callbacks=callbacks)
-A:xgboost.sklearn.meta->json.loads(meta_str)
-A:xgboost.sklearn.self._le->XGBoostLabelEncoder()
-A:xgboost.sklearn.self.classes_->numpy.unique(np.asarray(y))
-A:xgboost.sklearn.metric->_metric_decorator(eval_metric)
-A:xgboost.sklearn.tree_method->self.get_xgb_params().get('tree_method', None)
-A:xgboost.sklearn.self.evals_result_->cast(Dict[str, Dict[str, List[float]]], evals_result)
-A:xgboost.sklearn.(train_dmatrix, evals)->_wrap_evaluation_matrices(missing=self.missing, X=X, y=y, group=group, qid=qid, sample_weight=sample_weight, base_margin=base_margin, feature_weights=feature_weights, eval_set=eval_set, sample_weight_eval_set=sample_weight_eval_set, base_margin_eval_set=base_margin_eval_set, eval_group=eval_group, eval_qid=eval_qid, create_dmatrix=self._create_dmatrix, enable_categorical=self.enable_categorical, feature_types=self.feature_types)
-A:xgboost.sklearn.(model, metric, params, early_stopping_rounds, callbacks)->self._configure_fit(xgb_model, eval_metric, params, early_stopping_rounds, callbacks)
-A:xgboost.sklearn.predictor->self.get_xgb_params().get('predictor', None)
-A:xgboost.sklearn.iteration_range->self._get_iteration_range(iteration_range)
-A:xgboost.sklearn.predts->cupy.asnumpy(predts)
-A:xgboost.sklearn.test->DMatrix(X, base_margin=base_margin, missing=self.missing, nthread=self.n_jobs, feature_types=self.feature_types, enable_categorical=self.enable_categorical)
-A:xgboost.sklearn.test_dmatrix->DMatrix(X, missing=self.missing, feature_types=self.feature_types, nthread=self.n_jobs)
-A:xgboost.sklearn.booster->self.get_booster()
-A:xgboost.sklearn.score->self.get_booster().get_score(importance_type=self.importance_type if self.importance_type else dft())
-A:xgboost.sklearn.all_features_arr->numpy.array(all_features, dtype=np.float32)
-A:xgboost.sklearn.total->numpy.array(all_features, dtype=np.float32).sum()
-A:xgboost.sklearn.b->self.get_booster()
-A:xgboost.sklearn.coef->coef.reshape((n_classes, -1)).reshape((n_classes, -1))
-A:xgboost.sklearn.n_classes->getattr(self, 'n_classes_', None)
-A:xgboost.sklearn.PredtT->TypeVar('PredtT', bound=np.ndarray)
-A:xgboost.sklearn.self.n_classes_->len(self.classes_)
-A:xgboost.sklearn.expected_classes->numpy.arange(self.n_classes_)
-A:xgboost.sklearn.fit.__doc__->XGBModel.fit.__doc__.replace('Fit gradient boosting model', 'Fit gradient boosting classifier', 1)
-A:xgboost.sklearn.class_probs->super().predict(X=X, ntree_limit=ntree_limit, validate_features=validate_features, base_margin=base_margin, iteration_range=iteration_range)
-A:xgboost.sklearn.column_indexes->numpy.repeat(0, class_probs.shape[0])
-A:xgboost.sklearn.raw_predt->super().predict(X=X, ntree_limit=ntree_limit, validate_features=validate_features, base_margin=base_margin, iteration_range=iteration_range, output_margin=True)
-A:xgboost.sklearn.class_prob->softmax(raw_predt, axis=1)
-xgboost.XGBClassifier(self,*,objective:_SklObjective='binary:logistic',use_label_encoder:Optional[bool]=None,**kwargs:Any)
-xgboost.XGBClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBClassifier'
-xgboost.XGBClassifier.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.XGBClassifier.predict_proba(self,X:ArrayLike,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.XGBModel(self,max_depth:Optional[int]=None,max_leaves:Optional[int]=None,max_bin:Optional[int]=None,grow_policy:Optional[str]=None,learning_rate:Optional[float]=None,n_estimators:int=100,verbosity:Optional[int]=None,objective:_SklObjective=None,booster:Optional[str]=None,tree_method:Optional[str]=None,n_jobs:Optional[int]=None,gamma:Optional[float]=None,min_child_weight:Optional[float]=None,max_delta_step:Optional[float]=None,subsample:Optional[float]=None,sampling_method:Optional[str]=None,colsample_bytree:Optional[float]=None,colsample_bylevel:Optional[float]=None,colsample_bynode:Optional[float]=None,reg_alpha:Optional[float]=None,reg_lambda:Optional[float]=None,scale_pos_weight:Optional[float]=None,base_score:Optional[float]=None,random_state:Optional[Union[np.random.RandomState,int]]=None,missing:float=np.nan,num_parallel_tree:Optional[int]=None,monotone_constraints:Optional[Union[Dict[str,int],str]]=None,interaction_constraints:Optional[Union[str,Sequence[Sequence[str]]]]=None,importance_type:Optional[str]=None,gpu_id:Optional[int]=None,validate_parameters:Optional[bool]=None,predictor:Optional[str]=None,enable_categorical:bool=False,feature_types:FeatureTypes=None,max_cat_to_onehot:Optional[int]=None,max_cat_threshold:Optional[int]=None,eval_metric:Optional[Union[str,List[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,callbacks:Optional[List[TrainingCallback]]=None,**kwargs:Any)
-xgboost.XGBModel.__sklearn_is_fitted__(self)->bool
-xgboost.XGBModel._can_use_inplace_predict(self)->bool
-xgboost.XGBModel._configure_fit(self,booster:Optional[Union[Booster,'XGBModel',str]],eval_metric:Optional[Union[Callable,str,Sequence[str]]],params:Dict[str,Any],early_stopping_rounds:Optional[int],callbacks:Optional[Sequence[TrainingCallback]])->Tuple[Optional[Union[Booster, str, 'XGBModel']], Optional[Metric], Dict[str, Any], Optional[int], Optional[Sequence[TrainingCallback]]]
-xgboost.XGBModel._create_dmatrix(self,ref:Optional[DMatrix],**kwargs:Any)->DMatrix
-xgboost.XGBModel._early_stopping_attr(self,attr:str)->Union[float, int]
-xgboost.XGBModel._get_iteration_range(self,iteration_range:Optional[Tuple[int,int]])->Tuple[int, int]
-xgboost.XGBModel._get_type(self)->str
-xgboost.XGBModel._more_tags(self)->Dict[str, bool]
-xgboost.XGBModel._set_evaluation_result(self,evals_result:TrainingCallback.EvalsLog)->None
-xgboost.XGBModel.apply(self,X:ArrayLike,ntree_limit:int=0,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.XGBModel.best_iteration(self)->int
-xgboost.XGBModel.best_ntree_limit(self)->int
-xgboost.XGBModel.best_score(self)->float
-xgboost.XGBModel.coef_(self)->np.ndarray
-xgboost.XGBModel.evals_result(self)->Dict[str, Dict[str, List[float]]]
-xgboost.XGBModel.feature_importances_(self)->np.ndarray
-xgboost.XGBModel.feature_names_in_(self)->np.ndarray
-xgboost.XGBModel.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,'XGBModel']]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBModel'
-xgboost.XGBModel.get_booster(self)->Booster
-xgboost.XGBModel.get_num_boosting_rounds(self)->int
-xgboost.XGBModel.get_params(self,deep:bool=True)->Dict[str, Any]
-xgboost.XGBModel.get_xgb_params(self)->Dict[str, Any]
-xgboost.XGBModel.intercept_(self)->np.ndarray
-xgboost.XGBModel.load_model(self,fname:Union[str,bytearray,os.PathLike])->None
-xgboost.XGBModel.n_features_in_(self)->int
-xgboost.XGBModel.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.XGBModel.save_model(self,fname:Union[str,os.PathLike])->None
-xgboost.XGBModel.set_params(self,**params:Any)->'XGBModel'
-xgboost.XGBRFClassifier(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
-xgboost.XGBRFClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFClassifier'
-xgboost.XGBRFClassifier.get_num_boosting_rounds(self)->int
-xgboost.XGBRFClassifier.get_xgb_params(self)->Dict[str, Any]
-xgboost.XGBRFRegressor(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
-xgboost.XGBRFRegressor.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFRegressor'
-xgboost.XGBRFRegressor.get_num_boosting_rounds(self)->int
-xgboost.XGBRFRegressor.get_xgb_params(self)->Dict[str, Any]
-xgboost.XGBRanker(self,*,objective:str='rank:pairwise',**kwargs:Any)
-xgboost.XGBRanker.fit(self,X:ArrayLike,y:ArrayLike,*,group:Optional[ArrayLike]=None,qid:Optional[ArrayLike]=None,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_group:Optional[Sequence[ArrayLike]]=None,eval_qid:Optional[Sequence[ArrayLike]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=False,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRanker'
-xgboost.XGBRankerMixIn
-xgboost.XGBRegressor(self,*,objective:_SklObjective='reg:squarederror',**kwargs:Any)
-xgboost.sklearn.XGBClassifier(self,*,objective:_SklObjective='binary:logistic',use_label_encoder:Optional[bool]=None,**kwargs:Any)
-xgboost.sklearn.XGBClassifier.__init__(self,*,objective:_SklObjective='binary:logistic',use_label_encoder:Optional[bool]=None,**kwargs:Any)
-xgboost.sklearn.XGBClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBClassifier'
-xgboost.sklearn.XGBClassifier.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.sklearn.XGBClassifier.predict_proba(self,X:ArrayLike,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.sklearn.XGBModel(self,max_depth:Optional[int]=None,max_leaves:Optional[int]=None,max_bin:Optional[int]=None,grow_policy:Optional[str]=None,learning_rate:Optional[float]=None,n_estimators:int=100,verbosity:Optional[int]=None,objective:_SklObjective=None,booster:Optional[str]=None,tree_method:Optional[str]=None,n_jobs:Optional[int]=None,gamma:Optional[float]=None,min_child_weight:Optional[float]=None,max_delta_step:Optional[float]=None,subsample:Optional[float]=None,sampling_method:Optional[str]=None,colsample_bytree:Optional[float]=None,colsample_bylevel:Optional[float]=None,colsample_bynode:Optional[float]=None,reg_alpha:Optional[float]=None,reg_lambda:Optional[float]=None,scale_pos_weight:Optional[float]=None,base_score:Optional[float]=None,random_state:Optional[Union[np.random.RandomState,int]]=None,missing:float=np.nan,num_parallel_tree:Optional[int]=None,monotone_constraints:Optional[Union[Dict[str,int],str]]=None,interaction_constraints:Optional[Union[str,Sequence[Sequence[str]]]]=None,importance_type:Optional[str]=None,gpu_id:Optional[int]=None,validate_parameters:Optional[bool]=None,predictor:Optional[str]=None,enable_categorical:bool=False,feature_types:FeatureTypes=None,max_cat_to_onehot:Optional[int]=None,max_cat_threshold:Optional[int]=None,eval_metric:Optional[Union[str,List[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,callbacks:Optional[List[TrainingCallback]]=None,**kwargs:Any)
-xgboost.sklearn.XGBModel.__init__(self,max_depth:Optional[int]=None,max_leaves:Optional[int]=None,max_bin:Optional[int]=None,grow_policy:Optional[str]=None,learning_rate:Optional[float]=None,n_estimators:int=100,verbosity:Optional[int]=None,objective:_SklObjective=None,booster:Optional[str]=None,tree_method:Optional[str]=None,n_jobs:Optional[int]=None,gamma:Optional[float]=None,min_child_weight:Optional[float]=None,max_delta_step:Optional[float]=None,subsample:Optional[float]=None,sampling_method:Optional[str]=None,colsample_bytree:Optional[float]=None,colsample_bylevel:Optional[float]=None,colsample_bynode:Optional[float]=None,reg_alpha:Optional[float]=None,reg_lambda:Optional[float]=None,scale_pos_weight:Optional[float]=None,base_score:Optional[float]=None,random_state:Optional[Union[np.random.RandomState,int]]=None,missing:float=np.nan,num_parallel_tree:Optional[int]=None,monotone_constraints:Optional[Union[Dict[str,int],str]]=None,interaction_constraints:Optional[Union[str,Sequence[Sequence[str]]]]=None,importance_type:Optional[str]=None,gpu_id:Optional[int]=None,validate_parameters:Optional[bool]=None,predictor:Optional[str]=None,enable_categorical:bool=False,feature_types:FeatureTypes=None,max_cat_to_onehot:Optional[int]=None,max_cat_threshold:Optional[int]=None,eval_metric:Optional[Union[str,List[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,callbacks:Optional[List[TrainingCallback]]=None,**kwargs:Any)
-xgboost.sklearn.XGBModel.__sklearn_is_fitted__(self)->bool
-xgboost.sklearn.XGBModel._can_use_inplace_predict(self)->bool
-xgboost.sklearn.XGBModel._configure_fit(self,booster:Optional[Union[Booster,'XGBModel',str]],eval_metric:Optional[Union[Callable,str,Sequence[str]]],params:Dict[str,Any],early_stopping_rounds:Optional[int],callbacks:Optional[Sequence[TrainingCallback]])->Tuple[Optional[Union[Booster, str, 'XGBModel']], Optional[Metric], Dict[str, Any], Optional[int], Optional[Sequence[TrainingCallback]]]
-xgboost.sklearn.XGBModel._create_dmatrix(self,ref:Optional[DMatrix],**kwargs:Any)->DMatrix
-xgboost.sklearn.XGBModel._early_stopping_attr(self,attr:str)->Union[float, int]
-xgboost.sklearn.XGBModel._get_iteration_range(self,iteration_range:Optional[Tuple[int,int]])->Tuple[int, int]
-xgboost.sklearn.XGBModel._get_type(self)->str
-xgboost.sklearn.XGBModel._more_tags(self)->Dict[str, bool]
-xgboost.sklearn.XGBModel._set_evaluation_result(self,evals_result:TrainingCallback.EvalsLog)->None
-xgboost.sklearn.XGBModel.apply(self,X:ArrayLike,ntree_limit:int=0,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.sklearn.XGBModel.best_iteration(self)->int
-xgboost.sklearn.XGBModel.best_ntree_limit(self)->int
-xgboost.sklearn.XGBModel.best_score(self)->float
-xgboost.sklearn.XGBModel.coef_(self)->np.ndarray
-xgboost.sklearn.XGBModel.evals_result(self)->Dict[str, Dict[str, List[float]]]
-xgboost.sklearn.XGBModel.feature_importances_(self)->np.ndarray
-xgboost.sklearn.XGBModel.feature_names_in_(self)->np.ndarray
-xgboost.sklearn.XGBModel.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,'XGBModel']]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBModel'
-xgboost.sklearn.XGBModel.get_booster(self)->Booster
-xgboost.sklearn.XGBModel.get_num_boosting_rounds(self)->int
-xgboost.sklearn.XGBModel.get_params(self,deep:bool=True)->Dict[str, Any]
-xgboost.sklearn.XGBModel.get_xgb_params(self)->Dict[str, Any]
-xgboost.sklearn.XGBModel.intercept_(self)->np.ndarray
-xgboost.sklearn.XGBModel.load_model(self,fname:Union[str,bytearray,os.PathLike])->None
-xgboost.sklearn.XGBModel.n_features_in_(self)->int
-xgboost.sklearn.XGBModel.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
-xgboost.sklearn.XGBModel.save_model(self,fname:Union[str,os.PathLike])->None
-xgboost.sklearn.XGBModel.set_params(self,**params:Any)->'XGBModel'
-xgboost.sklearn.XGBRFClassifier(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
-xgboost.sklearn.XGBRFClassifier.__init__(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
-xgboost.sklearn.XGBRFClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFClassifier'
-xgboost.sklearn.XGBRFClassifier.get_num_boosting_rounds(self)->int
-xgboost.sklearn.XGBRFClassifier.get_xgb_params(self)->Dict[str, Any]
-xgboost.sklearn.XGBRFRegressor(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
-xgboost.sklearn.XGBRFRegressor.__init__(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
-xgboost.sklearn.XGBRFRegressor.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFRegressor'
-xgboost.sklearn.XGBRFRegressor.get_num_boosting_rounds(self)->int
-xgboost.sklearn.XGBRFRegressor.get_xgb_params(self)->Dict[str, Any]
-xgboost.sklearn.XGBRanker(self,*,objective:str='rank:pairwise',**kwargs:Any)
-xgboost.sklearn.XGBRanker.__init__(self,*,objective:str='rank:pairwise',**kwargs:Any)
-xgboost.sklearn.XGBRanker.fit(self,X:ArrayLike,y:ArrayLike,*,group:Optional[ArrayLike]=None,qid:Optional[ArrayLike]=None,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_group:Optional[Sequence[ArrayLike]]=None,eval_qid:Optional[Sequence[ArrayLike]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=False,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRanker'
-xgboost.sklearn.XGBRankerMixIn
-xgboost.sklearn.XGBRegressor(self,*,objective:_SklObjective='reg:squarederror',**kwargs:Any)
-xgboost.sklearn.XGBRegressor.__init__(self,*,objective:_SklObjective='reg:squarederror',**kwargs:Any)
-xgboost.sklearn._check_rf_callback(early_stopping_rounds:Optional[int],callbacks:Optional[Sequence[TrainingCallback]])->None
-xgboost.sklearn._cls_predict_proba(n_classes:int,prediction:PredtT,vstack:Callable)->PredtT
-xgboost.sklearn._metric_decorator(func:Callable)->Metric
-xgboost.sklearn._objective_decorator(func:Callable[[np.ndarray,np.ndarray],Tuple[np.ndarray,np.ndarray]])->Callable[[np.ndarray, DMatrix], Tuple[np.ndarray, np.ndarray]]
-xgboost.sklearn._wrap_evaluation_matrices(missing:float,X:Any,y:Any,group:Optional[Any],qid:Optional[Any],sample_weight:Optional[Any],base_margin:Optional[Any],feature_weights:Optional[Any],eval_set:Optional[Sequence[Tuple[Any,Any]]],sample_weight_eval_set:Optional[Sequence[Any]],base_margin_eval_set:Optional[Sequence[Any]],eval_group:Optional[Sequence[Any]],eval_qid:Optional[Sequence[Any]],create_dmatrix:Callable,enable_categorical:bool,feature_types:Optional[FeatureTypes])->Tuple[Any, List[Tuple[Any, str]]]
-xgboost.sklearn.xgboost_model_doc(header:str,items:List[str],extra_parameters:Optional[str]=None,end_note:Optional[str]=None)->Callable[[Type], Type]
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/tracker.py----------------------------------------
-A:xgboost.tracker.chunk->self.sock.recv(min(nbytes - nread, 1024))
-A:xgboost.tracker.slen->self.recvint()
-A:xgboost.tracker.worker->ExSocket(sock)
-A:xgboost.tracker.self.host->get_some_ip(s_addr[0])
-A:xgboost.tracker.magic->ExSocket(sock).recvint()
-A:xgboost.tracker.self.rank->ExSocket(sock).recvint()
-A:xgboost.tracker.self.world_size->ExSocket(sock).recvint()
-A:xgboost.tracker.self.task_id->ExSocket(sock).recvstr()
-A:xgboost.tracker.self.cmd->ExSocket(sock).recvstr()
-A:xgboost.tracker.msg->self.sock.recvstr()
-A:xgboost.tracker.nnset->set(tree_map[rank])
-A:xgboost.tracker.ngood->self.sock.recvint()
-A:xgboost.tracker.goodset->set([])
-A:xgboost.tracker.nerr->self.sock.recvint()
-A:xgboost.tracker.self.port->self.sock.recvint()
-A:xgboost.tracker.sock->socket.socket(get_family(host_ip), socket.SOCK_STREAM)
-A:xgboost.tracker.tree_map[r]->self._get_neighbor(r, n_workers)
-A:xgboost.tracker.nset->set(tree_map[rank])
-A:xgboost.tracker.vlst->self.find_share_ring(tree_map, parent_map, v)
-A:xgboost.tracker.rlst->self.find_share_ring(tree_map, parent_map, 0)
-A:xgboost.tracker.n_workers->len(tree_map)
-A:xgboost.tracker.(tree_map, parent_map)->self._get_tree(n_workers)
-A:xgboost.tracker.ring_map->self.get_ring(tree_map, parent_map)
-A:xgboost.tracker.(fd, s_addr)->self.sock.accept()
-A:xgboost.tracker.s->socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-A:xgboost.tracker.(tree_map, parent_map, ring_map)->self.get_link_map(n_workers)
-A:xgboost.tracker.todo_nodes->list(range(n_workers))
-A:xgboost.tracker.rank->list(range(n_workers)).pop(0)
-A:xgboost.tracker.pending->self._sort_pending(pending)
-A:xgboost.tracker.self.thread->Thread(target=run, args=(), daemon=True)
-A:xgboost.tracker.host_ip->socket.gethostbyname(socket.gethostname())
-A:xgboost.tracker.rabit->RabitTracker(host_ip=get_host_ip(args.host_ip), n_workers=args.num_workers, use_logger=True)
-A:xgboost.tracker.parser->argparse.ArgumentParser(description='Rabit Tracker start.')
-A:xgboost.tracker.args->argparse.ArgumentParser(description='Rabit Tracker start.').parse_args()
-xgboost.RabitTracker(self,host_ip:str,n_workers:int,port:int=0,use_logger:bool=False,sortby:str='host')
-xgboost.RabitTracker.__del__(self)->None
-xgboost.RabitTracker._get_neighbor(rank:int,n_workers:int)->List[int]
-xgboost.RabitTracker._get_tree(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int]]
-xgboost.RabitTracker._sort_pending(self,pending:List[WorkerEntry])->List[WorkerEntry]
-xgboost.RabitTracker.accept_workers(self,n_workers:int)->None
-xgboost.RabitTracker.alive(self)->bool
-xgboost.RabitTracker.find_share_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int],rank:int)->List[int]
-xgboost.RabitTracker.get_link_map(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int], _RingMap]
-xgboost.RabitTracker.get_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int])->_RingMap
-xgboost.RabitTracker.join(self)->None
-xgboost.RabitTracker.start(self,n_workers:int)->None
-xgboost.RabitTracker.worker_envs(self)->Dict[str, Union[str, int]]
-xgboost.tracker.ExSocket(self,sock:socket.socket)
-xgboost.tracker.ExSocket.__init__(self,sock:socket.socket)
-xgboost.tracker.ExSocket.recvall(self,nbytes:int)->bytes
-xgboost.tracker.ExSocket.recvint(self)->int
-xgboost.tracker.ExSocket.recvstr(self)->str
-xgboost.tracker.ExSocket.sendint(self,value:int)->None
-xgboost.tracker.ExSocket.sendstr(self,value:str)->None
-xgboost.tracker.RabitTracker(self,host_ip:str,n_workers:int,port:int=0,use_logger:bool=False,sortby:str='host')
-xgboost.tracker.RabitTracker.__del__(self)->None
-xgboost.tracker.RabitTracker.__init__(self,host_ip:str,n_workers:int,port:int=0,use_logger:bool=False,sortby:str='host')
-xgboost.tracker.RabitTracker._get_neighbor(rank:int,n_workers:int)->List[int]
-xgboost.tracker.RabitTracker._get_tree(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int]]
-xgboost.tracker.RabitTracker._sort_pending(self,pending:List[WorkerEntry])->List[WorkerEntry]
-xgboost.tracker.RabitTracker.accept_workers(self,n_workers:int)->None
-xgboost.tracker.RabitTracker.alive(self)->bool
-xgboost.tracker.RabitTracker.find_share_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int],rank:int)->List[int]
-xgboost.tracker.RabitTracker.get_link_map(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int], _RingMap]
-xgboost.tracker.RabitTracker.get_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int])->_RingMap
-xgboost.tracker.RabitTracker.join(self)->None
-xgboost.tracker.RabitTracker.start(self,n_workers:int)->None
-xgboost.tracker.RabitTracker.worker_envs(self)->Dict[str, Union[str, int]]
-xgboost.tracker.WorkerEntry(self,sock:socket.socket,s_addr:Tuple[str,int])
-xgboost.tracker.WorkerEntry.__init__(self,sock:socket.socket,s_addr:Tuple[str,int])
-xgboost.tracker.WorkerEntry._get_remote(self,wait_conn:Dict[int,'WorkerEntry'],nnset:Set[int])->List[int]
-xgboost.tracker.WorkerEntry.assign_rank(self,rank:int,wait_conn:Dict[int,'WorkerEntry'],tree_map:_TreeMap,parent_map:Dict[int,int],ring_map:_RingMap)->List[int]
-xgboost.tracker.WorkerEntry.decide_rank(self,job_map:Dict[str,int])->int
-xgboost.tracker.WorkerEntry.print(self,use_logger:bool)->None
-xgboost.tracker.get_family(addr:str)->int
-xgboost.tracker.get_host_ip(host_ip:Optional[str]=None)->str
-xgboost.tracker.get_some_ip(host:str)->str
-xgboost.tracker.main()->None
-xgboost.tracker.start_rabit_tracker(args:argparse.Namespace)->None
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/rabit.py----------------------------------------
-A:xgboost.rabit.LOGGER->logging.getLogger('[xgboost.rabit]')
-A:xgboost.rabit.kv->arg.decode().split('=')
-A:xgboost.rabit.T->TypeVar('T')
-xgboost.rabit.Op(IntEnum)
-xgboost.rabit.RabitContext(self,args:List[bytes]=None)
-xgboost.rabit.RabitContext.__enter__(self)->None
-xgboost.rabit.RabitContext.__exit__(self,*args:List)->None
-xgboost.rabit.RabitContext.__init__(self,args:List[bytes]=None)
-xgboost.rabit._deprecation_warning()->str
-xgboost.rabit.allreduce(data:np.ndarray,op:Op,prepare_fun:Optional[Callable[[np.ndarray],None]]=None)->np.ndarray
-xgboost.rabit.broadcast(data:T,root:int)->T
-xgboost.rabit.finalize()->None
-xgboost.rabit.get_processor_name()->bytes
-xgboost.rabit.get_rank()->int
-xgboost.rabit.get_world_size()->int
-xgboost.rabit.init(args:Optional[List[bytes]]=None)->None
-xgboost.rabit.is_distributed()->int
-xgboost.rabit.tracker_print(msg:Any)->None
-xgboost.rabit.version_number()->int
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/data.py----------------------------------------
-A:xgboost.data.interface_str->_array_interface(data)
-A:xgboost.data.(indptr, _)->_ensure_np_dtype(data.indptr, data.indptr.dtype)
-A:xgboost.data.(indices, _)->_ensure_np_dtype(data.indices, data.indices.dtype)
-A:xgboost.data.(values, _)->_ensure_np_dtype(data.data, data.data.dtype)
-A:xgboost.data.data->_transform_dlpack(data)
-A:xgboost.data.handle->ctypes.c_void_p()
-A:xgboost.data.(data, dtype)->_ensure_np_dtype(data, dtype)
-A:xgboost.data.(data, _)->_ensure_np_dtype(data, data.dtype)
-A:xgboost.data.config->bytes(json.dumps({'missing': missing, 'nthread': nthread}), 'utf-8')
-A:xgboost.data.feature_names->_transform_dlpack(data).columns.format()
-A:xgboost.data.transformed->_pandas_cat_null(data)
-A:xgboost.data.transformed[cat_columns]->transformed[cat_columns].apply(lambda x: x.cat.codes).astype(np.float32).replace(-1.0, np.NaN).apply(lambda x: x.cat.codes).astype(np.float32).replace(-1.0, np.NaN)
-A:xgboost.data.transformed[nul_columns]->transformed[nul_columns].astype(np.float32).astype(np.float32)
-A:xgboost.data.(feature_names, feature_types)->_pandas_feature_info(data, meta, feature_names, feature_types, enable_categorical)
-A:xgboost.data.arr->arr.astype(dtype).astype(dtype)
-A:xgboost.data.(data, feature_names, feature_types)->_transform_dt_df(data, feature_names, feature_types, None, None)
-A:xgboost.data.data_types_names->tuple((lt.name for lt in data.ltypes))
-A:xgboost.data.feature_types->numpy.vectorize(_dt_type_mapper2.get)(data_types_names).tolist()
-A:xgboost.data.ptrs->(ctypes.c_void_p * data.ncols)()
-A:xgboost.data.col->_transform_dlpack(data).internal.column(icol)
-A:xgboost.data.ptrs[icol]->frame_column_data_r(data, icol)
-A:xgboost.data.feature_type_strings->(ctypes.c_char_p * data.ncols)()
-A:xgboost.data.feature_type_strings[icol]->ctypes.c_char_p(data.stypes[icol].name.encode('utf-8'))
-A:xgboost.data.batch->next(data_iter)
-A:xgboost.data.ptr_schema->int(ffi.cast('uintptr_t', c_schemas[-1]))
-A:xgboost.data.ptr_array->int(ffi.cast('uintptr_t', c_arrays[-1]))
-A:xgboost.data.batches->_transform_dlpack(data).to_batches()
-A:xgboost.data.rb_iter->iter(batches)
-A:xgboost.data.it->record_batch_data_iter(rb_iter)
-A:xgboost.data.next_callback->ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)(it)
-A:xgboost.data.interfaces_str->_cudf_array_interfaces(data, cat_codes)
-A:xgboost.data.(data, cat_codes, feature_names, feature_types)->_transform_cudf_df(data, feature_names, feature_types, enable_categorical)
-A:xgboost.data.array->numpy.asarray(data)
-A:xgboost.data.converted->_convert_unknown_data(data)
-A:xgboost.data.data_np->numpy.array(data)
-A:xgboost.data.interface->bytes(json.dumps([data.__cuda_array_interface__], indent=2), 'utf-8')
-A:xgboost.data.(data, _, _)->_transform_pandas_df(data, False, meta=name, meta_type=dtype)
-A:xgboost.data.(arr, feature_names, feature_types)->_transform_pandas_df(data, enable_categorical, feature_names, feature_types)
-A:xgboost.data.(arr, _)->_ensure_np_dtype(arr, arr.dtype)
-A:xgboost.data.err->TypeError('Value type is not supported for data iterator:' + str(type(data)))
-xgboost.data.SingleBatchInternalIter(self,**kwargs:Any)
-xgboost.data.SingleBatchInternalIter.__init__(self,**kwargs:Any)
-xgboost.data.SingleBatchInternalIter.next(self,input_data:Callable)->int
-xgboost.data.SingleBatchInternalIter.reset(self)->None
-xgboost.data._array_interface(data:np.ndarray)->bytes
-xgboost.data._check_complex(data:DataType)->None
-xgboost.data._check_data_shape(data:DataType)->None
-xgboost.data._convert_unknown_data(data:DataType)->DataType
-xgboost.data._cudf_array_interfaces(data:DataType,cat_codes:list)->bytes
-xgboost.data._ensure_np_dtype(data:DataType,dtype:Optional[NumpyDType])->Tuple[np.ndarray, Optional[NumpyDType]]
-xgboost.data._from_arrow(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->DispatchedDataBackendReturnType
-xgboost.data._from_cudf_df(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->DispatchedDataBackendReturnType
-xgboost.data._from_cupy_array(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_dlpack(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_dt_df(data:DataType,missing:Optional[FloatCompatible],nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->DispatchedDataBackendReturnType
-xgboost.data._from_list(data:Sequence,missing:FloatCompatible,n_threads:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_numpy_array(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_pandas_df(data:DataFrame,enable_categorical:bool,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_pandas_series(data:DataType,missing:FloatCompatible,nthread:int,enable_categorical:bool,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_scipy_csc(data:DataType,missing:Optional[FloatCompatible],feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_scipy_csr(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_tuple(data:Sequence,missing:FloatCompatible,n_threads:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._from_uri(data:DataType,missing:Optional[FloatCompatible],feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
-xgboost.data._has_array_protocol(data:DataType)->bool
-xgboost.data._invalid_dataframe_dtype(data:DataType)->None
-xgboost.data._is_arrow(data:DataType)->bool
-xgboost.data._is_cudf_df(data:DataType)->bool
-xgboost.data._is_cudf_ser(data:DataType)->bool
-xgboost.data._is_cupy_array(data:DataType)->bool
-xgboost.data._is_cupy_csc(data:DataType)->bool
-xgboost.data._is_cupy_csr(data:DataType)->bool
-xgboost.data._is_dlpack(data:DataType)->bool
-xgboost.data._is_dt_df(data:DataType)->bool
-xgboost.data._is_iter(data:DataType)->bool
-xgboost.data._is_list(data:DataType)->bool
-xgboost.data._is_modin_df(data:DataType)->bool
-xgboost.data._is_modin_series(data:DataType)->bool
-xgboost.data._is_numpy_array(data:DataType)->bool
-xgboost.data._is_pandas_df(data:DataType)->bool
-xgboost.data._is_pandas_series(data:DataType)->bool
-xgboost.data._is_scipy_coo(data:DataType)->bool
-xgboost.data._is_scipy_csc(data:DataType)->bool
-xgboost.data._is_scipy_csr(data:DataType)->bool
-xgboost.data._is_tuple(data:DataType)->bool
-xgboost.data._is_uri(data:DataType)->bool
-xgboost.data._maybe_np_slice(data:DataType,dtype:Optional[NumpyDType])->np.ndarray
-xgboost.data._meta_from_cudf_df(data:DataType,field:str,handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_cudf_series(data:DataType,field:str,handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_cupy_array(data:DataType,field:str,handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_dt(data:DataType,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_list(data:Sequence,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_numpy(data:np.ndarray,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_pandas_series(data:DataType,name:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
-xgboost.data._meta_from_tuple(data:Sequence,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
-xgboost.data._pandas_cat_null(data:DataFrame)->DataFrame
-xgboost.data._pandas_feature_info(data:DataFrame,meta:Optional[str],feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->Tuple[Optional[FeatureNames], Optional[FeatureTypes]]
-xgboost.data._proxy_transform(data:DataType,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->Tuple[Union[bool, ctypes.c_void_p, np.ndarray], Optional[list], Optional[FeatureNames], Optional[FeatureTypes]]
-xgboost.data._to_data_type(dtype:str,name:str)->int
-xgboost.data._transform_cudf_df(data:DataType,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->Tuple[ctypes.c_void_p, list, Optional[FeatureNames], Optional[FeatureTypes]]
-xgboost.data._transform_cupy_array(data:DataType)->CupyT
-xgboost.data._transform_dlpack(data:DataType)->bool
-xgboost.data._transform_dt_df(data:DataType,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],meta:Optional[str]=None,meta_type:Optional[NumpyDType]=None)->Tuple[np.ndarray, Optional[FeatureNames], Optional[FeatureTypes]]
-xgboost.data._transform_pandas_df(data:DataFrame,enable_categorical:bool,feature_names:Optional[FeatureNames]=None,feature_types:Optional[FeatureTypes]=None,meta:Optional[str]=None,meta_type:Optional[NumpyDType]=None)->Tuple[np.ndarray, Optional[FeatureNames], Optional[FeatureTypes]]
-xgboost.data._transform_scipy_csr(data:DataType)->DataType
-xgboost.data._validate_meta_shape(data:DataType,name:str)->None
-xgboost.data._warn_unused_missing(data:DataType,missing:Optional[FloatCompatible])->None
-xgboost.data.dispatch_data_backend(data:DataType,missing:FloatCompatible,threads:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool=False)->DispatchedDataBackendReturnType
-xgboost.data.dispatch_meta_backend(matrix:DMatrix,data:DataType,name:str,dtype:Optional[NumpyDType]=None)->None
-xgboost.data.dispatch_proxy_set_data(proxy:_ProxyDMatrix,data:DataType,cat_codes:Optional[list],allow_host:bool)->None
-xgboost.data.is_nullable_dtype(dtype:PandasDType)->bool
-xgboost.data.record_batch_data_iter(data_iter:Iterator)->Callable
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/core.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/core.py----------------------------------------
 A:xgboost.core.IterRange->TypeVar('IterRange', Optional[Tuple[int, int]], Tuple[int, int])
 A:xgboost.core.(num_parallel_tree, _)->_get_booster_layer_trees(booster)
 A:xgboost.core.num_parallel_tree->int(config['learner']['gradient_booster']['gbtree_train_param']['num_parallel_tree'])
@@ -890,13 +494,95 @@ xgboost.core.make_jcargs(**kwargs:Any)->bytes
 xgboost.core.require_keyword_args(error:bool)->Callable[[Callable[..., _T]], Callable[..., _T]]
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/libpath.py----------------------------------------
-A:xgboost.libpath.curr_path->os.path.dirname(os.path.abspath(os.path.expanduser(__file__)))
-xgboost.libpath.XGBoostLibraryNotFound(Exception)
-xgboost.libpath.find_lib_path()->List[str]
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/training.py----------------------------------------
+A:xgboost.training.metric_fn->_configure_custom_metric(feval, custom_metric)
+A:xgboost.training.bst->CallbackContainer(callbacks, metric=metric_fn, output_margin=callable(obj) or metric_fn is feval).after_training(bst)
+A:xgboost.training.cb_container->CallbackContainer(callbacks, metric=metric_fn, output_margin=callable(obj) or metric_fn is feval)
+A:xgboost.training.self.bst->Booster(param, [dtrain, dtest])
+A:xgboost.training.group_boundaries->dall.get_uint_info('group_ptr')
+A:xgboost.training.group_sizes->numpy.diff(group_boundaries)
+A:xgboost.training.idx->numpy.arange(dall.num_row())
+A:xgboost.training.out_group_idset->numpy.array_split(idx, nfold)
+A:xgboost.training.dtrain->dall.slice(in_idset[k])
+A:xgboost.training.dtest->dall.slice(out_idset[k])
+A:xgboost.training.(dtrain, dtest, tparam)->fpreproc(dtrain, dtest, param.copy())
+A:xgboost.training.evals->list(evals)
+A:xgboost.training.out_idset->numpy.array_split(idx, nfold)
+A:xgboost.training.splits->list(sfk.split(X=dall.get_label(), y=dall.get_label()))
+A:xgboost.training.nfold->len(out_idset)
+A:xgboost.training.sfk->XGBStratifiedKFold(n_splits=nfold, shuffle=True, random_state=seed)
+A:xgboost.training.params->dict(((k, v) for (k, v) in params.items()))
+A:xgboost.training.cvfolds->mknfold(dtrain, nfold, params, seed, metrics, fpreproc, stratified, folds, shuffle)
+A:xgboost.training.callbacks_container->CallbackContainer(callbacks, metric=metric_fn, is_cv=True, output_margin=callable(obj) or metric_fn is feval)
+A:xgboost.training.booster->_PackedBooster(cvfolds)
+A:xgboost.training.should_break->CallbackContainer(callbacks, metric=metric_fn, is_cv=True, output_margin=callable(obj) or metric_fn is feval).after_iteration(booster, i, dtrain, None)
+A:xgboost.training.results->pandas.DataFrame.from_dict(results)
+xgboost.cv(params:BoosterParam,dtrain:DMatrix,num_boost_round:int=10,nfold:int=3,stratified:bool=False,folds:XGBStratifiedKFold=None,metrics:Sequence[str]=(),obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:bool=None,early_stopping_rounds:int=None,fpreproc:FPreProcCallable=None,as_pandas:bool=True,verbose_eval:Optional[Union[int,bool]]=None,show_stdv:bool=True,seed:int=0,callbacks:Sequence[TrainingCallback]=None,shuffle:bool=True,custom_metric:Optional[Metric]=None)->Union[Dict[str, float], DataFrame]
+xgboost.train(params:Dict[str,Any],dtrain:DMatrix,num_boost_round:int=10,*,evals:Optional[Sequence[Tuple[DMatrix,str]]]=None,obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:Optional[bool]=None,early_stopping_rounds:Optional[int]=None,evals_result:TrainingCallback.EvalsLog=None,verbose_eval:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[str,os.PathLike,Booster,bytearray]]=None,callbacks:Optional[Sequence[TrainingCallback]]=None,custom_metric:Optional[Metric]=None)->Booster
+xgboost.training.CVPack(self,dtrain:DMatrix,dtest:DMatrix,param:Optional[Union[Dict,List]])
+xgboost.training.CVPack.__getattr__(self,name:str)->Callable
+xgboost.training.CVPack.__init__(self,dtrain:DMatrix,dtest:DMatrix,param:Optional[Union[Dict,List]])
+xgboost.training.CVPack.eval(self,iteration:int,feval:Optional[Metric],output_margin:bool)->str
+xgboost.training.CVPack.update(self,iteration:int,fobj:Optional[Objective])->None
+xgboost.training._PackedBooster(self,cvfolds:_CVFolds)
+xgboost.training._PackedBooster.__init__(self,cvfolds:_CVFolds)
+xgboost.training._PackedBooster.attr(self,key:str)->Optional[str]
+xgboost.training._PackedBooster.best_iteration(self)->int
+xgboost.training._PackedBooster.best_score(self)->float
+xgboost.training._PackedBooster.eval(self,iteration:int,feval:Optional[Metric],output_margin:bool)->List[str]
+xgboost.training._PackedBooster.num_boosted_rounds(self)->int
+xgboost.training._PackedBooster.set_attr(self,**kwargs:Optional[str])->Any
+xgboost.training._PackedBooster.set_param(self,params:Union[Dict,Iterable[Tuple[str,Any]],str],value:Optional[str]=None)->None
+xgboost.training._PackedBooster.update(self,iteration:int,obj:Optional[Objective])->None
+xgboost.training._assert_new_callback(callbacks:Optional[Sequence[TrainingCallback]])->None
+xgboost.training._configure_custom_metric(feval:Optional[Metric],custom_metric:Optional[Metric])->Optional[Metric]
+xgboost.training.cv(params:BoosterParam,dtrain:DMatrix,num_boost_round:int=10,nfold:int=3,stratified:bool=False,folds:XGBStratifiedKFold=None,metrics:Sequence[str]=(),obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:bool=None,early_stopping_rounds:int=None,fpreproc:FPreProcCallable=None,as_pandas:bool=True,verbose_eval:Optional[Union[int,bool]]=None,show_stdv:bool=True,seed:int=0,callbacks:Sequence[TrainingCallback]=None,shuffle:bool=True,custom_metric:Optional[Metric]=None)->Union[Dict[str, float], DataFrame]
+xgboost.training.groups_to_rows(groups:List[np.ndarray],boundaries:np.ndarray)->np.ndarray
+xgboost.training.mkgroupfold(dall:DMatrix,nfold:int,param:BoosterParam,evals:Sequence[str]=(),fpreproc:FPreProcCallable=None,shuffle:bool=True)->List[CVPack]
+xgboost.training.mknfold(dall:DMatrix,nfold:int,param:BoosterParam,seed:int,evals:Sequence[str]=(),fpreproc:FPreProcCallable=None,stratified:bool=False,folds:XGBStratifiedKFold=None,shuffle:bool=True)->List[CVPack]
+xgboost.training.train(params:Dict[str,Any],dtrain:DMatrix,num_boost_round:int=10,*,evals:Optional[Sequence[Tuple[DMatrix,str]]]=None,obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:Optional[bool]=None,early_stopping_rounds:Optional[int]=None,evals_result:TrainingCallback.EvalsLog=None,verbose_eval:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[str,os.PathLike,Booster,bytearray]]=None,callbacks:Optional[Sequence[TrainingCallback]]=None,custom_metric:Optional[Metric]=None)->Booster
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/config.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/testing.py----------------------------------------
+A:xgboost.testing.PytestSkip->TypedDict('PytestSkip', {'condition': bool, 'reason': str})
+A:xgboost.testing.(conn, _)->server.accept()
+A:xgboost.testing.msg->conn.recv(3).decode()
+xgboost.testing.has_ipv6()->bool
+xgboost.testing.skip_ipv6()->PytestSkip
+xgboost.testing.timeout(sec:int,*args:Any,enable:bool=True,**kwargs:Any)->Any
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/collective.py----------------------------------------
+A:xgboost.collective.LOGGER->logging.getLogger('[xgboost.collective]')
+A:xgboost.collective.config->from_pystr_to_cstr(json.dumps(args))
+A:xgboost.collective.ret->core._LIB.XGCommunicatorGetWorldSize()
+A:xgboost.collective.is_dist->core._LIB.XGCommunicatorIsDistributed()
+A:xgboost.collective.msg->str(msg)
+A:xgboost.collective.name_str->ctypes.c_char_p()
+A:xgboost.collective.rank->get_rank()
+A:xgboost.collective.length->ctypes.c_ulong()
+A:xgboost.collective.s->pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL)
+A:xgboost.collective.length.value->len(s)
+A:xgboost.collective.dptr->(ctypes.c_char * length.value)()
+A:xgboost.collective.data->pickle.loads(dptr.raw)
+A:xgboost.collective.buf->buf.copy().copy()
+xgboost.collective.CommunicatorContext(self,**args:Any)
+xgboost.collective.CommunicatorContext.__enter__(self)->Dict[str, Any]
+xgboost.collective.CommunicatorContext.__exit__(self,*args:List)->None
+xgboost.collective.CommunicatorContext.__init__(self,**args:Any)
+xgboost.collective.Op(IntEnum)
+xgboost.collective.allreduce(data:np.ndarray,op:Op)->np.ndarray
+xgboost.collective.broadcast(data:_T,root:int)->_T
+xgboost.collective.communicator_print(msg:Any)->None
+xgboost.collective.finalize()->None
+xgboost.collective.get_processor_name()->str
+xgboost.collective.get_rank()->int
+xgboost.collective.get_world_size()->int
+xgboost.collective.init(**args:Any)->None
+xgboost.collective.is_distributed()->int
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/config.py----------------------------------------
 A:xgboost.config.config->json.loads(py_str(value))
 A:xgboost.config.config_str->ctypes.c_char_p()
 A:xgboost.config.old_config->get_config().copy()
@@ -909,25 +595,385 @@ xgboost.get_config()->Dict[str, Any]
 xgboost.set_config(**new_config:Any)->None
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/plotting.py----------------------------------------
-A:xgboost.plotting.importance->booster.get_booster().get_score(importance_type=importance_type, fmap=fmap)
-A:xgboost.plotting.tuples->sorted(tuples, key=lambda _x: _x[1])
-A:xgboost.plotting.(labels, values)->zip(*tuples)
-A:xgboost.plotting.(_, ax)->matplotlib.pyplot.subplots(1, 1)
-A:xgboost.plotting.ylocs->numpy.arange(len(values))
-A:xgboost.plotting.booster->booster.get_booster().get_booster()
-A:xgboost.plotting.g->to_graphviz(booster, fmap=fmap, num_trees=num_trees, rankdir=rankdir, **kwargs)
-A:xgboost.plotting.s->BytesIO()
-A:xgboost.plotting.img->matplotlib.image.imread(s)
-xgboost.plot_importance(booster:Booster,ax:Optional[Axes]=None,height:float=0.2,xlim:Optional[tuple]=None,ylim:Optional[tuple]=None,title:str='Featureimportance',xlabel:str='Fscore',ylabel:str='Features',fmap:PathLike='',importance_type:str='weight',max_num_features:Optional[int]=None,grid:bool=True,show_values:bool=True,**kwargs:Any)->Axes
-xgboost.plot_tree(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,ax:Optional[Axes]=None,**kwargs:Any)->Axes
-xgboost.plotting.plot_importance(booster:Booster,ax:Optional[Axes]=None,height:float=0.2,xlim:Optional[tuple]=None,ylim:Optional[tuple]=None,title:str='Featureimportance',xlabel:str='Fscore',ylabel:str='Features',fmap:PathLike='',importance_type:str='weight',max_num_features:Optional[int]=None,grid:bool=True,show_values:bool=True,**kwargs:Any)->Axes
-xgboost.plotting.plot_tree(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,ax:Optional[Axes]=None,**kwargs:Any)->Axes
-xgboost.plotting.to_graphviz(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,yes_color:Optional[str]=None,no_color:Optional[str]=None,condition_node_params:Optional[dict]=None,leaf_node_params:Optional[dict]=None,**kwargs:Any)->GraphvizSource
-xgboost.to_graphviz(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,yes_color:Optional[str]=None,no_color:Optional[str]=None,condition_node_params:Optional[dict]=None,leaf_node_params:Optional[dict]=None,**kwargs:Any)->GraphvizSource
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/sklearn.py----------------------------------------
+A:xgboost.sklearn.labels->dmatrix.get_label()
+A:xgboost.sklearn.y_true->dmatrix.get_label()
+A:xgboost.sklearn.cls.__doc__->''.join(full_doc)
+A:xgboost.sklearn.train_dmatrix->create_dmatrix(data=X, label=y, group=group, qid=qid, weight=sample_weight, base_margin=base_margin, feature_weights=feature_weights, missing=missing, enable_categorical=enable_categorical, feature_types=feature_types, ref=None)
+A:xgboost.sklearn.sample_weight_eval_set->validate_or_none(sample_weight_eval_set, 'sample_weight_eval_set')
+A:xgboost.sklearn.base_margin_eval_set->validate_or_none(base_margin_eval_set, 'base_margin_eval_set')
+A:xgboost.sklearn.eval_group->validate_or_none(eval_group, 'eval_group')
+A:xgboost.sklearn.eval_qid->validate_or_none(eval_qid, 'eval_qid')
+A:xgboost.sklearn.m->create_dmatrix(data=valid_X, label=valid_y, weight=sample_weight_eval_set[i], group=eval_group[i], qid=eval_qid[i], base_margin=base_margin_eval_set[i], missing=missing, enable_categorical=enable_categorical, feature_types=feature_types, ref=train_dmatrix)
+A:xgboost.sklearn.nevals->len(evals)
+A:xgboost.sklearn.evals->list(zip(evals, eval_names))
+A:xgboost.sklearn.parameters->self.get_xgb_params()
+A:xgboost.sklearn.params->self.get_xgb_params()
+A:xgboost.sklearn.cp->copy.copy(self)
+A:xgboost.sklearn.params['random_state']->params['random_state'].randint(np.iinfo(np.int32).max).randint(np.iinfo(np.int32).max)
+A:xgboost.sklearn.meta['_le']->self._le.to_json()
+A:xgboost.sklearn.meta['classes_']->self.classes_.tolist()
+A:xgboost.sklearn.meta['_estimator_type']->self._get_type()
+A:xgboost.sklearn.meta_str->self.get_booster().attr('scikit_learn')
+A:xgboost.sklearn.self._Booster->train(params, train_dmatrix, self.get_num_boosting_rounds(), early_stopping_rounds=early_stopping_rounds, evals=evals, evals_result=evals_result, custom_metric=metric, verbose_eval=verbose, xgb_model=model, callbacks=callbacks)
+A:xgboost.sklearn.meta->json.loads(meta_str)
+A:xgboost.sklearn.self._le->XGBoostLabelEncoder()
+A:xgboost.sklearn.self.classes_->numpy.unique(np.asarray(y))
+A:xgboost.sklearn.metric->_metric_decorator(eval_metric)
+A:xgboost.sklearn.tree_method->self.get_xgb_params().get('tree_method', None)
+A:xgboost.sklearn.self.evals_result_->cast(Dict[str, Dict[str, List[float]]], evals_result)
+A:xgboost.sklearn.(train_dmatrix, evals)->_wrap_evaluation_matrices(missing=self.missing, X=X, y=y, group=group, qid=qid, sample_weight=sample_weight, base_margin=base_margin, feature_weights=feature_weights, eval_set=eval_set, sample_weight_eval_set=sample_weight_eval_set, base_margin_eval_set=base_margin_eval_set, eval_group=eval_group, eval_qid=eval_qid, create_dmatrix=self._create_dmatrix, enable_categorical=self.enable_categorical, feature_types=self.feature_types)
+A:xgboost.sklearn.(model, metric, params, early_stopping_rounds, callbacks)->self._configure_fit(xgb_model, eval_metric, params, early_stopping_rounds, callbacks)
+A:xgboost.sklearn.predictor->self.get_xgb_params().get('predictor', None)
+A:xgboost.sklearn.iteration_range->self._get_iteration_range(iteration_range)
+A:xgboost.sklearn.predts->cupy.asnumpy(predts)
+A:xgboost.sklearn.test->DMatrix(X, base_margin=base_margin, missing=self.missing, nthread=self.n_jobs, feature_types=self.feature_types, enable_categorical=self.enable_categorical)
+A:xgboost.sklearn.test_dmatrix->DMatrix(X, missing=self.missing, feature_types=self.feature_types, nthread=self.n_jobs)
+A:xgboost.sklearn.booster->self.get_booster()
+A:xgboost.sklearn.score->self.get_booster().get_score(importance_type=self.importance_type if self.importance_type else dft())
+A:xgboost.sklearn.all_features_arr->numpy.array(all_features, dtype=np.float32)
+A:xgboost.sklearn.total->numpy.array(all_features, dtype=np.float32).sum()
+A:xgboost.sklearn.b->self.get_booster()
+A:xgboost.sklearn.coef->coef.reshape((n_classes, -1)).reshape((n_classes, -1))
+A:xgboost.sklearn.n_classes->getattr(self, 'n_classes_', None)
+A:xgboost.sklearn.PredtT->TypeVar('PredtT', bound=np.ndarray)
+A:xgboost.sklearn.self.n_classes_->len(self.classes_)
+A:xgboost.sklearn.expected_classes->numpy.arange(self.n_classes_)
+A:xgboost.sklearn.fit.__doc__->XGBModel.fit.__doc__.replace('Fit gradient boosting model', 'Fit gradient boosting classifier', 1)
+A:xgboost.sklearn.class_probs->super().predict(X=X, ntree_limit=ntree_limit, validate_features=validate_features, base_margin=base_margin, iteration_range=iteration_range)
+A:xgboost.sklearn.column_indexes->numpy.repeat(0, class_probs.shape[0])
+A:xgboost.sklearn.raw_predt->super().predict(X=X, ntree_limit=ntree_limit, validate_features=validate_features, base_margin=base_margin, iteration_range=iteration_range, output_margin=True)
+A:xgboost.sklearn.class_prob->softmax(raw_predt, axis=1)
+xgboost.XGBClassifier(self,*,objective:_SklObjective='binary:logistic',use_label_encoder:Optional[bool]=None,**kwargs:Any)
+xgboost.XGBClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBClassifier'
+xgboost.XGBClassifier.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.XGBClassifier.predict_proba(self,X:ArrayLike,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.XGBModel(self,max_depth:Optional[int]=None,max_leaves:Optional[int]=None,max_bin:Optional[int]=None,grow_policy:Optional[str]=None,learning_rate:Optional[float]=None,n_estimators:int=100,verbosity:Optional[int]=None,objective:_SklObjective=None,booster:Optional[str]=None,tree_method:Optional[str]=None,n_jobs:Optional[int]=None,gamma:Optional[float]=None,min_child_weight:Optional[float]=None,max_delta_step:Optional[float]=None,subsample:Optional[float]=None,sampling_method:Optional[str]=None,colsample_bytree:Optional[float]=None,colsample_bylevel:Optional[float]=None,colsample_bynode:Optional[float]=None,reg_alpha:Optional[float]=None,reg_lambda:Optional[float]=None,scale_pos_weight:Optional[float]=None,base_score:Optional[float]=None,random_state:Optional[Union[np.random.RandomState,int]]=None,missing:float=np.nan,num_parallel_tree:Optional[int]=None,monotone_constraints:Optional[Union[Dict[str,int],str]]=None,interaction_constraints:Optional[Union[str,Sequence[Sequence[str]]]]=None,importance_type:Optional[str]=None,gpu_id:Optional[int]=None,validate_parameters:Optional[bool]=None,predictor:Optional[str]=None,enable_categorical:bool=False,feature_types:FeatureTypes=None,max_cat_to_onehot:Optional[int]=None,max_cat_threshold:Optional[int]=None,eval_metric:Optional[Union[str,List[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,callbacks:Optional[List[TrainingCallback]]=None,**kwargs:Any)
+xgboost.XGBModel.__sklearn_is_fitted__(self)->bool
+xgboost.XGBModel._can_use_inplace_predict(self)->bool
+xgboost.XGBModel._configure_fit(self,booster:Optional[Union[Booster,'XGBModel',str]],eval_metric:Optional[Union[Callable,str,Sequence[str]]],params:Dict[str,Any],early_stopping_rounds:Optional[int],callbacks:Optional[Sequence[TrainingCallback]])->Tuple[Optional[Union[Booster, str, 'XGBModel']], Optional[Metric], Dict[str, Any], Optional[int], Optional[Sequence[TrainingCallback]]]
+xgboost.XGBModel._create_dmatrix(self,ref:Optional[DMatrix],**kwargs:Any)->DMatrix
+xgboost.XGBModel._early_stopping_attr(self,attr:str)->Union[float, int]
+xgboost.XGBModel._get_iteration_range(self,iteration_range:Optional[Tuple[int,int]])->Tuple[int, int]
+xgboost.XGBModel._get_type(self)->str
+xgboost.XGBModel._more_tags(self)->Dict[str, bool]
+xgboost.XGBModel._set_evaluation_result(self,evals_result:TrainingCallback.EvalsLog)->None
+xgboost.XGBModel.apply(self,X:ArrayLike,ntree_limit:int=0,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.XGBModel.best_iteration(self)->int
+xgboost.XGBModel.best_ntree_limit(self)->int
+xgboost.XGBModel.best_score(self)->float
+xgboost.XGBModel.coef_(self)->np.ndarray
+xgboost.XGBModel.evals_result(self)->Dict[str, Dict[str, List[float]]]
+xgboost.XGBModel.feature_importances_(self)->np.ndarray
+xgboost.XGBModel.feature_names_in_(self)->np.ndarray
+xgboost.XGBModel.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,'XGBModel']]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBModel'
+xgboost.XGBModel.get_booster(self)->Booster
+xgboost.XGBModel.get_num_boosting_rounds(self)->int
+xgboost.XGBModel.get_params(self,deep:bool=True)->Dict[str, Any]
+xgboost.XGBModel.get_xgb_params(self)->Dict[str, Any]
+xgboost.XGBModel.intercept_(self)->np.ndarray
+xgboost.XGBModel.load_model(self,fname:Union[str,bytearray,os.PathLike])->None
+xgboost.XGBModel.n_features_in_(self)->int
+xgboost.XGBModel.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.XGBModel.save_model(self,fname:Union[str,os.PathLike])->None
+xgboost.XGBModel.set_params(self,**params:Any)->'XGBModel'
+xgboost.XGBRFClassifier(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
+xgboost.XGBRFClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFClassifier'
+xgboost.XGBRFClassifier.get_num_boosting_rounds(self)->int
+xgboost.XGBRFClassifier.get_xgb_params(self)->Dict[str, Any]
+xgboost.XGBRFRegressor(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
+xgboost.XGBRFRegressor.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFRegressor'
+xgboost.XGBRFRegressor.get_num_boosting_rounds(self)->int
+xgboost.XGBRFRegressor.get_xgb_params(self)->Dict[str, Any]
+xgboost.XGBRanker(self,*,objective:str='rank:pairwise',**kwargs:Any)
+xgboost.XGBRanker.fit(self,X:ArrayLike,y:ArrayLike,*,group:Optional[ArrayLike]=None,qid:Optional[ArrayLike]=None,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_group:Optional[Sequence[ArrayLike]]=None,eval_qid:Optional[Sequence[ArrayLike]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=False,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRanker'
+xgboost.XGBRankerMixIn
+xgboost.XGBRegressor(self,*,objective:_SklObjective='reg:squarederror',**kwargs:Any)
+xgboost.sklearn.XGBClassifier(self,*,objective:_SklObjective='binary:logistic',use_label_encoder:Optional[bool]=None,**kwargs:Any)
+xgboost.sklearn.XGBClassifier.__init__(self,*,objective:_SklObjective='binary:logistic',use_label_encoder:Optional[bool]=None,**kwargs:Any)
+xgboost.sklearn.XGBClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBClassifier'
+xgboost.sklearn.XGBClassifier.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.sklearn.XGBClassifier.predict_proba(self,X:ArrayLike,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.sklearn.XGBModel(self,max_depth:Optional[int]=None,max_leaves:Optional[int]=None,max_bin:Optional[int]=None,grow_policy:Optional[str]=None,learning_rate:Optional[float]=None,n_estimators:int=100,verbosity:Optional[int]=None,objective:_SklObjective=None,booster:Optional[str]=None,tree_method:Optional[str]=None,n_jobs:Optional[int]=None,gamma:Optional[float]=None,min_child_weight:Optional[float]=None,max_delta_step:Optional[float]=None,subsample:Optional[float]=None,sampling_method:Optional[str]=None,colsample_bytree:Optional[float]=None,colsample_bylevel:Optional[float]=None,colsample_bynode:Optional[float]=None,reg_alpha:Optional[float]=None,reg_lambda:Optional[float]=None,scale_pos_weight:Optional[float]=None,base_score:Optional[float]=None,random_state:Optional[Union[np.random.RandomState,int]]=None,missing:float=np.nan,num_parallel_tree:Optional[int]=None,monotone_constraints:Optional[Union[Dict[str,int],str]]=None,interaction_constraints:Optional[Union[str,Sequence[Sequence[str]]]]=None,importance_type:Optional[str]=None,gpu_id:Optional[int]=None,validate_parameters:Optional[bool]=None,predictor:Optional[str]=None,enable_categorical:bool=False,feature_types:FeatureTypes=None,max_cat_to_onehot:Optional[int]=None,max_cat_threshold:Optional[int]=None,eval_metric:Optional[Union[str,List[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,callbacks:Optional[List[TrainingCallback]]=None,**kwargs:Any)
+xgboost.sklearn.XGBModel.__init__(self,max_depth:Optional[int]=None,max_leaves:Optional[int]=None,max_bin:Optional[int]=None,grow_policy:Optional[str]=None,learning_rate:Optional[float]=None,n_estimators:int=100,verbosity:Optional[int]=None,objective:_SklObjective=None,booster:Optional[str]=None,tree_method:Optional[str]=None,n_jobs:Optional[int]=None,gamma:Optional[float]=None,min_child_weight:Optional[float]=None,max_delta_step:Optional[float]=None,subsample:Optional[float]=None,sampling_method:Optional[str]=None,colsample_bytree:Optional[float]=None,colsample_bylevel:Optional[float]=None,colsample_bynode:Optional[float]=None,reg_alpha:Optional[float]=None,reg_lambda:Optional[float]=None,scale_pos_weight:Optional[float]=None,base_score:Optional[float]=None,random_state:Optional[Union[np.random.RandomState,int]]=None,missing:float=np.nan,num_parallel_tree:Optional[int]=None,monotone_constraints:Optional[Union[Dict[str,int],str]]=None,interaction_constraints:Optional[Union[str,Sequence[Sequence[str]]]]=None,importance_type:Optional[str]=None,gpu_id:Optional[int]=None,validate_parameters:Optional[bool]=None,predictor:Optional[str]=None,enable_categorical:bool=False,feature_types:FeatureTypes=None,max_cat_to_onehot:Optional[int]=None,max_cat_threshold:Optional[int]=None,eval_metric:Optional[Union[str,List[str],Callable]]=None,early_stopping_rounds:Optional[int]=None,callbacks:Optional[List[TrainingCallback]]=None,**kwargs:Any)
+xgboost.sklearn.XGBModel.__sklearn_is_fitted__(self)->bool
+xgboost.sklearn.XGBModel._can_use_inplace_predict(self)->bool
+xgboost.sklearn.XGBModel._configure_fit(self,booster:Optional[Union[Booster,'XGBModel',str]],eval_metric:Optional[Union[Callable,str,Sequence[str]]],params:Dict[str,Any],early_stopping_rounds:Optional[int],callbacks:Optional[Sequence[TrainingCallback]])->Tuple[Optional[Union[Booster, str, 'XGBModel']], Optional[Metric], Dict[str, Any], Optional[int], Optional[Sequence[TrainingCallback]]]
+xgboost.sklearn.XGBModel._create_dmatrix(self,ref:Optional[DMatrix],**kwargs:Any)->DMatrix
+xgboost.sklearn.XGBModel._early_stopping_attr(self,attr:str)->Union[float, int]
+xgboost.sklearn.XGBModel._get_iteration_range(self,iteration_range:Optional[Tuple[int,int]])->Tuple[int, int]
+xgboost.sklearn.XGBModel._get_type(self)->str
+xgboost.sklearn.XGBModel._more_tags(self)->Dict[str, bool]
+xgboost.sklearn.XGBModel._set_evaluation_result(self,evals_result:TrainingCallback.EvalsLog)->None
+xgboost.sklearn.XGBModel.apply(self,X:ArrayLike,ntree_limit:int=0,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.sklearn.XGBModel.best_iteration(self)->int
+xgboost.sklearn.XGBModel.best_ntree_limit(self)->int
+xgboost.sklearn.XGBModel.best_score(self)->float
+xgboost.sklearn.XGBModel.coef_(self)->np.ndarray
+xgboost.sklearn.XGBModel.evals_result(self)->Dict[str, Dict[str, List[float]]]
+xgboost.sklearn.XGBModel.feature_importances_(self)->np.ndarray
+xgboost.sklearn.XGBModel.feature_names_in_(self)->np.ndarray
+xgboost.sklearn.XGBModel.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,'XGBModel']]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBModel'
+xgboost.sklearn.XGBModel.get_booster(self)->Booster
+xgboost.sklearn.XGBModel.get_num_boosting_rounds(self)->int
+xgboost.sklearn.XGBModel.get_params(self,deep:bool=True)->Dict[str, Any]
+xgboost.sklearn.XGBModel.get_xgb_params(self)->Dict[str, Any]
+xgboost.sklearn.XGBModel.intercept_(self)->np.ndarray
+xgboost.sklearn.XGBModel.load_model(self,fname:Union[str,bytearray,os.PathLike])->None
+xgboost.sklearn.XGBModel.n_features_in_(self)->int
+xgboost.sklearn.XGBModel.predict(self,X:ArrayLike,output_margin:bool=False,ntree_limit:Optional[int]=None,validate_features:bool=True,base_margin:Optional[ArrayLike]=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
+xgboost.sklearn.XGBModel.save_model(self,fname:Union[str,os.PathLike])->None
+xgboost.sklearn.XGBModel.set_params(self,**params:Any)->'XGBModel'
+xgboost.sklearn.XGBRFClassifier(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
+xgboost.sklearn.XGBRFClassifier.__init__(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
+xgboost.sklearn.XGBRFClassifier.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFClassifier'
+xgboost.sklearn.XGBRFClassifier.get_num_boosting_rounds(self)->int
+xgboost.sklearn.XGBRFClassifier.get_xgb_params(self)->Dict[str, Any]
+xgboost.sklearn.XGBRFRegressor(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
+xgboost.sklearn.XGBRFRegressor.__init__(self,*,learning_rate:float=1.0,subsample:float=0.8,colsample_bynode:float=0.8,reg_lambda:float=1e-05,**kwargs:Any)
+xgboost.sklearn.XGBRFRegressor.fit(self,X:ArrayLike,y:ArrayLike,*,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRFRegressor'
+xgboost.sklearn.XGBRFRegressor.get_num_boosting_rounds(self)->int
+xgboost.sklearn.XGBRFRegressor.get_xgb_params(self)->Dict[str, Any]
+xgboost.sklearn.XGBRanker(self,*,objective:str='rank:pairwise',**kwargs:Any)
+xgboost.sklearn.XGBRanker.__init__(self,*,objective:str='rank:pairwise',**kwargs:Any)
+xgboost.sklearn.XGBRanker.fit(self,X:ArrayLike,y:ArrayLike,*,group:Optional[ArrayLike]=None,qid:Optional[ArrayLike]=None,sample_weight:Optional[ArrayLike]=None,base_margin:Optional[ArrayLike]=None,eval_set:Optional[Sequence[Tuple[ArrayLike,ArrayLike]]]=None,eval_group:Optional[Sequence[ArrayLike]]=None,eval_qid:Optional[Sequence[ArrayLike]]=None,eval_metric:Optional[Union[str,Sequence[str],Metric]]=None,early_stopping_rounds:Optional[int]=None,verbose:Optional[Union[bool,int]]=False,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set:Optional[Sequence[ArrayLike]]=None,base_margin_eval_set:Optional[Sequence[ArrayLike]]=None,feature_weights:Optional[ArrayLike]=None,callbacks:Optional[Sequence[TrainingCallback]]=None)->'XGBRanker'
+xgboost.sklearn.XGBRankerMixIn
+xgboost.sklearn.XGBRegressor(self,*,objective:_SklObjective='reg:squarederror',**kwargs:Any)
+xgboost.sklearn.XGBRegressor.__init__(self,*,objective:_SklObjective='reg:squarederror',**kwargs:Any)
+xgboost.sklearn._check_rf_callback(early_stopping_rounds:Optional[int],callbacks:Optional[Sequence[TrainingCallback]])->None
+xgboost.sklearn._cls_predict_proba(n_classes:int,prediction:PredtT,vstack:Callable)->PredtT
+xgboost.sklearn._metric_decorator(func:Callable)->Metric
+xgboost.sklearn._objective_decorator(func:Callable[[np.ndarray,np.ndarray],Tuple[np.ndarray,np.ndarray]])->Callable[[np.ndarray, DMatrix], Tuple[np.ndarray, np.ndarray]]
+xgboost.sklearn._wrap_evaluation_matrices(missing:float,X:Any,y:Any,group:Optional[Any],qid:Optional[Any],sample_weight:Optional[Any],base_margin:Optional[Any],feature_weights:Optional[Any],eval_set:Optional[Sequence[Tuple[Any,Any]]],sample_weight_eval_set:Optional[Sequence[Any]],base_margin_eval_set:Optional[Sequence[Any]],eval_group:Optional[Sequence[Any]],eval_qid:Optional[Sequence[Any]],create_dmatrix:Callable,enable_categorical:bool,feature_types:Optional[FeatureTypes])->Tuple[Any, List[Tuple[Any, str]]]
+xgboost.sklearn.xgboost_model_doc(header:str,items:List[str],extra_parameters:Optional[str]=None,end_note:Optional[str]=None)->Callable[[Type], Type]
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/callback.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/data.py----------------------------------------
+A:xgboost.data.interface_str->_array_interface(data)
+A:xgboost.data.(indptr, _)->_ensure_np_dtype(data.indptr, data.indptr.dtype)
+A:xgboost.data.(indices, _)->_ensure_np_dtype(data.indices, data.indices.dtype)
+A:xgboost.data.(values, _)->_ensure_np_dtype(data.data, data.data.dtype)
+A:xgboost.data.data->_transform_dlpack(data)
+A:xgboost.data.handle->ctypes.c_void_p()
+A:xgboost.data.(data, dtype)->_ensure_np_dtype(data, dtype)
+A:xgboost.data.(data, _)->_ensure_np_dtype(data, data.dtype)
+A:xgboost.data.config->bytes(json.dumps({'missing': missing, 'nthread': nthread}), 'utf-8')
+A:xgboost.data.feature_names->_transform_dlpack(data).columns.format()
+A:xgboost.data.transformed->_pandas_cat_null(data)
+A:xgboost.data.transformed[cat_columns]->transformed[cat_columns].apply(lambda x: x.cat.codes).astype(np.float32).replace(-1.0, np.NaN).apply(lambda x: x.cat.codes).astype(np.float32).replace(-1.0, np.NaN)
+A:xgboost.data.transformed[nul_columns]->transformed[nul_columns].astype(np.float32).astype(np.float32)
+A:xgboost.data.(feature_names, feature_types)->_pandas_feature_info(data, meta, feature_names, feature_types, enable_categorical)
+A:xgboost.data.arr->arr.astype(dtype).astype(dtype)
+A:xgboost.data.(data, feature_names, feature_types)->_transform_dt_df(data, feature_names, feature_types, None, None)
+A:xgboost.data.data_types_names->tuple((lt.name for lt in data.ltypes))
+A:xgboost.data.feature_types->numpy.vectorize(_dt_type_mapper2.get)(data_types_names).tolist()
+A:xgboost.data.ptrs->(ctypes.c_void_p * data.ncols)()
+A:xgboost.data.col->_transform_dlpack(data).internal.column(icol)
+A:xgboost.data.ptrs[icol]->frame_column_data_r(data, icol)
+A:xgboost.data.feature_type_strings->(ctypes.c_char_p * data.ncols)()
+A:xgboost.data.feature_type_strings[icol]->ctypes.c_char_p(data.stypes[icol].name.encode('utf-8'))
+A:xgboost.data.batch->next(data_iter)
+A:xgboost.data.ptr_schema->int(ffi.cast('uintptr_t', c_schemas[-1]))
+A:xgboost.data.ptr_array->int(ffi.cast('uintptr_t', c_arrays[-1]))
+A:xgboost.data.batches->_transform_dlpack(data).to_batches()
+A:xgboost.data.rb_iter->iter(batches)
+A:xgboost.data.it->record_batch_data_iter(rb_iter)
+A:xgboost.data.next_callback->ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)(it)
+A:xgboost.data.interfaces_str->_cudf_array_interfaces(data, cat_codes)
+A:xgboost.data.(data, cat_codes, feature_names, feature_types)->_transform_cudf_df(data, feature_names, feature_types, enable_categorical)
+A:xgboost.data.array->numpy.asarray(data)
+A:xgboost.data.converted->_convert_unknown_data(data)
+A:xgboost.data.data_np->numpy.array(data)
+A:xgboost.data.interface->bytes(json.dumps([data.__cuda_array_interface__], indent=2), 'utf-8')
+A:xgboost.data.(data, _, _)->_transform_pandas_df(data, False, meta=name, meta_type=dtype)
+A:xgboost.data.(arr, feature_names, feature_types)->_transform_pandas_df(data, enable_categorical, feature_names, feature_types)
+A:xgboost.data.(arr, _)->_ensure_np_dtype(arr, arr.dtype)
+A:xgboost.data.err->TypeError('Value type is not supported for data iterator:' + str(type(data)))
+xgboost.data.SingleBatchInternalIter(self,**kwargs:Any)
+xgboost.data.SingleBatchInternalIter.__init__(self,**kwargs:Any)
+xgboost.data.SingleBatchInternalIter.next(self,input_data:Callable)->int
+xgboost.data.SingleBatchInternalIter.reset(self)->None
+xgboost.data._array_interface(data:np.ndarray)->bytes
+xgboost.data._check_complex(data:DataType)->None
+xgboost.data._check_data_shape(data:DataType)->None
+xgboost.data._convert_unknown_data(data:DataType)->DataType
+xgboost.data._cudf_array_interfaces(data:DataType,cat_codes:list)->bytes
+xgboost.data._ensure_np_dtype(data:DataType,dtype:Optional[NumpyDType])->Tuple[np.ndarray, Optional[NumpyDType]]
+xgboost.data._from_arrow(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->DispatchedDataBackendReturnType
+xgboost.data._from_cudf_df(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->DispatchedDataBackendReturnType
+xgboost.data._from_cupy_array(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_dlpack(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_dt_df(data:DataType,missing:Optional[FloatCompatible],nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->DispatchedDataBackendReturnType
+xgboost.data._from_list(data:Sequence,missing:FloatCompatible,n_threads:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_numpy_array(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_pandas_df(data:DataFrame,enable_categorical:bool,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_pandas_series(data:DataType,missing:FloatCompatible,nthread:int,enable_categorical:bool,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_scipy_csc(data:DataType,missing:Optional[FloatCompatible],feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_scipy_csr(data:DataType,missing:FloatCompatible,nthread:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_tuple(data:Sequence,missing:FloatCompatible,n_threads:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._from_uri(data:DataType,missing:Optional[FloatCompatible],feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes])->DispatchedDataBackendReturnType
+xgboost.data._has_array_protocol(data:DataType)->bool
+xgboost.data._invalid_dataframe_dtype(data:DataType)->None
+xgboost.data._is_arrow(data:DataType)->bool
+xgboost.data._is_cudf_df(data:DataType)->bool
+xgboost.data._is_cudf_ser(data:DataType)->bool
+xgboost.data._is_cupy_array(data:DataType)->bool
+xgboost.data._is_cupy_csc(data:DataType)->bool
+xgboost.data._is_cupy_csr(data:DataType)->bool
+xgboost.data._is_dlpack(data:DataType)->bool
+xgboost.data._is_dt_df(data:DataType)->bool
+xgboost.data._is_iter(data:DataType)->bool
+xgboost.data._is_list(data:DataType)->bool
+xgboost.data._is_modin_df(data:DataType)->bool
+xgboost.data._is_modin_series(data:DataType)->bool
+xgboost.data._is_numpy_array(data:DataType)->bool
+xgboost.data._is_pandas_df(data:DataType)->bool
+xgboost.data._is_pandas_series(data:DataType)->bool
+xgboost.data._is_scipy_coo(data:DataType)->bool
+xgboost.data._is_scipy_csc(data:DataType)->bool
+xgboost.data._is_scipy_csr(data:DataType)->bool
+xgboost.data._is_tuple(data:DataType)->bool
+xgboost.data._is_uri(data:DataType)->bool
+xgboost.data._maybe_np_slice(data:DataType,dtype:Optional[NumpyDType])->np.ndarray
+xgboost.data._meta_from_cudf_df(data:DataType,field:str,handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_cudf_series(data:DataType,field:str,handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_cupy_array(data:DataType,field:str,handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_dt(data:DataType,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_list(data:Sequence,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_numpy(data:np.ndarray,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_pandas_series(data:DataType,name:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
+xgboost.data._meta_from_tuple(data:Sequence,field:str,dtype:Optional[NumpyDType],handle:ctypes.c_void_p)->None
+xgboost.data._pandas_cat_null(data:DataFrame)->DataFrame
+xgboost.data._pandas_feature_info(data:DataFrame,meta:Optional[str],feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->Tuple[Optional[FeatureNames], Optional[FeatureTypes]]
+xgboost.data._proxy_transform(data:DataType,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->Tuple[Union[bool, ctypes.c_void_p, np.ndarray], Optional[list], Optional[FeatureNames], Optional[FeatureTypes]]
+xgboost.data._to_data_type(dtype:str,name:str)->int
+xgboost.data._transform_cudf_df(data:DataType,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool)->Tuple[ctypes.c_void_p, list, Optional[FeatureNames], Optional[FeatureTypes]]
+xgboost.data._transform_cupy_array(data:DataType)->CupyT
+xgboost.data._transform_dlpack(data:DataType)->bool
+xgboost.data._transform_dt_df(data:DataType,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],meta:Optional[str]=None,meta_type:Optional[NumpyDType]=None)->Tuple[np.ndarray, Optional[FeatureNames], Optional[FeatureTypes]]
+xgboost.data._transform_pandas_df(data:DataFrame,enable_categorical:bool,feature_names:Optional[FeatureNames]=None,feature_types:Optional[FeatureTypes]=None,meta:Optional[str]=None,meta_type:Optional[NumpyDType]=None)->Tuple[np.ndarray, Optional[FeatureNames], Optional[FeatureTypes]]
+xgboost.data._transform_scipy_csr(data:DataType)->DataType
+xgboost.data._validate_meta_shape(data:DataType,name:str)->None
+xgboost.data._warn_unused_missing(data:DataType,missing:Optional[FloatCompatible])->None
+xgboost.data.dispatch_data_backend(data:DataType,missing:FloatCompatible,threads:int,feature_names:Optional[FeatureNames],feature_types:Optional[FeatureTypes],enable_categorical:bool=False)->DispatchedDataBackendReturnType
+xgboost.data.dispatch_meta_backend(matrix:DMatrix,data:DataType,name:str,dtype:Optional[NumpyDType]=None)->None
+xgboost.data.dispatch_proxy_set_data(proxy:_ProxyDMatrix,data:DataType,cat_codes:Optional[list],allow_host:bool)->None
+xgboost.data.is_nullable_dtype(dtype:PandasDType)->bool
+xgboost.data.record_batch_data_iter(data_iter:Iterator)->Callable
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/compat.py----------------------------------------
+A:xgboost.compat._logger->logging.getLogger(__name__)
+A:xgboost.compat.meta[k]->v.tolist()
+A:xgboost.compat.self.classes_->numpy.array(v)
+A:xgboost.compat.value_arr->cast(Sequence[np.ndarray], value)
+A:xgboost.compat.d->cupy.cuda.runtime.getDevice()
+A:xgboost.compat.arr->cast(cupy.ndarray, v)
+A:xgboost.compat.module->importlib.import_module(self.__name__)
+A:xgboost.compat.self.module->self._load()
+xgboost.compat.LazyLoader(self,local_name:str,parent_module_globals:Dict,name:str,warning:Optional[str]=None)
+xgboost.compat.LazyLoader.__dir__(self)->List[str]
+xgboost.compat.LazyLoader.__getattr__(self,item:str)->Any
+xgboost.compat.LazyLoader.__init__(self,local_name:str,parent_module_globals:Dict,name:str,warning:Optional[str]=None)
+xgboost.compat.LazyLoader._load(self)->types.ModuleType
+xgboost.compat.XGBoostLabelEncoder(LabelEncoder)
+xgboost.compat.XGBoostLabelEncoder.from_json(self,doc:Dict)->None
+xgboost.compat.XGBoostLabelEncoder.to_json(self)->Dict
+xgboost.compat.concat(value:Sequence[_T])->_T
+xgboost.compat.is_cudf_available()->bool
+xgboost.compat.lazy_isinstance(instance:Any,module:str,name:str)->bool
+xgboost.compat.py_str(x:bytes)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/tracker.py----------------------------------------
+A:xgboost.tracker.chunk->self.sock.recv(min(nbytes - nread, 1024))
+A:xgboost.tracker.slen->self.recvint()
+A:xgboost.tracker.worker->ExSocket(sock)
+A:xgboost.tracker.self.host->get_some_ip(s_addr[0])
+A:xgboost.tracker.magic->ExSocket(sock).recvint()
+A:xgboost.tracker.self.rank->ExSocket(sock).recvint()
+A:xgboost.tracker.self.world_size->ExSocket(sock).recvint()
+A:xgboost.tracker.self.task_id->ExSocket(sock).recvstr()
+A:xgboost.tracker.self.cmd->ExSocket(sock).recvstr()
+A:xgboost.tracker.msg->self.sock.recvstr()
+A:xgboost.tracker.nnset->set(tree_map[rank])
+A:xgboost.tracker.ngood->self.sock.recvint()
+A:xgboost.tracker.goodset->set([])
+A:xgboost.tracker.nerr->self.sock.recvint()
+A:xgboost.tracker.self.port->self.sock.recvint()
+A:xgboost.tracker.sock->socket.socket(get_family(host_ip), socket.SOCK_STREAM)
+A:xgboost.tracker.tree_map[r]->self._get_neighbor(r, n_workers)
+A:xgboost.tracker.nset->set(tree_map[rank])
+A:xgboost.tracker.vlst->self.find_share_ring(tree_map, parent_map, v)
+A:xgboost.tracker.rlst->self.find_share_ring(tree_map, parent_map, 0)
+A:xgboost.tracker.n_workers->len(tree_map)
+A:xgboost.tracker.(tree_map, parent_map)->self._get_tree(n_workers)
+A:xgboost.tracker.ring_map->self.get_ring(tree_map, parent_map)
+A:xgboost.tracker.(fd, s_addr)->self.sock.accept()
+A:xgboost.tracker.s->socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+A:xgboost.tracker.(tree_map, parent_map, ring_map)->self.get_link_map(n_workers)
+A:xgboost.tracker.todo_nodes->list(range(n_workers))
+A:xgboost.tracker.rank->list(range(n_workers)).pop(0)
+A:xgboost.tracker.pending->self._sort_pending(pending)
+A:xgboost.tracker.self.thread->Thread(target=run, args=(), daemon=True)
+A:xgboost.tracker.host_ip->socket.gethostbyname(socket.gethostname())
+A:xgboost.tracker.rabit->RabitTracker(host_ip=get_host_ip(args.host_ip), n_workers=args.num_workers, use_logger=True)
+A:xgboost.tracker.parser->argparse.ArgumentParser(description='Rabit Tracker start.')
+A:xgboost.tracker.args->argparse.ArgumentParser(description='Rabit Tracker start.').parse_args()
+xgboost.RabitTracker(self,host_ip:str,n_workers:int,port:int=0,use_logger:bool=False,sortby:str='host')
+xgboost.RabitTracker.__del__(self)->None
+xgboost.RabitTracker._get_neighbor(rank:int,n_workers:int)->List[int]
+xgboost.RabitTracker._get_tree(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int]]
+xgboost.RabitTracker._sort_pending(self,pending:List[WorkerEntry])->List[WorkerEntry]
+xgboost.RabitTracker.accept_workers(self,n_workers:int)->None
+xgboost.RabitTracker.alive(self)->bool
+xgboost.RabitTracker.find_share_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int],rank:int)->List[int]
+xgboost.RabitTracker.get_link_map(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int], _RingMap]
+xgboost.RabitTracker.get_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int])->_RingMap
+xgboost.RabitTracker.join(self)->None
+xgboost.RabitTracker.start(self,n_workers:int)->None
+xgboost.RabitTracker.worker_envs(self)->Dict[str, Union[str, int]]
+xgboost.tracker.ExSocket(self,sock:socket.socket)
+xgboost.tracker.ExSocket.__init__(self,sock:socket.socket)
+xgboost.tracker.ExSocket.recvall(self,nbytes:int)->bytes
+xgboost.tracker.ExSocket.recvint(self)->int
+xgboost.tracker.ExSocket.recvstr(self)->str
+xgboost.tracker.ExSocket.sendint(self,value:int)->None
+xgboost.tracker.ExSocket.sendstr(self,value:str)->None
+xgboost.tracker.RabitTracker(self,host_ip:str,n_workers:int,port:int=0,use_logger:bool=False,sortby:str='host')
+xgboost.tracker.RabitTracker.__del__(self)->None
+xgboost.tracker.RabitTracker.__init__(self,host_ip:str,n_workers:int,port:int=0,use_logger:bool=False,sortby:str='host')
+xgboost.tracker.RabitTracker._get_neighbor(rank:int,n_workers:int)->List[int]
+xgboost.tracker.RabitTracker._get_tree(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int]]
+xgboost.tracker.RabitTracker._sort_pending(self,pending:List[WorkerEntry])->List[WorkerEntry]
+xgboost.tracker.RabitTracker.accept_workers(self,n_workers:int)->None
+xgboost.tracker.RabitTracker.alive(self)->bool
+xgboost.tracker.RabitTracker.find_share_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int],rank:int)->List[int]
+xgboost.tracker.RabitTracker.get_link_map(self,n_workers:int)->Tuple[_TreeMap, Dict[int, int], _RingMap]
+xgboost.tracker.RabitTracker.get_ring(self,tree_map:_TreeMap,parent_map:Dict[int,int])->_RingMap
+xgboost.tracker.RabitTracker.join(self)->None
+xgboost.tracker.RabitTracker.start(self,n_workers:int)->None
+xgboost.tracker.RabitTracker.worker_envs(self)->Dict[str, Union[str, int]]
+xgboost.tracker.WorkerEntry(self,sock:socket.socket,s_addr:Tuple[str,int])
+xgboost.tracker.WorkerEntry.__init__(self,sock:socket.socket,s_addr:Tuple[str,int])
+xgboost.tracker.WorkerEntry._get_remote(self,wait_conn:Dict[int,'WorkerEntry'],nnset:Set[int])->List[int]
+xgboost.tracker.WorkerEntry.assign_rank(self,rank:int,wait_conn:Dict[int,'WorkerEntry'],tree_map:_TreeMap,parent_map:Dict[int,int],ring_map:_RingMap)->List[int]
+xgboost.tracker.WorkerEntry.decide_rank(self,job_map:Dict[str,int])->int
+xgboost.tracker.WorkerEntry.print(self,use_logger:bool)->None
+xgboost.tracker.get_family(addr:str)->int
+xgboost.tracker.get_host_ip(host_ip:Optional[str]=None)->str
+xgboost.tracker.get_some_ip(host:str)->str
+xgboost.tracker.main()->None
+xgboost.tracker.start_rabit_tracker(args:argparse.Namespace)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/libpath.py----------------------------------------
+A:xgboost.libpath.curr_path->os.path.dirname(os.path.abspath(os.path.expanduser(__file__)))
+xgboost.libpath.XGBoostLibraryNotFound(Exception)
+xgboost.libpath.find_lib_path()->List[str]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/callback.py----------------------------------------
 A:xgboost.callback.it->it.decode().decode()
 A:xgboost.callback.(k, v)->it.decode().decode().split(':')
 A:xgboost.callback.as_arr->numpy.array(s)
@@ -987,83 +1033,56 @@ xgboost.callback._aggcv(rlist:List[str])->List[Tuple[str, float, float]]
 xgboost.callback._allreduce_metric(score:_ART)->_ART
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/training.py----------------------------------------
-A:xgboost.training.metric_fn->_configure_custom_metric(feval, custom_metric)
-A:xgboost.training.bst->CallbackContainer(callbacks, metric=metric_fn, output_margin=callable(obj) or metric_fn is feval).after_training(bst)
-A:xgboost.training.cb_container->CallbackContainer(callbacks, metric=metric_fn, output_margin=callable(obj) or metric_fn is feval)
-A:xgboost.training.self.bst->Booster(param, [dtrain, dtest])
-A:xgboost.training.group_boundaries->dall.get_uint_info('group_ptr')
-A:xgboost.training.group_sizes->numpy.diff(group_boundaries)
-A:xgboost.training.idx->numpy.arange(dall.num_row())
-A:xgboost.training.out_group_idset->numpy.array_split(idx, nfold)
-A:xgboost.training.dtrain->dall.slice(in_idset[k])
-A:xgboost.training.dtest->dall.slice(out_idset[k])
-A:xgboost.training.(dtrain, dtest, tparam)->fpreproc(dtrain, dtest, param.copy())
-A:xgboost.training.evals->list(evals)
-A:xgboost.training.out_idset->numpy.array_split(idx, nfold)
-A:xgboost.training.splits->list(sfk.split(X=dall.get_label(), y=dall.get_label()))
-A:xgboost.training.nfold->len(out_idset)
-A:xgboost.training.sfk->XGBStratifiedKFold(n_splits=nfold, shuffle=True, random_state=seed)
-A:xgboost.training.params->dict(((k, v) for (k, v) in params.items()))
-A:xgboost.training.cvfolds->mknfold(dtrain, nfold, params, seed, metrics, fpreproc, stratified, folds, shuffle)
-A:xgboost.training.callbacks_container->CallbackContainer(callbacks, metric=metric_fn, is_cv=True, output_margin=callable(obj) or metric_fn is feval)
-A:xgboost.training.booster->_PackedBooster(cvfolds)
-A:xgboost.training.should_break->CallbackContainer(callbacks, metric=metric_fn, is_cv=True, output_margin=callable(obj) or metric_fn is feval).after_iteration(booster, i, dtrain, None)
-A:xgboost.training.results->pandas.DataFrame.from_dict(results)
-xgboost.cv(params:BoosterParam,dtrain:DMatrix,num_boost_round:int=10,nfold:int=3,stratified:bool=False,folds:XGBStratifiedKFold=None,metrics:Sequence[str]=(),obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:bool=None,early_stopping_rounds:int=None,fpreproc:FPreProcCallable=None,as_pandas:bool=True,verbose_eval:Optional[Union[int,bool]]=None,show_stdv:bool=True,seed:int=0,callbacks:Sequence[TrainingCallback]=None,shuffle:bool=True,custom_metric:Optional[Metric]=None)->Union[Dict[str, float], DataFrame]
-xgboost.train(params:Dict[str,Any],dtrain:DMatrix,num_boost_round:int=10,*,evals:Optional[Sequence[Tuple[DMatrix,str]]]=None,obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:Optional[bool]=None,early_stopping_rounds:Optional[int]=None,evals_result:TrainingCallback.EvalsLog=None,verbose_eval:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[str,os.PathLike,Booster,bytearray]]=None,callbacks:Optional[Sequence[TrainingCallback]]=None,custom_metric:Optional[Metric]=None)->Booster
-xgboost.training.CVPack(self,dtrain:DMatrix,dtest:DMatrix,param:Optional[Union[Dict,List]])
-xgboost.training.CVPack.__getattr__(self,name:str)->Callable
-xgboost.training.CVPack.__init__(self,dtrain:DMatrix,dtest:DMatrix,param:Optional[Union[Dict,List]])
-xgboost.training.CVPack.eval(self,iteration:int,feval:Optional[Metric],output_margin:bool)->str
-xgboost.training.CVPack.update(self,iteration:int,fobj:Optional[Objective])->None
-xgboost.training._PackedBooster(self,cvfolds:_CVFolds)
-xgboost.training._PackedBooster.__init__(self,cvfolds:_CVFolds)
-xgboost.training._PackedBooster.attr(self,key:str)->Optional[str]
-xgboost.training._PackedBooster.best_iteration(self)->int
-xgboost.training._PackedBooster.best_score(self)->float
-xgboost.training._PackedBooster.eval(self,iteration:int,feval:Optional[Metric],output_margin:bool)->List[str]
-xgboost.training._PackedBooster.num_boosted_rounds(self)->int
-xgboost.training._PackedBooster.set_attr(self,**kwargs:Optional[str])->Any
-xgboost.training._PackedBooster.set_param(self,params:Union[Dict,Iterable[Tuple[str,Any]],str],value:Optional[str]=None)->None
-xgboost.training._PackedBooster.update(self,iteration:int,obj:Optional[Objective])->None
-xgboost.training._assert_new_callback(callbacks:Optional[Sequence[TrainingCallback]])->None
-xgboost.training._configure_custom_metric(feval:Optional[Metric],custom_metric:Optional[Metric])->Optional[Metric]
-xgboost.training.cv(params:BoosterParam,dtrain:DMatrix,num_boost_round:int=10,nfold:int=3,stratified:bool=False,folds:XGBStratifiedKFold=None,metrics:Sequence[str]=(),obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:bool=None,early_stopping_rounds:int=None,fpreproc:FPreProcCallable=None,as_pandas:bool=True,verbose_eval:Optional[Union[int,bool]]=None,show_stdv:bool=True,seed:int=0,callbacks:Sequence[TrainingCallback]=None,shuffle:bool=True,custom_metric:Optional[Metric]=None)->Union[Dict[str, float], DataFrame]
-xgboost.training.groups_to_rows(groups:List[np.ndarray],boundaries:np.ndarray)->np.ndarray
-xgboost.training.mkgroupfold(dall:DMatrix,nfold:int,param:BoosterParam,evals:Sequence[str]=(),fpreproc:FPreProcCallable=None,shuffle:bool=True)->List[CVPack]
-xgboost.training.mknfold(dall:DMatrix,nfold:int,param:BoosterParam,seed:int,evals:Sequence[str]=(),fpreproc:FPreProcCallable=None,stratified:bool=False,folds:XGBStratifiedKFold=None,shuffle:bool=True)->List[CVPack]
-xgboost.training.train(params:Dict[str,Any],dtrain:DMatrix,num_boost_round:int=10,*,evals:Optional[Sequence[Tuple[DMatrix,str]]]=None,obj:Optional[Objective]=None,feval:Optional[Metric]=None,maximize:Optional[bool]=None,early_stopping_rounds:Optional[int]=None,evals_result:TrainingCallback.EvalsLog=None,verbose_eval:Optional[Union[bool,int]]=True,xgb_model:Optional[Union[str,os.PathLike,Booster,bytearray]]=None,callbacks:Optional[Sequence[TrainingCallback]]=None,custom_metric:Optional[Metric]=None)->Booster
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/rabit.py----------------------------------------
+A:xgboost.rabit.LOGGER->logging.getLogger('[xgboost.rabit]')
+A:xgboost.rabit.kv->arg.decode().split('=')
+A:xgboost.rabit.T->TypeVar('T')
+xgboost.rabit.Op(IntEnum)
+xgboost.rabit.RabitContext(self,args:List[bytes]=None)
+xgboost.rabit.RabitContext.__enter__(self)->None
+xgboost.rabit.RabitContext.__exit__(self,*args:List)->None
+xgboost.rabit.RabitContext.__init__(self,args:List[bytes]=None)
+xgboost.rabit._deprecation_warning()->str
+xgboost.rabit.allreduce(data:np.ndarray,op:Op,prepare_fun:Optional[Callable[[np.ndarray],None]]=None)->np.ndarray
+xgboost.rabit.broadcast(data:T,root:int)->T
+xgboost.rabit.finalize()->None
+xgboost.rabit.get_processor_name()->bytes
+xgboost.rabit.get_rank()->int
+xgboost.rabit.get_world_size()->int
+xgboost.rabit.init(args:Optional[List[bytes]]=None)->None
+xgboost.rabit.is_distributed()->int
+xgboost.rabit.tracker_print(msg:Any)->None
+xgboost.rabit.version_number()->int
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/compat.py----------------------------------------
-A:xgboost.compat._logger->logging.getLogger(__name__)
-A:xgboost.compat.meta[k]->v.tolist()
-A:xgboost.compat.self.classes_->numpy.array(v)
-A:xgboost.compat.value_arr->cast(Sequence[np.ndarray], value)
-A:xgboost.compat.d->cupy.cuda.runtime.getDevice()
-A:xgboost.compat.arr->cast(cupy.ndarray, v)
-A:xgboost.compat.module->importlib.import_module(self.__name__)
-A:xgboost.compat.self.module->self._load()
-xgboost.compat.LazyLoader(self,local_name:str,parent_module_globals:Dict,name:str,warning:Optional[str]=None)
-xgboost.compat.LazyLoader.__dir__(self)->List[str]
-xgboost.compat.LazyLoader.__getattr__(self,item:str)->Any
-xgboost.compat.LazyLoader.__init__(self,local_name:str,parent_module_globals:Dict,name:str,warning:Optional[str]=None)
-xgboost.compat.LazyLoader._load(self)->types.ModuleType
-xgboost.compat.XGBoostLabelEncoder(LabelEncoder)
-xgboost.compat.XGBoostLabelEncoder.from_json(self,doc:Dict)->None
-xgboost.compat.XGBoostLabelEncoder.to_json(self)->Dict
-xgboost.compat.concat(value:Sequence[_T])->_T
-xgboost.compat.is_cudf_available()->bool
-xgboost.compat.lazy_isinstance(instance:Any,module:str,name:str)->bool
-xgboost.compat.py_str(x:bytes)->str
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/plotting.py----------------------------------------
+A:xgboost.plotting.importance->booster.get_booster().get_score(importance_type=importance_type, fmap=fmap)
+A:xgboost.plotting.tuples->sorted(tuples, key=lambda _x: _x[1])
+A:xgboost.plotting.(labels, values)->zip(*tuples)
+A:xgboost.plotting.(_, ax)->matplotlib.pyplot.subplots(1, 1)
+A:xgboost.plotting.ylocs->numpy.arange(len(values))
+A:xgboost.plotting.booster->booster.get_booster().get_booster()
+A:xgboost.plotting.g->to_graphviz(booster, fmap=fmap, num_trees=num_trees, rankdir=rankdir, **kwargs)
+A:xgboost.plotting.s->BytesIO()
+A:xgboost.plotting.img->matplotlib.image.imread(s)
+xgboost.plot_importance(booster:Booster,ax:Optional[Axes]=None,height:float=0.2,xlim:Optional[tuple]=None,ylim:Optional[tuple]=None,title:str='Featureimportance',xlabel:str='Fscore',ylabel:str='Features',fmap:PathLike='',importance_type:str='weight',max_num_features:Optional[int]=None,grid:bool=True,show_values:bool=True,**kwargs:Any)->Axes
+xgboost.plot_tree(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,ax:Optional[Axes]=None,**kwargs:Any)->Axes
+xgboost.plotting.plot_importance(booster:Booster,ax:Optional[Axes]=None,height:float=0.2,xlim:Optional[tuple]=None,ylim:Optional[tuple]=None,title:str='Featureimportance',xlabel:str='Fscore',ylabel:str='Features',fmap:PathLike='',importance_type:str='weight',max_num_features:Optional[int]=None,grid:bool=True,show_values:bool=True,**kwargs:Any)->Axes
+xgboost.plotting.plot_tree(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,ax:Optional[Axes]=None,**kwargs:Any)->Axes
+xgboost.plotting.to_graphviz(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,yes_color:Optional[str]=None,no_color:Optional[str]=None,condition_node_params:Optional[dict]=None,leaf_node_params:Optional[dict]=None,**kwargs:Any)->GraphvizSource
+xgboost.to_graphviz(booster:Booster,fmap:PathLike='',num_trees:int=0,rankdir:Optional[str]=None,yes_color:Optional[str]=None,no_color:Optional[str]=None,condition_node_params:Optional[dict]=None,leaf_node_params:Optional[dict]=None,**kwargs:Any)->GraphvizSource
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/__init__.py----------------------------------------
-A:xgboost.__init__.__version__->_py_version()
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/_typing.py----------------------------------------
+A:xgboost._typing.CTypeT->TypeVar('CTypeT', ctypes.c_void_p, ctypes.c_char_p, ctypes.c_int, ctypes.c_float, ctypes.c_uint, ctypes.c_size_t)
+A:xgboost._typing._T->TypeVar('_T')
+A:xgboost._typing._F->TypeVar('_F', bound=Callable[..., Any])
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/estimator.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/estimator.py----------------------------------------
 xgboost.spark.SparkXGBClassifier(self,**kwargs)
 xgboost.spark.SparkXGBClassifier._pyspark_model_cls(cls)
 xgboost.spark.SparkXGBClassifier._validate_params(self)
@@ -1093,65 +1112,7 @@ xgboost.spark.estimator.SparkXGBRegressor._validate_params(self)
 xgboost.spark.estimator.SparkXGBRegressor._xgb_cls(cls)
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/utils.py----------------------------------------
-A:xgboost.spark.utils.sig->inspect.signature(func)
-A:xgboost.spark.utils.self.args['DMLC_TASK_ID']->str(context.partitionId())
-A:xgboost.spark.utils.host->_get_host_ip(context)
-A:xgboost.spark.utils.rabit_context->RabitTracker(host_ip=host, n_workers=n_workers)
-A:xgboost.spark.utils.thread->Thread(target=rabit_context.join)
-A:xgboost.spark.utils.env->_start_tracker(context, n_workers)
-A:xgboost.spark.utils.logger->logging.getLogger(name)
-A:xgboost.spark.utils.handler->logging.StreamHandler(sys.stderr)
-A:xgboost.spark.utils.resources->task_context.resources()
-xgboost.spark.utils.CommunicatorContext(self,context,**args)
-xgboost.spark.utils.CommunicatorContext.__enter__(self)
-xgboost.spark.utils.CommunicatorContext.__exit__(self,*args)
-xgboost.spark.utils.CommunicatorContext.__init__(self,context,**args)
-xgboost.spark.utils._get_args_from_message_list(messages)
-xgboost.spark.utils._get_default_params_from_func(func,unsupported_set)
-xgboost.spark.utils._get_gpu_id(task_context)->int
-xgboost.spark.utils._get_host_ip(context)
-xgboost.spark.utils._get_max_num_concurrent_tasks(spark_context)
-xgboost.spark.utils._get_rabit_args(context,n_workers)
-xgboost.spark.utils._get_spark_session()
-xgboost.spark.utils._is_local(spark_context)->bool
-xgboost.spark.utils._start_tracker(context,n_workers)
-xgboost.spark.utils.get_class_name(cls)
-xgboost.spark.utils.get_logger(name,level='INFO')
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/data.py----------------------------------------
-A:xgboost.spark.data.array->_read_csr_matrix_from_unwrapped_spark_vec(part)
-A:xgboost.spark.data.Alias->namedtuple('Alias', ('data', 'label', 'weight', 'margin', 'valid', 'qid'))
-A:xgboost.spark.data.alias->Alias('values', 'label', 'weight', 'baseMargin', 'validationIndicator', 'qid')
-A:xgboost.spark.data.vec_size->len(vec_values)
-A:xgboost.spark.data.csr_indices->numpy.arange(vec_size, dtype=np.int32)
-A:xgboost.spark.data.csr_indptr_arr->numpy.array(csr_indptr_list)
-A:xgboost.spark.data.csr_indices_arr->numpy.concatenate(csr_indices_list)
-A:xgboost.spark.data.csr_values_arr->numpy.concatenate(csr_values_list)
-A:xgboost.spark.data.it->PartIter(data, gpu_id, **meta)
-A:xgboost.spark.data.m->QuantileDMatrix(it, **params, ref=ref)
-A:xgboost.spark.data.data->concat_or_none(values[alias.data])
-A:xgboost.spark.data.label->concat_or_none(values.get(alias.label, None))
-A:xgboost.spark.data.weight->concat_or_none(values.get(alias.weight, None))
-A:xgboost.spark.data.margin->concat_or_none(values.get(alias.margin, None))
-A:xgboost.spark.data.qid->concat_or_none(values.get(alias.qid, None))
-A:xgboost.spark.data.(meta, params)->split_params()
-A:xgboost.spark.data.dtrain->make(train_data, kwargs)
-xgboost.spark.data.PartIter(self,data:Dict[str,List],device_id:Optional[int],**kwargs:Any)
-xgboost.spark.data.PartIter.__init__(self,data:Dict[str,List],device_id:Optional[int],**kwargs:Any)
-xgboost.spark.data.PartIter._fetch(self,data:Optional[Sequence[pd.DataFrame]])->Optional[pd.DataFrame]
-xgboost.spark.data.PartIter.next(self,input_data:Callable)->int
-xgboost.spark.data.PartIter.reset(self)->None
-xgboost.spark.data._read_csr_matrix_from_unwrapped_spark_vec(part:pd.DataFrame)->csr_matrix
-xgboost.spark.data.cache_partitions(iterator:Iterator[pd.DataFrame],append:Callable[[pd.DataFrame,str,bool],None])->None
-xgboost.spark.data.concat_or_none(seq:Optional[Sequence[np.ndarray]])->Optional[np.ndarray]
-xgboost.spark.data.create_dmatrix_from_partitions(iterator:Iterator[pd.DataFrame],feature_cols:Optional[Sequence[str]],gpu_id:Optional[int],use_qdm:bool,kwargs:Dict[str,Any],enable_sparse_data_optim:bool,has_validation_col:bool)->Tuple[DMatrix, Optional[DMatrix]]
-xgboost.spark.data.make_qdm(data:Dict[str,List[np.ndarray]],gpu_id:Optional[int],meta:Dict[str,Any],ref:Optional[DMatrix],params:Dict[str,Any])->DMatrix
-xgboost.spark.data.stack_series(series:pd.Series)->np.ndarray
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/core.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/core.py----------------------------------------
 A:xgboost.spark.core.num_workers->self.getOrDefault(self.num_workers)
 A:xgboost.spark.core.use_gpu->self.getOrDefault(self.use_gpu)
 A:xgboost.spark.core.force_repartition->Param(Params._dummy(), 'force_repartition', 'A boolean variable. Set force_repartition=true if you ' + 'want to force the input dataset to be repartitioned before XGBoost training.' + 'Note: The auto repartitioning judgement is not fully accurate, so it is recommended' + 'to have force_repartition be True.')
@@ -1273,22 +1234,7 @@ xgboost.spark.core._validate_and_convert_feature_col_as_array_col(dataset,featur
 xgboost.spark.core._validate_and_convert_feature_col_as_float_col_list(dataset,features_col_names:list)->list
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/params.py----------------------------------------
-A:xgboost.spark.params.arbitrary_params_dict->Param(Params._dummy(), 'arbitrary_params_dict', 'arbitrary_params_dict This parameter holds all of the additional parameters which are not exposed as the the XGBoost Spark estimator params but can be recognized by underlying XGBoost library. It is stored as a dictionary.')
-A:xgboost.spark.params.base_margin_col->Param(Params._dummy(), 'base_margin_col', 'This stores the name for the column of the base margin')
-A:xgboost.spark.params.features_cols->Param(Params._dummy(), 'features_cols', 'feature column names.', typeConverter=TypeConverters.toListString)
-A:xgboost.spark.params.enable_sparse_data_optim->Param(Params._dummy(), 'enable_sparse_data_optim', 'This stores the boolean config of enabling sparse data optimization, if enabled, Xgboost DMatrix object will be constructed from sparse matrix instead of dense matrix. This config is disabled by default. If most of examples in your training dataset contains sparse features, we suggest to enable this config.', typeConverter=TypeConverters.toBoolean)
-A:xgboost.spark.params.qid_col->Param(Params._dummy(), 'qid_col', 'query id column name', typeConverter=TypeConverters.toString)
-xgboost.spark.params.HasArbitraryParamsDict(Params)
-xgboost.spark.params.HasBaseMarginCol(Params)
-xgboost.spark.params.HasEnableSparseDataOptim(self)
-xgboost.spark.params.HasEnableSparseDataOptim.__init__(self)
-xgboost.spark.params.HasFeaturesCols(self)
-xgboost.spark.params.HasFeaturesCols.__init__(self)
-xgboost.spark.params.HasQueryIdCol(Params)
-
-
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/model.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/model.py----------------------------------------
 A:xgboost.spark.model.root_dir->pyspark.SparkFiles.getRootDirectory()
 A:xgboost.spark.model.xgb_tmp_dir->os.path.join(root_dir, 'xgboost-tmp')
 A:xgboost.spark.model.xgb_model->deserialize_xgb_model(ser_xgb_model, create_xgb_model)
@@ -1331,5 +1277,75 @@ xgboost.spark.model.deserialize_xgb_model(model_string,xgb_model_creator)
 xgboost.spark.model.serialize_booster(booster)
 
 
-----------------------------------------/home/zhang/Packages/xgboost/xgboost1.7.4/spark/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/utils.py----------------------------------------
+A:xgboost.spark.utils.sig->inspect.signature(func)
+A:xgboost.spark.utils.self.args['DMLC_TASK_ID']->str(context.partitionId())
+A:xgboost.spark.utils.host->_get_host_ip(context)
+A:xgboost.spark.utils.rabit_context->RabitTracker(host_ip=host, n_workers=n_workers)
+A:xgboost.spark.utils.thread->Thread(target=rabit_context.join)
+A:xgboost.spark.utils.env->_start_tracker(context, n_workers)
+A:xgboost.spark.utils.logger->logging.getLogger(name)
+A:xgboost.spark.utils.handler->logging.StreamHandler(sys.stderr)
+A:xgboost.spark.utils.resources->task_context.resources()
+xgboost.spark.utils.CommunicatorContext(self,context,**args)
+xgboost.spark.utils.CommunicatorContext.__enter__(self)
+xgboost.spark.utils.CommunicatorContext.__exit__(self,*args)
+xgboost.spark.utils.CommunicatorContext.__init__(self,context,**args)
+xgboost.spark.utils._get_args_from_message_list(messages)
+xgboost.spark.utils._get_default_params_from_func(func,unsupported_set)
+xgboost.spark.utils._get_gpu_id(task_context)->int
+xgboost.spark.utils._get_host_ip(context)
+xgboost.spark.utils._get_max_num_concurrent_tasks(spark_context)
+xgboost.spark.utils._get_rabit_args(context,n_workers)
+xgboost.spark.utils._get_spark_session()
+xgboost.spark.utils._is_local(spark_context)->bool
+xgboost.spark.utils._start_tracker(context,n_workers)
+xgboost.spark.utils.get_class_name(cls)
+xgboost.spark.utils.get_logger(name,level='INFO')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/params.py----------------------------------------
+A:xgboost.spark.params.arbitrary_params_dict->Param(Params._dummy(), 'arbitrary_params_dict', 'arbitrary_params_dict This parameter holds all of the additional parameters which are not exposed as the the XGBoost Spark estimator params but can be recognized by underlying XGBoost library. It is stored as a dictionary.')
+A:xgboost.spark.params.base_margin_col->Param(Params._dummy(), 'base_margin_col', 'This stores the name for the column of the base margin')
+A:xgboost.spark.params.features_cols->Param(Params._dummy(), 'features_cols', 'feature column names.', typeConverter=TypeConverters.toListString)
+A:xgboost.spark.params.enable_sparse_data_optim->Param(Params._dummy(), 'enable_sparse_data_optim', 'This stores the boolean config of enabling sparse data optimization, if enabled, Xgboost DMatrix object will be constructed from sparse matrix instead of dense matrix. This config is disabled by default. If most of examples in your training dataset contains sparse features, we suggest to enable this config.', typeConverter=TypeConverters.toBoolean)
+A:xgboost.spark.params.qid_col->Param(Params._dummy(), 'qid_col', 'query id column name', typeConverter=TypeConverters.toString)
+xgboost.spark.params.HasArbitraryParamsDict(Params)
+xgboost.spark.params.HasBaseMarginCol(Params)
+xgboost.spark.params.HasEnableSparseDataOptim(self)
+xgboost.spark.params.HasEnableSparseDataOptim.__init__(self)
+xgboost.spark.params.HasFeaturesCols(self)
+xgboost.spark.params.HasFeaturesCols.__init__(self)
+xgboost.spark.params.HasQueryIdCol(Params)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost1.7.4/lib/python3.9/site-packages/xgboost/spark/data.py----------------------------------------
+A:xgboost.spark.data.array->_read_csr_matrix_from_unwrapped_spark_vec(part)
+A:xgboost.spark.data.Alias->namedtuple('Alias', ('data', 'label', 'weight', 'margin', 'valid', 'qid'))
+A:xgboost.spark.data.alias->Alias('values', 'label', 'weight', 'baseMargin', 'validationIndicator', 'qid')
+A:xgboost.spark.data.vec_size->len(vec_values)
+A:xgboost.spark.data.csr_indices->numpy.arange(vec_size, dtype=np.int32)
+A:xgboost.spark.data.csr_indptr_arr->numpy.array(csr_indptr_list)
+A:xgboost.spark.data.csr_indices_arr->numpy.concatenate(csr_indices_list)
+A:xgboost.spark.data.csr_values_arr->numpy.concatenate(csr_values_list)
+A:xgboost.spark.data.it->PartIter(data, gpu_id, **meta)
+A:xgboost.spark.data.m->QuantileDMatrix(it, **params, ref=ref)
+A:xgboost.spark.data.data->concat_or_none(values[alias.data])
+A:xgboost.spark.data.label->concat_or_none(values.get(alias.label, None))
+A:xgboost.spark.data.weight->concat_or_none(values.get(alias.weight, None))
+A:xgboost.spark.data.margin->concat_or_none(values.get(alias.margin, None))
+A:xgboost.spark.data.qid->concat_or_none(values.get(alias.qid, None))
+A:xgboost.spark.data.(meta, params)->split_params()
+A:xgboost.spark.data.dtrain->make(train_data, kwargs)
+xgboost.spark.data.PartIter(self,data:Dict[str,List],device_id:Optional[int],**kwargs:Any)
+xgboost.spark.data.PartIter.__init__(self,data:Dict[str,List],device_id:Optional[int],**kwargs:Any)
+xgboost.spark.data.PartIter._fetch(self,data:Optional[Sequence[pd.DataFrame]])->Optional[pd.DataFrame]
+xgboost.spark.data.PartIter.next(self,input_data:Callable)->int
+xgboost.spark.data.PartIter.reset(self)->None
+xgboost.spark.data._read_csr_matrix_from_unwrapped_spark_vec(part:pd.DataFrame)->csr_matrix
+xgboost.spark.data.cache_partitions(iterator:Iterator[pd.DataFrame],append:Callable[[pd.DataFrame,str,bool],None])->None
+xgboost.spark.data.concat_or_none(seq:Optional[Sequence[np.ndarray]])->Optional[np.ndarray]
+xgboost.spark.data.create_dmatrix_from_partitions(iterator:Iterator[pd.DataFrame],feature_cols:Optional[Sequence[str]],gpu_id:Optional[int],use_qdm:bool,kwargs:Dict[str,Any],enable_sparse_data_optim:bool,has_validation_col:bool)->Tuple[DMatrix, Optional[DMatrix]]
+xgboost.spark.data.make_qdm(data:Dict[str,List[np.ndarray]],gpu_id:Optional[int],meta:Dict[str,Any],ref:Optional[DMatrix],params:Dict[str,Any])->DMatrix
+xgboost.spark.data.stack_series(series:pd.Series)->np.ndarray
 

@@ -1,34 +1,18 @@
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/encoders.py----------------------------------------
-A:fastapi.encoders.encoders_by_class_tuples->generate_encoders_by_class_tuples(ENCODERS_BY_TYPE)
-A:fastapi.encoders.include->set(include)
-A:fastapi.encoders.exclude->set(exclude)
-A:fastapi.encoders.encoder->getattr(obj.__config__, 'json_encoders', {})
-A:fastapi.encoders.obj_dict->dataclasses.asdict(obj)
-A:fastapi.encoders.allowed_keys->set(obj.keys())
-A:fastapi.encoders.encoded_key->jsonable_encoder(key, by_alias=by_alias, exclude_unset=exclude_unset, exclude_none=exclude_none, custom_encoder=custom_encoder, sqlalchemy_safe=sqlalchemy_safe)
-A:fastapi.encoders.encoded_value->jsonable_encoder(value, by_alias=by_alias, exclude_unset=exclude_unset, exclude_none=exclude_none, custom_encoder=custom_encoder, sqlalchemy_safe=sqlalchemy_safe)
-A:fastapi.encoders.data->vars(obj)
-fastapi.encoders.generate_encoders_by_class_tuples(type_encoder_map:Dict[Any,Callable[[Any],Any]])->Dict[Callable[[Any], Any], Tuple[Any, ...]]
-fastapi.encoders.jsonable_encoder(obj:Any,include:Optional[Union[SetIntStr,DictIntStrAny]]=None,exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,by_alias:bool=True,exclude_unset:bool=False,exclude_defaults:bool=False,exclude_none:bool=False,custom_encoder:Optional[Dict[Any,Callable[[Any],Any]]]=None,sqlalchemy_safe:bool=True)->Any
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/types.py----------------------------------------
-A:fastapi.types.DecoratedCallable->TypeVar('DecoratedCallable', bound=Callable[..., Any])
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/templating.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/responses.py----------------------------------------
-fastapi.responses.ORJSONResponse(JSONResponse)
-fastapi.responses.ORJSONResponse.render(self,content:Any)->bytes
-fastapi.responses.UJSONResponse(JSONResponse)
-fastapi.responses.UJSONResponse.render(self,content:Any)->bytes
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/requests.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/exception_handlers.py----------------------------------------
-A:fastapi.exception_handlers.headers->getattr(exc, 'headers', None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/logger.py----------------------------------------
+A:fastapi.logger.logger->logging.getLogger('fastapi')
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/utils.py----------------------------------------
 A:fastapi.utils.current_status_code->int(status_code)
 A:fastapi.utils.(m_schema, m_definitions, m_nested_models)->model_process_schema(model, model_name_map=model_name_map, ref_prefix=REF_PREFIX)
 A:fastapi.utils.original_type->cast(Type[BaseModel], original_type)
@@ -48,26 +32,85 @@ fastapi.utils.get_value_or_default(first_item:Union[DefaultPlaceholder,DefaultTy
 fastapi.utils.is_body_allowed_for_status_code(status_code:Union[int,str,None])->bool
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/staticfiles.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/websockets.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/concurrency.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/testclient.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/exceptions.py----------------------------------------
+fastapi.HTTPException(self,status_code:int,detail:Any=None,headers:Optional[Dict[str,Any]]=None)
+fastapi.exceptions.FastAPIError(RuntimeError)
+fastapi.exceptions.HTTPException(self,status_code:int,detail:Any=None,headers:Optional[Dict[str,Any]]=None)
+fastapi.exceptions.HTTPException.__init__(self,status_code:int,detail:Any=None,headers:Optional[Dict[str,Any]]=None)
+fastapi.exceptions.RequestValidationError(self,errors:Sequence[ErrorList],*,body:Any=None)
+fastapi.exceptions.RequestValidationError.__init__(self,errors:Sequence[ErrorList],*,body:Any=None)
+fastapi.exceptions.WebSocketRequestValidationError(self,errors:Sequence[ErrorList])
+fastapi.exceptions.WebSocketRequestValidationError.__init__(self,errors:Sequence[ErrorList])
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/background.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/param_functions.py----------------------------------------
+fastapi.Body(default:Any=Undefined,*,embed:bool=False,media_type:str='application/json',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
+fastapi.Cookie(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.Depends(dependency:Optional[Callable[...,Any]]=None,*,use_cache:bool=True)->Any
+fastapi.File(default:Any=Undefined,*,media_type:str='multipart/form-data',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
+fastapi.Form(default:Any=Undefined,*,media_type:str='application/x-www-form-urlencoded',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
+fastapi.Header(default:Any=Undefined,*,alias:Optional[str]=None,convert_underscores:bool=True,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.Path(default:Any=...,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.Query(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.Security(dependency:Optional[Callable[...,Any]]=None,*,scopes:Optional[Sequence[str]]=None,use_cache:bool=True)->Any
+fastapi.param_functions.Body(default:Any=Undefined,*,embed:bool=False,media_type:str='application/json',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
+fastapi.param_functions.Cookie(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.param_functions.Depends(dependency:Optional[Callable[...,Any]]=None,*,use_cache:bool=True)->Any
+fastapi.param_functions.File(default:Any=Undefined,*,media_type:str='multipart/form-data',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
+fastapi.param_functions.Form(default:Any=Undefined,*,media_type:str='application/x-www-form-urlencoded',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
+fastapi.param_functions.Header(default:Any=Undefined,*,alias:Optional[str]=None,convert_underscores:bool=True,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.param_functions.Path(default:Any=...,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.param_functions.Query(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
+fastapi.param_functions.Security(dependency:Optional[Callable[...,Any]]=None,*,scopes:Optional[Sequence[str]]=None,use_cache:bool=True)->Any
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/exception_handlers.py----------------------------------------
+A:fastapi.exception_handlers.headers->getattr(exc, 'headers', None)
+fastapi.exception_handlers.http_exception_handler(request:Request,exc:HTTPException)->Response
+fastapi.exception_handlers.request_validation_exception_handler(request:Request,exc:RequestValidationError)->JSONResponse
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/responses.py----------------------------------------
+fastapi.responses.ORJSONResponse(JSONResponse)
+fastapi.responses.ORJSONResponse.render(self,content:Any)->bytes
+fastapi.responses.UJSONResponse(JSONResponse)
+fastapi.responses.UJSONResponse.render(self,content:Any)->bytes
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/datastructures.py----------------------------------------
+A:fastapi.datastructures.DefaultType->TypeVar('DefaultType')
+fastapi.UploadFile(StarletteUploadFile)
+fastapi.UploadFile.__get_validators__(cls:Type['UploadFile'])->Iterable[Callable[..., Any]]
+fastapi.UploadFile.__modify_schema__(cls,field_schema:Dict[str,Any])->None
+fastapi.UploadFile.validate(cls:Type['UploadFile'],v:Any)->Any
+fastapi.datastructures.Default(value:DefaultType)->DefaultType
+fastapi.datastructures.DefaultPlaceholder(self,value:Any)
+fastapi.datastructures.DefaultPlaceholder.__bool__(self)->bool
+fastapi.datastructures.DefaultPlaceholder.__eq__(self,o:object)->bool
+fastapi.datastructures.DefaultPlaceholder.__init__(self,value:Any)
+fastapi.datastructures.UploadFile(StarletteUploadFile)
+fastapi.datastructures.UploadFile.__get_validators__(cls:Type['UploadFile'])->Iterable[Callable[..., Any]]
+fastapi.datastructures.UploadFile.__modify_schema__(cls,field_schema:Dict[str,Any])->None
+fastapi.datastructures.UploadFile.validate(cls:Type['UploadFile'],v:Any)->Any
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/concurrency.py----------------------------------------
 A:fastapi.concurrency._T->TypeVar('_T')
 A:fastapi.concurrency.exit_limiter->CapacityLimiter(1)
 A:fastapi.concurrency.ok->bool(await anyio.to_thread.run_sync(cm.__exit__, type(e), e, None, limiter=exit_limiter))
+fastapi.concurrency.contextmanager_in_threadpool(cm:ContextManager[_T])->AsyncGenerator[_T, None]
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/testclient.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/websockets.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/logger.py----------------------------------------
-A:fastapi.logger.logger->logging.getLogger('fastapi')
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/params.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/params.py----------------------------------------
 A:fastapi.params.attr->getattr(self.dependency, '__name__', type(self.dependency).__name__)
 fastapi.params.Body(self,default:Any=Undefined,*,embed:bool=False,media_type:str='application/json',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)
 fastapi.params.Body.__init__(self,default:Any=Undefined,*,embed:bool=False,media_type:str='application/json',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)
@@ -95,77 +138,21 @@ fastapi.params.Security(self,dependency:Optional[Callable[...,Any]]=None,*,scope
 fastapi.params.Security.__init__(self,dependency:Optional[Callable[...,Any]]=None,*,scopes:Optional[Sequence[str]]=None,use_cache:bool=True)
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/applications.py----------------------------------------
-A:fastapi.applications.AppType->TypeVar('AppType', bound='FastAPI')
-A:fastapi.applications.app->cls(app=app, **options)
-A:fastapi.applications.self.openapi_schema->get_openapi(title=self.title, version=self.version, openapi_version=self.openapi_version, description=self.description, terms_of_service=self.terms_of_service, contact=self.contact, license_info=self.license_info, routes=self.routes, tags=self.openapi_tags, servers=self.servers)
-A:fastapi.applications.root_path->req.scope.get('root_path', '').rstrip('/')
-fastapi.FastAPI(self:AppType,*,debug:bool=False,routes:Optional[List[BaseRoute]]=None,title:str='FastAPI',description:str='',version:str='0.1.0',openapi_url:Optional[str]='/openapi.json',openapi_tags:Optional[List[Dict[str,Any]]]=None,servers:Optional[List[Dict[str,Union[str,Any]]]]=None,dependencies:Optional[Sequence[Depends]]=None,default_response_class:Type[Response]=Default(JSONResponse),docs_url:Optional[str]='/docs',redoc_url:Optional[str]='/redoc',swagger_ui_oauth2_redirect_url:Optional[str]='/docs/oauth2-redirect',swagger_ui_init_oauth:Optional[Dict[str,Any]]=None,middleware:Optional[Sequence[Middleware]]=None,exception_handlers:Optional[Dict[Union[int,Type[Exception]],Callable[[Request,Any],Coroutine[Any,Any,Response]]]]=None,on_startup:Optional[Sequence[Callable[[],Any]]]=None,on_shutdown:Optional[Sequence[Callable[[],Any]]]=None,lifespan:Optional[Lifespan[AppType]]=None,terms_of_service:Optional[str]=None,contact:Optional[Dict[str,Union[str,Any]]]=None,license_info:Optional[Dict[str,Union[str,Any]]]=None,openapi_prefix:str='',root_path:str='',root_path_in_servers:bool=True,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,callbacks:Optional[List[BaseRoute]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,swagger_ui_parameters:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id),**extra:Any)
-fastapi.FastAPI.add_api_route(self,path:str,endpoint:Callable[...,Coroutine[Any,Any,Response]],*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Union[Type[Response],DefaultPlaceholder]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
-fastapi.FastAPI.add_api_websocket_route(self,path:str,endpoint:Callable[...,Any],name:Optional[str]=None)->None
-fastapi.FastAPI.api_route(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.build_middleware_stack(self)->ASGIApp
-fastapi.FastAPI.delete(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.exception_handler(self,exc_class_or_status_code:Union[int,Type[Exception]])->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.get(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.head(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.include_router(self,router:routing.APIRouter,*,prefix:str='',tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,default_response_class:Type[Response]=Default(JSONResponse),callbacks:Optional[List[BaseRoute]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
-fastapi.FastAPI.middleware(self,middleware_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.on_event(self,event_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.openapi(self)->Dict[str, Any]
-fastapi.FastAPI.options(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.patch(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.post(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.put(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.setup(self)->None
-fastapi.FastAPI.trace(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.websocket(self,path:str,name:Optional[str]=None)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.FastAPI.websocket_route(self,path:str,name:Union[str,None]=None)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI(self:AppType,*,debug:bool=False,routes:Optional[List[BaseRoute]]=None,title:str='FastAPI',description:str='',version:str='0.1.0',openapi_url:Optional[str]='/openapi.json',openapi_tags:Optional[List[Dict[str,Any]]]=None,servers:Optional[List[Dict[str,Union[str,Any]]]]=None,dependencies:Optional[Sequence[Depends]]=None,default_response_class:Type[Response]=Default(JSONResponse),docs_url:Optional[str]='/docs',redoc_url:Optional[str]='/redoc',swagger_ui_oauth2_redirect_url:Optional[str]='/docs/oauth2-redirect',swagger_ui_init_oauth:Optional[Dict[str,Any]]=None,middleware:Optional[Sequence[Middleware]]=None,exception_handlers:Optional[Dict[Union[int,Type[Exception]],Callable[[Request,Any],Coroutine[Any,Any,Response]]]]=None,on_startup:Optional[Sequence[Callable[[],Any]]]=None,on_shutdown:Optional[Sequence[Callable[[],Any]]]=None,lifespan:Optional[Lifespan[AppType]]=None,terms_of_service:Optional[str]=None,contact:Optional[Dict[str,Union[str,Any]]]=None,license_info:Optional[Dict[str,Union[str,Any]]]=None,openapi_prefix:str='',root_path:str='',root_path_in_servers:bool=True,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,callbacks:Optional[List[BaseRoute]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,swagger_ui_parameters:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id),**extra:Any)
-fastapi.applications.FastAPI.__init__(self:AppType,*,debug:bool=False,routes:Optional[List[BaseRoute]]=None,title:str='FastAPI',description:str='',version:str='0.1.0',openapi_url:Optional[str]='/openapi.json',openapi_tags:Optional[List[Dict[str,Any]]]=None,servers:Optional[List[Dict[str,Union[str,Any]]]]=None,dependencies:Optional[Sequence[Depends]]=None,default_response_class:Type[Response]=Default(JSONResponse),docs_url:Optional[str]='/docs',redoc_url:Optional[str]='/redoc',swagger_ui_oauth2_redirect_url:Optional[str]='/docs/oauth2-redirect',swagger_ui_init_oauth:Optional[Dict[str,Any]]=None,middleware:Optional[Sequence[Middleware]]=None,exception_handlers:Optional[Dict[Union[int,Type[Exception]],Callable[[Request,Any],Coroutine[Any,Any,Response]]]]=None,on_startup:Optional[Sequence[Callable[[],Any]]]=None,on_shutdown:Optional[Sequence[Callable[[],Any]]]=None,lifespan:Optional[Lifespan[AppType]]=None,terms_of_service:Optional[str]=None,contact:Optional[Dict[str,Union[str,Any]]]=None,license_info:Optional[Dict[str,Union[str,Any]]]=None,openapi_prefix:str='',root_path:str='',root_path_in_servers:bool=True,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,callbacks:Optional[List[BaseRoute]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,swagger_ui_parameters:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id),**extra:Any)
-fastapi.applications.FastAPI.add_api_route(self,path:str,endpoint:Callable[...,Coroutine[Any,Any,Response]],*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Union[Type[Response],DefaultPlaceholder]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
-fastapi.applications.FastAPI.add_api_websocket_route(self,path:str,endpoint:Callable[...,Any],name:Optional[str]=None)->None
-fastapi.applications.FastAPI.api_route(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.build_middleware_stack(self)->ASGIApp
-fastapi.applications.FastAPI.delete(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.exception_handler(self,exc_class_or_status_code:Union[int,Type[Exception]])->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.get(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.head(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.include_router(self,router:routing.APIRouter,*,prefix:str='',tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,default_response_class:Type[Response]=Default(JSONResponse),callbacks:Optional[List[BaseRoute]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
-fastapi.applications.FastAPI.middleware(self,middleware_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.on_event(self,event_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.openapi(self)->Dict[str, Any]
-fastapi.applications.FastAPI.options(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.patch(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.post(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.put(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.setup(self)->None
-fastapi.applications.FastAPI.trace(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.websocket(self,path:str,name:Optional[str]=None)->Callable[[DecoratedCallable], DecoratedCallable]
-fastapi.applications.FastAPI.websocket_route(self,path:str,name:Union[str,None]=None)->Callable[[DecoratedCallable], DecoratedCallable]
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/encoders.py----------------------------------------
+A:fastapi.encoders.encoders_by_class_tuples->generate_encoders_by_class_tuples(ENCODERS_BY_TYPE)
+A:fastapi.encoders.include->set(include)
+A:fastapi.encoders.exclude->set(exclude)
+A:fastapi.encoders.encoder->getattr(obj.__config__, 'json_encoders', {})
+A:fastapi.encoders.obj_dict->dataclasses.asdict(obj)
+A:fastapi.encoders.allowed_keys->set(obj.keys())
+A:fastapi.encoders.encoded_key->jsonable_encoder(key, by_alias=by_alias, exclude_unset=exclude_unset, exclude_none=exclude_none, custom_encoder=custom_encoder, sqlalchemy_safe=sqlalchemy_safe)
+A:fastapi.encoders.encoded_value->jsonable_encoder(value, by_alias=by_alias, exclude_unset=exclude_unset, exclude_none=exclude_none, custom_encoder=custom_encoder, sqlalchemy_safe=sqlalchemy_safe)
+A:fastapi.encoders.data->vars(obj)
+fastapi.encoders.generate_encoders_by_class_tuples(type_encoder_map:Dict[Any,Callable[[Any],Any]])->Dict[Callable[[Any], Any], Tuple[Any, ...]]
+fastapi.encoders.jsonable_encoder(obj:Any,include:Optional[Union[SetIntStr,DictIntStrAny]]=None,exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,by_alias:bool=True,exclude_unset:bool=False,exclude_defaults:bool=False,exclude_none:bool=False,custom_encoder:Optional[Dict[Any,Callable[[Any],Any]]]=None,sqlalchemy_safe:bool=True)->Any
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/templating.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/datastructures.py----------------------------------------
-A:fastapi.datastructures.DefaultType->TypeVar('DefaultType')
-fastapi.UploadFile(StarletteUploadFile)
-fastapi.UploadFile.__get_validators__(cls:Type['UploadFile'])->Iterable[Callable[..., Any]]
-fastapi.UploadFile.__modify_schema__(cls,field_schema:Dict[str,Any])->None
-fastapi.UploadFile.validate(cls:Type['UploadFile'],v:Any)->Any
-fastapi.datastructures.Default(value:DefaultType)->DefaultType
-fastapi.datastructures.DefaultPlaceholder(self,value:Any)
-fastapi.datastructures.DefaultPlaceholder.__bool__(self)->bool
-fastapi.datastructures.DefaultPlaceholder.__eq__(self,o:object)->bool
-fastapi.datastructures.DefaultPlaceholder.__init__(self,value:Any)
-fastapi.datastructures.UploadFile(StarletteUploadFile)
-fastapi.datastructures.UploadFile.__get_validators__(cls:Type['UploadFile'])->Iterable[Callable[..., Any]]
-fastapi.datastructures.UploadFile.__modify_schema__(cls,field_schema:Dict[str,Any])->None
-fastapi.datastructures.UploadFile.validate(cls:Type['UploadFile'],v:Any)->Any
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/routing.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/routing.py----------------------------------------
 A:fastapi.routing.read_with_orm_mode->getattr(res.__config__, 'read_with_orm_mode', None)
 A:fastapi.routing.response_content->_prepare_response_content(response_content, exclude_unset=exclude_unset, exclude_defaults=exclude_defaults, exclude_none=exclude_none)
 A:fastapi.routing.(value, errors_)->field.validate(response_content, {}, loc=('response',))
@@ -242,233 +229,71 @@ fastapi.routing.APIWebSocketRoute.matches(self,scope:Scope)->Tuple[Match, Scope]
 fastapi.routing._prepare_response_content(res:Any,*,exclude_unset:bool,exclude_defaults:bool=False,exclude_none:bool=False)->Any
 fastapi.routing.get_request_handler(dependant:Dependant,body_field:Optional[ModelField]=None,status_code:Optional[int]=None,response_class:Union[Type[Response],DefaultPlaceholder]=Default(JSONResponse),response_field:Optional[ModelField]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,dependency_overrides_provider:Optional[Any]=None)->Callable[[Request], Coroutine[Any, Any, Response]]
 fastapi.routing.get_websocket_app(dependant:Dependant,dependency_overrides_provider:Optional[Any]=None)->Callable[[WebSocket], Coroutine[Any, Any, Any]]
+fastapi.routing.run_endpoint_function(*,dependant:Dependant,values:Dict[str,Any],is_coroutine:bool)->Any
+fastapi.routing.serialize_response(*,field:Optional[ModelField]=None,response_content:Any,include:Optional[Union[SetIntStr,DictIntStrAny]]=None,exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,by_alias:bool=True,exclude_unset:bool=False,exclude_defaults:bool=False,exclude_none:bool=False,is_coroutine:bool=True)->Any
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/requests.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/staticfiles.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/exceptions.py----------------------------------------
-fastapi.HTTPException(self,status_code:int,detail:Any=None,headers:Optional[Dict[str,Any]]=None)
-fastapi.exceptions.FastAPIError(RuntimeError)
-fastapi.exceptions.HTTPException(self,status_code:int,detail:Any=None,headers:Optional[Dict[str,Any]]=None)
-fastapi.exceptions.HTTPException.__init__(self,status_code:int,detail:Any=None,headers:Optional[Dict[str,Any]]=None)
-fastapi.exceptions.RequestValidationError(self,errors:Sequence[ErrorList],*,body:Any=None)
-fastapi.exceptions.RequestValidationError.__init__(self,errors:Sequence[ErrorList],*,body:Any=None)
-fastapi.exceptions.WebSocketRequestValidationError(self,errors:Sequence[ErrorList])
-fastapi.exceptions.WebSocketRequestValidationError.__init__(self,errors:Sequence[ErrorList])
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/types.py----------------------------------------
+A:fastapi.types.DecoratedCallable->TypeVar('DecoratedCallable', bound=Callable[..., Any])
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/param_functions.py----------------------------------------
-fastapi.Body(default:Any=Undefined,*,embed:bool=False,media_type:str='application/json',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
-fastapi.Cookie(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.Depends(dependency:Optional[Callable[...,Any]]=None,*,use_cache:bool=True)->Any
-fastapi.File(default:Any=Undefined,*,media_type:str='multipart/form-data',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
-fastapi.Form(default:Any=Undefined,*,media_type:str='application/x-www-form-urlencoded',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
-fastapi.Header(default:Any=Undefined,*,alias:Optional[str]=None,convert_underscores:bool=True,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.Path(default:Any=...,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.Query(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.Security(dependency:Optional[Callable[...,Any]]=None,*,scopes:Optional[Sequence[str]]=None,use_cache:bool=True)->Any
-fastapi.param_functions.Body(default:Any=Undefined,*,embed:bool=False,media_type:str='application/json',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
-fastapi.param_functions.Cookie(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.param_functions.Depends(dependency:Optional[Callable[...,Any]]=None,*,use_cache:bool=True)->Any
-fastapi.param_functions.File(default:Any=Undefined,*,media_type:str='multipart/form-data',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
-fastapi.param_functions.Form(default:Any=Undefined,*,media_type:str='application/x-www-form-urlencoded',alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,**extra:Any)->Any
-fastapi.param_functions.Header(default:Any=Undefined,*,alias:Optional[str]=None,convert_underscores:bool=True,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.param_functions.Path(default:Any=...,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.param_functions.Query(default:Any=Undefined,*,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,regex:Optional[str]=None,example:Any=Undefined,examples:Optional[Dict[str,Any]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,**extra:Any)->Any
-fastapi.param_functions.Security(dependency:Optional[Callable[...,Any]]=None,*,scopes:Optional[Sequence[str]]=None,use_cache:bool=True)->Any
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/applications.py----------------------------------------
+A:fastapi.applications.AppType->TypeVar('AppType', bound='FastAPI')
+A:fastapi.applications.app->cls(app=app, **options)
+A:fastapi.applications.self.openapi_schema->get_openapi(title=self.title, version=self.version, openapi_version=self.openapi_version, description=self.description, terms_of_service=self.terms_of_service, contact=self.contact, license_info=self.license_info, routes=self.routes, tags=self.openapi_tags, servers=self.servers)
+A:fastapi.applications.root_path->req.scope.get('root_path', '').rstrip('/')
+fastapi.FastAPI(self:AppType,*,debug:bool=False,routes:Optional[List[BaseRoute]]=None,title:str='FastAPI',description:str='',version:str='0.1.0',openapi_url:Optional[str]='/openapi.json',openapi_tags:Optional[List[Dict[str,Any]]]=None,servers:Optional[List[Dict[str,Union[str,Any]]]]=None,dependencies:Optional[Sequence[Depends]]=None,default_response_class:Type[Response]=Default(JSONResponse),docs_url:Optional[str]='/docs',redoc_url:Optional[str]='/redoc',swagger_ui_oauth2_redirect_url:Optional[str]='/docs/oauth2-redirect',swagger_ui_init_oauth:Optional[Dict[str,Any]]=None,middleware:Optional[Sequence[Middleware]]=None,exception_handlers:Optional[Dict[Union[int,Type[Exception]],Callable[[Request,Any],Coroutine[Any,Any,Response]]]]=None,on_startup:Optional[Sequence[Callable[[],Any]]]=None,on_shutdown:Optional[Sequence[Callable[[],Any]]]=None,lifespan:Optional[Lifespan[AppType]]=None,terms_of_service:Optional[str]=None,contact:Optional[Dict[str,Union[str,Any]]]=None,license_info:Optional[Dict[str,Union[str,Any]]]=None,openapi_prefix:str='',root_path:str='',root_path_in_servers:bool=True,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,callbacks:Optional[List[BaseRoute]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,swagger_ui_parameters:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id),**extra:Any)
+fastapi.FastAPI.add_api_route(self,path:str,endpoint:Callable[...,Coroutine[Any,Any,Response]],*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Union[Type[Response],DefaultPlaceholder]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
+fastapi.FastAPI.add_api_websocket_route(self,path:str,endpoint:Callable[...,Any],name:Optional[str]=None)->None
+fastapi.FastAPI.api_route(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.build_middleware_stack(self)->ASGIApp
+fastapi.FastAPI.delete(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.exception_handler(self,exc_class_or_status_code:Union[int,Type[Exception]])->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.get(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.head(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.include_router(self,router:routing.APIRouter,*,prefix:str='',tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,default_response_class:Type[Response]=Default(JSONResponse),callbacks:Optional[List[BaseRoute]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
+fastapi.FastAPI.middleware(self,middleware_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.on_event(self,event_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.openapi(self)->Dict[str, Any]
+fastapi.FastAPI.options(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.patch(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.post(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.put(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.setup(self)->None
+fastapi.FastAPI.trace(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.websocket(self,path:str,name:Optional[str]=None)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.FastAPI.websocket_route(self,path:str,name:Union[str,None]=None)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI(self:AppType,*,debug:bool=False,routes:Optional[List[BaseRoute]]=None,title:str='FastAPI',description:str='',version:str='0.1.0',openapi_url:Optional[str]='/openapi.json',openapi_tags:Optional[List[Dict[str,Any]]]=None,servers:Optional[List[Dict[str,Union[str,Any]]]]=None,dependencies:Optional[Sequence[Depends]]=None,default_response_class:Type[Response]=Default(JSONResponse),docs_url:Optional[str]='/docs',redoc_url:Optional[str]='/redoc',swagger_ui_oauth2_redirect_url:Optional[str]='/docs/oauth2-redirect',swagger_ui_init_oauth:Optional[Dict[str,Any]]=None,middleware:Optional[Sequence[Middleware]]=None,exception_handlers:Optional[Dict[Union[int,Type[Exception]],Callable[[Request,Any],Coroutine[Any,Any,Response]]]]=None,on_startup:Optional[Sequence[Callable[[],Any]]]=None,on_shutdown:Optional[Sequence[Callable[[],Any]]]=None,lifespan:Optional[Lifespan[AppType]]=None,terms_of_service:Optional[str]=None,contact:Optional[Dict[str,Union[str,Any]]]=None,license_info:Optional[Dict[str,Union[str,Any]]]=None,openapi_prefix:str='',root_path:str='',root_path_in_servers:bool=True,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,callbacks:Optional[List[BaseRoute]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,swagger_ui_parameters:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id),**extra:Any)
+fastapi.applications.FastAPI.__init__(self:AppType,*,debug:bool=False,routes:Optional[List[BaseRoute]]=None,title:str='FastAPI',description:str='',version:str='0.1.0',openapi_url:Optional[str]='/openapi.json',openapi_tags:Optional[List[Dict[str,Any]]]=None,servers:Optional[List[Dict[str,Union[str,Any]]]]=None,dependencies:Optional[Sequence[Depends]]=None,default_response_class:Type[Response]=Default(JSONResponse),docs_url:Optional[str]='/docs',redoc_url:Optional[str]='/redoc',swagger_ui_oauth2_redirect_url:Optional[str]='/docs/oauth2-redirect',swagger_ui_init_oauth:Optional[Dict[str,Any]]=None,middleware:Optional[Sequence[Middleware]]=None,exception_handlers:Optional[Dict[Union[int,Type[Exception]],Callable[[Request,Any],Coroutine[Any,Any,Response]]]]=None,on_startup:Optional[Sequence[Callable[[],Any]]]=None,on_shutdown:Optional[Sequence[Callable[[],Any]]]=None,lifespan:Optional[Lifespan[AppType]]=None,terms_of_service:Optional[str]=None,contact:Optional[Dict[str,Union[str,Any]]]=None,license_info:Optional[Dict[str,Union[str,Any]]]=None,openapi_prefix:str='',root_path:str='',root_path_in_servers:bool=True,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,callbacks:Optional[List[BaseRoute]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,swagger_ui_parameters:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id),**extra:Any)
+fastapi.applications.FastAPI.add_api_route(self,path:str,endpoint:Callable[...,Coroutine[Any,Any,Response]],*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Union[Type[Response],DefaultPlaceholder]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
+fastapi.applications.FastAPI.add_api_websocket_route(self,path:str,endpoint:Callable[...,Any],name:Optional[str]=None)->None
+fastapi.applications.FastAPI.api_route(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,methods:Optional[List[str]]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.build_middleware_stack(self)->ASGIApp
+fastapi.applications.FastAPI.delete(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.exception_handler(self,exc_class_or_status_code:Union[int,Type[Exception]])->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.get(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.head(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.include_router(self,router:routing.APIRouter,*,prefix:str='',tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,include_in_schema:bool=True,default_response_class:Type[Response]=Default(JSONResponse),callbacks:Optional[List[BaseRoute]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->None
+fastapi.applications.FastAPI.middleware(self,middleware_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.on_event(self,event_type:str)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.openapi(self)->Dict[str, Any]
+fastapi.applications.FastAPI.options(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.patch(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.post(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.put(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.setup(self)->None
+fastapi.applications.FastAPI.trace(self,path:str,*,response_model:Any=Default(None),status_code:Optional[int]=None,tags:Optional[List[Union[str,Enum]]]=None,dependencies:Optional[Sequence[Depends]]=None,summary:Optional[str]=None,description:Optional[str]=None,response_description:str='SuccessfulResponse',responses:Optional[Dict[Union[int,str],Dict[str,Any]]]=None,deprecated:Optional[bool]=None,operation_id:Optional[str]=None,response_model_include:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_exclude:Optional[Union[SetIntStr,DictIntStrAny]]=None,response_model_by_alias:bool=True,response_model_exclude_unset:bool=False,response_model_exclude_defaults:bool=False,response_model_exclude_none:bool=False,include_in_schema:bool=True,response_class:Type[Response]=Default(JSONResponse),name:Optional[str]=None,callbacks:Optional[List[BaseRoute]]=None,openapi_extra:Optional[Dict[str,Any]]=None,generate_unique_id_function:Callable[[routing.APIRoute],str]=Default(generate_unique_id))->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.websocket(self,path:str,name:Optional[str]=None)->Callable[[DecoratedCallable], DecoratedCallable]
+fastapi.applications.FastAPI.websocket_route(self,path:str,name:Union[str,None]=None)->Callable[[DecoratedCallable], DecoratedCallable]
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/background.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/openapi/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/httpsredirect.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/gzip.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/trustedhost.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/cors.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/wsgi.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/asyncexitstack.py----------------------------------------
-fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware(self,app:ASGIApp,context_name:str='fastapi_astack')
-fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware.__init__(self,app:ASGIApp,context_name:str='fastapi_astack')
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/middleware/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/api_key.py----------------------------------------
-A:fastapi.security.api_key.api_key->request.cookies.get(self.model.name)
-fastapi.security.APIKeyCookie(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.APIKeyHeader(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.APIKeyQuery(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.api_key.APIKeyBase(SecurityBase)
-fastapi.security.api_key.APIKeyCookie(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.api_key.APIKeyCookie.__init__(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.api_key.APIKeyHeader(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.api_key.APIKeyHeader.__init__(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.api_key.APIKeyQuery(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.api_key.APIKeyQuery.__init__(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/utils.py----------------------------------------
-A:fastapi.security.utils.(scheme, _, param)->authorization_header_value.partition(' ')
-fastapi.security.utils.get_authorization_scheme_param(authorization_header_value:Optional[str])->Tuple[str, str]
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/oauth2.py----------------------------------------
-A:fastapi.security.oauth2.self.scopes->scope.split()
-A:fastapi.security.oauth2.self.model->OAuth2Model(flows=flows, description=description)
-A:fastapi.security.oauth2.authorization->request.headers.get('Authorization')
-A:fastapi.security.oauth2.flows->OAuthFlowsModel(authorizationCode={'authorizationUrl': authorizationUrl, 'tokenUrl': tokenUrl, 'refreshUrl': refreshUrl, 'scopes': scopes})
-A:fastapi.security.oauth2.(scheme, param)->get_authorization_scheme_param(authorization)
-A:fastapi.security.oauth2.self.scope_str->' '.join(self.scopes)
-fastapi.security.OAuth2(self,*,flows:Union[OAuthFlowsModel,Dict[str,Dict[str,Any]]]=OAuthFlowsModel(),scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.OAuth2AuthorizationCodeBearer(self,authorizationUrl:str,tokenUrl:str,refreshUrl:Optional[str]=None,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.OAuth2PasswordBearer(self,tokenUrl:str,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.OAuth2PasswordRequestForm(self,grant_type:str=Form(default=None,regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
-fastapi.security.OAuth2PasswordRequestFormStrict(self,grant_type:str=Form(regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
-fastapi.security.SecurityScopes(self,scopes:Optional[List[str]]=None)
-fastapi.security.oauth2.OAuth2(self,*,flows:Union[OAuthFlowsModel,Dict[str,Dict[str,Any]]]=OAuthFlowsModel(),scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.oauth2.OAuth2.__init__(self,*,flows:Union[OAuthFlowsModel,Dict[str,Dict[str,Any]]]=OAuthFlowsModel(),scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.oauth2.OAuth2AuthorizationCodeBearer(self,authorizationUrl:str,tokenUrl:str,refreshUrl:Optional[str]=None,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.oauth2.OAuth2AuthorizationCodeBearer.__init__(self,authorizationUrl:str,tokenUrl:str,refreshUrl:Optional[str]=None,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.oauth2.OAuth2PasswordBearer(self,tokenUrl:str,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.oauth2.OAuth2PasswordBearer.__init__(self,tokenUrl:str,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.oauth2.OAuth2PasswordRequestForm(self,grant_type:str=Form(default=None,regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
-fastapi.security.oauth2.OAuth2PasswordRequestForm.__init__(self,grant_type:str=Form(default=None,regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
-fastapi.security.oauth2.OAuth2PasswordRequestFormStrict(self,grant_type:str=Form(regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
-fastapi.security.oauth2.OAuth2PasswordRequestFormStrict.__init__(self,grant_type:str=Form(regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
-fastapi.security.oauth2.SecurityScopes(self,scopes:Optional[List[str]]=None)
-fastapi.security.oauth2.SecurityScopes.__init__(self,scopes:Optional[List[str]]=None)
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/open_id_connect_url.py----------------------------------------
-A:fastapi.security.open_id_connect_url.self.model->OpenIdConnectModel(openIdConnectUrl=openIdConnectUrl, description=description)
-A:fastapi.security.open_id_connect_url.authorization->request.headers.get('Authorization')
-fastapi.security.OpenIdConnect(self,*,openIdConnectUrl:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.open_id_connect_url.OpenIdConnect(self,*,openIdConnectUrl:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.open_id_connect_url.OpenIdConnect.__init__(self,*,openIdConnectUrl:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/base.py----------------------------------------
-fastapi.security.base.SecurityBase
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/http.py----------------------------------------
-A:fastapi.security.http.self.model->HTTPBaseModel(scheme='digest', description=description)
-A:fastapi.security.http.authorization->request.headers.get('Authorization')
-A:fastapi.security.http.(scheme, credentials)->get_authorization_scheme_param(authorization)
-A:fastapi.security.http.(scheme, param)->get_authorization_scheme_param(authorization)
-A:fastapi.security.http.invalid_user_credentials_exc->HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail='Invalid authentication credentials', headers=unauthorized_headers)
-A:fastapi.security.http.data->b64decode(param).decode('ascii')
-A:fastapi.security.http.(username, separator, password)->b64decode(param).decode('ascii').partition(':')
-fastapi.security.HTTPAuthorizationCredentials(BaseModel)
-fastapi.security.HTTPBasic(self,*,scheme_name:Optional[str]=None,realm:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.HTTPBasicCredentials(BaseModel)
-fastapi.security.HTTPBearer(self,*,bearerFormat:Optional[str]=None,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.HTTPDigest(self,*,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPAuthorizationCredentials(BaseModel)
-fastapi.security.http.HTTPBase(self,*,scheme:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPBase.__init__(self,*,scheme:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPBasic(self,*,scheme_name:Optional[str]=None,realm:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPBasic.__init__(self,*,scheme_name:Optional[str]=None,realm:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPBasicCredentials(BaseModel)
-fastapi.security.http.HTTPBearer(self,*,bearerFormat:Optional[str]=None,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPBearer.__init__(self,*,bearerFormat:Optional[str]=None,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPDigest(self,*,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-fastapi.security.http.HTTPDigest.__init__(self,*,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/security/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/dependencies/utils.py----------------------------------------
-A:fastapi.dependencies.utils.security_requirement->SecurityRequirement(security_scheme=dependency, scopes=use_scopes)
-A:fastapi.dependencies.utils.sub_dependant->get_param_sub_dependant(param_name=param_name, depends=depends, path=path, security_scopes=security_scopes)
-A:fastapi.dependencies.utils.flat_dependant->get_flat_dependant(dependant)
-A:fastapi.dependencies.utils.flat_sub->get_flat_dependant(sub_dependant, skip_repeats=skip_repeats, visited=visited)
-A:fastapi.dependencies.utils.signature->inspect.signature(call)
-A:fastapi.dependencies.utils.globalns->getattr(call, '__globals__', {})
-A:fastapi.dependencies.utils.typed_signature->inspect.Signature(typed_params)
-A:fastapi.dependencies.utils.annotation->get_annotation_from_field_info(annotation if annotation is not inspect.Signature.empty else Any, field_info, param_name)
-A:fastapi.dependencies.utils.path_param_names->get_path_param_names(path)
-A:fastapi.dependencies.utils.endpoint_signature->get_typed_signature(call)
-A:fastapi.dependencies.utils.dependant->Dependant(call=call, name=name, path=path, security_scopes=security_scopes, use_cache=use_cache)
-A:fastapi.dependencies.utils.(type_annotation, depends, param_field)->analyze_param(param_name=param_name, annotation=param.annotation, value=param.default, is_path_param=is_path_param)
-A:fastapi.dependencies.utils.annotated_args->get_args(annotation)
-A:fastapi.dependencies.utils.fastapi_annotation->next(iter(fastapi_annotations), None)
-A:fastapi.dependencies.utils.field_info->cast(params.Param, field.field_info)
-A:fastapi.dependencies.utils.alias->param_name.replace('_', '-')
-A:fastapi.dependencies.utils.field->create_response_field(name=param_name, type_=annotation, default=field_info.default, alias=alias, required=field_info.default in (Required, Undefined), field_info=field_info)
-A:fastapi.dependencies.utils.field.field_info->fastapi.params.Body(field_info.default)
-A:fastapi.dependencies.utils.dunder_call->getattr(call, '__call__', None)
-A:fastapi.dependencies.utils.cm->asynccontextmanager(call)(**sub_values)
-A:fastapi.dependencies.utils.response->Response()
-A:fastapi.dependencies.utils.sub_dependant.call->cast(Callable[..., Any], sub_dependant.call)
-A:fastapi.dependencies.utils.sub_dependant.cache_key->cast(Tuple[Callable[..., Any], Tuple[str]], sub_dependant.cache_key)
-A:fastapi.dependencies.utils.call->getattr(dependency_overrides_provider, 'dependency_overrides', {}).get(original_call, original_call)
-A:fastapi.dependencies.utils.use_sub_dependant->get_dependant(path=use_path, call=call, name=sub_dependant.name, security_scopes=sub_dependant.security_scopes)
-A:fastapi.dependencies.utils.stack->request.scope.get('fastapi_astack')
-A:fastapi.dependencies.utils.(path_values, path_errors)->request_params_to_args(dependant.path_params, request.path_params)
-A:fastapi.dependencies.utils.(query_values, query_errors)->request_params_to_args(dependant.query_params, request.query_params)
-A:fastapi.dependencies.utils.(header_values, header_errors)->request_params_to_args(dependant.header_params, request.headers)
-A:fastapi.dependencies.utils.(cookie_values, cookie_errors)->request_params_to_args(dependant.cookie_params, request.cookies)
-A:fastapi.dependencies.utils.background_tasks->BackgroundTasks()
-A:fastapi.dependencies.utils.values[dependant.security_scopes_param_name]->SecurityScopes(scopes=dependant.security_scopes)
-A:fastapi.dependencies.utils.value->sequence_shape_to_type[field.shape](results)
-A:fastapi.dependencies.utils.values[field.name]->deepcopy(field.default)
-A:fastapi.dependencies.utils.(v_, errors_)->create_response_field(name=param_name, type_=annotation, default=field_info.default, alias=alias, required=field_info.default in (Required, Undefined), field_info=field_info).validate(value, values, loc=loc)
-A:fastapi.dependencies.utils.embed->getattr(field_info, 'embed', None)
-A:fastapi.dependencies.utils.missing_field_error->ErrorWrapper(MissingError(), loc=loc)
-A:fastapi.dependencies.utils.required->any((True for f in flat_dependant.body_params if f.required))
-A:fastapi.dependencies.utils.final_field->create_response_field(name='body', type_=BodyModel, required=required, alias='body', field_info=BodyFieldInfo(**BodyFieldInfo_kwargs))
-fastapi.dependencies.utils.add_non_field_param_to_dependency(*,param_name:str,type_annotation:Any,dependant:Dependant)->Optional[bool]
-fastapi.dependencies.utils.add_param_to_fields(*,field:ModelField,dependant:Dependant)->None
-fastapi.dependencies.utils.analyze_param(*,param_name:str,annotation:Any,value:Any,is_path_param:bool)->Tuple[Any, Optional[params.Depends], Optional[ModelField]]
-fastapi.dependencies.utils.check_file_field(field:ModelField)->None
-fastapi.dependencies.utils.get_body_field(*,dependant:Dependant,name:str)->Optional[ModelField]
-fastapi.dependencies.utils.get_dependant(*,path:str,call:Callable[...,Any],name:Optional[str]=None,security_scopes:Optional[List[str]]=None,use_cache:bool=True)->Dependant
-fastapi.dependencies.utils.get_flat_dependant(dependant:Dependant,*,skip_repeats:bool=False,visited:Optional[List[CacheKey]]=None)->Dependant
-fastapi.dependencies.utils.get_flat_params(dependant:Dependant)->List[ModelField]
-fastapi.dependencies.utils.get_missing_field_error(loc:Tuple[str,...])->ErrorWrapper
-fastapi.dependencies.utils.get_param_sub_dependant(*,param_name:str,depends:params.Depends,path:str,security_scopes:Optional[List[str]]=None)->Dependant
-fastapi.dependencies.utils.get_parameterless_sub_dependant(*,depends:params.Depends,path:str)->Dependant
-fastapi.dependencies.utils.get_sub_dependant(*,depends:params.Depends,dependency:Callable[...,Any],path:str,name:Optional[str]=None,security_scopes:Optional[List[str]]=None)->Dependant
-fastapi.dependencies.utils.get_typed_annotation(annotation:Any,globalns:Dict[str,Any])->Any
-fastapi.dependencies.utils.get_typed_return_annotation(call:Callable[...,Any])->Any
-fastapi.dependencies.utils.get_typed_signature(call:Callable[...,Any])->inspect.Signature
-fastapi.dependencies.utils.is_async_gen_callable(call:Callable[...,Any])->bool
-fastapi.dependencies.utils.is_body_param(*,param_field:ModelField,is_path_param:bool)->bool
-fastapi.dependencies.utils.is_coroutine_callable(call:Callable[...,Any])->bool
-fastapi.dependencies.utils.is_gen_callable(call:Callable[...,Any])->bool
-fastapi.dependencies.utils.is_scalar_field(field:ModelField)->bool
-fastapi.dependencies.utils.is_scalar_sequence_field(field:ModelField)->bool
-fastapi.dependencies.utils.request_params_to_args(required_params:Sequence[ModelField],received_params:Union[Mapping[str,Any],QueryParams,Headers])->Tuple[Dict[str, Any], List[ErrorWrapper]]
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/dependencies/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/dependencies/models.py----------------------------------------
-fastapi.dependencies.models.Dependant(self,*,path_params:Optional[List[ModelField]]=None,query_params:Optional[List[ModelField]]=None,header_params:Optional[List[ModelField]]=None,cookie_params:Optional[List[ModelField]]=None,body_params:Optional[List[ModelField]]=None,dependencies:Optional[List['Dependant']]=None,security_schemes:Optional[List[SecurityRequirement]]=None,name:Optional[str]=None,call:Optional[Callable[...,Any]]=None,request_param_name:Optional[str]=None,websocket_param_name:Optional[str]=None,http_connection_param_name:Optional[str]=None,response_param_name:Optional[str]=None,background_tasks_param_name:Optional[str]=None,security_scopes_param_name:Optional[str]=None,security_scopes:Optional[List[str]]=None,use_cache:bool=True,path:Optional[str]=None)
-fastapi.dependencies.models.Dependant.__init__(self,*,path_params:Optional[List[ModelField]]=None,query_params:Optional[List[ModelField]]=None,header_params:Optional[List[ModelField]]=None,cookie_params:Optional[List[ModelField]]=None,body_params:Optional[List[ModelField]]=None,dependencies:Optional[List['Dependant']]=None,security_schemes:Optional[List[SecurityRequirement]]=None,name:Optional[str]=None,call:Optional[Callable[...,Any]]=None,request_param_name:Optional[str]=None,websocket_param_name:Optional[str]=None,http_connection_param_name:Optional[str]=None,response_param_name:Optional[str]=None,background_tasks_param_name:Optional[str]=None,security_scopes_param_name:Optional[str]=None,security_scopes:Optional[List[str]]=None,use_cache:bool=True,path:Optional[str]=None)
-fastapi.dependencies.models.SecurityRequirement(self,security_scheme:SecurityBase,scopes:Optional[Sequence[str]]=None)
-fastapi.dependencies.models.SecurityRequirement.__init__(self,security_scheme:SecurityBase,scopes:Optional[Sequence[str]]=None)
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/openapi/utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/openapi/utils.py----------------------------------------
 A:fastapi.openapi.utils.security_definition->jsonable_encoder(security_requirement.security_scheme.model, by_alias=True, exclude_none=True)
 A:fastapi.openapi.utils.field_info->cast(Body, body_field.field_info)
 A:fastapi.openapi.utils.parameter['examples']->jsonable_encoder(field_info.examples)
@@ -514,20 +339,7 @@ fastapi.openapi.utils.get_openapi_path(*,route:routing.APIRoute,model_name_map:D
 fastapi.openapi.utils.get_openapi_security_definitions(flat_dependant:Dependant)->Tuple[Dict[str, Any], List[Dict[str, Any]]]
 
 
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/openapi/docs.py----------------------------------------
-A:fastapi.openapi.docs.current_swagger_ui_parameters->swagger_ui_default_parameters.copy()
-fastapi.openapi.docs.get_redoc_html(*,openapi_url:str,title:str,redoc_js_url:str='https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js',redoc_favicon_url:str='https://fastapi.tiangolo.com/img/favicon.png',with_google_fonts:bool=True)->HTMLResponse
-fastapi.openapi.docs.get_swagger_ui_html(*,openapi_url:str,title:str,swagger_js_url:str='https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui-bundle.js',swagger_css_url:str='https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui.css',swagger_favicon_url:str='https://fastapi.tiangolo.com/img/favicon.png',oauth2_redirect_url:Optional[str]=None,init_oauth:Optional[Dict[str,Any]]=None,swagger_ui_parameters:Optional[Dict[str,Any]]=None)->HTMLResponse
-fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html()->HTMLResponse
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/openapi/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/openapi/constants.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/fastapi/fastapi0.95.0/openapi/models.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/openapi/models.py----------------------------------------
 A:fastapi.openapi.models.type_->Field(SecuritySchemeType.openIdConnect, alias='type')
 fastapi.openapi.models.APIKey(SecurityBase)
 fastapi.openapi.models.APIKeyIn(Enum)
@@ -591,4 +403,200 @@ fastapi.openapi.models.Tag(BaseModel)
 fastapi.openapi.models.Tag.Config
 fastapi.openapi.models.XML(BaseModel)
 fastapi.openapi.models.XML.Config
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/openapi/docs.py----------------------------------------
+A:fastapi.openapi.docs.current_swagger_ui_parameters->swagger_ui_default_parameters.copy()
+fastapi.openapi.docs.get_redoc_html(*,openapi_url:str,title:str,redoc_js_url:str='https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js',redoc_favicon_url:str='https://fastapi.tiangolo.com/img/favicon.png',with_google_fonts:bool=True)->HTMLResponse
+fastapi.openapi.docs.get_swagger_ui_html(*,openapi_url:str,title:str,swagger_js_url:str='https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui-bundle.js',swagger_css_url:str='https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui.css',swagger_favicon_url:str='https://fastapi.tiangolo.com/img/favicon.png',oauth2_redirect_url:Optional[str]=None,init_oauth:Optional[Dict[str,Any]]=None,swagger_ui_parameters:Optional[Dict[str,Any]]=None)->HTMLResponse
+fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html()->HTMLResponse
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/openapi/constants.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/httpsredirect.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/wsgi.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py----------------------------------------
+fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware(self,app:ASGIApp,context_name:str='fastapi_astack')
+fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware.__init__(self,app:ASGIApp,context_name:str='fastapi_astack')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/cors.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/trustedhost.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/middleware/gzip.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/open_id_connect_url.py----------------------------------------
+A:fastapi.security.open_id_connect_url.self.model->OpenIdConnectModel(openIdConnectUrl=openIdConnectUrl, description=description)
+A:fastapi.security.open_id_connect_url.authorization->request.headers.get('Authorization')
+fastapi.security.OpenIdConnect(self,*,openIdConnectUrl:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.open_id_connect_url.OpenIdConnect(self,*,openIdConnectUrl:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.open_id_connect_url.OpenIdConnect.__init__(self,*,openIdConnectUrl:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/utils.py----------------------------------------
+A:fastapi.security.utils.(scheme, _, param)->authorization_header_value.partition(' ')
+fastapi.security.utils.get_authorization_scheme_param(authorization_header_value:Optional[str])->Tuple[str, str]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/oauth2.py----------------------------------------
+A:fastapi.security.oauth2.self.scopes->scope.split()
+A:fastapi.security.oauth2.self.model->OAuth2Model(flows=flows, description=description)
+A:fastapi.security.oauth2.authorization->request.headers.get('Authorization')
+A:fastapi.security.oauth2.flows->OAuthFlowsModel(authorizationCode={'authorizationUrl': authorizationUrl, 'tokenUrl': tokenUrl, 'refreshUrl': refreshUrl, 'scopes': scopes})
+A:fastapi.security.oauth2.(scheme, param)->get_authorization_scheme_param(authorization)
+A:fastapi.security.oauth2.self.scope_str->' '.join(self.scopes)
+fastapi.security.OAuth2(self,*,flows:Union[OAuthFlowsModel,Dict[str,Dict[str,Any]]]=OAuthFlowsModel(),scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.OAuth2AuthorizationCodeBearer(self,authorizationUrl:str,tokenUrl:str,refreshUrl:Optional[str]=None,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.OAuth2PasswordBearer(self,tokenUrl:str,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.OAuth2PasswordRequestForm(self,grant_type:str=Form(default=None,regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
+fastapi.security.OAuth2PasswordRequestFormStrict(self,grant_type:str=Form(regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
+fastapi.security.SecurityScopes(self,scopes:Optional[List[str]]=None)
+fastapi.security.oauth2.OAuth2(self,*,flows:Union[OAuthFlowsModel,Dict[str,Dict[str,Any]]]=OAuthFlowsModel(),scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.oauth2.OAuth2.__init__(self,*,flows:Union[OAuthFlowsModel,Dict[str,Dict[str,Any]]]=OAuthFlowsModel(),scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.oauth2.OAuth2AuthorizationCodeBearer(self,authorizationUrl:str,tokenUrl:str,refreshUrl:Optional[str]=None,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.oauth2.OAuth2AuthorizationCodeBearer.__init__(self,authorizationUrl:str,tokenUrl:str,refreshUrl:Optional[str]=None,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.oauth2.OAuth2PasswordBearer(self,tokenUrl:str,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.oauth2.OAuth2PasswordBearer.__init__(self,tokenUrl:str,scheme_name:Optional[str]=None,scopes:Optional[Dict[str,str]]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.oauth2.OAuth2PasswordRequestForm(self,grant_type:str=Form(default=None,regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
+fastapi.security.oauth2.OAuth2PasswordRequestForm.__init__(self,grant_type:str=Form(default=None,regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
+fastapi.security.oauth2.OAuth2PasswordRequestFormStrict(self,grant_type:str=Form(regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
+fastapi.security.oauth2.OAuth2PasswordRequestFormStrict.__init__(self,grant_type:str=Form(regex='password'),username:str=Form(),password:str=Form(),scope:str=Form(default=''),client_id:Optional[str]=Form(default=None),client_secret:Optional[str]=Form(default=None))
+fastapi.security.oauth2.SecurityScopes(self,scopes:Optional[List[str]]=None)
+fastapi.security.oauth2.SecurityScopes.__init__(self,scopes:Optional[List[str]]=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/api_key.py----------------------------------------
+A:fastapi.security.api_key.api_key->request.cookies.get(self.model.name)
+fastapi.security.APIKeyCookie(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.APIKeyHeader(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.APIKeyQuery(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.api_key.APIKeyBase(SecurityBase)
+fastapi.security.api_key.APIKeyCookie(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.api_key.APIKeyCookie.__init__(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.api_key.APIKeyHeader(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.api_key.APIKeyHeader.__init__(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.api_key.APIKeyQuery(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.api_key.APIKeyQuery.__init__(self,*,name:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/base.py----------------------------------------
+fastapi.security.base.SecurityBase
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/security/http.py----------------------------------------
+A:fastapi.security.http.self.model->HTTPBaseModel(scheme='digest', description=description)
+A:fastapi.security.http.authorization->request.headers.get('Authorization')
+A:fastapi.security.http.(scheme, credentials)->get_authorization_scheme_param(authorization)
+A:fastapi.security.http.(scheme, param)->get_authorization_scheme_param(authorization)
+A:fastapi.security.http.invalid_user_credentials_exc->HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail='Invalid authentication credentials', headers=unauthorized_headers)
+A:fastapi.security.http.data->b64decode(param).decode('ascii')
+A:fastapi.security.http.(username, separator, password)->b64decode(param).decode('ascii').partition(':')
+fastapi.security.HTTPAuthorizationCredentials(BaseModel)
+fastapi.security.HTTPBasic(self,*,scheme_name:Optional[str]=None,realm:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.HTTPBasicCredentials(BaseModel)
+fastapi.security.HTTPBearer(self,*,bearerFormat:Optional[str]=None,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.HTTPDigest(self,*,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPAuthorizationCredentials(BaseModel)
+fastapi.security.http.HTTPBase(self,*,scheme:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPBase.__init__(self,*,scheme:str,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPBasic(self,*,scheme_name:Optional[str]=None,realm:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPBasic.__init__(self,*,scheme_name:Optional[str]=None,realm:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPBasicCredentials(BaseModel)
+fastapi.security.http.HTTPBearer(self,*,bearerFormat:Optional[str]=None,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPBearer.__init__(self,*,bearerFormat:Optional[str]=None,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPDigest(self,*,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+fastapi.security.http.HTTPDigest.__init__(self,*,scheme_name:Optional[str]=None,description:Optional[str]=None,auto_error:bool=True)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/dependencies/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/dependencies/utils.py----------------------------------------
+A:fastapi.dependencies.utils.security_requirement->SecurityRequirement(security_scheme=dependency, scopes=use_scopes)
+A:fastapi.dependencies.utils.sub_dependant->get_param_sub_dependant(param_name=param_name, depends=depends, path=path, security_scopes=security_scopes)
+A:fastapi.dependencies.utils.flat_dependant->get_flat_dependant(dependant)
+A:fastapi.dependencies.utils.flat_sub->get_flat_dependant(sub_dependant, skip_repeats=skip_repeats, visited=visited)
+A:fastapi.dependencies.utils.signature->inspect.signature(call)
+A:fastapi.dependencies.utils.globalns->getattr(call, '__globals__', {})
+A:fastapi.dependencies.utils.typed_signature->inspect.Signature(typed_params)
+A:fastapi.dependencies.utils.annotation->get_annotation_from_field_info(annotation if annotation is not inspect.Signature.empty else Any, field_info, param_name)
+A:fastapi.dependencies.utils.path_param_names->get_path_param_names(path)
+A:fastapi.dependencies.utils.endpoint_signature->get_typed_signature(call)
+A:fastapi.dependencies.utils.dependant->Dependant(call=call, name=name, path=path, security_scopes=security_scopes, use_cache=use_cache)
+A:fastapi.dependencies.utils.(type_annotation, depends, param_field)->analyze_param(param_name=param_name, annotation=param.annotation, value=param.default, is_path_param=is_path_param)
+A:fastapi.dependencies.utils.annotated_args->get_args(annotation)
+A:fastapi.dependencies.utils.fastapi_annotation->next(iter(fastapi_annotations), None)
+A:fastapi.dependencies.utils.field_info->cast(params.Param, field.field_info)
+A:fastapi.dependencies.utils.alias->param_name.replace('_', '-')
+A:fastapi.dependencies.utils.field->create_response_field(name=param_name, type_=annotation, default=field_info.default, alias=alias, required=field_info.default in (Required, Undefined), field_info=field_info)
+A:fastapi.dependencies.utils.field.field_info->fastapi.params.Body(field_info.default)
+A:fastapi.dependencies.utils.dunder_call->getattr(call, '__call__', None)
+A:fastapi.dependencies.utils.cm->asynccontextmanager(call)(**sub_values)
+A:fastapi.dependencies.utils.response->Response()
+A:fastapi.dependencies.utils.sub_dependant.call->cast(Callable[..., Any], sub_dependant.call)
+A:fastapi.dependencies.utils.sub_dependant.cache_key->cast(Tuple[Callable[..., Any], Tuple[str]], sub_dependant.cache_key)
+A:fastapi.dependencies.utils.call->getattr(dependency_overrides_provider, 'dependency_overrides', {}).get(original_call, original_call)
+A:fastapi.dependencies.utils.use_sub_dependant->get_dependant(path=use_path, call=call, name=sub_dependant.name, security_scopes=sub_dependant.security_scopes)
+A:fastapi.dependencies.utils.stack->request.scope.get('fastapi_astack')
+A:fastapi.dependencies.utils.(path_values, path_errors)->request_params_to_args(dependant.path_params, request.path_params)
+A:fastapi.dependencies.utils.(query_values, query_errors)->request_params_to_args(dependant.query_params, request.query_params)
+A:fastapi.dependencies.utils.(header_values, header_errors)->request_params_to_args(dependant.header_params, request.headers)
+A:fastapi.dependencies.utils.(cookie_values, cookie_errors)->request_params_to_args(dependant.cookie_params, request.cookies)
+A:fastapi.dependencies.utils.background_tasks->BackgroundTasks()
+A:fastapi.dependencies.utils.values[dependant.security_scopes_param_name]->SecurityScopes(scopes=dependant.security_scopes)
+A:fastapi.dependencies.utils.value->sequence_shape_to_type[field.shape](results)
+A:fastapi.dependencies.utils.values[field.name]->deepcopy(field.default)
+A:fastapi.dependencies.utils.(v_, errors_)->create_response_field(name=param_name, type_=annotation, default=field_info.default, alias=alias, required=field_info.default in (Required, Undefined), field_info=field_info).validate(value, values, loc=loc)
+A:fastapi.dependencies.utils.embed->getattr(field_info, 'embed', None)
+A:fastapi.dependencies.utils.missing_field_error->ErrorWrapper(MissingError(), loc=loc)
+A:fastapi.dependencies.utils.required->any((True for f in flat_dependant.body_params if f.required))
+A:fastapi.dependencies.utils.final_field->create_response_field(name='body', type_=BodyModel, required=required, alias='body', field_info=BodyFieldInfo(**BodyFieldInfo_kwargs))
+fastapi.dependencies.utils.add_non_field_param_to_dependency(*,param_name:str,type_annotation:Any,dependant:Dependant)->Optional[bool]
+fastapi.dependencies.utils.add_param_to_fields(*,field:ModelField,dependant:Dependant)->None
+fastapi.dependencies.utils.analyze_param(*,param_name:str,annotation:Any,value:Any,is_path_param:bool)->Tuple[Any, Optional[params.Depends], Optional[ModelField]]
+fastapi.dependencies.utils.check_file_field(field:ModelField)->None
+fastapi.dependencies.utils.get_body_field(*,dependant:Dependant,name:str)->Optional[ModelField]
+fastapi.dependencies.utils.get_dependant(*,path:str,call:Callable[...,Any],name:Optional[str]=None,security_scopes:Optional[List[str]]=None,use_cache:bool=True)->Dependant
+fastapi.dependencies.utils.get_flat_dependant(dependant:Dependant,*,skip_repeats:bool=False,visited:Optional[List[CacheKey]]=None)->Dependant
+fastapi.dependencies.utils.get_flat_params(dependant:Dependant)->List[ModelField]
+fastapi.dependencies.utils.get_missing_field_error(loc:Tuple[str,...])->ErrorWrapper
+fastapi.dependencies.utils.get_param_sub_dependant(*,param_name:str,depends:params.Depends,path:str,security_scopes:Optional[List[str]]=None)->Dependant
+fastapi.dependencies.utils.get_parameterless_sub_dependant(*,depends:params.Depends,path:str)->Dependant
+fastapi.dependencies.utils.get_sub_dependant(*,depends:params.Depends,dependency:Callable[...,Any],path:str,name:Optional[str]=None,security_scopes:Optional[List[str]]=None)->Dependant
+fastapi.dependencies.utils.get_typed_annotation(annotation:Any,globalns:Dict[str,Any])->Any
+fastapi.dependencies.utils.get_typed_return_annotation(call:Callable[...,Any])->Any
+fastapi.dependencies.utils.get_typed_signature(call:Callable[...,Any])->inspect.Signature
+fastapi.dependencies.utils.is_async_gen_callable(call:Callable[...,Any])->bool
+fastapi.dependencies.utils.is_body_param(*,param_field:ModelField,is_path_param:bool)->bool
+fastapi.dependencies.utils.is_coroutine_callable(call:Callable[...,Any])->bool
+fastapi.dependencies.utils.is_gen_callable(call:Callable[...,Any])->bool
+fastapi.dependencies.utils.is_scalar_field(field:ModelField)->bool
+fastapi.dependencies.utils.is_scalar_sequence_field(field:ModelField)->bool
+fastapi.dependencies.utils.request_body_to_args(required_params:List[ModelField],received_body:Optional[Union[Dict[str,Any],FormData]])->Tuple[Dict[str, Any], List[ErrorWrapper]]
+fastapi.dependencies.utils.request_params_to_args(required_params:Sequence[ModelField],received_params:Union[Mapping[str,Any],QueryParams,Headers])->Tuple[Dict[str, Any], List[ErrorWrapper]]
+fastapi.dependencies.utils.solve_dependencies(*,request:Union[Request,WebSocket],dependant:Dependant,body:Optional[Union[Dict[str,Any],FormData]]=None,background_tasks:Optional[BackgroundTasks]=None,response:Optional[Response]=None,dependency_overrides_provider:Optional[Any]=None,dependency_cache:Optional[Dict[Tuple[Callable[...,Any],Tuple[str]],Any]]=None)->Tuple[Dict[str, Any], List[ErrorWrapper], Optional[BackgroundTasks], Response, Dict[Tuple[Callable[..., Any], Tuple[str]], Any]]
+fastapi.dependencies.utils.solve_generator(*,call:Callable[...,Any],stack:AsyncExitStack,sub_values:Dict[str,Any])->Any
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/fastapi0.95.0/lib/python3.9/site-packages/fastapi/dependencies/models.py----------------------------------------
+fastapi.dependencies.models.Dependant(self,*,path_params:Optional[List[ModelField]]=None,query_params:Optional[List[ModelField]]=None,header_params:Optional[List[ModelField]]=None,cookie_params:Optional[List[ModelField]]=None,body_params:Optional[List[ModelField]]=None,dependencies:Optional[List['Dependant']]=None,security_schemes:Optional[List[SecurityRequirement]]=None,name:Optional[str]=None,call:Optional[Callable[...,Any]]=None,request_param_name:Optional[str]=None,websocket_param_name:Optional[str]=None,http_connection_param_name:Optional[str]=None,response_param_name:Optional[str]=None,background_tasks_param_name:Optional[str]=None,security_scopes_param_name:Optional[str]=None,security_scopes:Optional[List[str]]=None,use_cache:bool=True,path:Optional[str]=None)
+fastapi.dependencies.models.Dependant.__init__(self,*,path_params:Optional[List[ModelField]]=None,query_params:Optional[List[ModelField]]=None,header_params:Optional[List[ModelField]]=None,cookie_params:Optional[List[ModelField]]=None,body_params:Optional[List[ModelField]]=None,dependencies:Optional[List['Dependant']]=None,security_schemes:Optional[List[SecurityRequirement]]=None,name:Optional[str]=None,call:Optional[Callable[...,Any]]=None,request_param_name:Optional[str]=None,websocket_param_name:Optional[str]=None,http_connection_param_name:Optional[str]=None,response_param_name:Optional[str]=None,background_tasks_param_name:Optional[str]=None,security_scopes_param_name:Optional[str]=None,security_scopes:Optional[List[str]]=None,use_cache:bool=True,path:Optional[str]=None)
+fastapi.dependencies.models.SecurityRequirement(self,security_scheme:SecurityBase,scopes:Optional[Sequence[str]]=None)
+fastapi.dependencies.models.SecurityRequirement.__init__(self,security_scheme:SecurityBase,scopes:Optional[Sequence[str]]=None)
 

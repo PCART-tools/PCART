@@ -1,5 +1,8 @@
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/multipart.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/multipart.py----------------------------------------
 A:httpx.multipart._HTML5_FORM_ENCODING_RE->re.compile('|'.join([re.escape(c) for c in _HTML5_FORM_ENCODING_REPLACEMENTS.keys()]))
 A:httpx.multipart.name->_format_param('name', self.name)
 A:httpx.multipart.self.content_type->self.guess_content_type()
@@ -26,7 +29,143 @@ httpx.multipart.iter_fields(data:dict,files:dict)->typing.Iterator[Field]
 httpx.multipart.multipart_encode(data:dict,files:dict)->typing.Tuple[bytes, str]
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/utils.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/client.py----------------------------------------
+A:httpx.client.logger->get_logger(__name__)
+A:httpx.client.self.base_url->URL(base_url)
+A:httpx.client.self._params->QueryParams(params)
+A:httpx.client.self._headers->Headers(headers)
+A:httpx.client.self._cookies->Cookies(cookies)
+A:httpx.client.self.timeout->Timeout(timeout)
+A:httpx.client.self.netrc->NetRCInfo()
+A:httpx.client.request->next(auth_flow)
+A:httpx.client.url->url.copy_with(fragment=request.url.fragment).copy_with(fragment=request.url.fragment)
+A:httpx.client.headers->Headers(request.headers)
+A:httpx.client.cookies->Cookies(self.cookies)
+A:httpx.client.params->self.merge_queryparams(params)
+A:httpx.client.merged_cookies->Cookies(self.cookies)
+A:httpx.client.merged_headers->Headers(self.headers)
+A:httpx.client.merged_queryparams->QueryParams(self.params)
+A:httpx.client.credentials->self.netrc.get_credentials(request.url.authority)
+A:httpx.client.method->self.redirect_method(request, response)
+A:httpx.client.stream->self.redirect_stream(request, method)
+A:httpx.client.proxy_map->self.get_proxy_map(proxies, trust_env)
+A:httpx.client.self.dispatch->self.init_dispatch(verify=verify, cert=cert, http2=http2, pool_limits=pool_limits, dispatch=dispatch, app=app, backend=backend, trust_env=trust_env, uds=uds)
+A:httpx.client.auth->self.build_auth(request, auth)
+A:httpx.client.response->self.dispatcher_for_url(request.url).send(request, timeout=timeout)
+A:httpx.client.response.history->list(history)
+A:httpx.client.response.call_next->functools.partial(self.send_handling_redirects, request=request, auth=auth, timeout=timeout, allow_redirects=False, history=history)
+A:httpx.client.auth_flow->self.build_auth(request, auth).auth_flow(request)
+A:httpx.client.next_request->self.build_auth(request, auth).auth_flow(request).send(response)
+A:httpx.client.dispatcher->self.dispatcher_for_url(request.url)
+A:httpx.client.self.response->self.client.send(request=self.request, auth=self.auth, allow_redirects=self.allow_redirects, timeout=self.timeout, stream=True)
+httpx.AsyncClient(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
+httpx.AsyncClient.__aenter__(self)->'AsyncClient'
+httpx.AsyncClient.__aexit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.AsyncClient.aclose(self)->None
+httpx.AsyncClient.delete(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.dispatcher_for_url(self,url:URL)->AsyncDispatcher
+httpx.AsyncClient.get(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.head(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)->AsyncDispatcher
+httpx.AsyncClient.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True)->AsyncDispatcher
+httpx.AsyncClient.options(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.patch(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.post(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.put(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.send(self,request:Request,*,stream:bool=False,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.AsyncClient.send_handling_auth(self,request:Request,history:typing.List[Response],auth:Auth,timeout:Timeout)->Response
+httpx.AsyncClient.send_handling_redirects(self,request:Request,auth:Auth,timeout:Timeout,allow_redirects:bool=True,history:typing.List[Response]=None)->Response
+httpx.AsyncClient.send_single_request(self,request:Request,timeout:Timeout)->Response
+httpx.Client(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)
+httpx.Client.__enter__(self)->'Client'
+httpx.Client.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.Client.close(self)->None
+httpx.Client.delete(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.dispatcher_for_url(self,url:URL)->SyncDispatcher
+httpx.Client.get(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.head(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)->SyncDispatcher
+httpx.Client.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,trust_env:bool=True)->SyncDispatcher
+httpx.Client.options(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.patch(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.post(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.put(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.send(self,request:Request,*,stream:bool=False,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.Client.send_handling_auth(self,request:Request,history:typing.List[Response],auth:Auth,timeout:Timeout)->Response
+httpx.Client.send_handling_redirects(self,request:Request,auth:Auth,timeout:Timeout,allow_redirects:bool=True,history:typing.List[Response]=None)->Response
+httpx.Client.send_single_request(self,request:Request,timeout:Timeout)->Response
+httpx.client.AsyncClient(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
+httpx.client.AsyncClient.__aenter__(self)->'AsyncClient'
+httpx.client.AsyncClient.__aexit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.client.AsyncClient.__init__(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
+httpx.client.AsyncClient.aclose(self)->None
+httpx.client.AsyncClient.delete(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.dispatcher_for_url(self,url:URL)->AsyncDispatcher
+httpx.client.AsyncClient.get(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.head(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)->AsyncDispatcher
+httpx.client.AsyncClient.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True)->AsyncDispatcher
+httpx.client.AsyncClient.options(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.patch(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.post(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.put(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.send(self,request:Request,*,stream:bool=False,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.AsyncClient.send_handling_auth(self,request:Request,history:typing.List[Response],auth:Auth,timeout:Timeout)->Response
+httpx.client.AsyncClient.send_handling_redirects(self,request:Request,auth:Auth,timeout:Timeout,allow_redirects:bool=True,history:typing.List[Response]=None)->Response
+httpx.client.AsyncClient.send_single_request(self,request:Request,timeout:Timeout)->Response
+httpx.client.BaseClient(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,trust_env:bool=True)
+httpx.client.BaseClient.__init__(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,trust_env:bool=True)
+httpx.client.BaseClient.build_auth(self,request:Request,auth:AuthTypes=None)->Auth
+httpx.client.BaseClient.build_redirect_request(self,request:Request,response:Response)->Request
+httpx.client.BaseClient.build_request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None)->Request
+httpx.client.BaseClient.cookies(self)->Cookies
+httpx.client.BaseClient.cookies(self,cookies:CookieTypes)->None
+httpx.client.BaseClient.get_proxy_map(self,proxies:typing.Optional[ProxiesTypes],trust_env:bool)->typing.Dict[str, Proxy]
+httpx.client.BaseClient.headers(self)->Headers
+httpx.client.BaseClient.headers(self,headers:HeaderTypes)->None
+httpx.client.BaseClient.merge_cookies(self,cookies:CookieTypes=None)->typing.Optional[CookieTypes]
+httpx.client.BaseClient.merge_headers(self,headers:HeaderTypes=None)->typing.Optional[HeaderTypes]
+httpx.client.BaseClient.merge_queryparams(self,params:QueryParamTypes=None)->typing.Optional[QueryParamTypes]
+httpx.client.BaseClient.merge_url(self,url:URLTypes)->URL
+httpx.client.BaseClient.params(self)->QueryParams
+httpx.client.BaseClient.params(self,params:QueryParamTypes)->None
+httpx.client.BaseClient.redirect_headers(self,request:Request,url:URL,method:str)->Headers
+httpx.client.BaseClient.redirect_method(self,request:Request,response:Response)->str
+httpx.client.BaseClient.redirect_stream(self,request:Request,method:str)->typing.Optional[ContentStream]
+httpx.client.BaseClient.redirect_url(self,request:Request,response:Response)->URL
+httpx.client.BaseClient.stream(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->'StreamContextManager'
+httpx.client.Client(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)
+httpx.client.Client.__enter__(self)->'Client'
+httpx.client.Client.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.client.Client.__init__(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)
+httpx.client.Client.close(self)->None
+httpx.client.Client.delete(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.dispatcher_for_url(self,url:URL)->SyncDispatcher
+httpx.client.Client.get(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.head(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)->SyncDispatcher
+httpx.client.Client.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,trust_env:bool=True)->SyncDispatcher
+httpx.client.Client.options(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.patch(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.post(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.put(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.send(self,request:Request,*,stream:bool=False,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
+httpx.client.Client.send_handling_auth(self,request:Request,history:typing.List[Response],auth:Auth,timeout:Timeout)->Response
+httpx.client.Client.send_handling_redirects(self,request:Request,auth:Auth,timeout:Timeout,allow_redirects:bool=True,history:typing.List[Response]=None)->Response
+httpx.client.Client.send_single_request(self,request:Request,timeout:Timeout)->Response
+httpx.client.StreamContextManager(self,client:BaseClient,request:Request,*,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET,close_client:bool=False)
+httpx.client.StreamContextManager.__aenter__(self)->'Response'
+httpx.client.StreamContextManager.__aexit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.client.StreamContextManager.__enter__(self)->'Response'
+httpx.client.StreamContextManager.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.client.StreamContextManager.__init__(self,client:BaseClient,request:Request,*,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET,close_client:bool=False)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/utils.py----------------------------------------
 A:httpx.utils._HTML5_FORM_ENCODING_RE->re.compile('|'.join([re.escape(c) for c in _HTML5_FORM_ENCODING_REPLACEMENTS.keys()]))
 A:httpx.utils.value->value.strip(replace_chars).strip(replace_chars)
 A:httpx.utils._null->'\x00'.encode('ascii')
@@ -78,120 +217,7 @@ httpx.utils.to_str(value:typing.Union[str,bytes],encoding:str='utf-8')->str
 httpx.utils.unquote(value:str)->str
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/middleware.py----------------------------------------
-httpx.middleware.Middleware
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/config.py----------------------------------------
-A:httpx.config.DEFAULT_CIPHERS->':'.join(['ECDHE+AESGCM', 'ECDHE+CHACHA20', 'DHE+AESGCM', 'DHE+CHACHA20', 'ECDH+AESGCM', 'DH+AESGCM', 'ECDH+AES', 'DH+AES', 'RSA+AESGCM', 'RSA+AES', '!aNULL', '!eNULL', '!MD5', '!DSS'])
-A:httpx.config.logger->get_logger(__name__)
-A:httpx.config.UNSET->UnsetType()
-A:httpx.config.DEFAULT_CA_BUNDLE_PATH->Path(certifi.where())
-A:httpx.config.self.ssl_context->self.load_ssl_context()
-A:httpx.config.context->ssl.SSLContext(ssl.PROTOCOL_TLS)
-A:httpx.config.ca_bundle->get_ca_bundle_from_env()
-A:httpx.config.ca_bundle_path->Path(self.verify)
-A:httpx.config.keylogfile->os.environ.get('SSLKEYLOGFILE')
-A:httpx.config.url->URL(url)
-A:httpx.config.headers->Headers(headers)
-A:httpx.config.DEFAULT_TIMEOUT_CONFIG->Timeout(timeout=5.0)
-A:httpx.config.DEFAULT_POOL_LIMITS->PoolLimits(soft_limit=10, hard_limit=100)
-httpx.PoolLimits(self,*,soft_limit:int=None,hard_limit:int=None)
-httpx.PoolLimits.__eq__(self,other:typing.Any)->bool
-httpx.PoolLimits.__repr__(self)->str
-httpx.Proxy(self,url:URLTypes,*,headers:HeaderTypes=None,mode:str='DEFAULT')
-httpx.Proxy.__repr__(self)->str
-httpx.Timeout(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
-httpx.Timeout.__eq__(self,other:typing.Any)->bool
-httpx.Timeout.__repr__(self)->str
-httpx.config.PoolLimits(self,*,soft_limit:int=None,hard_limit:int=None)
-httpx.config.PoolLimits.__eq__(self,other:typing.Any)->bool
-httpx.config.PoolLimits.__init__(self,*,soft_limit:int=None,hard_limit:int=None)
-httpx.config.PoolLimits.__repr__(self)->str
-httpx.config.Proxy(self,url:URLTypes,*,headers:HeaderTypes=None,mode:str='DEFAULT')
-httpx.config.Proxy.__init__(self,url:URLTypes,*,headers:HeaderTypes=None,mode:str='DEFAULT')
-httpx.config.Proxy.__repr__(self)->str
-httpx.config.SSLConfig(self,*,cert:CertTypes=None,verify:VerifyTypes=True,trust_env:bool=None,http2:bool=False)
-httpx.config.SSLConfig.__eq__(self,other:typing.Any)->bool
-httpx.config.SSLConfig.__init__(self,*,cert:CertTypes=None,verify:VerifyTypes=True,trust_env:bool=None,http2:bool=False)
-httpx.config.SSLConfig.__repr__(self)->str
-httpx.config.SSLConfig._create_default_ssl_context(self)->ssl.SSLContext
-httpx.config.SSLConfig._load_client_certs(self,ssl_context:ssl.SSLContext)->None
-httpx.config.SSLConfig.load_ssl_context(self)->ssl.SSLContext
-httpx.config.SSLConfig.load_ssl_context_no_verify(self)->ssl.SSLContext
-httpx.config.SSLConfig.load_ssl_context_verify(self)->ssl.SSLContext
-httpx.config.Timeout(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
-httpx.config.Timeout.__eq__(self,other:typing.Any)->bool
-httpx.config.Timeout.__init__(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
-httpx.config.Timeout.__repr__(self)->str
-httpx.config.UnsetType
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/decoders.py----------------------------------------
-A:httpx.decoders.self.decompressor->brotli.Decompressor()
-A:httpx.decoders.self.children->list(reversed(children))
-A:httpx.decoders.data->child.decode(data)
-A:httpx.decoders.self.detector->chardet.universaldetector.UniversalDetector()
-A:httpx.decoders.text->self.decoder.decode(bytes(self.buffer), False)
-A:httpx.decoders.self.decoder->codecs.getincrementaldecoder(self._detector_result())()
-A:httpx.decoders.num_chars->len(text)
-httpx.decoders.BrotliDecoder(self)
-httpx.decoders.BrotliDecoder.__init__(self)
-httpx.decoders.BrotliDecoder.decode(self,data:bytes)->bytes
-httpx.decoders.BrotliDecoder.flush(self)->bytes
-httpx.decoders.Decoder
-httpx.decoders.Decoder.decode(self,data:bytes)->bytes
-httpx.decoders.Decoder.flush(self)->bytes
-httpx.decoders.DeflateDecoder(self)
-httpx.decoders.DeflateDecoder.__init__(self)
-httpx.decoders.DeflateDecoder.decode(self,data:bytes)->bytes
-httpx.decoders.DeflateDecoder.flush(self)->bytes
-httpx.decoders.GZipDecoder(self)
-httpx.decoders.GZipDecoder.__init__(self)
-httpx.decoders.GZipDecoder.decode(self,data:bytes)->bytes
-httpx.decoders.GZipDecoder.flush(self)->bytes
-httpx.decoders.IdentityDecoder(Decoder)
-httpx.decoders.IdentityDecoder.decode(self,data:bytes)->bytes
-httpx.decoders.IdentityDecoder.flush(self)->bytes
-httpx.decoders.LineDecoder(self)
-httpx.decoders.LineDecoder.__init__(self)
-httpx.decoders.LineDecoder.decode(self,text:str)->typing.List[str]
-httpx.decoders.LineDecoder.flush(self)->typing.List[str]
-httpx.decoders.MultiDecoder(self,children:typing.Sequence[Decoder])
-httpx.decoders.MultiDecoder.__init__(self,children:typing.Sequence[Decoder])
-httpx.decoders.MultiDecoder.decode(self,data:bytes)->bytes
-httpx.decoders.MultiDecoder.flush(self)->bytes
-httpx.decoders.TextDecoder(self,encoding:typing.Optional[str]=None)
-httpx.decoders.TextDecoder.__init__(self,encoding:typing.Optional[str]=None)
-httpx.decoders.TextDecoder._detector_result(self)->str
-httpx.decoders.TextDecoder.decode(self,data:bytes)->str
-httpx.decoders.TextDecoder.flush(self)->str
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/api.py----------------------------------------
-A:httpx.api.client->Client(cert=cert, verify=verify, trust_env=trust_env)
-A:httpx.api.request->Request(method=method, url=url, params=params, data=data, files=files, json=json, headers=headers, cookies=cookies)
-httpx.api.delete(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.get(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.head(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.options(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.patch(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.post(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.put(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.api.request(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->Response
-httpx.api.stream(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->StreamContextManager
-httpx.delete(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.get(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.head(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.options(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.patch(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.post(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.put(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
-httpx.request(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->Response
-httpx.stream(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->StreamContextManager
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/exceptions.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/exceptions.py----------------------------------------
 httpx.ConnectTimeout(TimeoutException)
 httpx.ConnectionClosed(NetworkError)
 httpx.CookieConflict(HTTPError)
@@ -238,127 +264,35 @@ httpx.exceptions.TooManyRedirects(RedirectError)
 httpx.exceptions.WriteTimeout(TimeoutException)
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/content_streams.py----------------------------------------
-A:httpx.content_streams.content_length->str(len(self.body))
-A:httpx.content_streams.self.body->BytesIO().getvalue()
-A:httpx.content_streams.name->format_form_param('name', self.name)
-A:httpx.content_streams.self.content_type->self.guess_content_type()
-A:httpx.content_streams.filename->format_form_param('filename', self.filename)
-A:httpx.content_streams.content_type->self.content_type.encode()
-A:httpx.content_streams.content->self.file.read()
-A:httpx.content_streams.body->BytesIO()
-A:httpx.content_streams.boundary->binascii.hexlify(os.urandom(16))
-A:httpx.content_streams.data->typing.cast(typing.Iterator[bytes], data)
-httpx.content_streams.AsyncIteratorStream(self,aiterator:typing.AsyncIterator[bytes],close_func:typing.Callable=None)
-httpx.content_streams.AsyncIteratorStream.__init__(self,aiterator:typing.AsyncIterator[bytes],close_func:typing.Callable=None)
-httpx.content_streams.AsyncIteratorStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.AsyncIteratorStream.can_replay(self)->bool
-httpx.content_streams.AsyncIteratorStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.ByteStream(self,body:typing.Union[str,bytes])
-httpx.content_streams.ByteStream.__init__(self,body:typing.Union[str,bytes])
-httpx.content_streams.ByteStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.ByteStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.ContentStream
-httpx.content_streams.ContentStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.ContentStream.can_replay(self)->bool
-httpx.content_streams.ContentStream.close(self)->None
-httpx.content_streams.ContentStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.IteratorStream(self,iterator:typing.Iterator[bytes],close_func:typing.Callable=None)
-httpx.content_streams.IteratorStream.__aiter__(self)->typing.AsyncIterator[bytes]
-httpx.content_streams.IteratorStream.__init__(self,iterator:typing.Iterator[bytes],close_func:typing.Callable=None)
-httpx.content_streams.IteratorStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.IteratorStream.can_replay(self)->bool
-httpx.content_streams.IteratorStream.close(self)->None
-httpx.content_streams.IteratorStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.JSONStream(self,json:typing.Any)
-httpx.content_streams.JSONStream.__init__(self,json:typing.Any)
-httpx.content_streams.JSONStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.JSONStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.MultipartStream(self,data:dict,files:dict,boundary:bytes=None)
-httpx.content_streams.MultipartStream.DataField(self,name:str,value:typing.Union[str,bytes])
-httpx.content_streams.MultipartStream.DataField.__init__(self,name:str,value:typing.Union[str,bytes])
-httpx.content_streams.MultipartStream.DataField.render_data(self)->bytes
-httpx.content_streams.MultipartStream.DataField.render_headers(self)->bytes
-httpx.content_streams.MultipartStream.FileField(self,name:str,value:typing.Union[typing.IO[typing.AnyStr],tuple])
-httpx.content_streams.MultipartStream.FileField.__init__(self,name:str,value:typing.Union[typing.IO[typing.AnyStr],tuple])
-httpx.content_streams.MultipartStream.FileField.guess_content_type(self)->typing.Optional[str]
-httpx.content_streams.MultipartStream.FileField.render_data(self)->bytes
-httpx.content_streams.MultipartStream.FileField.render_headers(self)->bytes
-httpx.content_streams.MultipartStream.__init__(self,data:dict,files:dict,boundary:bytes=None)
-httpx.content_streams.MultipartStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.MultipartStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.MultipartStream.iter_fields(self,data:dict,files:dict)->typing.Iterator[typing.Union['FileField', 'DataField']]
-httpx.content_streams.URLEncodedStream(self,data:dict)
-httpx.content_streams.URLEncodedStream.__init__(self,data:dict)
-httpx.content_streams.URLEncodedStream.__iter__(self)->typing.Iterator[bytes]
-httpx.content_streams.URLEncodedStream.get_headers(self)->typing.Dict[str, str]
-httpx.content_streams.encode(data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,boundary:bytes=None)->ContentStream
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/api.py----------------------------------------
+A:httpx.api.client->Client(cert=cert, verify=verify, trust_env=trust_env)
+A:httpx.api.request->Request(method=method, url=url, params=params, data=data, files=files, json=json, headers=headers, cookies=cookies)
+httpx.api.delete(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.get(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.head(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.options(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.patch(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.post(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.put(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.api.request(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->Response
+httpx.api.stream(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->StreamContextManager
+httpx.delete(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.get(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.head(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.options(url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.patch(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.post(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.put(url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,cert:CertTypes=None,verify:VerifyTypes=True,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,trust_env:bool=True)->Response
+httpx.request(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->Response
+httpx.stream(method:str,url:URLTypes,*,params:QueryParamTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,allow_redirects:bool=True,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=True)->StreamContextManager
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/middleware.py----------------------------------------
+httpx.middleware.Middleware(self,request:Request,get_response:typing.Callable)
+httpx.middleware.Middleware.__call__(self,request:Request,get_response:typing.Callable)
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/auth.py----------------------------------------
-A:httpx.auth.self.auth_header->self.build_auth_header(username, password)
-A:httpx.auth.userpass->b':'.join((to_bytes(username), to_bytes(password)))
-A:httpx.auth.token->b64encode(userpass).decode().strip()
-A:httpx.auth.self.username->to_bytes(username)
-A:httpx.auth.self.password->to_bytes(password)
-A:httpx.auth.challenge->DigestAuthChallenge.from_header(header)
-A:httpx.auth.request.headers['Authorization']->self._build_auth_header(request, challenge)
-A:httpx.auth.A1->b':'.join((self.username, challenge.realm, self.password))
-A:httpx.auth.path->request.url.full_path.encode('utf-8')
-A:httpx.auth.A2->b':'.join((request.method.encode(), path))
-A:httpx.auth.HA2->digest(A2)
-A:httpx.auth.cnonce->self._get_client_nonce(nonce_count, challenge.nonce)
-A:httpx.auth.HA1->digest(b':'.join((HA1, challenge.nonce, cnonce)))
-A:httpx.auth.qop->self._resolve_qop(challenge.qop)
-A:httpx.auth.key_digest->b':'.join(digest_data)
-A:httpx.auth.s->str(nonce_count).encode()
-A:httpx.auth.qops->re.split(b', ?', qop)
-A:httpx.auth.(scheme, _, fields)->header.partition(' ')
-A:httpx.auth.(key, value)->field.strip().split('=', 1)
-A:httpx.auth.header_dict[key]->unquote(value)
-A:httpx.auth.realm->header_dict['realm'].encode()
-A:httpx.auth.nonce->header_dict['nonce'].encode()
-A:httpx.auth.algorithm->header_dict.get('algorithm')
-httpx.Auth
-httpx.Auth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-httpx.BasicAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
-httpx.BasicAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-httpx.BasicAuth.build_auth_header(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])->str
-httpx.DigestAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
-httpx.DigestAuth._build_auth_header(self,request:Request,challenge:'DigestAuthChallenge')->str
-httpx.DigestAuth._get_client_nonce(self,nonce_count:int,nonce:bytes)->bytes
-httpx.DigestAuth._get_header_value(self,header_fields:typing.Dict[str,bytes])->str
-httpx.DigestAuth._resolve_qop(self,qop:typing.Optional[bytes])->typing.Optional[bytes]
-httpx.DigestAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-httpx.DigestAuthChallenge(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
-httpx.DigestAuthChallenge.from_header(cls,header:str)->'DigestAuthChallenge'
-httpx.DigestAuthChallenge.from_header_dict(cls,header_dict:dict)->'DigestAuthChallenge'
-httpx.auth.Auth
-httpx.auth.Auth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-httpx.auth.BasicAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
-httpx.auth.BasicAuth.__init__(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
-httpx.auth.BasicAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-httpx.auth.BasicAuth.build_auth_header(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])->str
-httpx.auth.DigestAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
-httpx.auth.DigestAuth.__init__(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
-httpx.auth.DigestAuth._build_auth_header(self,request:Request,challenge:'DigestAuthChallenge')->str
-httpx.auth.DigestAuth._get_client_nonce(self,nonce_count:int,nonce:bytes)->bytes
-httpx.auth.DigestAuth._get_header_value(self,header_fields:typing.Dict[str,bytes])->str
-httpx.auth.DigestAuth._resolve_qop(self,qop:typing.Optional[bytes])->typing.Optional[bytes]
-httpx.auth.DigestAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-httpx.auth.DigestAuthChallenge(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
-httpx.auth.DigestAuthChallenge.__init__(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
-httpx.auth.DigestAuthChallenge.from_header(cls,header:str)->'DigestAuthChallenge'
-httpx.auth.DigestAuthChallenge.from_header_dict(cls,header_dict:dict)->'DigestAuthChallenge'
-httpx.auth.FunctionAuth(self,func:typing.Callable[[Request],Request])
-httpx.auth.FunctionAuth.__init__(self,func:typing.Callable[[Request],Request])
-httpx.auth.FunctionAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/models.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/models.py----------------------------------------
 A:httpx.models.self._uri_reference->self._uri_reference.copy_with(query=query_string)
 A:httpx.models.url_params->QueryParams(self._uri_reference.query)
 A:httpx.models.query_string->str(self)
@@ -464,12 +398,20 @@ httpx.QueryParams.update(self,params:QueryParamTypes=None)->None
 httpx.QueryParams.values(self)->typing.ValuesView
 httpx.Request(self,method:str,url:typing.Union[str,URL],*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,stream:ContentStream=None)
 httpx.Request.__repr__(self)->str
+httpx.Request.aread(self)->bytes
 httpx.Request.content(self)->bytes
 httpx.Request.prepare(self)->None
 httpx.Request.read(self)->bytes
 httpx.Response(self,status_code:int,*,request:Request,http_version:str=None,headers:HeaderTypes=None,stream:ContentStream=None,content:bytes=None,history:typing.List['Response']=None)
 httpx.Response.__repr__(self)->str
+httpx.Response.aclose(self)->None
+httpx.Response.aiter_bytes(self)->typing.AsyncIterator[bytes]
+httpx.Response.aiter_lines(self)->typing.AsyncIterator[str]
+httpx.Response.aiter_raw(self)->typing.AsyncIterator[bytes]
+httpx.Response.aiter_text(self)->typing.AsyncIterator[str]
+httpx.Response.anext(self)->'Response'
 httpx.Response.apparent_encoding(self)->typing.Optional[str]
+httpx.Response.aread(self)->bytes
 httpx.Response.charset_encoding(self)->typing.Optional[str]
 httpx.Response.close(self)->None
 httpx.Response.content(self)->bytes
@@ -581,13 +523,21 @@ httpx.models.QueryParams.values(self)->typing.ValuesView
 httpx.models.Request(self,method:str,url:typing.Union[str,URL],*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,stream:ContentStream=None)
 httpx.models.Request.__init__(self,method:str,url:typing.Union[str,URL],*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,stream:ContentStream=None)
 httpx.models.Request.__repr__(self)->str
+httpx.models.Request.aread(self)->bytes
 httpx.models.Request.content(self)->bytes
 httpx.models.Request.prepare(self)->None
 httpx.models.Request.read(self)->bytes
 httpx.models.Response(self,status_code:int,*,request:Request,http_version:str=None,headers:HeaderTypes=None,stream:ContentStream=None,content:bytes=None,history:typing.List['Response']=None)
 httpx.models.Response.__init__(self,status_code:int,*,request:Request,http_version:str=None,headers:HeaderTypes=None,stream:ContentStream=None,content:bytes=None,history:typing.List['Response']=None)
 httpx.models.Response.__repr__(self)->str
+httpx.models.Response.aclose(self)->None
+httpx.models.Response.aiter_bytes(self)->typing.AsyncIterator[bytes]
+httpx.models.Response.aiter_lines(self)->typing.AsyncIterator[str]
+httpx.models.Response.aiter_raw(self)->typing.AsyncIterator[bytes]
+httpx.models.Response.aiter_text(self)->typing.AsyncIterator[str]
+httpx.models.Response.anext(self)->'Response'
 httpx.models.Response.apparent_encoding(self)->typing.Optional[str]
+httpx.models.Response.aread(self)->bytes
 httpx.models.Response.charset_encoding(self)->typing.Optional[str]
 httpx.models.Response.close(self)->None
 httpx.models.Response.content(self)->bytes
@@ -636,7 +586,153 @@ httpx.models.URL.userinfo(self)->str
 httpx.models.URL.username(self)->str
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/status_codes.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/config.py----------------------------------------
+A:httpx.config.DEFAULT_CIPHERS->':'.join(['ECDHE+AESGCM', 'ECDHE+CHACHA20', 'DHE+AESGCM', 'DHE+CHACHA20', 'ECDH+AESGCM', 'DH+AESGCM', 'ECDH+AES', 'DH+AES', 'RSA+AESGCM', 'RSA+AES', '!aNULL', '!eNULL', '!MD5', '!DSS'])
+A:httpx.config.logger->get_logger(__name__)
+A:httpx.config.UNSET->UnsetType()
+A:httpx.config.DEFAULT_CA_BUNDLE_PATH->Path(certifi.where())
+A:httpx.config.self.ssl_context->self.load_ssl_context()
+A:httpx.config.context->ssl.SSLContext(ssl.PROTOCOL_TLS)
+A:httpx.config.ca_bundle->get_ca_bundle_from_env()
+A:httpx.config.ca_bundle_path->Path(self.verify)
+A:httpx.config.keylogfile->os.environ.get('SSLKEYLOGFILE')
+A:httpx.config.url->URL(url)
+A:httpx.config.headers->Headers(headers)
+A:httpx.config.DEFAULT_TIMEOUT_CONFIG->Timeout(timeout=5.0)
+A:httpx.config.DEFAULT_POOL_LIMITS->PoolLimits(soft_limit=10, hard_limit=100)
+httpx.PoolLimits(self,*,soft_limit:int=None,hard_limit:int=None)
+httpx.PoolLimits.__eq__(self,other:typing.Any)->bool
+httpx.PoolLimits.__repr__(self)->str
+httpx.Proxy(self,url:URLTypes,*,headers:HeaderTypes=None,mode:str='DEFAULT')
+httpx.Proxy.__repr__(self)->str
+httpx.Timeout(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
+httpx.Timeout.__eq__(self,other:typing.Any)->bool
+httpx.Timeout.__repr__(self)->str
+httpx.config.PoolLimits(self,*,soft_limit:int=None,hard_limit:int=None)
+httpx.config.PoolLimits.__eq__(self,other:typing.Any)->bool
+httpx.config.PoolLimits.__init__(self,*,soft_limit:int=None,hard_limit:int=None)
+httpx.config.PoolLimits.__repr__(self)->str
+httpx.config.Proxy(self,url:URLTypes,*,headers:HeaderTypes=None,mode:str='DEFAULT')
+httpx.config.Proxy.__init__(self,url:URLTypes,*,headers:HeaderTypes=None,mode:str='DEFAULT')
+httpx.config.Proxy.__repr__(self)->str
+httpx.config.SSLConfig(self,*,cert:CertTypes=None,verify:VerifyTypes=True,trust_env:bool=None,http2:bool=False)
+httpx.config.SSLConfig.__eq__(self,other:typing.Any)->bool
+httpx.config.SSLConfig.__init__(self,*,cert:CertTypes=None,verify:VerifyTypes=True,trust_env:bool=None,http2:bool=False)
+httpx.config.SSLConfig.__repr__(self)->str
+httpx.config.SSLConfig._create_default_ssl_context(self)->ssl.SSLContext
+httpx.config.SSLConfig._load_client_certs(self,ssl_context:ssl.SSLContext)->None
+httpx.config.SSLConfig.load_ssl_context(self)->ssl.SSLContext
+httpx.config.SSLConfig.load_ssl_context_no_verify(self)->ssl.SSLContext
+httpx.config.SSLConfig.load_ssl_context_verify(self)->ssl.SSLContext
+httpx.config.Timeout(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
+httpx.config.Timeout.__eq__(self,other:typing.Any)->bool
+httpx.config.Timeout.__init__(self,timeout:TimeoutTypes=None,*,connect_timeout:typing.Union[None,float,UnsetType]=UNSET,read_timeout:typing.Union[None,float,UnsetType]=UNSET,write_timeout:typing.Union[None,float,UnsetType]=UNSET,pool_timeout:typing.Union[None,float,UnsetType]=UNSET)
+httpx.config.Timeout.__repr__(self)->str
+httpx.config.UnsetType
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/decoders.py----------------------------------------
+A:httpx.decoders.self.decompressor->brotli.Decompressor()
+A:httpx.decoders.self.children->list(reversed(children))
+A:httpx.decoders.data->child.decode(data)
+A:httpx.decoders.self.detector->chardet.universaldetector.UniversalDetector()
+A:httpx.decoders.text->self.decoder.decode(bytes(self.buffer), False)
+A:httpx.decoders.self.decoder->codecs.getincrementaldecoder(self._detector_result())()
+A:httpx.decoders.num_chars->len(text)
+httpx.decoders.BrotliDecoder(self)
+httpx.decoders.BrotliDecoder.__init__(self)
+httpx.decoders.BrotliDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.BrotliDecoder.flush(self)->bytes
+httpx.decoders.Decoder
+httpx.decoders.Decoder.decode(self,data:bytes)->bytes
+httpx.decoders.Decoder.flush(self)->bytes
+httpx.decoders.DeflateDecoder(self)
+httpx.decoders.DeflateDecoder.__init__(self)
+httpx.decoders.DeflateDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.DeflateDecoder.flush(self)->bytes
+httpx.decoders.GZipDecoder(self)
+httpx.decoders.GZipDecoder.__init__(self)
+httpx.decoders.GZipDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.GZipDecoder.flush(self)->bytes
+httpx.decoders.IdentityDecoder(Decoder)
+httpx.decoders.IdentityDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.IdentityDecoder.flush(self)->bytes
+httpx.decoders.LineDecoder(self)
+httpx.decoders.LineDecoder.__init__(self)
+httpx.decoders.LineDecoder.decode(self,text:str)->typing.List[str]
+httpx.decoders.LineDecoder.flush(self)->typing.List[str]
+httpx.decoders.MultiDecoder(self,children:typing.Sequence[Decoder])
+httpx.decoders.MultiDecoder.__init__(self,children:typing.Sequence[Decoder])
+httpx.decoders.MultiDecoder.decode(self,data:bytes)->bytes
+httpx.decoders.MultiDecoder.flush(self)->bytes
+httpx.decoders.TextDecoder(self,encoding:typing.Optional[str]=None)
+httpx.decoders.TextDecoder.__init__(self,encoding:typing.Optional[str]=None)
+httpx.decoders.TextDecoder._detector_result(self)->str
+httpx.decoders.TextDecoder.decode(self,data:bytes)->str
+httpx.decoders.TextDecoder.flush(self)->str
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/auth.py----------------------------------------
+A:httpx.auth.self.auth_header->self.build_auth_header(username, password)
+A:httpx.auth.userpass->b':'.join((to_bytes(username), to_bytes(password)))
+A:httpx.auth.token->b64encode(userpass).decode().strip()
+A:httpx.auth.self.username->to_bytes(username)
+A:httpx.auth.self.password->to_bytes(password)
+A:httpx.auth.challenge->DigestAuthChallenge.from_header(header)
+A:httpx.auth.request.headers['Authorization']->self._build_auth_header(request, challenge)
+A:httpx.auth.A1->b':'.join((self.username, challenge.realm, self.password))
+A:httpx.auth.path->request.url.full_path.encode('utf-8')
+A:httpx.auth.A2->b':'.join((request.method.encode(), path))
+A:httpx.auth.HA2->digest(A2)
+A:httpx.auth.cnonce->self._get_client_nonce(nonce_count, challenge.nonce)
+A:httpx.auth.HA1->digest(b':'.join((HA1, challenge.nonce, cnonce)))
+A:httpx.auth.qop->self._resolve_qop(challenge.qop)
+A:httpx.auth.key_digest->b':'.join(digest_data)
+A:httpx.auth.s->str(nonce_count).encode()
+A:httpx.auth.qops->re.split(b', ?', qop)
+A:httpx.auth.(scheme, _, fields)->header.partition(' ')
+A:httpx.auth.(key, value)->field.strip().split('=', 1)
+A:httpx.auth.header_dict[key]->unquote(value)
+A:httpx.auth.realm->header_dict['realm'].encode()
+A:httpx.auth.nonce->header_dict['nonce'].encode()
+A:httpx.auth.algorithm->header_dict.get('algorithm')
+httpx.Auth
+httpx.Auth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+httpx.BasicAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.BasicAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+httpx.BasicAuth.build_auth_header(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])->str
+httpx.DigestAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.DigestAuth._build_auth_header(self,request:Request,challenge:'DigestAuthChallenge')->str
+httpx.DigestAuth._get_client_nonce(self,nonce_count:int,nonce:bytes)->bytes
+httpx.DigestAuth._get_header_value(self,header_fields:typing.Dict[str,bytes])->str
+httpx.DigestAuth._resolve_qop(self,qop:typing.Optional[bytes])->typing.Optional[bytes]
+httpx.DigestAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+httpx.DigestAuthChallenge(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
+httpx.DigestAuthChallenge.from_header(cls,header:str)->'DigestAuthChallenge'
+httpx.DigestAuthChallenge.from_header_dict(cls,header_dict:dict)->'DigestAuthChallenge'
+httpx.auth.Auth
+httpx.auth.Auth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+httpx.auth.BasicAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.BasicAuth.__init__(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.BasicAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+httpx.auth.BasicAuth.build_auth_header(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])->str
+httpx.auth.DigestAuth(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.DigestAuth.__init__(self,username:typing.Union[str,bytes],password:typing.Union[str,bytes])
+httpx.auth.DigestAuth._build_auth_header(self,request:Request,challenge:'DigestAuthChallenge')->str
+httpx.auth.DigestAuth._get_client_nonce(self,nonce_count:int,nonce:bytes)->bytes
+httpx.auth.DigestAuth._get_header_value(self,header_fields:typing.Dict[str,bytes])->str
+httpx.auth.DigestAuth._resolve_qop(self,qop:typing.Optional[bytes])->typing.Optional[bytes]
+httpx.auth.DigestAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+httpx.auth.DigestAuthChallenge(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
+httpx.auth.DigestAuthChallenge.__init__(self,realm:bytes,nonce:bytes,algorithm:str=None,opaque:typing.Optional[bytes]=None,qop:typing.Optional[bytes]=None)
+httpx.auth.DigestAuthChallenge.from_header(cls,header:str)->'DigestAuthChallenge'
+httpx.auth.DigestAuthChallenge.from_header_dict(cls,header_dict:dict)->'DigestAuthChallenge'
+httpx.auth.FunctionAuth(self,func:typing.Callable[[Request],Request])
+httpx.auth.FunctionAuth.__init__(self,func:typing.Callable[[Request],Request])
+httpx.auth.FunctionAuth.auth_flow(self,request:Request)->typing.Generator[Request, Response, None]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/status_codes.py----------------------------------------
 A:httpx.status_codes.obj->int.__new__(cls, value)
 httpx.StatusCode(cls,value:int,phrase:str='')
 httpx.StatusCode.__str__(self)->str
@@ -655,114 +751,128 @@ httpx.status_codes.StatusCode.is_redirect(cls,value:int)->bool
 httpx.status_codes.StatusCode.is_server_error(cls,value:int)->bool
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/client.py----------------------------------------
-A:httpx.client.logger->get_logger(__name__)
-A:httpx.client.self.base_url->URL(base_url)
-A:httpx.client.self._params->QueryParams(params)
-A:httpx.client.self._headers->Headers(headers)
-A:httpx.client.self._cookies->Cookies(cookies)
-A:httpx.client.self.timeout->Timeout(timeout)
-A:httpx.client.self.netrc->NetRCInfo()
-A:httpx.client.request->next(auth_flow)
-A:httpx.client.url->url.copy_with(fragment=request.url.fragment).copy_with(fragment=request.url.fragment)
-A:httpx.client.headers->Headers(request.headers)
-A:httpx.client.cookies->Cookies(self.cookies)
-A:httpx.client.params->self.merge_queryparams(params)
-A:httpx.client.merged_cookies->Cookies(self.cookies)
-A:httpx.client.merged_headers->Headers(self.headers)
-A:httpx.client.merged_queryparams->QueryParams(self.params)
-A:httpx.client.credentials->self.netrc.get_credentials(request.url.authority)
-A:httpx.client.method->self.redirect_method(request, response)
-A:httpx.client.stream->self.redirect_stream(request, method)
-A:httpx.client.proxy_map->self.get_proxy_map(proxies, trust_env)
-A:httpx.client.self.dispatch->self.init_dispatch(verify=verify, cert=cert, http2=http2, pool_limits=pool_limits, dispatch=dispatch, app=app, backend=backend, trust_env=trust_env, uds=uds)
-A:httpx.client.auth->self.build_auth(request, auth)
-A:httpx.client.response->self.dispatcher_for_url(request.url).send(request, timeout=timeout)
-A:httpx.client.response.history->list(history)
-A:httpx.client.response.call_next->functools.partial(self.send_handling_redirects, request=request, auth=auth, timeout=timeout, allow_redirects=False, history=history)
-A:httpx.client.auth_flow->self.build_auth(request, auth).auth_flow(request)
-A:httpx.client.next_request->self.build_auth(request, auth).auth_flow(request).send(response)
-A:httpx.client.dispatcher->self.dispatcher_for_url(request.url)
-A:httpx.client.self.response->self.client.send(request=self.request, auth=self.auth, allow_redirects=self.allow_redirects, timeout=self.timeout, stream=True)
-httpx.AsyncClient(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
-httpx.AsyncClient.dispatcher_for_url(self,url:URL)->AsyncDispatcher
-httpx.AsyncClient.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)->AsyncDispatcher
-httpx.AsyncClient.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True)->AsyncDispatcher
-httpx.Client(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)
-httpx.Client.__enter__(self)->'Client'
-httpx.Client.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
-httpx.Client.close(self)->None
-httpx.Client.delete(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.dispatcher_for_url(self,url:URL)->SyncDispatcher
-httpx.Client.get(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.head(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)->SyncDispatcher
-httpx.Client.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,trust_env:bool=True)->SyncDispatcher
-httpx.Client.options(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.patch(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.post(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.put(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.send(self,request:Request,*,stream:bool=False,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.Client.send_handling_auth(self,request:Request,history:typing.List[Response],auth:Auth,timeout:Timeout)->Response
-httpx.Client.send_handling_redirects(self,request:Request,auth:Auth,timeout:Timeout,allow_redirects:bool=True,history:typing.List[Response]=None)->Response
-httpx.Client.send_single_request(self,request:Request,timeout:Timeout)->Response
-httpx.client.AsyncClient(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
-httpx.client.AsyncClient.__init__(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)
-httpx.client.AsyncClient.dispatcher_for_url(self,url:URL)->AsyncDispatcher
-httpx.client.AsyncClient.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:AsyncDispatcher=None,app:typing.Callable=None,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True,uds:str=None)->AsyncDispatcher
-httpx.client.AsyncClient.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,http2:bool=False,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,backend:typing.Union[str,ConcurrencyBackend]='auto',trust_env:bool=True)->AsyncDispatcher
-httpx.client.BaseClient(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,trust_env:bool=True)
-httpx.client.BaseClient.__init__(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,trust_env:bool=True)
-httpx.client.BaseClient.build_auth(self,request:Request,auth:AuthTypes=None)->Auth
-httpx.client.BaseClient.build_redirect_request(self,request:Request,response:Response)->Request
-httpx.client.BaseClient.build_request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None)->Request
-httpx.client.BaseClient.cookies(self)->Cookies
-httpx.client.BaseClient.cookies(self,cookies:CookieTypes)->None
-httpx.client.BaseClient.get_proxy_map(self,proxies:typing.Optional[ProxiesTypes],trust_env:bool)->typing.Dict[str, Proxy]
-httpx.client.BaseClient.headers(self)->Headers
-httpx.client.BaseClient.headers(self,headers:HeaderTypes)->None
-httpx.client.BaseClient.merge_cookies(self,cookies:CookieTypes=None)->typing.Optional[CookieTypes]
-httpx.client.BaseClient.merge_headers(self,headers:HeaderTypes=None)->typing.Optional[HeaderTypes]
-httpx.client.BaseClient.merge_queryparams(self,params:QueryParamTypes=None)->typing.Optional[QueryParamTypes]
-httpx.client.BaseClient.merge_url(self,url:URLTypes)->URL
-httpx.client.BaseClient.params(self)->QueryParams
-httpx.client.BaseClient.params(self,params:QueryParamTypes)->None
-httpx.client.BaseClient.redirect_headers(self,request:Request,url:URL,method:str)->Headers
-httpx.client.BaseClient.redirect_method(self,request:Request,response:Response)->str
-httpx.client.BaseClient.redirect_stream(self,request:Request,method:str)->typing.Optional[ContentStream]
-httpx.client.BaseClient.redirect_url(self,request:Request,response:Response)->URL
-httpx.client.BaseClient.stream(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->'StreamContextManager'
-httpx.client.Client(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)
-httpx.client.Client.__enter__(self)->'Client'
-httpx.client.Client.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
-httpx.client.Client.__init__(self,*,auth:AuthTypes=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,verify:VerifyTypes=True,cert:CertTypes=None,proxies:ProxiesTypes=None,timeout:TimeoutTypes=DEFAULT_TIMEOUT_CONFIG,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,max_redirects:int=DEFAULT_MAX_REDIRECTS,base_url:URLTypes=None,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)
-httpx.client.Client.close(self)->None
-httpx.client.Client.delete(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.dispatcher_for_url(self,url:URL)->SyncDispatcher
-httpx.client.Client.get(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.head(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=False,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.init_dispatch(self,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,dispatch:SyncDispatcher=None,app:typing.Callable=None,trust_env:bool=True)->SyncDispatcher
-httpx.client.Client.init_proxy_dispatch(self,proxy:Proxy,verify:VerifyTypes=True,cert:CertTypes=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,trust_env:bool=True)->SyncDispatcher
-httpx.client.Client.options(self,url:URLTypes,*,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.patch(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.post(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.put(self,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.request(self,method:str,url:URLTypes,*,data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,params:QueryParamTypes=None,headers:HeaderTypes=None,cookies:CookieTypes=None,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.send(self,request:Request,*,stream:bool=False,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET)->Response
-httpx.client.Client.send_handling_auth(self,request:Request,history:typing.List[Response],auth:Auth,timeout:Timeout)->Response
-httpx.client.Client.send_handling_redirects(self,request:Request,auth:Auth,timeout:Timeout,allow_redirects:bool=True,history:typing.List[Response]=None)->Response
-httpx.client.Client.send_single_request(self,request:Request,timeout:Timeout)->Response
-httpx.client.StreamContextManager(self,client:BaseClient,request:Request,*,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET,close_client:bool=False)
-httpx.client.StreamContextManager.__enter__(self)->'Response'
-httpx.client.StreamContextManager.__exit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
-httpx.client.StreamContextManager.__init__(self,client:BaseClient,request:Request,*,auth:AuthTypes=None,allow_redirects:bool=True,timeout:typing.Union[TimeoutTypes,UnsetType]=UNSET,close_client:bool=False)
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/content_streams.py----------------------------------------
+A:httpx.content_streams.content_length->str(len(self.body))
+A:httpx.content_streams.self.body->BytesIO().getvalue()
+A:httpx.content_streams.name->format_form_param('name', self.name)
+A:httpx.content_streams.self.content_type->self.guess_content_type()
+A:httpx.content_streams.filename->format_form_param('filename', self.filename)
+A:httpx.content_streams.content_type->self.content_type.encode()
+A:httpx.content_streams.content->self.file.read()
+A:httpx.content_streams.body->BytesIO()
+A:httpx.content_streams.boundary->binascii.hexlify(os.urandom(16))
+A:httpx.content_streams.data->typing.cast(typing.Iterator[bytes], data)
+httpx.content_streams.AsyncIteratorStream(self,aiterator:typing.AsyncIterator[bytes],close_func:typing.Callable=None)
+httpx.content_streams.AsyncIteratorStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.AsyncIteratorStream.__init__(self,aiterator:typing.AsyncIterator[bytes],close_func:typing.Callable=None)
+httpx.content_streams.AsyncIteratorStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.AsyncIteratorStream.aclose(self)->None
+httpx.content_streams.AsyncIteratorStream.can_replay(self)->bool
+httpx.content_streams.AsyncIteratorStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.ByteStream(self,body:typing.Union[str,bytes])
+httpx.content_streams.ByteStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.ByteStream.__init__(self,body:typing.Union[str,bytes])
+httpx.content_streams.ByteStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.ByteStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.ContentStream
+httpx.content_streams.ContentStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.ContentStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.ContentStream.aclose(self)->None
+httpx.content_streams.ContentStream.can_replay(self)->bool
+httpx.content_streams.ContentStream.close(self)->None
+httpx.content_streams.ContentStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.IteratorStream(self,iterator:typing.Iterator[bytes],close_func:typing.Callable=None)
+httpx.content_streams.IteratorStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.IteratorStream.__init__(self,iterator:typing.Iterator[bytes],close_func:typing.Callable=None)
+httpx.content_streams.IteratorStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.IteratorStream.can_replay(self)->bool
+httpx.content_streams.IteratorStream.close(self)->None
+httpx.content_streams.IteratorStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.JSONStream(self,json:typing.Any)
+httpx.content_streams.JSONStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.JSONStream.__init__(self,json:typing.Any)
+httpx.content_streams.JSONStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.JSONStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.MultipartStream(self,data:dict,files:dict,boundary:bytes=None)
+httpx.content_streams.MultipartStream.DataField(self,name:str,value:typing.Union[str,bytes])
+httpx.content_streams.MultipartStream.DataField.__init__(self,name:str,value:typing.Union[str,bytes])
+httpx.content_streams.MultipartStream.DataField.render_data(self)->bytes
+httpx.content_streams.MultipartStream.DataField.render_headers(self)->bytes
+httpx.content_streams.MultipartStream.FileField(self,name:str,value:typing.Union[typing.IO[typing.AnyStr],tuple])
+httpx.content_streams.MultipartStream.FileField.__init__(self,name:str,value:typing.Union[typing.IO[typing.AnyStr],tuple])
+httpx.content_streams.MultipartStream.FileField.guess_content_type(self)->typing.Optional[str]
+httpx.content_streams.MultipartStream.FileField.render_data(self)->bytes
+httpx.content_streams.MultipartStream.FileField.render_headers(self)->bytes
+httpx.content_streams.MultipartStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.MultipartStream.__init__(self,data:dict,files:dict,boundary:bytes=None)
+httpx.content_streams.MultipartStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.MultipartStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.MultipartStream.iter_fields(self,data:dict,files:dict)->typing.Iterator[typing.Union['FileField', 'DataField']]
+httpx.content_streams.URLEncodedStream(self,data:dict)
+httpx.content_streams.URLEncodedStream.__aiter__(self)->typing.AsyncIterator[bytes]
+httpx.content_streams.URLEncodedStream.__init__(self,data:dict)
+httpx.content_streams.URLEncodedStream.__iter__(self)->typing.Iterator[bytes]
+httpx.content_streams.URLEncodedStream.get_headers(self)->typing.Dict[str, str]
+httpx.content_streams.encode(data:RequestData=None,files:RequestFiles=None,json:typing.Any=None,boundary:bytes=None)->ContentStream
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/__version__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/__version__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/backends/asyncio.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/backends/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/backends/auto.py----------------------------------------
+A:httpx.backends.auto.backend->sniffio.current_async_library()
+A:httpx.backends.auto.self._backend_implementation->lookup_backend(backend)
+httpx.backends.auto.AutoBackend(ConcurrencyBackend)
+httpx.backends.auto.AutoBackend.backend(self)->ConcurrencyBackend
+httpx.backends.auto.AutoBackend.create_lock(self)->BaseLock
+httpx.backends.auto.AutoBackend.create_semaphore(self,max_value:int,exc_class:type)->BaseSemaphore
+httpx.backends.auto.AutoBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
+httpx.backends.auto.AutoBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
+httpx.backends.auto.AutoBackend.time(self)->float
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/backends/trio.py----------------------------------------
+A:httpx.backends.trio.self.read_lock->trio.Lock()
+A:httpx.backends.trio.self.write_lock->trio.Lock()
+A:httpx.backends.trio.connect_timeout->none_as_inf(timeout.connect_timeout)
+A:httpx.backends.trio.ssl_stream->trio.SSLStream(self.stream, ssl_context=ssl_context, server_hostname=hostname)
+A:httpx.backends.trio.ident->self.stream.selected_alpn_protocol()
+A:httpx.backends.trio.read_timeout->none_as_inf(timeout.read_timeout)
+A:httpx.backends.trio.write_timeout->none_as_inf(timeout.write_timeout)
+A:httpx.backends.trio.stream->trio.SSLStream(stream, ssl_context, server_hostname=hostname)
+A:httpx.backends.trio.self._semaphore->trio.Semaphore(self.max_value, max_value=self.max_value)
+A:httpx.backends.trio.timeout->none_as_inf(timeout)
+A:httpx.backends.trio.self._lock->trio.Lock()
+httpx.backends.trio.Lock(self)
+httpx.backends.trio.Lock.__init__(self)
+httpx.backends.trio.Lock.acquire(self)->None
+httpx.backends.trio.Lock.release(self)->None
+httpx.backends.trio.Semaphore(self,max_value:int,exc_class:type)
+httpx.backends.trio.Semaphore.__init__(self,max_value:int,exc_class:type)
+httpx.backends.trio.Semaphore.acquire(self,timeout:float=None)->None
+httpx.backends.trio.Semaphore.release(self)->None
+httpx.backends.trio.Semaphore.semaphore(self)->trio.Semaphore
+httpx.backends.trio.SocketStream(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
+httpx.backends.trio.SocketStream.__init__(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
+httpx.backends.trio.SocketStream.close(self)->None
+httpx.backends.trio.SocketStream.get_http_version(self)->str
+httpx.backends.trio.SocketStream.is_connection_dropped(self)->bool
+httpx.backends.trio.SocketStream.read(self,n:int,timeout:Timeout)->bytes
+httpx.backends.trio.SocketStream.start_tls(self,hostname:str,ssl_context:ssl.SSLContext,timeout:Timeout)->'SocketStream'
+httpx.backends.trio.SocketStream.write(self,data:bytes,timeout:Timeout)->None
+httpx.backends.trio.TrioBackend(ConcurrencyBackend)
+httpx.backends.trio.TrioBackend.create_lock(self)->BaseLock
+httpx.backends.trio.TrioBackend.create_semaphore(self,max_value:int,exc_class:type)->BaseSemaphore
+httpx.backends.trio.TrioBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
+httpx.backends.trio.TrioBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
+httpx.backends.trio.TrioBackend.time(self)->float
+httpx.backends.trio.none_as_inf(value:typing.Optional[float])->float
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/backends/asyncio.py----------------------------------------
 A:httpx.backends.asyncio.loop->asyncio.get_event_loop()
 A:httpx.backends.asyncio.waiter->asyncio.get_event_loop().create_future()
 A:httpx.backends.asyncio.ssl_protocol->asyncio.sslproto.SSLProtocol(loop, protocol, sslcontext, waiter, server_side=False, server_hostname=server_hostname, call_connection_made=False)
@@ -781,230 +891,112 @@ httpx.backends.asyncio.AsyncioBackend(self)
 httpx.backends.asyncio.AsyncioBackend.__init__(self)
 httpx.backends.asyncio.AsyncioBackend.create_lock(self)->BaseLock
 httpx.backends.asyncio.AsyncioBackend.create_semaphore(self,max_value:int,exc_class:type)->BaseSemaphore
+httpx.backends.asyncio.AsyncioBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
+httpx.backends.asyncio.AsyncioBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
 httpx.backends.asyncio.AsyncioBackend.time(self)->float
 httpx.backends.asyncio.Lock(self)
 httpx.backends.asyncio.Lock.__init__(self)
+httpx.backends.asyncio.Lock.acquire(self)->None
 httpx.backends.asyncio.Lock.release(self)->None
 httpx.backends.asyncio.Semaphore(self,max_value:int,exc_class:type)
 httpx.backends.asyncio.Semaphore.__init__(self,max_value:int,exc_class:type)
+httpx.backends.asyncio.Semaphore.acquire(self,timeout:float=None)->None
 httpx.backends.asyncio.Semaphore.release(self)->None
 httpx.backends.asyncio.Semaphore.semaphore(self)->asyncio.BoundedSemaphore
 httpx.backends.asyncio.SocketStream(self,stream_reader:asyncio.StreamReader,stream_writer:asyncio.StreamWriter)
 httpx.backends.asyncio.SocketStream.__init__(self,stream_reader:asyncio.StreamReader,stream_writer:asyncio.StreamWriter)
+httpx.backends.asyncio.SocketStream.close(self)->None
 httpx.backends.asyncio.SocketStream.get_http_version(self)->str
 httpx.backends.asyncio.SocketStream.is_connection_dropped(self)->bool
+httpx.backends.asyncio.SocketStream.read(self,n:int,timeout:Timeout)->bytes
+httpx.backends.asyncio.SocketStream.start_tls(self,hostname:str,ssl_context:ssl.SSLContext,timeout:Timeout)->'SocketStream'
+httpx.backends.asyncio.SocketStream.write(self,data:bytes,timeout:Timeout)->None
+httpx.backends.asyncio.backport_start_tls(transport:asyncio.BaseTransport,protocol:asyncio.BaseProtocol,sslcontext:ssl.SSLContext=None,*,server_side:bool=False,server_hostname:str=None,ssl_handshake_timeout:float=None)->asyncio.Transport
 httpx.backends.asyncio.ssl_monkey_patch()->None
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/backends/base.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/backends/base.py----------------------------------------
 httpx.backends.base.BaseLock
+httpx.backends.base.BaseLock.__aenter__(self)->None
+httpx.backends.base.BaseLock.__aexit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.backends.base.BaseLock.acquire(self)->None
 httpx.backends.base.BaseLock.release(self)->None
 httpx.backends.base.BaseSemaphore
+httpx.backends.base.BaseSemaphore.acquire(self,timeout:float=None)->None
 httpx.backends.base.BaseSemaphore.release(self)->None
 httpx.backends.base.BaseSocketStream
+httpx.backends.base.BaseSocketStream.close(self)->None
 httpx.backends.base.BaseSocketStream.get_http_version(self)->str
 httpx.backends.base.BaseSocketStream.is_connection_dropped(self)->bool
+httpx.backends.base.BaseSocketStream.read(self,n:int,timeout:Timeout)->bytes
+httpx.backends.base.BaseSocketStream.start_tls(self,hostname:str,ssl_context:ssl.SSLContext,timeout:Timeout)->'BaseSocketStream'
+httpx.backends.base.BaseSocketStream.write(self,data:bytes,timeout:Timeout)->None
 httpx.backends.base.ConcurrencyBackend
 httpx.backends.base.ConcurrencyBackend.create_lock(self)->BaseLock
 httpx.backends.base.ConcurrencyBackend.create_semaphore(self,max_value:int,exc_class:type)->BaseSemaphore
+httpx.backends.base.ConcurrencyBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
+httpx.backends.base.ConcurrencyBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
 httpx.backends.base.ConcurrencyBackend.time(self)->float
 httpx.backends.base.lookup_backend(backend:typing.Union[str,'ConcurrencyBackend']='auto')->'ConcurrencyBackend'
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/backends/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/concurrency/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/backends/trio.py----------------------------------------
-A:httpx.backends.trio.self.read_lock->trio.Lock()
-A:httpx.backends.trio.self.write_lock->trio.Lock()
-A:httpx.backends.trio.connect_timeout->none_as_inf(timeout.connect_timeout)
-A:httpx.backends.trio.ssl_stream->trio.SSLStream(self.stream, ssl_context=ssl_context, server_hostname=hostname)
-A:httpx.backends.trio.ident->self.stream.selected_alpn_protocol()
-A:httpx.backends.trio.read_timeout->none_as_inf(timeout.read_timeout)
-A:httpx.backends.trio.write_timeout->none_as_inf(timeout.write_timeout)
-A:httpx.backends.trio.stream->trio.SSLStream(stream, ssl_context, server_hostname=hostname)
-A:httpx.backends.trio.self._semaphore->trio.Semaphore(self.max_value, max_value=self.max_value)
-A:httpx.backends.trio.timeout->none_as_inf(timeout)
-A:httpx.backends.trio.self._lock->trio.Lock()
-httpx.backends.trio.Lock(self)
-httpx.backends.trio.Lock.__init__(self)
-httpx.backends.trio.Lock.release(self)->None
-httpx.backends.trio.Semaphore(self,max_value:int,exc_class:type)
-httpx.backends.trio.Semaphore.__init__(self,max_value:int,exc_class:type)
-httpx.backends.trio.Semaphore.release(self)->None
-httpx.backends.trio.Semaphore.semaphore(self)->trio.Semaphore
-httpx.backends.trio.SocketStream(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
-httpx.backends.trio.SocketStream.__init__(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
-httpx.backends.trio.SocketStream.get_http_version(self)->str
-httpx.backends.trio.SocketStream.is_connection_dropped(self)->bool
-httpx.backends.trio.TrioBackend(ConcurrencyBackend)
-httpx.backends.trio.TrioBackend.create_lock(self)->BaseLock
-httpx.backends.trio.TrioBackend.create_semaphore(self,max_value:int,exc_class:type)->BaseSemaphore
-httpx.backends.trio.TrioBackend.time(self)->float
-httpx.backends.trio.none_as_inf(value:typing.Optional[float])->float
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/concurrency/auto.py----------------------------------------
+A:httpx.concurrency.auto.backend->sniffio.current_async_library()
+A:httpx.concurrency.auto.self._backend_implementation->lookup_backend(backend)
+httpx.concurrency.auto.AutoBackend(ConcurrencyBackend)
+httpx.concurrency.auto.AutoBackend.backend(self)->ConcurrencyBackend
+httpx.concurrency.auto.AutoBackend.create_event(self)->BaseEvent
+httpx.concurrency.auto.AutoBackend.get_semaphore(self,max_value:int)->BasePoolSemaphore
+httpx.concurrency.auto.AutoBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
+httpx.concurrency.auto.AutoBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
+httpx.concurrency.auto.AutoBackend.run_in_threadpool(self,func:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.auto.AutoBackend.time(self)->float
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/backends/auto.py----------------------------------------
-A:httpx.backends.auto.backend->sniffio.current_async_library()
-A:httpx.backends.auto.self._backend_implementation->lookup_backend(backend)
-httpx.backends.auto.AutoBackend(ConcurrencyBackend)
-httpx.backends.auto.AutoBackend.backend(self)->ConcurrencyBackend
-httpx.backends.auto.AutoBackend.create_lock(self)->BaseLock
-httpx.backends.auto.AutoBackend.create_semaphore(self,max_value:int,exc_class:type)->BaseSemaphore
-httpx.backends.auto.AutoBackend.time(self)->float
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/concurrency/trio.py----------------------------------------
+A:httpx.concurrency.trio.self.read_lock->trio.Lock()
+A:httpx.concurrency.trio.self.write_lock->trio.Lock()
+A:httpx.concurrency.trio.connect_timeout->none_as_inf(timeout.connect_timeout)
+A:httpx.concurrency.trio.ssl_stream->trio.SSLStream(self.stream, ssl_context=ssl_context, server_hostname=hostname)
+A:httpx.concurrency.trio.ident->self.stream.selected_alpn_protocol()
+A:httpx.concurrency.trio.read_timeout->none_as_inf(timeout.read_timeout)
+A:httpx.concurrency.trio.write_timeout->none_as_inf(timeout.write_timeout)
+A:httpx.concurrency.trio.self._semaphore->trio.Semaphore(self.max_value, max_value=self.max_value)
+A:httpx.concurrency.trio.timeout->none_as_inf(timeout)
+A:httpx.concurrency.trio.stream->trio.SSLStream(stream, ssl_context, server_hostname=hostname)
+A:httpx.concurrency.trio.self._event->trio.Event()
+httpx.concurrency.trio.Event(self)
+httpx.concurrency.trio.Event.__init__(self)
+httpx.concurrency.trio.Event.set(self)->None
+httpx.concurrency.trio.Event.wait(self)->None
+httpx.concurrency.trio.PoolSemaphore(self,max_value:int)
+httpx.concurrency.trio.PoolSemaphore.__init__(self,max_value:int)
+httpx.concurrency.trio.PoolSemaphore.acquire(self,timeout:float=None)->None
+httpx.concurrency.trio.PoolSemaphore.release(self)->None
+httpx.concurrency.trio.PoolSemaphore.semaphore(self)->trio.Semaphore
+httpx.concurrency.trio.SocketStream(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
+httpx.concurrency.trio.SocketStream.__init__(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
+httpx.concurrency.trio.SocketStream.close(self)->None
+httpx.concurrency.trio.SocketStream.get_http_version(self)->str
+httpx.concurrency.trio.SocketStream.is_connection_dropped(self)->bool
+httpx.concurrency.trio.SocketStream.read(self,n:int,timeout:Timeout)->bytes
+httpx.concurrency.trio.SocketStream.start_tls(self,hostname:str,ssl_context:ssl.SSLContext,timeout:Timeout)->'SocketStream'
+httpx.concurrency.trio.SocketStream.write(self,data:bytes,timeout:Timeout)->None
+httpx.concurrency.trio.TrioBackend(ConcurrencyBackend)
+httpx.concurrency.trio.TrioBackend.create_event(self)->BaseEvent
+httpx.concurrency.trio.TrioBackend.get_semaphore(self,max_value:int)->BasePoolSemaphore
+httpx.concurrency.trio.TrioBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
+httpx.concurrency.trio.TrioBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
+httpx.concurrency.trio.TrioBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.trio.TrioBackend.run_in_threadpool(self,func:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.trio.TrioBackend.time(self)->float
+httpx.concurrency.trio.none_as_inf(value:typing.Optional[float])->float
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/http11.py----------------------------------------
-A:httpx.dispatch.http11.logger->get_logger(__name__)
-A:httpx.dispatch.http11.self.h11_state->h11.Connection(our_role=h11.CLIENT)
-A:httpx.dispatch.http11.stream->AsyncIteratorStream(aiterator=self._receive_response_data(timeout), close_func=self.response_closed)
-A:httpx.dispatch.http11.event->self.h11_state.next_event()
-A:httpx.dispatch.http11.method->request.method.encode('ascii')
-A:httpx.dispatch.http11.target->request.url.full_path.encode('ascii')
-A:httpx.dispatch.http11.bytes_to_send->self.h11_state.send(event)
-httpx.dispatch.http11.HTTP11Connection(self,socket:BaseSocketStream,on_release:typing.Optional[OnReleaseCallback]=None)
-httpx.dispatch.http11.HTTP11Connection.__init__(self,socket:BaseSocketStream,on_release:typing.Optional[OnReleaseCallback]=None)
-httpx.dispatch.http11.HTTP11Connection.is_closed(self)->bool
-httpx.dispatch.http11.HTTP11Connection.is_connection_dropped(self)->bool
-httpx.dispatch.http11.HTTP11Connection.is_http2(self)->bool
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/wsgi.py----------------------------------------
-A:httpx.dispatch.wsgi.key->key.upper().replace('-', '_').upper().replace('-', '_')
-A:httpx.dispatch.wsgi.result->self.app(environ, start_response)
-httpx.WSGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,script_name:str='',remote_addr:str='127.0.0.1')
-httpx.WSGIDispatch.send(self,request:Request,timeout:TimeoutTypes=None)->Response
-httpx.dispatch.wsgi.WSGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,script_name:str='',remote_addr:str='127.0.0.1')
-httpx.dispatch.wsgi.WSGIDispatch.__init__(self,app:typing.Callable,raise_app_exceptions:bool=True,script_name:str='',remote_addr:str='127.0.0.1')
-httpx.dispatch.wsgi.WSGIDispatch.send(self,request:Request,timeout:TimeoutTypes=None)->Response
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/base.py----------------------------------------
-A:httpx.dispatch.base.request->Request(method, url, data=data, params=params, headers=headers)
-httpx.dispatch.base.AsyncDispatcher
-httpx.dispatch.base.SyncDispatcher
-httpx.dispatch.base.SyncDispatcher.close(self)->None
-httpx.dispatch.base.SyncDispatcher.send(self,request:Request,timeout:Timeout=None)->Response
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/urllib3.py----------------------------------------
-A:httpx.dispatch.urllib3.ssl_config->SSLConfig(verify=verify, cert=cert, trust_env=trust_env, http2=False)
-A:httpx.dispatch.urllib3.num_pools->int(math.sqrt(hard_limit))
-A:httpx.dispatch.urllib3.maxsize->int(math.sqrt(hard_limit))
-A:httpx.dispatch.urllib3.self.pool->self.init_pool_manager(proxy=proxy, ssl_context=ssl_config.ssl_context, num_pools=num_pools, maxsize=maxsize, block=block)
-A:httpx.dispatch.urllib3.urllib3_timeout->urllib3.util.Timeout(connect=timeout.connect_timeout, read=timeout.read_timeout)
-A:httpx.dispatch.urllib3.content_length->int(request.headers.get('Content-Length', '0'))
-A:httpx.dispatch.urllib3.conn->self.pool.urlopen(method=request.method, url=str(request.url), headers=dict(request.headers), body=body, redirect=False, assert_same_host=False, retries=0, preload_content=False, chunked=chunked, timeout=urllib3_timeout, pool_timeout=timeout.pool_timeout)
-httpx.dispatch.urllib3.URLLib3Dispatcher(self,*,proxy:Proxy=None,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS)
-httpx.dispatch.urllib3.URLLib3Dispatcher.__init__(self,*,proxy:Proxy=None,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS)
-httpx.dispatch.urllib3.URLLib3Dispatcher.close(self)->None
-httpx.dispatch.urllib3.URLLib3Dispatcher.init_pool_manager(self,proxy:typing.Optional[Proxy],ssl_context:ssl.SSLContext,num_pools:int,maxsize:int,block:bool)->typing.Union[urllib3.PoolManager, urllib3.ProxyManager]
-httpx.dispatch.urllib3.URLLib3Dispatcher.send(self,request:Request,timeout:Timeout=None)->Response
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/connection_pool.py----------------------------------------
-A:httpx.dispatch.connection_pool.logger->get_logger(__name__)
-A:httpx.dispatch.connection_pool.connection->self.keepalive_connections.pop_by_origin(origin)
-A:httpx.dispatch.connection_pool.self.ssl->SSLConfig(verify=verify, cert=cert, trust_env=trust_env, http2=http2)
-A:httpx.dispatch.connection_pool.self.keepalive_connections->ConnectionStore()
-A:httpx.dispatch.connection_pool.self.active_connections->ConnectionStore()
-A:httpx.dispatch.connection_pool.self.backend->lookup_backend(backend)
-A:httpx.dispatch.connection_pool.self._max_connections->NullSemaphore()
-A:httpx.dispatch.connection_pool.now->self.backend.time()
-A:httpx.dispatch.connection_pool.keepalives->list(self.keepalive_connections.all.keys())
-A:httpx.dispatch.connection_pool.connections->list(self.keepalive_connections)
-httpx.dispatch.connection_pool.ConnectionPool(self,*,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto',uds:typing.Optional[str]=None)
-httpx.dispatch.connection_pool.ConnectionPool.__init__(self,*,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto',uds:typing.Optional[str]=None)
-httpx.dispatch.connection_pool.ConnectionPool.max_connections(self)->BaseSemaphore
-httpx.dispatch.connection_pool.ConnectionPool.num_connections(self)->int
-httpx.dispatch.connection_pool.ConnectionPool.pop_connection(self,origin:Origin)->typing.Optional[HTTPConnection]
-httpx.dispatch.connection_pool.ConnectionStore(self)
-httpx.dispatch.connection_pool.ConnectionStore.__init__(self)
-httpx.dispatch.connection_pool.ConnectionStore.__iter__(self)->typing.Iterator[HTTPConnection]
-httpx.dispatch.connection_pool.ConnectionStore.__len__(self)->int
-httpx.dispatch.connection_pool.ConnectionStore.add(self,connection:HTTPConnection)->None
-httpx.dispatch.connection_pool.ConnectionStore.clear(self)->None
-httpx.dispatch.connection_pool.ConnectionStore.pop_by_origin(self,origin:Origin,http2_only:bool=False)->typing.Optional[HTTPConnection]
-httpx.dispatch.connection_pool.ConnectionStore.remove(self,connection:HTTPConnection)->None
-httpx.dispatch.connection_pool.NullSemaphore(BaseSemaphore)
-httpx.dispatch.connection_pool.NullSemaphore.release(self)->None
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/http2.py----------------------------------------
-A:httpx.dispatch.http2.logger->get_logger(__name__)
-A:httpx.dispatch.http2.CONFIG->H2Configuration(validate_inbound_headers=False)
-A:httpx.dispatch.http2.self.backend->lookup_backend(backend)
-A:httpx.dispatch.http2.self.state->h2.connection.H2Connection(config=self.CONFIG)
-A:httpx.dispatch.http2.self._initialization_lock->self.backend.create_lock()
-A:httpx.dispatch.http2.stream_id->self.state.get_next_available_stream_id()
-A:httpx.dispatch.http2.stream->AsyncIteratorStream(aiterator=self.body_iter(timeout), close_func=self.close)
-A:httpx.dispatch.http2.self.state.local_settings->Settings(client=True, initial_values={SettingCodes.ENABLE_PUSH: 0, SettingCodes.MAX_CONCURRENT_STREAMS: 100, SettingCodes.MAX_HEADER_LIST_SIZE: 65536})
-A:httpx.dispatch.http2.data_to_send->self.state.data_to_send()
-A:httpx.dispatch.http2.local_flow->self.state.local_flow_control_window(stream_id)
-A:httpx.dispatch.http2.flow->min(local_flow, connection_flow)
-A:httpx.dispatch.http2.events->self.state.receive_data(data)
-A:httpx.dispatch.http2.event_stream_id->getattr(event, 'stream_id', 0)
-A:httpx.dispatch.http2.chunk_size->min(len(data), max_flow)
-A:httpx.dispatch.http2.status_code->int(v.decode('ascii', errors='ignore'))
-httpx.dispatch.http2.HTTP2Connection(self,socket:BaseSocketStream,backend:typing.Union[str,ConcurrencyBackend]='auto',on_release:typing.Callable=None)
-httpx.dispatch.http2.HTTP2Connection.__init__(self,socket:BaseSocketStream,backend:typing.Union[str,ConcurrencyBackend]='auto',on_release:typing.Callable=None)
-httpx.dispatch.http2.HTTP2Connection.init_lock(self)->BaseLock
-httpx.dispatch.http2.HTTP2Connection.is_closed(self)->bool
-httpx.dispatch.http2.HTTP2Connection.is_connection_dropped(self)->bool
-httpx.dispatch.http2.HTTP2Connection.is_http2(self)->bool
-httpx.dispatch.http2.HTTP2Stream(self,stream_id:int,connection:HTTP2Connection)
-httpx.dispatch.http2.HTTP2Stream.__init__(self,stream_id:int,connection:HTTP2Connection)
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/asgi.py----------------------------------------
-A:httpx.dispatch.asgi.request_body_chunks->request.stream.__aiter__()
-A:httpx.dispatch.asgi.headers->message.get('headers', [])
-A:httpx.dispatch.asgi.body->message.get('body', b'')
-A:httpx.dispatch.asgi.more_body->message.get('more_body', False)
-A:httpx.dispatch.asgi.stream->ByteStream(b''.join(body_parts))
-httpx.ASGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
-httpx.dispatch.asgi.ASGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
-httpx.dispatch.asgi.ASGIDispatch.__init__(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/connection.py----------------------------------------
-A:httpx.dispatch.connection.logger->get_logger(__name__)
-A:httpx.dispatch.connection.self.backend->lookup_backend(backend)
-A:httpx.dispatch.connection.on_release->functools.partial(self.release_func, self)
-A:httpx.dispatch.connection.http_version->socket.get_http_version()
-A:httpx.dispatch.connection.self.connection->HTTP11Connection(socket, on_release=on_release)
-httpx.dispatch.connection.HTTPConnection(self,origin:typing.Union[str,Origin],ssl:SSLConfig=None,backend:typing.Union[str,ConcurrencyBackend]='auto',release_func:typing.Optional[ReleaseCallback]=None,uds:typing.Optional[str]=None)
-httpx.dispatch.connection.HTTPConnection.__init__(self,origin:typing.Union[str,Origin],ssl:SSLConfig=None,backend:typing.Union[str,ConcurrencyBackend]='auto',release_func:typing.Optional[ReleaseCallback]=None,uds:typing.Optional[str]=None)
-httpx.dispatch.connection.HTTPConnection.__repr__(self)->str
-httpx.dispatch.connection.HTTPConnection.is_closed(self)->bool
-httpx.dispatch.connection.HTTPConnection.is_connection_dropped(self)->bool
-httpx.dispatch.connection.HTTPConnection.is_http2(self)->bool
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/dispatch/proxy_http.py----------------------------------------
-A:httpx.dispatch.proxy_http.logger->get_logger(__name__)
-A:httpx.dispatch.proxy_http.self.tunnel_ssl->SSLConfig(verify=verify, cert=cert, trust_env=trust_env, http2=False)
-A:httpx.dispatch.proxy_http.self.proxy_url->url.copy_with(authority=authority)
-A:httpx.dispatch.proxy_http.self.proxy_headers->Headers(proxy_headers)
-A:httpx.dispatch.proxy_http.(credentials, _, authority)->url.authority.rpartition('@')
-A:httpx.dispatch.proxy_http.token->b64encode(b':'.join(userpass)).decode().strip()
-A:httpx.dispatch.proxy_http.connection->HTTPConnection(Origin(self.proxy_url), ssl=self.tunnel_ssl, backend=self.backend, release_func=self.release_connection)
-A:httpx.dispatch.proxy_http.proxy_headers->self.proxy_headers.copy()
-A:httpx.dispatch.proxy_http.proxy_request->Request(method='CONNECT', url=self.proxy_url.copy_with(), headers=proxy_headers)
-A:httpx.dispatch.proxy_http.target_url->str(request.url)
-A:httpx.dispatch.proxy_http.request.url->self.proxy_url.copy_with()
-httpx.dispatch.proxy_http.HTTPProxy(self,proxy_url:URLTypes,*,proxy_headers:HeaderTypes=None,proxy_mode:str='DEFAULT',verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto')
-httpx.dispatch.proxy_http.HTTPProxy.__init__(self,proxy_url:URLTypes,*,proxy_headers:HeaderTypes=None,proxy_mode:str='DEFAULT',verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto')
-httpx.dispatch.proxy_http.HTTPProxy.__repr__(self)->str
-httpx.dispatch.proxy_http.HTTPProxy.build_auth_header(self,username:str,password:str)->str
-httpx.dispatch.proxy_http.HTTPProxy.should_forward_origin(self,origin:Origin)->bool
-httpx.dispatch.proxy_http.HTTPProxyMode(enum.Enum)
-
-
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/concurrency/asyncio.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/concurrency/asyncio.py----------------------------------------
 A:httpx.concurrency.asyncio.loop->asyncio.get_event_loop()
 A:httpx.concurrency.asyncio.waiter->asyncio.get_event_loop().create_future()
 A:httpx.concurrency.asyncio.ssl_protocol->asyncio.sslproto.SSLProtocol(loop, protocol, sslcontext, waiter, server_side=False, server_hostname=server_hostname, call_connection_made=False)
@@ -1025,78 +1017,250 @@ httpx.concurrency.asyncio.AsyncioBackend.__init__(self)
 httpx.concurrency.asyncio.AsyncioBackend.create_event(self)->BaseEvent
 httpx.concurrency.asyncio.AsyncioBackend.get_semaphore(self,max_value:int)->BasePoolSemaphore
 httpx.concurrency.asyncio.AsyncioBackend.loop(self)->asyncio.AbstractEventLoop
+httpx.concurrency.asyncio.AsyncioBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
+httpx.concurrency.asyncio.AsyncioBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->SocketStream
 httpx.concurrency.asyncio.AsyncioBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.asyncio.AsyncioBackend.run_in_threadpool(self,func:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
 httpx.concurrency.asyncio.AsyncioBackend.time(self)->float
 httpx.concurrency.asyncio.Event(self)
 httpx.concurrency.asyncio.Event.__init__(self)
 httpx.concurrency.asyncio.Event.set(self)->None
+httpx.concurrency.asyncio.Event.wait(self)->None
 httpx.concurrency.asyncio.PoolSemaphore(self,max_value:int)
 httpx.concurrency.asyncio.PoolSemaphore.__init__(self,max_value:int)
+httpx.concurrency.asyncio.PoolSemaphore.acquire(self,timeout:float=None)->None
 httpx.concurrency.asyncio.PoolSemaphore.release(self)->None
 httpx.concurrency.asyncio.PoolSemaphore.semaphore(self)->asyncio.BoundedSemaphore
 httpx.concurrency.asyncio.SocketStream(self,stream_reader:asyncio.StreamReader,stream_writer:asyncio.StreamWriter)
 httpx.concurrency.asyncio.SocketStream.__init__(self,stream_reader:asyncio.StreamReader,stream_writer:asyncio.StreamWriter)
+httpx.concurrency.asyncio.SocketStream.close(self)->None
 httpx.concurrency.asyncio.SocketStream.get_http_version(self)->str
 httpx.concurrency.asyncio.SocketStream.is_connection_dropped(self)->bool
+httpx.concurrency.asyncio.SocketStream.read(self,n:int,timeout:Timeout)->bytes
+httpx.concurrency.asyncio.SocketStream.start_tls(self,hostname:str,ssl_context:ssl.SSLContext,timeout:Timeout)->'SocketStream'
+httpx.concurrency.asyncio.SocketStream.write(self,data:bytes,timeout:Timeout)->None
+httpx.concurrency.asyncio.backport_start_tls(transport:asyncio.BaseTransport,protocol:asyncio.BaseProtocol,sslcontext:ssl.SSLContext=None,*,server_side:bool=False,server_hostname:str=None,ssl_handshake_timeout:float=None)->asyncio.Transport
 httpx.concurrency.asyncio.ssl_monkey_patch()->None
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/concurrency/base.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/concurrency/base.py----------------------------------------
 httpx.concurrency.base.BaseEvent
 httpx.concurrency.base.BaseEvent.set(self)->None
+httpx.concurrency.base.BaseEvent.wait(self)->None
 httpx.concurrency.base.BasePoolSemaphore
+httpx.concurrency.base.BasePoolSemaphore.acquire(self,timeout:float=None)->None
 httpx.concurrency.base.BasePoolSemaphore.release(self)->None
 httpx.concurrency.base.BaseSocketStream
+httpx.concurrency.base.BaseSocketStream.close(self)->None
 httpx.concurrency.base.BaseSocketStream.get_http_version(self)->str
 httpx.concurrency.base.BaseSocketStream.is_connection_dropped(self)->bool
+httpx.concurrency.base.BaseSocketStream.read(self,n:int,timeout:Timeout)->bytes
+httpx.concurrency.base.BaseSocketStream.start_tls(self,hostname:str,ssl_context:ssl.SSLContext,timeout:Timeout)->'BaseSocketStream'
+httpx.concurrency.base.BaseSocketStream.write(self,data:bytes,timeout:Timeout)->None
 httpx.concurrency.base.ConcurrencyBackend
 httpx.concurrency.base.ConcurrencyBackend.create_event(self)->BaseEvent
 httpx.concurrency.base.ConcurrencyBackend.get_semaphore(self,max_value:int)->BasePoolSemaphore
+httpx.concurrency.base.ConcurrencyBackend.open_tcp_stream(self,hostname:str,port:int,ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
+httpx.concurrency.base.ConcurrencyBackend.open_uds_stream(self,path:str,hostname:typing.Optional[str],ssl_context:typing.Optional[ssl.SSLContext],timeout:Timeout)->BaseSocketStream
 httpx.concurrency.base.ConcurrencyBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
+httpx.concurrency.base.ConcurrencyBackend.run_in_threadpool(self,func:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
 httpx.concurrency.base.ConcurrencyBackend.time(self)->float
 httpx.concurrency.base.lookup_backend(backend:typing.Union[str,'ConcurrencyBackend']='auto')->'ConcurrencyBackend'
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/concurrency/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/concurrency/trio.py----------------------------------------
-A:httpx.concurrency.trio.self.read_lock->trio.Lock()
-A:httpx.concurrency.trio.self.write_lock->trio.Lock()
-A:httpx.concurrency.trio.connect_timeout->none_as_inf(timeout.connect_timeout)
-A:httpx.concurrency.trio.ssl_stream->trio.SSLStream(self.stream, ssl_context=ssl_context, server_hostname=hostname)
-A:httpx.concurrency.trio.ident->self.stream.selected_alpn_protocol()
-A:httpx.concurrency.trio.read_timeout->none_as_inf(timeout.read_timeout)
-A:httpx.concurrency.trio.write_timeout->none_as_inf(timeout.write_timeout)
-A:httpx.concurrency.trio.self._semaphore->trio.Semaphore(self.max_value, max_value=self.max_value)
-A:httpx.concurrency.trio.timeout->none_as_inf(timeout)
-A:httpx.concurrency.trio.stream->trio.SSLStream(stream, ssl_context, server_hostname=hostname)
-A:httpx.concurrency.trio.self._event->trio.Event()
-httpx.concurrency.trio.Event(self)
-httpx.concurrency.trio.Event.__init__(self)
-httpx.concurrency.trio.Event.set(self)->None
-httpx.concurrency.trio.PoolSemaphore(self,max_value:int)
-httpx.concurrency.trio.PoolSemaphore.__init__(self,max_value:int)
-httpx.concurrency.trio.PoolSemaphore.release(self)->None
-httpx.concurrency.trio.PoolSemaphore.semaphore(self)->trio.Semaphore
-httpx.concurrency.trio.SocketStream(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
-httpx.concurrency.trio.SocketStream.__init__(self,stream:typing.Union[trio.SocketStream,trio.SSLStream])
-httpx.concurrency.trio.SocketStream.get_http_version(self)->str
-httpx.concurrency.trio.SocketStream.is_connection_dropped(self)->bool
-httpx.concurrency.trio.TrioBackend(ConcurrencyBackend)
-httpx.concurrency.trio.TrioBackend.create_event(self)->BaseEvent
-httpx.concurrency.trio.TrioBackend.get_semaphore(self,max_value:int)->BasePoolSemaphore
-httpx.concurrency.trio.TrioBackend.run(self,coroutine:typing.Callable,*args:typing.Any,**kwargs:typing.Any)->typing.Any
-httpx.concurrency.trio.TrioBackend.time(self)->float
-httpx.concurrency.trio.none_as_inf(value:typing.Optional[float])->float
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/proxy_http.py----------------------------------------
+A:httpx.dispatch.proxy_http.logger->get_logger(__name__)
+A:httpx.dispatch.proxy_http.self.tunnel_ssl->SSLConfig(verify=verify, cert=cert, trust_env=trust_env, http2=False)
+A:httpx.dispatch.proxy_http.self.proxy_url->url.copy_with(authority=authority)
+A:httpx.dispatch.proxy_http.self.proxy_headers->Headers(proxy_headers)
+A:httpx.dispatch.proxy_http.(credentials, _, authority)->url.authority.rpartition('@')
+A:httpx.dispatch.proxy_http.token->b64encode(b':'.join(userpass)).decode().strip()
+A:httpx.dispatch.proxy_http.connection->HTTPConnection(Origin(self.proxy_url), ssl=self.tunnel_ssl, backend=self.backend, release_func=self.release_connection)
+A:httpx.dispatch.proxy_http.proxy_headers->self.proxy_headers.copy()
+A:httpx.dispatch.proxy_http.proxy_request->Request(method='CONNECT', url=self.proxy_url.copy_with(), headers=proxy_headers)
+A:httpx.dispatch.proxy_http.target_url->str(request.url)
+A:httpx.dispatch.proxy_http.request.url->self.proxy_url.copy_with()
+httpx.dispatch.proxy_http.HTTPProxy(self,proxy_url:URLTypes,*,proxy_headers:HeaderTypes=None,proxy_mode:str='DEFAULT',verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto')
+httpx.dispatch.proxy_http.HTTPProxy.__init__(self,proxy_url:URLTypes,*,proxy_headers:HeaderTypes=None,proxy_mode:str='DEFAULT',verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto')
+httpx.dispatch.proxy_http.HTTPProxy.__repr__(self)->str
+httpx.dispatch.proxy_http.HTTPProxy.acquire_connection(self,origin:Origin,timeout:Timeout=None)->HTTPConnection
+httpx.dispatch.proxy_http.HTTPProxy.build_auth_header(self,username:str,password:str)->str
+httpx.dispatch.proxy_http.HTTPProxy.request_tunnel_proxy_connection(self,origin:Origin)->HTTPConnection
+httpx.dispatch.proxy_http.HTTPProxy.send(self,request:Request,timeout:Timeout=None)->Response
+httpx.dispatch.proxy_http.HTTPProxy.should_forward_origin(self,origin:Origin)->bool
+httpx.dispatch.proxy_http.HTTPProxy.tunnel_connection(self,origin:Origin,timeout:Timeout=None)->HTTPConnection
+httpx.dispatch.proxy_http.HTTPProxyMode(enum.Enum)
 
 
-----------------------------------------/home/zhang/Packages/httpx/httpx0.11.1/concurrency/auto.py----------------------------------------
-A:httpx.concurrency.auto.backend->sniffio.current_async_library()
-A:httpx.concurrency.auto.self._backend_implementation->lookup_backend(backend)
-httpx.concurrency.auto.AutoBackend(ConcurrencyBackend)
-httpx.concurrency.auto.AutoBackend.backend(self)->ConcurrencyBackend
-httpx.concurrency.auto.AutoBackend.create_event(self)->BaseEvent
-httpx.concurrency.auto.AutoBackend.get_semaphore(self,max_value:int)->BasePoolSemaphore
-httpx.concurrency.auto.AutoBackend.time(self)->float
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/connection_pool.py----------------------------------------
+A:httpx.dispatch.connection_pool.logger->get_logger(__name__)
+A:httpx.dispatch.connection_pool.connection->self.keepalive_connections.pop_by_origin(origin)
+A:httpx.dispatch.connection_pool.self.ssl->SSLConfig(verify=verify, cert=cert, trust_env=trust_env, http2=http2)
+A:httpx.dispatch.connection_pool.self.keepalive_connections->ConnectionStore()
+A:httpx.dispatch.connection_pool.self.active_connections->ConnectionStore()
+A:httpx.dispatch.connection_pool.self.backend->lookup_backend(backend)
+A:httpx.dispatch.connection_pool.self._max_connections->NullSemaphore()
+A:httpx.dispatch.connection_pool.now->self.backend.time()
+A:httpx.dispatch.connection_pool.keepalives->list(self.keepalive_connections.all.keys())
+A:httpx.dispatch.connection_pool.connections->list(self.keepalive_connections)
+httpx.dispatch.connection_pool.ConnectionPool(self,*,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto',uds:typing.Optional[str]=None)
+httpx.dispatch.connection_pool.ConnectionPool.__init__(self,*,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS,http2:bool=False,backend:typing.Union[str,ConcurrencyBackend]='auto',uds:typing.Optional[str]=None)
+httpx.dispatch.connection_pool.ConnectionPool.acquire_connection(self,origin:Origin,timeout:Timeout=None)->HTTPConnection
+httpx.dispatch.connection_pool.ConnectionPool.check_keepalive_expiry(self)->None
+httpx.dispatch.connection_pool.ConnectionPool.close(self)->None
+httpx.dispatch.connection_pool.ConnectionPool.max_connections(self)->BaseSemaphore
+httpx.dispatch.connection_pool.ConnectionPool.num_connections(self)->int
+httpx.dispatch.connection_pool.ConnectionPool.pop_connection(self,origin:Origin)->typing.Optional[HTTPConnection]
+httpx.dispatch.connection_pool.ConnectionPool.release_connection(self,connection:HTTPConnection)->None
+httpx.dispatch.connection_pool.ConnectionPool.send(self,request:Request,timeout:Timeout=None)->Response
+httpx.dispatch.connection_pool.ConnectionStore(self)
+httpx.dispatch.connection_pool.ConnectionStore.__init__(self)
+httpx.dispatch.connection_pool.ConnectionStore.__iter__(self)->typing.Iterator[HTTPConnection]
+httpx.dispatch.connection_pool.ConnectionStore.__len__(self)->int
+httpx.dispatch.connection_pool.ConnectionStore.add(self,connection:HTTPConnection)->None
+httpx.dispatch.connection_pool.ConnectionStore.clear(self)->None
+httpx.dispatch.connection_pool.ConnectionStore.pop_by_origin(self,origin:Origin,http2_only:bool=False)->typing.Optional[HTTPConnection]
+httpx.dispatch.connection_pool.ConnectionStore.remove(self,connection:HTTPConnection)->None
+httpx.dispatch.connection_pool.NullSemaphore(BaseSemaphore)
+httpx.dispatch.connection_pool.NullSemaphore.acquire(self,timeout:float=None)->None
+httpx.dispatch.connection_pool.NullSemaphore.release(self)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/http2.py----------------------------------------
+A:httpx.dispatch.http2.logger->get_logger(__name__)
+A:httpx.dispatch.http2.CONFIG->H2Configuration(validate_inbound_headers=False)
+A:httpx.dispatch.http2.self.backend->lookup_backend(backend)
+A:httpx.dispatch.http2.self.state->h2.connection.H2Connection(config=self.CONFIG)
+A:httpx.dispatch.http2.self._initialization_lock->self.backend.create_lock()
+A:httpx.dispatch.http2.stream_id->self.state.get_next_available_stream_id()
+A:httpx.dispatch.http2.stream->AsyncIteratorStream(aiterator=self.body_iter(timeout), close_func=self.close)
+A:httpx.dispatch.http2.self.state.local_settings->Settings(client=True, initial_values={SettingCodes.ENABLE_PUSH: 0, SettingCodes.MAX_CONCURRENT_STREAMS: 100, SettingCodes.MAX_HEADER_LIST_SIZE: 65536})
+A:httpx.dispatch.http2.data_to_send->self.state.data_to_send()
+A:httpx.dispatch.http2.local_flow->self.state.local_flow_control_window(stream_id)
+A:httpx.dispatch.http2.flow->min(local_flow, connection_flow)
+A:httpx.dispatch.http2.events->self.state.receive_data(data)
+A:httpx.dispatch.http2.event_stream_id->getattr(event, 'stream_id', 0)
+A:httpx.dispatch.http2.chunk_size->min(len(data), max_flow)
+A:httpx.dispatch.http2.status_code->int(v.decode('ascii', errors='ignore'))
+httpx.dispatch.http2.HTTP2Connection(self,socket:BaseSocketStream,backend:typing.Union[str,ConcurrencyBackend]='auto',on_release:typing.Callable=None)
+httpx.dispatch.http2.HTTP2Connection.__init__(self,socket:BaseSocketStream,backend:typing.Union[str,ConcurrencyBackend]='auto',on_release:typing.Callable=None)
+httpx.dispatch.http2.HTTP2Connection.acknowledge_received_data(self,stream_id:int,amount:int,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Connection.close(self)->None
+httpx.dispatch.http2.HTTP2Connection.close_stream(self,stream_id:int)->None
+httpx.dispatch.http2.HTTP2Connection.end_stream(self,stream_id:int,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Connection.init_lock(self)->BaseLock
+httpx.dispatch.http2.HTTP2Connection.is_closed(self)->bool
+httpx.dispatch.http2.HTTP2Connection.is_connection_dropped(self)->bool
+httpx.dispatch.http2.HTTP2Connection.is_http2(self)->bool
+httpx.dispatch.http2.HTTP2Connection.receive_events(self,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Connection.send(self,request:Request,timeout:Timeout=None)->Response
+httpx.dispatch.http2.HTTP2Connection.send_connection_init(self,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Connection.send_data(self,stream_id:int,chunk:bytes,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Connection.send_headers(self,stream_id:int,headers:typing.List[typing.Tuple[bytes,bytes]],end_stream:bool,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Connection.wait_for_event(self,stream_id:int,timeout:Timeout)->h2.events.Event
+httpx.dispatch.http2.HTTP2Connection.wait_for_outgoing_flow(self,stream_id:int,timeout:Timeout)->int
+httpx.dispatch.http2.HTTP2Stream(self,stream_id:int,connection:HTTP2Connection)
+httpx.dispatch.http2.HTTP2Stream.__init__(self,stream_id:int,connection:HTTP2Connection)
+httpx.dispatch.http2.HTTP2Stream.body_iter(self,timeout:Timeout)->typing.AsyncIterator[bytes]
+httpx.dispatch.http2.HTTP2Stream.close(self)->None
+httpx.dispatch.http2.HTTP2Stream.receive_response(self,timeout:Timeout)->typing.Tuple[int, typing.List[typing.Tuple[bytes, bytes]]]
+httpx.dispatch.http2.HTTP2Stream.send(self,request:Request,timeout:Timeout)->Response
+httpx.dispatch.http2.HTTP2Stream.send_body(self,request:Request,timeout:Timeout)->None
+httpx.dispatch.http2.HTTP2Stream.send_headers(self,request:Request,has_body:bool,timeout:Timeout)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/asgi.py----------------------------------------
+A:httpx.dispatch.asgi.request_body_chunks->request.stream.__aiter__()
+A:httpx.dispatch.asgi.headers->message.get('headers', [])
+A:httpx.dispatch.asgi.body->message.get('body', b'')
+A:httpx.dispatch.asgi.more_body->message.get('more_body', False)
+A:httpx.dispatch.asgi.stream->ByteStream(b''.join(body_parts))
+httpx.ASGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
+httpx.ASGIDispatch.send(self,request:Request,timeout:TimeoutTypes=None)->Response
+httpx.dispatch.asgi.ASGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
+httpx.dispatch.asgi.ASGIDispatch.__init__(self,app:typing.Callable,raise_app_exceptions:bool=True,root_path:str='',client:typing.Tuple[str,int]=('127.0.0.1',123))
+httpx.dispatch.asgi.ASGIDispatch.send(self,request:Request,timeout:TimeoutTypes=None)->Response
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/urllib3.py----------------------------------------
+A:httpx.dispatch.urllib3.ssl_config->SSLConfig(verify=verify, cert=cert, trust_env=trust_env, http2=False)
+A:httpx.dispatch.urllib3.num_pools->int(math.sqrt(hard_limit))
+A:httpx.dispatch.urllib3.maxsize->int(math.sqrt(hard_limit))
+A:httpx.dispatch.urllib3.self.pool->self.init_pool_manager(proxy=proxy, ssl_context=ssl_config.ssl_context, num_pools=num_pools, maxsize=maxsize, block=block)
+A:httpx.dispatch.urllib3.urllib3_timeout->urllib3.util.Timeout(connect=timeout.connect_timeout, read=timeout.read_timeout)
+A:httpx.dispatch.urllib3.content_length->int(request.headers.get('Content-Length', '0'))
+A:httpx.dispatch.urllib3.conn->self.pool.urlopen(method=request.method, url=str(request.url), headers=dict(request.headers), body=body, redirect=False, assert_same_host=False, retries=0, preload_content=False, chunked=chunked, timeout=urllib3_timeout, pool_timeout=timeout.pool_timeout)
+httpx.dispatch.urllib3.URLLib3Dispatcher(self,*,proxy:Proxy=None,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS)
+httpx.dispatch.urllib3.URLLib3Dispatcher.__init__(self,*,proxy:Proxy=None,verify:VerifyTypes=True,cert:CertTypes=None,trust_env:bool=None,pool_limits:PoolLimits=DEFAULT_POOL_LIMITS)
+httpx.dispatch.urllib3.URLLib3Dispatcher.close(self)->None
+httpx.dispatch.urllib3.URLLib3Dispatcher.init_pool_manager(self,proxy:typing.Optional[Proxy],ssl_context:ssl.SSLContext,num_pools:int,maxsize:int,block:bool)->typing.Union[urllib3.PoolManager, urllib3.ProxyManager]
+httpx.dispatch.urllib3.URLLib3Dispatcher.send(self,request:Request,timeout:Timeout=None)->Response
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/wsgi.py----------------------------------------
+A:httpx.dispatch.wsgi.key->key.upper().replace('-', '_').upper().replace('-', '_')
+A:httpx.dispatch.wsgi.result->self.app(environ, start_response)
+httpx.WSGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,script_name:str='',remote_addr:str='127.0.0.1')
+httpx.WSGIDispatch.send(self,request:Request,timeout:TimeoutTypes=None)->Response
+httpx.dispatch.wsgi.WSGIDispatch(self,app:typing.Callable,raise_app_exceptions:bool=True,script_name:str='',remote_addr:str='127.0.0.1')
+httpx.dispatch.wsgi.WSGIDispatch.__init__(self,app:typing.Callable,raise_app_exceptions:bool=True,script_name:str='',remote_addr:str='127.0.0.1')
+httpx.dispatch.wsgi.WSGIDispatch.send(self,request:Request,timeout:TimeoutTypes=None)->Response
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/http11.py----------------------------------------
+A:httpx.dispatch.http11.logger->get_logger(__name__)
+A:httpx.dispatch.http11.self.h11_state->h11.Connection(our_role=h11.CLIENT)
+A:httpx.dispatch.http11.stream->AsyncIteratorStream(aiterator=self._receive_response_data(timeout), close_func=self.response_closed)
+A:httpx.dispatch.http11.event->self.h11_state.next_event()
+A:httpx.dispatch.http11.method->request.method.encode('ascii')
+A:httpx.dispatch.http11.target->request.url.full_path.encode('ascii')
+A:httpx.dispatch.http11.bytes_to_send->self.h11_state.send(event)
+httpx.dispatch.http11.HTTP11Connection(self,socket:BaseSocketStream,on_release:typing.Optional[OnReleaseCallback]=None)
+httpx.dispatch.http11.HTTP11Connection.__init__(self,socket:BaseSocketStream,on_release:typing.Optional[OnReleaseCallback]=None)
+httpx.dispatch.http11.HTTP11Connection._receive_event(self,timeout:Timeout)->H11Event
+httpx.dispatch.http11.HTTP11Connection._receive_response(self,timeout:Timeout)->typing.Tuple[str, int, typing.List[typing.Tuple[bytes, bytes]]]
+httpx.dispatch.http11.HTTP11Connection._receive_response_data(self,timeout:Timeout)->typing.AsyncIterator[bytes]
+httpx.dispatch.http11.HTTP11Connection._send_event(self,event:H11Event,timeout:Timeout)->None
+httpx.dispatch.http11.HTTP11Connection._send_request(self,request:Request,timeout:Timeout)->None
+httpx.dispatch.http11.HTTP11Connection._send_request_body(self,request:Request,timeout:Timeout)->None
+httpx.dispatch.http11.HTTP11Connection.close(self)->None
+httpx.dispatch.http11.HTTP11Connection.is_closed(self)->bool
+httpx.dispatch.http11.HTTP11Connection.is_connection_dropped(self)->bool
+httpx.dispatch.http11.HTTP11Connection.is_http2(self)->bool
+httpx.dispatch.http11.HTTP11Connection.response_closed(self)->None
+httpx.dispatch.http11.HTTP11Connection.send(self,request:Request,timeout:Timeout=None)->Response
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/base.py----------------------------------------
+A:httpx.dispatch.base.request->Request(method, url, data=data, params=params, headers=headers)
+httpx.dispatch.base.AsyncDispatcher
+httpx.dispatch.base.AsyncDispatcher.__aenter__(self)->'AsyncDispatcher'
+httpx.dispatch.base.AsyncDispatcher.__aexit__(self,exc_type:typing.Type[BaseException]=None,exc_value:BaseException=None,traceback:TracebackType=None)->None
+httpx.dispatch.base.AsyncDispatcher.close(self)->None
+httpx.dispatch.base.AsyncDispatcher.request(self,method:str,url:URLTypes,*,data:RequestData=b'',params:QueryParamTypes=None,headers:HeaderTypes=None,timeout:Timeout=None)->Response
+httpx.dispatch.base.AsyncDispatcher.send(self,request:Request,timeout:Timeout=None)->Response
+httpx.dispatch.base.SyncDispatcher
+httpx.dispatch.base.SyncDispatcher.close(self)->None
+httpx.dispatch.base.SyncDispatcher.send(self,request:Request,timeout:Timeout=None)->Response
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/httpx0.11.1/lib/python3.9/site-packages/httpx/dispatch/connection.py----------------------------------------
+A:httpx.dispatch.connection.logger->get_logger(__name__)
+A:httpx.dispatch.connection.self.backend->lookup_backend(backend)
+A:httpx.dispatch.connection.on_release->functools.partial(self.release_func, self)
+A:httpx.dispatch.connection.http_version->socket.get_http_version()
+A:httpx.dispatch.connection.self.connection->HTTP11Connection(socket, on_release=on_release)
+httpx.dispatch.connection.HTTPConnection(self,origin:typing.Union[str,Origin],ssl:SSLConfig=None,backend:typing.Union[str,ConcurrencyBackend]='auto',release_func:typing.Optional[ReleaseCallback]=None,uds:typing.Optional[str]=None)
+httpx.dispatch.connection.HTTPConnection.__init__(self,origin:typing.Union[str,Origin],ssl:SSLConfig=None,backend:typing.Union[str,ConcurrencyBackend]='auto',release_func:typing.Optional[ReleaseCallback]=None,uds:typing.Optional[str]=None)
+httpx.dispatch.connection.HTTPConnection.__repr__(self)->str
+httpx.dispatch.connection.HTTPConnection.close(self)->None
+httpx.dispatch.connection.HTTPConnection.connect(self,timeout:Timeout)->typing.Union[HTTP11Connection, HTTP2Connection]
+httpx.dispatch.connection.HTTPConnection.is_closed(self)->bool
+httpx.dispatch.connection.HTTPConnection.is_connection_dropped(self)->bool
+httpx.dispatch.connection.HTTPConnection.is_http2(self)->bool
+httpx.dispatch.connection.HTTPConnection.send(self,request:Request,timeout:Timeout=None)->Response
+httpx.dispatch.connection.HTTPConnection.tunnel_start_tls(self,origin:Origin,proxy_url:URL,timeout:Timeout=None)->None
 

@@ -1,219 +1,149 @@
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/sessions.py----------------------------------------
-A:flask.sessions.self['_permanent']->bool(value)
-A:flask.sessions.rv->rv.rsplit(':', 1)[0].lstrip('.').rsplit(':', 1)[0].lstrip('.')
-A:flask.sessions.ip->is_ip(rv)
-A:flask.sessions.session_json_serializer->TaggedJSONSerializer()
-A:flask.sessions.digest_method->staticmethod(hashlib.sha1)
-A:flask.sessions.signer_kwargs->dict(key_derivation=self.key_derivation, digest_method=self.digest_method)
-A:flask.sessions.s->self.get_signing_serializer(app)
-A:flask.sessions.val->self.get_signing_serializer(app).dumps(dict(session))
-A:flask.sessions.max_age->int(app.permanent_session_lifetime.total_seconds())
-A:flask.sessions.data->self.get_signing_serializer(app).loads(val, max_age=max_age)
-A:flask.sessions.name->self.get_cookie_name(app)
-A:flask.sessions.domain->self.get_cookie_domain(app)
-A:flask.sessions.path->self.get_cookie_path(app)
-A:flask.sessions.secure->self.get_cookie_secure(app)
-A:flask.sessions.samesite->self.get_cookie_samesite(app)
-A:flask.sessions.httponly->self.get_cookie_httponly(app)
-A:flask.sessions.expires->self.get_expiration_time(app, session)
-flask.sessions.NullSession(SecureCookieSession)
-flask.sessions.NullSession._fail(self,*args:t.Any,**kwargs:t.Any)->'te.NoReturn'
-flask.sessions.SecureCookieSession(self,initial:t.Any=None)
-flask.sessions.SecureCookieSession.__getitem__(self,key:str)->t.Any
-flask.sessions.SecureCookieSession.__init__(self,initial:t.Any=None)
-flask.sessions.SecureCookieSession.get(self,key:str,default:t.Any=None)->t.Any
-flask.sessions.SecureCookieSession.setdefault(self,key:str,default:t.Any=None)->t.Any
-flask.sessions.SecureCookieSessionInterface(SessionInterface)
-flask.sessions.SecureCookieSessionInterface.get_signing_serializer(self,app:'Flask')->t.Optional[URLSafeTimedSerializer]
-flask.sessions.SecureCookieSessionInterface.open_session(self,app:'Flask',request:'Request')->t.Optional[SecureCookieSession]
-flask.sessions.SecureCookieSessionInterface.save_session(self,app:'Flask',session:SessionMixin,response:'Response')->None
-flask.sessions.SessionInterface
-flask.sessions.SessionInterface.get_cookie_domain(self,app:'Flask')->t.Optional[str]
-flask.sessions.SessionInterface.get_cookie_httponly(self,app:'Flask')->bool
-flask.sessions.SessionInterface.get_cookie_name(self,app:'Flask')->str
-flask.sessions.SessionInterface.get_cookie_path(self,app:'Flask')->str
-flask.sessions.SessionInterface.get_cookie_samesite(self,app:'Flask')->str
-flask.sessions.SessionInterface.get_cookie_secure(self,app:'Flask')->bool
-flask.sessions.SessionInterface.get_expiration_time(self,app:'Flask',session:SessionMixin)->t.Optional[datetime]
-flask.sessions.SessionInterface.is_null_session(self,obj:object)->bool
-flask.sessions.SessionInterface.make_null_session(self,app:'Flask')->NullSession
-flask.sessions.SessionInterface.open_session(self,app:'Flask',request:'Request')->t.Optional[SessionMixin]
-flask.sessions.SessionInterface.save_session(self,app:'Flask',session:SessionMixin,response:'Response')->None
-flask.sessions.SessionInterface.should_set_cookie(self,app:'Flask',session:SessionMixin)->bool
-flask.sessions.SessionMixin(MutableMapping)
-flask.sessions.SessionMixin.permanent(self)->bool
-flask.sessions.SessionMixin.permanent(self,value:bool)->None
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/__main__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/globals.py----------------------------------------
-A:flask.globals._request_ctx_stack->LocalStack()
-A:flask.globals._app_ctx_stack->LocalStack()
-flask.globals._find_app()
-flask.globals._lookup_app_object(name)
-flask.globals._lookup_req_object(name)
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/ctx.py----------------------------------------
-A:flask.ctx._sentinel->object()
-A:flask.ctx.reqctx->top.copy()
-A:flask.ctx.self.url_adapter->app.create_url_adapter(self.request)
-A:flask.ctx.self.g->app.app_ctx_globals_class()
-A:flask.ctx.rv->globals._request_ctx_stack.pop()
-A:flask.ctx.request->app.request_class(environ)
-A:flask.ctx.result->self.url_adapter.match(return_rule=True)
-A:flask.ctx.app_ctx->self._implicit_app_ctx_stack.pop()
-A:flask.ctx.self.session->session_interface.make_null_session(self.app)
-A:flask.ctx.request_close->getattr(self.request, 'close', None)
-flask.after_this_request(f:AfterRequestCallable)->AfterRequestCallable
-flask.copy_current_request_context(f:t.Callable)->t.Callable
-flask.ctx.AppContext(self,app:'Flask')
-flask.ctx.AppContext.__enter__(self)->'AppContext'
-flask.ctx.AppContext.__exit__(self,exc_type:type,exc_value:BaseException,tb:TracebackType)->None
-flask.ctx.AppContext.__init__(self,app:'Flask')
-flask.ctx.AppContext.pop(self,exc:t.Optional[BaseException]=_sentinel)->None
-flask.ctx.AppContext.push(self)->None
-flask.ctx.RequestContext(self,app:'Flask',environ:dict,request:t.Optional['Request']=None,session:t.Optional['SessionMixin']=None)
-flask.ctx.RequestContext.__enter__(self)->'RequestContext'
-flask.ctx.RequestContext.__exit__(self,exc_type:type,exc_value:BaseException,tb:TracebackType)->None
-flask.ctx.RequestContext.__init__(self,app:'Flask',environ:dict,request:t.Optional['Request']=None,session:t.Optional['SessionMixin']=None)
-flask.ctx.RequestContext.__repr__(self)->str
-flask.ctx.RequestContext.auto_pop(self,exc:t.Optional[BaseException])->None
-flask.ctx.RequestContext.copy(self)->'RequestContext'
-flask.ctx.RequestContext.g(self)->AppContext
-flask.ctx.RequestContext.g(self,value:AppContext)->None
-flask.ctx.RequestContext.match_request(self)->None
-flask.ctx.RequestContext.pop(self,exc:t.Optional[BaseException]=_sentinel)->None
-flask.ctx.RequestContext.push(self)->None
-flask.ctx._AppCtxGlobals
-flask.ctx._AppCtxGlobals.__contains__(self,item:str)->bool
-flask.ctx._AppCtxGlobals.__delattr__(self,name:str)->None
-flask.ctx._AppCtxGlobals.__getattr__(self,name:str)->t.Any
-flask.ctx._AppCtxGlobals.__iter__(self)->t.Iterator[str]
-flask.ctx._AppCtxGlobals.__repr__(self)->str
-flask.ctx._AppCtxGlobals.__setattr__(self,name:str,value:t.Any)->None
-flask.ctx._AppCtxGlobals.get(self,name:str,default:t.Optional[t.Any]=None)->t.Any
-flask.ctx._AppCtxGlobals.pop(self,name:str,default:t.Any=_sentinel)->t.Any
-flask.ctx._AppCtxGlobals.setdefault(self,name:str,default:t.Any=None)->t.Any
-flask.ctx.after_this_request(f:AfterRequestCallable)->AfterRequestCallable
-flask.ctx.copy_current_request_context(f:t.Callable)->t.Callable
-flask.ctx.has_app_context()->bool
-flask.ctx.has_request_context()->bool
-flask.has_app_context()->bool
-flask.has_request_context()->bool
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/templating.py----------------------------------------
+A:flask.templating.options['loader']->app.create_global_jinja_loader()
+A:flask.templating.rv->template.render(context)
+A:flask.templating.result->set()
+flask.render_template(template_name_or_list:t.Union[str,t.List[str]],**context:t.Any)->str
+flask.render_template_string(source:str,**context:t.Any)->str
+flask.templating.DispatchingJinjaLoader(self,app:'Flask')
+flask.templating.DispatchingJinjaLoader.__init__(self,app:'Flask')
+flask.templating.DispatchingJinjaLoader._get_source_explained(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
+flask.templating.DispatchingJinjaLoader._get_source_fast(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
+flask.templating.DispatchingJinjaLoader._iter_loaders(self,template:str)->t.Generator[t.Tuple['Scaffold', BaseLoader], None, None]
+flask.templating.DispatchingJinjaLoader.get_source(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
+flask.templating.DispatchingJinjaLoader.list_templates(self)->t.List[str]
+flask.templating.Environment(self,app:'Flask',**options:t.Any)
+flask.templating.Environment.__init__(self,app:'Flask',**options:t.Any)
+flask.templating._default_template_ctx_processor()->t.Dict[str, t.Any]
+flask.templating._render(template:Template,context:dict,app:'Flask')->str
+flask.templating.render_template(template_name_or_list:t.Union[str,t.List[str]],**context:t.Any)->str
+flask.templating.render_template_string(source:str,**context:t.Any)->str
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/testing.py----------------------------------------
-A:flask.testing.url->url_parse(path)
-A:flask.testing.environ_overrides->kwargs.setdefault('environ_overrides', {})
-A:flask.testing.sess->session_interface.open_session(app, c.request)
-A:flask.testing.resp->app.response_class()
-A:flask.testing.headers->app.response_class().get_wsgi_headers(c.request.environ)
-A:flask.testing.builder->EnvironBuilder(self.application, *args, **kwargs)
-A:flask.testing.builder.environ_base->copy_environ(builder.environ_base or {})
-A:flask.testing.request->EnvironBuilder(self.application, *args, **kwargs).get_request()
-A:flask.testing.request.environ->copy_environ(request.environ)
-A:flask.testing.kwargs['environ_base']->copy_environ(kwargs.get('environ_base', {}))
-A:flask.testing.kwargs['obj']->ScriptInfo(create_app=lambda : self.app)
-flask.testing.EnvironBuilder(self,app:'Flask',path:str='/',base_url:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_scheme:t.Optional[str]=None,*args:t.Any,**kwargs:t.Any)
-flask.testing.EnvironBuilder.__init__(self,app:'Flask',path:str='/',base_url:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_scheme:t.Optional[str]=None,*args:t.Any,**kwargs:t.Any)
-flask.testing.EnvironBuilder.json_dumps(self,obj:t.Any,**kwargs:t.Any)->str
-flask.testing.FlaskCliRunner(self,app:'Flask',**kwargs:t.Any)
-flask.testing.FlaskCliRunner.__init__(self,app:'Flask',**kwargs:t.Any)
-flask.testing.FlaskCliRunner.invoke(self,cli:t.Any=None,args:t.Any=None,**kwargs:t.Any)->t.Any
-flask.testing.FlaskClient(self,*args:t.Any,**kwargs:t.Any)
-flask.testing.FlaskClient.__enter__(self)->'FlaskClient'
-flask.testing.FlaskClient.__exit__(self,exc_type:type,exc_value:BaseException,tb:TracebackType)->None
-flask.testing.FlaskClient.__init__(self,*args:t.Any,**kwargs:t.Any)
-flask.testing.FlaskClient.open(self,*args:t.Any,as_tuple:bool=False,buffered:bool=False,follow_redirects:bool=False,**kwargs:t.Any)->'Response'
-flask.testing.FlaskClient.session_transaction(self,*args:t.Any,**kwargs:t.Any)->t.Generator[SessionMixin, None, None]
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/helpers.py----------------------------------------
+A:flask.helpers.val->os.environ.get('FLASK_SKIP_DOTENV')
+A:flask.helpers.gen->generator_or_function(*args, **kwargs)
+A:flask.helpers.wrapped_g->generator()
+A:flask.helpers.external->values.pop('_external', True)
+A:flask.helpers.anchor->values.pop('_anchor', None)
+A:flask.helpers.method->values.pop('_method', None)
+A:flask.helpers.scheme->values.pop('_scheme', None)
+A:flask.helpers.rv->url_adapter.build(endpoint, values, method=method, force_external=external)
+A:flask.helpers.flashes->list(filter(lambda f: f[0] in category_filter, flashes))
+A:flask.helpers.path->werkzeug.utils.safe_join(directory, *pathnames)
+A:flask.helpers.mod->sys.modules.get(import_name)
+A:flask.helpers.loader->pkgutil.get_loader(import_name)
+A:flask.helpers.filepath->getattr(mod, '__file__', None)
+A:flask.helpers.self.lock->RLock()
+flask.flash(message:str,category:str='message')->None
+flask.get_flashed_messages(with_categories:bool=False,category_filter:t.Iterable[str]=())->t.Union[t.List[str], t.List[t.Tuple[str, str]]]
+flask.get_template_attribute(template_name:str,attribute:str)->t.Any
+flask.helpers._prepare_send_file_kwargs(download_name:t.Optional[str]=None,attachment_filename:t.Optional[str]=None,etag:t.Optional[t.Union[bool,str]]=None,add_etags:t.Optional[t.Union[bool]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None,cache_timeout:t.Optional[int]=None,**kwargs:t.Any)->t.Dict[str, t.Any]
+flask.helpers._split_blueprint_path(name:str)->t.List[str]
+flask.helpers.flash(message:str,category:str='message')->None
+flask.helpers.get_debug_flag()->bool
+flask.helpers.get_env()->str
+flask.helpers.get_flashed_messages(with_categories:bool=False,category_filter:t.Iterable[str]=())->t.Union[t.List[str], t.List[t.Tuple[str, str]]]
+flask.helpers.get_load_dotenv(default:bool=True)->bool
+flask.helpers.get_root_path(import_name:str)->str
+flask.helpers.get_template_attribute(template_name:str,attribute:str)->t.Any
+flask.helpers.is_ip(value:str)->bool
+flask.helpers.locked_cached_property(self,fget:t.Callable[[t.Any],t.Any],name:t.Optional[str]=None,doc:t.Optional[str]=None)
+flask.helpers.locked_cached_property.__delete__(self,obj:object)->None
+flask.helpers.locked_cached_property.__get__(self,obj:object,type:type=None)->t.Any
+flask.helpers.locked_cached_property.__init__(self,fget:t.Callable[[t.Any],t.Any],name:t.Optional[str]=None,doc:t.Optional[str]=None)
+flask.helpers.locked_cached_property.__set__(self,obj:object,value:t.Any)->None
+flask.helpers.make_response(*args:t.Any)->'Response'
+flask.helpers.safe_join(directory:str,*pathnames:str)->str
+flask.helpers.send_file(path_or_file:t.Union[os.PathLike,str,t.BinaryIO],mimetype:t.Optional[str]=None,as_attachment:bool=False,download_name:t.Optional[str]=None,attachment_filename:t.Optional[str]=None,conditional:bool=True,etag:t.Union[bool,str]=True,add_etags:t.Optional[bool]=None,last_modified:t.Optional[t.Union[datetime,int,float]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None,cache_timeout:t.Optional[int]=None)
+flask.helpers.send_from_directory(directory:t.Union[os.PathLike,str],path:t.Union[os.PathLike,str],filename:t.Optional[str]=None,**kwargs:t.Any)->'Response'
+flask.helpers.stream_with_context(generator_or_function:t.Union[t.Iterator[t.AnyStr],t.Callable[...,t.Iterator[t.AnyStr]]])->t.Iterator[t.AnyStr]
+flask.helpers.total_seconds(td:timedelta)->int
+flask.helpers.url_for(endpoint:str,**values:t.Any)->str
+flask.make_response(*args:t.Any)->'Response'
+flask.safe_join(directory:str,*pathnames:str)->str
+flask.send_file(path_or_file:t.Union[os.PathLike,str,t.BinaryIO],mimetype:t.Optional[str]=None,as_attachment:bool=False,download_name:t.Optional[str]=None,attachment_filename:t.Optional[str]=None,conditional:bool=True,etag:t.Union[bool,str]=True,add_etags:t.Optional[bool]=None,last_modified:t.Optional[t.Union[datetime,int,float]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None,cache_timeout:t.Optional[int]=None)
+flask.send_from_directory(directory:t.Union[os.PathLike,str],path:t.Union[os.PathLike,str],filename:t.Optional[str]=None,**kwargs:t.Any)->'Response'
+flask.stream_with_context(generator_or_function:t.Union[t.Iterator[t.AnyStr],t.Callable[...,t.Iterator[t.AnyStr]]])->t.Iterator[t.AnyStr]
+flask.url_for(endpoint:str,**values:t.Any)->str
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/scaffold.py----------------------------------------
-A:flask.scaffold._sentinel->object()
-A:flask.scaffold.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
-A:flask.scaffold.root_path->get_root_path(self.import_name)
-A:flask.scaffold.self.cli->AppGroup()
-A:flask.scaffold.value->value.rstrip('/').rstrip('/')
-A:flask.scaffold.basename->os.path.basename(self.static_folder)
-A:flask.scaffold.max_age->self.get_send_file_max_age(filename)
-A:flask.scaffold.endpoint->options.pop('endpoint', None)
-A:flask.scaffold.(exc_class, code)->self._get_exc_class_and_code(code_or_exception)
-A:flask.scaffold.self.error_handler_spec[None][code][exc_class]->typing.cast('ErrorHandlerCallable[Exception]', f)
-A:flask.scaffold.cls->type(loader)
-A:flask.scaffold.spec->importlib.util.find_spec(root_mod_name)
-A:flask.scaffold.loader->pkgutil.get_loader(root_mod_name)
-A:flask.scaffold.filename->pkgutil.get_loader(root_mod_name).get_filename(root_mod_name)
-A:flask.scaffold.package_path->_find_package_path(root_mod_name)
-A:flask.scaffold.(root_mod_name, _, _)->import_name.partition('.')
-A:flask.scaffold.py_prefix->os.path.abspath(sys.prefix)
-A:flask.scaffold.(site_parent, site_folder)->os.path.split(package_path)
-A:flask.scaffold.(parent, folder)->os.path.split(site_parent)
-flask.scaffold.Scaffold(self,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,root_path:t.Optional[str]=None)
-flask.scaffold.Scaffold.__init__(self,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,root_path:t.Optional[str]=None)
-flask.scaffold.Scaffold.__repr__(self)->str
-flask.scaffold.Scaffold._get_exc_class_and_code(exc_class_or_code:t.Union[t.Type[Exception],int])->t.Tuple[t.Type[Exception], t.Optional[int]]
-flask.scaffold.Scaffold._is_setup_finished(self)->bool
-flask.scaffold.Scaffold._method_route(self,method:str,rule:str,options:dict)->t.Callable
-flask.scaffold.Scaffold.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
-flask.scaffold.Scaffold.after_request(self,f:AfterRequestCallable)->AfterRequestCallable
-flask.scaffold.Scaffold.before_request(self,f:BeforeRequestCallable)->BeforeRequestCallable
-flask.scaffold.Scaffold.context_processor(self,f:TemplateContextProcessorCallable)->TemplateContextProcessorCallable
-flask.scaffold.Scaffold.delete(self,rule:str,**options:t.Any)->t.Callable
-flask.scaffold.Scaffold.endpoint(self,endpoint:str)->t.Callable
-flask.scaffold.Scaffold.errorhandler(self,code_or_exception:t.Union[t.Type[GenericException],int])->t.Callable[['ErrorHandlerCallable[GenericException]'], 'ErrorHandlerCallable[GenericException]']
-flask.scaffold.Scaffold.get(self,rule:str,**options:t.Any)->t.Callable
-flask.scaffold.Scaffold.get_send_file_max_age(self,filename:t.Optional[str])->t.Optional[int]
-flask.scaffold.Scaffold.has_static_folder(self)->bool
-flask.scaffold.Scaffold.jinja_loader(self)->t.Optional[FileSystemLoader]
-flask.scaffold.Scaffold.open_resource(self,resource:str,mode:str='rb')->t.IO[t.AnyStr]
-flask.scaffold.Scaffold.patch(self,rule:str,**options:t.Any)->t.Callable
-flask.scaffold.Scaffold.post(self,rule:str,**options:t.Any)->t.Callable
-flask.scaffold.Scaffold.put(self,rule:str,**options:t.Any)->t.Callable
-flask.scaffold.Scaffold.register_error_handler(self,code_or_exception:t.Union[t.Type[GenericException],int],f:'ErrorHandlerCallable[GenericException]')->None
-flask.scaffold.Scaffold.route(self,rule:str,**options:t.Any)->t.Callable
-flask.scaffold.Scaffold.send_static_file(self,filename:str)->'Response'
-flask.scaffold.Scaffold.static_folder(self)->t.Optional[str]
-flask.scaffold.Scaffold.static_folder(self,value:t.Optional[t.Union[str,os.PathLike]])->None
-flask.scaffold.Scaffold.static_url_path(self)->t.Optional[str]
-flask.scaffold.Scaffold.static_url_path(self,value:t.Optional[str])->None
-flask.scaffold.Scaffold.teardown_request(self,f:TeardownCallable)->TeardownCallable
-flask.scaffold.Scaffold.url_defaults(self,f:URLDefaultCallable)->URLDefaultCallable
-flask.scaffold.Scaffold.url_value_preprocessor(self,f:URLValuePreprocessorCallable)->URLValuePreprocessorCallable
-flask.scaffold._endpoint_from_view_func(view_func:t.Callable)->str
-flask.scaffold._find_package_path(root_mod_name)
-flask.scaffold._matching_loader_thinks_module_is_package(loader,mod_name)
-flask.scaffold.find_package(import_name:str)
-flask.scaffold.setupmethod(f:F)->F
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/blueprints.py----------------------------------------
+A:flask.blueprints.subdomain->self.options.get('subdomain')
+A:flask.blueprints.url_prefix->self.options.get('url_prefix')
+A:flask.blueprints.self.name->self.options.get('name', blueprint.name)
+A:flask.blueprints.self.name_prefix->self.options.get('name_prefix', '')
+A:flask.blueprints.self.url_defaults->dict(self.blueprint.url_values_defaults)
+A:flask.blueprints.rule->'/'.join((self.url_prefix.rstrip('/'), rule.lstrip('/')))
+A:flask.blueprints.endpoint->_endpoint_from_view_func(view_func)
+A:flask.blueprints.defaults->dict(defaults, **options.pop('defaults'))
+A:flask.blueprints.name_prefix->options.get('name_prefix', '')
+A:flask.blueprints.self_name->options.get('name', self.name)
+A:flask.blueprints.name->f'{name_prefix}.{self_name}'.lstrip('.')
+A:flask.blueprints.state->self.make_setup_state(app, options, first_bp_registration)
+A:flask.blueprints.value->defaultdict(dict, {code: {exc_class: func for (exc_class, func) in code_values.items()} for (code, code_values) in value.items()})
+A:flask.blueprints.cli_resolved_group->options.get('cli_group', self.cli_group)
+A:flask.blueprints.bp_options->bp_options.copy().copy()
+A:flask.blueprints.bp_url_prefix->bp_options.copy().copy().get('url_prefix')
+flask.Blueprint(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
+flask.Blueprint._is_setup_finished(self)->bool
+flask.Blueprint.add_app_template_filter(self,f:TemplateFilterCallable,name:t.Optional[str]=None)->None
+flask.Blueprint.add_app_template_global(self,f:TemplateGlobalCallable,name:t.Optional[str]=None)->None
+flask.Blueprint.add_app_template_test(self,f:TemplateTestCallable,name:t.Optional[str]=None)->None
+flask.Blueprint.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
+flask.Blueprint.after_app_request(self,f:AfterRequestCallable)->AfterRequestCallable
+flask.Blueprint.app_context_processor(self,f:TemplateContextProcessorCallable)->TemplateContextProcessorCallable
+flask.Blueprint.app_errorhandler(self,code:t.Union[t.Type[Exception],int])->t.Callable
+flask.Blueprint.app_template_filter(self,name:t.Optional[str]=None)->t.Callable[[TemplateFilterCallable], TemplateFilterCallable]
+flask.Blueprint.app_template_global(self,name:t.Optional[str]=None)->t.Callable[[TemplateGlobalCallable], TemplateGlobalCallable]
+flask.Blueprint.app_template_test(self,name:t.Optional[str]=None)->t.Callable[[TemplateTestCallable], TemplateTestCallable]
+flask.Blueprint.app_url_defaults(self,f:URLDefaultCallable)->URLDefaultCallable
+flask.Blueprint.app_url_value_preprocessor(self,f:URLValuePreprocessorCallable)->URLValuePreprocessorCallable
+flask.Blueprint.before_app_first_request(self,f:BeforeFirstRequestCallable)->BeforeFirstRequestCallable
+flask.Blueprint.before_app_request(self,f:BeforeRequestCallable)->BeforeRequestCallable
+flask.Blueprint.make_setup_state(self,app:'Flask',options:dict,first_registration:bool=False)->BlueprintSetupState
+flask.Blueprint.record(self,func:t.Callable)->None
+flask.Blueprint.record_once(self,func:t.Callable)->None
+flask.Blueprint.register(self,app:'Flask',options:dict)->None
+flask.Blueprint.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
+flask.Blueprint.teardown_app_request(self,f:TeardownCallable)->TeardownCallable
+flask.BlueprintSetupState(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
+flask.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,**options:t.Any)->None
+flask.blueprints.Blueprint(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
+flask.blueprints.Blueprint.__init__(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
+flask.blueprints.Blueprint._is_setup_finished(self)->bool
+flask.blueprints.Blueprint.add_app_template_filter(self,f:TemplateFilterCallable,name:t.Optional[str]=None)->None
+flask.blueprints.Blueprint.add_app_template_global(self,f:TemplateGlobalCallable,name:t.Optional[str]=None)->None
+flask.blueprints.Blueprint.add_app_template_test(self,f:TemplateTestCallable,name:t.Optional[str]=None)->None
+flask.blueprints.Blueprint.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
+flask.blueprints.Blueprint.after_app_request(self,f:AfterRequestCallable)->AfterRequestCallable
+flask.blueprints.Blueprint.app_context_processor(self,f:TemplateContextProcessorCallable)->TemplateContextProcessorCallable
+flask.blueprints.Blueprint.app_errorhandler(self,code:t.Union[t.Type[Exception],int])->t.Callable
+flask.blueprints.Blueprint.app_template_filter(self,name:t.Optional[str]=None)->t.Callable[[TemplateFilterCallable], TemplateFilterCallable]
+flask.blueprints.Blueprint.app_template_global(self,name:t.Optional[str]=None)->t.Callable[[TemplateGlobalCallable], TemplateGlobalCallable]
+flask.blueprints.Blueprint.app_template_test(self,name:t.Optional[str]=None)->t.Callable[[TemplateTestCallable], TemplateTestCallable]
+flask.blueprints.Blueprint.app_url_defaults(self,f:URLDefaultCallable)->URLDefaultCallable
+flask.blueprints.Blueprint.app_url_value_preprocessor(self,f:URLValuePreprocessorCallable)->URLValuePreprocessorCallable
+flask.blueprints.Blueprint.before_app_first_request(self,f:BeforeFirstRequestCallable)->BeforeFirstRequestCallable
+flask.blueprints.Blueprint.before_app_request(self,f:BeforeRequestCallable)->BeforeRequestCallable
+flask.blueprints.Blueprint.make_setup_state(self,app:'Flask',options:dict,first_registration:bool=False)->BlueprintSetupState
+flask.blueprints.Blueprint.record(self,func:t.Callable)->None
+flask.blueprints.Blueprint.record_once(self,func:t.Callable)->None
+flask.blueprints.Blueprint.register(self,app:'Flask',options:dict)->None
+flask.blueprints.Blueprint.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
+flask.blueprints.Blueprint.teardown_app_request(self,f:TeardownCallable)->TeardownCallable
+flask.blueprints.BlueprintSetupState(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
+flask.blueprints.BlueprintSetupState.__init__(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
+flask.blueprints.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,**options:t.Any)->None
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/logging.py----------------------------------------
-A:flask.logging.level->logging.getLogger(app.name).getEffectiveLevel()
-A:flask.logging.default_handler->logging.StreamHandler(wsgi_errors_stream)
-A:flask.logging.logger->logging.getLogger(app.name)
-flask.logging.create_logger(app:'Flask')->logging.Logger
-flask.logging.has_level_handler(logger:logging.Logger)->bool
-flask.logging.wsgi_errors_stream()->t.TextIO
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/debughelpers.py----------------------------------------
-A:flask.debughelpers.form_matches->request.form.getlist(key)
-A:flask.debughelpers.names->', '.join((repr(x) for x in form_matches))
-A:flask.debughelpers.self.msg->''.join(buf)
-A:flask.debughelpers.src_info->repr(srcobj)
-flask.debughelpers.DebugFilesKeyError(self,request,key)
-flask.debughelpers.DebugFilesKeyError.__init__(self,request,key)
-flask.debughelpers.DebugFilesKeyError.__str__(self)
-flask.debughelpers.FormDataRoutingRedirect(self,request)
-flask.debughelpers.FormDataRoutingRedirect.__init__(self,request)
-flask.debughelpers.UnexpectedUnicodeError(AssertionError,UnicodeError)
-flask.debughelpers._dump_loader_info(loader)->t.Generator
-flask.debughelpers.attach_enctype_error_multidict(request)
-flask.debughelpers.explain_ignored_app_run()->None
-flask.debughelpers.explain_template_loading_attempts(app:Flask,template,attempts)->None
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/app.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/app.py----------------------------------------
 A:flask.app.testing->ConfigAttribute('TESTING')
 A:flask.app.secret_key->ConfigAttribute('SECRET_KEY')
 A:flask.app.session_cookie_name->ConfigAttribute('SESSION_COOKIE_NAME')
@@ -384,25 +314,213 @@ flask.app.Flask.wsgi_app(self,environ:dict,start_response:t.Callable)->t.Any
 flask.app._make_timedelta(value:t.Optional[timedelta])->t.Optional[timedelta]
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/signals.py----------------------------------------
-A:flask.signals._signals->Namespace()
-A:flask.signals.template_rendered->Namespace().signal('template-rendered')
-A:flask.signals.before_render_template->Namespace().signal('before-render-template')
-A:flask.signals.request_started->Namespace().signal('request-started')
-A:flask.signals.request_finished->Namespace().signal('request-finished')
-A:flask.signals.request_tearing_down->Namespace().signal('request-tearing-down')
-A:flask.signals.got_request_exception->Namespace().signal('got-request-exception')
-A:flask.signals.appcontext_tearing_down->Namespace().signal('appcontext-tearing-down')
-A:flask.signals.appcontext_pushed->Namespace().signal('appcontext-pushed')
-A:flask.signals.appcontext_popped->Namespace().signal('appcontext-popped')
-A:flask.signals.message_flashed->Namespace().signal('message-flashed')
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/scaffold.py----------------------------------------
+A:flask.scaffold._sentinel->object()
+A:flask.scaffold.F->typing.TypeVar('F', bound=t.Callable[..., t.Any])
+A:flask.scaffold.root_path->get_root_path(self.import_name)
+A:flask.scaffold.self.cli->AppGroup()
+A:flask.scaffold.value->value.rstrip('/').rstrip('/')
+A:flask.scaffold.basename->os.path.basename(self.static_folder)
+A:flask.scaffold.max_age->self.get_send_file_max_age(filename)
+A:flask.scaffold.endpoint->options.pop('endpoint', None)
+A:flask.scaffold.(exc_class, code)->self._get_exc_class_and_code(code_or_exception)
+A:flask.scaffold.self.error_handler_spec[None][code][exc_class]->typing.cast('ErrorHandlerCallable[Exception]', f)
+A:flask.scaffold.cls->type(loader)
+A:flask.scaffold.spec->importlib.util.find_spec(root_mod_name)
+A:flask.scaffold.loader->pkgutil.get_loader(root_mod_name)
+A:flask.scaffold.filename->pkgutil.get_loader(root_mod_name).get_filename(root_mod_name)
+A:flask.scaffold.package_path->_find_package_path(root_mod_name)
+A:flask.scaffold.(root_mod_name, _, _)->import_name.partition('.')
+A:flask.scaffold.py_prefix->os.path.abspath(sys.prefix)
+A:flask.scaffold.(site_parent, site_folder)->os.path.split(package_path)
+A:flask.scaffold.(parent, folder)->os.path.split(site_parent)
+flask.scaffold.Scaffold(self,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,root_path:t.Optional[str]=None)
+flask.scaffold.Scaffold.__init__(self,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,root_path:t.Optional[str]=None)
+flask.scaffold.Scaffold.__repr__(self)->str
+flask.scaffold.Scaffold._get_exc_class_and_code(exc_class_or_code:t.Union[t.Type[Exception],int])->t.Tuple[t.Type[Exception], t.Optional[int]]
+flask.scaffold.Scaffold._is_setup_finished(self)->bool
+flask.scaffold.Scaffold._method_route(self,method:str,rule:str,options:dict)->t.Callable
+flask.scaffold.Scaffold.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
+flask.scaffold.Scaffold.after_request(self,f:AfterRequestCallable)->AfterRequestCallable
+flask.scaffold.Scaffold.before_request(self,f:BeforeRequestCallable)->BeforeRequestCallable
+flask.scaffold.Scaffold.context_processor(self,f:TemplateContextProcessorCallable)->TemplateContextProcessorCallable
+flask.scaffold.Scaffold.delete(self,rule:str,**options:t.Any)->t.Callable
+flask.scaffold.Scaffold.endpoint(self,endpoint:str)->t.Callable
+flask.scaffold.Scaffold.errorhandler(self,code_or_exception:t.Union[t.Type[GenericException],int])->t.Callable[['ErrorHandlerCallable[GenericException]'], 'ErrorHandlerCallable[GenericException]']
+flask.scaffold.Scaffold.get(self,rule:str,**options:t.Any)->t.Callable
+flask.scaffold.Scaffold.get_send_file_max_age(self,filename:t.Optional[str])->t.Optional[int]
+flask.scaffold.Scaffold.has_static_folder(self)->bool
+flask.scaffold.Scaffold.jinja_loader(self)->t.Optional[FileSystemLoader]
+flask.scaffold.Scaffold.open_resource(self,resource:str,mode:str='rb')->t.IO[t.AnyStr]
+flask.scaffold.Scaffold.patch(self,rule:str,**options:t.Any)->t.Callable
+flask.scaffold.Scaffold.post(self,rule:str,**options:t.Any)->t.Callable
+flask.scaffold.Scaffold.put(self,rule:str,**options:t.Any)->t.Callable
+flask.scaffold.Scaffold.register_error_handler(self,code_or_exception:t.Union[t.Type[GenericException],int],f:'ErrorHandlerCallable[GenericException]')->None
+flask.scaffold.Scaffold.route(self,rule:str,**options:t.Any)->t.Callable
+flask.scaffold.Scaffold.send_static_file(self,filename:str)->'Response'
+flask.scaffold.Scaffold.static_folder(self)->t.Optional[str]
+flask.scaffold.Scaffold.static_folder(self,value:t.Optional[t.Union[str,os.PathLike]])->None
+flask.scaffold.Scaffold.static_url_path(self)->t.Optional[str]
+flask.scaffold.Scaffold.static_url_path(self,value:t.Optional[str])->None
+flask.scaffold.Scaffold.teardown_request(self,f:TeardownCallable)->TeardownCallable
+flask.scaffold.Scaffold.url_defaults(self,f:URLDefaultCallable)->URLDefaultCallable
+flask.scaffold.Scaffold.url_value_preprocessor(self,f:URLValuePreprocessorCallable)->URLValuePreprocessorCallable
+flask.scaffold._endpoint_from_view_func(view_func:t.Callable)->str
+flask.scaffold._find_package_path(root_mod_name)
+flask.scaffold._matching_loader_thinks_module_is_package(loader,mod_name)
+flask.scaffold.find_package(import_name:str)
+flask.scaffold.setupmethod(f:F)->F
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/typing.py----------------------------------------
-A:flask.typing.GenericException->typing.TypeVar('GenericException', bound=Exception, contravariant=True)
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/sessions.py----------------------------------------
+A:flask.sessions.self['_permanent']->bool(value)
+A:flask.sessions.rv->rv.rsplit(':', 1)[0].lstrip('.').rsplit(':', 1)[0].lstrip('.')
+A:flask.sessions.ip->is_ip(rv)
+A:flask.sessions.session_json_serializer->TaggedJSONSerializer()
+A:flask.sessions.digest_method->staticmethod(hashlib.sha1)
+A:flask.sessions.signer_kwargs->dict(key_derivation=self.key_derivation, digest_method=self.digest_method)
+A:flask.sessions.s->self.get_signing_serializer(app)
+A:flask.sessions.val->self.get_signing_serializer(app).dumps(dict(session))
+A:flask.sessions.max_age->int(app.permanent_session_lifetime.total_seconds())
+A:flask.sessions.data->self.get_signing_serializer(app).loads(val, max_age=max_age)
+A:flask.sessions.name->self.get_cookie_name(app)
+A:flask.sessions.domain->self.get_cookie_domain(app)
+A:flask.sessions.path->self.get_cookie_path(app)
+A:flask.sessions.secure->self.get_cookie_secure(app)
+A:flask.sessions.samesite->self.get_cookie_samesite(app)
+A:flask.sessions.httponly->self.get_cookie_httponly(app)
+A:flask.sessions.expires->self.get_expiration_time(app, session)
+flask.sessions.NullSession(SecureCookieSession)
+flask.sessions.NullSession._fail(self,*args:t.Any,**kwargs:t.Any)->'te.NoReturn'
+flask.sessions.SecureCookieSession(self,initial:t.Any=None)
+flask.sessions.SecureCookieSession.__getitem__(self,key:str)->t.Any
+flask.sessions.SecureCookieSession.__init__(self,initial:t.Any=None)
+flask.sessions.SecureCookieSession.get(self,key:str,default:t.Any=None)->t.Any
+flask.sessions.SecureCookieSession.setdefault(self,key:str,default:t.Any=None)->t.Any
+flask.sessions.SecureCookieSessionInterface(SessionInterface)
+flask.sessions.SecureCookieSessionInterface.get_signing_serializer(self,app:'Flask')->t.Optional[URLSafeTimedSerializer]
+flask.sessions.SecureCookieSessionInterface.open_session(self,app:'Flask',request:'Request')->t.Optional[SecureCookieSession]
+flask.sessions.SecureCookieSessionInterface.save_session(self,app:'Flask',session:SessionMixin,response:'Response')->None
+flask.sessions.SessionInterface
+flask.sessions.SessionInterface.get_cookie_domain(self,app:'Flask')->t.Optional[str]
+flask.sessions.SessionInterface.get_cookie_httponly(self,app:'Flask')->bool
+flask.sessions.SessionInterface.get_cookie_name(self,app:'Flask')->str
+flask.sessions.SessionInterface.get_cookie_path(self,app:'Flask')->str
+flask.sessions.SessionInterface.get_cookie_samesite(self,app:'Flask')->str
+flask.sessions.SessionInterface.get_cookie_secure(self,app:'Flask')->bool
+flask.sessions.SessionInterface.get_expiration_time(self,app:'Flask',session:SessionMixin)->t.Optional[datetime]
+flask.sessions.SessionInterface.is_null_session(self,obj:object)->bool
+flask.sessions.SessionInterface.make_null_session(self,app:'Flask')->NullSession
+flask.sessions.SessionInterface.open_session(self,app:'Flask',request:'Request')->t.Optional[SessionMixin]
+flask.sessions.SessionInterface.save_session(self,app:'Flask',session:SessionMixin,response:'Response')->None
+flask.sessions.SessionInterface.should_set_cookie(self,app:'Flask',session:SessionMixin)->bool
+flask.sessions.SessionMixin(MutableMapping)
+flask.sessions.SessionMixin.permanent(self)->bool
+flask.sessions.SessionMixin.permanent(self,value:bool)->None
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/config.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/ctx.py----------------------------------------
+A:flask.ctx._sentinel->object()
+A:flask.ctx.reqctx->top.copy()
+A:flask.ctx.self.url_adapter->app.create_url_adapter(self.request)
+A:flask.ctx.self.g->app.app_ctx_globals_class()
+A:flask.ctx.rv->globals._request_ctx_stack.pop()
+A:flask.ctx.request->app.request_class(environ)
+A:flask.ctx.result->self.url_adapter.match(return_rule=True)
+A:flask.ctx.app_ctx->self._implicit_app_ctx_stack.pop()
+A:flask.ctx.self.session->session_interface.make_null_session(self.app)
+A:flask.ctx.request_close->getattr(self.request, 'close', None)
+flask.after_this_request(f:AfterRequestCallable)->AfterRequestCallable
+flask.copy_current_request_context(f:t.Callable)->t.Callable
+flask.ctx.AppContext(self,app:'Flask')
+flask.ctx.AppContext.__enter__(self)->'AppContext'
+flask.ctx.AppContext.__exit__(self,exc_type:type,exc_value:BaseException,tb:TracebackType)->None
+flask.ctx.AppContext.__init__(self,app:'Flask')
+flask.ctx.AppContext.pop(self,exc:t.Optional[BaseException]=_sentinel)->None
+flask.ctx.AppContext.push(self)->None
+flask.ctx.RequestContext(self,app:'Flask',environ:dict,request:t.Optional['Request']=None,session:t.Optional['SessionMixin']=None)
+flask.ctx.RequestContext.__enter__(self)->'RequestContext'
+flask.ctx.RequestContext.__exit__(self,exc_type:type,exc_value:BaseException,tb:TracebackType)->None
+flask.ctx.RequestContext.__init__(self,app:'Flask',environ:dict,request:t.Optional['Request']=None,session:t.Optional['SessionMixin']=None)
+flask.ctx.RequestContext.__repr__(self)->str
+flask.ctx.RequestContext.auto_pop(self,exc:t.Optional[BaseException])->None
+flask.ctx.RequestContext.copy(self)->'RequestContext'
+flask.ctx.RequestContext.g(self)->AppContext
+flask.ctx.RequestContext.g(self,value:AppContext)->None
+flask.ctx.RequestContext.match_request(self)->None
+flask.ctx.RequestContext.pop(self,exc:t.Optional[BaseException]=_sentinel)->None
+flask.ctx.RequestContext.push(self)->None
+flask.ctx._AppCtxGlobals
+flask.ctx._AppCtxGlobals.__contains__(self,item:str)->bool
+flask.ctx._AppCtxGlobals.__delattr__(self,name:str)->None
+flask.ctx._AppCtxGlobals.__getattr__(self,name:str)->t.Any
+flask.ctx._AppCtxGlobals.__iter__(self)->t.Iterator[str]
+flask.ctx._AppCtxGlobals.__repr__(self)->str
+flask.ctx._AppCtxGlobals.__setattr__(self,name:str,value:t.Any)->None
+flask.ctx._AppCtxGlobals.get(self,name:str,default:t.Optional[t.Any]=None)->t.Any
+flask.ctx._AppCtxGlobals.pop(self,name:str,default:t.Any=_sentinel)->t.Any
+flask.ctx._AppCtxGlobals.setdefault(self,name:str,default:t.Any=None)->t.Any
+flask.ctx.after_this_request(f:AfterRequestCallable)->AfterRequestCallable
+flask.ctx.copy_current_request_context(f:t.Callable)->t.Callable
+flask.ctx.has_app_context()->bool
+flask.ctx.has_request_context()->bool
+flask.has_app_context()->bool
+flask.has_request_context()->bool
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/testing.py----------------------------------------
+A:flask.testing.url->url_parse(path)
+A:flask.testing.environ_overrides->kwargs.setdefault('environ_overrides', {})
+A:flask.testing.sess->session_interface.open_session(app, c.request)
+A:flask.testing.resp->app.response_class()
+A:flask.testing.headers->app.response_class().get_wsgi_headers(c.request.environ)
+A:flask.testing.builder->EnvironBuilder(self.application, *args, **kwargs)
+A:flask.testing.builder.environ_base->copy_environ(builder.environ_base or {})
+A:flask.testing.request->EnvironBuilder(self.application, *args, **kwargs).get_request()
+A:flask.testing.request.environ->copy_environ(request.environ)
+A:flask.testing.kwargs['environ_base']->copy_environ(kwargs.get('environ_base', {}))
+A:flask.testing.kwargs['obj']->ScriptInfo(create_app=lambda : self.app)
+flask.testing.EnvironBuilder(self,app:'Flask',path:str='/',base_url:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_scheme:t.Optional[str]=None,*args:t.Any,**kwargs:t.Any)
+flask.testing.EnvironBuilder.__init__(self,app:'Flask',path:str='/',base_url:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_scheme:t.Optional[str]=None,*args:t.Any,**kwargs:t.Any)
+flask.testing.EnvironBuilder.json_dumps(self,obj:t.Any,**kwargs:t.Any)->str
+flask.testing.FlaskCliRunner(self,app:'Flask',**kwargs:t.Any)
+flask.testing.FlaskCliRunner.__init__(self,app:'Flask',**kwargs:t.Any)
+flask.testing.FlaskCliRunner.invoke(self,cli:t.Any=None,args:t.Any=None,**kwargs:t.Any)->t.Any
+flask.testing.FlaskClient(self,*args:t.Any,**kwargs:t.Any)
+flask.testing.FlaskClient.__enter__(self)->'FlaskClient'
+flask.testing.FlaskClient.__exit__(self,exc_type:type,exc_value:BaseException,tb:TracebackType)->None
+flask.testing.FlaskClient.__init__(self,*args:t.Any,**kwargs:t.Any)
+flask.testing.FlaskClient.open(self,*args:t.Any,as_tuple:bool=False,buffered:bool=False,follow_redirects:bool=False,**kwargs:t.Any)->'Response'
+flask.testing.FlaskClient.session_transaction(self,*args:t.Any,**kwargs:t.Any)->t.Generator[SessionMixin, None, None]
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/debughelpers.py----------------------------------------
+A:flask.debughelpers.form_matches->request.form.getlist(key)
+A:flask.debughelpers.names->', '.join((repr(x) for x in form_matches))
+A:flask.debughelpers.self.msg->''.join(buf)
+A:flask.debughelpers.src_info->repr(srcobj)
+flask.debughelpers.DebugFilesKeyError(self,request,key)
+flask.debughelpers.DebugFilesKeyError.__init__(self,request,key)
+flask.debughelpers.DebugFilesKeyError.__str__(self)
+flask.debughelpers.FormDataRoutingRedirect(self,request)
+flask.debughelpers.FormDataRoutingRedirect.__init__(self,request)
+flask.debughelpers.UnexpectedUnicodeError(AssertionError,UnicodeError)
+flask.debughelpers._dump_loader_info(loader)->t.Generator
+flask.debughelpers.attach_enctype_error_multidict(request)
+flask.debughelpers.explain_ignored_app_run()->None
+flask.debughelpers.explain_template_loading_attempts(app:Flask,template,attempts)->None
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/logging.py----------------------------------------
+A:flask.logging.level->logging.getLogger(app.name).getEffectiveLevel()
+A:flask.logging.default_handler->logging.StreamHandler(wsgi_errors_stream)
+A:flask.logging.logger->logging.getLogger(app.name)
+flask.logging.create_logger(app:'Flask')->logging.Logger
+flask.logging.has_level_handler(logger:logging.Logger)->bool
+flask.logging.wsgi_errors_stream()->t.TextIO
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/config.py----------------------------------------
 A:flask.config.rv->os.environ.get(variable_name)
 A:flask.config.filename->os.path.join(self.root_path, filename)
 A:flask.config.d->types.ModuleType('config')
@@ -437,7 +555,60 @@ flask.config.ConfigAttribute.__init__(self,name:str,get_converter:t.Optional[t.C
 flask.config.ConfigAttribute.__set__(self,obj:t.Any,value:t.Any)->None
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/cli.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/views.py----------------------------------------
+A:flask.views.http_method_funcs->frozenset(['get', 'post', 'head', 'options', 'delete', 'put', 'trace', 'patch'])
+A:flask.views.self->decorator(view).view_class(*class_args, **class_kwargs)
+A:flask.views.view->decorator(view)
+A:flask.views.methods->set()
+A:flask.views.meth->getattr(self, 'get', None)
+flask.views.MethodView(View,metaclass=MethodViewType)
+flask.views.MethodView.dispatch_request(self,*args:t.Any,**kwargs:t.Any)->ResponseReturnValue
+flask.views.MethodViewType(cls,name,bases,d)
+flask.views.MethodViewType.__init__(cls,name,bases,d)
+flask.views.View
+flask.views.View.as_view(cls,name:str,*class_args:t.Any,**class_kwargs:t.Any)->t.Callable
+flask.views.View.dispatch_request(self)->ResponseReturnValue
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/wrappers.py----------------------------------------
+flask.wrappers.Request(RequestBase)
+flask.wrappers.Request._load_form_data(self)->None
+flask.wrappers.Request.blueprint(self)->t.Optional[str]
+flask.wrappers.Request.blueprints(self)->t.List[str]
+flask.wrappers.Request.endpoint(self)->t.Optional[str]
+flask.wrappers.Request.max_content_length(self)->t.Optional[int]
+flask.wrappers.Request.on_json_loading_failed(self,e:Exception)->'te.NoReturn'
+flask.wrappers.Response(ResponseBase)
+flask.wrappers.Response.max_cookie_size(self)->int
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/signals.py----------------------------------------
+A:flask.signals._signals->Namespace()
+A:flask.signals.template_rendered->Namespace().signal('template-rendered')
+A:flask.signals.before_render_template->Namespace().signal('before-render-template')
+A:flask.signals.request_started->Namespace().signal('request-started')
+A:flask.signals.request_finished->Namespace().signal('request-finished')
+A:flask.signals.request_tearing_down->Namespace().signal('request-tearing-down')
+A:flask.signals.got_request_exception->Namespace().signal('got-request-exception')
+A:flask.signals.appcontext_tearing_down->Namespace().signal('appcontext-tearing-down')
+A:flask.signals.appcontext_pushed->Namespace().signal('appcontext-pushed')
+A:flask.signals.appcontext_popped->Namespace().signal('appcontext-popped')
+A:flask.signals.message_flashed->Namespace().signal('message-flashed')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/typing.py----------------------------------------
+A:flask.typing.GenericException->typing.TypeVar('GenericException', bound=Exception, contravariant=True)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/globals.py----------------------------------------
+A:flask.globals._request_ctx_stack->LocalStack()
+A:flask.globals._app_ctx_stack->LocalStack()
+flask.globals._find_app()
+flask.globals._lookup_app_object(name)
+flask.globals._lookup_req_object(name)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/cli.py----------------------------------------
 A:flask.cli.app->DispatchingApp(info.load_app, use_eager_loading=eager_loading)
 A:flask.cli.app_factory->getattr(module, attr_name, None)
 A:flask.cli.sig->inspect.signature(app_factory)
@@ -512,178 +683,26 @@ flask.cli.show_server_banner(env,debug,app_import_path,eager_loading)
 flask.cli.with_appcontext(f)
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/views.py----------------------------------------
-A:flask.views.http_method_funcs->frozenset(['get', 'post', 'head', 'options', 'delete', 'put', 'trace', 'patch'])
-A:flask.views.self->decorator(view).view_class(*class_args, **class_kwargs)
-A:flask.views.view->decorator(view)
-A:flask.views.methods->set()
-A:flask.views.meth->getattr(self, 'get', None)
-flask.views.MethodView(View,metaclass=MethodViewType)
-flask.views.MethodView.dispatch_request(self,*args:t.Any,**kwargs:t.Any)->ResponseReturnValue
-flask.views.MethodViewType(cls,name,bases,d)
-flask.views.MethodViewType.__init__(cls,name,bases,d)
-flask.views.View
-flask.views.View.as_view(cls,name:str,*class_args:t.Any,**class_kwargs:t.Any)->t.Callable
-flask.views.View.dispatch_request(self)->ResponseReturnValue
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/json/__init__.py----------------------------------------
+A:flask.json.__init__.encoding->kwargs.pop('encoding', None)
+A:flask.json.__init__.rv->json.dumps(obj, **kwargs)
+A:flask.json.__init__.fp->io.TextIOWrapper(fp, encoding)
+A:flask.json.__init__.s->s.decode(encoding).decode(encoding)
+flask.json.__init__.JSONDecoder(_json.JSONDecoder)
+flask.json.__init__.JSONEncoder(_json.JSONEncoder)
+flask.json.__init__.JSONEncoder.default(self,o:t.Any)->t.Any
+flask.json.__init__._dump_arg_defaults(kwargs:t.Dict[str,t.Any],app:t.Optional['Flask']=None)->None
+flask.json.__init__._load_arg_defaults(kwargs:t.Dict[str,t.Any],app:t.Optional['Flask']=None)->None
+flask.json.__init__.dump(obj:t.Any,fp:t.IO[str],app:t.Optional['Flask']=None,**kwargs:t.Any)->None
+flask.json.__init__.dumps(obj:t.Any,app:t.Optional['Flask']=None,**kwargs:t.Any)->str
+flask.json.__init__.htmlsafe_dump(obj:t.Any,fp:t.IO[str],**kwargs:t.Any)->None
+flask.json.__init__.htmlsafe_dumps(obj:t.Any,**kwargs:t.Any)->str
+flask.json.__init__.jsonify(*args:t.Any,**kwargs:t.Any)->'Response'
+flask.json.__init__.load(fp:t.IO[str],app:t.Optional['Flask']=None,**kwargs:t.Any)->t.Any
+flask.json.__init__.loads(s:str,app:t.Optional['Flask']=None,**kwargs:t.Any)->t.Any
 
 
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/templating.py----------------------------------------
-A:flask.templating.options['loader']->app.create_global_jinja_loader()
-A:flask.templating.rv->template.render(context)
-A:flask.templating.result->set()
-flask.render_template(template_name_or_list:t.Union[str,t.List[str]],**context:t.Any)->str
-flask.render_template_string(source:str,**context:t.Any)->str
-flask.templating.DispatchingJinjaLoader(self,app:'Flask')
-flask.templating.DispatchingJinjaLoader.__init__(self,app:'Flask')
-flask.templating.DispatchingJinjaLoader._get_source_explained(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
-flask.templating.DispatchingJinjaLoader._get_source_fast(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
-flask.templating.DispatchingJinjaLoader._iter_loaders(self,template:str)->t.Generator[t.Tuple['Scaffold', BaseLoader], None, None]
-flask.templating.DispatchingJinjaLoader.get_source(self,environment:Environment,template:str)->t.Tuple[str, t.Optional[str], t.Optional[t.Callable]]
-flask.templating.DispatchingJinjaLoader.list_templates(self)->t.List[str]
-flask.templating.Environment(self,app:'Flask',**options:t.Any)
-flask.templating.Environment.__init__(self,app:'Flask',**options:t.Any)
-flask.templating._default_template_ctx_processor()->t.Dict[str, t.Any]
-flask.templating._render(template:Template,context:dict,app:'Flask')->str
-flask.templating.render_template(template_name_or_list:t.Union[str,t.List[str]],**context:t.Any)->str
-flask.templating.render_template_string(source:str,**context:t.Any)->str
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/blueprints.py----------------------------------------
-A:flask.blueprints.subdomain->self.options.get('subdomain')
-A:flask.blueprints.url_prefix->self.options.get('url_prefix')
-A:flask.blueprints.self.name->self.options.get('name', blueprint.name)
-A:flask.blueprints.self.name_prefix->self.options.get('name_prefix', '')
-A:flask.blueprints.self.url_defaults->dict(self.blueprint.url_values_defaults)
-A:flask.blueprints.rule->'/'.join((self.url_prefix.rstrip('/'), rule.lstrip('/')))
-A:flask.blueprints.endpoint->_endpoint_from_view_func(view_func)
-A:flask.blueprints.defaults->dict(defaults, **options.pop('defaults'))
-A:flask.blueprints.name_prefix->options.get('name_prefix', '')
-A:flask.blueprints.self_name->options.get('name', self.name)
-A:flask.blueprints.name->f'{name_prefix}.{self_name}'.lstrip('.')
-A:flask.blueprints.state->self.make_setup_state(app, options, first_bp_registration)
-A:flask.blueprints.value->defaultdict(dict, {code: {exc_class: func for (exc_class, func) in code_values.items()} for (code, code_values) in value.items()})
-A:flask.blueprints.cli_resolved_group->options.get('cli_group', self.cli_group)
-A:flask.blueprints.bp_options->bp_options.copy().copy()
-A:flask.blueprints.bp_url_prefix->bp_options.copy().copy().get('url_prefix')
-flask.Blueprint(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
-flask.Blueprint._is_setup_finished(self)->bool
-flask.Blueprint.add_app_template_filter(self,f:TemplateFilterCallable,name:t.Optional[str]=None)->None
-flask.Blueprint.add_app_template_global(self,f:TemplateGlobalCallable,name:t.Optional[str]=None)->None
-flask.Blueprint.add_app_template_test(self,f:TemplateTestCallable,name:t.Optional[str]=None)->None
-flask.Blueprint.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
-flask.Blueprint.after_app_request(self,f:AfterRequestCallable)->AfterRequestCallable
-flask.Blueprint.app_context_processor(self,f:TemplateContextProcessorCallable)->TemplateContextProcessorCallable
-flask.Blueprint.app_errorhandler(self,code:t.Union[t.Type[Exception],int])->t.Callable
-flask.Blueprint.app_template_filter(self,name:t.Optional[str]=None)->t.Callable[[TemplateFilterCallable], TemplateFilterCallable]
-flask.Blueprint.app_template_global(self,name:t.Optional[str]=None)->t.Callable[[TemplateGlobalCallable], TemplateGlobalCallable]
-flask.Blueprint.app_template_test(self,name:t.Optional[str]=None)->t.Callable[[TemplateTestCallable], TemplateTestCallable]
-flask.Blueprint.app_url_defaults(self,f:URLDefaultCallable)->URLDefaultCallable
-flask.Blueprint.app_url_value_preprocessor(self,f:URLValuePreprocessorCallable)->URLValuePreprocessorCallable
-flask.Blueprint.before_app_first_request(self,f:BeforeFirstRequestCallable)->BeforeFirstRequestCallable
-flask.Blueprint.before_app_request(self,f:BeforeRequestCallable)->BeforeRequestCallable
-flask.Blueprint.make_setup_state(self,app:'Flask',options:dict,first_registration:bool=False)->BlueprintSetupState
-flask.Blueprint.record(self,func:t.Callable)->None
-flask.Blueprint.record_once(self,func:t.Callable)->None
-flask.Blueprint.register(self,app:'Flask',options:dict)->None
-flask.Blueprint.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
-flask.Blueprint.teardown_app_request(self,f:TeardownCallable)->TeardownCallable
-flask.BlueprintSetupState(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
-flask.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,**options:t.Any)->None
-flask.blueprints.Blueprint(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
-flask.blueprints.Blueprint.__init__(self,name:str,import_name:str,static_folder:t.Optional[t.Union[str,os.PathLike]]=None,static_url_path:t.Optional[str]=None,template_folder:t.Optional[str]=None,url_prefix:t.Optional[str]=None,subdomain:t.Optional[str]=None,url_defaults:t.Optional[dict]=None,root_path:t.Optional[str]=None,cli_group:t.Optional[str]=_sentinel)
-flask.blueprints.Blueprint._is_setup_finished(self)->bool
-flask.blueprints.Blueprint.add_app_template_filter(self,f:TemplateFilterCallable,name:t.Optional[str]=None)->None
-flask.blueprints.Blueprint.add_app_template_global(self,f:TemplateGlobalCallable,name:t.Optional[str]=None)->None
-flask.blueprints.Blueprint.add_app_template_test(self,f:TemplateTestCallable,name:t.Optional[str]=None)->None
-flask.blueprints.Blueprint.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,provide_automatic_options:t.Optional[bool]=None,**options:t.Any)->None
-flask.blueprints.Blueprint.after_app_request(self,f:AfterRequestCallable)->AfterRequestCallable
-flask.blueprints.Blueprint.app_context_processor(self,f:TemplateContextProcessorCallable)->TemplateContextProcessorCallable
-flask.blueprints.Blueprint.app_errorhandler(self,code:t.Union[t.Type[Exception],int])->t.Callable
-flask.blueprints.Blueprint.app_template_filter(self,name:t.Optional[str]=None)->t.Callable[[TemplateFilterCallable], TemplateFilterCallable]
-flask.blueprints.Blueprint.app_template_global(self,name:t.Optional[str]=None)->t.Callable[[TemplateGlobalCallable], TemplateGlobalCallable]
-flask.blueprints.Blueprint.app_template_test(self,name:t.Optional[str]=None)->t.Callable[[TemplateTestCallable], TemplateTestCallable]
-flask.blueprints.Blueprint.app_url_defaults(self,f:URLDefaultCallable)->URLDefaultCallable
-flask.blueprints.Blueprint.app_url_value_preprocessor(self,f:URLValuePreprocessorCallable)->URLValuePreprocessorCallable
-flask.blueprints.Blueprint.before_app_first_request(self,f:BeforeFirstRequestCallable)->BeforeFirstRequestCallable
-flask.blueprints.Blueprint.before_app_request(self,f:BeforeRequestCallable)->BeforeRequestCallable
-flask.blueprints.Blueprint.make_setup_state(self,app:'Flask',options:dict,first_registration:bool=False)->BlueprintSetupState
-flask.blueprints.Blueprint.record(self,func:t.Callable)->None
-flask.blueprints.Blueprint.record_once(self,func:t.Callable)->None
-flask.blueprints.Blueprint.register(self,app:'Flask',options:dict)->None
-flask.blueprints.Blueprint.register_blueprint(self,blueprint:'Blueprint',**options:t.Any)->None
-flask.blueprints.Blueprint.teardown_app_request(self,f:TeardownCallable)->TeardownCallable
-flask.blueprints.BlueprintSetupState(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
-flask.blueprints.BlueprintSetupState.__init__(self,blueprint:'Blueprint',app:'Flask',options:t.Any,first_registration:bool)
-flask.blueprints.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:t.Optional[str]=None,view_func:t.Optional[t.Callable]=None,**options:t.Any)->None
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/wrappers.py----------------------------------------
-flask.wrappers.Request(RequestBase)
-flask.wrappers.Request._load_form_data(self)->None
-flask.wrappers.Request.blueprint(self)->t.Optional[str]
-flask.wrappers.Request.blueprints(self)->t.List[str]
-flask.wrappers.Request.endpoint(self)->t.Optional[str]
-flask.wrappers.Request.max_content_length(self)->t.Optional[int]
-flask.wrappers.Request.on_json_loading_failed(self,e:Exception)->'te.NoReturn'
-flask.wrappers.Response(ResponseBase)
-flask.wrappers.Response.max_cookie_size(self)->int
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/__main__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/helpers.py----------------------------------------
-A:flask.helpers.val->os.environ.get('FLASK_SKIP_DOTENV')
-A:flask.helpers.gen->generator_or_function(*args, **kwargs)
-A:flask.helpers.wrapped_g->generator()
-A:flask.helpers.external->values.pop('_external', True)
-A:flask.helpers.anchor->values.pop('_anchor', None)
-A:flask.helpers.method->values.pop('_method', None)
-A:flask.helpers.scheme->values.pop('_scheme', None)
-A:flask.helpers.rv->url_adapter.build(endpoint, values, method=method, force_external=external)
-A:flask.helpers.flashes->list(filter(lambda f: f[0] in category_filter, flashes))
-A:flask.helpers.path->werkzeug.utils.safe_join(directory, *pathnames)
-A:flask.helpers.mod->sys.modules.get(import_name)
-A:flask.helpers.loader->pkgutil.get_loader(import_name)
-A:flask.helpers.filepath->getattr(mod, '__file__', None)
-A:flask.helpers.self.lock->RLock()
-flask.flash(message:str,category:str='message')->None
-flask.get_flashed_messages(with_categories:bool=False,category_filter:t.Iterable[str]=())->t.Union[t.List[str], t.List[t.Tuple[str, str]]]
-flask.get_template_attribute(template_name:str,attribute:str)->t.Any
-flask.helpers._prepare_send_file_kwargs(download_name:t.Optional[str]=None,attachment_filename:t.Optional[str]=None,etag:t.Optional[t.Union[bool,str]]=None,add_etags:t.Optional[t.Union[bool]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None,cache_timeout:t.Optional[int]=None,**kwargs:t.Any)->t.Dict[str, t.Any]
-flask.helpers._split_blueprint_path(name:str)->t.List[str]
-flask.helpers.flash(message:str,category:str='message')->None
-flask.helpers.get_debug_flag()->bool
-flask.helpers.get_env()->str
-flask.helpers.get_flashed_messages(with_categories:bool=False,category_filter:t.Iterable[str]=())->t.Union[t.List[str], t.List[t.Tuple[str, str]]]
-flask.helpers.get_load_dotenv(default:bool=True)->bool
-flask.helpers.get_root_path(import_name:str)->str
-flask.helpers.get_template_attribute(template_name:str,attribute:str)->t.Any
-flask.helpers.is_ip(value:str)->bool
-flask.helpers.locked_cached_property(self,fget:t.Callable[[t.Any],t.Any],name:t.Optional[str]=None,doc:t.Optional[str]=None)
-flask.helpers.locked_cached_property.__delete__(self,obj:object)->None
-flask.helpers.locked_cached_property.__get__(self,obj:object,type:type=None)->t.Any
-flask.helpers.locked_cached_property.__init__(self,fget:t.Callable[[t.Any],t.Any],name:t.Optional[str]=None,doc:t.Optional[str]=None)
-flask.helpers.locked_cached_property.__set__(self,obj:object,value:t.Any)->None
-flask.helpers.make_response(*args:t.Any)->'Response'
-flask.helpers.safe_join(directory:str,*pathnames:str)->str
-flask.helpers.send_file(path_or_file:t.Union[os.PathLike,str,t.BinaryIO],mimetype:t.Optional[str]=None,as_attachment:bool=False,download_name:t.Optional[str]=None,attachment_filename:t.Optional[str]=None,conditional:bool=True,etag:t.Union[bool,str]=True,add_etags:t.Optional[bool]=None,last_modified:t.Optional[t.Union[datetime,int,float]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None,cache_timeout:t.Optional[int]=None)
-flask.helpers.send_from_directory(directory:t.Union[os.PathLike,str],path:t.Union[os.PathLike,str],filename:t.Optional[str]=None,**kwargs:t.Any)->'Response'
-flask.helpers.stream_with_context(generator_or_function:t.Union[t.Iterator[t.AnyStr],t.Callable[...,t.Iterator[t.AnyStr]]])->t.Iterator[t.AnyStr]
-flask.helpers.total_seconds(td:timedelta)->int
-flask.helpers.url_for(endpoint:str,**values:t.Any)->str
-flask.make_response(*args:t.Any)->'Response'
-flask.safe_join(directory:str,*pathnames:str)->str
-flask.send_file(path_or_file:t.Union[os.PathLike,str,t.BinaryIO],mimetype:t.Optional[str]=None,as_attachment:bool=False,download_name:t.Optional[str]=None,attachment_filename:t.Optional[str]=None,conditional:bool=True,etag:t.Union[bool,str]=True,add_etags:t.Optional[bool]=None,last_modified:t.Optional[t.Union[datetime,int,float]]=None,max_age:t.Optional[t.Union[int,t.Callable[[t.Optional[str]],t.Optional[int]]]]=None,cache_timeout:t.Optional[int]=None)
-flask.send_from_directory(directory:t.Union[os.PathLike,str],path:t.Union[os.PathLike,str],filename:t.Optional[str]=None,**kwargs:t.Any)->'Response'
-flask.stream_with_context(generator_or_function:t.Union[t.Iterator[t.AnyStr],t.Callable[...,t.Iterator[t.AnyStr]]])->t.Iterator[t.AnyStr]
-flask.url_for(endpoint:str,**values:t.Any)->str
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/json/tag.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/flask2.0.2/lib/python3.9/site-packages/flask/json/tag.py----------------------------------------
 A:flask.json.tag.key->next(iter(value))
 A:flask.json.tag.tag->tag_class(self)
 flask.json.tag.JSONTag(self,serializer:'TaggedJSONSerializer')
@@ -729,23 +748,4 @@ flask.json.tag.TaggedJSONSerializer.loads(self,value:str)->t.Any
 flask.json.tag.TaggedJSONSerializer.register(self,tag_class:t.Type[JSONTag],force:bool=False,index:t.Optional[int]=None)->None
 flask.json.tag.TaggedJSONSerializer.tag(self,value:t.Any)->t.Dict[str, t.Any]
 flask.json.tag.TaggedJSONSerializer.untag(self,value:t.Dict[str,t.Any])->t.Any
-
-
-----------------------------------------/home/zhang/Packages/flask/flask2.0.2/json/__init__.py----------------------------------------
-A:flask.json.__init__.encoding->kwargs.pop('encoding', None)
-A:flask.json.__init__.rv->json.dumps(obj, **kwargs)
-A:flask.json.__init__.fp->io.TextIOWrapper(fp, encoding)
-A:flask.json.__init__.s->s.decode(encoding).decode(encoding)
-flask.json.__init__.JSONDecoder(_json.JSONDecoder)
-flask.json.__init__.JSONEncoder(_json.JSONEncoder)
-flask.json.__init__.JSONEncoder.default(self,o:t.Any)->t.Any
-flask.json.__init__._dump_arg_defaults(kwargs:t.Dict[str,t.Any],app:t.Optional['Flask']=None)->None
-flask.json.__init__._load_arg_defaults(kwargs:t.Dict[str,t.Any],app:t.Optional['Flask']=None)->None
-flask.json.__init__.dump(obj:t.Any,fp:t.IO[str],app:t.Optional['Flask']=None,**kwargs:t.Any)->None
-flask.json.__init__.dumps(obj:t.Any,app:t.Optional['Flask']=None,**kwargs:t.Any)->str
-flask.json.__init__.htmlsafe_dump(obj:t.Any,fp:t.IO[str],**kwargs:t.Any)->None
-flask.json.__init__.htmlsafe_dumps(obj:t.Any,**kwargs:t.Any)->str
-flask.json.__init__.jsonify(*args:t.Any,**kwargs:t.Any)->'Response'
-flask.json.__init__.load(fp:t.IO[str],app:t.Optional['Flask']=None,**kwargs:t.Any)->t.Any
-flask.json.__init__.loads(s:str,app:t.Optional['Flask']=None,**kwargs:t.Any)->t.Any
 

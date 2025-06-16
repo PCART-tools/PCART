@@ -1,31 +1,26 @@
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/util.py----------------------------------------
-A:spacy.util.path->pathlib.Path(path)
-A:spacy.util.(name, version)->split_data_name(data_name.parts[-1])
-A:spacy.util.entries->file_.read().split('\n')
-A:spacy.util.expression->'|'.join([piece for piece in entries if piece.strip()])
-A:spacy.util.start->min(length, max(0, start))
-A:spacy.util.stop->min(length, max(start, stop))
-spacy.get_lang_class(name)
-spacy.set_lang_class(name,cls)
-spacy.util.check_renamed_kwargs(renamed,kwargs)
-spacy.util.compile_infix_regex(entries)
-spacy.util.compile_prefix_regex(entries)
-spacy.util.compile_suffix_regex(entries)
-spacy.util.constraint_match(constraint_string,version)
-spacy.util.get_data_path(require_exists=True)
-spacy.util.get_lang_class(name)
-spacy.util.match_best_version(target_name,target_version,path)
-spacy.util.normalize_slice(length,start,stop,step=None)
-spacy.util.or_(val1,val2)
-spacy.util.read_regex(path)
-spacy.util.set_data_path(path)
-spacy.util.set_lang_class(name,cls)
-spacy.util.split_data_name(name)
-spacy.util.utf8open(loc,mode='r')
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/__init__.py----------------------------------------
+A:spacy.__init__.(target_name, target_version)->util.split_data_name(name)
+A:spacy.__init__.data_path->overrides.get('path', util.get_data_path())
+A:spacy.__init__.path->util.match_best_version(target_name, target_version, data_path)
+A:spacy.__init__.cls->get_lang_class(target_name)
+spacy.__init__.load(name,**overrides)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/lemmatizer.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/deprecated.py----------------------------------------
+A:spacy.deprecated.lang->get_lang_class(name)
+A:spacy.deprecated.tokenization->package.load_json(('tokenizer', 'specials.json'))
+A:spacy.deprecated.queue->list(indices)
+A:spacy.deprecated.string->string.replace(subtoks.replace('<SEP>', ' '), subtoks).replace(subtoks.replace('<SEP>', ' '), subtoks)
+A:spacy.deprecated.subtoks->chunk.split('<SEP>')
+spacy.deprecated.align_tokens(ref,indices)
+spacy.deprecated.detokenize(token_rules,words)
+spacy.deprecated.get_package(data_dir)
+spacy.deprecated.get_package_by_name(name=None,via=None)
+spacy.deprecated.read_lang_data(package)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/lemmatizer.py----------------------------------------
 A:spacy.lemmatizer.index[pos]->set()
 A:spacy.lemmatizer.exc[pos]->read_exc(file_)
 A:spacy.lemmatizer.rules->ujson.load(file_)
@@ -47,23 +42,49 @@ spacy.lemmatizer.read_exc(fileobj)
 spacy.lemmatizer.read_index(fileobj)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/about.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/scorer.py----------------------------------------
+A:spacy.scorer.self.tokens->PRFScore()
+A:spacy.scorer.self.sbd->PRFScore()
+A:spacy.scorer.self.unlabelled->PRFScore()
+A:spacy.scorer.self.labelled->PRFScore()
+A:spacy.scorer.self.tags->PRFScore()
+A:spacy.scorer.self.ner->PRFScore()
+A:spacy.scorer.gold_deps->set()
+A:spacy.scorer.gold_tags->set()
+A:spacy.scorer.gold_ents->set(tags_to_entities([annot[-1] for annot in gold.orig_annot]))
+A:spacy.scorer.cand_deps->set()
+A:spacy.scorer.cand_tags->set()
+A:spacy.scorer.cand_ents->set()
+spacy.scorer.PRFScore(self)
+spacy.scorer.PRFScore.__init__(self)
+spacy.scorer.PRFScore.fscore(self)
+spacy.scorer.PRFScore.precision(self)
+spacy.scorer.PRFScore.recall(self)
+spacy.scorer.PRFScore.score_set(self,cand,gold)
+spacy.scorer.Scorer(self,eval_punct=False)
+spacy.scorer.Scorer.__init__(self,eval_punct=False)
+spacy.scorer.Scorer.ents_f(self)
+spacy.scorer.Scorer.ents_p(self)
+spacy.scorer.Scorer.ents_r(self)
+spacy.scorer.Scorer.las(self)
+spacy.scorer.Scorer.score(self,tokens,gold,verbose=False,punct_labels=('p','punct'))
+spacy.scorer.Scorer.scores(self)
+spacy.scorer.Scorer.tags_acc(self)
+spacy.scorer.Scorer.token_acc(self)
+spacy.scorer.Scorer.uas(self)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/deprecated.py----------------------------------------
-A:spacy.deprecated.lang->get_lang_class(name)
-A:spacy.deprecated.tokenization->package.load_json(('tokenizer', 'specials.json'))
-A:spacy.deprecated.queue->list(indices)
-A:spacy.deprecated.string->string.replace(subtoks.replace('<SEP>', ' '), subtoks).replace(subtoks.replace('<SEP>', ' '), subtoks)
-A:spacy.deprecated.subtoks->chunk.split('<SEP>')
-spacy.deprecated.align_tokens(ref,indices)
-spacy.deprecated.detokenize(token_rules,words)
-spacy.deprecated.get_package(data_dir)
-spacy.deprecated.get_package_by_name(name=None,via=None)
-spacy.deprecated.read_lang_data(package)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/about.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/download.py----------------------------------------
+A:spacy.download.data_path->str(data_path)
+A:spacy.download.pkg->sputnik.package(about.__title__, about.__version__, about.__models__.get(lang, lang), data_path)
+A:spacy.download.package->sputnik.install(about.__title__, about.__version__, about.__models__.get(lang, lang), data_path)
+spacy.download.download(lang,force=False,fail_on_exist=True,data_path=None)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language.py----------------------------------------
 A:spacy.language.lemmatizer->cls.create_lemmatizer(nlp)
 A:spacy.language.lex_attr_getters->dict(cls.lex_attr_getters)
 A:spacy.language.prefixes->tuple(language_data.TOKENIZER_PREFIXES)
@@ -109,12 +130,38 @@ spacy.language.Language.pipe(self,texts,tag=True,parse=True,entity=True,n_thread
 spacy.language.Language.train(cls,path,gold_tuples,*configs)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/multi_words.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/util.py----------------------------------------
+A:spacy.util.path->pathlib.Path(path)
+A:spacy.util.(name, version)->split_data_name(data_name.parts[-1])
+A:spacy.util.entries->file_.read().split('\n')
+A:spacy.util.expression->'|'.join([piece for piece in entries if piece.strip()])
+A:spacy.util.start->min(length, max(0, start))
+A:spacy.util.stop->min(length, max(start, stop))
+spacy.get_lang_class(name)
+spacy.set_lang_class(name,cls)
+spacy.util.check_renamed_kwargs(renamed,kwargs)
+spacy.util.compile_infix_regex(entries)
+spacy.util.compile_prefix_regex(entries)
+spacy.util.compile_suffix_regex(entries)
+spacy.util.constraint_match(constraint_string,version)
+spacy.util.get_data_path(require_exists=True)
+spacy.util.get_lang_class(name)
+spacy.util.match_best_version(target_name,target_version,path)
+spacy.util.normalize_slice(length,start,stop,step=None)
+spacy.util.or_(val1,val2)
+spacy.util.read_regex(path)
+spacy.util.set_data_path(path)
+spacy.util.set_lang_class(name,cls)
+spacy.util.split_data_name(name)
+spacy.util.utf8open(loc,mode='r')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/multi_words.py----------------------------------------
 spacy.multi_words.RegexMerger(self,regexes)
 spacy.multi_words.RegexMerger.__init__(self,regexes)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/train.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/train.py----------------------------------------
 A:spacy.train.paragraph_tuples->merge_sents(paragraph_tuples)
 A:spacy.train.docs->self.make_docs(raw_text, paragraph_tuples)
 A:spacy.train.golds->self.make_golds(docs, paragraph_tuples)
@@ -130,96 +177,71 @@ spacy.train.Trainer.make_golds(self,docs,paragraph_tuples)
 spacy.train.Trainer.update(self,doc,gold)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/download.py----------------------------------------
-A:spacy.download.data_path->str(data_path)
-A:spacy.download.pkg->sputnik.package(about.__title__, about.__version__, about.__models__.get(lang, lang), data_path)
-A:spacy.download.package->sputnik.install(about.__title__, about.__version__, about.__models__.get(lang, lang), data_path)
-spacy.download.download(lang,force=False,fail_on_exist=True,data_path=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/it/__init__.py----------------------------------------
+A:spacy.it.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.it.__init__.Italian(Language)
+spacy.it.__init__.Italian.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/scorer.py----------------------------------------
-A:spacy.scorer.self.tokens->PRFScore()
-A:spacy.scorer.self.sbd->PRFScore()
-A:spacy.scorer.self.unlabelled->PRFScore()
-A:spacy.scorer.self.labelled->PRFScore()
-A:spacy.scorer.self.tags->PRFScore()
-A:spacy.scorer.self.ner->PRFScore()
-A:spacy.scorer.gold_deps->set()
-A:spacy.scorer.gold_tags->set()
-A:spacy.scorer.gold_ents->set(tags_to_entities([annot[-1] for annot in gold.orig_annot]))
-A:spacy.scorer.cand_deps->set()
-A:spacy.scorer.cand_tags->set()
-A:spacy.scorer.cand_ents->set()
-spacy.scorer.PRFScore(self)
-spacy.scorer.PRFScore.__init__(self)
-spacy.scorer.PRFScore.fscore(self)
-spacy.scorer.PRFScore.precision(self)
-spacy.scorer.PRFScore.recall(self)
-spacy.scorer.PRFScore.score_set(self,cand,gold)
-spacy.scorer.Scorer(self,eval_punct=False)
-spacy.scorer.Scorer.__init__(self,eval_punct=False)
-spacy.scorer.Scorer.ents_f(self)
-spacy.scorer.Scorer.ents_p(self)
-spacy.scorer.Scorer.ents_r(self)
-spacy.scorer.Scorer.las(self)
-spacy.scorer.Scorer.score(self,tokens,gold,verbose=False,punct_labels=('p','punct'))
-spacy.scorer.Scorer.scores(self)
-spacy.scorer.Scorer.tags_acc(self)
-spacy.scorer.Scorer.token_acc(self)
-spacy.scorer.Scorer.uas(self)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/it/language_data.py----------------------------------------
+A:spacy.it.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.it.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/__init__.py----------------------------------------
-A:spacy.__init__.(target_name, target_version)->util.split_data_name(name)
-A:spacy.__init__.data_path->overrides.get('path', util.get_data_path())
-A:spacy.__init__.path->util.match_best_version(target_name, target_version, data_path)
-A:spacy.__init__.cls->get_lang_class(target_name)
-spacy.__init__.load(name,**overrides)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/it/stop_words.py----------------------------------------
+A:spacy.it.stop_words.STOP_WORDS->set('\na abbastanza abbia abbiamo abbiano abbiate accidenti ad adesso affinche agl\nagli ahime ahimè ai al alcuna alcuni alcuno all alla alle allo allora altri\naltrimenti altro altrove altrui anche ancora anni anno ansa anticipo assai\nattesa attraverso avanti avemmo avendo avente aver avere averlo avesse\navessero avessi avessimo aveste avesti avete aveva avevamo avevano avevate\navevi avevo avrai avranno avrebbe avrebbero avrei avremmo avremo avreste\navresti avrete avrà avrò avuta avute avuti avuto\n\nbasta bene benissimo brava bravo\n\ncasa caso cento certa certe certi certo che chi chicchessia chiunque ci\nciascuna ciascuno cima cio cioe circa citta città co codesta codesti codesto\ncogli coi col colei coll coloro colui come cominci comunque con concernente\nconciliarsi conclusione consiglio contro cortesia cos cosa cosi così cui\n\nda dagl dagli dai dal dall dalla dalle dallo dappertutto davanti degl degli\ndei del dell della delle dello dentro detto deve di dice dietro dire\ndirimpetto diventa diventare diventato dopo dov dove dovra dovrà dovunque due\ndunque durante\n\nebbe ebbero ebbi ecc ecco ed effettivamente egli ella entrambi eppure era\nerano eravamo eravate eri ero esempio esse essendo esser essere essi ex\n\nfa faccia facciamo facciano facciate faccio facemmo facendo facesse facessero\nfacessi facessimo faceste facesti faceva facevamo facevano facevate facevi\nfacevo fai fanno farai faranno fare farebbe farebbero farei faremmo faremo\nfareste faresti farete farà farò fatto favore fece fecero feci fin finalmente\nfinche fine fino forse forza fosse fossero fossi fossimo foste fosti fra\nfrattempo fu fui fummo fuori furono futuro generale\n\ngia già giacche giorni giorno gli gliela gliele glieli glielo gliene governo\ngrande grazie gruppo\n\nha haha hai hanno ho\n\nieri il improvviso in inc infatti inoltre insieme intanto intorno invece io\n\nla là lasciato lato lavoro le lei li lo lontano loro lui lungo luogo\n\nma macche magari maggior mai male malgrado malissimo mancanza marche me\nmedesimo mediante meglio meno mentre mesi mezzo mi mia mie miei mila miliardi\nmilioni minimi ministro mio modo molti moltissimo molto momento mondo mosto\n\nnazionale ne negl negli nei nel nell nella nelle nello nemmeno neppure nessun\nnessuna nessuno niente no noi non nondimeno nonostante nonsia nostra nostre\nnostri nostro novanta nove nulla nuovo\n\nod oggi ogni ognuna ognuno oltre oppure ora ore osi ossia ottanta otto\n\npaese parecchi parecchie parecchio parte partendo peccato peggio per perche\nperché percio perciò perfino pero persino persone però piedi pieno piglia piu\npiuttosto più po pochissimo poco poi poiche possa possedere posteriore posto\npotrebbe preferibilmente presa press prima primo principalmente probabilmente\nproprio puo può pure purtroppo\n\nqualche qualcosa qualcuna qualcuno quale quali qualunque quando quanta quante\nquanti quanto quantunque quasi quattro quel quella quelle quelli quello quest\nquesta queste questi questo qui quindi\n\nrealmente recente recentemente registrazione relativo riecco salvo\n\nsara sarà sarai saranno sarebbe sarebbero sarei saremmo saremo sareste\nsaresti sarete saro sarò scola scopo scorso se secondo seguente seguito sei\nsembra sembrare sembrato sembri sempre senza sette si sia siamo siano siate\nsiete sig solito solo soltanto sono sopra sotto spesso srl sta stai stando\nstanno starai staranno starebbe starebbero starei staremmo staremo stareste\nstaresti starete starà starò stata state stati stato stava stavamo stavano\nstavate stavi stavo stemmo stessa stesse stessero stessi stessimo stesso\nsteste stesti stette stettero stetti stia stiamo stiano stiate sto su sua\nsubito successivamente successivo sue sugl sugli sui sul sull sulla sulle\nsullo suo suoi\n\ntale tali talvolta tanto te tempo ti titolo torino tra tranne tre trenta\ntroppo trovato tu tua tue tuo tuoi tutta tuttavia tutte tutti tutto\n\nuguali ulteriore ultimo un una uno uomo\n\nva vale vari varia varie vario verso vi via vicino visto vita voi volta volte\nvostra vostre vostri vostro\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/pt/stop_words.py----------------------------------------
-A:spacy.pt.stop_words.STOP_WORDS->set('\nà às acerca adeus agora ainda algmas algo algumas alguns ali além ambos ano\nanos antes ao aos apenas apoio apontar após aquela aquelas aquele aqueles aqui\naquilo area área as assim através atrás até aí\n\nbaixo bastante bem bom breve\n\ncada caminho catorze cedo cento certamente certeza cima cinco coisa com como\ncomprido conhecido conselho contra corrente custa cá\n\nda daquela daquele dar das de debaixo demais dentro depois desde desligado\ndessa desse desta deste deve devem deverá dez dezanove dezasseis dezassete\ndezoito dia diante direita diz dizem dizer do dois dos doze duas dá dão dúvida\n\né ela elas ele eles em embora enquanto entre então era és essa essas esse esses\nesta estado estar estará estas estava este estes esteve estive estivemos\nestiveram estiveste estivestes estou está estás estão eu exemplo\n\nfalta fará favor faz fazeis fazem fazemos fazer fazes fazia faço fez fim final\nfoi fomos for fora foram forma foste fostes fui\n\ngeral grande grandes grupo\n\nhoje horas há\n\niniciar inicio ir irá isso ista iste isto já\n\nlado ligado local logo longe lugar lá\n\nmaior maioria maiorias mais mal mas me meio menor menos meses mesmo meu meus\nmil minha minhas momento muito muitos máximo mês\n\nna nada naquela naquele nas nem nenhuma nessa nesse nesta neste no noite nome\nnos nossa nossas nosso nossos nova nove novo novos num numa nunca não nível nós\nnúmero\n\nobra obrigada obrigado oitava oitavo oito onde ontem onze os ou outra outras\noutro outros\n\npara parece parte partir pegar pela pelas pelo pelos perto pessoas pode podem\npoder poderá podia ponto pontos por porque porquê posição possivelmente posso\npossível pouca pouco povo primeira primeiro promeiro próprio próximo puderam\npôde põe põem\n\nqual qualquer quando quanto quarta quarto quatro que quem quer quero questão\nquieto quinta quinto quinze quê relação\n\nsabe saber se segunda segundo sei seis sem sempre ser seria sete seu seus sexta\nsexto sim sistema sob sobre sois somente somos sou sua suas são sétima sétimo\n\ntal talvez também tanto tarde te tem temos tempo tendes tenho tens tentar\ntentaram tente tentei ter terceira terceiro teu teus teve tipo tive tivemos\ntiveram tiveste tivestes toda todas todo todos trabalhar trabalho treze três tu\ntua tuas tudo tão têm\n\núltimo um uma umas uns usa usar\n\nvai vais valor veja vem vens ver verdade verdadeiro vez vezes viagem vindo\nvinte você vocês vos vossa vossas vosso vossos vários vão vêm vós\n\nzero\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/__init__.py----------------------------------------
+A:spacy.en.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+A:spacy.en.__init__.overrides->_fix_deprecated_glove_vectors_loading(overrides)
+A:spacy.en.__init__.data_path->get_data_path()
+A:spacy.en.__init__.vec_path->match_best_version('en_glove_cc_300_1m_vectors', None, data_path)
+spacy.en.__init__.English(self,**overrides)
+spacy.en.__init__.English.Defaults(Language.Defaults)
+spacy.en.__init__.English.__init__(self,**overrides)
+spacy.en.__init__._fix_deprecated_glove_vectors_loading(overrides)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/pt/language_data.py----------------------------------------
-A:spacy.pt.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.pt.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/tokenizer_exceptions.py----------------------------------------
+A:spacy.en.tokenizer_exceptions.verb_data_tc->dict(verb_data)
+A:spacy.en.tokenizer_exceptions.verb_data_tc[ORTH]->verb_data_tc[ORTH].title().title()
+A:spacy.en.tokenizer_exceptions.exc_data_tc->dict(exc_data)
+A:spacy.en.tokenizer_exceptions.exc_data_tc[ORTH]->exc_data_tc[ORTH].title().title()
+A:spacy.en.tokenizer_exceptions.data_apos->dict(data)
+A:spacy.en.tokenizer_exceptions.exc_data_apos->dict(exc_data)
+A:spacy.en.tokenizer_exceptions.TOKENIZER_EXCEPTIONS->dict(EXC)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/pt/__init__.py----------------------------------------
-A:spacy.pt.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.pt.__init__.Portuguese(Language)
-spacy.pt.__init__.Portuguese.Defaults(Language.Defaults)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/language_data.py----------------------------------------
+A:spacy.en.language_data.TAG_MAP->dict(TAG_MAP)
+A:spacy.en.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.en.language_data.TOKENIZER_EXCEPTIONS->dict(TOKENIZER_EXCEPTIONS)
+spacy.en.get_time_exc(hours)
+spacy.en.language_data.get_time_exc(hours)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/de/stop_words.py----------------------------------------
-A:spacy.de.stop_words.STOP_WORDS->set('\ná a ab aber ach acht achte achten achter achtes ag alle allein allem allen\naller allerdings alles allgemeinen als also am an andere anderen andern anders\nauch auf aus ausser außer ausserdem außerdem\n\nbald bei beide beiden beim beispiel bekannt bereits besonders besser besten bin\nbis bisher bist\n\nda dabei dadurch dafür dagegen daher dahin dahinter damals damit danach daneben\ndank dann daran darauf daraus darf darfst darin darüber darum darunter das\ndasein daselbst dass daß dasselbe davon davor dazu dazwischen dein deine deinem\ndeiner dem dementsprechend demgegenüber demgemäss demgemäß demselben demzufolge\nden denen denn denselben der deren derjenige derjenigen dermassen dermaßen\nderselbe derselben des deshalb desselben dessen deswegen dich die diejenige\ndiejenigen dies diese dieselbe dieselben diesem diesen dieser dieses dir doch\ndort drei drin dritte dritten dritter drittes du durch durchaus dürfen dürft\ndurfte durften\n\neben ebenso ehrlich eigen eigene eigenen eigener eigenes ein einander eine\neinem einen einer eines einigeeinigen einiger einiges einmal einmaleins elf en\nende endlich entweder er erst erste ersten erster erstes es etwa etwas euch\n\nfrüher fünf fünfte fünften fünfter fünftes für\n\ngab ganz ganze ganzen ganzer ganzes gar gedurft gegen gegenüber gehabt gehen\ngeht gekannt gekonnt gemacht gemocht gemusst genug gerade gern gesagt geschweige\ngewesen gewollt geworden gibt ging gleich gott gross groß grosse große grossen\ngroßen grosser großer grosses großes gut gute guter gutes\n\nhabe haben habt hast hat hatte hätte hatten hätten heisst heißt her heute hier\nhin hinter hoch\n\nich ihm ihn ihnen ihr ihre ihrem ihrer ihres im immer in indem infolgedessen\nins irgend ist\n\nja jahr jahre jahren je jede jedem jeden jeder jedermann jedermanns jedoch\njemand jemandem jemanden jene jenem jenen jener jenes jetzt\n\nkam kann kannst kaum kein keine keinem keinen keiner kleine kleinen kleiner\nkleines kommen kommt können könnt konnte könnte konnten kurz\n\nlang lange leicht leider lieber los\n\nmachen macht machte mag magst man manche manchem manchen mancher manches mehr\nmein meine meinem meinen meiner meines mensch menschen mich mir mit mittel\nmochte möchte mochten mögen möglich mögt morgen muss muß müssen musst müsst\nmusste mussten\n\nna nach nachdem nahm natürlich neben nein neue neuen neun neunte neunten neunter\nneuntes nicht nichts nie niemand niemandem niemanden noch nun nur\n\nob oben oder offen oft ohne\n\nrecht rechte rechten rechter rechtes richtig rund\n\nsagt sagte sah satt schlecht schon sechs sechste sechsten sechster sechstes\nsehr sei seid seien sein seine seinem seinen seiner seines seit seitdem selbst\nselbst sich sie sieben siebente siebenten siebenter siebentes siebte siebten\nsiebter siebtes sind so solang solche solchem solchen solcher solches soll\nsollen sollte sollten sondern sonst sowie später statt\n\ntag tage tagen tat teil tel trotzdem tun\n\nüber überhaupt übrigens uhr um und uns unser unsere unserer unter\n\nvergangene vergangenen viel viele vielem vielen vielleicht vier vierte vierten\nvierter viertes vom von vor\n\nwahr während währenddem währenddessen wann war wäre waren wart warum was wegen\nweil weit weiter weitere weiteren weiteres welche welchem welchen welcher\nwelches wem wen wenig wenige weniger weniges wenigstens wenn wer werde werden\nwerdet wessen wie wieder will willst wir wird wirklich wirst wo wohl wollen\nwollt wollte wollten worden wurde würde wurden würden\n\nzehn zehnte zehnten zehnter zehntes zeit zu zuerst zugleich zum zunächst zur\nzurück zusammen zwanzig zwar zwei zweite zweiten zweiter zweites zwischen\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/lemma_rules.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/de/language_data.py----------------------------------------
-A:spacy.de.language_data.TAG_MAP->dict(TAG_MAP)
-A:spacy.de.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.de.language_data.TOKENIZER_EXCEPTIONS->dict(TOKENIZER_EXCEPTIONS)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/download.py----------------------------------------
+spacy.en.download.main(data_size='all',force=False,data_path=None)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/de/tokenizer_exceptions.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/morph_rules.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/de/download.py----------------------------------------
-spacy.de.download.main(data_size='all',force=False,data_path=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/stop_words.py----------------------------------------
+A:spacy.en.stop_words.STOP_WORDS->set('\na about above across after afterwards again against all almost alone along\nalready also although always am among amongst amount an and another any anyhow\nanyone anything anyway anywhere are around as at\n\nback be became because become becomes becoming been before beforehand behind\nbeing below beside besides between beyond both bottom but by\n\ncall can cannot ca could\n\ndid do does doing done down due during\n\neach eight either eleven else elsewhere empty enough etc even ever every\neveryone everything everywhere except\n\nfew fifteen fifty first five for former formerly forty four from front full\nfurther\n\nget give go\n\nhad has have he hence her here hereafter hereby herein hereupon hers herself\nhim himself his how however hundred\n\ni if in inc indeed into is it its itself\n\nkeep\n\nlast latter latterly least less\n\njust\n\nmade make many may me meanwhile might mine more moreover most mostly move much\nmust my myself\n\nname namely neither never nevertheless next nine no nobody none noone nor not\nnothing now nowhere\n\nof off often on once one only onto or other others otherwise our ours ourselves\nout over own\n\npart per perhaps please put\n\nquite\n\nrather re really regarding\n\nsame say see seem seemed seeming seems serious several she should show side\nsince six sixty so some somehow someone something sometime sometimes somewhere\nstill such\n\ntake ten than that the their them themselves then thence there thereafter\nthereby therefore therein thereupon these they third this those though three\nthrough throughout thru thus to together too top toward towards twelve twenty\ntwo\n\nunder until up unless upon us used using\n\nvarious very very via was we well were what whatever when whence whenever where\nwhereafter whereas whereby wherein whereupon wherever whether which while\nwhither who whoever whole whom whose why will with within without would\n\nyet you your yours yourself yourselves\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/de/tag_map.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/en/tag_map.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/de/__init__.py----------------------------------------
-A:spacy.de.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
-A:spacy.de.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.de.__init__.German(Language)
-spacy.de.__init__.German.Defaults(Language.Defaults)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/util.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/util.py----------------------------------------
 A:spacy.tests.util.doc->Doc(vocab, words=words)
 A:spacy.tests.util.attrs->Doc(vocab, words=words).to_array([POS, HEAD, DEP])
 A:spacy.tests.util.(move, label)->action_name.split('-')
@@ -231,20 +253,7 @@ spacy.tests.util.get_cosine(vec1,vec2)
 spacy.tests.util.get_doc(vocab,words=[],pos=None,heads=None,deps=None,tags=None,ents=None)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/test_orth.py----------------------------------------
-spacy.tests.test_orth.test_orth_is_alpha(text,match)
-spacy.tests.test_orth.test_orth_is_digit(text,match)
-spacy.tests.test_orth.test_orth_is_punct(text,match)
-spacy.tests.test_orth.test_orth_is_space(text,match)
-spacy.tests.test_orth.test_orth_like_number(text,match)
-spacy.tests.test_orth.test_orth_like_url(text,match)
-spacy.tests.test_orth.test_orth_word_shape(text,shape)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/conftest.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/conftest.py----------------------------------------
 spacy.tests.conftest.DE()
 spacy.tests.conftest.EN()
 spacy.tests.conftest.de_tokenizer()
@@ -263,14 +272,118 @@ spacy.tests.conftest.text_file_b()
 spacy.tests.conftest.tokenizer(request)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/test_attrs.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/test_attrs.py----------------------------------------
 A:spacy.tests.test_attrs.int_attrs->intify_attrs({'F': text, 'is_alpha': True}, strings_map={text: 10}, _do_deprecated=True)
 spacy.tests.test_attrs.test_attrs_do_deprecated(text)
 spacy.tests.test_attrs.test_attrs_idempotence(text)
 spacy.tests.test_attrs.test_attrs_key(text)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/spans/test_span.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/test_orth.py----------------------------------------
+spacy.tests.test_orth.test_orth_is_alpha(text,match)
+spacy.tests.test_orth.test_orth_is_digit(text,match)
+spacy.tests.test_orth.test_orth_is_punct(text,match)
+spacy.tests.test_orth.test_orth_is_space(text,match)
+spacy.tests.test_orth.test_orth_like_number(text,match)
+spacy.tests.test_orth.test_orth_like_url(text,match)
+spacy.tests.test_orth.test_orth_word_shape(text,shape)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_ner.py----------------------------------------
+A:spacy.tests.parser.test_ner.tokens->EN(u'Charity and other short-term aid have buoyed them so far, and a tax-relief bill working its way through Congress would help. But the September 11 Victim Compensation Fund, enacted by Congress to discourage people from filing lawsuits, will determine the shape of their lives for years to come.\n\n', entity=False)
+A:spacy.tests.parser.test_ner.ents->matcher(doc)
+A:spacy.tests.parser.test_ner.matcher->Matcher(EN.vocab, {'MemberNames': ('PERSON', {}, [[{LOWER: 'cal'}], [{LOWER: 'cal'}, {LOWER: 'henderson'}]])})
+A:spacy.tests.parser.test_ner.doc->EN(u'who is cal the manager of?')
+spacy.tests.parser.test_ner.test_consistency_bug(EN)
+spacy.tests.parser.test_ner.test_simple_types(EN)
+spacy.tests.parser.test_ner.test_unit_end_gazetteer(EN)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_parse.py----------------------------------------
+A:spacy.tests.parser.test_parse.tokens->en_tokenizer(text)
+A:spacy.tests.parser.test_parse.doc->get_doc(tokens.vocab, [t.text for t in tokens], deps=deps, heads=heads, tags=tags)
+spacy.tests.parser.test_parse.test_parser_arc_eager_finalize_state(en_tokenizer,en_parser)
+spacy.tests.parser.test_parse.test_parser_initial(en_tokenizer,en_parser)
+spacy.tests.parser.test_parse.test_parser_merge_pp(en_tokenizer)
+spacy.tests.parser.test_parse.test_parser_parse_one_word_sentence(en_tokenizer,en_parser,text)
+spacy.tests.parser.test_parse.test_parser_parse_subtrees(en_tokenizer,en_parser)
+spacy.tests.parser.test_parse.test_parser_root(en_tokenizer)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_space_attachment.py----------------------------------------
+A:spacy.tests.parser.test_space_attachment.tokens->en_tokenizer(text)
+A:spacy.tests.parser.test_space_attachment.doc->Doc(en_parser.vocab, words=text)
+spacy.tests.parser.test_space_attachment.test_parser_sentence_space(en_tokenizer)
+spacy.tests.parser.test_space_attachment.test_parser_space_attachment(en_tokenizer)
+spacy.tests.parser.test_space_attachment.test_parser_space_attachment_intermediate_trailing(en_tokenizer,en_parser)
+spacy.tests.parser.test_space_attachment.test_parser_space_attachment_leading(en_tokenizer,en_parser)
+spacy.tests.parser.test_space_attachment.test_parser_space_attachment_space(en_tokenizer,en_parser,text,length)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_parse_navigate.py----------------------------------------
+A:spacy.tests.parser.test_parse_navigate.tokens->en_tokenizer(text)
+A:spacy.tests.parser.test_parse_navigate.doc->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads)
+A:spacy.tests.parser.test_parse_navigate.lefts[head.i]->set()
+A:spacy.tests.parser.test_parse_navigate.rights[head.i]->set()
+A:spacy.tests.parser.test_parse_navigate.subtree->list(token.subtree)
+A:spacy.tests.parser.test_parse_navigate.debug->'\t'.join((token.text, token.right_edge.text, subtree[-1].text, token.right_edge.head.text))
+spacy.tests.parser.test_parse_navigate.heads()
+spacy.tests.parser.test_parse_navigate.test_parser_parse_navigate_child_consistency(en_tokenizer,text,heads)
+spacy.tests.parser.test_parse_navigate.test_parser_parse_navigate_consistency(en_tokenizer,text,heads)
+spacy.tests.parser.test_parse_navigate.test_parser_parse_navigate_edges(en_tokenizer,text,heads)
+spacy.tests.parser.test_parse_navigate.text()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_noun_chunks.py----------------------------------------
+A:spacy.tests.parser.test_noun_chunks.tokens->de_tokenizer(text)
+A:spacy.tests.parser.test_noun_chunks.doc->get_doc(tokens.vocab, [t.text for t in tokens], tags=tags, deps=deps, heads=heads)
+A:spacy.tests.parser.test_noun_chunks.chunks->list(doc.noun_chunks)
+spacy.tests.parser.test_noun_chunks.test_de_extended_chunk(de_tokenizer)
+spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_coordinated(en_tokenizer)
+spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_pp_chunks(en_tokenizer)
+spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_standard(en_tokenizer)
+spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_standard_de(de_tokenizer)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_sbd.py----------------------------------------
+A:spacy.tests.parser.test_sbd.tokens->en_tokenizer(text)
+A:spacy.tests.parser.test_sbd.doc->EN.tokenizer(text)
+A:spacy.tests.parser.test_sbd.doc_serialized->Doc(EN.vocab).from_bytes(doc.to_bytes())
+spacy.tests.parser.test_sbd.test_parser_sbd_serialization_projective(EN)
+spacy.tests.parser.test_sbd.test_parser_sbd_single_punct(en_tokenizer,text,punct)
+spacy.tests.parser.test_sbd.test_parser_sentence_breaks(en_tokenizer,en_parser)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_sbd_prag.py----------------------------------------
+A:spacy.tests.parser.test_sbd_prag.doc->EN(text)
+spacy.tests.parser.test_sbd_prag.test_parser_sbd_prag(EN,text,expected_sents)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/parser/test_nonproj.py----------------------------------------
+A:spacy.tests.parser.test_nonproj.tokens->en_tokenizer('whatever ' * len(proj_heads))
+A:spacy.tests.parser.test_nonproj.doc->get_doc(tokens.vocab, [t.text for t in tokens], deps=deco_labels, heads=rel_proj_heads)
+A:spacy.tests.parser.test_nonproj.(proj_heads, deco_labels)->syntax.nonproj.PseudoProjectivity.projectivize(nonproj_tree2, labels2)
+A:spacy.tests.parser.test_nonproj.(deproj_heads, undeco_labels)->deprojectivize(proj_heads, deco_labels)
+spacy.tests.parser.test_nonproj.cyclic_tree()
+spacy.tests.parser.test_nonproj.multirooted_tree()
+spacy.tests.parser.test_nonproj.nonproj_tree()
+spacy.tests.parser.test_nonproj.partial_tree()
+spacy.tests.parser.test_nonproj.proj_tree()
+spacy.tests.parser.test_nonproj.test_parser_ancestors(tree,cyclic_tree,partial_tree,multirooted_tree)
+spacy.tests.parser.test_nonproj.test_parser_contains_cycle(tree,cyclic_tree,partial_tree,multirooted_tree)
+spacy.tests.parser.test_nonproj.test_parser_is_nonproj_arc(nonproj_tree,partial_tree,multirooted_tree)
+spacy.tests.parser.test_nonproj.test_parser_is_nonproj_tree(proj_tree,nonproj_tree,partial_tree,multirooted_tree)
+spacy.tests.parser.test_nonproj.test_parser_pseudoprojectivity(en_tokenizer)
+spacy.tests.parser.test_nonproj.tree()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/spans/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/spans/test_span.py----------------------------------------
 A:spacy.tests.spans.test_span.tokens->en_tokenizer(text)
 A:spacy.tests.spans.test_span.sents->list(doc.sents)
 A:spacy.tests.spans.test_span.doc->get_doc(tokens.vocab, [t.text for t in tokens])
@@ -283,7 +396,7 @@ spacy.tests.spans.test_span.test_spans_sent_spans(doc)
 spacy.tests.spans.test_span.test_spans_span_sent(doc)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/spans/test_merge.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/spans/test_merge.py----------------------------------------
 A:spacy.tests.spans.test_merge.tokens->en_tokenizer(text)
 A:spacy.tests.spans.test_merge.doc->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads, deps=deps)
 A:spacy.tests.spans.test_merge.merged->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads, deps=deps).merge()
@@ -298,74 +411,10 @@ spacy.tests.spans.test_merge.test_spans_sentence_update_after_merge(en_tokenizer
 spacy.tests.spans.test_merge.test_spans_subtree_size_check(en_tokenizer)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/spans/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/serialize/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vectors/test_vectors.py----------------------------------------
-A:spacy.tests.vectors.test_vectors.doc->get_doc(vocab, text)
-A:spacy.tests.vectors.test_vectors.token->tokenizer_v(text1)
-A:spacy.tests.vectors.test_vectors.doc1->get_doc(vocab, text1)
-A:spacy.tests.vectors.test_vectors.doc2->get_doc(vocab, text2)
-spacy.tests.vectors.test_vectors.test_vectors_doc_doc_similarity(vocab,text1,text2)
-spacy.tests.vectors.test_vectors.test_vectors_doc_vector(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_lexeme_doc_similarity(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_lexeme_lexeme_similarity(vocab,text1,text2)
-spacy.tests.vectors.test_vectors.test_vectors_lexeme_span_similarity(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_lexeme_vector(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_span_doc_similarity(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_span_span_similarity(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_span_vector(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_token_doc_similarity(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_token_lexeme_similarity(tokenizer_v,vocab,text1,text2)
-spacy.tests.vectors.test_vectors.test_vectors_token_span_similarity(vocab,text)
-spacy.tests.vectors.test_vectors.test_vectors_token_token_similarity(tokenizer_v,text)
-spacy.tests.vectors.test_vectors.test_vectors_token_vector(tokenizer_v,vectors,text)
-spacy.tests.vectors.test_vectors.tokenizer_v(vocab)
-spacy.tests.vectors.test_vectors.vectors()
-spacy.tests.vectors.test_vectors.vocab(en_vocab,vectors)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vectors/test_similarity.py----------------------------------------
-A:spacy.tests.vectors.test_similarity.doc->get_doc(vocab, words=[word1, word2])
-spacy.tests.vectors.test_similarity.test_vectors_similarity_DS(vocab,vectors)
-spacy.tests.vectors.test_similarity.test_vectors_similarity_LL(vocab,vectors)
-spacy.tests.vectors.test_similarity.test_vectors_similarity_TD(vocab,vectors)
-spacy.tests.vectors.test_similarity.test_vectors_similarity_TS(vocab,vectors)
-spacy.tests.vectors.test_similarity.test_vectors_similarity_TT(vocab,vectors)
-spacy.tests.vectors.test_similarity.vectors()
-spacy.tests.vectors.test_similarity.vocab(en_vocab,vectors)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vectors/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/serialize/test_io.py----------------------------------------
-A:spacy.tests.serialize.test_io.doc1->get_doc(en_vocab, text1)
-A:spacy.tests.serialize.test_io.doc2->get_doc(en_vocab, text2)
-A:spacy.tests.serialize.test_io.(bytes1, bytes2)->tokens.Doc.read_bytes(text_file_b)
-A:spacy.tests.serialize.test_io.result1->get_doc(en_vocab).from_bytes(bytes1)
-A:spacy.tests.serialize.test_io.result2->get_doc(en_vocab).from_bytes(bytes2)
-A:spacy.tests.serialize.test_io.doc->EN(text)
-A:spacy.tests.serialize.test_io.result->Doc(doc.vocab).from_bytes(doc.to_bytes())
-spacy.tests.serialize.test_io.test_lemmas(EN)
-spacy.tests.serialize.test_io.test_serialize_io_left_right(en_vocab)
-spacy.tests.serialize.test_io.test_serialize_io_read_write(en_vocab,text_file_b)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/serialize/test_codecs.py----------------------------------------
-A:spacy.tests.serialize.test_codecs.codec->HuffmanCodec([(lex.orth, lex.prob) for lex in en_vocab])
-A:spacy.tests.serialize.test_codecs.bits->BitArray()
-A:spacy.tests.serialize.test_codecs.array->numpy.array(ids, dtype=numpy.int32)
-A:spacy.tests.serialize.test_codecs.result->numpy.array(range(len(array)), dtype=numpy.int32)
-spacy.tests.serialize.test_codecs.test_serialize_codecs_attribute()
-spacy.tests.serialize.test_codecs.test_serialize_codecs_binary()
-spacy.tests.serialize.test_codecs.test_serialize_codecs_vocab(en_vocab)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/serialize/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/serialize/test_huffman.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/serialize/test_huffman.py----------------------------------------
 A:spacy.tests.serialize.test_huffman.lo->heappop(heap)
 A:spacy.tests.serialize.test_huffman.hi->heappop(heap)
 A:spacy.tests.serialize.test_huffman.probs->numpy.zeros(shape=(10,), dtype=numpy.float32)
@@ -390,7 +439,17 @@ spacy.tests.serialize.test_huffman.test_serialize_huffman_round_trip()
 spacy.tests.serialize.test_huffman.test_vocab(EN)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/serialize/test_serialization.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/serialize/test_codecs.py----------------------------------------
+A:spacy.tests.serialize.test_codecs.codec->HuffmanCodec([(lex.orth, lex.prob) for lex in en_vocab])
+A:spacy.tests.serialize.test_codecs.bits->BitArray()
+A:spacy.tests.serialize.test_codecs.array->numpy.array(ids, dtype=numpy.int32)
+A:spacy.tests.serialize.test_codecs.result->numpy.array(range(len(array)), dtype=numpy.int32)
+spacy.tests.serialize.test_codecs.test_serialize_codecs_attribute()
+spacy.tests.serialize.test_codecs.test_serialize_codecs_binary()
+spacy.tests.serialize.test_codecs.test_serialize_codecs_vocab(en_vocab)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/serialize/test_serialization.py----------------------------------------
 A:spacy.tests.serialize.test_serialization.doc->get_doc(en_vocab)
 A:spacy.tests.serialize.test_serialization.packer->Packer(en_vocab, {})
 A:spacy.tests.serialize.test_serialization.b->Packer(en_vocab, {}).pack(doc)
@@ -402,7 +461,20 @@ spacy.tests.serialize.test_serialization.test_serialize_tokens(en_vocab,text)
 spacy.tests.serialize.test_serialization.test_serialize_tokens_ner(EN,text,tags,deps,ents)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/serialize/test_packer.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/serialize/test_io.py----------------------------------------
+A:spacy.tests.serialize.test_io.doc1->get_doc(en_vocab, text1)
+A:spacy.tests.serialize.test_io.doc2->get_doc(en_vocab, text2)
+A:spacy.tests.serialize.test_io.(bytes1, bytes2)->tokens.Doc.read_bytes(text_file_b)
+A:spacy.tests.serialize.test_io.result1->get_doc(en_vocab).from_bytes(bytes1)
+A:spacy.tests.serialize.test_io.result2->get_doc(en_vocab).from_bytes(bytes2)
+A:spacy.tests.serialize.test_io.doc->EN(text)
+A:spacy.tests.serialize.test_io.result->Doc(doc.vocab).from_bytes(doc.to_bytes())
+spacy.tests.serialize.test_io.test_lemmas(EN)
+spacy.tests.serialize.test_io.test_serialize_io_left_right(en_vocab)
+spacy.tests.serialize.test_io.test_serialize_io_read_write(en_vocab,text_file_b)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/serialize/test_packer.py----------------------------------------
 A:spacy.tests.serialize.test_packer.packer->Packer(en_tokenizer.vocab, [])
 A:spacy.tests.serialize.test_packer.bits->Packer(en_tokenizer.vocab, []).pack(doc)
 A:spacy.tests.serialize.test_packer.byte_str->bytearray(text_b)
@@ -419,36 +491,10 @@ spacy.tests.serialize.test_packer.text()
 spacy.tests.serialize.test_packer.text_b()
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/doc/test_token_api.py----------------------------------------
-A:spacy.tests.doc.test_token_api.tokens->en_tokenizer(text)
-A:spacy.tests.doc.test_token_api.doc->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads)
-A:spacy.tests.doc.test_token_api.vector_length->en_tokenizer.vocab.load_vectors(text_file)
-spacy.tests.doc.test_token_api.test_doc_token_api_ancestors(en_tokenizer)
-spacy.tests.doc.test_token_api.test_doc_token_api_flags(en_tokenizer)
-spacy.tests.doc.test_token_api.test_doc_token_api_head_setter(en_tokenizer)
-spacy.tests.doc.test_token_api.test_doc_token_api_is_properties(en_vocab)
-spacy.tests.doc.test_token_api.test_doc_token_api_prob_inherited_from_vocab(en_tokenizer,text)
-spacy.tests.doc.test_token_api.test_doc_token_api_str_builtin(en_tokenizer,text)
-spacy.tests.doc.test_token_api.test_doc_token_api_strings(en_tokenizer)
-spacy.tests.doc.test_token_api.test_doc_token_api_vectors(en_tokenizer,text_file,text,vectors)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/doc/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/doc/test_add_entities.py----------------------------------------
-A:spacy.tests.doc.test_add_entities.doc->get_doc(en_vocab, text)
-A:spacy.tests.doc.test_add_entities.ner->EntityRecognizer(en_vocab, features=[(2,), (3,)])
-spacy.tests.doc.test_add_entities.test_doc_add_entities_set_ents_iob(en_vocab)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/doc/test_array.py----------------------------------------
-A:spacy.tests.doc.test_array.tokens->en_tokenizer(text)
-A:spacy.tests.doc.test_array.feats_array->get_doc(tokens.vocab, [t.text for t in tokens], deps=deps).to_array((ORTH, DEP))
-A:spacy.tests.doc.test_array.doc->get_doc(tokens.vocab, [t.text for t in tokens], deps=deps)
-spacy.tests.doc.test_array.test_doc_array_attr_of_token(en_tokenizer,en_vocab)
-spacy.tests.doc.test_array.test_doc_array_dep(en_tokenizer)
-spacy.tests.doc.test_array.test_doc_array_tag(en_tokenizer)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/doc/test_doc_api.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/doc/test_doc_api.py----------------------------------------
 A:spacy.tests.doc.test_doc_api.doc->en_tokenizer(text)
 A:spacy.tests.doc.test_doc_api.tokens->en_tokenizer(text)
 A:spacy.tests.doc.test_doc_api.new_tokens->get_doc(tokens.vocab).from_bytes(tokens.to_bytes())
@@ -467,154 +513,81 @@ spacy.tests.doc.test_doc_api.test_doc_api_serialize(en_tokenizer,text)
 spacy.tests.doc.test_doc_api.test_doc_api_set_ents(en_tokenizer)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/doc/test_noun_chunks.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/doc/test_array.py----------------------------------------
+A:spacy.tests.doc.test_array.tokens->en_tokenizer(text)
+A:spacy.tests.doc.test_array.feats_array->get_doc(tokens.vocab, [t.text for t in tokens], deps=deps).to_array((ORTH, DEP))
+A:spacy.tests.doc.test_array.doc->get_doc(tokens.vocab, [t.text for t in tokens], deps=deps)
+spacy.tests.doc.test_array.test_doc_array_attr_of_token(en_tokenizer,en_vocab)
+spacy.tests.doc.test_array.test_doc_array_dep(en_tokenizer)
+spacy.tests.doc.test_array.test_doc_array_tag(en_tokenizer)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/doc/test_add_entities.py----------------------------------------
+A:spacy.tests.doc.test_add_entities.doc->get_doc(en_vocab, text)
+A:spacy.tests.doc.test_add_entities.ner->EntityRecognizer(en_vocab, features=[(2,), (3,)])
+spacy.tests.doc.test_add_entities.test_doc_add_entities_set_ents_iob(en_vocab)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/doc/test_noun_chunks.py----------------------------------------
 A:spacy.tests.doc.test_noun_chunks.tokens->en_tokenizer(text)
 A:spacy.tests.doc.test_noun_chunks.doc->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads, deps=deps)
 spacy.tests.doc.test_noun_chunks.test_doc_noun_chunks_not_nested(en_tokenizer)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/doc/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/doc/test_token_api.py----------------------------------------
+A:spacy.tests.doc.test_token_api.tokens->en_tokenizer(text)
+A:spacy.tests.doc.test_token_api.doc->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads)
+A:spacy.tests.doc.test_token_api.vector_length->en_tokenizer.vocab.load_vectors(text_file)
+spacy.tests.doc.test_token_api.test_doc_token_api_ancestors(en_tokenizer)
+spacy.tests.doc.test_token_api.test_doc_token_api_flags(en_tokenizer)
+spacy.tests.doc.test_token_api.test_doc_token_api_head_setter(en_tokenizer)
+spacy.tests.doc.test_token_api.test_doc_token_api_is_properties(en_vocab)
+spacy.tests.doc.test_token_api.test_doc_token_api_prob_inherited_from_vocab(en_tokenizer,text)
+spacy.tests.doc.test_token_api.test_doc_token_api_str_builtin(en_tokenizer,text)
+spacy.tests.doc.test_token_api.test_doc_token_api_strings(en_tokenizer)
+spacy.tests.doc.test_token_api.test_doc_token_api_vectors(en_tokenizer,text_file,text,vectors)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tagger/test_lemmatizer.py----------------------------------------
-A:spacy.tests.tagger.test_lemmatizer.index->read_index(file_)
-A:spacy.tests.tagger.test_lemmatizer.exc->read_exc(file_)
-A:spacy.tests.tagger.test_lemmatizer.doc->EN.tokenizer(text)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_base_form_verb(lemmatizer)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_base_forms(lemmatizer)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_lemma_assignment(EN)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_noun_lemmas(lemmatizer,text,lemmas)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_punct(lemmatizer)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_read_exc(path,text,lemma)
-spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_read_index(path)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/matcher/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tagger/test_spaces.py----------------------------------------
-A:spacy.tests.tagger.test_spaces.doc->EN(text, tag=True, parse=False)
-A:spacy.tests.tagger.test_spaces.tokens->EN(text)
-spacy.tests.tagger.test_spaces.test_tagger_return_char(EN)
-spacy.tests.tagger.test_spaces.test_tagger_spaces(EN)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/matcher/test_entity_id.py----------------------------------------
+A:spacy.tests.matcher.test_entity_id.matcher->Matcher(en_vocab)
+A:spacy.tests.matcher.test_entity_id.doc->get_doc(en_vocab, words)
+A:spacy.tests.matcher.test_entity_id.matches->matcher(doc)
+spacy.tests.matcher.test_entity_id.test_matcher_add_empty_entity(en_vocab,words,entity)
+spacy.tests.matcher.test_entity_id.test_matcher_get_entity_attrs(en_vocab,entity1,entity2,attrs)
+spacy.tests.matcher.test_entity_id.test_matcher_get_entity_via_match(en_vocab,words,entity,attrs)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tagger/test_tag_names.py----------------------------------------
-A:spacy.tests.tagger.test_tag_names.doc->EN(text, parse=False, tag=True)
-spacy.tests.tagger.test_tag_names.test_tag_names(EN)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/matcher/test_matcher.py----------------------------------------
+A:spacy.tests.matcher.test_matcher.matcher->PhraseMatcher(en_vocab, [doc])
+A:spacy.tests.matcher.test_matcher.doc->get_doc(matcher.vocab, words)
+A:spacy.tests.matcher.test_matcher.words1->'He said , " some words " ...'.split()
+A:spacy.tests.matcher.test_matcher.words2->'He said , " some three words " ...'.split()
+A:spacy.tests.matcher.test_matcher.words->'He said , " some words " ...'.split()
+spacy.tests.matcher.test_matcher.matcher(en_vocab)
+spacy.tests.matcher.test_matcher.test_matcher_compile(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_init(en_vocab,words)
+spacy.tests.matcher.test_matcher.test_matcher_match_end(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_match_middle(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_match_multi(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_match_start(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_match_zero(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_match_zero_plus(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_no_match(matcher)
+spacy.tests.matcher.test_matcher.test_matcher_phrase_matcher(en_vocab)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tagger/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vocab/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tagger/test_morph_exceptions.py----------------------------------------
-A:spacy.tests.tagger.test_morph_exceptions.tokens->en_tokenizer(text)
-A:spacy.tests.tagger.test_morph_exceptions.doc->get_doc(tokens.vocab, [t.text for t in tokens], tags=tags)
-spacy.tests.tagger.test_morph_exceptions.test_tagger_load_morph_exc(en_tokenizer)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_ner.py----------------------------------------
-A:spacy.tests.parser.test_ner.tokens->EN(u'Charity and other short-term aid have buoyed them so far, and a tax-relief bill working its way through Congress would help. But the September 11 Victim Compensation Fund, enacted by Congress to discourage people from filing lawsuits, will determine the shape of their lives for years to come.\n\n', entity=False)
-A:spacy.tests.parser.test_ner.ents->matcher(doc)
-A:spacy.tests.parser.test_ner.matcher->Matcher(EN.vocab, {'MemberNames': ('PERSON', {}, [[{LOWER: 'cal'}], [{LOWER: 'cal'}, {LOWER: 'henderson'}]])})
-A:spacy.tests.parser.test_ner.doc->EN(u'who is cal the manager of?')
-spacy.tests.parser.test_ner.test_consistency_bug(EN)
-spacy.tests.parser.test_ner.test_simple_types(EN)
-spacy.tests.parser.test_ner.test_unit_end_gazetteer(EN)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_space_attachment.py----------------------------------------
-A:spacy.tests.parser.test_space_attachment.tokens->en_tokenizer(text)
-A:spacy.tests.parser.test_space_attachment.doc->Doc(en_parser.vocab, words=text)
-spacy.tests.parser.test_space_attachment.test_parser_sentence_space(en_tokenizer)
-spacy.tests.parser.test_space_attachment.test_parser_space_attachment(en_tokenizer)
-spacy.tests.parser.test_space_attachment.test_parser_space_attachment_intermediate_trailing(en_tokenizer,en_parser)
-spacy.tests.parser.test_space_attachment.test_parser_space_attachment_leading(en_tokenizer,en_parser)
-spacy.tests.parser.test_space_attachment.test_parser_space_attachment_space(en_tokenizer,en_parser,text,length)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_noun_chunks.py----------------------------------------
-A:spacy.tests.parser.test_noun_chunks.tokens->de_tokenizer(text)
-A:spacy.tests.parser.test_noun_chunks.doc->get_doc(tokens.vocab, [t.text for t in tokens], tags=tags, deps=deps, heads=heads)
-A:spacy.tests.parser.test_noun_chunks.chunks->list(doc.noun_chunks)
-spacy.tests.parser.test_noun_chunks.test_de_extended_chunk(de_tokenizer)
-spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_coordinated(en_tokenizer)
-spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_pp_chunks(en_tokenizer)
-spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_standard(en_tokenizer)
-spacy.tests.parser.test_noun_chunks.test_parser_noun_chunks_standard_de(de_tokenizer)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_parse.py----------------------------------------
-A:spacy.tests.parser.test_parse.tokens->en_tokenizer(text)
-A:spacy.tests.parser.test_parse.doc->get_doc(tokens.vocab, [t.text for t in tokens], deps=deps, heads=heads, tags=tags)
-spacy.tests.parser.test_parse.test_parser_arc_eager_finalize_state(en_tokenizer,en_parser)
-spacy.tests.parser.test_parse.test_parser_initial(en_tokenizer,en_parser)
-spacy.tests.parser.test_parse.test_parser_merge_pp(en_tokenizer)
-spacy.tests.parser.test_parse.test_parser_parse_one_word_sentence(en_tokenizer,en_parser,text)
-spacy.tests.parser.test_parse.test_parser_parse_subtrees(en_tokenizer,en_parser)
-spacy.tests.parser.test_parse.test_parser_root(en_tokenizer)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_nonproj.py----------------------------------------
-A:spacy.tests.parser.test_nonproj.tokens->en_tokenizer('whatever ' * len(proj_heads))
-A:spacy.tests.parser.test_nonproj.doc->get_doc(tokens.vocab, [t.text for t in tokens], deps=deco_labels, heads=rel_proj_heads)
-A:spacy.tests.parser.test_nonproj.(proj_heads, deco_labels)->syntax.nonproj.PseudoProjectivity.projectivize(nonproj_tree2, labels2)
-A:spacy.tests.parser.test_nonproj.(deproj_heads, undeco_labels)->deprojectivize(proj_heads, deco_labels)
-spacy.tests.parser.test_nonproj.cyclic_tree()
-spacy.tests.parser.test_nonproj.multirooted_tree()
-spacy.tests.parser.test_nonproj.nonproj_tree()
-spacy.tests.parser.test_nonproj.partial_tree()
-spacy.tests.parser.test_nonproj.proj_tree()
-spacy.tests.parser.test_nonproj.test_parser_ancestors(tree,cyclic_tree,partial_tree,multirooted_tree)
-spacy.tests.parser.test_nonproj.test_parser_contains_cycle(tree,cyclic_tree,partial_tree,multirooted_tree)
-spacy.tests.parser.test_nonproj.test_parser_is_nonproj_arc(nonproj_tree,partial_tree,multirooted_tree)
-spacy.tests.parser.test_nonproj.test_parser_is_nonproj_tree(proj_tree,nonproj_tree,partial_tree,multirooted_tree)
-spacy.tests.parser.test_nonproj.test_parser_pseudoprojectivity(en_tokenizer)
-spacy.tests.parser.test_nonproj.tree()
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_sbd_prag.py----------------------------------------
-A:spacy.tests.parser.test_sbd_prag.doc->EN(text)
-spacy.tests.parser.test_sbd_prag.test_parser_sbd_prag(EN,text,expected_sents)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_sbd.py----------------------------------------
-A:spacy.tests.parser.test_sbd.tokens->en_tokenizer(text)
-A:spacy.tests.parser.test_sbd.doc->EN.tokenizer(text)
-A:spacy.tests.parser.test_sbd.doc_serialized->Doc(EN.vocab).from_bytes(doc.to_bytes())
-spacy.tests.parser.test_sbd.test_parser_sbd_serialization_projective(EN)
-spacy.tests.parser.test_sbd.test_parser_sbd_single_punct(en_tokenizer,text,punct)
-spacy.tests.parser.test_sbd.test_parser_sentence_breaks(en_tokenizer,en_parser)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/parser/test_parse_navigate.py----------------------------------------
-A:spacy.tests.parser.test_parse_navigate.tokens->en_tokenizer(text)
-A:spacy.tests.parser.test_parse_navigate.doc->get_doc(tokens.vocab, [t.text for t in tokens], heads=heads)
-A:spacy.tests.parser.test_parse_navigate.lefts[head.i]->set()
-A:spacy.tests.parser.test_parse_navigate.rights[head.i]->set()
-A:spacy.tests.parser.test_parse_navigate.subtree->list(token.subtree)
-A:spacy.tests.parser.test_parse_navigate.debug->'\t'.join((token.text, token.right_edge.text, subtree[-1].text, token.right_edge.head.text))
-spacy.tests.parser.test_parse_navigate.heads()
-spacy.tests.parser.test_parse_navigate.test_parser_parse_navigate_child_consistency(en_tokenizer,text,heads)
-spacy.tests.parser.test_parse_navigate.test_parser_parse_navigate_consistency(en_tokenizer,text,heads)
-spacy.tests.parser.test_parse_navigate.test_parser_parse_navigate_edges(en_tokenizer,text,heads)
-spacy.tests.parser.test_parse_navigate.text()
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vocab/test_add_vectors.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vocab/test_add_vectors.py----------------------------------------
 A:spacy.tests.vocab.test_add_vectors.lex.vector->numpy.ndarray((10,), dtype='float32')
 spacy.tests.vocab.test_add_vectors.test_vocab_add_vector(en_vocab,text)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vocab/test_vocab_api.py----------------------------------------
-spacy.tests.vocab.test_vocab_api.test_vocab_api_contains(en_vocab,text)
-spacy.tests.vocab.test_vocab_api.test_vocab_api_eq(en_vocab,text)
-spacy.tests.vocab.test_vocab_api.test_vocab_api_neq(en_vocab,text1,text2)
-spacy.tests.vocab.test_vocab_api.test_vocab_api_shape_attr(en_vocab,text)
-spacy.tests.vocab.test_vocab_api.test_vocab_api_symbols(en_vocab,string,symbol)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vocab/test_lexeme.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vocab/test_lexeme.py----------------------------------------
 A:spacy.tests.vocab.test_lexeme.is_len4->en_vocab.add_flag(lambda string: len(string) == 4, flag_id=IS_DIGIT)
 spacy.tests.vocab.test_lexeme.test_vocab_lexeme_add_flag_auto_id(en_vocab)
 spacy.tests.vocab.test_lexeme.test_vocab_lexeme_add_flag_provided_id(en_vocab)
@@ -624,21 +597,35 @@ spacy.tests.vocab.test_lexeme.test_vocab_lexeme_is_digit(en_vocab)
 spacy.tests.vocab.test_lexeme.test_vocab_lexeme_lt(en_vocab,text1,text2,prob1,prob2)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/vocab/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vocab/test_vocab_api.py----------------------------------------
+spacy.tests.vocab.test_vocab_api.test_vocab_api_contains(en_vocab,text)
+spacy.tests.vocab.test_vocab_api.test_vocab_api_eq(en_vocab,text)
+spacy.tests.vocab.test_vocab_api.test_vocab_api_neq(en_vocab,text1,text2)
+spacy.tests.vocab.test_vocab_api.test_vocab_api_shape_attr(en_vocab,text)
+spacy.tests.vocab.test_vocab_api.test_vocab_api_symbols(en_vocab,string,symbol)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tokenizer/test_urls.py----------------------------------------
-A:spacy.tests.tokenizer.test_urls.tokens->tokenizer(url + suffix1 + suffix2)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_prefixed_url(tokenizer,prefix,url)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_simple_surround_url(tokenizer,url)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_simple_url(tokenizer,url)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_suffixed_url(tokenizer,url,suffix)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_surround_url(tokenizer,prefix,suffix,url)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_two_prefix_url(tokenizer,prefix1,prefix2,url)
-spacy.tests.tokenizer.test_urls.test_tokenizer_handles_two_prefix_url(tokenizer,suffix1,suffix2,url)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tokenizer/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tokenizer/test_tokenizer.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tokenizer/test_whitespace.py----------------------------------------
+A:spacy.tests.tokenizer.test_whitespace.tokens->tokenizer(text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_handles_double_trainling_ws(tokenizer,text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_double_space(tokenizer,text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline(tokenizer,text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline_double_space(tokenizer,text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline_space(tokenizer,text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline_space_wrap(tokenizer,text)
+spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_single_space(tokenizer,text)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tokenizer/test_exceptions.py----------------------------------------
+A:spacy.tests.tokenizer.test_exceptions.tokens->tokenizer(text)
+spacy.tests.tokenizer.test_exceptions.test_tokenizer_excludes_false_pos_emoticons(tokenizer,text,length)
+spacy.tests.tokenizer.test_exceptions.test_tokenizer_handles_emoticons(tokenizer)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tokenizer/test_tokenizer.py----------------------------------------
 A:spacy.tests.tokenizer.test_tokenizer.tokens->tokenizer(text)
 A:spacy.tests.tokenizer.test_tokenizer.loc->os.path.join(path.dirname(__file__), file_name)
 A:spacy.tests.tokenizer.test_tokenizer.text->utf8open(loc).read()
@@ -660,58 +647,97 @@ spacy.tests.tokenizer.test_tokenizer.test_tokenizer_keeps_email(tokenizer,text)
 spacy.tests.tokenizer.test_tokenizer.test_tokenizer_suspected_freeing_strings(tokenizer)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tokenizer/test_whitespace.py----------------------------------------
-A:spacy.tests.tokenizer.test_whitespace.tokens->tokenizer(text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_handles_double_trainling_ws(tokenizer,text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_double_space(tokenizer,text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline(tokenizer,text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline_double_space(tokenizer,text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline_space(tokenizer,text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_newline_space_wrap(tokenizer,text)
-spacy.tests.tokenizer.test_whitespace.test_tokenizer_splits_single_space(tokenizer,text)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tokenizer/test_urls.py----------------------------------------
+A:spacy.tests.tokenizer.test_urls.tokens->tokenizer(url + suffix1 + suffix2)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_prefixed_url(tokenizer,prefix,url)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_simple_surround_url(tokenizer,url)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_simple_url(tokenizer,url)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_suffixed_url(tokenizer,url,suffix)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_surround_url(tokenizer,prefix,suffix,url)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_two_prefix_url(tokenizer,prefix1,prefix2,url)
+spacy.tests.tokenizer.test_urls.test_tokenizer_handles_two_prefix_url(tokenizer,suffix1,suffix2,url)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tokenizer/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vectors/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/tokenizer/test_exceptions.py----------------------------------------
-A:spacy.tests.tokenizer.test_exceptions.tokens->tokenizer(text)
-spacy.tests.tokenizer.test_exceptions.test_tokenizer_excludes_false_pos_emoticons(tokenizer,text,length)
-spacy.tests.tokenizer.test_exceptions.test_tokenizer_handles_emoticons(tokenizer)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vectors/test_vectors.py----------------------------------------
+A:spacy.tests.vectors.test_vectors.doc->get_doc(vocab, text)
+A:spacy.tests.vectors.test_vectors.token->tokenizer_v(text1)
+A:spacy.tests.vectors.test_vectors.doc1->get_doc(vocab, text1)
+A:spacy.tests.vectors.test_vectors.doc2->get_doc(vocab, text2)
+spacy.tests.vectors.test_vectors.test_vectors_doc_doc_similarity(vocab,text1,text2)
+spacy.tests.vectors.test_vectors.test_vectors_doc_vector(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_lexeme_doc_similarity(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_lexeme_lexeme_similarity(vocab,text1,text2)
+spacy.tests.vectors.test_vectors.test_vectors_lexeme_span_similarity(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_lexeme_vector(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_span_doc_similarity(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_span_span_similarity(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_span_vector(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_token_doc_similarity(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_token_lexeme_similarity(tokenizer_v,vocab,text1,text2)
+spacy.tests.vectors.test_vectors.test_vectors_token_span_similarity(vocab,text)
+spacy.tests.vectors.test_vectors.test_vectors_token_token_similarity(tokenizer_v,text)
+spacy.tests.vectors.test_vectors.test_vectors_token_vector(tokenizer_v,vectors,text)
+spacy.tests.vectors.test_vectors.tokenizer_v(vocab)
+spacy.tests.vectors.test_vectors.vectors()
+spacy.tests.vectors.test_vectors.vocab(en_vocab,vectors)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/matcher/test_entity_id.py----------------------------------------
-A:spacy.tests.matcher.test_entity_id.matcher->Matcher(en_vocab)
-A:spacy.tests.matcher.test_entity_id.doc->get_doc(en_vocab, words)
-A:spacy.tests.matcher.test_entity_id.matches->matcher(doc)
-spacy.tests.matcher.test_entity_id.test_matcher_add_empty_entity(en_vocab,words,entity)
-spacy.tests.matcher.test_entity_id.test_matcher_get_entity_attrs(en_vocab,entity1,entity2,attrs)
-spacy.tests.matcher.test_entity_id.test_matcher_get_entity_via_match(en_vocab,words,entity,attrs)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/vectors/test_similarity.py----------------------------------------
+A:spacy.tests.vectors.test_similarity.doc->get_doc(vocab, words=[word1, word2])
+spacy.tests.vectors.test_similarity.test_vectors_similarity_DS(vocab,vectors)
+spacy.tests.vectors.test_similarity.test_vectors_similarity_LL(vocab,vectors)
+spacy.tests.vectors.test_similarity.test_vectors_similarity_TD(vocab,vectors)
+spacy.tests.vectors.test_similarity.test_vectors_similarity_TS(vocab,vectors)
+spacy.tests.vectors.test_similarity.test_vectors_similarity_TT(vocab,vectors)
+spacy.tests.vectors.test_similarity.vectors()
+spacy.tests.vectors.test_similarity.vocab(en_vocab,vectors)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/matcher/test_matcher.py----------------------------------------
-A:spacy.tests.matcher.test_matcher.matcher->PhraseMatcher(en_vocab, [doc])
-A:spacy.tests.matcher.test_matcher.doc->get_doc(matcher.vocab, words)
-A:spacy.tests.matcher.test_matcher.words1->'He said , " some words " ...'.split()
-A:spacy.tests.matcher.test_matcher.words2->'He said , " some three words " ...'.split()
-A:spacy.tests.matcher.test_matcher.words->'He said , " some words " ...'.split()
-spacy.tests.matcher.test_matcher.matcher(en_vocab)
-spacy.tests.matcher.test_matcher.test_matcher_compile(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_init(en_vocab,words)
-spacy.tests.matcher.test_matcher.test_matcher_match_end(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_match_middle(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_match_multi(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_match_start(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_match_zero(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_match_zero_plus(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_no_match(matcher)
-spacy.tests.matcher.test_matcher.test_matcher_phrase_matcher(en_vocab)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tagger/test_spaces.py----------------------------------------
+A:spacy.tests.tagger.test_spaces.doc->EN(text, tag=True, parse=False)
+A:spacy.tests.tagger.test_spaces.tokens->EN(text)
+spacy.tests.tagger.test_spaces.test_tagger_return_char(EN)
+spacy.tests.tagger.test_spaces.test_tagger_spaces(EN)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/matcher/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tagger/test_lemmatizer.py----------------------------------------
+A:spacy.tests.tagger.test_lemmatizer.index->read_index(file_)
+A:spacy.tests.tagger.test_lemmatizer.exc->read_exc(file_)
+A:spacy.tests.tagger.test_lemmatizer.doc->EN.tokenizer(text)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_base_form_verb(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_base_forms(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_lemma_assignment(EN)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_noun_lemmas(lemmatizer,text,lemmas)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_punct(lemmatizer)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_read_exc(path,text,lemma)
+spacy.tests.tagger.test_lemmatizer.test_tagger_lemmatizer_read_index(path)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/stringstore/test_stringstore.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tagger/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tagger/test_morph_exceptions.py----------------------------------------
+A:spacy.tests.tagger.test_morph_exceptions.tokens->en_tokenizer(text)
+A:spacy.tests.tagger.test_morph_exceptions.doc->get_doc(tokens.vocab, [t.text for t in tokens], tags=tags)
+spacy.tests.tagger.test_morph_exceptions.test_tagger_load_morph_exc(en_tokenizer)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/tagger/test_tag_names.py----------------------------------------
+A:spacy.tests.tagger.test_tag_names.doc->EN(text, parse=False, tag=True)
+spacy.tests.tagger.test_tag_names.test_tag_names(EN)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/stringstore/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/stringstore/test_freeze_string_store.py----------------------------------------
+spacy.tests.stringstore.test_freeze_string_store.test_stringstore_freeze_oov(stringstore,text)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tests/stringstore/test_stringstore.py----------------------------------------
 A:spacy.tests.stringstore.test_stringstore.new_stringstore->StringStore()
 spacy.tests.stringstore.test_stringstore.test_stringstore_dump_load(stringstore,text_file,text)
 spacy.tests.stringstore.test_stringstore.test_stringstore_long_string(stringstore)
@@ -723,96 +749,112 @@ spacy.tests.stringstore.test_stringstore.test_stringstore_save_bytes(stringstore
 spacy.tests.stringstore.test_stringstore.test_stringstore_save_unicode(stringstore,text1,text2,text3)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/stringstore/test_freeze_string_store.py----------------------------------------
-spacy.tests.stringstore.test_freeze_string_store.test_stringstore_freeze_oov(stringstore,text)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/zh/__init__.py----------------------------------------
+A:spacy.zh.__init__.words->list(jieba.cut(text, cut_all=True))
+spacy.zh.__init__.Chinese(Language)
+spacy.zh.__init__.Chinese.make_doc(self,text)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tests/stringstore/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/serialize/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/es/stop_words.py----------------------------------------
-A:spacy.es.stop_words.STOP_WORDS->set('\nactualmente acuerdo adelante ademas además adrede afirmó agregó ahi ahora ahí\nal algo alguna algunas alguno algunos algún alli allí alrededor ambos ampleamos\nantano antaño ante anterior antes apenas aproximadamente aquel aquella aquellas\naquello aquellos aqui aquél aquélla aquéllas aquéllos aquí arriba arribaabajo\naseguró asi así atras aun aunque ayer añadió aún\n\nbajo bastante bien breve buen buena buenas bueno buenos\n\ncada casi cerca cierta ciertas cierto ciertos cinco claro comentó como con\nconmigo conocer conseguimos conseguir considera consideró consigo consigue\nconsiguen consigues contigo contra cosas creo cual cuales cualquier cuando\ncuanta cuantas cuanto cuantos cuatro cuenta cuál cuáles cuándo cuánta cuántas\ncuánto cuántos cómo\n\nda dado dan dar de debajo debe deben debido decir dejó del delante demasiado\ndemás dentro deprisa desde despacio despues después detras detrás dia dias dice\ndicen dicho dieron diferente diferentes dijeron dijo dio donde dos durante día\ndías dónde\n\nejemplo el ella ellas ello ellos embargo empleais emplean emplear empleas\nempleo en encima encuentra enfrente enseguida entonces entre era eramos eran\neras eres es esa esas ese eso esos esta estaba estaban estado estados estais\nestamos estan estar estará estas este esto estos estoy estuvo está están ex\nexcepto existe existen explicó expresó él ésa ésas ése ésos ésta éstas éste\néstos\n\nfin final fue fuera fueron fui fuimos\n\ngeneral gran grandes gueno\n\nha haber habia habla hablan habrá había habían hace haceis hacemos hacen hacer\nhacerlo haces hacia haciendo hago han hasta hay haya he hecho hemos hicieron\nhizo horas hoy hubo\n\nigual incluso indicó informo informó intenta intentais intentamos intentan\nintentar intentas intento ir\n\njunto\n\nla lado largo las le lejos les llegó lleva llevar lo los luego lugar\n\nmal manera manifestó mas mayor me mediante medio mejor mencionó menos menudo mi\nmia mias mientras mio mios mis misma mismas mismo mismos modo momento mucha\nmuchas mucho muchos muy más mí mía mías mío míos\n\nnada nadie ni ninguna ningunas ninguno ningunos ningún no nos nosotras nosotros\nnuestra nuestras nuestro nuestros nueva nuevas nuevo nuevos nunca\n\nocho os otra otras otro otros\n\npais para parece parte partir pasada pasado paìs peor pero pesar poca pocas\npoco pocos podeis podemos poder podria podriais podriamos podrian podrias podrá\npodrán podría podrían poner por porque posible primer primera primero primeros\nprincipalmente pronto propia propias propio propios proximo próximo próximos\npudo pueda puede pueden puedo pues\n\nqeu que quedó queremos quien quienes quiere quiza quizas quizá quizás quién quiénes qué\n\nraras realizado realizar realizó repente respecto\n\nsabe sabeis sabemos saben saber sabes salvo se sea sean segun segunda segundo\nsegún seis ser sera será serán sería señaló si sido siempre siendo siete sigue\nsiguiente sin sino sobre sois sola solamente solas solo solos somos son soy\nsoyos su supuesto sus suya suyas suyo sé sí sólo\n\ntal tambien también tampoco tan tanto tarde te temprano tendrá tendrán teneis\ntenemos tener tenga tengo tenido tenía tercera ti tiempo tiene tienen toda\ntodas todavia todavía todo todos total trabaja trabajais trabajamos trabajan\ntrabajar trabajas trabajo tras trata través tres tu tus tuvo tuya tuyas tuyo\ntuyos tú\n\nultimo un una unas uno unos usa usais usamos usan usar usas uso usted ustedes\núltima últimas último últimos\n\nva vais valor vamos van varias varios vaya veces ver verdad verdadera verdadero\nvez vosotras vosotros voy vuestra vuestras vuestro vuestros\n\nya yo\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/es/__init__.py----------------------------------------
+A:spacy.es.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.es.__init__.Spanish(Language)
+spacy.es.__init__.Spanish.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/es/language_data.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/es/tokenizer_exceptions.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/es/language_data.py----------------------------------------
 A:spacy.es.language_data.STOP_WORDS->set(STOP_WORDS)
 A:spacy.es.language_data.TOKENIZER_EXCEPTIONS->dict(TOKENIZER_EXCEPTIONS)
 spacy.es.get_time_exc(hours)
 spacy.es.language_data.get_time_exc(hours)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/es/tokenizer_exceptions.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/es/stop_words.py----------------------------------------
+A:spacy.es.stop_words.STOP_WORDS->set('\nactualmente acuerdo adelante ademas además adrede afirmó agregó ahi ahora ahí\nal algo alguna algunas alguno algunos algún alli allí alrededor ambos ampleamos\nantano antaño ante anterior antes apenas aproximadamente aquel aquella aquellas\naquello aquellos aqui aquél aquélla aquéllas aquéllos aquí arriba arribaabajo\naseguró asi así atras aun aunque ayer añadió aún\n\nbajo bastante bien breve buen buena buenas bueno buenos\n\ncada casi cerca cierta ciertas cierto ciertos cinco claro comentó como con\nconmigo conocer conseguimos conseguir considera consideró consigo consigue\nconsiguen consigues contigo contra cosas creo cual cuales cualquier cuando\ncuanta cuantas cuanto cuantos cuatro cuenta cuál cuáles cuándo cuánta cuántas\ncuánto cuántos cómo\n\nda dado dan dar de debajo debe deben debido decir dejó del delante demasiado\ndemás dentro deprisa desde despacio despues después detras detrás dia dias dice\ndicen dicho dieron diferente diferentes dijeron dijo dio donde dos durante día\ndías dónde\n\nejemplo el ella ellas ello ellos embargo empleais emplean emplear empleas\nempleo en encima encuentra enfrente enseguida entonces entre era eramos eran\neras eres es esa esas ese eso esos esta estaba estaban estado estados estais\nestamos estan estar estará estas este esto estos estoy estuvo está están ex\nexcepto existe existen explicó expresó él ésa ésas ése ésos ésta éstas éste\néstos\n\nfin final fue fuera fueron fui fuimos\n\ngeneral gran grandes gueno\n\nha haber habia habla hablan habrá había habían hace haceis hacemos hacen hacer\nhacerlo haces hacia haciendo hago han hasta hay haya he hecho hemos hicieron\nhizo horas hoy hubo\n\nigual incluso indicó informo informó intenta intentais intentamos intentan\nintentar intentas intento ir\n\njunto\n\nla lado largo las le lejos les llegó lleva llevar lo los luego lugar\n\nmal manera manifestó mas mayor me mediante medio mejor mencionó menos menudo mi\nmia mias mientras mio mios mis misma mismas mismo mismos modo momento mucha\nmuchas mucho muchos muy más mí mía mías mío míos\n\nnada nadie ni ninguna ningunas ninguno ningunos ningún no nos nosotras nosotros\nnuestra nuestras nuestro nuestros nueva nuevas nuevo nuevos nunca\n\nocho os otra otras otro otros\n\npais para parece parte partir pasada pasado paìs peor pero pesar poca pocas\npoco pocos podeis podemos poder podria podriais podriamos podrian podrias podrá\npodrán podría podrían poner por porque posible primer primera primero primeros\nprincipalmente pronto propia propias propio propios proximo próximo próximos\npudo pueda puede pueden puedo pues\n\nqeu que quedó queremos quien quienes quiere quiza quizas quizá quizás quién quiénes qué\n\nraras realizado realizar realizó repente respecto\n\nsabe sabeis sabemos saben saber sabes salvo se sea sean segun segunda segundo\nsegún seis ser sera será serán sería señaló si sido siempre siendo siete sigue\nsiguiente sin sino sobre sois sola solamente solas solo solos somos son soy\nsoyos su supuesto sus suya suyas suyo sé sí sólo\n\ntal tambien también tampoco tan tanto tarde te temprano tendrá tendrán teneis\ntenemos tener tenga tengo tenido tenía tercera ti tiempo tiene tienen toda\ntodas todavia todavía todo todos total trabaja trabajais trabajamos trabajan\ntrabajar trabajas trabajo tras trata través tres tu tus tuvo tuya tuyas tuyo\ntuyos tú\n\nultimo un una unas uno unos usa usais usamos usan usar usas uso usted ustedes\núltima últimas último últimos\n\nva vais valor vamos van varias varios vaya veces ver verdad verdadera verdadero\nvez vosotras vosotros voy vuestra vuestras vuestro vuestros\n\nya yo\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/es/__init__.py----------------------------------------
-A:spacy.es.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.es.__init__.Spanish(Language)
-spacy.es.__init__.Spanish.Defaults(Language.Defaults)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/sv/__init__.py----------------------------------------
+A:spacy.sv.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.sv.__init__.Swedish(Language)
+spacy.sv.__init__.Swedish.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/it/stop_words.py----------------------------------------
-A:spacy.it.stop_words.STOP_WORDS->set('\na abbastanza abbia abbiamo abbiano abbiate accidenti ad adesso affinche agl\nagli ahime ahimè ai al alcuna alcuni alcuno all alla alle allo allora altri\naltrimenti altro altrove altrui anche ancora anni anno ansa anticipo assai\nattesa attraverso avanti avemmo avendo avente aver avere averlo avesse\navessero avessi avessimo aveste avesti avete aveva avevamo avevano avevate\navevi avevo avrai avranno avrebbe avrebbero avrei avremmo avremo avreste\navresti avrete avrà avrò avuta avute avuti avuto\n\nbasta bene benissimo brava bravo\n\ncasa caso cento certa certe certi certo che chi chicchessia chiunque ci\nciascuna ciascuno cima cio cioe circa citta città co codesta codesti codesto\ncogli coi col colei coll coloro colui come cominci comunque con concernente\nconciliarsi conclusione consiglio contro cortesia cos cosa cosi così cui\n\nda dagl dagli dai dal dall dalla dalle dallo dappertutto davanti degl degli\ndei del dell della delle dello dentro detto deve di dice dietro dire\ndirimpetto diventa diventare diventato dopo dov dove dovra dovrà dovunque due\ndunque durante\n\nebbe ebbero ebbi ecc ecco ed effettivamente egli ella entrambi eppure era\nerano eravamo eravate eri ero esempio esse essendo esser essere essi ex\n\nfa faccia facciamo facciano facciate faccio facemmo facendo facesse facessero\nfacessi facessimo faceste facesti faceva facevamo facevano facevate facevi\nfacevo fai fanno farai faranno fare farebbe farebbero farei faremmo faremo\nfareste faresti farete farà farò fatto favore fece fecero feci fin finalmente\nfinche fine fino forse forza fosse fossero fossi fossimo foste fosti fra\nfrattempo fu fui fummo fuori furono futuro generale\n\ngia già giacche giorni giorno gli gliela gliele glieli glielo gliene governo\ngrande grazie gruppo\n\nha haha hai hanno ho\n\nieri il improvviso in inc infatti inoltre insieme intanto intorno invece io\n\nla là lasciato lato lavoro le lei li lo lontano loro lui lungo luogo\n\nma macche magari maggior mai male malgrado malissimo mancanza marche me\nmedesimo mediante meglio meno mentre mesi mezzo mi mia mie miei mila miliardi\nmilioni minimi ministro mio modo molti moltissimo molto momento mondo mosto\n\nnazionale ne negl negli nei nel nell nella nelle nello nemmeno neppure nessun\nnessuna nessuno niente no noi non nondimeno nonostante nonsia nostra nostre\nnostri nostro novanta nove nulla nuovo\n\nod oggi ogni ognuna ognuno oltre oppure ora ore osi ossia ottanta otto\n\npaese parecchi parecchie parecchio parte partendo peccato peggio per perche\nperché percio perciò perfino pero persino persone però piedi pieno piglia piu\npiuttosto più po pochissimo poco poi poiche possa possedere posteriore posto\npotrebbe preferibilmente presa press prima primo principalmente probabilmente\nproprio puo può pure purtroppo\n\nqualche qualcosa qualcuna qualcuno quale quali qualunque quando quanta quante\nquanti quanto quantunque quasi quattro quel quella quelle quelli quello quest\nquesta queste questi questo qui quindi\n\nrealmente recente recentemente registrazione relativo riecco salvo\n\nsara sarà sarai saranno sarebbe sarebbero sarei saremmo saremo sareste\nsaresti sarete saro sarò scola scopo scorso se secondo seguente seguito sei\nsembra sembrare sembrato sembri sempre senza sette si sia siamo siano siate\nsiete sig solito solo soltanto sono sopra sotto spesso srl sta stai stando\nstanno starai staranno starebbe starebbero starei staremmo staremo stareste\nstaresti starete starà starò stata state stati stato stava stavamo stavano\nstavate stavi stavo stemmo stessa stesse stessero stessi stessimo stesso\nsteste stesti stette stettero stetti stia stiamo stiano stiate sto su sua\nsubito successivamente successivo sue sugl sugli sui sul sull sulla sulle\nsullo suo suoi\n\ntale tali talvolta tanto te tempo ti titolo torino tra tranne tre trenta\ntroppo trovato tu tua tue tuo tuoi tutta tuttavia tutte tutti tutto\n\nuguali ulteriore ultimo un una uno uomo\n\nva vale vari varia varie vario verso vi via vicino visto vita voi volta volte\nvostra vostre vostri vostro\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/sv/tokenizer_exceptions.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/it/language_data.py----------------------------------------
-A:spacy.it.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.it.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/sv/language_data.py----------------------------------------
+A:spacy.sv.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.sv.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/it/__init__.py----------------------------------------
-A:spacy.it.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.it.__init__.Italian(Language)
-spacy.it.__init__.Italian.Defaults(Language.Defaults)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/sv/morph_rules.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/zh/__init__.py----------------------------------------
-A:spacy.zh.__init__.words->list(jieba.cut(text, cut_all=True))
-spacy.zh.__init__.Chinese(Language)
-spacy.zh.__init__.Chinese.make_doc(self,text)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/sv/stop_words.py----------------------------------------
+A:spacy.sv.stop_words.STOP_WORDS->set('\naderton adertonde adjö aldrig alla allas allt alltid alltså än andra andras annan annat ännu artonde arton åtminstone att åtta åttio åttionde åttonde av även\n\nbåda bådas bakom bara bäst bättre behöva behövas behövde behövt beslut beslutat beslutit bland blev bli blir blivit bort borta bra\n\ndå dag dagar dagarna dagen där därför de del delen dem den deras dess det detta dig din dina dit ditt dock du\n\nefter eftersom elfte eller elva en enkel enkelt enkla enligt er era ert ett ettusen\n\nfå fanns får fått fem femte femtio femtionde femton femtonde fick fin finnas finns fjärde fjorton fjortonde fler flera flesta följande för före förlåt förra första fram framför från fyra fyrtio fyrtionde\n\ngå gälla gäller gällt går gärna gått genast genom gick gjorde gjort god goda godare godast gör göra gott\n\nha hade haft han hans har här heller hellre helst helt henne hennes hit hög höger högre högst hon honom hundra hundraen hundraett hur\n\ni ibland idag igår igen imorgon in inför inga ingen ingenting inget innan inne inom inte inuti\n\nja jag jämfört\n\nkan kanske knappast kom komma kommer kommit kr kunde kunna kunnat kvar\n\nlänge längre långsam långsammare långsammast långsamt längst långt lätt lättare lättast legat ligga ligger lika likställd likställda lilla lite liten litet\n\nman många måste med mellan men mer mera mest mig min mina mindre minst mitt mittemot möjlig möjligen möjligt möjligtvis mot mycket\n\nnågon någonting något några när nästa ned nederst nedersta nedre nej ner ni nio nionde nittio nittionde nitton nittonde nödvändig nödvändiga nödvändigt nödvändigtvis nog noll nr nu nummer\n\noch också ofta oftast olika olikt om oss\n\növer övermorgon överst övre\n\npå\n\nrakt rätt redan\n\nså sade säga säger sagt samma sämre sämst sedan senare senast sent sex sextio sextionde sexton sextonde sig sin sina sist sista siste sitt sjätte sju sjunde sjuttio sjuttionde sjutton sjuttonde ska skall skulle slutligen små smått snart som stor stora större störst stort\n\ntack tidig tidigare tidigast tidigt till tills tillsammans tio tionde tjugo tjugoen tjugoett tjugonde tjugotre tjugotvå tjungo tolfte tolv tre tredje trettio trettionde tretton trettonde två tvåhundra\n\nunder upp ur ursäkt ut utan utanför ute\n\nvad vänster vänstra var vår vara våra varför varifrån varit varken värre varsågod vart vårt vem vems verkligen vi vid vidare viktig viktigare viktigast viktigt vilka vilken vilket vill\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/nl/stop_words.py----------------------------------------
-A:spacy.nl.stop_words.STOP_WORDS->set('\naan af al alles als altijd andere\n\nben bij\n\ndaar dan dat de der deze die dit doch doen door dus\n\neen eens en er\n\nge geen geweest\n\nhaar had heb hebben heeft hem het hier hij hoe hun\n\niemand iets ik in is\n\nja je\n\nkan kon kunnen\n\nmaar me meer men met mij mijn moet\n\nna naar niet niets nog nu\n\nof om omdat ons ook op over\n\nreeds\n\nte tegen toch toen tot\n\nu uit uw\n\nvan veel voor\n\nwant waren was wat we wel werd wezen wie wij wil worden\n\nzal ze zei zelf zich zij zijn zo zonder zou\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/emoticons.py----------------------------------------
+A:spacy.language_data.emoticons.EMOTICONS->set('\n:)\n:-)\n:))\n:-))\n:)))\n:-)))\n(:\n(-:\n=)\n(=\n")\n:]\n:-]\n[:\n[-:\n:o)\n(o:\n:}\n:-}\n8)\n8-)\n(-8\n\n;)\n;-)\n(;\n(-;\n\n:(\n:-(\n:((\n:-((\n:(((\n:-(((\n):\n)-:\n=(\n>:(\n\n:\')\n:\'-)\n:\'(\n:\'-(\n\n:/\n:-/\n=/\n:|\n:-|\n:1\n\n:P\n:-P\n:p\n:-p\n\n:O\n:-O\n:o\n:-o\n:0\n:-0\n:()\n>:o\n\n:*\n:-*\n:3\n:-3\n=3\n:>\n:->\n\n:X\n:-X\n:x\n:-x\n\n:D\n:-D\n;D\n;-D\n=D\nxD\nXD\nxDD\nXDD\n8D\n8-D\n\n^_^\n^__^\n^___^\n>.<\n>.>\n<.<\n._.\n;_;\n-_-\n-__-\nv.v\nV.V\nv_v\nV_V\no_o\no_O\nO_o\nO_O\n0_o\no_0\n0_0\no.O\nO.o\nO.O\no.o\n0.0\no.0\n0.o\n@_@\n\n<3\n<33\n<333\n</3\n\n(^_^)\n(-_-)\n(._.)\n(>_<)\n(*_*)\n(¬_¬)\n\nಠ_ಠ\nಠ︵ಠ\n(ಠ_ಠ)\n¯\\(ツ)/¯\n(╯°□°）╯︵┻━┻\n><(((*>\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/nl/language_data.py----------------------------------------
-A:spacy.nl.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.nl.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/abbreviations.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/nl/__init__.py----------------------------------------
-A:spacy.nl.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.nl.__init__.Dutch(Language)
-spacy.nl.__init__.Dutch.Defaults(Language.Defaults)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/munge/read_ontonotes.py----------------------------------------
-A:spacy.munge.read_ontonotes.docid_re->re.compile('<DOCID>([^>]+)</DOCID>')
-A:spacy.munge.read_ontonotes.doctype_re->re.compile('<DOCTYPE SOURCE="[^"]+">([^>]+)</DOCTYPE>')
-A:spacy.munge.read_ontonotes.datetime_re->re.compile('<DATETIME>([^>]+)</DATETIME>')
-A:spacy.munge.read_ontonotes.headline_re->re.compile('<HEADLINE>(.+)</HEADLINE>', re.DOTALL)
-A:spacy.munge.read_ontonotes.post_re->re.compile('<POST>(.+)</POST>', re.DOTALL)
-A:spacy.munge.read_ontonotes.poster_re->re.compile('<POSTER>(.+)</POSTER>')
-A:spacy.munge.read_ontonotes.postdate_re->re.compile('<POSTDATE>(.+)</POSTDATE>')
-A:spacy.munge.read_ontonotes.tag_re->re.compile('<[^>]+>[^>]+</[^>]+>')
-A:spacy.munge.read_ontonotes.matches->regex.search(text)
-spacy.munge.read_ontonotes._get_one(regex,text,required=False)
-spacy.munge.read_ontonotes._get_text(data)
-spacy.munge.read_ontonotes.sgml_extract(text_data)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/tokenizer_exceptions.py----------------------------------------
+A:spacy.language_data.tokenizer_exceptions._URL_PATTERN->'\n^((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w\\-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)$\n'.strip()
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/munge/read_conll.py----------------------------------------
-A:spacy.munge.read_conll.sent_text->sent_text.strip().strip()
-A:spacy.munge.read_conll.(word, tag, head, dep)->_parse_line(line)
-A:spacy.munge.read_conll.id_map[i]->len(words)
-A:spacy.munge.read_conll.pieces->line.split()
-spacy.munge.read_conll._is_bad_period(prev,period)
-spacy.munge.read_conll._parse_line(line)
-spacy.munge.read_conll.parse(sent_text,strip_bad_periods=False)
-spacy.munge.read_conll.split(text)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/entity_rules.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/munge/align_raw.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/util.py----------------------------------------
+A:spacy.language_data.util.described_orth->''.join((attr[ORTH] for attr in token_attrs))
+A:spacy.language_data.util.overlap->set(exc.keys()).intersection(set(additions))
+A:spacy.language_data.util.new_key->token_string.replace(search, replace)
+A:spacy.language_data.util.fixed->dict(token)
+A:spacy.language_data.util.fixed[ORTH]->fixed[ORTH].replace(search, replace).replace(search, replace)
+spacy.language_data._fix_token(token,search,replace)
+spacy.language_data.expand_exc(excs,search,replace)
+spacy.language_data.strings_to_exc(orths)
+spacy.language_data.update_exc(exc,additions)
+spacy.language_data.util._fix_token(token,search,replace)
+spacy.language_data.util.expand_exc(excs,search,replace)
+spacy.language_data.util.strings_to_exc(orths)
+spacy.language_data.util.update_exc(exc,additions)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/tag_map.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/language_data/punctuation.py----------------------------------------
+A:spacy.language_data.punctuation.LIST_CURRENCY->list(_CURRENCY.strip().split())
+A:spacy.language_data.punctuation.LIST_QUOTES->list(_QUOTES.strip().split())
+A:spacy.language_data.punctuation.LIST_PUNCT->list(_PUNCT.strip().split())
+A:spacy.language_data.punctuation.LIST_HYPHENS->list(_HYPHENS.strip().split())
+A:spacy.language_data.punctuation.ALPHA_LOWER->_ALPHA_LOWER.strip().replace(' ', '').replace('\n', '')
+A:spacy.language_data.punctuation.ALPHA_UPPER->_ALPHA_UPPER.strip().replace(' ', '').replace('\n', '')
+A:spacy.language_data.punctuation.QUOTES->_QUOTES.strip().replace(' ', '|')
+A:spacy.language_data.punctuation.CURRENCY->_CURRENCY.strip().replace(' ', '|')
+A:spacy.language_data.punctuation.UNITS->_UNITS.strip().replace(' ', '|').replace('\n', '|')
+A:spacy.language_data.punctuation.HYPHENS->_HYPHENS.strip().replace(' ', '|')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/tokens/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/munge/__init__.py----------------------------------------
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/munge/align_raw.py----------------------------------------
 A:spacy.munge.align_raw.line->line.replace(find, replace).replace(find, replace)
 A:spacy.munge.align_raw.ptb_sec_dir->Path(ptb_sec_dir)
 A:spacy.munge.align_raw.text->file_.read()
@@ -849,7 +891,33 @@ spacy.munge.align_raw.read_odc(section_loc)
 spacy.munge.align_raw.read_ptb_sec(ptb_sec_dir)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/munge/read_ner.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/munge/read_ontonotes.py----------------------------------------
+A:spacy.munge.read_ontonotes.docid_re->re.compile('<DOCID>([^>]+)</DOCID>')
+A:spacy.munge.read_ontonotes.doctype_re->re.compile('<DOCTYPE SOURCE="[^"]+">([^>]+)</DOCTYPE>')
+A:spacy.munge.read_ontonotes.datetime_re->re.compile('<DATETIME>([^>]+)</DATETIME>')
+A:spacy.munge.read_ontonotes.headline_re->re.compile('<HEADLINE>(.+)</HEADLINE>', re.DOTALL)
+A:spacy.munge.read_ontonotes.post_re->re.compile('<POST>(.+)</POST>', re.DOTALL)
+A:spacy.munge.read_ontonotes.poster_re->re.compile('<POSTER>(.+)</POSTER>')
+A:spacy.munge.read_ontonotes.postdate_re->re.compile('<POSTDATE>(.+)</POSTDATE>')
+A:spacy.munge.read_ontonotes.tag_re->re.compile('<[^>]+>[^>]+</[^>]+>')
+A:spacy.munge.read_ontonotes.matches->regex.search(text)
+spacy.munge.read_ontonotes._get_one(regex,text,required=False)
+spacy.munge.read_ontonotes._get_text(data)
+spacy.munge.read_ontonotes.sgml_extract(text_data)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/munge/read_conll.py----------------------------------------
+A:spacy.munge.read_conll.sent_text->sent_text.strip().strip()
+A:spacy.munge.read_conll.(word, tag, head, dep)->_parse_line(line)
+A:spacy.munge.read_conll.id_map[i]->len(words)
+A:spacy.munge.read_conll.pieces->line.split()
+spacy.munge.read_conll._is_bad_period(prev,period)
+spacy.munge.read_conll._parse_line(line)
+spacy.munge.read_conll.parse(sent_text,strip_bad_periods=False)
+spacy.munge.read_conll.split(text)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/munge/read_ner.py----------------------------------------
 A:spacy.munge.read_ner.string->string.replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain').replace('<ENAMEXTYPE="CARDINAL"><ENAMEXTYPE="CARDINAL">little</ENAMEX> drain</ENAMEX>', 'little drain')
 A:spacy.munge.read_ner.substr->re.compile('<ENAMEXTYPE="[^"]+">').sub('', substr)
 A:spacy.munge.read_ner.(tag, open_tag)->_get_tag(substr, open_tag)
@@ -865,7 +933,7 @@ spacy.munge.read_ner.split(text)
 spacy.munge.read_ner.tags_to_entities(tags)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/munge/read_ptb.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/munge/read_ptb.py----------------------------------------
 A:spacy.munge.read_ptb.sent_text->sent_text.replace('((', '( (', 1).replace('((', '( (', 1)
 A:spacy.munge.read_ptb.bracketsRE->re.compile('(\\()([^\\s\\)\\(]+)|([^\\s\\)\\(]+)?(\\))')
 A:spacy.munge.read_ptb.(open_, label, text, close)->match.groups()
@@ -876,91 +944,60 @@ spacy.munge.read_ptb.parse(sent_text,strip_bad_periods=False)
 spacy.munge.read_ptb.split(text)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/munge/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/de/__init__.py----------------------------------------
+A:spacy.de.__init__.tokenizer_exceptions->dict(language_data.TOKENIZER_EXCEPTIONS)
+A:spacy.de.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.de.__init__.German(Language)
+spacy.de.__init__.German.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/serialize/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/de/tokenizer_exceptions.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/morph_rules.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/de/language_data.py----------------------------------------
+A:spacy.de.language_data.TAG_MAP->dict(TAG_MAP)
+A:spacy.de.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.de.language_data.TOKENIZER_EXCEPTIONS->dict(TOKENIZER_EXCEPTIONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/stop_words.py----------------------------------------
-A:spacy.en.stop_words.STOP_WORDS->set('\na about above across after afterwards again against all almost alone along\nalready also although always am among amongst amount an and another any anyhow\nanyone anything anyway anywhere are around as at\n\nback be became because become becomes becoming been before beforehand behind\nbeing below beside besides between beyond both bottom but by\n\ncall can cannot ca could\n\ndid do does doing done down due during\n\neach eight either eleven else elsewhere empty enough etc even ever every\neveryone everything everywhere except\n\nfew fifteen fifty first five for former formerly forty four from front full\nfurther\n\nget give go\n\nhad has have he hence her here hereafter hereby herein hereupon hers herself\nhim himself his how however hundred\n\ni if in inc indeed into is it its itself\n\nkeep\n\nlast latter latterly least less\n\njust\n\nmade make many may me meanwhile might mine more moreover most mostly move much\nmust my myself\n\nname namely neither never nevertheless next nine no nobody none noone nor not\nnothing now nowhere\n\nof off often on once one only onto or other others otherwise our ours ourselves\nout over own\n\npart per perhaps please put\n\nquite\n\nrather re really regarding\n\nsame say see seem seemed seeming seems serious several she should show side\nsince six sixty so some somehow someone something sometime sometimes somewhere\nstill such\n\ntake ten than that the their them themselves then thence there thereafter\nthereby therefore therein thereupon these they third this those though three\nthrough throughout thru thus to together too top toward towards twelve twenty\ntwo\n\nunder until up unless upon us used using\n\nvarious very very via was we well were what whatever when whence whenever where\nwhereafter whereas whereby wherein whereupon wherever whether which while\nwhither who whoever whole whom whose why will with within without would\n\nyet you your yours yourself yourselves\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/de/download.py----------------------------------------
+spacy.de.download.main(data_size='all',force=False,data_path=None)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/language_data.py----------------------------------------
-A:spacy.en.language_data.TAG_MAP->dict(TAG_MAP)
-A:spacy.en.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.en.language_data.TOKENIZER_EXCEPTIONS->dict(TOKENIZER_EXCEPTIONS)
-spacy.en.get_time_exc(hours)
-spacy.en.language_data.get_time_exc(hours)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/de/stop_words.py----------------------------------------
+A:spacy.de.stop_words.STOP_WORDS->set('\ná a ab aber ach acht achte achten achter achtes ag alle allein allem allen\naller allerdings alles allgemeinen als also am an andere anderen andern anders\nauch auf aus ausser außer ausserdem außerdem\n\nbald bei beide beiden beim beispiel bekannt bereits besonders besser besten bin\nbis bisher bist\n\nda dabei dadurch dafür dagegen daher dahin dahinter damals damit danach daneben\ndank dann daran darauf daraus darf darfst darin darüber darum darunter das\ndasein daselbst dass daß dasselbe davon davor dazu dazwischen dein deine deinem\ndeiner dem dementsprechend demgegenüber demgemäss demgemäß demselben demzufolge\nden denen denn denselben der deren derjenige derjenigen dermassen dermaßen\nderselbe derselben des deshalb desselben dessen deswegen dich die diejenige\ndiejenigen dies diese dieselbe dieselben diesem diesen dieser dieses dir doch\ndort drei drin dritte dritten dritter drittes du durch durchaus dürfen dürft\ndurfte durften\n\neben ebenso ehrlich eigen eigene eigenen eigener eigenes ein einander eine\neinem einen einer eines einigeeinigen einiger einiges einmal einmaleins elf en\nende endlich entweder er erst erste ersten erster erstes es etwa etwas euch\n\nfrüher fünf fünfte fünften fünfter fünftes für\n\ngab ganz ganze ganzen ganzer ganzes gar gedurft gegen gegenüber gehabt gehen\ngeht gekannt gekonnt gemacht gemocht gemusst genug gerade gern gesagt geschweige\ngewesen gewollt geworden gibt ging gleich gott gross groß grosse große grossen\ngroßen grosser großer grosses großes gut gute guter gutes\n\nhabe haben habt hast hat hatte hätte hatten hätten heisst heißt her heute hier\nhin hinter hoch\n\nich ihm ihn ihnen ihr ihre ihrem ihrer ihres im immer in indem infolgedessen\nins irgend ist\n\nja jahr jahre jahren je jede jedem jeden jeder jedermann jedermanns jedoch\njemand jemandem jemanden jene jenem jenen jener jenes jetzt\n\nkam kann kannst kaum kein keine keinem keinen keiner kleine kleinen kleiner\nkleines kommen kommt können könnt konnte könnte konnten kurz\n\nlang lange leicht leider lieber los\n\nmachen macht machte mag magst man manche manchem manchen mancher manches mehr\nmein meine meinem meinen meiner meines mensch menschen mich mir mit mittel\nmochte möchte mochten mögen möglich mögt morgen muss muß müssen musst müsst\nmusste mussten\n\nna nach nachdem nahm natürlich neben nein neue neuen neun neunte neunten neunter\nneuntes nicht nichts nie niemand niemandem niemanden noch nun nur\n\nob oben oder offen oft ohne\n\nrecht rechte rechten rechter rechtes richtig rund\n\nsagt sagte sah satt schlecht schon sechs sechste sechsten sechster sechstes\nsehr sei seid seien sein seine seinem seinen seiner seines seit seitdem selbst\nselbst sich sie sieben siebente siebenten siebenter siebentes siebte siebten\nsiebter siebtes sind so solang solche solchem solchen solcher solches soll\nsollen sollte sollten sondern sonst sowie später statt\n\ntag tage tagen tat teil tel trotzdem tun\n\nüber überhaupt übrigens uhr um und uns unser unsere unserer unter\n\nvergangene vergangenen viel viele vielem vielen vielleicht vier vierte vierten\nvierter viertes vom von vor\n\nwahr während währenddem währenddessen wann war wäre waren wart warum was wegen\nweil weit weiter weitere weiteren weiteres welche welchem welchen welcher\nwelches wem wen wenig wenige weniger weniges wenigstens wenn wer werde werden\nwerdet wessen wie wieder will willst wir wird wirklich wirst wo wohl wollen\nwollt wollte wollten worden wurde würde wurden würden\n\nzehn zehnte zehnten zehnter zehntes zeit zu zuerst zugleich zum zunächst zur\nzurück zusammen zwanzig zwar zwei zweite zweiten zweiter zweites zwischen\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/lemma_rules.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/de/tag_map.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/tokenizer_exceptions.py----------------------------------------
-A:spacy.en.tokenizer_exceptions.verb_data_tc->dict(verb_data)
-A:spacy.en.tokenizer_exceptions.verb_data_tc[ORTH]->verb_data_tc[ORTH].title().title()
-A:spacy.en.tokenizer_exceptions.exc_data_tc->dict(exc_data)
-A:spacy.en.tokenizer_exceptions.exc_data_tc[ORTH]->exc_data_tc[ORTH].title().title()
-A:spacy.en.tokenizer_exceptions.data_apos->dict(data)
-A:spacy.en.tokenizer_exceptions.exc_data_apos->dict(exc_data)
-A:spacy.en.tokenizer_exceptions.TOKENIZER_EXCEPTIONS->dict(EXC)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/nl/__init__.py----------------------------------------
+A:spacy.nl.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.nl.__init__.Dutch(Language)
+spacy.nl.__init__.Dutch.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/download.py----------------------------------------
-spacy.en.download.main(data_size='all',force=False,data_path=None)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/nl/language_data.py----------------------------------------
+A:spacy.nl.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.nl.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/tag_map.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/nl/stop_words.py----------------------------------------
+A:spacy.nl.stop_words.STOP_WORDS->set('\naan af al alles als altijd andere\n\nben bij\n\ndaar dan dat de der deze die dit doch doen door dus\n\neen eens en er\n\nge geen geweest\n\nhaar had heb hebben heeft hem het hier hij hoe hun\n\niemand iets ik in is\n\nja je\n\nkan kon kunnen\n\nmaar me meer men met mij mijn moet\n\nna naar niet niets nog nu\n\nof om omdat ons ook op over\n\nreeds\n\nte tegen toch toen tot\n\nu uit uw\n\nvan veel voor\n\nwant waren was wat we wel werd wezen wie wij wil worden\n\nzal ze zei zelf zich zij zijn zo zonder zou\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/en/__init__.py----------------------------------------
-A:spacy.en.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-A:spacy.en.__init__.overrides->_fix_deprecated_glove_vectors_loading(overrides)
-A:spacy.en.__init__.data_path->get_data_path()
-A:spacy.en.__init__.vec_path->match_best_version('en_glove_cc_300_1m_vectors', None, data_path)
-spacy.en.__init__.English(self,**overrides)
-spacy.en.__init__.English.Defaults(Language.Defaults)
-spacy.en.__init__.English.__init__(self,**overrides)
-spacy.en.__init__._fix_deprecated_glove_vectors_loading(overrides)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/syntax/__init__.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/fr/stop_words.py----------------------------------------
-A:spacy.fr.stop_words.STOP_WORDS->set("\na à â abord absolument afin ah ai aie ailleurs ainsi ait allaient allo allons\nallô alors anterieur anterieure anterieures apres après as assez attendu au\naucun aucune aujourd aujourd'hui aupres auquel aura auraient aurait auront\naussi autre autrefois autrement autres autrui aux auxquelles auxquels avaient\navais avait avant avec avoir avons ayant\n\nbah bas basee bat beau beaucoup bien bigre boum bravo brrr\n\nça car ce ceci cela celle celle-ci celle-là celles celles-ci celles-là celui\ncelui-ci celui-là cent cependant certain certaine certaines certains certes ces\ncet cette ceux ceux-ci ceux-là chacun chacune chaque cher chers chez chiche\nchut chère chères ci cinq cinquantaine cinquante cinquantième cinquième clac\nclic combien comme comment comparable comparables compris concernant contre\ncouic crac\n\nda dans de debout dedans dehors deja delà depuis dernier derniere derriere\nderrière des desormais desquelles desquels dessous dessus deux deuxième\ndeuxièmement devant devers devra different differentes differents différent\ndifférente différentes différents dire directe directement dit dite dits divers\ndiverse diverses dix dix-huit dix-neuf dix-sept dixième doit doivent donc dont\ndouze douzième dring du duquel durant dès désormais\n\neffet egale egalement egales eh elle elle-même elles elles-mêmes en encore\nenfin entre envers environ es ès est et etaient étaient etais étais etait était\netant étant etc été etre être eu euh eux eux-mêmes exactement excepté extenso\nexterieur\n\nfais faisaient faisant fait façon feront fi flac floc font\n\ngens\n\nha hein hem hep hi ho holà hop hormis hors hou houp hue hui huit huitième hum\nhurrah hé hélas i il ils importe\n\nje jusqu jusque juste\n\nla laisser laquelle las le lequel les lesquelles lesquels leur leurs longtemps\nlors lorsque lui lui-meme lui-même là lès\n\nma maint maintenant mais malgre malgré maximale me meme memes merci mes mien\nmienne miennes miens mille mince minimale moi moi-meme moi-même moindres moins\nmon moyennant multiple multiples même mêmes\n\nna naturel naturelle naturelles ne neanmoins necessaire necessairement neuf\nneuvième ni nombreuses nombreux non nos notamment notre nous nous-mêmes nouveau\nnul néanmoins nôtre nôtres\n\no ô oh ohé ollé olé on ont onze onzième ore ou ouf ouias oust ouste outre\nouvert ouverte ouverts où\n\npaf pan par parce parfois parle parlent parler parmi parseme partant\nparticulier particulière particulièrement pas passé pendant pense permet\npersonne peu peut peuvent peux pff pfft pfut pif pire plein plouf plus\nplusieurs plutôt possessif possessifs possible possibles pouah pour pourquoi\npourrais pourrait pouvait prealable precisement premier première premièrement\npres probable probante procedant proche près psitt pu puis puisque pur pure\n\nqu quand quant quant-à-soi quanta quarante quatorze quatre quatre-vingt\nquatrième quatrièmement que quel quelconque quelle quelles quelqu'un quelque\nquelques quels qui quiconque quinze quoi quoique\n\nrare rarement rares relative relativement remarquable rend rendre restant reste\nrestent restrictif retour revoici revoilà rien\n\nsa sacrebleu sait sans sapristi sauf se sein seize selon semblable semblaient\nsemble semblent sent sept septième sera seraient serait seront ses seul seule\nseulement si sien sienne siennes siens sinon six sixième soi soi-même soit\nsoixante son sont sous souvent specifique specifiques speculatif stop\nstrictement subtiles suffisant suffisante suffit suis suit suivant suivante\nsuivantes suivants suivre superpose sur surtout\n\nta tac tant tardive te tel telle tellement telles tels tenant tend tenir tente\ntes tic tien tienne tiennes tiens toc toi toi-même ton touchant toujours tous\ntout toute toutefois toutes treize trente tres trois troisième troisièmement\ntrop très tsoin tsouin tu té\n\nun une unes uniformement unique uniques uns\n\nva vais vas vers via vif vifs vingt vivat vive vives vlan voici voilà vont vos\nvotre vous vous-mêmes vu vé vôtre vôtres\n\nzut\n".split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/syntax/util.py----------------------------------------
+spacy.syntax.util.Config(self,**kwargs)
+spacy.syntax.util.Config.__init__(self,**kwargs)
+spacy.syntax.util.Config.get(self,attr,default=None)
+spacy.syntax.util.Config.read(cls,model_dir,name)
+spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/fr/language_data.py----------------------------------------
-A:spacy.fr.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.fr.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/fr/__init__.py----------------------------------------
-A:spacy.fr.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.fr.__init__.French(Language)
-spacy.fr.__init__.French.Defaults(Language.Defaults)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/hu/stop_words.py----------------------------------------
-A:spacy.hu.stop_words.STOP_WORDS->set('\na abban ahhoz ahogy ahol aki akik akkor akár alatt amely amelyek amelyekben\namelyeket amelyet amelynek ami amikor amit amolyan amíg annak arra arról az\nazok azon azonban azt aztán azután azzal azért\n\nbe belül benne bár\n\ncikk cikkek cikkeket csak\n\nde\n\ne ebben eddig egy egyes egyetlen egyik egyre egyéb egész ehhez ekkor el ellen\nelo eloször elott elso elég előtt emilyen ennek erre ez ezek ezen ezt ezzel\nezért\n\nfel felé\n\nha hanem hiszen hogy hogyan hát\n\nide igen ill ill. illetve ilyen ilyenkor inkább is ismét ison itt\n\njobban jó jól\n\nkell kellett keressünk keresztül ki kívül között közül\n\nle legalább legyen lehet lehetett lenne lenni lesz lett\n\nma maga magát majd meg mellett mely melyek mert mi miatt mikor milyen minden\nmindenki mindent mindig mint mintha mit mivel miért mondta most már más másik\nmég míg\n\nnagy nagyobb nagyon ne nekem neki nem nincs néha néhány nélkül\n\no oda ok oket olyan ott\n\npedig persze például\n\nrá\n\ns saját sem semmi sok sokat sokkal stb. szemben szerint szinte számára szét\n\ntalán te tehát teljes ti tovább továbbá több túl ugyanis\n\nutolsó után utána\n\nvagy vagyis vagyok valaki valami valamint való van vannak vele vissza viszont\nvolna volt voltak voltam voltunk\n\náltal általában át\n\nén éppen és\n\nígy\n\nön össze\n\núgy új újabb újra\n\nő őket\n'.split())
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/hu/language_data.py----------------------------------------
-A:spacy.hu.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.hu.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/hu/tokenizer_exceptions.py----------------------------------------
-A:spacy.hu.tokenizer_exceptions.ABBREVIATIONS->'\nA.\nAG.\nAkH.\nAö.\nB.\nB.CS.\nB.S.\nB.Sc.\nB.ú.é.k.\nBE.\nBEK.\nBSC.\nBSc.\nBTK.\nBat.\nBe.\nBek.\nBfok.\nBk.\nBp.\nBros.\nBt.\nBtk.\nBtke.\nBtét.\nC.\nCSC.\nCal.\nCg.\nCgf.\nCgt.\nCia.\nCo.\nColo.\nComp.\nCopr.\nCorp.\nCos.\nCs.\nCsc.\nCsop.\nCstv.\nCtv.\nCtvr.\nD.\nDR.\nDipl.\nDr.\nDsz.\nDzs.\nE.\nEK.\nEU.\nF.\nFla.\nFolyt.\nFpk.\nFőszerk.\nG.\nGK.\nGM.\nGfv.\nGmk.\nGr.\nGroup.\nGt.\nGy.\nH.\nHKsz.\nHmvh.\nI.\nIfj.\nInc.\nInform.\nInt.\nJ.\nJr.\nJv.\nK.\nK.m.f.\nKB.\nKER.\nKFT.\nKRT.\nKb.\nKer.\nKft.\nKg.\nKht.\nKkt.\nKong.\nKorm.\nKr.\nKr.e.\nKr.u.\nKrt.\nL.\nLB.\nLlc.\nLtd.\nM.\nM.A.\nM.S.\nM.SC.\nM.Sc.\nMA.\nMH.\nMSC.\nMSc.\nMass.\nMax.\nMlle.\nMme.\nMo.\nMr.\nMrs.\nMs.\nMt.\nN.\nN.N.\nNB.\nNBr.\nNat.\nNo.\nNr.\nNy.\nNyh.\nNyr.\nNyrt.\nO.\nOJ.\nOp.\nP.\nP.H.\nP.S.\nPH.D.\nPHD.\nPROF.\nPf.\nPh.D\nPhD.\nPk.\nPl.\nPlc.\nPp.\nProc.\nProf.\nPtk.\nR.\nRT.\nRer.\nRt.\nS.\nS.B.\nSZOLG.\nSalg.\nSch.\nSpa.\nSt.\nSz.\nSzRt.\nSzerk.\nSzfv.\nSzjt.\nSzolg.\nSzt.\nSztv.\nSzvt.\nSzámv.\nT.\nTEL.\nTel.\nTy.\nTyr.\nU.\nUi.\nUt.\nV.\nVB.\nVcs.\nVhr.\nVht.\nVárm.\nW.\nX.\nX.Y.\nY.\nZ.\nZrt.\nZs.\na.C.\nac.\nadj.\nadm.\nag.\nagit.\nalez.\nalk.\nall.\naltbgy.\nan.\nang.\narch.\nat.\natc.\naug.\nb.a.\nb.s.\nb.sc.\nbek.\nbelker.\nberend.\nbiz.\nbizt.\nbo.\nbp.\nbr.\nbsc.\nbt.\nbtk.\nca.\ncc.\ncca.\ncf.\ncif.\nco.\ncorp.\ncos.\ncs.\ncsc.\ncsüt.\ncső.\nctv.\ndbj.\ndd.\nddr.\nde.\ndec.\ndikt.\ndipl.\ndj.\ndk.\ndl.\ndny.\ndolg.\ndr.\ndu.\ndzs.\nea.\ned.\neff.\negyh.\nell.\nelv.\nelvt.\nem.\neng.\neny.\net.\netc.\nev.\nezr.\neü.\nf.h.\nf.é.\nfam.\nfb.\nfebr.\nfej.\nfelv.\nfelügy.\nff.\nffi.\nfhdgy.\nfil.\nfiz.\nfm.\nfoglalk.\nford.\nfp.\nfr.\nfrsz.\nfszla.\nfszt.\nft.\nfuv.\nfőig.\nfőisk.\nfőtörm.\nfőv.\ngazd.\ngimn.\ngk.\ngkv.\ngmk.\ngondn.\ngr.\ngrav.\ngy.\ngyak.\ngyártm.\ngör.\nhads.\nhallg.\nhdm.\nhdp.\nhds.\nhg.\nhiv.\nhk.\nhm.\nho.\nhonv.\nhp.\nhr.\nhrsz.\nhsz.\nht.\nhtb.\nhv.\nhőm.\ni.e.\ni.sz.\nid.\nie.\nifj.\nig.\nigh.\nill.\nimp.\ninc.\nind.\ninform.\ninic.\nint.\nio.\nip.\nir.\nirod.\nirod.\nisk.\nism.\nizr.\niá.\njan.\njav.\njegyz.\njgmk.\njjv.\njkv.\njogh.\njogt.\njr.\njvb.\njúl.\njún.\nkarb.\nkat.\nkath.\nkb.\nkcs.\nkd.\nker.\nkf.\nkft.\nkht.\nkir.\nkirend.\nkisip.\nkiv.\nkk.\nkkt.\nklin.\nkm.\nkorm.\nkp.\nkrt.\nkt.\nktsg.\nkult.\nkv.\nkve.\nképv.\nkísérl.\nkóth.\nkönyvt.\nkörz.\nköv.\nközj.\nközl.\nközp.\nközt.\nkü.\nlat.\nld.\nlegs.\nlg.\nlgv.\nloc.\nlt.\nltd.\nltp.\nluth.\nm.a.\nm.s.\nm.sc.\nma.\nmat.\nmax.\nmb.\nmed.\nmegh.\nmet.\nmf.\nmfszt.\nmin.\nmiss.\nmjr.\nmjv.\nmk.\nmlle.\nmme.\nmn.\nmozg.\nmr.\nmrs.\nms.\nmsc.\nmá.\nmáj.\nmárc.\nmé.\nmélt.\nmü.\nműh.\nműsz.\nműv.\nművez.\nnagyker.\nnagys.\nnat.\nnb.\nneg.\nnk.\nno.\nnov.\nnu.\nny.\nnyilv.\nnyrt.\nnyug.\nobj.\nokl.\nokt.\nold.\nolv.\norsz.\nort.\nov.\novh.\npf.\npg.\nph.d\nph.d.\nphd.\nphil.\npjt.\npk.\npl.\nplb.\nplc.\npld.\nplur.\npol.\npolg.\npoz.\npp.\nproc.\nprof.\nprot.\npság.\nptk.\npu.\npü.\nr.k.\nrac.\nrad.\nred.\nref.\nreg.\nrer.\nrev.\nrf.\nrkp.\nrkt.\nrt.\nrtg.\nröv.\ns.b.\ns.k.\nsa.\nsb.\nsel.\nsgt.\nsm.\nst.\nstat.\nstb.\nstrat.\nstud.\nsz.\nszakm.\nszaksz.\nszakszerv.\nszd.\nszds.\nszept.\nszerk.\nszf.\nszimf.\nszjt.\nszkv.\nszla.\nszn.\nszolg.\nszt.\nszubj.\nszöv.\nszül.\ntanm.\ntb.\ntbk.\ntc.\ntechn.\ntek.\ntel.\ntf.\ntgk.\nti.\ntip.\ntisztv.\ntitks.\ntk.\ntkp.\ntny.\ntp.\ntszf.\ntszk.\ntszkv.\ntv.\ntvr.\nty.\ntörv.\ntü.\nua.\nui.\nunit.\nuo.\nuv.\nvas.\nvb.\nvegy.\nvh.\nvhol.\nvhr.\nvill.\nvizsg.\nvk.\nvkf.\nvkny.\nvm.\nvol.\nvs.\nvsz.\nvv.\nvál.\nvárm.\nvízv.\nvö.\nzrt.\nzs.\nÁ.\nÁe.\nÁht.\nÉ.\nÉpt.\nÉsz.\nÚj-Z.\nÚjZ.\nÚn.\ná.\nált.\nápr.\násv.\né.\nék.\nény.\nérk.\névf.\ní.\nó.\nössz.\nötk.\nözv.\nú.\nú.n.\núm.\nún.\nút.\nüag.\nüd.\nüdv.\nüe.\nümk.\nütk.\nüv.\nű.\nőrgy.\nőrpk.\nőrv.\n'.strip().split()
-A:spacy.hu.tokenizer_exceptions.OTHER_EXC->'\n-e\n'.strip().split()
-A:spacy.hu.tokenizer_exceptions._SUFFIXES->'-[{a}]+'.format(a=ALPHA_LOWER)
-A:spacy.hu.tokenizer_exceptions.NUMERIC_EXP->'({n})(({o})({n}))*[%]?'.format(n=_NUM, o=_OPS)
-A:spacy.hu.tokenizer_exceptions.NUMS->'(({ne})|({t})|({on})|({c}))({s})?'.format(ne=NUMERIC_EXP, t=TIME_EXP, on=ORD_NUM_OR_DATE, c=CURRENCY, s=_SUFFIXES)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/hu/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/hu/__init__.py----------------------------------------
 A:spacy.hu.__init__.tokenizer_exceptions->dict(TOKENIZER_EXCEPTIONS)
 A:spacy.hu.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
 A:spacy.hu.__init__.prefixes->tuple(TOKENIZER_PREFIXES)
@@ -971,89 +1008,52 @@ spacy.hu.__init__.Hungarian(Language)
 spacy.hu.__init__.Hungarian.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/hu/punctuation.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/hu/tokenizer_exceptions.py----------------------------------------
+A:spacy.hu.tokenizer_exceptions.ABBREVIATIONS->'\nA.\nAG.\nAkH.\nAö.\nB.\nB.CS.\nB.S.\nB.Sc.\nB.ú.é.k.\nBE.\nBEK.\nBSC.\nBSc.\nBTK.\nBat.\nBe.\nBek.\nBfok.\nBk.\nBp.\nBros.\nBt.\nBtk.\nBtke.\nBtét.\nC.\nCSC.\nCal.\nCg.\nCgf.\nCgt.\nCia.\nCo.\nColo.\nComp.\nCopr.\nCorp.\nCos.\nCs.\nCsc.\nCsop.\nCstv.\nCtv.\nCtvr.\nD.\nDR.\nDipl.\nDr.\nDsz.\nDzs.\nE.\nEK.\nEU.\nF.\nFla.\nFolyt.\nFpk.\nFőszerk.\nG.\nGK.\nGM.\nGfv.\nGmk.\nGr.\nGroup.\nGt.\nGy.\nH.\nHKsz.\nHmvh.\nI.\nIfj.\nInc.\nInform.\nInt.\nJ.\nJr.\nJv.\nK.\nK.m.f.\nKB.\nKER.\nKFT.\nKRT.\nKb.\nKer.\nKft.\nKg.\nKht.\nKkt.\nKong.\nKorm.\nKr.\nKr.e.\nKr.u.\nKrt.\nL.\nLB.\nLlc.\nLtd.\nM.\nM.A.\nM.S.\nM.SC.\nM.Sc.\nMA.\nMH.\nMSC.\nMSc.\nMass.\nMax.\nMlle.\nMme.\nMo.\nMr.\nMrs.\nMs.\nMt.\nN.\nN.N.\nNB.\nNBr.\nNat.\nNo.\nNr.\nNy.\nNyh.\nNyr.\nNyrt.\nO.\nOJ.\nOp.\nP.\nP.H.\nP.S.\nPH.D.\nPHD.\nPROF.\nPf.\nPh.D\nPhD.\nPk.\nPl.\nPlc.\nPp.\nProc.\nProf.\nPtk.\nR.\nRT.\nRer.\nRt.\nS.\nS.B.\nSZOLG.\nSalg.\nSch.\nSpa.\nSt.\nSz.\nSzRt.\nSzerk.\nSzfv.\nSzjt.\nSzolg.\nSzt.\nSztv.\nSzvt.\nSzámv.\nT.\nTEL.\nTel.\nTy.\nTyr.\nU.\nUi.\nUt.\nV.\nVB.\nVcs.\nVhr.\nVht.\nVárm.\nW.\nX.\nX.Y.\nY.\nZ.\nZrt.\nZs.\na.C.\nac.\nadj.\nadm.\nag.\nagit.\nalez.\nalk.\nall.\naltbgy.\nan.\nang.\narch.\nat.\natc.\naug.\nb.a.\nb.s.\nb.sc.\nbek.\nbelker.\nberend.\nbiz.\nbizt.\nbo.\nbp.\nbr.\nbsc.\nbt.\nbtk.\nca.\ncc.\ncca.\ncf.\ncif.\nco.\ncorp.\ncos.\ncs.\ncsc.\ncsüt.\ncső.\nctv.\ndbj.\ndd.\nddr.\nde.\ndec.\ndikt.\ndipl.\ndj.\ndk.\ndl.\ndny.\ndolg.\ndr.\ndu.\ndzs.\nea.\ned.\neff.\negyh.\nell.\nelv.\nelvt.\nem.\neng.\neny.\net.\netc.\nev.\nezr.\neü.\nf.h.\nf.é.\nfam.\nfb.\nfebr.\nfej.\nfelv.\nfelügy.\nff.\nffi.\nfhdgy.\nfil.\nfiz.\nfm.\nfoglalk.\nford.\nfp.\nfr.\nfrsz.\nfszla.\nfszt.\nft.\nfuv.\nfőig.\nfőisk.\nfőtörm.\nfőv.\ngazd.\ngimn.\ngk.\ngkv.\ngmk.\ngondn.\ngr.\ngrav.\ngy.\ngyak.\ngyártm.\ngör.\nhads.\nhallg.\nhdm.\nhdp.\nhds.\nhg.\nhiv.\nhk.\nhm.\nho.\nhonv.\nhp.\nhr.\nhrsz.\nhsz.\nht.\nhtb.\nhv.\nhőm.\ni.e.\ni.sz.\nid.\nie.\nifj.\nig.\nigh.\nill.\nimp.\ninc.\nind.\ninform.\ninic.\nint.\nio.\nip.\nir.\nirod.\nirod.\nisk.\nism.\nizr.\niá.\njan.\njav.\njegyz.\njgmk.\njjv.\njkv.\njogh.\njogt.\njr.\njvb.\njúl.\njún.\nkarb.\nkat.\nkath.\nkb.\nkcs.\nkd.\nker.\nkf.\nkft.\nkht.\nkir.\nkirend.\nkisip.\nkiv.\nkk.\nkkt.\nklin.\nkm.\nkorm.\nkp.\nkrt.\nkt.\nktsg.\nkult.\nkv.\nkve.\nképv.\nkísérl.\nkóth.\nkönyvt.\nkörz.\nköv.\nközj.\nközl.\nközp.\nközt.\nkü.\nlat.\nld.\nlegs.\nlg.\nlgv.\nloc.\nlt.\nltd.\nltp.\nluth.\nm.a.\nm.s.\nm.sc.\nma.\nmat.\nmax.\nmb.\nmed.\nmegh.\nmet.\nmf.\nmfszt.\nmin.\nmiss.\nmjr.\nmjv.\nmk.\nmlle.\nmme.\nmn.\nmozg.\nmr.\nmrs.\nms.\nmsc.\nmá.\nmáj.\nmárc.\nmé.\nmélt.\nmü.\nműh.\nműsz.\nműv.\nművez.\nnagyker.\nnagys.\nnat.\nnb.\nneg.\nnk.\nno.\nnov.\nnu.\nny.\nnyilv.\nnyrt.\nnyug.\nobj.\nokl.\nokt.\nold.\nolv.\norsz.\nort.\nov.\novh.\npf.\npg.\nph.d\nph.d.\nphd.\nphil.\npjt.\npk.\npl.\nplb.\nplc.\npld.\nplur.\npol.\npolg.\npoz.\npp.\nproc.\nprof.\nprot.\npság.\nptk.\npu.\npü.\nr.k.\nrac.\nrad.\nred.\nref.\nreg.\nrer.\nrev.\nrf.\nrkp.\nrkt.\nrt.\nrtg.\nröv.\ns.b.\ns.k.\nsa.\nsb.\nsel.\nsgt.\nsm.\nst.\nstat.\nstb.\nstrat.\nstud.\nsz.\nszakm.\nszaksz.\nszakszerv.\nszd.\nszds.\nszept.\nszerk.\nszf.\nszimf.\nszjt.\nszkv.\nszla.\nszn.\nszolg.\nszt.\nszubj.\nszöv.\nszül.\ntanm.\ntb.\ntbk.\ntc.\ntechn.\ntek.\ntel.\ntf.\ntgk.\nti.\ntip.\ntisztv.\ntitks.\ntk.\ntkp.\ntny.\ntp.\ntszf.\ntszk.\ntszkv.\ntv.\ntvr.\nty.\ntörv.\ntü.\nua.\nui.\nunit.\nuo.\nuv.\nvas.\nvb.\nvegy.\nvh.\nvhol.\nvhr.\nvill.\nvizsg.\nvk.\nvkf.\nvkny.\nvm.\nvol.\nvs.\nvsz.\nvv.\nvál.\nvárm.\nvízv.\nvö.\nzrt.\nzs.\nÁ.\nÁe.\nÁht.\nÉ.\nÉpt.\nÉsz.\nÚj-Z.\nÚjZ.\nÚn.\ná.\nált.\nápr.\násv.\né.\nék.\nény.\nérk.\névf.\ní.\nó.\nössz.\nötk.\nözv.\nú.\nú.n.\núm.\nún.\nút.\nüag.\nüd.\nüdv.\nüe.\nümk.\nütk.\nüv.\nű.\nőrgy.\nőrpk.\nőrv.\n'.strip().split()
+A:spacy.hu.tokenizer_exceptions.OTHER_EXC->'\n-e\n'.strip().split()
+A:spacy.hu.tokenizer_exceptions._SUFFIXES->'-[{a}]+'.format(a=ALPHA_LOWER)
+A:spacy.hu.tokenizer_exceptions.NUMERIC_EXP->'({n})(({o})({n}))*[%]?'.format(n=_NUM, o=_OPS)
+A:spacy.hu.tokenizer_exceptions.NUMS->'(({ne})|({t})|({on})|({c}))({s})?'.format(ne=NUMERIC_EXP, t=TIME_EXP, on=ORD_NUM_OR_DATE, c=CURRENCY, s=_SUFFIXES)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/syntax/util.py----------------------------------------
-spacy.syntax.util.Config(self,**kwargs)
-spacy.syntax.util.Config.__init__(self,**kwargs)
-spacy.syntax.util.Config.get(self,attr,default=None)
-spacy.syntax.util.Config.read(cls,model_dir,name)
-spacy.syntax.util.Config.write(cls,model_dir,name,**kwargs)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/hu/language_data.py----------------------------------------
+A:spacy.hu.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.hu.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/syntax/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/hu/stop_words.py----------------------------------------
+A:spacy.hu.stop_words.STOP_WORDS->set('\na abban ahhoz ahogy ahol aki akik akkor akár alatt amely amelyek amelyekben\namelyeket amelyet amelynek ami amikor amit amolyan amíg annak arra arról az\nazok azon azonban azt aztán azután azzal azért\n\nbe belül benne bár\n\ncikk cikkek cikkeket csak\n\nde\n\ne ebben eddig egy egyes egyetlen egyik egyre egyéb egész ehhez ekkor el ellen\nelo eloször elott elso elég előtt emilyen ennek erre ez ezek ezen ezt ezzel\nezért\n\nfel felé\n\nha hanem hiszen hogy hogyan hát\n\nide igen ill ill. illetve ilyen ilyenkor inkább is ismét ison itt\n\njobban jó jól\n\nkell kellett keressünk keresztül ki kívül között közül\n\nle legalább legyen lehet lehetett lenne lenni lesz lett\n\nma maga magát majd meg mellett mely melyek mert mi miatt mikor milyen minden\nmindenki mindent mindig mint mintha mit mivel miért mondta most már más másik\nmég míg\n\nnagy nagyobb nagyon ne nekem neki nem nincs néha néhány nélkül\n\no oda ok oket olyan ott\n\npedig persze például\n\nrá\n\ns saját sem semmi sok sokat sokkal stb. szemben szerint szinte számára szét\n\ntalán te tehát teljes ti tovább továbbá több túl ugyanis\n\nutolsó után utána\n\nvagy vagyis vagyok valaki valami valamint való van vannak vele vissza viszont\nvolna volt voltak voltam voltunk\n\náltal általában át\n\nén éppen és\n\nígy\n\nön össze\n\núgy új újabb újra\n\nő őket\n'.split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/tokens/__init__.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/hu/punctuation.py----------------------------------------
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/util.py----------------------------------------
-A:spacy.language_data.util.described_orth->''.join((attr[ORTH] for attr in token_attrs))
-A:spacy.language_data.util.overlap->set(exc.keys()).intersection(set(additions))
-A:spacy.language_data.util.new_key->token_string.replace(search, replace)
-A:spacy.language_data.util.fixed->dict(token)
-A:spacy.language_data.util.fixed[ORTH]->fixed[ORTH].replace(search, replace).replace(search, replace)
-spacy.language_data._fix_token(token,search,replace)
-spacy.language_data.expand_exc(excs,search,replace)
-spacy.language_data.strings_to_exc(orths)
-spacy.language_data.update_exc(exc,additions)
-spacy.language_data.util._fix_token(token,search,replace)
-spacy.language_data.util.expand_exc(excs,search,replace)
-spacy.language_data.util.strings_to_exc(orths)
-spacy.language_data.util.update_exc(exc,additions)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/fr/__init__.py----------------------------------------
+A:spacy.fr.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.fr.__init__.French(Language)
+spacy.fr.__init__.French.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/emoticons.py----------------------------------------
-A:spacy.language_data.emoticons.EMOTICONS->set('\n:)\n:-)\n:))\n:-))\n:)))\n:-)))\n(:\n(-:\n=)\n(=\n")\n:]\n:-]\n[:\n[-:\n:o)\n(o:\n:}\n:-}\n8)\n8-)\n(-8\n\n;)\n;-)\n(;\n(-;\n\n:(\n:-(\n:((\n:-((\n:(((\n:-(((\n):\n)-:\n=(\n>:(\n\n:\')\n:\'-)\n:\'(\n:\'-(\n\n:/\n:-/\n=/\n:|\n:-|\n:1\n\n:P\n:-P\n:p\n:-p\n\n:O\n:-O\n:o\n:-o\n:0\n:-0\n:()\n>:o\n\n:*\n:-*\n:3\n:-3\n=3\n:>\n:->\n\n:X\n:-X\n:x\n:-x\n\n:D\n:-D\n;D\n;-D\n=D\nxD\nXD\nxDD\nXDD\n8D\n8-D\n\n^_^\n^__^\n^___^\n>.<\n>.>\n<.<\n._.\n;_;\n-_-\n-__-\nv.v\nV.V\nv_v\nV_V\no_o\no_O\nO_o\nO_O\n0_o\no_0\n0_0\no.O\nO.o\nO.O\no.o\n0.0\no.0\n0.o\n@_@\n\n<3\n<33\n<333\n</3\n\n(^_^)\n(-_-)\n(._.)\n(>_<)\n(*_*)\n(¬_¬)\n\nಠ_ಠ\nಠ︵ಠ\n(ಠ_ಠ)\n¯\\(ツ)/¯\n(╯°□°）╯︵┻━┻\n><(((*>\n'.split())
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/fr/language_data.py----------------------------------------
+A:spacy.fr.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.fr.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/entity_rules.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/fr/stop_words.py----------------------------------------
+A:spacy.fr.stop_words.STOP_WORDS->set("\na à â abord absolument afin ah ai aie ailleurs ainsi ait allaient allo allons\nallô alors anterieur anterieure anterieures apres après as assez attendu au\naucun aucune aujourd aujourd'hui aupres auquel aura auraient aurait auront\naussi autre autrefois autrement autres autrui aux auxquelles auxquels avaient\navais avait avant avec avoir avons ayant\n\nbah bas basee bat beau beaucoup bien bigre boum bravo brrr\n\nça car ce ceci cela celle celle-ci celle-là celles celles-ci celles-là celui\ncelui-ci celui-là cent cependant certain certaine certaines certains certes ces\ncet cette ceux ceux-ci ceux-là chacun chacune chaque cher chers chez chiche\nchut chère chères ci cinq cinquantaine cinquante cinquantième cinquième clac\nclic combien comme comment comparable comparables compris concernant contre\ncouic crac\n\nda dans de debout dedans dehors deja delà depuis dernier derniere derriere\nderrière des desormais desquelles desquels dessous dessus deux deuxième\ndeuxièmement devant devers devra different differentes differents différent\ndifférente différentes différents dire directe directement dit dite dits divers\ndiverse diverses dix dix-huit dix-neuf dix-sept dixième doit doivent donc dont\ndouze douzième dring du duquel durant dès désormais\n\neffet egale egalement egales eh elle elle-même elles elles-mêmes en encore\nenfin entre envers environ es ès est et etaient étaient etais étais etait était\netant étant etc été etre être eu euh eux eux-mêmes exactement excepté extenso\nexterieur\n\nfais faisaient faisant fait façon feront fi flac floc font\n\ngens\n\nha hein hem hep hi ho holà hop hormis hors hou houp hue hui huit huitième hum\nhurrah hé hélas i il ils importe\n\nje jusqu jusque juste\n\nla laisser laquelle las le lequel les lesquelles lesquels leur leurs longtemps\nlors lorsque lui lui-meme lui-même là lès\n\nma maint maintenant mais malgre malgré maximale me meme memes merci mes mien\nmienne miennes miens mille mince minimale moi moi-meme moi-même moindres moins\nmon moyennant multiple multiples même mêmes\n\nna naturel naturelle naturelles ne neanmoins necessaire necessairement neuf\nneuvième ni nombreuses nombreux non nos notamment notre nous nous-mêmes nouveau\nnul néanmoins nôtre nôtres\n\no ô oh ohé ollé olé on ont onze onzième ore ou ouf ouias oust ouste outre\nouvert ouverte ouverts où\n\npaf pan par parce parfois parle parlent parler parmi parseme partant\nparticulier particulière particulièrement pas passé pendant pense permet\npersonne peu peut peuvent peux pff pfft pfut pif pire plein plouf plus\nplusieurs plutôt possessif possessifs possible possibles pouah pour pourquoi\npourrais pourrait pouvait prealable precisement premier première premièrement\npres probable probante procedant proche près psitt pu puis puisque pur pure\n\nqu quand quant quant-à-soi quanta quarante quatorze quatre quatre-vingt\nquatrième quatrièmement que quel quelconque quelle quelles quelqu'un quelque\nquelques quels qui quiconque quinze quoi quoique\n\nrare rarement rares relative relativement remarquable rend rendre restant reste\nrestent restrictif retour revoici revoilà rien\n\nsa sacrebleu sait sans sapristi sauf se sein seize selon semblable semblaient\nsemble semblent sent sept septième sera seraient serait seront ses seul seule\nseulement si sien sienne siennes siens sinon six sixième soi soi-même soit\nsoixante son sont sous souvent specifique specifiques speculatif stop\nstrictement subtiles suffisant suffisante suffit suis suit suivant suivante\nsuivantes suivants suivre superpose sur surtout\n\nta tac tant tardive te tel telle tellement telles tels tenant tend tenir tente\ntes tic tien tienne tiennes tiens toc toi toi-même ton touchant toujours tous\ntout toute toutefois toutes treize trente tres trois troisième troisièmement\ntrop très tsoin tsouin tu té\n\nun une unes uniformement unique uniques uns\n\nva vais vas vers via vif vifs vingt vivat vive vives vlan voici voilà vont vos\nvotre vous vous-mêmes vu vé vôtre vôtres\n\nzut\n".split())
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/tokenizer_exceptions.py----------------------------------------
-A:spacy.language_data.tokenizer_exceptions._URL_PATTERN->'\n^((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w\\-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)$\n'.strip()
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/pt/__init__.py----------------------------------------
+A:spacy.pt.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
+spacy.pt.__init__.Portuguese(Language)
+spacy.pt.__init__.Portuguese.Defaults(Language.Defaults)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/tag_map.py----------------------------------------
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/pt/language_data.py----------------------------------------
+A:spacy.pt.language_data.STOP_WORDS->set(STOP_WORDS)
+A:spacy.pt.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
 
 
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/__init__.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/abbreviations.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/language_data/punctuation.py----------------------------------------
-A:spacy.language_data.punctuation.LIST_CURRENCY->list(_CURRENCY.strip().split())
-A:spacy.language_data.punctuation.LIST_QUOTES->list(_QUOTES.strip().split())
-A:spacy.language_data.punctuation.LIST_PUNCT->list(_PUNCT.strip().split())
-A:spacy.language_data.punctuation.LIST_HYPHENS->list(_HYPHENS.strip().split())
-A:spacy.language_data.punctuation.ALPHA_LOWER->_ALPHA_LOWER.strip().replace(' ', '').replace('\n', '')
-A:spacy.language_data.punctuation.ALPHA_UPPER->_ALPHA_UPPER.strip().replace(' ', '').replace('\n', '')
-A:spacy.language_data.punctuation.QUOTES->_QUOTES.strip().replace(' ', '|')
-A:spacy.language_data.punctuation.CURRENCY->_CURRENCY.strip().replace(' ', '|')
-A:spacy.language_data.punctuation.UNITS->_UNITS.strip().replace(' ', '|').replace('\n', '|')
-A:spacy.language_data.punctuation.HYPHENS->_HYPHENS.strip().replace(' ', '|')
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/sv/morph_rules.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/sv/stop_words.py----------------------------------------
-A:spacy.sv.stop_words.STOP_WORDS->set('\naderton adertonde adjö aldrig alla allas allt alltid alltså än andra andras annan annat ännu artonde arton åtminstone att åtta åttio åttionde åttonde av även\n\nbåda bådas bakom bara bäst bättre behöva behövas behövde behövt beslut beslutat beslutit bland blev bli blir blivit bort borta bra\n\ndå dag dagar dagarna dagen där därför de del delen dem den deras dess det detta dig din dina dit ditt dock du\n\nefter eftersom elfte eller elva en enkel enkelt enkla enligt er era ert ett ettusen\n\nfå fanns får fått fem femte femtio femtionde femton femtonde fick fin finnas finns fjärde fjorton fjortonde fler flera flesta följande för före förlåt förra första fram framför från fyra fyrtio fyrtionde\n\ngå gälla gäller gällt går gärna gått genast genom gick gjorde gjort god goda godare godast gör göra gott\n\nha hade haft han hans har här heller hellre helst helt henne hennes hit hög höger högre högst hon honom hundra hundraen hundraett hur\n\ni ibland idag igår igen imorgon in inför inga ingen ingenting inget innan inne inom inte inuti\n\nja jag jämfört\n\nkan kanske knappast kom komma kommer kommit kr kunde kunna kunnat kvar\n\nlänge längre långsam långsammare långsammast långsamt längst långt lätt lättare lättast legat ligga ligger lika likställd likställda lilla lite liten litet\n\nman många måste med mellan men mer mera mest mig min mina mindre minst mitt mittemot möjlig möjligen möjligt möjligtvis mot mycket\n\nnågon någonting något några när nästa ned nederst nedersta nedre nej ner ni nio nionde nittio nittionde nitton nittonde nödvändig nödvändiga nödvändigt nödvändigtvis nog noll nr nu nummer\n\noch också ofta oftast olika olikt om oss\n\növer övermorgon överst övre\n\npå\n\nrakt rätt redan\n\nså sade säga säger sagt samma sämre sämst sedan senare senast sent sex sextio sextionde sexton sextonde sig sin sina sist sista siste sitt sjätte sju sjunde sjuttio sjuttionde sjutton sjuttonde ska skall skulle slutligen små smått snart som stor stora större störst stort\n\ntack tidig tidigare tidigast tidigt till tills tillsammans tio tionde tjugo tjugoen tjugoett tjugonde tjugotre tjugotvå tjungo tolfte tolv tre tredje trettio trettionde tretton trettonde två tvåhundra\n\nunder upp ur ursäkt ut utan utanför ute\n\nvad vänster vänstra var vår vara våra varför varifrån varit varken värre varsågod vart vårt vem vems verkligen vi vid vidare viktig viktigare viktigast viktigt vilka vilken vilket vill\n'.split())
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/sv/language_data.py----------------------------------------
-A:spacy.sv.language_data.STOP_WORDS->set(STOP_WORDS)
-A:spacy.sv.language_data.TOKENIZER_EXCEPTIONS->strings_to_exc(base.EMOTICONS)
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/sv/tokenizer_exceptions.py----------------------------------------
-
-
-----------------------------------------/home/zhang/Packages/spacy/spacy1.6.0/sv/__init__.py----------------------------------------
-A:spacy.sv.__init__.lex_attr_getters->dict(Language.Defaults.lex_attr_getters)
-spacy.sv.__init__.Swedish(Language)
-spacy.sv.__init__.Swedish.Defaults(Language.Defaults)
+----------------------------------------/dataset/nuaa/anaconda3/envs/spacy1.6.0/lib/python3.6/site-packages/spacy/pt/stop_words.py----------------------------------------
+A:spacy.pt.stop_words.STOP_WORDS->set('\nà às acerca adeus agora ainda algmas algo algumas alguns ali além ambos ano\nanos antes ao aos apenas apoio apontar após aquela aquelas aquele aqueles aqui\naquilo area área as assim através atrás até aí\n\nbaixo bastante bem bom breve\n\ncada caminho catorze cedo cento certamente certeza cima cinco coisa com como\ncomprido conhecido conselho contra corrente custa cá\n\nda daquela daquele dar das de debaixo demais dentro depois desde desligado\ndessa desse desta deste deve devem deverá dez dezanove dezasseis dezassete\ndezoito dia diante direita diz dizem dizer do dois dos doze duas dá dão dúvida\n\né ela elas ele eles em embora enquanto entre então era és essa essas esse esses\nesta estado estar estará estas estava este estes esteve estive estivemos\nestiveram estiveste estivestes estou está estás estão eu exemplo\n\nfalta fará favor faz fazeis fazem fazemos fazer fazes fazia faço fez fim final\nfoi fomos for fora foram forma foste fostes fui\n\ngeral grande grandes grupo\n\nhoje horas há\n\niniciar inicio ir irá isso ista iste isto já\n\nlado ligado local logo longe lugar lá\n\nmaior maioria maiorias mais mal mas me meio menor menos meses mesmo meu meus\nmil minha minhas momento muito muitos máximo mês\n\nna nada naquela naquele nas nem nenhuma nessa nesse nesta neste no noite nome\nnos nossa nossas nosso nossos nova nove novo novos num numa nunca não nível nós\nnúmero\n\nobra obrigada obrigado oitava oitavo oito onde ontem onze os ou outra outras\noutro outros\n\npara parece parte partir pegar pela pelas pelo pelos perto pessoas pode podem\npoder poderá podia ponto pontos por porque porquê posição possivelmente posso\npossível pouca pouco povo primeira primeiro promeiro próprio próximo puderam\npôde põe põem\n\nqual qualquer quando quanto quarta quarto quatro que quem quer quero questão\nquieto quinta quinto quinze quê relação\n\nsabe saber se segunda segundo sei seis sem sempre ser seria sete seu seus sexta\nsexto sim sistema sob sobre sois somente somos sou sua suas são sétima sétimo\n\ntal talvez também tanto tarde te tem temos tempo tendes tenho tens tentar\ntentaram tente tentei ter terceira terceiro teu teus teve tipo tive tivemos\ntiveram tiveste tivestes toda todas todo todos trabalhar trabalho treze três tu\ntua tuas tudo tão têm\n\núltimo um uma umas uns usa usar\n\nvai vais valor veja vem vens ver verdade verdadeiro vez vezes viagem vindo\nvinte você vocês vos vossa vossas vosso vossos vários vão vêm vós\n\nzero\n'.split())
 
