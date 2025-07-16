@@ -20,9 +20,10 @@ def getFileName(fileName,extension):
     fileName=fileName.replace(' ','')
     fileName=fileName.replace('/','')
     fileName=fileName.replace('\\','')
-    length=255-len(extension)
-    if len(fileName)>length:
-        fileName=fileName[0:length] #如果超出了长度，就进行截断
+    if len(extension) != 0:
+        length=255-len(extension)
+        if len(fileName)>length:
+            fileName=fileName[0:length] #如果超出了长度，就进行截断
     fileName+=extension 
     return fileName
 ## @endcond
