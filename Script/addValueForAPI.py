@@ -8,6 +8,7 @@
 import sys
 import inspect
 import dill
+import hashlib
 
 ## @cond SCRIPT_ONLY
 ## Normalize file name
@@ -19,8 +20,11 @@ def getFileName(fileName,extension):
     fileName=fileName.replace('\\','')
     if len(extension) != 0:
         length=255-len(extension)
-        if len(fileName)>length:
-            fileName=fileName[0:length] #如果超出了长度，就进行截断
+        #if len(fileName)>length:
+            #fileName=fileName[0:length] #如果超出了长度，就进行截断
+        fileName=fileName.split('(')[0] + '_' + hashlib.md5(fileName.encode()).hexdigest()[:16] # 2025.7.18 More robust file name processing
+        fileName=fileName[0:length]
+
     fileName+=extension
     return fileName
 ## @endcond
