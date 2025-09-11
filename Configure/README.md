@@ -34,17 +34,18 @@ Each configuration file includes:
 
 ---
 
-## Example Configuration File (3d.json)
+## Example Configuration File (AIBO.json)
 
 ```json
 {
-  "projPath": "Example/3d_ken_burns",
-  "runCommand": "python autozoom.py --in ./images/doublestrike.jpg --out ./autozoom.mp4",
-  "runFilePath": "",
-  "libName": "torch",
-  "currentVersion": "1.7.1",
-  "targetVersion": "1.9.0",
-  "currentEnv": "/dataset/zhang/anaconda3/envs/3d",
-  "targetEnv": "/dataset/zhang/anaconda3/envs/3d_u"
+    "projPath": "Example/AIBO",
+    "runCommand": "python run.py --func=Ackley --dim=100 --method=anneal --iters=5000 --batch-size=10",
+    "runFilePath":"",
+    "libName": "scipy",
+    "currentVersion": "1.7.3",
+    "targetVersion": "1.10.0",
+    "currentEnv": "/dataset/zhang/anaconda3/envs/AIBO1.7.3",
+    "targetEnv": "/dataset/zhang/anaconda3/envs/AIBO1.10.0"
 }
+
 
