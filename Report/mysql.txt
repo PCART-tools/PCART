@@ -1,0 +1,151 @@
+Run Command: python  test_with.py
+Total File Number: 1
+Total Mysql Invoked API Number: 9
+Not Covered Mysql Invoked API Number: 2/9
+Covered Mysql Invoked API Number: 7/9
+
+Compatible Mysql Invoked API Number: 7/7
+Unknown Compatible Mysql Invoked API Number: 0/7
+
+Incompatible Mysql Invoked API Number: 0/7
+-> Successfully Repaired Mysql Invoked API number: 0/0
+-> Failed to Repair Mysql Invoked API Number: 0/0
+-> Unknown Repair Status Mysql Invoked API Number: 0/0
+
+======================================================================================================
+|                       File #1: mysql/test_with.py has 9 Mysql-Invoked API(s)                       |
+======================================================================================================
+| Invoked API #1: mysql.connector.connect(**db_config)                                               |
+|                                                                                                    |
+| Location: At Line 15 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: (*args: 'Any', **kwargs: 'Any') -> 'Union[PooledMySQLConnection, MySQ |
+| LConnection, CMySQLConnection]'                                                                    |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: (*args: 'Any', **kwargs: 'Any') -> 'Union[PooledMySQLConnection, MySQ |
+| LConnectionAbstract]'                                                                              |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #2: conn.cursor(dictionary=True)                                                       |
+|                                                                                                    |
+| Location: At Line 17 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: (buffered: Optional[bool] = None, raw: Optional[bool] = None, prepare |
+| d: Optional[bool] = None, cursor_class: Optional[Type[mysql.connector.cursor_cext.CMySQLCursor]] = |
+|  None, dictionary: Optional[bool] = None, named_tuple: Optional[bool] = None) -> mysql.connector.c |
+| ursor_cext.CMySQLCursor                                                                            |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: (buffered: 'Optional[bool]' = None, raw: 'Optional[bool]' = None, pre |
+| pared: 'Optional[bool]' = None, cursor_class: 'Optional[Type[MySQLCursor]]' = None, dictionary: 'O |
+| ptional[bool]' = None, named_tuple: 'Optional[bool]' = None, read_timeout: 'Optional[int]' = None, |
+|  write_timeout: 'Optional[int]' = None) -> 'MySQLCursor'                                           |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #3: cursor.execute('\n                        CREATE TABLE IF NOT EXISTS products (\n  |
+|                            id INT AUTO_INCREMENT PRIMARY KEY,\n                            name VA |
+| RCHAR(100),\n                            price DECIMAL(10,2)\n                        )\n          |
+|            ')                                                                                      |
+|                                                                                                    |
+| Location: At Line 20 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: (operation: 'StrOrBytes', params: 'ParamsSequenceOrDictType' = (), mu |
+| lti: 'bool' = False) -> 'Optional[Generator[CMySQLCursor, None, None]]'                            |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: (operation: 'str', params: 'Optional[ParamsSequenceOrDictType]' = Non |
+| e, map_results: 'bool' = False) -> 'None'                                                          |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #4: cursor.executemany('INSERT INTO products (name, price) VALUES (%s, %s)', products) |
+|                                                                                                    |
+| Location: At Line 36 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: (operation: 'str', seq_params: 'Sequence[ParamsSequenceOrDictType]')  |
+| -> 'Optional[Generator[CMySQLCursor, None, None]]'                                                 |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: (operation: 'str', seq_params: 'Sequence[ParamsSequenceOrDictType]')  |
+| -> 'None'                                                                                          |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #5: conn.commit()                                                                      |
+|                                                                                                    |
+| Location: At Line 43 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: () -> None                                                            |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: () -> 'None'                                                          |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #6: cursor.execute('SELECT * FROM products')                                           |
+|                                                                                                    |
+| Location: At Line 48 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: (operation: 'StrOrBytes', params: 'ParamsSequenceOrDictType' = (), mu |
+| lti: 'bool' = False) -> 'Optional[Generator[CMySQLCursor, None, None]]'                            |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: (operation: 'str', params: 'Optional[ParamsSequenceOrDictType]' = Non |
+| e, map_results: 'bool' = False) -> 'None'                                                          |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #7: cursor.execute('SELECT * FROM products WHERE price < %s', (50,))                   |
+|                                                                                                    |
+| Location: At Line 54 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @8.2.0 <dynamic>: (operation: 'StrOrBytes', params: 'ParamsSequenceOrDictType' = (), mu |
+| lti: 'bool' = False) -> 'Optional[Generator[CMySQLCursor, None, None]]'                            |
+|                                                                                                    |
+| Definition @9.2.0 <dynamic>: (operation: 'str', params: 'Optional[ParamsSequenceOrDictType]' = Non |
+| e, map_results: 'bool' = False) -> 'None'                                                          |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #8: conn.rollback()                                                                    |
+|                                                                                                    |
+| Location: At Line 60 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: No                                                                                       |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #9: conn.rollback()                                                                    |
+|                                                                                                    |
+| Location: At Line 63 in mysql/test_with.py                                                         |
+|                                                                                                    |
+| Coverage: No                                                                                       |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+
+

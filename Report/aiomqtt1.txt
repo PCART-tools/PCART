@@ -1,0 +1,104 @@
+Run Command: python  test_asyncawait.py
+Total File Number: 1
+Total Aiomqtt Invoked API Number: 4
+Not Covered Aiomqtt Invoked API Number: 0/4
+Covered Aiomqtt Invoked API Number: 4/4
+
+Compatible Aiomqtt Invoked API Number: 3/4
+Unknown Compatible Aiomqtt Invoked API Number: 1/4
+
+Incompatible Aiomqtt Invoked API Number: 0/4
+-> Successfully Repaired Aiomqtt Invoked API number: 0/0
+-> Failed to Repair Aiomqtt Invoked API Number: 0/0
+-> Unknown Repair Status Aiomqtt Invoked API Number: 0/0
+
+======================================================================================================
+|                 File #1: aiomqtt1/test_asyncawait.py has 4 Aiomqtt-Invoked API(s)                  |
+======================================================================================================
+| Invoked API #1: Client('test.mosquitto.org')                                                       |
+|                                                                                                    |
+| Location: At Line 5 in aiomqtt1/test_asyncawait.py                                                 |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @1.2.1 <dynamic>: (hostname: 'str', port: 'int' = 1883, *, username: 'str | None' = Non |
+| e, password: 'str | None' = None, logger: 'logging.Logger | None' = None, client_id: 'str | None'  |
+| = None, tls_context: 'ssl.SSLContext | None' = None, tls_params: 'TLSParameters | None' = None, tl |
+| s_insecure: 'bool | None' = None, proxy: 'ProxySettings | None' = None, protocol: 'ProtocolVersion |
+|  | None' = None, will: 'Will | None' = None, clean_session: 'bool | None' = None, transport: 'str' |
+|  = 'tcp', timeout: 'float | None' = None, keepalive: 'int' = 60, bind_address: 'str' = '', bind_po |
+| rt: 'int' = 0, clean_start: 'int' = 3, properties: 'Properties | None' = None, message_retry_set:  |
+| 'int' = 20, socket_options: 'Iterable[SocketOption] | None' = None, max_concurrent_outgoing_calls: |
+|  'int | None' = None, websocket_path: 'str | None' = None, websocket_headers: 'WebSocketHeaders |  |
+| None' = None, max_inflight_messages: 'int | None' = None, max_queued_messages: 'int | None' = None |
+| ) -> 'None'                                                                                        |
+|                                                                                                    |
+| Definition @2.0.0 <dynamic>: (hostname: 'str', port: 'int' = 1883, *, username: 'str | None' = Non |
+| e, password: 'str | None' = None, logger: 'logging.Logger | None' = None, identifier: 'str | None' |
+|  = None, queue_type: 'type[asyncio.Queue[Message]] | None' = None, protocol: 'ProtocolVersion | No |
+| ne' = None, will: 'Will | None' = None, clean_session: 'bool | None' = None, transport: 'str' = 't |
+| cp', timeout: 'float | None' = None, keepalive: 'int' = 60, bind_address: 'str' = '', bind_port: ' |
+| int' = 0, clean_start: 'int' = 3, max_queued_incoming_messages: 'int | None' = None, max_queued_ou |
+| tgoing_messages: 'int | None' = None, max_inflight_messages: 'int | None' = None, max_concurrent_o |
+| utgoing_calls: 'int | None' = None, properties: 'mqtt.Properties | None' = None, tls_context: 'ssl |
+| .SSLContext | None' = None, tls_params: 'TLSParameters | None' = None, tls_insecure: 'bool | None' |
+|  = None, proxy: 'ProxySettings | None' = None, socket_options: 'Iterable[SocketOption] | None' = N |
+| one, websocket_path: 'str | None' = None, websocket_headers: 'WebSocketHeaders | None' = None) ->  |
+| 'None'                                                                                             |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #2: client.publish('temperature', payload='25.3')                                      |
+|                                                                                                    |
+| Location: At Line 6 in aiomqtt1/test_asyncawait.py                                                 |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @1.2.1 <dynamic>: (topic: 'str', payload: 'PayloadType' = None, qos: 'int' = 0, retain: |
+|  'bool' = False, properties: 'Properties | None' = None, *args: 'Any', timeout: 'float | None' = N |
+| one, **kwargs: 'Any') -> 'None'                                                                    |
+|                                                                                                    |
+| Definition @2.0.0 <dynamic>: (topic: 'str', payload: 'PayloadType' = None, qos: 'int' = 0, retain: |
+|  'bool' = False, properties: 'mqtt.Properties | None' = None, *args: 'Any', timeout: 'float | None |
+| ' = None, **kwargs: 'Any') -> 'None'                                                               |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #3: client.messages()                                                                  |
+|                                                                                                    |
+| Location: At Line 7 in aiomqtt1/test_asyncawait.py                                                 |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @1.2.1 <dynamic>: (*, queue_class: 'type[asyncio.Queue[Message]]' = <class 'asyncio.que |
+| ues.Queue'>, queue_maxsize: 'int' = 0) -> 'AsyncGenerator[AsyncGenerator[Message, None], None]'    |
+|                                                                                                    |
+| Definition @2.0.0 <static>: {}                                                                     |
+|                                                                                                    |
+| Compatible: Unknown                                                                                |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #4: client.subscribe('temperature')                                                    |
+|                                                                                                    |
+| Location: At Line 8 in aiomqtt1/test_asyncawait.py                                                 |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @1.2.1 <dynamic>: (topic: 'SubscribeTopic', qos: 'int' = 0, options: 'mqtt.SubscribeOpt |
+| ions | None' = None, properties: 'Properties | None' = None, *args: 'Any', timeout: 'float | None' |
+|  = None, **kwargs: 'Any') -> 'tuple[int] | list[mqtt.ReasonCodes]'                                 |
+|                                                                                                    |
+| Definition @2.0.0 <dynamic>: (topic: 'SubscribeTopic', qos: 'int' = 0, options: 'mqtt.SubscribeOpt |
+| ions | None' = None, properties: 'mqtt.Properties | None' = None, *args: 'Any', timeout: 'float |  |
+| None' = None, **kwargs: 'Any') -> 'tuple[int] | list[mqtt.ReasonCodes]'                            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+
+
