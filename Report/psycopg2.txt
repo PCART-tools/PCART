@@ -1,0 +1,361 @@
+Run Command: python  test_with.py
+Total File Number: 1
+Total Psycopg2 Invoked API Number: 21
+Not Covered Psycopg2 Invoked API Number: 4/21
+Covered Psycopg2 Invoked API Number: 17/21
+
+Compatible Psycopg2 Invoked API Number: 15/17
+Unknown Compatible Psycopg2 Invoked API Number: 2/17
+
+Incompatible Psycopg2 Invoked API Number: 0/17
+-> Successfully Repaired Psycopg2 Invoked API number: 0/0
+-> Failed to Repair Psycopg2 Invoked API Number: 0/0
+-> Unknown Repair Status Psycopg2 Invoked API Number: 0/0
+
+======================================================================================================
+|                   File #1: psycopg2/test_with.py has 21 Psycopg2-Invoked API(s)                    |
+======================================================================================================
+| Invoked API #1: psycopg2.connect(**db_params)                                                      |
+|                                                                                                    |
+| Location: At Line 17 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <dynamic>: (dsn=None, connection_factory=None, cursor_factory=None, **kwargs)    |
+|                                                                                                    |
+| Definition @2.9.5 <dynamic>: (dsn=None, connection_factory=None, cursor_factory=None, **kwargs)    |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #2: conn.cursor(cursor_factory=DictCursor)                                             |
+|                                                                                                    |
+| Location: At Line 22 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictConnection.cursor': ['(self,*args,**kwargs)'], ' |
+| psycopg2.extras.LoggingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.MinTimeLogg |
+| ingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.NamedTupleConnection.cursor': [ |
+| '(self,*args,**kwargs)'], 'psycopg2.extras.RealDictConnection.cursor': ['(self,*args,**kwargs)']}  |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictConnection.cursor': ['(self,*args,**kwargs)'], ' |
+| psycopg2.extras.LoggingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.MinTimeLogg |
+| ingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.NamedTupleConnection.cursor': [ |
+| '(self,*args,**kwargs)'], 'psycopg2.extras.RealDictConnection.cursor': ['(self,*args,**kwargs)']}  |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #3: cursor.execute('\n                        DROP TABLE IF EXISTS employees;\n        |
+|                  CREATE TABLE employees (\n                            id SERIAL PRIMARY KEY,\n    |
+|                          name VARCHAR(100) NOT NULL,\n                            department VARCH |
+| AR(50),\n                            salary NUMERIC(10, 2),\n                            hire_date |
+|  DATE,\n                            email VARCHAR(100) UNIQUE\n                        )\n         |
+|             ')                                                                                     |
+|                                                                                                    |
+| Location: At Line 25 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #4: sql.SQL('\n                        INSERT INTO employees (name, department, salary |
+| , hire_date, email)\n                        VALUES (%s, %s, %s, %s, %s)\n                         |
+| RETURNING id\n                    ')                                                               |
+|                                                                                                    |
+| Location: At Line 39 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <dynamic>: (string)                                                              |
+|                                                                                                    |
+| Definition @2.9.5 <dynamic>: (string)                                                              |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #5: cursor.execute(insert_query, emp)                                                  |
+|                                                                                                    |
+| Location: At Line 52 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #6: cursor.fetchone()                                                                  |
+|                                                                                                    |
+| Location: At Line 53 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursorBase.fetchone': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchone': ['(self)']}                                                         |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursorBase.fetchone': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchone': ['(self)']}                                                         |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #7: cursor.execute('\n                        UPDATE employees \n                      |
+|    SET salary = salary * 1.1 \n                        WHERE department = %s\n                     |
+| ', ('Engineering',))                                                                               |
+|                                                                                                    |
+| Location: At Line 57 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #8: cursor.execute('SELECT * FROM employees ORDER BY salary DESC')                     |
+|                                                                                                    |
+| Location: At Line 66 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #9: cursor.fetchall()                                                                  |
+|                                                                                                    |
+| Location: At Line 68 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursorBase.fetchall': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchall': ['(self)']}                                                         |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursorBase.fetchall': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchall': ['(self)']}                                                         |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #10: cursor.execute('\n                        SELECT name, salary \n                  |
+|        FROM employees \n                        WHERE salary > %s\n                    ', (8000,)) |
+|                                                                                                    |
+| Location: At Line 72 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #11: cursor.fetchall()                                                                 |
+|                                                                                                    |
+| Location: At Line 78 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursorBase.fetchall': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchall': ['(self)']}                                                         |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursorBase.fetchall': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchall': ['(self)']}                                                         |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #12: conn.commit()                                                                     |
+|                                                                                                    |
+| Location: At Line 82 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {}                                                                     |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {}                                                                     |
+|                                                                                                    |
+| Compatible: Unknown                                                                                |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #13: conn.rollback()                                                                   |
+|                                                                                                    |
+| Location: At Line 86 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: No                                                                                       |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #14: conn.rollback()                                                                   |
+|                                                                                                    |
+| Location: At Line 89 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: No                                                                                       |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #15: conn.rollback()                                                                   |
+|                                                                                                    |
+| Location: At Line 92 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: No                                                                                       |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #16: conn.cursor()                                                                     |
+|                                                                                                    |
+| Location: At Line 97 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictConnection.cursor': ['(self,*args,**kwargs)'], ' |
+| psycopg2.extras.LoggingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.MinTimeLogg |
+| ingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.NamedTupleConnection.cursor': [ |
+| '(self,*args,**kwargs)'], 'psycopg2.extras.RealDictConnection.cursor': ['(self,*args,**kwargs)']}  |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictConnection.cursor': ['(self,*args,**kwargs)'], ' |
+| psycopg2.extras.LoggingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.MinTimeLogg |
+| ingConnection.cursor': ['(self,*args,**kwargs)'], 'psycopg2.extras.NamedTupleConnection.cursor': [ |
+| '(self,*args,**kwargs)'], 'psycopg2.extras.RealDictConnection.cursor': ['(self,*args,**kwargs)']}  |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #17: cursor.execute('DELETE FROM employees WHERE name = %s', ('Mike Johnson',))        |
+|                                                                                                    |
+| Location: At Line 99 in psycopg2/test_with.py                                                      |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #18: cursor.execute('SELECT COUNT(*) FROM employees WHERE name = %s', ('Mike Johnson', |
+| ))                                                                                                 |
+|                                                                                                    |
+| Location: At Line 103 in psycopg2/test_with.py                                                     |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursor.execute': ['(self,query,vars=None)'], 'ps |
+| ycopg2.extras.LoggingCursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.MinTimeLoggingC |
+| ursor.execute': ['(self,query,vars=None)'], 'psycopg2.extras.NamedTupleCursor.execute': ['(self,qu |
+| ery,vars=None)'], 'psycopg2.extras.RealDictCursor.execute': ['(self,query,vars=None)']}            |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #19: cursor.fetchone()                                                                 |
+|                                                                                                    |
+| Location: At Line 104 in psycopg2/test_with.py                                                     |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {'psycopg2.extras.DictCursorBase.fetchone': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchone': ['(self)']}                                                         |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {'psycopg2.extras.DictCursorBase.fetchone': ['(self)'], 'psycopg2.extr |
+| as.NamedTupleCursor.fetchone': ['(self)']}                                                         |
+|                                                                                                    |
+| Compatible: Yes                                                                                    |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #20: conn.commit()                                                                     |
+|                                                                                                    |
+| Location: At Line 107 in psycopg2/test_with.py                                                     |
+|                                                                                                    |
+| Coverage: Yes                                                                                      |
+|                                                                                                    |
+| Definition @2.9.1 <static>: {}                                                                     |
+|                                                                                                    |
+| Definition @2.9.5 <static>: {}                                                                     |
+|                                                                                                    |
+| Compatible: Unknown                                                                                |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+| Invoked API #21: conn.rollback()                                                                   |
+|                                                                                                    |
+| Location: At Line 109 in psycopg2/test_with.py                                                     |
+|                                                                                                    |
+| Coverage: No                                                                                       |
+|                                                                                                    |
+|----------------------------------------------------------------------------------------------------|
+
+
