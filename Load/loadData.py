@@ -19,7 +19,8 @@ from Tool.tool import cmp
 #  @return assignDict The assign dict stores the alias of APIs
 #  @return libAPIins The built-in APIs' definitions 
 def loadLib(libName,version):
-    f=open(f'LibAPIExtraction/{libName}/{libName}{version}','r')
+    # f=open(f'LibAPIExtraction/{libName}/{libName}{version}','r')
+    f=open(f'LibAPIExtraction/{libName}/{libName}{version}','r',encoding='utf-8')
     lst=f.readlines()
     f.close()
     libAPIs=[] #既包含了非内置也包含了内置
@@ -76,7 +77,8 @@ def getAPILst(filePath):
     pattern_v='\d+\.(?:\d+\.)*\d+'
     obj_v=re.compile(pattern_v)
     version=obj_v.findall(filePath)[0]
-    f=open(filePath,'r')
+    # f=open(filePath,'r')
+    f=open(filePath,'r',encoding='utf-8')
     apiLst=f.readlines()
     ans=[]
     for it in apiLst:
@@ -122,7 +124,8 @@ def lib2json(sourceFilePath,saveFilePath):
         value.sort(key=lambda it:cmp([v for v in it.keys()][0])) #it就是value中的每个元素,即字典
 
     #再把dic字典保存为json格式的文件
-    fw=open(saveFilePath,'w')
+    # fw=open(saveFilePath,'w')
+    fw=open(saveFilePath,'w',encoding='utf-8')
     json.dump(dic,fw,indent=4,ensure_ascii=False)
     fw.close()
     print(f"API total number={len(dic)}")

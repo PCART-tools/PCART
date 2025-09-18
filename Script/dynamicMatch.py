@@ -222,6 +222,7 @@ try:
     matchDict['error']=''
     try:
         internalPath=inspect.getfile(eval(api))
+        internalPath = internalPath.replace('\\', '/')
         internalPath=internalPath.split('site-packages/')[-1].replace('.py','').replace('/','.')
         matchDict['internalPath']=internalPath
     except:
