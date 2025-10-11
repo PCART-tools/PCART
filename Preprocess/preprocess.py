@@ -7,6 +7,7 @@ import re
 import ast
 import shutil
 import subprocess
+import platform
 from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
@@ -386,7 +387,8 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         return
 
     #处理相关路径
-    fileName=filePath.split('/')[-1][0:-3]
+    # fileName=filePath.split('/')[-1][0:-3]
+    fileName = os.path.basename(filePath)[0:-3]
     fileRelativePath=filePath.split(f'{projName}',1)[-1]
     fileAbsolutePath=projPath+fileRelativePath
     
@@ -527,7 +529,8 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         
         if flag==0:
             print(f"{fileName}#{lineno}-->{callState}\n")
-            with open('66666666666.py','a') as fw:
+            # with open('66666666666.py','a') as fw:
+            with open('66666666666.py', 'a', encoding='UTF-8') as fw:
                 fw.write('\n'+fileName+'='*100+'\n')
                 fw.write(f"{fileName}#{lineno}--->{callState}\n")
                 for it in codeLst[insertStartLine:]:
@@ -535,7 +538,8 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
 
     
     #最后再判断一下该文件是否为该项目的运行文件
-    fileName=filePath.split('/')[-1] #fileName带.py
+    # fileName=filePath.split('/')[-1] #fileName带.py
+    fileName = os.path.basename(filePath)
     if fileName in runFileLst:
         #寻找__main__所在的行
         flag=0
@@ -761,13 +765,15 @@ def obtainDef(sourcePath):
 
 
 def modifyFromImport(filePath,importStatement):
-    with open(filePath,'r') as fr:
+    # with open(filePath,'r') as fr:
+    with open(filePath, 'r', encoding='UTF-8') as fr:
         codeLst=fr.readlines()
 
     s='\n'.join(importStatement)+'\n'
     # print(s)
     codeLst.insert(0,s)
-    with open(filePath,'w') as fw:
+    # with open(filePath,'w') as fw:
+    with open(filePath, 'w', encoding='UTF-8') as fw:
         for it in codeLst:
             fw.write(it)
 
@@ -828,7 +834,8 @@ def saveStructure(projPath,libName):
     for file in filePath:
         _,callDict=getCallFunction(file,libName)
         callLst=[callAPI.split('#_')[0] for callAPI in callDict.keys()] #去掉API中的行号信息
-        with open(file,'r') as fr:
+        # with open(file,'r') as fr:
+        with open(file, 'r', encoding='UTF-8') as fr:
             code=fr.read()
         try:
             root=ast.parse(code,filename='<unknown>',mode='exec')
@@ -893,7 +900,8 @@ def getLibImportLst(projPath,libName):
     filePath=[file for file in pathObj.path if file.endswith('.py')]
     pattern=rf"(from {libName}|import {libName})" #确保库的前面不会出现其它字符
     for file in filePath:#下面的所有操作都是对项目副本进行的
-        with open(file,'r') as fr:
+        # with open(file,'r') as fr:
+        with open(file, 'r', encoding='UTF-8') as fr:
             code=fr.read()
         try:
             root=ast.parse(code,filename='<unknown>',mode='exec')
@@ -910,6 +918,23 @@ def getLibImportLst(projPath,libName):
     ansLst.sort(key=lst.index) 
     return ansLst 
 
+## Convert tabs to spaces in all Python files within a directory
+## 将目录下所有Python文件中的制表符转换为空格
+#  @param directory The directory path to process
+def convertTabsToSpaces(directory):
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.py'):
+                file_path = os.path.join(root, file)
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    # 将制表符转换为4个空格
+                    content = content.expandtabs(4)
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.write(content)
+                except Exception as e:
+                    print(f"Error converting file {file_path}: {e}")
 
 
 #代码预处理目的：
@@ -923,15 +948,19 @@ def codeProcess(projPath,runCommand,runPath,libName):
     temp=runCommand.split(' ') #把命令按空格拆分
     runFile=temp[1]
     prefix='' #运行文件所在的目录，默认是在项目的一级子目录下
-    if '/' in runFile:
-        prefix=runFile.rsplit('/',1)[0]
-        runFile=runFile.rsplit('/',1)[1] #去掉路径前缀，只保留文件名即run.py
+    # if '/' in runFile:
+    if '/' in runFile or '\\' in runFile:
+        # prefix=runFile.rsplit('/',1)[0]
+        prefix = os.path.dirname(runFile)
+        # runFile=runFile.rsplit('/',1)[1] #去掉路径前缀，只保留文件名即run.py
+        runFile = os.path.basename(runFile)
     runFileLst.append(runFile)
     #这种情况针对于python run.py, run.py在其它目录中比如src，则prefix就是src 
     #若是python src/run.py, 则prexfix和runPath是一致的
     if runPath!='' and prefix!=runPath:
         prefix=runPath
-    projName=projPath.split('/')[-1]
+    # projName=projPath.split('/')[-1]
+    projName = os.path.basename(projPath)
     copyProjPath=f"Copy/{projName}"
     importStatement=''
     for it in runFileLst:
@@ -976,8 +1005,14 @@ def codeProcess(projPath,runCommand,runPath,libName):
     
     
     #然后再把Copy中的项目制表符统一转化为空格,目的是为了插入字典的时候计算空格缩进
-    command2=f'bash Preprocess/tab2space.sh;'
-    subprocess.run(command2,shell=True,executable='/bin/bash')
+    # command2=f'bash Preprocess/tab2space.sh;'
+    # subprocess.run(command2,shell=True,executable='/bin/bash')
+    # 用Python实现制表符转空格，跨平台兼容
+    if platform.system() == 'Windows':
+        convertTabsToSpaces('Copy')
+    else:
+        command2 = 'bash Preprocess/tab2space.sh'
+        subprocess.run(command2, shell=True)
 
     #把代码换行写的合成一行，并添加字典
     pathObj=Path('DF')
@@ -996,7 +1031,8 @@ def codeProcess(projPath,runCommand,runPath,libName):
 
 
     shutil.copytree(f'Copy/{projName}',f'Copy/bak_{projName}')
-    with open(f"Copy/bak_{projName}/{prefix}/recordValue.py",'w') as fw:
+    # with open(f"Copy/bak_{projName}/{prefix}/recordValue.py",'w') as fw:
+    with open(f"Copy/bak_{projName}/{prefix}/recordValue.py", 'w', encoding='UTF-8') as fw:
         fw.write('paraValueDict={}\n')
         fw.write('apiCoveredSet=set()\n') 
     
@@ -1011,7 +1047,8 @@ def codeProcess(projPath,runCommand,runPath,libName):
         handleRunFile(file,runPath,runCommand) 
     
     #处理完项目所有文件后，再给项目添加一个新的文件
-    with open(f"Copy/{projName}/{prefix}/recordValue.py",'w') as fw:
+    # with open(f"Copy/{projName}/{prefix}/recordValue.py",'w') as fw:
+    with open(f"Copy/{projName}/{prefix}/recordValue.py", 'w', encoding='UTF-8') as fw:
         fw.write('paraValueDict={}\n')
         fw.write('apiCoveredSet=set()\n')
     

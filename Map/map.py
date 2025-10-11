@@ -7,6 +7,7 @@ import os
 import json
 import shutil
 import subprocess
+import platform
 from Map.fuzzyMatch import *
 from Load.loadData import loadLib
 from Tool.tool import removeParameter,getFileName
@@ -82,7 +83,11 @@ def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传�
 #  @param curr=1 Current version flag
 #  @return dynamicMatchDict Mapped API signatures 
 def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1):
-    pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径 
+    # pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径
+    if platform.system() == "Windows":
+        pythonPath = os.path.join(virtualEnv, "python.exe")
+    else:
+        pythonPath = f"{virtualEnv}/bin/python"
     pklFile=getFileName(callAPI,'.pkl')
     pklStr=pklFile.replace('"','\\"')
     callStr=callAPI.replace('"','\\"')
@@ -100,16 +105,36 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     
     if not os.path.exists(f"Copy/pkl/{pklFile}"):
         return False
-    
-    if runPath!='':
-        if runPath not in runCommand:
-            command=f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-        else:
-            command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-    else: #大部分属于这种情况
-        command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
 
-    matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    # if runPath!='':
+    #     if runPath not in runCommand:
+    #         command=f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+    #     else:
+    #         command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+    # else: #大部分属于这种情况
+    #     command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+    if platform.system() == "Windows":
+        if runPath != '':
+            if runPath not in runCommand:
+                command = f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+            else:
+                command = f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+        else:
+            command = f'cd Dynamic\\{projName} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+    else:
+        if runPath != '':
+            if runPath not in runCommand:
+                command = f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+            else:
+                command = f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+        else:
+            command = f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+
+    # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    stdout = matchResult.stdout
+    stderr = matchResult.stderr
+
     # print(f"{callAPI}{version}")
     # print(matchResult.stdout,matchResult.stderr)
     # print('\n')
@@ -122,7 +147,8 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
         
         #若在新版本中无法加载旧版本的pkl文件，则尝试在新版本中重新生成
         #什么情况下不需要在目标版本重新生成？什么情况下需要在mu
-        elif 'Ran out of input' not in matchResult.stderr: 
+        # elif 'Ran out of input' not in matchResult.stderr:
+        elif stderr and 'Ran out of input' not in stderr:
             loadError=f"{callAPI}, Failed to load pkl in target version{version}: {matchResult.stderr}\n" 
             with lock:
                 shutil.copy2(copyFile,f"{copyFile}.bak")
@@ -132,11 +158,13 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                     command=f'cd Copy/{projName};{pythonPath} {runCommand};' #运行项目指令的时候需要考虑运行文件目录是否已经包含到runCommand中了
                 else:
                     command=f'cd Copy/{projName}/{runPath};{pythonPath} {runCommand};'
-                generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
+                # generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
+                generateResult = subprocess.run(command, shell=True, stderr=subprocess.PIPE, text=True)
                 if generateResult.returncode==0:
                     pklStr=pklFile.replace('"','\\"')
                     command=f'cd Copy/pkl;mv paraValue.pkl "{pklStr}"'
-                    subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+                    # subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+                    subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             
                 #插桩完后，再将备份后的文件进行还原
                 os.remove(copyFile)
@@ -154,7 +182,8 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                         command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
                 else: #大部分属于这种情况
                     command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-                matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+                # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+                matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 if matchResult.returncode!=0:
                     errLst.append(f"[{version}]{callAPI}, load new pkl failed: {matchResult.stderr}\n") 
                     return False

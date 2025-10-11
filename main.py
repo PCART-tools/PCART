@@ -10,6 +10,7 @@ import json
 import time
 import shutil
 import subprocess
+import platform
 from Path.getPath import *
 from Map.map import mapAPI
 from multiprocessing import Pool
@@ -29,24 +30,31 @@ from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,qu
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
     projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet=args
-    fileName=file.split('/')[-1][0:-3]
+    # fileName=file.split('/')[-1][0:-3]
+    fileName = os.path.basename(file)[:-3]
     
     #step1:先把当前文件中指定的第三方库的API抽取出来
     callAPIDict,_=getCallFunction(file,libName) #key是还原前的API，value是还原后的API
-    with open(f'data/{fileName}_callAPIDict.json','w') as fw:
-        json.dump(callAPIDict,fw,indent=4,ensure_ascii=False) 
+    # with open(f'data/{fileName}_callAPIDict.json','w') as fw:
+    os.makedirs('data', exist_ok=True)
+    with open(os.path.join('data', f'{fileName}_callAPIDict.json'), 'w', encoding='utf-8') as fw:
+        json.dump(callAPIDict, fw, indent=4, ensure_ascii=False)
     try: 
         root=getAst(file) #获取当前文件的AST，便于修复使用
     except:
         pass
     #step2:将源代码文件映射到Copy目录中
-    tempLst=file.split('/')
+    # tempLst=file.split('/')
+    normalized_file = file.replace('\\', '/')
+    tempLst = normalized_file.split('/')
     pos=tempLst.index(projName)
     realProjPath='/'.join(tempLst[0:pos+1])
     fileRelativePath='/'.join(tempLst[pos:])
-    copyFile='./Copy/'+fileRelativePath
+    # copyFile='./Copy/'+fileRelativePath
+    copyFile = os.path.join('.', 'Copy', *fileRelativePath.split('/'))
     invokedAPINum=len(callAPIDict)
-    errorLog=f"Report/{projName}_fixed_log.txt"
+    # errorLog=f"Report/{projName}_fixed_log.txt"
+    errorLog = os.path.join('Report', f'{projName}_fixed_log.txt')
     for key,formatAPI in callAPIDict.items():
         errLst=[] #记录错误信息
         ansDict[key]={}
@@ -154,13 +162,31 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     projName=projPath.split('/')[-1]
     projName=projPath.split('/')[-1]
     #先在起始版本中生成每个API的pkl
-    pythonPath=f"{currentEnv}/bin/python" 
-    if runPath in runCommand: #针对于python src/run.py这种情况
-        command=f'cd Copy/{projName};{pythonPath}{runCommand}'
-    else: #针对于python run.py,但执行路径位于scr下,此处的runPath也可能为空
-        command=f'cd Copy/{projName}/{runPath};{pythonPath}{runCommand}'
+    # pythonPath=f"{currentEnv}/bin/python"
+    # if runPath in runCommand: #针对于python src/run.py这种情况
+    #     command=f'cd Copy/{projName};{pythonPath}{runCommand}'
+    # else: #针对于python run.py,但执行路径位于scr下,此处的runPath也可能为空
+    #     command=f'cd Copy/{projName}/{runPath};{pythonPath}{runCommand}'
+    # 1. python 路径自动适配
+    if platform.system() == 'Windows':
+        currentEnv = currentEnv.replace('/', '\\')
+        pythonPath = os.path.join(currentEnv, 'python.exe')
+    else:
+        pythonPath = os.path.join(currentEnv, 'bin', 'python')
+    # 2. 运行命令自动适配
+    if platform.system() == 'Windows':
+        if runPath in runCommand:
+            command = f'cd Copy\\{projName} && {pythonPath} {runCommand}'
+        else:
+            command = f'cd Copy\\{projName}\\{runPath} && {pythonPath} {runCommand}'
+    else:
+        if runPath in runCommand:
+            command = f'cd Copy/{projName};{pythonPath} {runCommand}'
+        else:
+            command = f'cd Copy/{projName}/{runPath};{pythonPath} {runCommand}'
     print('Running the project...')
-    createResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    # createResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    createResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if createResult.returncode!=0:
         print(f'Failure to generate PKL in current version')
         print(createResult.stderr)
@@ -169,9 +195,12 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     #print(createResult.stdout)
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
-    shutil.move(f'Copy/{projName}','temp')
-    shutil.move(f'Copy/bak_{projName}',f'Copy/{projName}')
-    shutil.move('temp',f'Copy/bak_{projName}')
+    # shutil.move(f'Copy/{projName}','temp')
+    shutil.move(os.path.join('Copy', projName), 'temp')
+    # shutil.move(f'Copy/bak_{projName}',f'Copy/{projName}')
+    shutil.move(os.path.join('Copy', f'bak_{projName}'), os.path.join('Copy', projName))
+    # shutil.move('temp',f'Copy/bak_{projName}')
+    shutil.move('temp', os.path.join('Copy', f'bak_{projName}'))
 
 
     # dir=f"Report/{projName}/{libName}"
@@ -179,8 +208,11 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     #这里用进程池同时处理多个任务，但对于torch库可能会报错RuntimeError:CUDA out or memory
     #对数据库的读写需要加锁
     coverSet=set()
-    if os.path.exists('Copy/pkl/coverSet'):
-        with open('Copy/pkl/coverSet','r') as fr:
+    # if os.path.exists('Copy/pkl/coverSet'):
+    coverSet_path = os.path.join('Copy', 'pkl', 'coverSet')
+    if os.path.exists(coverSet_path):
+        # with open('Copy/pkl/coverSet','r') as fr:
+        with open(coverSet_path, 'r', encoding='utf-8') as fr:
             tempLst=fr.readlines()
         for it in tempLst:
             it=it.rstrip('\n').replace(' ','')
@@ -194,7 +226,8 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     pool.close() #关闭进程池，使其不再接受新的任务
     pool.join() #等待进程池中所有的任务执行完，否则主进程可能继续往下执行提前结束，而导致部分任务没有执行完
     runCommand=f"python {runCommand}"
-    save2txt(resultLst,libName,runCommand,f"Report/{projName}.txt")
+    # save2txt(resultLst,libName,runCommand,f"Report/{projName}.txt")
+    save2txt(resultLst, libName, runCommand, os.path.join('Report', f'{projName}.txt'))
 
 
 
