@@ -3,6 +3,8 @@
 #
 #  More details (TODO)
 
+
+
 import os
 import ast
 import subprocess
@@ -10,7 +12,17 @@ from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter
 from API.LibApi import Parameter
 from Change.changeAnalyze import para2Obj
 
-    
+
+
+## Get repair operation dictionary of positional parameter
+## 获取位置参数的修复操作字典
+#
+#  Here, positonal parameter means that the parameter is passed by position without parameter name
+#  此处，位置参数指按位置而不带参数名进行传递的参数
+#
+#  @param pos Parameter position
+#  @param dic Repair operation dictionary
+#  @ruturn dic[key] The repair operation    
 def mapPos(pos,dic):
     for key in dic:
         try:
@@ -21,6 +33,16 @@ def mapPos(pos,dic):
     return {}
 
 
+
+## Get repair operation dictionary of keyword parameter
+## 获取关键字参数的修复操作字典
+#
+#  Here, keyword parameter means that the parameter is passed by parameter name
+#  此处，关键字参数指带参数名进行传递的参数
+#
+#  @param name Parameter name
+#  @param dic Repair opeartion dictionary
+#  @ruturn dic[key] The repair operation    
 def mapName(name,dic):
     for key in dic:
         if key[0]==name:
@@ -28,19 +50,28 @@ def mapName(name,dic):
     return {}
 
 
+
+## Find parameter name by its position
+## 通过位置查找参数名
+#
+#  @param pos Parameter position
+#  @param dic Repair operation dictionary
+#  @return key[0] The parameter name
 def findName(pos,dic):
     for key in dic.keys():
         if key[1]==pos:
             return key[0] #返回参数名
     print(f"findName error:{pos}")
     return ''
-
-
                 
 
 
-
-#给修复后API的参数填上参数名
+## Create mirror for the fixed API by adding all parameter names
+## 给修复后API的参数填上参数名
+#
+#  @param fixedAPI Fixed API
+#  @param dic Repair operation dictionary
+#  @return paraObjLst API mirror 
 def mirrorAPI(fixedAPI,dic):
     paraStr=getLastAPIParameter(fixedAPI)
     paraObjLst=[] #保存参数对象
@@ -92,6 +123,14 @@ def mirrorAPI(fixedAPI,dic):
 
 
 
+## Perform parameter repair operations through AST
+## 通过AST执行参数修复操作
+#
+#  @param callAPI The API call
+#  @param repairDict Repair operation dictionary
+#  @param node The AST node of the API call 
+#  @param starFlag Flag of * 
+#  @param twoStarFlag Flag of **
 def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
     for n in ast.iter_child_nodes(node):
         fix(callAPI,repairDict,n,starFlag,twoStarFlag)
@@ -105,7 +144,7 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
             newPosLst=[]
             newKeyLst=[]
             index=0
-            insertParas=[] #记录待插入的参数，（insertPos, para）
+            insertParas=[] #记录待插入的参数，(insertPos, moveFlag, para)
             #step1: 先对位置参数进行处理
             for para in posLst:
                 opDict=mapPos(index,repairDict)
@@ -140,7 +179,6 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
                 if len(opDict)==0:
                     insertParas.append((index,-1,para))
                 index+=1
-            
             #最后还要判断是否有新增的位置参数,新增的位置参数也需要具体的值,新增带默认值的位置参数可以不填
             # for key,value in repairDict.items():
             #     if 'addPos' in value:
@@ -172,6 +210,7 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
                 k=para.arg
                 opDict=mapName(k,repairDict)
                 for op,v in opDict.items():
+
                     if op=='delete':
                         if twoStarFlag:
                             if len(opDict)==1:
@@ -216,8 +255,16 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
 
 
 
-
-#修复完后动态验证
+## Dynamic validation
+## 动态验证
+# 
+#  @param callAPI The API call
+#  @param apiWithValue The API call with valued added by loading the pkl file
+#  @param projName The project name
+#  @param virtualEnv The virtual environment of the target lib version
+#  @param runPath The relative path of the run file
+#  @param runCommand The run command of the project
+#  @return result Dynamic validation result
 def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
     if apiWithValue=='':
         return None
@@ -253,8 +300,15 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
 
 
 
-
-
+## Static validation
+## 静态验证
+#
+#  @param fixedAPI The fixed API
+#  @param repairDict Repair operation dictionary
+#  @param targetAPIDefinition API definition of target lib version
+#  @param starFlag Flag of * 
+#  @param twoStarFlag Flag of **
+#  @return True/False Static validation result: passed/not passed 
 def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
     paraObjLst=mirrorAPI(fixedAPI,repairDict)
     posLst,keyLst=para2Obj(targetAPIDefinition)
@@ -282,11 +336,26 @@ def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
     return True
 
 
-#需要判断一下apiWithValue是否为空
-#修复成功=形式上修复成功+成功运行
-#是否兼容
-#问题是修完之后，无法通过返回值来判断，到底是动态修复成功了还是只经过了静态验证,再返回一个标签？
-#函数返回3个值：修复结果，形式上的兼容性，是否修复成功
+
+## Task of repairing parameter compatibility issues 
+## 参数兼容性问题修复任务
+#
+#  需要判断一下apiWithValue是否为空
+#  修复成功=形式上修复成功+成功运行
+#  是否兼容
+#  问题是修完之后，无法通过返回值来判断，到底是动态修复成功了还是只经过了静态验证,再返回一个标签？
+#  函数返回3个值：修复结果，形式上的兼容性，是否修复成功
+#
+#  @param root The AST root of the source file
+#  @param callAPI The API call
+#  @param apiWithValue The API call with valued added by loading the pkl file
+#  @param projName The project name
+#  @param runPath The relative path of the run file
+#  @param runCommand The run command of the project
+#  @param repairLst  List of repair operation dictionary
+#  @param virtualEnv The virtual environment of the target lib version
+#  @param errLst List of error messages
+#  @return repairResults 
 def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst):
     #静态修复,pkl加载失败，只能进入静态修复
     repairCandidates=[]

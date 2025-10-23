@@ -1,7 +1,9 @@
 ## @package tool
-#  Provides utility functions for processing API calls and source files
+#  Provide utility functions for processing API calls and source files
 #
 #  More details (TODO)  
+
+
 
 import re
 import os
@@ -10,10 +12,19 @@ import json
 import hashlib
 from Path.getPath import Path
 
-#将参数字符串拆分成单个的参数
-#apiName(x,y="<bold>Hello, World!</bold>",z:int,w=(p1,p2={1,(1m,23)}),device: Union[Device, int] = None, abbreviated: bool ={'a','b'}) -> str
-#默认按逗号进行拆分,也可按'.'进行拆分，比如a.b.c
-#拆分参数的时候没有考虑到x="hello,wolrd"带冒号的情况，会错误拆成两个
+
+
+## Split parameter string into list of separated parameters
+## 将参数字符串拆分成单个的参数
+# 
+#  apiName(x,y="<bold>Hello, World!</bold>",z:int,w=(p1,p2={1,(1m,23)}),device: Union[Device, int] = None, abbreviated: bool ={'a','b'}) -> str
+#  默认按逗号进行拆分,也可按'.'进行拆分，比如a.b.c
+#  拆分参数的时候没有考虑到x="hello,wolrd"带冒号的情况，会错误拆成两个
+#
+#  @param p_string Parameter string
+#  @param separator The separator, ',' is the default value 
+#  @param space Determine whether to remove the space in the parameter string 
+#  @return parameters List of separater parameters 
 def get_parameter(p_string,separator=',',space=1):
     #库定义的参数去空格，项目中的参数不去空格，防止出问题
     if space: #默认是去空格的
@@ -96,7 +107,13 @@ def get_parameter(p_string,separator=',',space=1):
     return parameters
 
 
-#将代码转化为Ast树
+
+## Get AST for code 
+## 将代码转化为Ast树
+#
+#  @param filePath The code file path
+#  @strFlag Determine the code from file or API: 0 for file; 1 for API call string
+#  @return root The parsed AST root
 def getAst(filePath,strFlag=0): #若strFlag=1,则表明传进来的是一个api，而不是一个路径
     if strFlag==0:
         with open(filePath,'r') as f:
@@ -121,8 +138,15 @@ def getImportLst(filePath):
 
 
 
-#去掉API中的参数部分
-#比如a.b(x,y(2)).c(z=1).d(w=[(1,2)])变成a.b.c.d
+## Remove parameter(s) from API call string 
+## 去掉API中的参数部分
+#
+#  For example, a.b(x,y(2)).c(z=1).d(w=[(1,2)]) --> a.b.c.d
+#  比如a.b(x,y(2)).c(z=1).d(w=[(1,2)])变成a.b.c.d
+#
+#  @param s The API call string
+#  @param flag Determine remove all parameters or the last parameter for the input API call: 0 for all parameters; 1 for the last parameters
+#  @return ans The API call string without parameter(s)
 def removeParameter(s,flag=0): 
     if '->' in s: #若有返回值，则把返回值也去掉
         s=s.split('->')[0] 
@@ -167,10 +191,14 @@ def removeParameter(s,flag=0):
 
 
 
-
-#获取最后一个API参数
-#a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4)
-#获取c的参数1,2,3,4
+## Get parameter(s) of the last API from the API call string
+## 获取最后一个API参数
+#
+#  For example, a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4) --> 1,2,3,4
+#  比如，a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4)，获取c的参数1,2,3,4
+# 
+#  @param apiStr The API call string
+#  @return ans The parameter(s) of the last API
 def getLastAPIParameter(apiStr):
     ans=''
     left=0 #记录左括号的个数
@@ -192,10 +220,15 @@ def getLastAPIParameter(apiStr):
 
 
 
-
-#拆分API，比如a.b(x).c(y).d(z)
-#拆成3个API，分别是a.b(x),a.b(x).c(y), a.b(x).c(y).d(z)
-#还有特殊的调用形式a.b['x'](y)
+## Split API call string based on parameter passing
+## 根据参数传递拆分API调用字符串
+#
+#  For example, a.b(x).c(y).d(z) --> ['a.b(x)', 'a.b(x).c(y)', 'a.b(x).c(y).d(z)']
+#  比如a.b(x).c(y).d(z)拆成3个API，分别是['a.b(x)', 'a.b(x).c(y)', 'a.b(x).c(y).d(z)']
+#  还有特殊的调用形式a.b['x'](y)
+#
+#  @param s The API call string
+#  @return ansLst The splited result
 def departAPI(s):
     ansLst=[]
     stack=''
@@ -234,6 +267,16 @@ def departAPI(s):
     return ansLst
 
 
+
+## Split API call string based on separator "." 
+## 根据"."拆分API调用字符串
+#
+#  For example, a.b(x).c(y).d(z) --> ['a', 'b(x)', 'c(y)', 'd(z)']
+#  比如a.b(x).c(y).d(z)拆成4个API，分别是['a', 'b(x)', 'c(y)', 'd(z)']
+#
+#  @param s The API call string
+#  @param separator The separator simbol: .
+#  @return ansLst The splited result
 def departAPI2(s,separator='.'):
     ansLst=[]
     lst=[]
@@ -287,8 +330,9 @@ def isDynamic(dic):
 
 
 
-#/home/zhang/Packages/scikit-learn
-#给定库的路径，获得该库的所有版本号
+## 给定库的路径，获得该库的所有版本号
+#
+#  /home/zhang/Packages/scikit-learn
 def getVersionLst(libPath):
     obj=Path('D')
     versionLst=[]
@@ -304,6 +348,7 @@ def getVersionLst(libPath):
         versionLst.append(p[index:])
     versionLst.sort(key=lambda it:cmp(it))
     return versionLst
+
 
 
 #将版本号格式统一为x.xx.xx.小数部分
@@ -353,7 +398,12 @@ def cmp(version):
 
 
 
-#给文件取名字
+## Normalize file name 
+## 给文件取名字
+#
+#  @param fileName Typically, the API call string is input as the file name
+#  @param extension The extension of the file
+#  @return fileName The normalized file name
 def getFileName(fileName,extension):
     #step1:先把fileName中的非法字符去除
     fileName=fileName.replace(' ','')
@@ -368,11 +418,18 @@ def getFileName(fileName,extension):
 
     fileName+=extension 
     return fileName
-    
+   
+ 
 
-
-
-#规定文件中每行的字符串的宽度，如果超出宽度就换行写,如果换行之后还超过了最大宽度，则继续向下换行
+## Format output 
+## 格式化输出
+# 
+#  Specifies the maximum width for each line of string in the file. If a line exceeds this width, it is wrapped. If the wrapped line still exceeds the maximum width, the wrapping process continues. 
+#  规定文件中每行的字符串的宽度，如果超出宽度就换行写,如果换行之后还超过了最大宽度，则继续向下换行
+#
+#  @param width The width of each line of string 
+#  @param s The output string
+#  @param fw File writter 
 def writeLine(width,s,fw):
     if len(s)<=width-4:
         tailSpaceNum=width-2-len(s)-1
@@ -392,6 +449,13 @@ def writeLine(width,s,fw):
 
 
 
+## Save PCART report
+## 保存PCART报告
+#
+#  @param lst PCART's result 
+#  @param libName The lib name
+#  @param runCommand The run command of the project
+#  @param savePath The save path
 def save2txt(lst,libName,runCommand,savePath):
     fw=open(savePath,'w')
     totalFileNum=0
@@ -479,6 +543,12 @@ def save2txt(lst,libName,runCommand,savePath):
     fw.close()
 
 
+
+## Load PCART's configuration file
+## 加载PCART配置文件
+#
+#  @param configPath The path of configuration file
+#  @return (dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']) tuple of configuration entries 
 def loadConfig(configPath):
     with open(configPath,'r') as fr:
         dic=json.load(fr)
@@ -487,6 +557,11 @@ def loadConfig(configPath):
 
 
 
+## Get Python interpreter path
+## 获取Python解释器路径
+#
+#  @param basePath The virtual environment path 
+#  @return full_path The path of Python interpreter
 def findPythonDir(basePath):
     if not os.path.exists(basePath):
         print(f"Path is not exist: {basePath}")
@@ -503,7 +578,14 @@ def findPythonDir(basePath):
     return None
 
 
-#f"/dataset/zhang/anaconda3/envs/3d/lib/{pythonxx.xx}/" + f"site-packages/{torch}"
+
+## Get source code path of the lib 
+## 获取库源码路径
+#
+#  f"/dataset/zhang/anaconda3/envs/3d/lib/{pythonxx.xx}/" + f"site-packages/{torch}"
+#  
+#  @param configPath PCART's configuration file
+#  @return (currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath) Tuple of current version, target version, virtual environment paths of current version and target version
 def getSourceCodePath(configPath):
     with open(f"Configure/{configPath}",'r') as fr:
         dic=json.load(fr)
@@ -519,7 +601,9 @@ def getSourceCodePath(configPath):
     return currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath
 
 
-#展开单行条件返回语句为多行if-else结构
+
+## Convert conditional return statement to multi-line if-else structure
+## 展开单行条件返回语句为多行if-else结构
 class ConditionalReturnTransformer(ast.NodeTransformer):
     def visit_Return(self, node):
         #检查return语句是否为单行条件语句（IfExp)

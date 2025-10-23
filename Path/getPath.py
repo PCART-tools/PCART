@@ -3,12 +3,18 @@
 #
 #  More details (TODO)
 
+
+
 import os
 import copy
 
+
+
 ## The Path class definition
+## 路径定义类
 #
 #  provide functionalities for obtaining the paths of source files and directories  
+#  提供源码和文件夹路径获取功能
 class Path:
     def __init__(self,mode):
         #mode='D' 表示只获取根目录下的一级子目录

@@ -3,27 +3,64 @@
 #
 #  More details (TODO)
 
+
+
 import copy
 import re
 from Tool.tool import get_parameter
 
+
+
+## Parameter class for Library APIs
+## API参数类
+#
+#  Parameter object: for storing the information of one parameter 
+#  参数对象:用于保存一个参数的信息 
 class Parameter():
+    
+    ## The constructor
+    ## 构造函数
     def __init__(self):
+
+        ## The full string of the parameter
+        ## 参数字符串
         self.fullItem=""
+
+        ## The parameter name
+        ## 参数名称
         self.name=""
+
+        ## The parameter position
+        ## 参数位置
         self.position=""
+
+        ## The parameter default value
+        ## 参数默认值
         self.value=""
+ 
+        ## The parameter type
+        ## 参数类型
         self.type=""
+
+        ## The star symbol position
+        ## 星号位置
         self.star_position=-1  #记录'*'的位置,便于拆分位置参数和关键字参数
 
+    ## Return the hash value of the parameter
+    ## 返回参数哈希值
     def __hash__(self):
         return hash(self.fullItem)
-    
+   
+    ## Determine whether two parameter objects are equal
+    ## 判断两个参数对象是否相等 
     def __eq__(self,other):
         return self.fullItem==other.fullItem
-    
+   
+    ## Return the string representation of the parameter
+    ## 返回参数的字符串表示形式 
     def __repr__(self):
         return self.fullItem
+
 
 
 #暂时只考虑同名Api的变更情况
@@ -48,9 +85,6 @@ class Api:
     def __repr__(self):
         return self.full_item 
 
-
-
-        
 
 
 class APIOBJ:

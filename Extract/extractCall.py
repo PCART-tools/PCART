@@ -3,10 +3,14 @@
 #
 #  More details (TODO)
 
+
+
 import ast
 
+
+
 ## Import and ImportFrom node visitor
-## 访问import节点和importFrom节点
+## Import和ImportFrom节点遍历器
 #
 #  Inherits from ast.NodeVisitor  
 class Import(ast.NodeVisitor):
@@ -34,7 +38,9 @@ class Import(ast.NodeVisitor):
                     self._md_name[it["asname"]]=node.module+'.'+it["name"]
 
 
+
 ## Extract all call type nodes from a project source file
+## 抽取项目源码中的所有call类型节点
 #
 #  Use DFS algorithm to traverse the call type node from the root node. Each API call is stored in a tuple (API name, parameters, call statement, line no) 
 #  从根节点开始，直接找根节点的孩子，Call存在于Expr和Assign节点中。每个API调用存储为四元组(API名称,参数,调用语句,行号)
@@ -70,8 +76,10 @@ class GetFuncCall:
                 # print(node.lineno,'<-->',callState)
             return
 
+
+
 ## Get all assign nodes from a project source file 
-## 找到所有的Assign节点
+## 项目源码Assign节点遍历器
 #
 #  For an assign node, extract the values before (the variable name) and after (the value expression) the assignment operator 
 #  对于Assign节点，只需要关注等号左右两边的名字   
@@ -88,8 +96,10 @@ class AssignVisitor(ast.NodeVisitor):
             valueExpr=ast.unparse(node.value)
             self._targetCall[targetName]=valueExpr
 
+
+
 ## Get all with nodes from a project souce file
-## 找到所有的with节点
+## 项目源码with节点遍历器
 #
 #  For an withitem node, extract the call name in the context_expr and its alias name (if any) in the optional_vars
 #  对于withitem节点，提取其中的call节点和别名（如果有）
