@@ -3,11 +3,16 @@
 #
 #  More details (TODO)
 
+
+
 import ast
 from Extract.extractCall import *
 
 
+
 ## Extract method calls in a custom class inherited from a lib class
+## 获取从库API继承的自定义类中的库API方法调用
+#
 #  @param root The ast node of the parsed project file 
 #  @param importDict Module names identified from import statements 
 #  @param libName The target lib name (e.g., torch) 
@@ -52,7 +57,9 @@ def getSelfAPI(root,importDict,libName):
     return ansLst
 
 
+
 ## Restore the conventional API call path by modifying the first name of API prefix 
+## 通过修改API赋值调用前缀还原完整的API调用路劲
 #
 #  For example: 
 #  A=polars()
@@ -61,6 +68,7 @@ def getSelfAPI(root,importDict,libName):
 #  A=A.a(z)
 #  A.a(z)-->A.b(y).a(z)-->A.a(x).b(y).a(z)-->polars.a(x).b(y).a(z)
 #  存在的异常情况：中间函数的返回值可能会改变
+#
 #  @param prefix Prefix of the API call (e.g., A.a(z), A is the prefix)
 #  @param callName API call item in source code 
 #  @param paraStr Parameter string
@@ -128,12 +136,16 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
     else: #若没有找到赋值语句，则直接结束
         return callName
 
+
+
 ## Resotre the conventional API call path in the withitem (including AsyncWith) call form
+## 还原withitemAPI调用的完整API调用路径
 #
 #  For example:
 #  async with Client("test.mosquitto.org") as client:
 #      await client.publish("temperature", payload="25.3")
 #  client.publish("temperature", payload="25.3") --> Client("test.mosquitto.org").publish("temperature", payload="25.3")
+#
 #  @param callName API call item in source code
 #  @param withitemCallName A dict stores the alias and its counterpart withitem call name
 #  @return The conventional API call path
@@ -154,9 +166,9 @@ def modifyWithName(callName, withitemCallName):
         
           
 
-
 ## Extract all API calls from a given .py file
 ## 每次传进来一个.py文件，抽取所有的调用API
+#
 #  @param filePath The .py file path
 #  @param libName The target lib name (e.g., torch) 
 #  @return A dictionary, where the key is the restored API call path + parameters, the value is the original API call + parameters 

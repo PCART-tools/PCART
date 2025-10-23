@@ -3,6 +3,8 @@
 #
 #  More details (TODO) 
 
+
+
 import re
 import json
 import time
@@ -11,8 +13,10 @@ from API.LibApi import *
 from Tool.tool import cmp
 
 
+
 ## Load the extracted definitions of lib APIs for static signature mapping
 ## 把之前抽取出来的库API加载到字典中，在项目API与库API匹配的时候需要用到
+#
 #  @param libName The upgraded lib name
 #  @version version The lib's version
 #  @return tempLst The APIs' definitions
@@ -71,6 +75,7 @@ def func(libApiObjLst,libApiName):
     return lst
 
 
+
 ## 这个应该和loadlib合并到一起
 def getAPILst(filePath):
     # pattern_v='.*?Torch(.*).txt'
@@ -91,7 +96,6 @@ def getAPILst(filePath):
     tempLst=list(set(ans))
     tempLst.sort(key=ans.index)
     return version,tempLst
-
 
 
 
@@ -140,5 +144,3 @@ def lib2json(sourceFilePath,saveFilePath):
                     break
             if breakFlag==1:
                 break
-
-    

@@ -3,9 +3,14 @@
 #
 #  More details (TODO)
 
+
+
 import re
 
 
+
+## Static mapping class for lib API definitions
+## 库API定义静态匹配类
 class fuzzyMatch:
     def __init__(self):
         self.alias=''
@@ -37,5 +42,3 @@ class fuzzyMatch:
         #否则认为该API可能是库中的一个别名
         self.alias=callAPI
         return ans
-        
-        

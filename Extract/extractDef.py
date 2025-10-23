@@ -1,11 +1,16 @@
 ## @package extractDef
-#  Provides some class definitions for extracting lib API definitions from lib source files
+#  Provide some class definitions for extracting lib API definitions from lib source files
 #
 #  More details (TODO)
+
+
  
 import ast
 
+
+
 ## Function definition node visitor
+## 函数定义节点遍历器
 #
 #  Inherits from ast.NodeVisitor 
 class FunctionDefVisitor(ast.NodeVisitor):
@@ -19,7 +24,9 @@ class FunctionDefVisitor(ast.NodeVisitor):
         self._defNodes.append(node)
 
 
+
 ## From import statement node visitor
+## From import语句节点遍历器
 #
 #  Inherits from ast.NodeVisitor 
 class FromImport(ast.NodeVisitor):
@@ -51,7 +58,10 @@ class FromImport(ast.NodeVisitor):
                 else:
                     self._importDict[key]=dic['name']
 
+
+
 ## Get prefix and relative path of a source file
+## 获取源码文件路径前缀和相对路径
 #
 #  The prefix denotes the fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
 #  the relative path denotes the relative path of a source file, e.g., lib/a/b/c.py   

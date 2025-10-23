@@ -3,6 +3,8 @@
 # 
 #  More details (TODO)
 
+
+
 import os
 import sys
 import ast
@@ -21,12 +23,13 @@ from Repair.repair import repairTask,validateByRun
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
+
+
 ## One process handles one file 
 ## 一个进程处理一个文件
+#
 #  @param args Input parameters for processing one project file 
-#  @return ansDict API parameter compatibility issue detection and repair results
-#  @return fileRelativePath The detected and repaired project file
-#  @return invokedAPINum The number of invoked APIs 
+#  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: API parameter compatibility issue detection and repair results; fileRelativePath: The detected and repaired project file; invokedAPINum: The number of invoked APIs 
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
     projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet=args
@@ -147,14 +150,15 @@ def backwardTask(args):
 
 ## Generate pkl files and perform detection and repair task
 ## 生成项目调用API的pkl文件以及执行检测与修复任务
+#
 #  @param projPath The path to the project
 #  @param libName  The upgraded Python third-party library name
 #  @param currentVersion The upgraded lib's current version
 #  @param currentEnv Current version's virtual environment
 #  @param targetVersion The upgraded lib's target version
 #  @param targetEnv Target version's virtual environment
-#  @param runCommand Run command of the project
-#  @param runPath Run path of the project
+#  @param runCommand The run command of the project
+#  @param runPath The relative path of the run file
 def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath):
     pathObj=Path('DF')
     pathObj.getPath(projPath)
@@ -231,15 +235,30 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
 
 
 
+## Main function of PCART
+## PCART主函数
+def main():
+    if len(sys.argv) < 3:
+       print("Usage: python main.py -cfg config.json")
+       sys.exit(1)
 
-## python main.py -cfg config.json
-if __name__=='__main__':
     config=sys.argv[2]
     start=time.time()
+
+    #加载配置
     projPath,runCommand,runPath,libName,currentVersion,targetVersion,currentEnv,targetEnv=loadConfig(f'Configure/{config}')
     print("Code preprocessing...")
-    codeProcess(projPath,runCommand,runPath,libName) #首先对代码进行预处理
+
+    #首先对代码进行预处理
+    codeProcess(projPath,runCommand,runPath,libName) 
     print("Code preprocess complete")
+
+    #执行主逻辑 
     backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath)
+
     end=time.time()
     print(f"Total run time={int(end-start)}s")
+
+
+if __name__=='__main__':
+    main()

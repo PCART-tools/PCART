@@ -3,6 +3,8 @@
 #
 #  More details (TODO)
 
+
+
 import os
 import re
 from Path.getPath import *
@@ -11,7 +13,9 @@ from Extract.extractCall import *
 from Tool.tool import getAst
 
 
+
 ## Regular expression match class 
+## 正则表达式匹配类
 #
 #  Match a given pattern from code text
 class RegexMatch:
@@ -46,8 +50,10 @@ class RegexMatch:
             return 0
 
 
+
 ## Extract all assign node from a .py file's AST
 ## 通过AST获取.py文件的Assign语句
+#
 #  @param root_node The ast node of the .py file
 def getAssign(root_node):
     #找出树中所有的模块名
@@ -77,12 +83,13 @@ def getAssign(root_node):
 
 
 
-
 ## Shorten the API path based on __init__.py and import alias 
 ## 通过解析__init__.py和import别名,把源码中的部分API路径缩短
+#
+#  缩短API路径可能会将不同文件中的API还原成相同的形式，比如A.b.f,A.c.f都还原成A.f
+#
 #  @param lst An API path. Initially, lst is the fully qualified API name. 
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
-#  缩短API路径可能会将不同文件中的API还原成相同的形式，比如A.b.f,A.c.f都还原成A.f
 def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的API路径
     absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
     relativePath=[v for v in fileDict.values()][0] #pkg/file.py 
@@ -126,8 +133,11 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
     lst[0]=api 
     shortenPath(lst,{absolutePath:relativePath})
 
+
+
 ## Extract class method definitions from a give class.
 ## 抽取类中方法定义。递归访问类中所有节点，主要解决嵌套类的问题
+#
 #  @param lst List of lib API definitions extracted from a lib source file 
 #  @param root The class type ast node
 #  @param prefix The fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
@@ -205,8 +215,9 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
 
 
 
-
 ## Extract all lib API definitions from a source file
+## 抽取库源码API定义任务
+#
 #  @param codeText The code text of a source file, read by f.read()
 #  @param libApi List of lib API definitions extracted from a lib source file 
 #  @param prefix The fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
@@ -246,6 +257,8 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文�
 
 
 ## Extract all lib API definitions from a specified version
+## 抽取给定版本的库API定义
+#
 #  @param args The arguments include the lib name, lib version, and the lib path 
 def getDefFunction(args):
     libName, version, libPath=args
@@ -365,5 +378,3 @@ def getDefFunction(args):
             f.write('\n')
 
     f.close()
-
-        

@@ -3,6 +3,8 @@
 #
 #  More details (TODO)
 
+
+
 import re
 import ast
 import shutil
@@ -12,6 +14,8 @@ from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
 from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName
+
+
 
 ## Count the number of different types of brackets ((), [], {}) in a string
 ## 计算字符串中各类括号((), [], {})的个数
@@ -48,6 +52,7 @@ def countBracket(s):
     return minL,minR,midL,midR,huaL,huaR
 
 
+
 ## Convert the multi-line parameter calls in the code into a single line to facilitate insertion into dictionary statements 
 ## 把代码中换行写的参数调用，合并成一行，目的是便于插入字典语句
 #  @param filePath The source file path
@@ -61,6 +66,8 @@ def oneLine(filePath):
             fw.write(f"{newCode}\n")
     except Exception as e:
         print(f"oneLine --> {filePath} parse to ast failed: {e}")
+
+
     
 ## Expand the single-line conditional return statement into a multi-line if-else structure  
 ## 展开单行条件return语句为多行if-else结构
@@ -79,6 +86,16 @@ def expandConditionalReturn(filePath):
         print(f"expandConditionalReturn --> {filePath} parse to ast failed: {e}")
  
 
+
+## Get the local variable in the list comprehension
+## 获取列表推导式中的局部变量
+#
+#  For example, [x**2 for x in range(10)] --> x=[x for x in range(10)][0]
+#  比如[x**2 for x in range(10)]转换为 x=[x for x in range(10)][0]
+#
+#
+#  @param root The AST root of the line of code
+#  @param ansLst List of coverted local variable(s) in list comprehension
 def getListVar(root,ansLst):
     for node in ast.iter_child_nodes(root):
         if isinstance(node,ast.ListComp):
@@ -97,6 +114,15 @@ def getListVar(root,ansLst):
         getListVar(node,ansLst)    
 
 
+
+## Get the local variable in the dictionary comprehension
+## 获取字典推导式中的局部变量
+#
+#  For example, {k:v for k,v in {'a': 1, 'b': 2, 'c': 3}.items()} --> k, v=[(k, v) for (k, v) in {'a': 1, 'b': 2, 'c': 3}.items()][0] 
+#  比如{k:v for k,v in {'a': 1, 'b': 2, 'c': 3}.items()}转换后为k, v=[(k, v) for (k, v) in {'a': 1, 'b': 2, 'c': 3}.items()][0] 
+#
+#  @param root The AST root of the line of code
+#  @param ansLst List of coverted local variable(s) in dictionary comprehension
 def getDictVar(root,ansLst):
     for node in ast.iter_child_nodes(root):
         if isinstance(node,ast.DictComp):
@@ -116,7 +142,11 @@ def getDictVar(root,ansLst):
 
 
 
-#主要是列表推导式listComp和字典推导式DictComp
+## Convert the ListComp and DictComp statements to variable assignment statements 
+## 将列表推导式listComp和字典推导式DictComp转换为变量赋值表达式
+#
+#  @param filePath The source file path
+#  @param libName The name of the lib
 def convertLocalVar(filePath,libName):
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
@@ -220,6 +250,11 @@ def convertLocalVar(filePath,libName):
 
 
 
+## Find assignment call statements
+## 获取赋值调用语句
+#
+#  @param root The AST root the source code
+#  @return assignLst List of assignment call statements
 def findAssignCall(root):
     assignLst=[]
     for node in ast.walk(root):
@@ -230,8 +265,11 @@ def findAssignCall(root):
 
     
 
-
-#计算字符串的前面有多少个空格
+## Count the number of spaces at the begining of a string 
+## 计算字符串的前面有多少个空格
+#
+#  @param s The string
+#  @return cntSpace The number of spaces
 def countSpace(s):
     cntSpace=0
     for it in s:
@@ -241,6 +279,16 @@ def countSpace(s):
             break
     return cntSpace
 
+
+
+## Determine the instrumentation line for import statements
+## 确定import语句插桩行
+#  
+#  Default line is 0. Avoid instrumenting import statements before __future__ statements) or between comments 
+#  默认行为0，避免在__future__前或注释块中插入import语句
+#
+#  @param codeLst Code list read by f.readlines()
+#  @return index The appropriate index for import statement instrumentation
 def getImportLine(codeLst):
     #首先判断from import语句中是否含有特殊的__future__
     index=-1
@@ -262,7 +310,13 @@ def getImportLine(codeLst):
     
     return index
 
-#抽取项目中第三方库装饰器调用
+
+
+## Extract decorator API calls
+## 抽取项目中第三方库装饰器调用
+#
+#  @param root The AST root of the source code file
+#  @return decoratorLst The list of decorator API calls 
 def extractDecorator(root):
     decoratorLst = []
     for n in ast.walk(root):
@@ -275,6 +329,11 @@ def extractDecorator(root):
 
 
 
+## Code instrumentation for single API call within a source file
+## 源文件单个API调用代码插桩
+#
+#  @param callAPI The API call
+#  @param filePath The source file paht
 def addDictSingle(callAPI,filePath):
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
@@ -373,8 +432,16 @@ def addDictSingle(callAPI,filePath):
 
 
 
-
-
+## Code instrumentation for all API calls within a project source file
+## 项目源文件所有API调用代码插桩
+#
+#  @param projPath The project path 
+#  @param projName The project name 
+#  @param filePath The project source file path 
+#  @param runFileLst The list of run file 
+#  @param libName The lib name  
+#  @param runPath The relative path of the run file 
+#  @param runCommand The run command of the project 
 def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand):
     with open(filePath,'r',encoding='UTF-8') as fr:
         code=fr.read()
@@ -667,8 +734,16 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
             fw.write(it)
 
 
-#该函数用于动态匹配时候的时候对单个API进行插桩，除了要插桩当前文件
-#还要对运行文件进行插桩,所以提前把bak_Proj中的运行文件处理好
+
+## Code instrumentation for project run file
+## 项目运行文件代码插桩
+#
+#  该函数用于动态匹配时候的时候对单个API进行插桩，除了要插桩当前文件
+#  还要对运行文件进行插桩,所以提前把bak_Proj中的运行文件处理好
+#
+#  @param file The run file
+#  @param runPath The relative path of the run file 
+#  @param runCommand The run command of the project 
 def handleRunFile(file,runPath,runCommand):
     with open(file,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
@@ -745,7 +820,6 @@ def handleRunFile(file,runPath,runCommand):
             fw.write(it)
 
 
-
 def obtainDef(sourcePath):
     with open(sourcePath,'r',encoding='UTF-8') as fr:
         code=fr.read()
@@ -762,8 +836,11 @@ def obtainDef(sourcePath):
     fw.close()
 
 
-
-
+## Save import statement to source file
+## 将import语句保存到源码中
+#
+#  @param filePath The source file path
+#  @param importStatement The import statement to be saved
 def modifyFromImport(filePath,importStatement):
     # with open(filePath,'r') as fr:
     with open(filePath, 'r', encoding='UTF-8') as fr:
@@ -777,6 +854,28 @@ def modifyFromImport(filePath,importStatement):
         for it in codeLst:
             fw.write(it)
 
+
+
+## Save assignment statement with constant values
+## 保存常量赋值语句
+#
+#  保留包含常量的全局赋值语句和装饰器调用相关的赋值语句，例如:
+#  Case 1:
+#  1.  a = 1
+#  2.  b = 1
+#  3.  c = a + b
+#  4.  c = func(a,b)
+#  仅保留1，2，3行代码
+#  Case 2:
+#  1. app = Flask(__name__)
+#  2. @app.route("/")
+#  保留 app = Flask(__name__)以解决NameError 
+#
+#  @param astNode The AST node
+#  @param constantVar Constant variable
+#  @param nonConstantVar Non-constant variable
+#  @param decoratorLst Decorator API call list 
+#  @return astBody The AST of the saved assignment statement; 1 for none
 def saveConstantAssign(astNode, constantVar, nonConstantVar, decoratorLst):
     flag = 0
     astBody = []
@@ -824,9 +923,14 @@ def saveConstantAssign(astNode, constantVar, nonConstantVar, decoratorLst):
     else:
         astBody.append(astNode)
         return astBody
- 
 
-#保存项目的结构信息
+
+ 
+## Save structure information of the project 
+## 保存项目的结构信息
+#
+#  @param projPath The project path
+#  @param libName The lib name
 def saveStructure(projPath,libName):
     pathObj=Path('DF')
     pathObj.getPath(projPath)
@@ -888,11 +992,23 @@ def saveStructure(projPath,libName):
 
 
 
-
+## Determine the soft link files in a directory
+## 确定文件夹中的软链接文件
+#
+#  @param directory The directory
+#  @param files The files in the directory
+#  @return [f for f in files if os.path.islink(os.path.join(directory, f))] List of soft link files
 def ignore_sym_links(directory, files):
     return [f for f in files if os.path.islink(os.path.join(directory, f))]
 
 
+
+## Get all lib-related import statements
+## 获取所有第三方库相关的import语句
+#
+#  @param projPath The project path 
+#  @param libName The project name
+#  @return ansLst List of all lib-related import statements
 def getLibImportLst(projPath,libName):
     lst=[]
     pathObj=Path('DF')
@@ -918,8 +1034,11 @@ def getLibImportLst(projPath,libName):
     ansLst.sort(key=lst.index) 
     return ansLst 
 
+
+
 ## Convert tabs to spaces in all Python files within a directory
 ## 将目录下所有Python文件中的制表符转换为空格
+#
 #  @param directory The directory path to process
 def convertTabsToSpaces(directory):
     for root, dirs, files in os.walk(directory):
@@ -937,11 +1056,20 @@ def convertTabsToSpaces(directory):
                     print(f"Error converting file {file_path}: {e}")
 
 
-#代码预处理目的：
-#1.修改一些动态运行的脚本
-#2.将用户代码的tab键用四个空格替换（因为不同编译器的tab键对应的空格数可能不同），再把换行写的语句集中到一行，目的是为了便于插桩处理
-#3.插入一些头文件
-# runCommand可能是 src/run.py --config json
+
+## Code processing
+## 代码预处理
+#
+#  #代码预处理目的：
+#  1.修改一些动态运行的脚本
+#  2.将用户代码的tab键用四个空格替换（因为不同编译器的tab键对应的空格数可能不同），再把换行写的语句集中到一行，目的是为了便于插桩处理
+#  3.插入一些头文件
+#  runCommand可能是 src/run.py --config json
+#
+#  @param projPath The project path
+#  @param runCommand The run command of the project 
+#  @param runPath The relative path of the run file 
+#  @param libName The lib name 
 def codeProcess(projPath,runCommand,runPath,libName):
     #提取运行的文件
     runFileLst=[]

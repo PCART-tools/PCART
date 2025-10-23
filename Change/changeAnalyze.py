@@ -3,6 +3,8 @@
 #
 #  More details (TODO)
 
+
+
 import os
 import platform
 import re
@@ -12,20 +14,63 @@ from API.LibApi import Parameter
 from Tool.tool import get_parameter,removeParameter,getFileName
 
 
+
+## Update class for parameter change analysis
+## 参数变更分析类
+#
+#  Record parameter change type information by comparing the old and the new parameters
+#  通过比较新旧参数记录参数变更类型信息
 class Update():
+
+    ## The constructor
+    ## 构造函数 
     def __init__(self):
+
+        ## New position of the parameter
+        ## 参数新位置 
         self.pos=-1
+
+        ## New type of the parameter
+        ## 参数新类型
         self.type=''
+
+        ## New name of the parameter
+        ## 参数重命名
         self.rename=''
+
+        ## Replacement of the parameter
+        ## 参数替换
         self.rep=''
+
+        ## New default value of the parameter
+        ## 参数新默认值
+        #  TODO: Unimplemented
         self.value=''
+
+        ## Flag (1) of parameter deletion 
+        ## 参数删除标记 (1)
         self.dele=''
-        self.addPos='' #增加位置参数
-        self.addKey='' #增加关键字参数
+
+        ## New positional parameter
+        ## 新增位置参数
+        self.addPos='' 
+
+        ## New keyword parameter
+        ## 新增关键字参数
+        self.addKey='' 
+
+        ## Conversion of positional parameter to keyword parameter
+        ## 位置参数变更为关键字参数
         self.pos2key=''
+
+        ## Conversion of keyword parameter to positional parameter
+        ## 关键字参数变更为位置参数
         self.key2pos=''
 
 
+
+    ## Return the string representation of the parameter update
+    ## 返回参数变更的字符串表示形式 
     def __repr__(self):
         # s=f"name:{self.name}, "
         s=''
@@ -42,6 +87,10 @@ class Update():
 
 
 
+## Save error messages 
+## 保存错误信息
+#  @param errorLog Log file  
+#  @param errorLst The error messages 
 def updateErrorLst(errorLog,errorLst):
     # with open(errorLog,'a') as fw:
     with open(errorLog, 'a', encoding='utf-8') as fw:
@@ -51,8 +100,11 @@ def updateErrorLst(errorLog,errorLst):
 
 
 
-
-#查询字典
+## Query API mapping dictionary 
+## 查询API映射字典
+#  @param callAPI The called API for query
+#  @param sharedDict The API mapping dictionary: multiprocessing.manager.dict()
+#  @return ansDict The query result 
 def querySharedDict(callAPI,sharedDict):
     ansDict={}
     k=removeParameter(callAPI)
@@ -63,7 +115,13 @@ def querySharedDict(callAPI,sharedDict):
     return ansDict
 
 
-#更新的操作有两种：添加和修改
+
+## Update API mapping dictionary: add and revise
+## 更新API映射字典: 添加和修改
+#  @param callAPI The called API for update
+#  @param currentDict The API signature of the current version
+#  @param targetDict The API signature of the target version
+#  @param sharedDict The API mapping dictionary: multiprocessing.manager.dict()
 def updateSharedDict(callAPI,currentDict,targetDict,sharedDict):
     key=removeParameter(callAPI)
     if key not in sharedDict: #没有就添加
@@ -82,12 +140,18 @@ def updateSharedDict(callAPI,currentDict,targetDict,sharedDict):
 
 
 
-#判断两个参数的类型是否发生了变更,只要兼容，就认为相同
-#Union[int,float],表示类型是int或float
-#Optional[int],表示变量的类型是int或值为None,等价于Union[int,None]
-#None即可以表示类型也可以表示值
-#Optional[Union[int, str]]表示参数的类型为int,str或None
-#Union[Callable[[torch.Tensor,str],torch.Tensor],torch.device,str,Dict[str,str],NoneType]=None
+## Determine parameter type change: compatible type means no type change  
+## 判断两个参数的类型是否发生了变更: 只要兼容，就认为相同
+#
+#  Union[int,float],表示类型是int或float
+#  Optional[int],表示变量的类型是int或值为None,等价于Union[int,None]
+#  None即可以表示类型也可以表示值
+#  Optional[Union[int, str]]表示参数的类型为int,str或None
+#  Union[Callable[[torch.Tensor,str],torch.Tensor],torch.device,str,Dict[str,str],NoneType]=None
+#
+#  @param oldType The parameter type from the current version
+#  @param newType The parameter type from the target version
+#  @return newType Return newType if type difference exists or return False
 def isDifferType(oldType,newType):
     #先从字面值上判断看是否一样
     if oldType==newType:
@@ -147,13 +211,14 @@ def isDifferType(oldType,newType):
             return False
         else:
             return newType
-    
 
 
 
-
-
-
+## Convert parameter string to positional and keyword parameter objects
+## 将参数字符串转换为位置和关键字参数对象
+#
+#  @param paraStr The full string of API parameters
+#  @return (posParameters, keyParameters) Tuple of positional and keyword parameter lists 
 def para2Obj(paraStr):
     paraStr=paraStr.replace(' ','') #去空格
     paraObjLst=[] #保存参数对象
@@ -221,8 +286,12 @@ def para2Obj(paraStr):
         
 
 
-
-#输入两个api参数部分，判断参数部分有何不同
+## Determine difference of two parameters
+## 输入两个api参数部分，判断参数部分有何不同
+#
+#  @param oldPara The old parameter from current version
+#  @param newPara The new parameter from target version
+#  @return ansDict The dictionary of parameter changes for each parameter 
 def findDiffer(oldPara,newPara):
     oldPos,oldKey=para2Obj(oldPara) 
     newPos,newKey=para2Obj(newPara)
@@ -403,11 +472,17 @@ def findDiffer(oldPara,newPara):
 
 
 
-#判断两个重载API是否兼容
-#分位置参数和关键字参数进行分析
-#判断标准
-#位置参数：位置和名称相同，且类型兼容，认为兼容
-#关键字参数：名字相同且类型兼容，认为兼容
+## Analyze the compatibility of two APIs
+## 判断两个重载API是否兼容
+#
+#  分位置参数和关键字参数进行分析
+#  判断标准
+#  位置参数：位置和名称相同，且类型兼容，认为兼容
+#  关键字参数：名字相同且类型兼容，认为兼容
+#
+#  @param oldPara The old parameter from current version
+#  @param newPara The new parameter from target version
+#  @return True/False Compatible or not 
 def analyzeCompatibility(oldPara,newPara):
     #将其转化为参数对象
     oldPos,oldKey=para2Obj(oldPara)
@@ -462,7 +537,15 @@ def analyzeCompatibility(oldPara,newPara):
     return True
 
 
-#兼容返回空列表，不兼容返回则返回需要修复的字典，可能会有多个
+
+## Detemine the compatibility of APIs from current and target versions
+## 判断起始版本和目标版本API的兼容性 
+#
+#  兼容返回空列表，不兼容返回则返回需要修复的字典，可能会有多个
+#
+#  @param current API parameter signature(s) from current version
+#  @param target API parameter signature(s) from target version
+#  @return tempLst1/2 The repair operation dictionary if incompatible 
 def isCompatible(current,target):
     if len(current['match'])==0 or len(target['match'])==0:
         return None
@@ -531,6 +614,18 @@ def isCompatible(current,target):
         return tempLst2
      
 
+
+## Add values stored by pkl file for API parameters 
+## 为API参数添加保存至pkl文件中的值
+#
+#  @param callAPI The API call
+#  @param projName The project name
+#  @param runPath The relative path of the run file 
+#  @param runCommand The run command of the project 
+#  @param currentEnv Virtual environment of the current version
+#  @param targetEnv Virtual environment of the target version
+#  @parami errLst Error message logging list
+#  @return lst[0] The API call string with added parameter values (load from pkl file) 
 # def addValueForAPI(callAPI,projName,runPath,runCommand,virtualEnv,errLst):
 def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst):
     pklName=getFileName(callAPI,'.pkl')
@@ -602,7 +697,7 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
     pattern="##(.*)##"
     obj=re.compile(pattern,re.DOTALL)
     lst=obj.findall(output)
-    if len(lst)==1:
+    if len(lst)==1: 
         return lst[0]
         
     return ''
