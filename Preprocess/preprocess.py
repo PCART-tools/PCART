@@ -253,7 +253,7 @@ def convertLocalVar(filePath,libName):
 ## Find assignment call statements
 ## 获取赋值调用语句
 #
-#  @param root The AST root the source code
+#  @param root The AST root of the source code
 #  @return assignLst List of assignment call statements
 def findAssignCall(root):
     assignLst=[]
@@ -265,7 +265,7 @@ def findAssignCall(root):
 
     
 
-## Count the number of spaces at the begining of a string 
+## Count the number of spaces at the beginning of a string 
 ## 计算字符串的前面有多少个空格
 #
 #  @param s The string
@@ -329,11 +329,11 @@ def extractDecorator(root):
 
 
 
-## Code instrumentation for single API call within a source file
+## Code instrumentation for a single API call within a source file
 ## 源文件单个API调用代码插桩
 #
 #  @param callAPI The API call
-#  @param filePath The source file paht
+#  @param filePath The source file path
 def addDictSingle(callAPI,filePath):
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
@@ -438,7 +438,7 @@ def addDictSingle(callAPI,filePath):
 #  @param projPath The project path 
 #  @param projName The project name 
 #  @param filePath The project source file path 
-#  @param runFileLst The list of run file 
+#  @param runFileLst The list of run files 
 #  @param libName The lib name  
 #  @param runPath The relative path of the run file 
 #  @param runCommand The run command of the project 
@@ -1125,7 +1125,7 @@ def codeProcess(projPath,runCommand,runPath,libName):
     modifyFromImport(f'Dynamic/{projName}/{prefix}/dynamicMatch.py',libImportLst)
     modifyFromImport(f'Dynamic/{projName}/{prefix}/verifySingle.py',libImportLst)
     
-    #情况data中的数据
+    #清除data中的数据
     if not os.path.isdir('data'):
         os.mkdir('data') 
     shutil.rmtree('data')
