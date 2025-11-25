@@ -86,3 +86,23 @@ class Def2format:
         pos=s.rfind('.')
         s=s[0:pos]
         self._prefix=s.replace('/', '.')
+
+
+
+## Get all assign nodes from a lib source file 
+## 源码Assign节点遍历器
+#
+#  For an assign node, extract the values before (the variable name) and after (the value expression) the assignment operator 
+#  对于Assign节点，只需要关注等号左右两边的名字   
+class AssignVisitor(ast.NodeVisitor):
+    def __init__(self):
+        self._targetCall={}
+    
+    def get_target_call(self):
+        return self._targetCall
+    
+    def visit_Assign(self,node):
+        if isinstance(node.value,ast.Call):
+            targetName=ast.unparse(node.targets)
+            valueExpr=ast.unparse(node.value)
+            self._targetCall[targetName]=valueExpr
