@@ -13,7 +13,7 @@ from Extract.extractCall import *
 ## Extract method calls in a custom class inherited from a lib class
 ## 获取从库API继承的自定义类中的库API方法调用
 #
-#  @param root The ast node of the parsed project file 
+#  @param root The AST node of the parsed project file 
 #  @param importDict Module names identified from import statements 
 #  @param libName The target lib name (e.g., torch) 
 #  @return list of extracted inherited method calls 
@@ -58,7 +58,7 @@ def getSelfAPI(root,importDict,libName):
 
 
 
-## Restore the conventional API call path by modifying the first name of API prefix 
+## Restore the conventional API call path by modifying the first name of the API prefix 
 ## 通过修改API赋值调用前缀还原完整的API调用路劲
 #
 #  For example: 
@@ -138,7 +138,7 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
 
 
 
-## Resotre the conventional API call path in the withitem (including AsyncWith) call form
+## Restore the conventional API call path in the withitem (including AsyncWith) call form
 ## 还原withitemAPI调用的完整API调用路径
 #
 #  For example:
@@ -292,8 +292,8 @@ def getCallFunction(filePath,libName):
                             apiFormatDict[(name,paraStr,callState,lineno)]=(callName,paraStr,callState,lineno)
 
         #把和指定第三方库相关的callAPI都筛选出来
-        callDict={} #词字典用于之后的匹配和变更分析
-        callDict2={} #此处的字典用于预处理插桩
+        callDict={} #此字典用于之后的匹配和变更分析
+        callDict2={} #此字典用于预处理插桩
         for key,value in apiFormatDict.items(): #key是还原后的API，value是还原前的API
             if key[0].split('.')[0]==libName:
                 callDict[f"{value[2]}#_{value[3]}"]=f"{key[0]}({key[1]})" #2023.10.23，确保预处理插桩和在目标版本插桩字典的键都是一样的
