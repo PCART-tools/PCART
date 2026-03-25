@@ -683,7 +683,10 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
             else:
                 command = f'cd Dynamic/{projName};{pythonPath} {runPath}/addValueForAPI.py  "{pklStr}" "{callStr}"'
     else: #大部分属于这种情况
-        command=f'cd Dynamic/{projName};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
+        if platform.system() == "Windows":
+            command=f'cd Dynamic\\{projName} && {pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
+        else:
+            command=f'cd Dynamic/{projName};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
 
     # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

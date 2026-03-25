@@ -7,6 +7,7 @@
 
 import os
 import ast
+import platform
 import subprocess
 from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter
 from API.LibApi import Parameter
@@ -283,19 +284,31 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
         while l>0:
             pklPath='../'+pklPath
             l-=1
-    pythonPath=f"{virtualEnv}/bin/python"
+    if platform.system() == "Windows":
+        pythonPath = os.path.join(virtualEnv, "python.exe")
+    else:
+        pythonPath = f"{virtualEnv}/bin/python"
+
     apiWithValue=apiWithValue.replace('"','\\"')
     pklPath=pklPath.replace('"','\\"')
 
     if runPath!='':
-        if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-            command=f'cd Dynamic/{projName}/{runPath};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+        if platform.system() == "Windows":
+            if runPath not in runCommand:
+                command = f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+            else:
+                command=f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\verifySingle.py "{pklPath}" "{apiWithValue}"'
         else:
-            command=f'cd Dynamic/{projName};{pythonPath} {runPath}/verifySingle.py "{pklPath}" "{apiWithValue}"'
+            if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
+                command=f'cd Dynamic/{projName}/{runPath};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+            else:
+                command=f'cd Dynamic/{projName};{pythonPath} {runPath}/verifySingle.py "{pklPath}" "{apiWithValue}"'
     else: #大部分属于这种情况
-        command=f'cd Dynamic/{projName};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
-    
-    result=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        if platform.system() == "Windows":
+            command=f'cd Dynamic\\{projName} && {pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+        else:
+            command=f'cd Dynamic/{projName};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+    result=subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     return result
 
 
