@@ -164,7 +164,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     pathObj.getPath(projPath)
     filePath=[it for it in pathObj.path if it.endswith('py')] #保留项目中的.py文件
     projName=projPath.split('/')[-1]
-    projName=projPath.split('/')[-1]
+    
     #先在起始版本中生成每个API的pkl
     # pythonPath=f"{currentEnv}/bin/python"
     # if runPath in runCommand: #针对于python src/run.py这种情况
