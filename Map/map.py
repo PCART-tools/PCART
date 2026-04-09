@@ -164,15 +164,24 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                 shutil.copy2(copyFile,f"{copyFile}.bak")
                 addDictSingle(callAPI,copyFile) #添加字典并运行，在当前文件中添加字典，在运行文件中
                 pklFile='new_'+pklFile #更新pkl文件名
-                if runPath in runCommand:
-                    command=f'cd Copy/{projName};{pythonPath} {runCommand};' #运行项目指令的时候需要考虑运行文件目录是否已经包含到runCommand中了
+                if platform.system() == "Windows":
+                    if runPath in runCommand:
+                        command=f'cd Copy\\{projName} && {pythonPath} {runCommand}'
+                    else:
+                        command=f'cd Copy\\{projName}\\{runPath} && {pythonPath} {runCommand}'
                 else:
-                    command=f'cd Copy/{projName}/{runPath};{pythonPath} {runCommand};'
+                    if runPath in runCommand:
+                        command=f'cd Copy/{projName};{pythonPath} {runCommand};' #运行项目指令的时候需要考虑运行文件目录是否已经包含到runCommand中了
+                    else:
+                        command=f'cd Copy/{projName}/{runPath};{pythonPath} {runCommand};'
                 # generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
                 generateResult = subprocess.run(command, shell=True, stderr=subprocess.PIPE, text=True)
                 if generateResult.returncode==0:
                     pklStr=pklFile.replace('"','\\"')
-                    command=f'cd Copy/pkl;mv paraValue.pkl "{pklStr}"'
+                    if platform.system() == "Windows":
+                        command=f'cd Copy\\pkl && move paraValue.pkl "{pklStr}"'
+                    else:
+                        command=f'cd Copy/pkl;mv paraValue.pkl "{pklStr}"'
                     # subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
                     subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             
@@ -187,11 +196,20 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
             else:
                 if runPath!='':
                     if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-                        command=f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                        if platform.system() == "Windows":
+                            command=f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                        else:
+                            command=f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
                     else:
-                        command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                        if platform.system() == "Windows":
+                            command=f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                        else:
+                            command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
                 else: #大部分属于这种情况
-                    command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                    if platform.system() == "Windows":
+                        command=f'cd Dynamic\\{projName} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                    else:
+                        command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
                 # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
                 matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 if matchResult.returncode!=0:
