@@ -6,6 +6,7 @@
 
 
 
+import os
 import sys
 import json
 from Path.getPath import *
@@ -21,7 +22,7 @@ from Tool.tool import getSourceCodePath
 #  @param version An specific library version
 #  @param sourceCodePath The source code path of the library
 def getLibAPI(version, sourceCodePath):
-    libName=sourceCodePath.split('/')[-1]
+    libName=os.path.basename(sourceCodePath)
     getDefFunction((libName, version, sourceCodePath))
 
 

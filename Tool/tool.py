@@ -10,6 +10,7 @@ import os
 import ast
 import json
 import hashlib
+import platform
 from Path.getPath import Path
 
 
@@ -595,8 +596,12 @@ def getSourceCodePath(configPath):
     currentEnvPath=dic['currentEnv']
     targetEnvPath=dic['targetEnv']
     
-    currentSourceCodePath=findPythonDir(f"{currentEnvPath}/lib")+f"/site-packages/{libName}" 
-    targetSourceCodePath=findPythonDir(f"{targetEnvPath}/lib")+f"/site-packages/{libName}" 
+    if platform.system() == 'Windows':
+        currentSourceCodePath=os.path.join(currentEnvPath, "Lib", "site-packages", libName)
+        targetSourceCodePath=os.path.join(targetEnvPath, "Lib", "site-packages", libName)
+    else:
+        currentSourceCodePath=findPythonDir(f"{currentEnvPath}/lib")+f"/site-packages/{libName}"
+        targetSourceCodePath=findPythonDir(f"{targetEnvPath}/lib")+f"/site-packages/{libName}" 
 
     return currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath
 
