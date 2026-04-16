@@ -92,12 +92,14 @@ def getAssign(root_node):
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的API路径
     absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
-    relativePath=[v for v in fileDict.values()][0] #pkg/file.py 
-    pos1=relativePath.rfind('/')
+    relativePath=[v for v in fileDict.values()][0] #pkg/file.py
+    norm_relative=relativePath.replace('\\','/')
+    norm_absolute=absolutePath.replace('\\','/')
+    pos1=norm_relative.rfind('/')
     if pos1==-1:
         return
     relativePath=relativePath[0:pos1] #更新relativatePath
-    pos2=absolutePath.rfind('/') 
+    pos2=norm_absolute.rfind('/')
     absolutePath=absolutePath[0:pos2] #更新absolutePath,使其和relativatePath保持一致
     initPath=f"{absolutePath}/__init__.py"
     api=lst[0]
@@ -107,7 +109,11 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
         except Exception as e:
             print(f"shortenPath --> ast.parse failed: {e}")
             return
-        currentLevel=relativePath.split('/')[-1]
+        parts=norm_relative.split('/')
+        if parts[-1] in ('__init__.py','__init__'):
+            currentLevel=parts[-2] if len(parts)>=2 else parts[-1]
+        else:
+            currentLevel=parts[-1].replace('.py','')
         obj=FromImport(currentLevel)
         obj.visit(root)
         replaceKey1=''

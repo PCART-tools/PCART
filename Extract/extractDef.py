@@ -6,6 +6,7 @@
 
  
 import ast
+import os
 
 
 
@@ -80,12 +81,12 @@ class Def2format:
     
     # Get the relative path and prefix of a source file 
     def toFormat(self,filePath):
-        s=filePath.split(f"site-packages/")[-1]
+        s=filePath.rsplit(f"site-packages{os.sep}", 1)[-1]
         self._relativePath=s
-        s=s.replace('/','.')
+        s=s.replace('\\','.').replace('/','.')
         pos=s.rfind('.')
         s=s[0:pos]
-        self._prefix=s.replace('/', '.')
+        self._prefix=s.replace('\\','.').replace('/','.')
 
 
 
