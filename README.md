@@ -135,7 +135,7 @@ python extractLibAPI.py -cfg your_config.json
 ## Example
 
 ```bash
-python main.py -cfg Configure/Deep-Graph-Kernels.json
+python main.py -cfg Deep-Graph-Kernels.json
 ```
 
 ## Documentation
