@@ -20,15 +20,24 @@ See [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuratio
 - [PCBench](https://github.com/PCART-tools/PCBench) - Benchmark for Python API Parameter Compatibility Issues
 - [PCART Evaluation Results](https://github.com/PCART-tools/PCART-evaluation)
 
-## Supported Compatibility Issue Types
+## Supported Parameter Change Types
 
-| Type | Description |
-|------|-------------|
-| Parameter Addition | A new required parameter is added in the target version |
-| Parameter Removal | A parameter used in the current version is removed in the target version |
-| Parameter Renaming | A parameter is renamed between versions |
-| Parameter Reordering | Parameters are reordered in the function signature |
-| Positional to Keyword Conversion | A parameter that was positional-only becomes keyword-only |
+| Dictionary Key | Type Name | Description | Support |
+|----------------|-----------|-------------|---------|
+| `delete` | Deletion | Parameter removed | ✅ Full |
+| `typeChange` | Type Change | Parameter type altered | ⚠️ Partial |
+| `rename` | Renaming | Parameter name changed | ✅ Full |
+| `posChange` | Position Change | Parameter position altered | ✅ Full |
+| `replace` | Replacement | Parameter replaced at same position | ✅ Full |
+| `pos2key` | Positional to Keyword | Positional-only changed to keyword-only | ✅ Full |
+| `addPos` | Add Positional | New positional parameter added | ✅ Full |
+| `addKey` | Add Keyword | New keyword parameter added | ✅ Full |
+| `key2pos` | Keyword to Positional | Keyword changed to positional | ✅ Full |
+| `value` | Default Value Change | Parameter default value changed | ❌ Not implemented |
+
+**Total: 10 parameter change types**
+
+> ⚠️ **Note**: `typeChange` only checks if the old type is identical to or a subset of the new type for complex annotations (Union/Optional/|).
 
 ## Prerequisites
 
