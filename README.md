@@ -47,8 +47,8 @@ See [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuratio
 | Environment | Purpose | Requirements |
 |-------------|---------|--------------|
 | PCART | Runs the PCART tool itself | Python 3.9 + dill |
-| currentEnv | Runs the target project (current library version) | Python 3.x + library (current version) + dill |
-| targetEnv | Runs the target project (target library version) | Python 3.x + library (target version) + dill |
+| currentEnv | Dynamic API signature mapping for current library version | Python 3.x + library (current version) + dill |
+| targetEnv | Dynamic API signature mapping and post-repair validation for target library version | Python 3.x + library (target version) + dill |
 
 ## Project Structure
 
