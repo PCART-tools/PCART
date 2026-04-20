@@ -9,7 +9,7 @@ import os
 import ast
 import platform
 import subprocess
-from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter
+from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter,resolvePythonExecutable
 from API.LibApi import Parameter
 from Change.changeAnalyze import para2Obj
 
@@ -284,10 +284,7 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
         while l>0:
             pklPath='../'+pklPath
             l-=1
-    if platform.system() == "Windows":
-        pythonPath = os.path.join(virtualEnv, "python.exe")
-    else:
-        pythonPath = f"{virtualEnv}/bin/python"
+    pythonPath = resolvePythonExecutable(virtualEnv)
 
     apiWithValue=apiWithValue.replace('"','\\"')
     pklPath=pklPath.replace('"','\\"')

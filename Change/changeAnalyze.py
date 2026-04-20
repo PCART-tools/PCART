@@ -11,7 +11,7 @@ import re
 import copy
 import subprocess
 from API.LibApi import Parameter 
-from Tool.tool import get_parameter,removeParameter,getFileName
+from Tool.tool import get_parameter,removeParameter,getFileName,resolvePythonExecutable
 
 
 
@@ -649,17 +649,9 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
     
     # pythonPath=f"{virtualEnv}/bin/python"
     if flag==0:
-        # pythonPath=f"{currentEnv}/bin/python"
-        if platform.system() == "Windows":
-            pythonPath = os.path.join(currentEnv, "python.exe")
-        else:
-            pythonPath = f"{currentEnv}/bin/python"
+        pythonPath = resolvePythonExecutable(currentEnv)
     else:
-        # pythonPath=f"{targetEnv}/bin/python"
-        if platform.system() == "Windows":
-            pythonPath = os.path.join(targetEnv, "python.exe")
-        else:
-            pythonPath = f"{targetEnv}/bin/python"
+        pythonPath = resolvePythonExecutable(targetEnv)
     
     pklStr=pklPath.replace('"','\\"')
     callStr=callAPI.replace('"','\\"')

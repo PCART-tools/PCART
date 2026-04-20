@@ -20,7 +20,7 @@ from multiprocessing import Manager
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
-from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName
+from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,resolvePythonExecutable
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
@@ -172,11 +172,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     # else: #针对于python run.py,但执行路径位于scr下,此处的runPath也可能为空
     #     command=f'cd Copy/{projName}/{runPath};{pythonPath}{runCommand}'
     # 1. python 路径自动适配
-    if platform.system() == 'Windows':
-        currentEnv = currentEnv.replace('/', '\\')
-        pythonPath = os.path.join(currentEnv, 'python.exe')
-    else:
-        pythonPath = os.path.join(currentEnv, 'bin', 'python')
+    pythonPath = resolvePythonExecutable(currentEnv)
     # 2. 运行命令自动适配
     if platform.system() == 'Windows':
         if runPath in runCommand:

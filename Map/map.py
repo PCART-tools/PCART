@@ -12,7 +12,7 @@ import subprocess
 import platform
 from Map.fuzzyMatch import *
 from Load.loadData import loadLib
-from Tool.tool import removeParameter,getFileName
+from Tool.tool import removeParameter,getFileName,resolvePythonExecutable
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import addDictSingle
 
@@ -94,10 +94,7 @@ def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传�
 #  @return dynamicMatchDict Mapped API signatures 
 def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1):
     # pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径
-    if platform.system() == "Windows":
-        pythonPath = os.path.join(virtualEnv, "python.exe")
-    else:
-        pythonPath = f"{virtualEnv}/bin/python"
+    pythonPath = resolvePythonExecutable(virtualEnv)
     pklFile=getFileName(callAPI,'.pkl')
     pklStr=pklFile.replace('"','\\"')
     callStr=callAPI.replace('"','\\"')
