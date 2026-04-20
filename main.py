@@ -24,7 +24,6 @@ from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,res
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
-
 ## One process handles one file 
 ## 一个进程处理一个文件
 #
@@ -164,6 +163,9 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     pathObj.getPath(projPath)
     filePath=[it for it in pathObj.path if it.endswith('py')] #保留项目中的.py文件
     projName=os.path.basename(projPath)
+    errorLog = os.path.join('Report', f'{projName}_fixed_log.txt')
+    if os.path.exists(errorLog):
+        os.remove(errorLog)
     
     #先在起始版本中生成每个API的pkl
     # pythonPath=f"{currentEnv}/bin/python"
