@@ -280,7 +280,8 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
     #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
     #而文件操作的相对路径就是相对于命令执行的路径
     if runPath!='' and runPath not in runCommand:
-        l=len(runPath.split('/'))
+        normalized_runPath = runPath.replace('\\', '/').strip('/')
+        l=len([segment for segment in normalized_runPath.split('/') if segment])
         while l>0:
             pklPath='../'+pklPath
             l-=1
