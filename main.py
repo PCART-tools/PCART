@@ -176,14 +176,14 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     # 2. 运行命令自动适配
     if platform.system() == 'Windows':
         if runPath in runCommand:
-            command = f'cd Copy\\{projName} && {pythonPath} {runCommand}'
+            command = f'cd "Copy\\{projName}" && "{pythonPath}" {runCommand}'
         else:
-            command = f'cd Copy\\{projName}\\{runPath} && {pythonPath} {runCommand}'
+            command = f'cd "Copy\\{projName}\\{runPath}" && "{pythonPath}" {runCommand}'
     else:
         if runPath in runCommand:
-            command = f'cd Copy/{projName};{pythonPath} {runCommand}'
+            command = f'cd "Copy/{projName}";"{pythonPath}" {runCommand}'
         else:
-            command = f'cd Copy/{projName}/{runPath};{pythonPath} {runCommand}'
+            command = f'cd "Copy/{projName}/{runPath}";"{pythonPath}" {runCommand}'
     print('Running the project...')
     # createResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     createResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

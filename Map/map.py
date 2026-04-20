@@ -19,7 +19,7 @@ from Preprocess.preprocess import addDictSingle
 
 
 ## Check the last name in an API call is an alias or not
-## 判断一个callAPI最后一个名字是否为库中的别名
+## 判断一个callAPI最后一个名字是否为库中的别�?
 #
 #  @param callApi The called API to be check
 #  @param assignDict The assign dict stores the alias of APIs
@@ -40,46 +40,46 @@ def isAlias(callApi,assignDict):
 
 
 ## Static mapping of API signatures
-## API签名静态匹配
+## API签名静态匹�?
 #
 #  @param formatAPI The called API
 #  @param libName The upgraded lib 
 #  @param version The upgraded lib's version 
 #  @param builtinFlag Built-in API flag
 #  @return ansDict Mapped API signatures 
-def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传出参数
+def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传出参�?
     libAPIs,assignDict,libAPIIns=loadLib(libName,version)
     Fuzz=fuzzyMatch()
     if builtinFlag and len(libAPIIns)>0:
-        ans=Fuzz.fmatch(formatAPI,libAPIIns) #只从.pyi文件里找,但如果没有注释的话,也不一定能找到，
+        ans=Fuzz.fmatch(formatAPI,libAPIIns) #只从.pyi文件里找,但如果没有注释的�?也不一定能找到�?
     else:
         ans=Fuzz.fmatch(formatAPI,libAPIs)
 
     if len(ans)==0 and not builtinFlag:
         aliasName=Fuzz.alias
-        realName=isAlias(aliasName,assignDict) #检查是否是别名，是的话就将别名还原成真名，然后再进行模糊匹配
+        realName=isAlias(aliasName,assignDict) #检查是否是别名，是的话就将别名还原成真名，然后再进行模糊匹�?
         if realName is not None: 
             ans=Fuzz.fmatch(realName,libAPIs)
     
-    #对匹配出的结果按照不同的函数名进行分类,得到一个形式为{同名:[重载]}字典
+    #对匹配出的结果按照不同的函数名进行分�?得到一个形式为{同名:[重载]}字典
     ansDict={}
     for it in ans: #ans是模糊得到的结果，当然也可能为空
         pos=it.find('(')
         if pos!=-1:
             apiName=it[0:pos]
             parameters=it[pos:]
-            if removeParameter(it)==formatAPI:#若和formatAPI完全相等，则说明匹配的结果是唯一且正确
+            if removeParameter(it)==formatAPI:#若和formatAPI完全相等，则说明匹配的结果是唯一且正�?
                 return {apiName:[parameters]}
             
             if apiName not in ansDict:
-                ansDict[apiName]=[] #初始化字典，把同一个API的不同重载放到一起
+                ansDict[apiName]=[] #初始化字典，把同一个API的不同重载放到一�?
             ansDict[apiName].append(parameters)
     return ansDict 
 
 
 
 ## Dynamic mapping of API signatures
-## API签名动态匹配 
+## API签名动态匹�?
 #
 #  @param callAPI The called API
 #  @param runCommand The run command of the project
@@ -119,24 +119,24 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     #         command=f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
     #     else:
     #         command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-    # else: #大部分属于这种情况
+    # else: #大部分属于这种情�?
     #     command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
     if platform.system() == "Windows":
         if runPath != '':
             if runPath not in runCommand:
-                command = f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                command = f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
             else:
-                command = f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                command = f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\dynamicMatch.py" "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
         else:
-            command = f'cd Dynamic\\{projName} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+            command = f'cd "Dynamic\\{projName}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
     else:
         if runPath != '':
             if runPath not in runCommand:
-                command = f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                command = f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
             else:
-                command = f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                command = f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/dynamicMatch.py" "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
         else:
-            command = f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+            command = f'cd "Dynamic/{projName}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
 
     # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -153,37 +153,37 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
             errLst.append(f"{callAPI}, Failed to load pkl in current version{version}: {matchResult.stderr}\n") 
             return False
         
-        #若在新版本中无法加载旧版本的pkl文件，则尝试在新版本中重新生成
+        #若在新版本中无法加载旧版本的pkl文件，则尝试在新版本中重新生�?
         #什么情况下不需要在目标版本重新生成？什么情况下需要在mu
         # elif 'Ran out of input' not in matchResult.stderr:
         elif stderr and 'Ran out of input' not in stderr:
             loadError=f"{callAPI}, Failed to load pkl in target version{version}: {matchResult.stderr}\n" 
             with lock:
                 shutil.copy2(copyFile,f"{copyFile}.bak")
-                addDictSingle(callAPI,copyFile) #添加字典并运行，在当前文件中添加字典，在运行文件中
-                pklFile='new_'+pklFile #更新pkl文件名
+                addDictSingle(callAPI,copyFile) #添加字典并运行，在当前文件中添加字典，在运行文件�?
+                pklFile='new_'+pklFile #更新pkl文件�?
                 if platform.system() == "Windows":
                     if runPath in runCommand:
-                        command=f'cd Copy\\{projName} && {pythonPath} {runCommand}'
+                        command=f'cd "Copy\\{projName}" && "{pythonPath}" {runCommand}'
                     else:
-                        command=f'cd Copy\\{projName}\\{runPath} && {pythonPath} {runCommand}'
+                        command=f'cd "Copy\\{projName}\\{runPath}" && "{pythonPath}" {runCommand}'
                 else:
                     if runPath in runCommand:
-                        command=f'cd Copy/{projName};{pythonPath} {runCommand};' #运行项目指令的时候需要考虑运行文件目录是否已经包含到runCommand中了
+                        command=f'cd "Copy/{projName}";"{pythonPath}" {runCommand};' #运行项目指令的时候需要考虑运行文件目录是否已经包含到runCommand中了
                     else:
-                        command=f'cd Copy/{projName}/{runPath};{pythonPath} {runCommand};'
+                        command=f'cd "Copy/{projName}/{runPath}";"{pythonPath}" {runCommand};'
                 # generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
                 generateResult = subprocess.run(command, shell=True, stderr=subprocess.PIPE, text=True)
                 if generateResult.returncode==0:
                     pklStr=pklFile.replace('"','\\"')
                     if platform.system() == "Windows":
-                        command=f'cd Copy\\pkl && move paraValue.pkl "{pklStr}"'
+                        command=f'cd "Copy\\pkl" && move paraValue.pkl "{pklStr}"'
                     else:
-                        command=f'cd Copy/pkl;mv paraValue.pkl "{pklStr}"'
+                        command=f'cd "Copy/pkl";mv paraValue.pkl "{pklStr}"'
                     # subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
                     subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             
-                #插桩完后，再将备份后的文件进行还原
+                #插桩完后，再将备份后的文件进行还�?
                 os.remove(copyFile)
                 shutil.move(f'{copyFile}.bak',copyFile)
         
@@ -195,19 +195,19 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                 if runPath!='':
                     if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
                         if platform.system() == "Windows":
-                            command=f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                            command=f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
                         else:
-                            command=f'cd Dynamic/{projName}/{runPath};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                            command=f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
                     else:
                         if platform.system() == "Windows":
-                            command=f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                            command=f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\dynamicMatch.py" "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
                         else:
-                            command=f'cd Dynamic/{projName};{pythonPath} {runPath}/dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-                else: #大部分属于这种情况
+                            command=f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/dynamicMatch.py" "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                else: #大部分属于这种情�?
                     if platform.system() == "Windows":
-                        command=f'cd Dynamic\\{projName} && {pythonPath} dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+                        command=f'cd "Dynamic\\{projName}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
                     else:
-                        command=f'cd Dynamic/{projName};{pythonPath} dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
+                        command=f'cd "Dynamic/{projName}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
                 # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
                 matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 if matchResult.returncode!=0:
@@ -237,10 +237,10 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
 
 
 ## Construct the mapping between the invoked API and the lib API to obtain its signature 
-## 建立invoked API与 lib API之间的映射关系，从而获取其参数定义
+## 建立invoked API�?lib API之间的映射关系，从而获取其参数定义
 #
 #  先进行动态匹配，动态匹配的结果是保存在api_dynamic.json文件中的
-#  动态匹配的成功包括3步：1.加载PKL； 2.动态脚本执行成功，3.动态获取参数成功（部分内置api无法获取参数）
+#  动态匹配的成功包括3步：1.加载PKL�?2.动态脚本执行成功，3.动态获取参数成功（部分内置api无法获取参数�?
 #
 #  @param callAPI The called API
 #  @param runCommand The run command of the project
@@ -258,7 +258,7 @@ def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,versio
     dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr)
     ans={}
     ans['format']=formatAPI
-    if dynamicMatchDict!=False: #若动态匹配成功,还要对动态匹配的结果进行检查
+    if dynamicMatchDict!=False: #若动态匹配成�?还要对动态匹配的结果进行检�?
         result=dynamicMatchDict['match']
         ans['error']=dynamicMatchDict['error']
         if 'internalPath' in dynamicMatchDict:
@@ -267,7 +267,7 @@ def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,versio
             ans['internalPath']=formatAPI 
     
         if 'builtin' in dynamicMatchDict['error']: #这里的内置不一定是库的内置，有可能是python内置,如何区分?
-            ans['match']=fuzzymatch(formatAPI,libName,version,1) #目前只发现pytorch中把内置记录到了.pyi中
+            ans['match']=fuzzymatch(formatAPI,libName,version,1) #目前只发现pytorch中把内置记录到了.pyi�?
             ans['matchMethod']='static'
         elif result=='nullptr': #若inspect失败
             ans['match']=fuzzymatch(formatAPI,libName,version,0)
@@ -280,3 +280,4 @@ def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,versio
         ans['matchMethod']='static'
 
     return ans
+

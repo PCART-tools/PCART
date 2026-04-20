@@ -292,19 +292,19 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
     if runPath!='':
         if platform.system() == "Windows":
             if runPath not in runCommand:
-                command = f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command = f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
             else:
-                command=f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command=f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\verifySingle.py" "{pklPath}" "{apiWithValue}"'
         else:
             if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-                command=f'cd Dynamic/{projName}/{runPath};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command=f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
             else:
-                command=f'cd Dynamic/{projName};{pythonPath} {runPath}/verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command=f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/verifySingle.py" "{pklPath}" "{apiWithValue}"'
     else: #大部分属于这种情况
         if platform.system() == "Windows":
-            command=f'cd Dynamic\\{projName} && {pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+            command=f'cd "Dynamic\\{projName}" && "{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
         else:
-            command=f'cd Dynamic/{projName};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+            command=f'cd "Dynamic/{projName}";"{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
     result=subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     return result
 
