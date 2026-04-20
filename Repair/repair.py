@@ -9,7 +9,7 @@ import os
 import ast
 import platform
 import subprocess
-from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter
+from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter,resolvePythonExecutable
 from API.LibApi import Parameter
 from Change.changeAnalyze import para2Obj
 
@@ -280,14 +280,12 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
     #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
     #而文件操作的相对路径就是相对于命令执行的路径
     if runPath!='' and runPath not in runCommand:
-        l=len(runPath.split('/'))
+        normalized_runPath = runPath.replace('\\', '/').strip('/')
+        l=len([segment for segment in normalized_runPath.split('/') if segment])
         while l>0:
             pklPath='../'+pklPath
             l-=1
-    if platform.system() == "Windows":
-        pythonPath = os.path.join(virtualEnv, "python.exe")
-    else:
-        pythonPath = f"{virtualEnv}/bin/python"
+    pythonPath = resolvePythonExecutable(virtualEnv)
 
     apiWithValue=apiWithValue.replace('"','\\"')
     pklPath=pklPath.replace('"','\\"')
@@ -295,19 +293,19 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
     if runPath!='':
         if platform.system() == "Windows":
             if runPath not in runCommand:
-                command = f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command = f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
             else:
-                command=f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command=f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\verifySingle.py" "{pklPath}" "{apiWithValue}"'
         else:
             if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-                command=f'cd Dynamic/{projName}/{runPath};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command=f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
             else:
-                command=f'cd Dynamic/{projName};{pythonPath} {runPath}/verifySingle.py "{pklPath}" "{apiWithValue}"'
+                command=f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/verifySingle.py" "{pklPath}" "{apiWithValue}"'
     else: #大部分属于这种情况
         if platform.system() == "Windows":
-            command=f'cd Dynamic\\{projName} && {pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+            command=f'cd "Dynamic\\{projName}" && "{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
         else:
-            command=f'cd Dynamic/{projName};{pythonPath} verifySingle.py "{pklPath}" "{apiWithValue}"'
+            command=f'cd "Dynamic/{projName}";"{pythonPath}" verifySingle.py "{pklPath}" "{apiWithValue}"'
     result=subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     return result
 
