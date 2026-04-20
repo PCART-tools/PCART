@@ -172,11 +172,11 @@ def isDifferType(oldType,newType):
             newType=newType[1:-1]
         
         if 'Union' in oldType:
-            pattern='.*?Union\[(.*)\].*?'
+            pattern=r'.*?Union\[(.*)\].*?'
             result=re.findall(pattern,oldType)
             oldLst=get_parameter(result[0])
         elif 'Optional' in oldType:
-            pattern='.*?Optional\[(.*)\].*?'
+            pattern=r'.*?Optional\[(.*)\].*?'
             result=re.findall(pattern,oldType)
             oldLst=get_parameter(result[0])
         elif '|' in oldType:
@@ -190,11 +190,11 @@ def isDifferType(oldType,newType):
 
 
         if 'Union' in newType:
-            pattern='.*?Union\[(.*)\].*?'
+            pattern=r'.*?Union\[(.*)\].*?'
             result=re.findall(pattern,newType)
             newLst=get_parameter(result[0])
         elif 'Optional' in newType:
-            pattern='.*?Optional\[(.*)\].*?'
+            pattern=r'.*?Optional\[(.*)\].*?'
             result=re.findall(pattern,newType)
             newLst=get_parameter(result[0])
         elif '|' in newType:
@@ -666,19 +666,19 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
         #     command=f'cd Dynamic/{projName};{pythonPath} {runPath}/addValueForAPI.py  "{pklStr}" "{callStr}"'
         if platform.system() == "Windows":
             if runPath not in runCommand:
-                command = f'cd Dynamic\\{projName}\\{runPath} && {pythonPath} addValueForAPI.py "{pklStr}" "{callStr}"'
+                command = f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" addValueForAPI.py "{pklStr}" "{callStr}"'
             else:
-                command = f'cd Dynamic\\{projName} && {pythonPath} {runPath}\\addValueForAPI.py "{pklStr}" "{callStr}"'
+                command = f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\addValueForAPI.py" "{pklStr}" "{callStr}"'
         else:
             if runPath not in runCommand:
-                command = f'cd Dynamic/{projName}/{runPath};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
+                command = f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" addValueForAPI.py  "{pklStr}" "{callStr}"'
             else:
-                command = f'cd Dynamic/{projName};{pythonPath} {runPath}/addValueForAPI.py  "{pklStr}" "{callStr}"'
+                command = f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/addValueForAPI.py"  "{pklStr}" "{callStr}"'
     else: #大部分属于这种情况
         if platform.system() == "Windows":
-            command=f'cd Dynamic\\{projName} && {pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
+            command=f'cd "Dynamic\\{projName}" && "{pythonPath}" addValueForAPI.py  "{pklStr}" "{callStr}"'
         else:
-            command=f'cd Dynamic/{projName};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
+            command=f'cd "Dynamic/{projName}";"{pythonPath}" addValueForAPI.py  "{pklStr}" "{callStr}"'
 
     # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
