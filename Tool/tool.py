@@ -555,7 +555,11 @@ def save2txt(lst,libName,runCommand,savePath):
 def loadConfig(configPath):
     with open(configPath,'r') as fr:
         dic=json.load(fr)
-    runCommand=dic['runCommand'].lstrip('python')
+    runCommand=dic['runCommand'].lstrip()
+    if runCommand.startswith('python3 '):
+        runCommand=runCommand[len('python3'):]
+    elif runCommand.startswith('python '):
+        runCommand=runCommand[len('python'):]
     return dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']
 
 
