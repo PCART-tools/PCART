@@ -11,8 +11,6 @@ import ast
 import json
 import hashlib
 import platform
-import subprocess
-from functools import lru_cache
 from Path.getPath import Path
 
 
@@ -555,7 +553,11 @@ def save2txt(lst,libName,runCommand,savePath):
 def loadConfig(configPath):
     with open(configPath,'r') as fr:
         dic=json.load(fr)
-    runCommand=dic['runCommand'].lstrip('python')
+    runCommand=dic['runCommand'].lstrip()
+    if runCommand.startswith('python3 '):
+        runCommand=runCommand[len('python3'):]
+    elif runCommand.startswith('python '):
+        runCommand=runCommand[len('python'):]
     return dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']
 
 
@@ -586,35 +588,25 @@ def findPythonDir(basePath):
 #
 #  @param envPath The virtual environment root path
 #  @return resolvedPath Absolute path of the Python executable
-@lru_cache(maxsize=None)
 def resolvePythonExecutable(envPath):
     normalizedEnvPath = os.path.abspath(envPath)
-    candidates = [
-        os.path.join(normalizedEnvPath, 'python.exe'),
-        os.path.join(normalizedEnvPath, 'Scripts', 'python.exe'),
-        os.path.join(normalizedEnvPath, 'bin', 'python'),
-        os.path.join(normalizedEnvPath, 'bin', 'python3'),
-    ]
+    if platform.system() == 'Windows':
+        candidates = [
+            os.path.join(normalizedEnvPath, 'python.exe'),
+            os.path.join(normalizedEnvPath, 'Scripts', 'python.exe'),
+        ]
+    else:
+        candidates = [
+            os.path.join(normalizedEnvPath, 'bin', 'python'),
+        ]
 
     for candidate in candidates:
         if os.path.exists(candidate):
-            command = [candidate, '-c', 'import sys; print(sys.version_info[0])']
-            try:
-                result = subprocess.run(
-                    command,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True,
-                )
-            except Exception:
-                continue
-
-            if result.returncode == 0 and result.stdout.strip() == '3':
-                return candidate
+            return candidate
 
     candidate_str = ', '.join(candidates)
     raise FileNotFoundError(
-        f"Cannot find Python 3 executable under virtual environment root: "
+        f"Cannot find Python executable under virtual environment root: "
         f"{normalizedEnvPath}. Tried: {candidate_str}"
     )
 
