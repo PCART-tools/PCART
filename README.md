@@ -29,13 +29,6 @@ python main.py -cfg your_config.json
 
 For environment setup, configuration fields, and platform-specific examples, see the [Quick Start](https://github.com/PCART-tools/PCART/wiki/Quick-Start) and [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide).
 
-## Core Capabilities
-
-- Detect and repair added, removed, renamed, reordered, and replaced parameters.
-- Handle positional-to-keyword and keyword-to-positional parameter changes.
-- Compare APIs across current and target library versions through isolated environments.
-- Generate repair outputs and validation reports for target-version compatibility.
-
 ## Three-Environment Architecture
 
 | Environment | Purpose | Requirements |
