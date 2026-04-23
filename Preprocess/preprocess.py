@@ -373,8 +373,10 @@ def addDictSingle(callAPI,filePath):
 
             #判断API是否为withitem中的别名调用 -- 2025/5/19 
             if firstPart and firstPart.split('.')[0] in withitem_call_names:
-                dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
-            #     dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                if len(withitem_call_names) > 1: #2026/4/22 Fix withitem caller instrucmentation
+                    dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
+                else:
+                    dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
             
             #再保存API的参数值 
             dicString2=f'paraValueDict[\"{key}\"]'+'=['
@@ -521,11 +523,13 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                
                 #判断API是否为withitem中的别名调用 -- 2025/5/19 
                 if firstPart and firstPart.split('.')[0] in withitem_call_names:
-                    initialCallName = modifyWithName(firstPart, withitem_call_names).rstrip('.')
-                    initialCallName = initialCallName.rstrip('.')
-                    #dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
-                    dicString1=f'paraValueDict[\"@{key}\"]=\"{initialCallName}\"\n'
-
+                    if len(withitem_call_names) > 1: #2026/4/22 Fix withitem caller instrucmentation
+                        initialCallName = modifyWithName(firstPart, withitem_call_names).rstrip('.')
+                        initialCallName = initialCallName.rstrip('.')
+                        #dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
+                        dicString1=f'paraValueDict[\"@{key}\"]=\"{initialCallName}\"\n'
+                    else:
+                        dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
                 #再保存API的参数值
                 dicString2=f'paraValueDict[\"{key}\"]=['
                 paraLst=get_parameter(paraStr,space=0) #项目参数不去空格2023-12-14
