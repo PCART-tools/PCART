@@ -34,8 +34,8 @@ For environment setup, configuration fields, and platform-specific examples, see
 | Environment | Purpose | Requirements |
 |-------------|---------|--------------|
 | PCART | Runs the PCART tool itself | Python 3.9 + dill |
-| currentEnv | Dynamic API signature mapping for current library version | Python 3.x + current library version + dill |
-| targetEnv | Dynamic API signature mapping and post-repair validation for target library version | Python 3.x + target library version + dill |
+| currentEnv | Dynamic API signature mapping for current library version | Python 3.x + current library version + requirements.txt + dill |
+| targetEnv | Dynamic API signature mapping and post-repair validation for target library version | Python 3.x + target library version + requirements.txt + dill |
 
 `currentEnv` and `targetEnv` should point to environment root directories. See the [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for details.
 
