@@ -231,6 +231,7 @@ def para2Obj(paraStr):
         lst=get_parameter(paraStr)
     else:
         lst=[]
+    lst=[para for para in lst if para != '/'] # 2026/4/23 当前修复模型只区分args/kwargs，忽略仅位置参数分隔符
     if len(lst)>0:
         if 'self' in lst[0]: #self可能也存在类型注释
             lst.remove(lst[0])
