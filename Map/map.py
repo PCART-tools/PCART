@@ -98,6 +98,8 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     pklFile=getFileName(callAPI,'.pkl')
     pklStr=pklFile.replace('"','\\"')
     callStr=callAPI.replace('"','\\"')
+    if platform.system() != "Windows":  # 2026/4/24 Avoid shell expansion for $ in callAPI on Unix.
+        callStr = callStr.replace('$', '\\$')
     pklPrefix='../..'
     jsonPrefix='../..'
     
