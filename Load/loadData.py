@@ -7,7 +7,6 @@
 
 import re
 import json
-import time
 from Path.getPath import Path
 from API.LibApi import *
 from Tool.tool import cmp

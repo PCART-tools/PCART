@@ -9,7 +9,7 @@ import os
 import json
 import shutil
 import subprocess
-import platform
+import shlex
 from Map.fuzzyMatch import *
 from Load.loadData import loadLib
 from Tool.tool import removeParameter,getFileName,resolvePythonExecutable
@@ -96,13 +96,9 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     # pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径
     pythonPath = resolvePythonExecutable(virtualEnv)
     pklFile=getFileName(callAPI,'.pkl')
-    pklStr=pklFile.replace('"','\\"')
-    callStr=callAPI.replace('"','\\"')
-    if platform.system() != "Windows":  # 2026/4/24 Avoid shell expansion for $ in callAPI on Unix.
-        callStr = callStr.replace('$', '\\$')
     pklPrefix='../..'
     jsonPrefix='../..'
-    
+
     #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
     #而文件操作的相对路径就是相对于命令执行的路径
     if runPath!='' and runPath not in runCommand:
@@ -112,7 +108,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
             pklPrefix='../'+pklPrefix
             jsonPrefix='../'+jsonPrefix
             l-=1
-    
+
     if not os.path.exists(f"Copy/pkl/{pklFile}"):
         return False
 
@@ -123,25 +119,17 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     #         command=f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/dynamicMatch.py" "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
     # else: #大部分属于这种情况
     #     command=f'cd "Dynamic/{projName}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-    if platform.system() == "Windows":
-        if runPath != '':
-            if runPath not in runCommand:
-                command = f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
-            else:
-                command = f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\dynamicMatch.py" "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
-        else:
-            command = f'cd "Dynamic\\{projName}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
+    if runPath and runPath not in runCommand:
+        dynamic_cwd = os.path.join('Dynamic', projName, runPath)
+        dynamic_script = 'dynamicMatch.py'
     else:
-        if runPath != '':
-            if runPath not in runCommand:
-                command = f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-            else:
-                command = f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/dynamicMatch.py" "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-        else:
-            command = f'cd "Dynamic/{projName}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-
-    # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-    matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        dynamic_cwd = os.path.join('Dynamic', projName)
+        dynamic_script = os.path.join(runPath, 'dynamicMatch.py') if runPath else 'dynamicMatch.py'
+    pkl_arg = os.path.join(pklPrefix, 'Copy', 'pkl', pklFile)
+    matchResult = subprocess.run(
+        [pythonPath, dynamic_script, pkl_arg, callAPI, jsonPrefix],
+        cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
+    )
     stdout = matchResult.stdout
     stderr = matchResult.stderr
 
@@ -164,26 +152,20 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                 shutil.copy2(copyFile,f"{copyFile}.bak")
                 addDictSingle(callAPI,copyFile) #添加字典并运行，在当前文件中添加字典，在运行文件中
                 pklFile='new_'+pklFile #更新pkl文件名
-                if platform.system() == "Windows":
-                    if runPath in runCommand:
-                        command=f'cd "Copy\\{projName}" && "{pythonPath}" {runCommand}'
-                    else:
-                        command=f'cd "Copy\\{projName}\\{runPath}" && "{pythonPath}" {runCommand}'
+                if runPath and runPath not in runCommand:
+                    copy_cwd = os.path.join('Copy', projName, runPath)
                 else:
-                    if runPath in runCommand:
-                        command=f'cd "Copy/{projName}";"{pythonPath}" {runCommand};' #运行项目指令的时候需要考虑运行文件目录是否已经包含到runCommand中了
-                    else:
-                        command=f'cd "Copy/{projName}/{runPath}";"{pythonPath}" {runCommand};'
+                    copy_cwd = os.path.join('Copy', projName)
                 # generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
-                generateResult = subprocess.run(command, shell=True, stderr=subprocess.PIPE, text=True)
+                generateResult = subprocess.run(
+                    [pythonPath] + shlex.split(runCommand),
+                    cwd=copy_cwd, capture_output=True, text=True, encoding='utf-8'
+                )
                 if generateResult.returncode==0:
-                    pklStr=pklFile.replace('"','\\"')
-                    if platform.system() == "Windows":
-                        command=f'cd "Copy\\pkl" && move paraValue.pkl "{pklStr}"'
-                    else:
-                        command=f'cd "Copy/pkl";mv paraValue.pkl "{pklStr}"'
-                    # subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-                    subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                    shutil.move(
+                        os.path.join('Copy', 'pkl', 'paraValue.pkl'),
+                        os.path.join('Copy', 'pkl', pklFile)
+                    )
             
                 #插桩完后，再将备份后的文件进行还原
                 os.remove(copyFile)
@@ -194,24 +176,11 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                 errLst.append(f'[{version}]{callAPI}, generate new pkl failed: {generateResult.stderr}\n')
                 return False
             else:
-                if runPath!='':
-                    if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-                        if platform.system() == "Windows":
-                            command=f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
-                        else:
-                            command=f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-                    else:
-                        if platform.system() == "Windows":
-                            command=f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\dynamicMatch.py" "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
-                        else:
-                            command=f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/dynamicMatch.py" "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-                else: #大部分属于这种情况
-                    if platform.system() == "Windows":
-                        command=f'cd "Dynamic\\{projName}" && "{pythonPath}" dynamicMatch.py "{pklPrefix}\\Copy\\pkl\\{pklStr}" "{callStr}" "{jsonPrefix}"'
-                    else:
-                        command=f'cd "Dynamic/{projName}";"{pythonPath}" dynamicMatch.py "{pklPrefix}/Copy/pkl/{pklStr}" "{callStr}" "{jsonPrefix}"'
-                # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-                matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                pkl_arg = os.path.join(pklPrefix, 'Copy', 'pkl', pklFile)
+                matchResult = subprocess.run(
+                    [pythonPath, dynamic_script, pkl_arg, callAPI, jsonPrefix],
+                    cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
+                )
                 if matchResult.returncode!=0:
                     errLst.append(f"[{version}]{callAPI}, load new pkl failed: {matchResult.stderr}\n") 
                     return False

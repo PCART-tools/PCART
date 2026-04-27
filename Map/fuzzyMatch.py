@@ -1,11 +1,7 @@
-## @package fuzzyMatch 
-#  Provide class definitions for statically mapping API parameter definitions   
+## @package fuzzyMatch
+#  Provide class definitions for statically mapping API parameter definitions
 #
 #  More details (TODO)
-
-
-
-import re
 
 
 
