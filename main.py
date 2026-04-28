@@ -7,12 +7,11 @@
 
 import os
 import sys
-import ast
 import json
 import time
 import shutil
 import subprocess
-import platform
+import shlex
 from Path.getPath import *
 from Map.map import mapAPI
 from multiprocessing import Pool
@@ -175,20 +174,16 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     #     command=f'cd Copy/{projName}/{runPath};{pythonPath}{runCommand}'
     # 1. python 路径自动适配
     pythonPath = resolvePythonExecutable(currentEnv)
-    # 2. 运行命令自动适配
-    if platform.system() == 'Windows':
-        if runPath in runCommand:
-            command = f'cd "Copy\\{projName}" && "{pythonPath}" {runCommand}'
-        else:
-            command = f'cd "Copy\\{projName}\\{runPath}" && "{pythonPath}" {runCommand}'
+    # 2. cwd 自动适配：使用 subprocess cwd 参数替代 shell cd
+    if runPath and runPath not in runCommand:
+        cwd = os.path.join('Copy', projName, runPath)
     else:
-        if runPath in runCommand:
-            command = f'cd "Copy/{projName}";"{pythonPath}" {runCommand}'
-        else:
-            command = f'cd "Copy/{projName}/{runPath}";"{pythonPath}" {runCommand}'
+        cwd = os.path.join('Copy', projName)
     print('Running the project...')
-    # createResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-    createResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    createResult = subprocess.run(
+        [pythonPath] + shlex.split(runCommand),
+        cwd=cwd, capture_output=True, text=True, encoding='utf-8'
+    )
     if createResult.returncode!=0:
         print(f'Failure to generate PKL in current version')
         print(createResult.stderr)

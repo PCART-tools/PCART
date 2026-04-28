@@ -8,8 +8,6 @@
 import re
 import ast
 import shutil
-import subprocess
-import platform
 from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
@@ -1123,6 +1121,7 @@ def codeProcess(projPath,runCommand,runPath,libName):
     saveStructure(f'Dynamic/{projName}',libName) 
     
     shutil.copy2('Script/addValueForAPI.py',f'Dynamic/{projName}/{prefix}')
+    shutil.copy2('Script/codeUtils.py',f'Dynamic/{projName}/{prefix}')
     shutil.copy2('Script/dynamicMatch.py',f'Dynamic/{projName}/{prefix}')
     shutil.copy2('Script/verifySingle.py',f'Dynamic/{projName}/{prefix}')
     
@@ -1139,14 +1138,7 @@ def codeProcess(projPath,runCommand,runPath,libName):
     
     
     #然后再把Copy中的项目制表符统一转化为空格,目的是为了插入字典的时候计算空格缩进
-    # command2=f'bash Preprocess/tab2space.sh;'
-    # subprocess.run(command2,shell=True,executable='/bin/bash')
-    # 用Python实现制表符转空格，跨平台兼容
-    if platform.system() == 'Windows':
-        convertTabsToSpaces('Copy')
-    else:
-        command2 = 'bash Preprocess/tab2space.sh'
-        subprocess.run(command2, shell=True)
+    convertTabsToSpaces('Copy')
 
     #把代码换行写的合成一行，并添加字典
     pathObj=Path('DF')

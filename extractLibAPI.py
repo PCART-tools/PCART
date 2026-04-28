@@ -8,10 +8,7 @@
 
 import os
 import sys
-import json
-from Path.getPath import *
 from Extract.getDef import getDefFunction
-from multiprocessing import Pool
 from Tool.tool import getSourceCodePath
 
 

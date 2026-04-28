@@ -6,7 +6,6 @@
 
 
 import os
-import platform
 import re
 import copy
 import subprocess
@@ -655,35 +654,27 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
     else:
         pythonPath = resolvePythonExecutable(targetEnv)
     
-    pklStr=pklPath.replace('"','\\"')
-    callStr=callAPI.replace('"','\\"')
-    
     # if not os.path.exists(f"Copy/pkl/{pklName}"):
     #     return ''
 
-    if runPath!='':
-        # if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-        #     command=f'cd Dynamic/{projName}/{runPath};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
-        # else:
-        #     command=f'cd Dynamic/{projName};{pythonPath} {runPath}/addValueForAPI.py  "{pklStr}" "{callStr}"'
-        if platform.system() == "Windows":
-            if runPath not in runCommand:
-                command = f'cd "Dynamic\\{projName}\\{runPath}" && "{pythonPath}" addValueForAPI.py "{pklStr}" "{callStr}"'
-            else:
-                command = f'cd "Dynamic\\{projName}" && "{pythonPath}" "{runPath}\\addValueForAPI.py" "{pklStr}" "{callStr}"'
-        else:
-            if runPath not in runCommand:
-                command = f'cd "Dynamic/{projName}/{runPath}";"{pythonPath}" addValueForAPI.py  "{pklStr}" "{callStr}"'
-            else:
-                command = f'cd "Dynamic/{projName}";"{pythonPath}" "{runPath}/addValueForAPI.py"  "{pklStr}" "{callStr}"'
-    else: #大部分属于这种情况
-        if platform.system() == "Windows":
-            command=f'cd "Dynamic\\{projName}" && "{pythonPath}" addValueForAPI.py  "{pklStr}" "{callStr}"'
-        else:
-            command=f'cd "Dynamic/{projName}";"{pythonPath}" addValueForAPI.py  "{pklStr}" "{callStr}"'
-
-    # matchResult=subprocess.run(command,shell=True,executable='/bin/bash',stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-    matchResult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    # if runPath!='':
+    #     if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
+    #         command=f'cd Dynamic/{projName}/{runPath};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
+    #     else:
+    #         command=f'cd Dynamic/{projName};{pythonPath} {runPath}/addValueForAPI.py  "{pklStr}" "{callStr}"'
+    if runPath and runPath not in runCommand:
+        cwd = os.path.join('Dynamic', projName, runPath)
+        script = 'addValueForAPI.py'
+    elif runPath:
+        cwd = os.path.join('Dynamic', projName)
+        script = os.path.join(runPath, 'addValueForAPI.py')
+    else:
+        cwd = os.path.join('Dynamic', projName)
+        script = 'addValueForAPI.py'
+    matchResult = subprocess.run(
+        [pythonPath, script, pklPath, callAPI],
+        cwd=cwd, capture_output=True, text=True, encoding='utf-8'
+    )
     # print(command)
     # print(':',matchResult.stdout)
     if matchResult.returncode!=0:
