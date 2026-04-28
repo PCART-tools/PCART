@@ -7,6 +7,7 @@
 
 import re
 import ast
+import shlex
 import shutil
 from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
@@ -668,7 +669,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         s12="dill.dump(tempDict,fw)\n"
         s13="except BaseException as e:\n"
         s14="print('save to pkl error: {}'.format(e))\n"
-        s15=f"with open('{pklPrefix}/coverSet','w') as fw:\n"
+        s15=f"with open('{pklPrefix}/coverSet','w',encoding='utf-8') as fw:\n"
         s16="for it in apiCoveredSet:\n"
         s17="fw.write(it+'\\n')\n"  
         #添加空格
@@ -1077,8 +1078,8 @@ def convertTabsToSpaces(directory):
 def codeProcess(projPath,runCommand,runPath,libName):
     #提取运行的文件
     runFileLst=[]
-    temp=runCommand.split(' ') #把命令按空格拆分
-    runFile=temp[1]
+    temp=shlex.split(runCommand) #把命令按空格拆分
+    runFile=temp[0]
     prefix='' #运行文件所在的目录，默认是在项目的一级子目录下
     # if '/' in runFile:
     if '/' in runFile or '\\' in runFile:

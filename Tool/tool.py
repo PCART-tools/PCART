@@ -458,7 +458,7 @@ def writeLine(width,s,fw):
 #  @param runCommand The run command of the project
 #  @param savePath The save path
 def save2txt(lst,libName,runCommand,savePath):
-    fw=open(savePath,'w')
+    fw=open(savePath,'w',encoding='UTF-8')
     totalFileNum=0
     totalAPINum=0
     compatibleNum=0
@@ -551,13 +551,16 @@ def save2txt(lst,libName,runCommand,savePath):
 #  @param configPath The path of configuration file
 #  @return (dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']) tuple of configuration entries 
 def loadConfig(configPath):
-    with open(configPath,'r') as fr:
+    with open(configPath,'r',encoding='UTF-8') as fr:
         dic=json.load(fr)
-    runCommand=dic['runCommand'].lstrip()
-    if runCommand.startswith('python3 '):
-        runCommand=runCommand[len('python3'):]
-    elif runCommand.startswith('python '):
-        runCommand=runCommand[len('python'):]
+    for key in dic:
+        if isinstance(dic[key], str):
+            dic[key] = dic[key].strip()
+    runCommand=dic['runCommand']
+    for prefix in ('python3 ', 'python.exe ', 'python '):
+        if runCommand.startswith(prefix):
+            runCommand=runCommand[len(prefix):].lstrip()
+            break
     return dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']
 
 
@@ -569,18 +572,19 @@ def loadConfig(configPath):
 #  @return full_path The path of Python interpreter
 def findPythonDir(basePath):
     if not os.path.exists(basePath):
-        print(f"Path is not exist: {basePath}")
-        return None
+        raise FileNotFoundError(
+            f"Cannot find Python directory: {basePath} does not exist"
+        )
     
     for entry in os.listdir(basePath):
         full_path = os.path.join(basePath, entry)
         if os.path.isdir(full_path):
             if entry.startswith("python"):
-                # print(f"find the path: {full_path}")
                 return full_path
     
-    print(f"Can not find {basePath}/pythonxx.xx")
-    return None
+    raise FileNotFoundError(
+        f"Cannot find Python directory under {basePath}/pythonxx.xx"
+    )
 
 
 ## Resolve Python executable from a virtual environment root
@@ -619,7 +623,7 @@ def resolvePythonExecutable(envPath):
 #  @param configPath PCART's configuration file
 #  @return (currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath) Tuple of current version, target version, virtual environment paths of current version and target version
 def getSourceCodePath(configPath):
-    with open(f"Configure/{configPath}",'r') as fr:
+    with open(f"Configure/{configPath}",'r',encoding='UTF-8') as fr:
         dic=json.load(fr)
     libName=dic['libName']
     currentVersion=dic['currentVersion']
@@ -631,8 +635,8 @@ def getSourceCodePath(configPath):
         currentSourceCodePath=os.path.join(currentEnvPath, "Lib", "site-packages", libName)
         targetSourceCodePath=os.path.join(targetEnvPath, "Lib", "site-packages", libName)
     else:
-        currentSourceCodePath=findPythonDir(f"{currentEnvPath}/lib")+f"/site-packages/{libName}"
-        targetSourceCodePath=findPythonDir(f"{targetEnvPath}/lib")+f"/site-packages/{libName}" 
+        currentSourceCodePath=os.path.join(findPythonDir(os.path.join(currentEnvPath, "lib")), "site-packages", libName)
+        targetSourceCodePath=os.path.join(findPythonDir(os.path.join(targetEnvPath, "lib")), "site-packages", libName) 
 
     return currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath
 
