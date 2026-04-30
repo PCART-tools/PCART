@@ -458,6 +458,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     # fileName=filePath.split('/')[-1][0:-3]
     fileName = os.path.basename(filePath)[0:-3]
     fileRelativePath=filePath.split(f'{projName}',1)[-1]
+    coverageKey = fileRelativePath.replace('\\', '/').lstrip('/').rsplit('.', 1)[0]
     fileAbsolutePath=projPath+fileRelativePath
     
     lineno=getImportLine(codeLst)
@@ -542,8 +543,8 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     dicString2=dicString2+para+','
                 dicString2=dicString2.rstrip(',')+']\n'
                 
-                dicString3=f'apiCoveredSet.add(\"{fileName}##{lineno}##{key}\")\n'
-                # print(f"{fileName}##{lineno}##{key}") 
+                dicString3=f'apiCoveredSet.add(\"{coverageKey}##{lineno}##{key}\")\n'
+                # print(f"{coverageKey}##{lineno}##{key}")
                 while spaceNum>0:
                     if dicString1:
                         dicString1=' '+dicString1
@@ -610,7 +611,11 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     #最后再判断一下该文件是否为该项目的运行文件
     # fileName=filePath.split('/')[-1] #fileName带.py
     fileName = os.path.basename(filePath)
-    if fileName in runFileLst:
+    inRunDir = True
+    if runPath:
+        normalized_rp = runPath.replace('\\', '/').strip('/')
+        inRunDir = fileRelativePath.replace('\\', '/').startswith(f'/{normalized_rp}/')
+    if fileName in runFileLst and inRunDir:
         #寻找__main__所在的行
         flag=0
         spaceNum=0

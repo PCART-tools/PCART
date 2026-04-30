@@ -51,6 +51,7 @@ def backwardTask(args):
     pos=tempLst.index(projName)
     realProjPath='/'.join(tempLst[0:pos+1])
     fileRelativePath='/'.join(tempLst[pos:])
+    coverageKey = '/'.join(tempLst[pos+1:]).rsplit('.', 1)[0]
     # copyFile='./Copy/'+fileRelativePath
     copyFile = os.path.join('.', 'Copy', *fileRelativePath.split('/'))
     invokedAPINum=len(callAPIDict)
@@ -72,8 +73,9 @@ def backwardTask(args):
         #     continue
         
         flag=0
+        probe = f"{coverageKey}##{lineNum}##{callAPI}".split('(')[0].replace(' ','')
         for it in coverSet:
-            if f"{fileName}##{lineNum}##{callAPI}".split('(')[0].replace(' ','') in it:
+            if it.replace(' ', '').startswith(probe):
                 flag=1
                 break
         if flag==0:

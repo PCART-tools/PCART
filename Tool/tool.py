@@ -340,7 +340,7 @@ def getVersionLst(libPath):
     obj.getPath(libPath)
     path=obj.path
     for p in path:
-        p=p.split('/')[-1]
+        p = os.path.basename(p)
         index=-1
         for i in range(len(p)):
             if p[i].isdigit():
