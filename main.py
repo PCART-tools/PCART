@@ -62,6 +62,8 @@ def backwardTask(args):
         ansDict[key]={}
         callAPI=key.split('#_')[0]
         lineNum=key.split('#_')[1]
+        # 动态阶段使用调用点key区分同名API，避免不同调用行共享同一个pkl和缓存结果
+        callKey=f"{getFileName(callAPI,'')}#_{lineNum}"
         ansDict[key]['Location']=f"At Line {lineNum} in {fileRelativePath}"
         #判断有没有覆盖有两个条件，先看是否有pkl，再看是否在coverSet中
         # if not os.path.exists(f"Copy/pkl/{pklName}") and f"{fileName}##{lineNum}##{callAPI}".replace(' ','') not in coverSet:
@@ -87,15 +89,15 @@ def backwardTask(args):
         #step3:将项目中的API与库API进行匹配，获得参数定义
         #首先判断一下这个API是否匹配过，若之前匹配过了，就不用再匹配了
         with lock:
-            matchDict=querySharedDict(callAPI,sharedDict) #当查询操作发生在更新操作之前，可能会查询失败
+            matchDict=querySharedDict(callKey,sharedDict) #当查询操作发生在更新操作之前，可能会查询失败
         if len(matchDict)>0:
             currentMatch=matchDict['current']
             targetMatch=matchDict['target']
         else:
-            currentMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,currentVersion,currentEnv,lock,errLst)
-            targetMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,targetVersion,targetEnv,lock,errLst,curr=0)
+            currentMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,currentVersion,currentEnv,lock,errLst,callKey=callKey)
+            targetMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,targetVersion,targetEnv,lock,errLst,curr=0,callKey=callKey)
             with lock:
-                updateSharedDict(callAPI,currentMatch,targetMatch,sharedDict)#更新sharedDict
+                updateSharedDict(callKey,currentMatch,targetMatch,sharedDict)#更新sharedDict
         
         
         ansDict[key][f"Definition @{currentVersion} <{currentMatch['matchMethod']}>"]=str(currentMatch['match'])
@@ -115,8 +117,8 @@ def backwardTask(args):
         if len(repairLst)==0: #若返回修复字典的个数为零，则一定是兼容的
             ansDict[key]['Compatible']='Yes'
         else:
-            apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst) #apiWithValue为空表示添加参数失败
-            fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst)
+            apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=callKey) #apiWithValue为空表示添加参数失败
+            fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst,callKey=callKey)
             if compatibilityLabel=='Compatible':
                 ansDict[key]['Compatible']='Yes'
             else:

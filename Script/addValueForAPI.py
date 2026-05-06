@@ -18,6 +18,7 @@ print("load pkl successfully")
 
 
 callAPI=sys.argv[2]
+lookupKey=sys.argv[3] if len(sys.argv)>3 else callAPI
 lst1=departAPI(callAPI) #将API按点进行拆分a.b(y).c(z)拆分成a.b(y), a.b(y).c(z)
 lst2=departAPI2(callAPI) #拆分成a(x), b(y), c(z)
 tempLst=[]
@@ -26,7 +27,7 @@ s=''
 #给API填上参数的具体值
 for key in paraValueDict.keys():
     #if callAPI.replace(' ','')==key.replace(' ',''):
-    if getFileName(callAPI,'')==getFileName(key,''): # 2025/5/25 Fix inconsistency between callAPI name and the key name
+    if getFileName(lookupKey,'')==getFileName(key,''): # 2025/5/25 Fix inconsistency between callAPI name and the key name
         # 2025/5/25 将复杂API参数键替换为简单键，例如复杂的引号符号
         newKey = "callKey"  
         if newKey not in paraValueDict:
@@ -56,12 +57,23 @@ for key in paraValueDict.keys():
         k='@{}'.format(key)
         firstPart=lst2[0]    
         if k in paraValueDict:
+            receiver = paraValueDict.get(k)
+            # 新版withitem pkl可能保存object/expr候选；旧版pkl仍是单个接收者
+            if isinstance(receiver, dict):
+                if 'object' in receiver:
+                    receiver = receiver['object']
+                elif 'expr' in receiver:
+                    receiver = receiver['expr']
+                paraValueDict[k] = receiver
             # 2025/5/25 将复杂API参数键替换为简单键，例如复杂的引号符号
             newK = '@' + newKey 
             if newK not in paraValueDict:
-                paraValueDict[newK] = paraValueDict[k] 
+                paraValueDict[newK] = receiver 
 
-            s='paraValueDict["{}"]'.format(newK)+'.'+s
+            if isinstance(receiver, str):
+                s=receiver+'.'+s
+            else:
+                s='paraValueDict["{}"]'.format(newK)+'.'+s
         else:#比如torch.func(x),还有类似于tornado.web.Application()的形式
             prefix=''
             for it in lst2:

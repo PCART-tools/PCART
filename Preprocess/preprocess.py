@@ -333,7 +333,7 @@ def extractDecorator(root):
 #
 #  @param callAPI The API call
 #  @param filePath The source file path
-def addDictSingle(callAPI,filePath):
+def addDictSingle(callAPI,filePath,callKey=None):
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
     
@@ -364,7 +364,7 @@ def addDictSingle(callAPI,filePath):
                     firstPart+=it+'.'
             firstPart=firstPart.rstrip('.')
             
-            key=callAPI.replace('"','\\"')
+            key=(callKey or callAPI).replace('"','\\"')
             if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
                 dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
             elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
@@ -372,10 +372,11 @@ def addDictSingle(callAPI,filePath):
 
             #判断API是否为withitem中的别名调用 -- 2025/5/19 
             if firstPart and firstPart.split('.')[0] in withitem_call_names:
-                if len(withitem_call_names) > 1: #2026/4/22 Fix withitem caller instrucmentation
-                    dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
-                else:
-                    dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                lineNo = i + 1
+                initialCallName = modifyWithName(firstPart, withitem_call_names, lineNo).rstrip('.')
+                initialCallName = initialCallName.replace('"','\\"')
+                # withitem接收者同时保存运行时对象和还原表达式，动态阶段按可用候选依次尝试
+                dicString1=f'paraValueDict[\"@{key}\"]={{}}; paraValueDict[\"@{key}\"][\"object\"]={firstPart}; paraValueDict[\"@{key}\"][\"expr\"]=\"{initialCallName}\"\n'
             
             #再保存API的参数值 
             dicString2=f'paraValueDict[\"{key}\"]'+'=['
@@ -469,8 +470,12 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     targetLst=findAssignCall(root) #用来区分调用者是否来自赋值语句，比如a.f(), tf.f(), or self.f()
  
     #找出树中所有withitem call节点 -- 2025/5/19
+    try:
+        withitem_root = getAst(fileAbsolutePath)
+    except Exception:
+        withitem_root = root
     withitem_visitor = WithVisitor()
-    withitem_visitor.visit(root)
+    withitem_visitor.visit(withitem_root)
     withitem_call_names = withitem_visitor.get_withitem_call() #dict
 
     insertStartLine=0 #记录每次插桩的行
@@ -502,6 +507,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 #key=callState.replace('"','\\"') #把字符串中的"改成\"
                 key=getFileName(callState,'') # 2025/5/25 Fix inconsistency between callAPI name and the key name 
                 key=key.replace('"','\\"') #把字符串中的"改成\"
+                callSiteKey=f'{key}#_{lineno}'
                 l=departAPI(callState)
                 l2=departAPI2(callState)
                 firstPart=''
@@ -517,21 +523,19 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 # if '(' not in firstPart and (firstPart in targetLst or firstPart=='self'):
                 #self.f(x), a.f(x), a.b.c(x)
                 if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
-                    dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                    dicString1=f'paraValueDict[\"@{callSiteKey}\"]={firstPart}\n'
                 elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
-                    dicString1=f'paraValueDict[\"@{key}\"]={l[-2]}\n'
+                    dicString1=f'paraValueDict[\"@{callSiteKey}\"]={l[-2]}\n'
                
                 #判断API是否为withitem中的别名调用 -- 2025/5/19 
                 if firstPart and firstPart.split('.')[0] in withitem_call_names:
-                    if len(withitem_call_names) > 1: #2026/4/22 Fix withitem caller instrucmentation
-                        initialCallName = modifyWithName(firstPart, withitem_call_names).rstrip('.')
-                        initialCallName = initialCallName.rstrip('.')
-                        #dicString1=f'paraValueDict[\"@{key}\"]=\"{withitem_call_names[firstPart.split(".")[0]]}\"\n'
-                        dicString1=f'paraValueDict[\"@{key}\"]=\"{initialCallName}\"\n'
-                    else:
-                        dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                    initialCallName = modifyWithName(firstPart, withitem_call_names, lineno).rstrip('.')
+                    initialCallName = initialCallName.rstrip('.')
+                    initialCallName = initialCallName.replace('"','\\"')
+                    # withitem接收者同时保存运行时对象和还原表达式，非withitem调用仍保持原有单值保存
+                    dicString1=f'paraValueDict[\"@{callSiteKey}\"]={{}}; paraValueDict[\"@{callSiteKey}\"][\"object\"]={firstPart}; paraValueDict[\"@{callSiteKey}\"][\"expr\"]=\"{initialCallName}\"\n'
                 #再保存API的参数值
-                dicString2=f'paraValueDict[\"{key}\"]=['
+                dicString2=f'paraValueDict[\"{callSiteKey}\"]=['
                 paraLst=get_parameter(paraStr,space=0) #项目参数不去空格2023-12-14
                 for para in paraLst: 
                     if '=' in para and "'='" not in para and '"="' not in para: #若参数的形式为key=f(x=1),只要确保=的前面不含括号即可
@@ -621,6 +625,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         spaceNum=0
         lineno=getImportLine(codeLst)
         codeLst.insert(lineno,'import dill\n')
+        codeLst.insert(lineno,'import os\n')
         codeLst.insert(lineno,'from codeUtils import *\n')
         mainLineno=0
         #计算__main__第一个非空行开头的空格数
@@ -660,80 +665,48 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 l-=1
         
         
-        s1="for key,value in paraValueDict.items():\n"
-        s2="if '@' in key:\n"
-        s3="continue\n"        
-        s4="tempDict={}\n"
-        s5="tempDict[key]=value\n"
-        s6="k='@{}'.format(key)\n"
-        s7="if k in paraValueDict:\n"
-        s8="tempDict[k]=paraValueDict[k]\n"
-        s9="pklName=getFileName(key,'.pkl')\n"
-        s10="try:\n"
-        s11=f"with open('{pklPrefix}"+"/{}'.format(pklName),'wb') as fw:\n"
-        s12="dill.dump(tempDict,fw)\n"
-        s13="except BaseException as e:\n"
-        s14="print('save to pkl error: {}'.format(e))\n"
-        s15=f"with open('{pklPrefix}/coverSet','w',encoding='utf-8') as fw:\n"
-        s16="for it in apiCoveredSet:\n"
-        s17="fw.write(it+'\\n')\n"  
-        #添加空格
-        #spaceNum不能为0,为0的时候，这个地方会出错，后面得修改一下,一个spaceNum就是一个tab块=4空格
-        if spaceNum!=0:
-            s1=' '*spaceNum*1+s1
-            s2=' '*spaceNum*2+s2
-            s3=' '*spaceNum*3+s3
-            s4=' '*spaceNum*2+s4
-            s5=' '*spaceNum*2+s5
-            s6=' '*spaceNum*2+s6
-            s7=' '*spaceNum*2+s7
-            s8=' '*spaceNum*3+s8
-            s9=' '*spaceNum*2+s9
-            s10=' '*spaceNum*2+s10
-            s11=' '*spaceNum*3+s11
-            s12=' '*spaceNum*4+s12
-            s13=' '*spaceNum*2+s13
-            s14=' '*spaceNum*3+s14
-
-            s15=' '*spaceNum*1+s15
-            s16=' '*spaceNum*2+s16
-            s17=' '*spaceNum*3+s17
-        else:
-            spaceNum=4
-            s2=' '*spaceNum*1+s2
-            s3=' '*spaceNum*2+s3
-            s4=' '*spaceNum*1+s4
-            s5=' '*spaceNum*1+s5
-            s6=' '*spaceNum*1+s6
-            s7=' '*spaceNum*1+s7
-            s8=' '*spaceNum*2+s8
-            s9=' '*spaceNum*1+s9
-            s10=' '*spaceNum*1+s10
-            s11=' '*spaceNum*2+s11
-            s12=' '*spaceNum*3+s12
-            s13=' '*spaceNum*1+s13
-            s14=' '*spaceNum*2+s14
-            
-            s16=' '*spaceNum*1+s16
-            s17=' '*spaceNum*2+s17
-
-        headLst.append(s1)
-        headLst.append(s2)
-        headLst.append(s3)
-        headLst.append(s4)
-        headLst.append(s5)
-        headLst.append(s6)
-        headLst.append(s7)
-        headLst.append(s8)
-        headLst.append(s9)
-        headLst.append(s10)
-        headLst.append(s11)
-        headLst.append(s12)
-        headLst.append(s13)
-        headLst.append(s14)
-        headLst.append(s15)
-        headLst.append(s16)
-        headLst.append(s17)
+        unit = spaceNum if spaceNum != 0 else 4
+        base = spaceNum if spaceNum != 0 else 0
+        # 每个候选pkl都保存完整的{callsite参数, @callsite接收者}，避免参数和接收者分属不同文件
+        saveLines = [
+            (0, "for key,value in paraValueDict.items():\n"),
+            (1, "if '@' in key:\n"),
+            (2, "continue\n"),
+            (1, "k='@{}'.format(key)\n"),
+            (1, "receiver=paraValueDict.get(k)\n"),
+            (1, "candidates=[]\n"),
+            (1, "if isinstance(receiver,dict) and ('object' in receiver or 'expr' in receiver):\n"),
+            (2, "if 'object' in receiver:\n"),
+            (3, "candidates.append(('__object',receiver['object']))\n"),
+            (2, "if 'expr' in receiver:\n"),
+            (3, "candidates.append(('__expr',receiver['expr']))\n"),
+            (1, "else:\n"),
+            (2, "candidates.append(('',receiver))\n"),
+            (1, "for suffix,receiverValue in candidates:\n"),
+            (2, "tempDict={}\n"),
+            (2, "tempDict[key]=value\n"),
+            (2, "if receiverValue is not None:\n"),
+            (3, "tempDict[k]=receiverValue\n"),
+            (2, "pklName=getFileName(key,'.pkl')\n"),
+            (2, "if suffix:\n"),
+            (3, "pklName=pklName[:-4]+suffix+'.pkl'\n"),
+            (2, "tmpPklName=pklName+'.tmp'\n"),
+            (2, "# 先写临时文件再原子替换，避免pickle失败时留下空pkl\n"),
+            (2, "try:\n"),
+            (3, f"with open('{pklPrefix}"+"/{}'.format(tmpPklName),'wb') as fw:\n"),
+            (4, "dill.dump(tempDict,fw)\n"),
+            (3, f"os.replace('{pklPrefix}"+"/{}'.format(tmpPklName),'"+f"{pklPrefix}"+"/{}'.format(pklName))\n"),
+            (2, "except BaseException as e:\n"),
+            (3, f"tmpPath='{pklPrefix}"+"/{}'.format(tmpPklName)\n"),
+            (3, "if os.path.exists(tmpPath):\n"),
+            (4, "os.remove(tmpPath)\n"),
+            (3, "print('save to pkl error: {}'.format(e))\n"),
+            (0, f"with open('{pklPrefix}/coverSet','w',encoding='utf-8') as fw:\n"),
+            (1, "for it in apiCoveredSet:\n"),
+            (2, "fw.write(it+'\\n')\n"),
+        ]
+        for level, text in saveLines:
+            headLst.append(' ' * (base + unit * level) + text)
 
         codeLst=headLst+trailLst    
     if codeLst[0]=='pass\n':
@@ -759,6 +732,7 @@ def handleRunFile(file,runPath,runCommand):
     lineno=getImportLine(codeLst)
     codeLst.insert(lineno,f"from recordValue import paraValueDict\n")
     codeLst.insert(lineno,'import dill\n')
+    codeLst.insert(lineno,'import os\n')
     #寻找__main__所在的行
     flag=0
     spaceNum=0
@@ -794,32 +768,43 @@ def handleRunFile(file,runPath,runCommand):
         while l>0:
             pklPrefix='../'+pklPrefix
             l-=1
-    s1="try:\n"
-    s2=f"with open('{pklPrefix}/paraValue.pkl','wb') as fw:\n"
-    s3="dill.dump(paraValueDict,fw)\n"
-    s4="except Exception as e:\n"
-    s5="print('save to pkl error: {}'.format(e))\n"
-    #spaceNum不能为0
-    if spaceNum: 
-        s1=' '*spaceNum*1+s1
-        s2=' '*spaceNum*2+s2
-        s3=' '*spaceNum*3+s3
-        s4=' '*spaceNum*1+s4
-        s5=' '*spaceNum*2+s5       
-    else:
-        spaceNum=4
-        s1=' '*spaceNum*0+s1
-        s2=' '*spaceNum*1+s2
-        s3=' '*spaceNum*2+s3
-        s4=' '*spaceNum*0+s4
-        s5=' '*spaceNum*1+s5       
-
-
-    headLst.append(s1)
-    headLst.append(s2)
-    headLst.append(s3)
-    headLst.append(s4)
-    headLst.append(s5)
+    unit = spaceNum if spaceNum != 0 else 4
+    base = spaceNum if spaceNum != 0 else 0
+    # 动态重生成pkl时先保存通用候选文件，Map阶段再改名为具体API调用点文件
+    saveLines = [
+        (0, "for key,value in paraValueDict.items():\n"),
+        (1, "if '@' in key:\n"),
+        (2, "continue\n"),
+        (1, "k='@{}'.format(key)\n"),
+        (1, "receiver=paraValueDict.get(k)\n"),
+        (1, "candidates=[]\n"),
+        (1, "if isinstance(receiver,dict) and ('object' in receiver or 'expr' in receiver):\n"),
+        (2, "if 'object' in receiver:\n"),
+        (3, "candidates.append(('__object',receiver['object']))\n"),
+        (2, "if 'expr' in receiver:\n"),
+        (3, "candidates.append(('__expr',receiver['expr']))\n"),
+        (1, "else:\n"),
+        (2, "candidates.append(('',receiver))\n"),
+        (1, "for suffix,receiverValue in candidates:\n"),
+        (2, "tempDict={}\n"),
+        (2, "tempDict[key]=value\n"),
+        (2, "if receiverValue is not None:\n"),
+        (3, "tempDict[k]=receiverValue\n"),
+        (2, "pklName='paraValue'+suffix+'.pkl'\n"),
+        (2, "tmpPklName=pklName+'.tmp'\n"),
+        (2, "# 先写临时文件再原子替换，避免pickle失败时留下空pkl\n"),
+        (2, "try:\n"),
+        (3, f"with open('{pklPrefix}"+"/{}'.format(tmpPklName),'wb') as fw:\n"),
+        (4, "dill.dump(tempDict,fw)\n"),
+        (3, f"os.replace('{pklPrefix}"+"/{}'.format(tmpPklName),'"+f"{pklPrefix}"+"/{}'.format(pklName))\n"),
+        (2, "except BaseException as e:\n"),
+        (3, f"tmpPath='{pklPrefix}"+"/{}'.format(tmpPklName)\n"),
+        (3, "if os.path.exists(tmpPath):\n"),
+        (4, "os.remove(tmpPath)\n"),
+        (3, "print('save to pkl error: {}'.format(e))\n"),
+    ]
+    for level, text in saveLines:
+        headLst.append(' ' * (base + unit * level) + text)
 
     codeLst=headLst+trailLst
 

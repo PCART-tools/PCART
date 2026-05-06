@@ -24,6 +24,7 @@ print("load pkl successfully")
 #step2: 动态匹配
 callAPI=sys.argv[2]
 jsonPrefix=sys.argv[3]
+lookupKey=sys.argv[4] if len(sys.argv)>4 else callAPI
 matchDict={}
 tempLst=[]
 s=''
@@ -37,14 +38,22 @@ s=removeParameter(lastAPI,1)
 for key in paraValueDict.keys():
     #if callAPI.replace(' ','')==key.replace(' ',''):
     # 2025/5/25 Fix inconsistency between callAPI name and the key name
-    if getFileName(callAPI,'')==getFileName(key,''): 
+    if getFileName(lookupKey,'')==getFileName(key,''): 
         #把函数的上文依赖给填上,比如self.a(x)中的self, a.b(2).c(3)中的a.b(2)
         k='@{}'.format(key)
         firstPart=lst2[0]
         if k in paraValueDict:
-            #新增类Contenxt Manager对象动态匹配支持 -- 2025/5/20
-            if isinstance(eval('paraValueDict.get(k)'),str):
-                s=eval('paraValueDict.get(k)')+'.'+s
+            #新增Context Manager对象动态匹配支持 -- 2025/5/20
+            receiver = paraValueDict.get(k)
+            # 新版withitem pkl可能保存object/expr候选；旧版pkl仍是单个接收者
+            if isinstance(receiver, dict):
+                if 'object' in receiver:
+                    receiver = receiver['object']
+                elif 'expr' in receiver:
+                    receiver = receiver['expr']
+                paraValueDict[k] = receiver
+            if isinstance(receiver,str):
+                s=receiver+'.'+s
             else:
                 s='paraValueDict.get(k)'+'.'+s
         else: #比如torch.func(x),还有类似于tornado.web.Application()的形式
@@ -80,7 +89,7 @@ except Exception as e:
 
 # print("match:",matchDict['match'])
 #动态匹配若失败，则没有internalPath,和addValue这两个属性的
-fileName=getFileName(callAPI,'_dynamicMatch.json')
+fileName=getFileName(lookupKey,'_dynamicMatch.json')
 
 with open('{}/data/{}'.format(jsonPrefix,fileName),'w',encoding='UTF-8') as fw:
     json.dump(matchDict,fw,indent=4,ensure_ascii=False)
