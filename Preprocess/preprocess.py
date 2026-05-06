@@ -262,6 +262,76 @@ def findAssignCall(root):
             assignLst.append(target)
     return assignLst
 
+
+## Resolve the source expression assigned to a receiver alias
+## 还原调用者别名在当前作用域内的赋值来源表达式
+#
+#  @param root The AST root of the source code
+#  @param source The original source code
+#  @param aliasName The first name of the receiver alias
+#  @param lineno The line number of the call site
+#  @return expr The scoped assignment expression or None
+def getAssignReceiverExpr(root,source,aliasName,lineno):
+    expr=None
+    bestLine=-1
+
+    scopeBodies=[root.body]
+    for node in ast.walk(root):
+        if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)):
+            start=node.lineno
+            end=getattr(node,'end_lineno',start)
+            if start<lineno<=end:
+                scopeBodies.append(node.body)
+
+    for body in scopeBodies:
+        for stmt in body:
+            if not hasattr(stmt,'lineno') or stmt.lineno>=lineno:
+                continue
+            if isinstance(stmt,(ast.If,ast.For,ast.AsyncFor,ast.While,ast.Try,ast.With,ast.AsyncWith)):
+                continue
+            value=None
+            targets=[]
+            if isinstance(stmt,ast.Assign):
+                value=stmt.value
+                targets=stmt.targets
+            elif isinstance(stmt,ast.AnnAssign):
+                value=stmt.value
+                targets=[stmt.target]
+            if value is None:
+                continue
+            for target in targets:
+                if isinstance(target,ast.Name) and target.id==aliasName and stmt.lineno>bestLine:
+                    sourceExpr=ast.get_source_segment(source,value)
+                    if sourceExpr:
+                        expr=sourceExpr.strip()
+                        bestLine=stmt.lineno
+    return expr
+
+
+## Resolve the visible base-class expression for an inherited self receiver
+## 还原继承场景中self调用者可见的基类表达式
+#
+#  @param root The AST root of the source code
+#  @param lineno The line number of the call site
+#  @param methodName The self method name
+#  @return expr The base-class expression or None
+def getSelfReceiverExpr(root,lineno,methodName):
+    for node in ast.walk(root):
+        if not isinstance(node,ast.ClassDef):
+            continue
+        start=node.lineno
+        end=getattr(node,'end_lineno',start)
+        if not (start<lineno<=end) or len(node.bases)==0:
+            continue
+        defNames=set()
+        for item in ast.iter_child_nodes(node):
+            if isinstance(item,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                defNames.add(item.name)
+        if methodName in defNames:
+            return None
+        return ast.unparse(node.bases[0])
+    return None
+
     
 
 ## Count the number of spaces at the beginning of a string 
@@ -336,6 +406,7 @@ def extractDecorator(root):
 def addDictSingle(callAPI,filePath,callKey=None):
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
+    source=''.join(codeLst)
     
     lineno=getImportLine(codeLst)
     importDict='from recordValue import paraValueDict\n'
@@ -366,7 +437,18 @@ def addDictSingle(callAPI,filePath,callKey=None):
             
             key=(callKey or callAPI).replace('"','\\"')
             if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
-                dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                lineNo = i + 1
+                receiverExpr=None
+                if firstPart.split('.')[0] in targetLst:
+                    receiverExpr=getAssignReceiverExpr(root,source,firstPart.split('.')[0],lineNo)
+                elif firstPart.split('.')[0]=='self':
+                    methodName=callAPI.split('(')[0].split('.')[-1]
+                    receiverExpr=getSelfReceiverExpr(root,lineNo,methodName)
+                if receiverExpr:
+                    receiverExpr=receiverExpr.replace('\\','\\\\').replace('"','\\"')
+                    dicString1=f'paraValueDict[\"@{key}\"]={{}}; paraValueDict[\"@{key}\"][\"object\"]={firstPart}; paraValueDict[\"@{key}\"][\"expr\"]=\"{receiverExpr}\"\n'
+                else:
+                    dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
             elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
                 dicString1=f'paraValueDict[\"@{key}\"]={l[-2]}\n'
 
@@ -374,8 +456,8 @@ def addDictSingle(callAPI,filePath,callKey=None):
             if firstPart and firstPart.split('.')[0] in withitem_call_names:
                 lineNo = i + 1
                 initialCallName = modifyWithName(firstPart, withitem_call_names, lineNo).rstrip('.')
-                initialCallName = initialCallName.replace('"','\\"')
                 # withitem接收者同时保存运行时对象和还原表达式，动态阶段按可用候选依次尝试
+                initialCallName=initialCallName.replace('\\','\\\\').replace('"','\\"')
                 dicString1=f'paraValueDict[\"@{key}\"]={{}}; paraValueDict[\"@{key}\"][\"object\"]={firstPart}; paraValueDict[\"@{key}\"][\"expr\"]=\"{initialCallName}\"\n'
             
             #再保存API的参数值 
@@ -523,7 +605,17 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 # if '(' not in firstPart and (firstPart in targetLst or firstPart=='self'):
                 #self.f(x), a.f(x), a.b.c(x)
                 if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
-                    dicString1=f'paraValueDict[\"@{callSiteKey}\"]={firstPart}\n'
+                    receiverExpr=None
+                    if firstPart.split('.')[0] in targetLst:
+                        receiverExpr=getAssignReceiverExpr(root,code,firstPart.split('.')[0],lineno)
+                    elif firstPart.split('.')[0]=='self':
+                        methodName=callState.split('(')[0].split('.')[-1]
+                        receiverExpr=getSelfReceiverExpr(root,lineno,methodName)
+                    if receiverExpr:
+                        receiverExpr=receiverExpr.replace('\\','\\\\').replace('"','\\"')
+                        dicString1=f'paraValueDict[\"@{callSiteKey}\"]={{}}; paraValueDict[\"@{callSiteKey}\"][\"object\"]={firstPart}; paraValueDict[\"@{callSiteKey}\"][\"expr\"]=\"{receiverExpr}\"\n'
+                    else:
+                        dicString1=f'paraValueDict[\"@{callSiteKey}\"]={firstPart}\n'
                 elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
                     dicString1=f'paraValueDict[\"@{callSiteKey}\"]={l[-2]}\n'
                
@@ -531,8 +623,8 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 if firstPart and firstPart.split('.')[0] in withitem_call_names:
                     initialCallName = modifyWithName(firstPart, withitem_call_names, lineno).rstrip('.')
                     initialCallName = initialCallName.rstrip('.')
-                    initialCallName = initialCallName.replace('"','\\"')
                     # withitem接收者同时保存运行时对象和还原表达式，非withitem调用仍保持原有单值保存
+                    initialCallName=initialCallName.replace('\\','\\\\').replace('"','\\"')
                     dicString1=f'paraValueDict[\"@{callSiteKey}\"]={{}}; paraValueDict[\"@{callSiteKey}\"][\"object\"]={firstPart}; paraValueDict[\"@{callSiteKey}\"][\"expr\"]=\"{initialCallName}\"\n'
                 #再保存API的参数值
                 dicString2=f'paraValueDict[\"{callSiteKey}\"]=['
