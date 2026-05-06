@@ -626,6 +626,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         lineno=getImportLine(codeLst)
         codeLst.insert(lineno,'import dill\n')
         codeLst.insert(lineno,'import os\n')
+        codeLst.insert(lineno,'import json\n')
         codeLst.insert(lineno,'from codeUtils import *\n')
         mainLineno=0
         #计算__main__第一个非空行开头的空格数
@@ -675,6 +676,8 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
             (1, "k='@{}'.format(key)\n"),
             (1, "receiver=paraValueDict.get(k)\n"),
             (1, "candidates=[]\n"),
+            (1, "candidateManifest={'callsite':key,'covered':True,'candidates':[]}\n"),
+            (1, "manifestName=getFileName(key,'.manifest.json')\n"),
             (1, "if isinstance(receiver,dict) and ('object' in receiver or 'expr' in receiver):\n"),
             (2, "if 'object' in receiver:\n"),
             (3, "candidates.append(('__object',receiver['object']))\n"),
@@ -683,6 +686,9 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
             (1, "else:\n"),
             (2, "candidates.append(('',receiver))\n"),
             (1, "for suffix,receiverValue in candidates:\n"),
+            (2, "candidateKind=suffix[2:] if suffix else 'object'\n"),
+            (2, "candidateInfo={'callsite':key,'kind':candidateKind,'status':'pending','pkl':None}\n"),
+            (2, "candidateInfo['callsite']=key\n"),
             (2, "tempDict={}\n"),
             (2, "tempDict[key]=value\n"),
             (2, "if receiverValue is not None:\n"),
@@ -690,17 +696,24 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
             (2, "pklName=getFileName(key,'.pkl')\n"),
             (2, "if suffix:\n"),
             (3, "pklName=pklName[:-4]+suffix+'.pkl'\n"),
+            (2, "candidateInfo['pkl']=pklName\n"),
             (2, "tmpPklName=pklName+'.tmp'\n"),
             (2, "# 先写临时文件再原子替换，避免pickle失败时留下空pkl\n"),
             (2, "try:\n"),
             (3, f"with open('{pklPrefix}"+"/{}'.format(tmpPklName),'wb') as fw:\n"),
             (4, "dill.dump(tempDict,fw)\n"),
             (3, f"os.replace('{pklPrefix}"+"/{}'.format(tmpPklName),'"+f"{pklPrefix}"+"/{}'.format(pklName))\n"),
+            (3, "candidateInfo['status']='saved'\n"),
             (2, "except BaseException as e:\n"),
             (3, f"tmpPath='{pklPrefix}"+"/{}'.format(tmpPklName)\n"),
             (3, "if os.path.exists(tmpPath):\n"),
             (4, "os.remove(tmpPath)\n"),
+            (3, "candidateInfo['status']='save_failed'\n"),
+            (3, "candidateInfo['error']=str(e)\n"),
             (3, "print('save to pkl error: {}'.format(e))\n"),
+            (2, "candidateManifest['candidates'].append(candidateInfo)\n"),
+            (1, f"with open('{pklPrefix}"+"/{}'.format(manifestName),'w',encoding='utf-8') as fw:\n"),
+            (2, "json.dump(candidateManifest,fw,indent=4,ensure_ascii=False)\n"),
             (0, f"with open('{pklPrefix}/coverSet','w',encoding='utf-8') as fw:\n"),
             (1, "for it in apiCoveredSet:\n"),
             (2, "fw.write(it+'\\n')\n"),
@@ -733,6 +746,8 @@ def handleRunFile(file,runPath,runCommand):
     codeLst.insert(lineno,f"from recordValue import paraValueDict\n")
     codeLst.insert(lineno,'import dill\n')
     codeLst.insert(lineno,'import os\n')
+    codeLst.insert(lineno,'import json\n')
+    codeLst.insert(lineno,'from codeUtils import *\n')
     #寻找__main__所在的行
     flag=0
     spaceNum=0
@@ -778,6 +793,8 @@ def handleRunFile(file,runPath,runCommand):
         (1, "k='@{}'.format(key)\n"),
         (1, "receiver=paraValueDict.get(k)\n"),
         (1, "candidates=[]\n"),
+        (1, "candidateManifest={'callsite':key,'covered':True,'candidates':[]}\n"),
+        (1, "manifestName=getFileName(key,'.manifest.json')\n"),
         (1, "if isinstance(receiver,dict) and ('object' in receiver or 'expr' in receiver):\n"),
         (2, "if 'object' in receiver:\n"),
         (3, "candidates.append(('__object',receiver['object']))\n"),
@@ -786,22 +803,32 @@ def handleRunFile(file,runPath,runCommand):
         (1, "else:\n"),
         (2, "candidates.append(('',receiver))\n"),
         (1, "for suffix,receiverValue in candidates:\n"),
+        (2, "candidateKind=suffix[2:] if suffix else 'object'\n"),
+        (2, "candidateInfo={'callsite':key,'kind':candidateKind,'status':'pending','pkl':None}\n"),
+        (2, "candidateInfo['callsite']=key\n"),
         (2, "tempDict={}\n"),
         (2, "tempDict[key]=value\n"),
         (2, "if receiverValue is not None:\n"),
         (3, "tempDict[k]=receiverValue\n"),
         (2, "pklName='paraValue'+suffix+'.pkl'\n"),
+        (2, "candidateInfo['pkl']=pklName\n"),
         (2, "tmpPklName=pklName+'.tmp'\n"),
         (2, "# 先写临时文件再原子替换，避免pickle失败时留下空pkl\n"),
         (2, "try:\n"),
         (3, f"with open('{pklPrefix}"+"/{}'.format(tmpPklName),'wb') as fw:\n"),
         (4, "dill.dump(tempDict,fw)\n"),
         (3, f"os.replace('{pklPrefix}"+"/{}'.format(tmpPklName),'"+f"{pklPrefix}"+"/{}'.format(pklName))\n"),
+        (3, "candidateInfo['status']='saved'\n"),
         (2, "except BaseException as e:\n"),
         (3, f"tmpPath='{pklPrefix}"+"/{}'.format(tmpPklName)\n"),
         (3, "if os.path.exists(tmpPath):\n"),
         (4, "os.remove(tmpPath)\n"),
+        (3, "candidateInfo['status']='save_failed'\n"),
+        (3, "candidateInfo['error']=str(e)\n"),
         (3, "print('save to pkl error: {}'.format(e))\n"),
+        (2, "candidateManifest['candidates'].append(candidateInfo)\n"),
+        (1, f"with open('{pklPrefix}"+"/{}'.format(manifestName),'w',encoding='utf-8') as fw:\n"),
+        (2, "json.dump(candidateManifest,fw,indent=4,ensure_ascii=False)\n"),
     ]
     for level, text in saveLines:
         headLst.append(' ' * (base + unit * level) + text)
@@ -1162,6 +1189,8 @@ def codeProcess(projPath,runCommand,runPath,libName):
         file=f'Copy/bak_{projName}/{prefix}/'+file
         # print(prefix)
         handleRunFile(file,runPath,runCommand) 
+    # bak项目会在current pkl生成后换回Copy/{projName}，其运行文件也依赖codeUtils
+    shutil.copy2('Script/codeUtils.py',f'Copy/bak_{projName}/{prefix}')
     
     #处理完项目所有文件后，再给项目添加一个新的文件
     # with open(f"Copy/{projName}/{prefix}/recordValue.py",'w') as fw:
