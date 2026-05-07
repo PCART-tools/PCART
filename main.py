@@ -223,7 +223,6 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     resultLst=pool.map(backwardTask,tasks)
     pool.close() #关闭进程池，使其不再接受新的任务
     pool.join() #等待进程池中所有的任务执行完，否则主进程可能继续往下执行提前结束，而导致部分任务没有执行完
-    runCommand=f"python {runCommand}"
     # save2txt(resultLst,libName,runCommand,f"Report/{projName}.txt")
     save2txt(resultLst, libName, runCommand, os.path.join('Report', f'{projName}.txt'))
 
