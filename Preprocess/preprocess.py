@@ -7,12 +7,11 @@
 
 import re
 import ast
-import shlex
 import shutil
 from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
-from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName
+from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName, getRunFile
 
 
 
@@ -703,117 +702,6 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                 for it in codeLst[insertStartLine:]:
                     fw.write(it)
 
-    
-    #最后再判断一下该文件是否为该项目的运行文件
-    # fileName=filePath.split('/')[-1] #fileName带.py
-    fileName = os.path.basename(filePath)
-    inRunDir = True
-    if runPath:
-        normalized_rp = runPath.replace('\\', '/').strip('/')
-        inRunDir = fileRelativePath.replace('\\', '/').startswith(f'/{normalized_rp}/')
-    if fileName in runFileLst and inRunDir:
-        #寻找__main__所在的行
-        flag=0
-        spaceNum=0
-        lineno=getImportLine(codeLst)
-        codeLst.insert(lineno,'import dill\n')
-        codeLst.insert(lineno,'import os\n')
-        codeLst.insert(lineno,'import json\n')
-        codeLst.insert(lineno,'from codeUtils import *\n')
-        mainLineno=0
-        #计算__main__第一个非空行开头的空格数
-        for i in range(len(codeLst)):
-            if "if__name__=='__main__':" in codeLst[i].replace(' ',''):
-                flag=1
-                mainLineno=i 
-                continue
-            
-            if flag:
-                if codeLst[i]!='\n' and '#' not in codeLst[i]: #这个#号的判断后面可以再细致点
-                    spaceNum=countSpace(codeLst[i])
-                    break
-        
-        #再判断if __name__=='__main__'后面是否有paraValueDict
-        #若有的话，找到最后一个paraValueDict的位置，然后插入保存字典的代码块
-        
-        index=len(codeLst)-1
-        # if flag:
-        #     for i in range(mainLineno,len(codeLst)):
-        #         if 'paraValueDict[' in codeLst[i]:
-        #             spaceNum=countSpace(codeLst[i])
-        #             index=i
-        
-        headLst=codeLst[0:index+1]
-        trailLst=codeLst[index+1:]
-
-        pklPrefix=f"../../Copy/pkl"
-        
-        #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
-        #而文件操作的相对路径就是相对于命令执行的路径
-        if runPath!='' and runPath not in runCommand:
-            normalized_runPath = runPath.replace('\\', '/').strip('/')
-            l=len([segment for segment in normalized_runPath.split('/') if segment])
-            while l>0:
-                pklPrefix='../'+pklPrefix
-                l-=1
-        
-        
-        unit = spaceNum if spaceNum != 0 else 4
-        base = spaceNum if spaceNum != 0 else 0
-        # 每个候选pkl都保存完整的{callsite参数, @callsite接收者}，避免参数和接收者分属不同文件
-        saveLines = [
-            (0, "for key,value in paraValueDict.items():\n"),
-            (1, "if '@' in key:\n"),
-            (2, "continue\n"),
-            (1, "k='@{}'.format(key)\n"),
-            (1, "receiver=paraValueDict.get(k)\n"),
-            (1, "candidates=[]\n"),
-            (1, "candidateManifest={'callsite':key,'covered':True,'candidates':[]}\n"),
-            (1, "manifestName=getFileName(key,'.manifest.json')\n"),
-            (1, "if isinstance(receiver,dict) and ('object' in receiver or 'expr' in receiver):\n"),
-            (2, "if 'object' in receiver:\n"),
-            (3, "candidates.append(('__object',receiver['object']))\n"),
-            (2, "if 'expr' in receiver:\n"),
-            (3, "candidates.append(('__expr',receiver['expr']))\n"),
-            (1, "else:\n"),
-            (2, "candidates.append(('',receiver))\n"),
-            (1, "for suffix,receiverValue in candidates:\n"),
-            (2, "candidateKind=suffix[2:] if suffix else 'object'\n"),
-            (2, "candidateInfo={'callsite':key,'kind':candidateKind,'status':'pending','pkl':None}\n"),
-            (2, "candidateInfo['callsite']=key\n"),
-            (2, "tempDict={}\n"),
-            (2, "tempDict[key]=value\n"),
-            (2, "if receiverValue is not None:\n"),
-            (3, "tempDict[k]=receiverValue\n"),
-            (2, "pklName=getFileName(key,'.pkl')\n"),
-            (2, "if suffix:\n"),
-            (3, "pklName=pklName[:-4]+suffix+'.pkl'\n"),
-            (2, "candidateInfo['pkl']=pklName\n"),
-            (2, "tmpPklName=pklName+'.tmp'\n"),
-            (2, "# 先写临时文件再原子替换，避免pickle失败时留下空pkl\n"),
-            (2, "try:\n"),
-            (3, f"with open('{pklPrefix}"+"/{}'.format(tmpPklName),'wb') as fw:\n"),
-            (4, "dill.dump(tempDict,fw)\n"),
-            (3, f"os.replace('{pklPrefix}"+"/{}'.format(tmpPklName),'"+f"{pklPrefix}"+"/{}'.format(pklName))\n"),
-            (3, "candidateInfo['status']='saved'\n"),
-            (2, "except BaseException as e:\n"),
-            (3, f"tmpPath='{pklPrefix}"+"/{}'.format(tmpPklName)\n"),
-            (3, "if os.path.exists(tmpPath):\n"),
-            (4, "os.remove(tmpPath)\n"),
-            (3, "candidateInfo['status']='save_failed'\n"),
-            (3, "candidateInfo['error']=str(e)\n"),
-            (3, "print('save to pkl error: {}'.format(e))\n"),
-            (2, "candidateManifest['candidates'].append(candidateInfo)\n"),
-            (1, f"with open('{pklPrefix}"+"/{}'.format(manifestName),'w',encoding='utf-8') as fw:\n"),
-            (2, "json.dump(candidateManifest,fw,indent=4,ensure_ascii=False)\n"),
-            (0, f"with open('{pklPrefix}/coverSet','w',encoding='utf-8') as fw:\n"),
-            (1, "for it in apiCoveredSet:\n"),
-            (2, "fw.write(it+'\\n')\n"),
-        ]
-        for level, text in saveLines:
-            headLst.append(' ' * (base + unit * level) + text)
-
-        codeLst=headLst+trailLst    
     if codeLst[0]=='pass\n':
         codeLst=codeLst[1:]
     with open(filePath,'w',encoding='UTF-8') as fw:
@@ -836,96 +724,6 @@ def handleRunFile(file,runPath,runCommand):
         codeLst=fr.readlines()
     lineno=getImportLine(codeLst)
     codeLst.insert(lineno,f"from recordValue import paraValueDict\n")
-    codeLst.insert(lineno,'import dill\n')
-    codeLst.insert(lineno,'import os\n')
-    codeLst.insert(lineno,'import json\n')
-    codeLst.insert(lineno,'from codeUtils import *\n')
-    #寻找__main__所在的行
-    flag=0
-    spaceNum=0
-    mainLineno=0
-    #计算__main__第一个非空行开头的空格数
-    for i in range(len(codeLst)):
-        if "if__name__=='__main__':" in codeLst[i].replace(' ',''):
-            flag=1
-            mainLineno=i
-            continue
-    
-        if flag:
-            if codeLst[i]!='\n' and '#' not in codeLst[i]: #这个#号的判断后面可以再细致点
-                spaceNum=countSpace(codeLst[i])
-                break
-    
-    #再判断if __name__=='__main__'后面是否有paraValueDict
-    #若有的话，找到最后一个paraValueDict的位置，然后插入保存字典的代码块
-    index=len(codeLst)-1
-    for i in range(mainLineno,len(codeLst)):
-        if 'paraValueDict[' in codeLst[i]:
-            index=i
-    
-    headLst=codeLst[0:index+1]
-    trailLst=codeLst[index+1:]
-
-    #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
-    #而文件操作的相对路径就是相对于命令执行的路径
-    pklPrefix=f"../../Copy/pkl"
-    if runPath!='' and runPath not in runCommand:
-        normalized_runPath = runPath.replace('\\', '/').strip('/')
-        l=len([segment for segment in normalized_runPath.split('/') if segment])
-        while l>0:
-            pklPrefix='../'+pklPrefix
-            l-=1
-    unit = spaceNum if spaceNum != 0 else 4
-    base = spaceNum if spaceNum != 0 else 0
-    # 动态重生成pkl时先保存通用候选文件，Map阶段再改名为具体API调用点文件
-    saveLines = [
-        (0, "for key,value in paraValueDict.items():\n"),
-        (1, "if '@' in key:\n"),
-        (2, "continue\n"),
-        (1, "k='@{}'.format(key)\n"),
-        (1, "receiver=paraValueDict.get(k)\n"),
-        (1, "candidates=[]\n"),
-        (1, "candidateManifest={'callsite':key,'covered':True,'candidates':[]}\n"),
-        (1, "manifestName=getFileName(key,'.manifest.json')\n"),
-        (1, "if isinstance(receiver,dict) and ('object' in receiver or 'expr' in receiver):\n"),
-        (2, "if 'object' in receiver:\n"),
-        (3, "candidates.append(('__object',receiver['object']))\n"),
-        (2, "if 'expr' in receiver:\n"),
-        (3, "candidates.append(('__expr',receiver['expr']))\n"),
-        (1, "else:\n"),
-        (2, "candidates.append(('',receiver))\n"),
-        (1, "for suffix,receiverValue in candidates:\n"),
-        (2, "candidateKind=suffix[2:] if suffix else 'object'\n"),
-        (2, "candidateInfo={'callsite':key,'kind':candidateKind,'status':'pending','pkl':None}\n"),
-        (2, "candidateInfo['callsite']=key\n"),
-        (2, "tempDict={}\n"),
-        (2, "tempDict[key]=value\n"),
-        (2, "if receiverValue is not None:\n"),
-        (3, "tempDict[k]=receiverValue\n"),
-        (2, "pklName='paraValue'+suffix+'.pkl'\n"),
-        (2, "candidateInfo['pkl']=pklName\n"),
-        (2, "tmpPklName=pklName+'.tmp'\n"),
-        (2, "# 先写临时文件再原子替换，避免pickle失败时留下空pkl\n"),
-        (2, "try:\n"),
-        (3, f"with open('{pklPrefix}"+"/{}'.format(tmpPklName),'wb') as fw:\n"),
-        (4, "dill.dump(tempDict,fw)\n"),
-        (3, f"os.replace('{pklPrefix}"+"/{}'.format(tmpPklName),'"+f"{pklPrefix}"+"/{}'.format(pklName))\n"),
-        (3, "candidateInfo['status']='saved'\n"),
-        (2, "except BaseException as e:\n"),
-        (3, f"tmpPath='{pklPrefix}"+"/{}'.format(tmpPklName)\n"),
-        (3, "if os.path.exists(tmpPath):\n"),
-        (4, "os.remove(tmpPath)\n"),
-        (3, "candidateInfo['status']='save_failed'\n"),
-        (3, "candidateInfo['error']=str(e)\n"),
-        (3, "print('save to pkl error: {}'.format(e))\n"),
-        (2, "candidateManifest['candidates'].append(candidateInfo)\n"),
-        (1, f"with open('{pklPrefix}"+"/{}'.format(manifestName),'w',encoding='utf-8') as fw:\n"),
-        (2, "json.dump(candidateManifest,fw,indent=4,ensure_ascii=False)\n"),
-    ]
-    for level, text in saveLines:
-        headLst.append(' ' * (base + unit * level) + text)
-
-    codeLst=headLst+trailLst
 
     if codeLst[0]=='pass\n':
         codeLst=codeLst[1:]
@@ -1171,6 +969,87 @@ def convertTabsToSpaces(directory):
 
 
 
+## Write recordValue.py used by instrumented project files
+## 写入插桩文件共享的recordValue.py
+#
+#  @param filePath The path of recordValue.py
+#  @param pklRelPath The relative path from recordValue.py to Copy/pkl
+#  @param useCallsiteName Whether to save pkl with callsite filename
+def writeRecordValue(filePath,pklRelPath,useCallsiteName):
+    with open(filePath,'w',encoding='UTF-8') as fw:
+        fw.write('import os\n')
+        fw.write('import atexit\n')
+        fw.write('import dill\n')
+        fw.write('import json\n')
+        fw.write('from codeUtils import getFileName\n')
+        fw.write('\n')
+        fw.write('paraValueDict={}\n')
+        fw.write('apiCoveredSet=set()\n')
+        fw.write('\n')
+        fw.write('def _pcart_save_pkls():\n')
+        fw.write('    pkl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), ')
+        fw.write(repr(pklRelPath))
+        fw.write(')\n')
+        fw.write('    os.makedirs(pkl_dir, exist_ok=True)\n')
+        fw.write('    for key, value in paraValueDict.items():\n')
+        fw.write('        if "@" in key:\n')
+        fw.write('            continue\n')
+        fw.write('        k = "@{}".format(key)\n')
+        fw.write('        receiver = paraValueDict.get(k)\n')
+        fw.write('        candidates = []\n')
+        fw.write('        candidateManifest = {"callsite": key, "covered": True, ')
+        fw.write('"candidates": []}\n')
+        fw.write('        manifestName = getFileName(key, ".manifest.json")\n')
+        fw.write('        if isinstance(receiver, dict) and ("object" in receiver ')
+        fw.write('or "expr" in receiver):\n')
+        fw.write('            if "object" in receiver:\n')
+        fw.write('                candidates.append(("__object", receiver["object"]))\n')
+        fw.write('            if "expr" in receiver:\n')
+        fw.write('                candidates.append(("__expr", receiver["expr"]))\n')
+        fw.write('        else:\n')
+        fw.write('            candidates.append(("", receiver))\n')
+        fw.write('        for suffix, receiverValue in candidates:\n')
+        fw.write('            candidateKind = suffix[2:] if suffix else "object"\n')
+        fw.write('            candidateInfo = {"callsite": key, "kind": candidateKind, ')
+        fw.write('"status": "pending", "pkl": None}\n')
+        fw.write('            tempDict = {}\n')
+        fw.write('            tempDict[key] = value\n')
+        fw.write('            if receiverValue is not None:\n')
+        fw.write('                tempDict[k] = receiverValue\n')
+        if useCallsiteName:
+            fw.write('            pklName = getFileName(key, ".pkl")\n')
+            fw.write('            if suffix:\n')
+            fw.write('                pklName = pklName[:-4] + suffix + ".pkl"\n')
+        else:
+            fw.write('            pklName = "paraValue" + suffix + ".pkl"\n')
+        fw.write('            candidateInfo["pkl"] = pklName\n')
+        fw.write('            tmpPklName = pklName + ".tmp"\n')
+        fw.write('            try:\n')
+        fw.write('                with open(os.path.join(pkl_dir, tmpPklName), "wb") as fw_pkl:\n')
+        fw.write('                    dill.dump(tempDict, fw_pkl)\n')
+        fw.write('                os.replace(os.path.join(pkl_dir, tmpPklName),\n')
+        fw.write('                           os.path.join(pkl_dir, pklName))\n')
+        fw.write('                candidateInfo["status"] = "saved"\n')
+        fw.write('            except BaseException as e:\n')
+        fw.write('                tmpPath = os.path.join(pkl_dir, tmpPklName)\n')
+        fw.write('                if os.path.exists(tmpPath):\n')
+        fw.write('                    os.remove(tmpPath)\n')
+        fw.write('                candidateInfo["status"] = "save_failed"\n')
+        fw.write('                candidateInfo["error"] = str(e)\n')
+        fw.write('                print("save to pkl error: {}".format(e))\n')
+        fw.write('            candidateManifest["candidates"].append(candidateInfo)\n')
+        fw.write('        with open(os.path.join(pkl_dir, manifestName), "w", ')
+        fw.write('encoding="utf-8") as fw_m:\n')
+        fw.write('            json.dump(candidateManifest, fw_m, indent=4, ')
+        fw.write('ensure_ascii=False)\n')
+        fw.write('    with open(os.path.join(pkl_dir, "coverSet"), "w", ')
+        fw.write('encoding="utf-8") as fw_cs:\n')
+        fw.write('        for it in apiCoveredSet:\n')
+        fw.write('            fw_cs.write(it + "\\n")\n')
+        fw.write('\n')
+        fw.write('atexit.register(_pcart_save_pkls)\n')
+
+
 ## Code processing
 ## 代码预处理
 #
@@ -1187,16 +1066,16 @@ def convertTabsToSpaces(directory):
 def codeProcess(projPath,runCommand,runPath,libName):
     #提取运行的文件
     runFileLst=[]
-    temp=shlex.split(runCommand) #把命令按空格拆分
-    runFile=temp[0]
+    runFile=getRunFile(runCommand)
     prefix='' #运行文件所在的目录，默认是在项目的一级子目录下
     # if '/' in runFile:
-    if '/' in runFile or '\\' in runFile:
+    if runFile and ('/' in runFile or '\\' in runFile):
         # prefix=runFile.rsplit('/',1)[0]
         prefix = os.path.dirname(runFile)
         # runFile=runFile.rsplit('/',1)[1] #去掉路径前缀，只保留文件名即run.py
         runFile = os.path.basename(runFile)
-    runFileLst.append(runFile)
+    if runFile:
+        runFileLst.append(runFile)
     #这种情况针对于python run.py, run.py在其它目录中比如src，则prefix就是src 
     #若是python src/run.py, 则prexfix和runPath是一致的
     if runPath!='' and prefix!=runPath:
@@ -1267,10 +1146,13 @@ def codeProcess(projPath,runCommand,runPath,libName):
 
 
     shutil.copytree(f'Copy/{projName}',f'Copy/bak_{projName}')
-    # with open(f"Copy/bak_{projName}/{prefix}/recordValue.py",'w') as fw:
-    with open(f"Copy/bak_{projName}/{prefix}/recordValue.py", 'w', encoding='UTF-8') as fw:
-        fw.write('paraValueDict={}\n')
-        fw.write('apiCoveredSet=set()\n') 
+
+    # 计算recordValue.py到Copy/pkl的相对路径
+    pklDepth=1
+    if prefix:
+        pklDepth+=len([s for s in prefix.replace('\\','/').strip('/').split('/') if s])
+    pklRelPath='/'.join(['..']*pklDepth+['pkl'])
+    writeRecordValue(f"Copy/bak_{projName}/{prefix}/recordValue.py",pklRelPath,0)
     
     
     for file in filePath:
@@ -1285,9 +1167,8 @@ def codeProcess(projPath,runCommand,runPath,libName):
     shutil.copy2('Script/codeUtils.py',f'Copy/bak_{projName}/{prefix}')
     
     #处理完项目所有文件后，再给项目添加一个新的文件
-    # with open(f"Copy/{projName}/{prefix}/recordValue.py",'w') as fw:
-    with open(f"Copy/{projName}/{prefix}/recordValue.py", 'w', encoding='UTF-8') as fw:
-        fw.write('paraValueDict={}\n')
-        fw.write('apiCoveredSet=set()\n')
+    writeRecordValue(f"Copy/{projName}/{prefix}/recordValue.py",pklRelPath,1)
     
     shutil.copy2('Script/codeUtils.py',f'Copy/{projName}/{runPath}') 
+    if prefix!=runPath:
+        shutil.copy2('Script/codeUtils.py',f'Copy/{projName}/{prefix}')

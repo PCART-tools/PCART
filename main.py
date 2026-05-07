@@ -11,7 +11,6 @@ import json
 import time
 import shutil
 import subprocess
-import shlex
 from Path.getPath import *
 from Map.map import mapAPI
 from multiprocessing import Pool
@@ -19,7 +18,7 @@ from multiprocessing import Manager
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
-from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,resolvePythonExecutable
+from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,buildRunCommand
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
@@ -176,17 +175,15 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     #     command=f'cd Copy/{projName};{pythonPath}{runCommand}'
     # else: #针对于python run.py,但执行路径位于scr下,此处的runPath也可能为空
     #     command=f'cd Copy/{projName}/{runPath};{pythonPath}{runCommand}'
-    # 1. python 路径自动适配
-    pythonPath = resolvePythonExecutable(currentEnv)
-    # 2. cwd 自动适配：使用 subprocess cwd 参数替代 shell cd
+    # cwd 自动适配：使用 subprocess cwd 参数替代 shell cd
     if runPath and runPath not in runCommand:
         cwd = os.path.join('Copy', projName, runPath)
     else:
         cwd = os.path.join('Copy', projName)
     print('Running the project...')
+    cmd=buildRunCommand(runCommand,currentEnv)
     createResult = subprocess.run(
-        [pythonPath] + shlex.split(runCommand),
-        cwd=cwd, capture_output=True, text=True, encoding='utf-8'
+        cmd, cwd=cwd, capture_output=True, text=True, encoding='utf-8'
     )
     if createResult.returncode!=0:
         print(f'Failure to generate PKL in current version')

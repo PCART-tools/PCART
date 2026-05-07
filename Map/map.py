@@ -9,10 +9,9 @@ import os
 import json
 import shutil
 import subprocess
-import shlex
 from Map.fuzzyMatch import *
 from Load.loadData import loadLib
-from Tool.tool import removeParameter,getFileName,resolvePythonExecutable
+from Tool.tool import removeParameter,getFileName,resolvePythonExecutable,buildRunCommand
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import addDictSingle
 
@@ -240,9 +239,9 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                 else:
                     copy_cwd = os.path.join('Copy', projName)
                 # generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
+                cmd=buildRunCommand(runCommand,virtualEnv)
                 generateResult = subprocess.run(
-                    [pythonPath] + shlex.split(runCommand),
-                    cwd=copy_cwd, capture_output=True, text=True, encoding='utf-8'
+                    cmd, cwd=copy_cwd, capture_output=True, text=True, encoding='utf-8'
                 )
                 if generateResult.returncode==0:
                     # target环境重生成时保留object/expr候选顺序，避免退回混合老格式pkl
