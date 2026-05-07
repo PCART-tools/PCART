@@ -77,6 +77,59 @@ def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传�
     return ansDict 
 
 
+## Save dynamic match result snapshot
+## 保存动态匹配结果快照
+#
+#  @param pklKey The callsite key used to locate the pkl/json data
+#  @param version The lib version used in this dynamic match
+#  @param curr Current version flag, 1 for current and 0 for target
+#  @param dynamicMatchDict Dynamic match result loaded from dynamicMatch.py
+#  @param pklFile The pkl candidate file used by this dynamic match
+#
+def saveDynamicMatchSnapshot(pklKey,version,curr,dynamicMatchDict,pklFile=None):
+    if not isinstance(dynamicMatchDict,dict):
+        return
+    phase='current' if curr else 'target'
+    # getFileName(...,'.json')会处理Windows非法文件名字符，再去掉扩展名用于拼接快照文件名
+    safeKey=getFileName(pklKey,'.json')[:-5]
+    safeVersion=str(version).replace(os.sep,'_').replace('/','_').replace('\\','_')
+    snapshotDict=dict(dynamicMatchDict)
+    # 保留current/target最终动态匹配结果，原dynamicMatch.json仍作为子进程通信文件
+    snapshotDict['_pcart']={
+        'phase': phase,
+        'version': str(version),
+        'callKey': pklKey,
+    }
+    if pklFile is not None:
+        snapshotDict['_pcart']['pklFile']=pklFile
+    os.makedirs('data',exist_ok=True)
+    fileName=f"{phase}_{safeKey}_{safeVersion}_dynamicMatch.json"
+    with open(f"data/{fileName}",'w',encoding='UTF-8') as fw:
+        json.dump(snapshotDict,fw,indent=4,ensure_ascii=False)
+
+
+## Check whether a callsite candidate manifest records pkl save failure
+## 检查调用点候选清单是否记录了pkl保存失败
+#
+#  @param pklKey The callsite key used to locate the manifest
+#  @return result Whether any candidate was covered but failed to save
+def hasSaveFailedManifest(pklKey):
+    manifestPath=f"Copy/pkl/{getFileName(pklKey,'.manifest.json')}"
+    if not os.path.exists(manifestPath):
+        return False
+    try:
+        with open(manifestPath,'r',encoding='UTF-8') as fr:
+            manifest=json.load(fr)
+    except Exception:
+        return False
+    if not manifest.get('covered'):
+        return False
+    for candidate in manifest.get('candidates',[]):
+        if candidate.get('status')=='save_failed':
+            return True
+    return False
+
+
 
 ## Dynamic mapping of API signatures
 ## API签名动态匹配 
@@ -92,10 +145,13 @@ def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传�
 #  @param errLst Error list
 #  @param curr=1 Current version flag
 #  @return dynamicMatchDict Mapped API signatures 
-def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1):
+def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1,callKey=None):
     # pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径
     pythonPath = resolvePythonExecutable(virtualEnv)
-    pklFile=getFileName(callAPI,'.pkl')
+    pklKey = callKey or callAPI
+    pklFile=getFileName(pklKey,'.pkl')
+    # withitem调用优先尝试运行时对象，其次尝试还原表达式，最后兼容旧版单pkl
+    pklCandidateFiles=[pklFile[:-4]+'__object.pkl',pklFile[:-4]+'__expr.pkl',pklFile]
     pklPrefix='../..'
     jsonPrefix='../..'
 
@@ -108,9 +164,6 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
             pklPrefix='../'+pklPrefix
             jsonPrefix='../'+jsonPrefix
             l-=1
-
-    if not os.path.exists(f"Copy/pkl/{pklFile}"):
-        return False
 
     # if runPath!='':
     #     if runPath not in runCommand:
@@ -125,13 +178,43 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     else:
         dynamic_cwd = os.path.join('Dynamic', projName)
         dynamic_script = os.path.join(runPath, 'dynamicMatch.py') if runPath else 'dynamicMatch.py'
-    pkl_arg = os.path.join(pklPrefix, 'Copy', 'pkl', pklFile)
-    matchResult = subprocess.run(
-        [pythonPath, dynamic_script, pkl_arg, callAPI, jsonPrefix],
-        cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
-    )
-    stdout = matchResult.stdout
-    stderr = matchResult.stderr
+    lastResult = None
+    lastDynamicMatchDict = None
+    existingPklFiles=[file for file in pklCandidateFiles if os.path.exists(f"Copy/pkl/{file}")]
+    if not existingPklFiles:
+        if curr or not hasSaveFailedManifest(pklKey):
+            return False
+        lastResult=subprocess.CompletedProcess([],1,'','manifest save_failed')
+    else:
+        for candidatePklFile in existingPklFiles:
+            # 某个候选返回nullptr时继续尝试下一个候选，避免可inspect调用被提前判为static
+            pkl_arg = os.path.join(pklPrefix, 'Copy', 'pkl', candidatePklFile)
+            matchResult = subprocess.run(
+                [pythonPath, dynamic_script, pkl_arg, callAPI, jsonPrefix, pklKey],
+                cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
+            )
+            lastResult = matchResult
+            if matchResult.returncode == 0:
+                fileName=getFileName(pklKey,'_dynamicMatch.json')
+                with open(f"data/{fileName}",'r',encoding='UTF-8') as fr:
+                    try:
+                        dynamicMatchDict=json.load(fr)
+                    except Exception as e:
+                        dynamicMatchDict=None
+                        print(f"json load data/{fileName} failed: {e}\n")
+                lastDynamicMatchDict = dynamicMatchDict
+                if dynamicMatchDict and dynamicMatchDict.get('match') != 'nullptr':
+                    saveDynamicMatchSnapshot(pklKey,version,curr,dynamicMatchDict,candidatePklFile)
+                    return dynamicMatchDict
+                continue
+            continue
+
+    if lastResult is None:
+        return False
+
+    stdout = lastResult.stdout
+    stderr = lastResult.stderr
+    matchResult = lastResult
 
     # print(f"{callAPI}{version}")
     # print(matchResult.stdout,matchResult.stderr)
@@ -150,8 +233,8 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
             loadError=f"{callAPI}, Failed to load pkl in target version{version}: {matchResult.stderr}\n" 
             with lock:
                 shutil.copy2(copyFile,f"{copyFile}.bak")
-                addDictSingle(callAPI,copyFile) #添加字典并运行，在当前文件中添加字典，在运行文件中
-                pklFile='new_'+pklFile #更新pkl文件名
+                addDictSingle(callAPI,copyFile,pklKey) #添加字典并运行，在当前文件中添加字典，在运行文件中
+                regeneratedPklFiles=[]
                 if runPath and runPath not in runCommand:
                     copy_cwd = os.path.join('Copy', projName, runPath)
                 else:
@@ -162,11 +245,19 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                     cwd=copy_cwd, capture_output=True, text=True, encoding='utf-8'
                 )
                 if generateResult.returncode==0:
-                    shutil.move(
-                        os.path.join('Copy', 'pkl', 'paraValue.pkl'),
-                        os.path.join('Copy', 'pkl', pklFile)
-                    )
-            
+                    # target环境重生成时保留object/expr候选顺序，避免退回混合老格式pkl
+                    regeneratedCandidates=[
+                        ('paraValue__object.pkl','new_'+pklFile[:-4]+'__object.pkl'),
+                        ('paraValue__expr.pkl','new_'+pklFile[:-4]+'__expr.pkl'),
+                        ('paraValue.pkl','new_'+pklFile),
+                    ]
+                    for sourceName,targetName in regeneratedCandidates:
+                        sourcePath=os.path.join('Copy','pkl',sourceName)
+                        if os.path.exists(sourcePath):
+                            targetPath=os.path.join('Copy','pkl',targetName)
+                            os.replace(sourcePath,targetPath)
+                            regeneratedPklFiles.append(targetName)
+             
                 #插桩完后，再将备份后的文件进行还原
                 os.remove(copyFile)
                 shutil.move(f'{copyFile}.bak',copyFile)
@@ -176,34 +267,41 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                 errLst.append(f'[{version}]{callAPI}, generate new pkl failed: {generateResult.stderr}\n')
                 return False
             else:
-                pkl_arg = os.path.join(pklPrefix, 'Copy', 'pkl', pklFile)
-                matchResult = subprocess.run(
-                    [pythonPath, dynamic_script, pkl_arg, callAPI, jsonPrefix],
-                    cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
-                )
-                if matchResult.returncode!=0:
-                    errLst.append(f"[{version}]{callAPI}, load new pkl failed: {matchResult.stderr}\n") 
+                if not regeneratedPklFiles:
+                    errLst.append(f'[{version}]{callAPI}, generate new pkl failed: no pkl file generated\n')
                     return False
-                else:
-                    fileName=getFileName(callAPI,'_dynamicMatch.json')
+                for regeneratedPklFile in regeneratedPklFiles:
+                    pkl_arg = os.path.join(pklPrefix, 'Copy', 'pkl', regeneratedPklFile)
+                    matchResult = subprocess.run(
+                        [pythonPath, dynamic_script, pkl_arg, callAPI, jsonPrefix, pklKey],
+                        cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
+                    )
+                    if matchResult.returncode!=0:
+                        continue
+                    fileName=getFileName(pklKey,'_dynamicMatch.json')
                     with open(f"data/{fileName}",'r',encoding='UTF-8') as fr:
                         try:
                             dynamicMatchDict=json.load(fr)
                         except Exception as e:
+                            dynamicMatchDict=None
                             print(f"json load data/{fileName} failed: {e}\n")
-                    return dynamicMatchDict
+                    if dynamicMatchDict and dynamicMatchDict.get('match') != 'nullptr':
+                        saveDynamicMatchSnapshot(pklKey,version,curr,dynamicMatchDict,regeneratedPklFile)
+                        return dynamicMatchDict
+                    lastDynamicMatchDict=dynamicMatchDict
+                if lastDynamicMatchDict:
+                    saveDynamicMatchSnapshot(pklKey,version,curr,lastDynamicMatchDict)
+                    return lastDynamicMatchDict
+                errLst.append(f"[{version}]{callAPI}, load new pkl failed: {matchResult.stderr}\n") 
+                return False
 
         else:
             return False    
 
     else:
-        fileName=getFileName(callAPI,'_dynamicMatch.json')
-        with open(f"data/{fileName}",'r',encoding='UTF-8') as fr:
-            try:
-                dynamicMatchDict=json.load(fr)
-            except Exception as e:
-                print(f"json load data/{fileName} failed: {e}\n")
-        return dynamicMatchDict
+        if lastDynamicMatchDict:
+            saveDynamicMatchSnapshot(pklKey,version,curr,lastDynamicMatchDict)
+        return lastDynamicMatchDict
 
 
 
@@ -225,8 +323,8 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
 #  @param errLst Error list
 #  @param curr=1 Current version flag
 #  @return ans Mapped API signatures 
-def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,version,virtualEnv,lock,errLst,curr=1):
-    dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr)
+def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,version,virtualEnv,lock,errLst,curr=1,callKey=None):
+    dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr,callKey)
     ans={}
     ans['format']=formatAPI
     if dynamicMatchDict!=False: #若动态匹配成功,还要对动态匹配的结果进行检查

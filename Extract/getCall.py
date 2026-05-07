@@ -149,17 +149,36 @@ def modifyFirstName(prefix, callName, paraStr, codeLst):
 #  @param callName API call item in source code
 #  @param withitemCallName A dict stores the alias and its counterpart withitem call name
 #  @return The conventional API call path
-def modifyWithName(callName, withitemCallName):
+def modifyWithName(callName, withitemCallName, lineno=None):
     name_parts = callName.split('.') #按.进行字段拆分
     firstModify = callName
     modifyFlag = 0
     if name_parts[0] in withitemCallName:
-        firstModify = withitemCallName[name_parts[0]] + '.' + '.'.join(name_parts[1:])
-        modifyFlag = 1
+        withitem = withitemCallName[name_parts[0]]
+        if isinstance(withitem, list):
+            candidates = withitem
+            if lineno is not None:
+                # with别名同名时，只使用覆盖当前调用行号的候选，避免外层/兄弟作用域误还原
+                scoped = []
+                for item in candidates:
+                    start = item.get('lineno')
+                    end = item.get('end_lineno')
+                    if start is not None and end is not None and start <= lineno <= end:
+                        scoped.append(item)
+                candidates = scoped
+            if candidates:
+                # 嵌套with中内层别名优先；行号越靠后的候选作用域越内层
+                candidates = sorted(candidates, key=lambda item: item.get('lineno') or -1)
+                withitem = candidates[-1].get('callName')
+            else:
+                withitem = None
+        if withitem:
+            firstModify = withitem + '.' + '.'.join(name_parts[1:])
+            modifyFlag = 1
 
     #找到了withitem call，重新试探一下前面是否还有withitem call语句
     if modifyFlag:
-        return modifyWithName(firstModify, withitemCallName)
+        return modifyWithName(firstModify, withitemCallName, lineno)
     #若没有，则直接结束 
     else:
         return callName 
@@ -255,7 +274,7 @@ def getCallFunction(filePath,libName):
 
             # #再将withitem call的别名还原为真名（如有）-- 2025/5/19
             if len(withitem_call_names) !=0:
-                firstModify = modifyWithName(callName, withitem_call_names)
+                firstModify = modifyWithName(callName, withitem_call_names, lineno)
                 secondModify = firstModify
 
             # #最后将import的别名还原成真名

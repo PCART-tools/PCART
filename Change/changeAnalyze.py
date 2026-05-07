@@ -627,15 +627,26 @@ def isCompatible(current,target):
 #  @parami errLst Error message logging list
 #  @return lst[0] The API call string with added parameter values (load from pkl file) 
 # def addValueForAPI(callAPI,projName,runPath,runCommand,virtualEnv,errLst):
-def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst):
-    pklName=getFileName(callAPI,'.pkl')
+def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=None):
+    pklKey = callKey or callAPI
+    pklName=getFileName(pklKey,'.pkl')
     flag=0
-    if os.path.exists(f"Copy/pkl/new_{pklName}"):
-        flag=1
-        pklPath=f"../../Copy/pkl/new_{pklName}"
-    elif os.path.exists(f"Copy/pkl/{pklName}"):
-        pklPath=f"../../Copy/pkl/{pklName}"
-    else:
+    # 参数补值沿用动态匹配的候选顺序，并优先使用目标环境重新生成的pkl
+    pklCandidates=[
+        ('new_'+pklName[:-4]+'__object.pkl',1),
+        ('new_'+pklName[:-4]+'__expr.pkl',1),
+        ('new_'+pklName,1),
+        (pklName[:-4]+'__object.pkl',0),
+        (pklName[:-4]+'__expr.pkl',0),
+        (pklName,0),
+    ]
+    pklPath=''
+    for candidateName,candidateFlag in pklCandidates:
+        if os.path.exists(f"Copy/pkl/{candidateName}"):
+            flag=candidateFlag
+            pklPath=f"../../Copy/pkl/{candidateName}"
+            break
+    if not pklPath:
         return ''
     
     # pklPath=f"../../Copy/pkl/{pklName}"
@@ -672,7 +683,7 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
         cwd = os.path.join('Dynamic', projName)
         script = 'addValueForAPI.py'
     matchResult = subprocess.run(
-        [pythonPath, script, pklPath, callAPI],
+        [pythonPath, script, pklPath, callAPI, pklKey],
         cwd=cwd, capture_output=True, text=True, encoding='utf-8'
     )
     # print(command)

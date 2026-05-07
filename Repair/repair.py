@@ -265,15 +265,25 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
 #  @param runPath The relative path of the run file
 #  @param runCommand The run command of the project
 #  @return result Dynamic validation result
-def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand):
+def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,callKey=None):
     if apiWithValue=='':
         return None
-    pklName=getFileName(callAPI,'.pkl')
-    if os.path.exists(f"Copy/pkl/new_{pklName}"): #优先加载新版本的PKL
-        pklPath=f"../../Copy/pkl/new_{pklName}"
-    elif os.path.exists(f'Copy/pkl/{pklName}'):
-        pklPath=f"../../Copy/pkl/{pklName}"
-    else:
+    pklName=getFileName(callKey or callAPI,'.pkl')
+    # 验证阶段复用候选pkl顺序，保证修复验证和动态匹配读取的是同一类接收者
+    pklCandidates=[
+        'new_'+pklName[:-4]+'__object.pkl',
+        'new_'+pklName[:-4]+'__expr.pkl',
+        'new_'+pklName,
+        pklName[:-4]+'__object.pkl',
+        pklName[:-4]+'__expr.pkl',
+        pklName,
+    ]
+    pklPath=''
+    for candidateName in pklCandidates:
+        if os.path.exists(f"Copy/pkl/{candidateName}"):
+            pklPath=f"../../Copy/pkl/{candidateName}"
+            break
+    if not pklPath:
         return None
 
     #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
@@ -359,7 +369,7 @@ def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
 #  @param virtualEnv The virtual environment of the target lib version
 #  @param errLst List of error messages
 #  @return repairResults 
-def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst):
+def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst,callKey=None):
     #静态修复,pkl加载失败，只能进入静态修复
     repairCandidates=[]
     if apiWithValue=='':
@@ -413,7 +423,7 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
         fix(apiWithValue,repairDict,apiRoot,starFlag,twoStarFlag)
         apiWithValueFixed=ast.unparse(apiRoot)
         #1先通过动态运行,判断其是否修复成功
-        result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand)
+        result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand,callKey)
         if result==None:
             if fixedAPI not in repairCandidates:
                 repairCandidates.append(fixedAPI)

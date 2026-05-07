@@ -85,14 +85,40 @@ class GetFuncCall:
 #  对于withitem节点，提取其中的call节点和别名（如果有）
 class WithVisitor(ast.NodeVisitor):
     def __init__(self):
+        # 同名with别名可能在不同作用域重复出现，因此按别名保存所有候选及其行号范围
         self._withitemCall={}
     
     def get_withitem_call(self):
         return self._withitemCall
 
+    def visit_With(self, node):
+        # 手动遍历body，避免generic_visit再次访问withitem导致重复记录
+        self._visit_with_items(node)
+        for stmt in node.body:
+            self.visit(stmt)
+
+    def visit_AsyncWith(self, node):
+        # AsyncWith和With保持相同的withitem别名还原规则
+        self._visit_with_items(node)
+        for stmt in node.body:
+            self.visit(stmt)
+
+    def _visit_with_items(self, node):
+        for item in node.items:
+            self._record_withitem(item, node)
+
     def visit_withitem(self, node):
+        self._record_withitem(node)
+
+    def _record_withitem(self, node, parent=None):
         if isinstance(node.context_expr, ast.Call):
             if node.optional_vars:
                 callName =  ast.unparse(node.context_expr)
                 aliasName = ast.unparse(node.optional_vars)
-                self._withitemCall[aliasName] = callName
+                # lineno/end_lineno用于后续按调用点选择当前作用域内的withitem
+                item = {
+                    'callName': callName,
+                    'lineno': getattr(parent, 'lineno', None),
+                    'end_lineno': getattr(parent, 'end_lineno', None),
+                }
+                self._withitemCall.setdefault(aliasName, []).append(item)
