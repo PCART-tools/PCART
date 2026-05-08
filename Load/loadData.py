@@ -5,6 +5,7 @@
 
 
 
+import os
 import re
 import json
 from Path.getPath import Path
@@ -22,8 +23,10 @@ from Tool.tool import cmp
 #  @return assignDict The assign dict stores the alias of APIs
 #  @return libAPIins The built-in APIs' definitions 
 def loadLib(libName,version):
-    # f=open(f'LibAPIExtraction/{libName}/{libName}{version}','r')
-    f = open(f'LibAPIExtraction/{libName}/{libName}{version}', 'r', encoding='utf-8')
+    # 使用源码位置定位仓库根目录，避免切换运行工作区后找不到LibAPIExtraction
+    repoRoot=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    libPath=os.path.join(repoRoot,'LibAPIExtraction',libName,f'{libName}{version}')
+    f = open(libPath, 'r', encoding='utf-8')
     lst=f.readlines()
     f.close()
     libAPIs=[] #既包含了非内置也包含了内置

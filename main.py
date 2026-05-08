@@ -18,7 +18,8 @@ from multiprocessing import Manager
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
-from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,buildRunCommand
+from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
+from Tool.workspace import createRunWorkspace,exportRunReport,getRepoRoot,workspaceCwd
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
@@ -200,12 +201,13 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     #print(createResult.stdout)
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
-    # shutil.move(f'Copy/{projName}','temp')
-    shutil.move(os.path.join('Copy', projName), 'temp')
-    # shutil.move(f'Copy/bak_{projName}',f'Copy/{projName}')
+    os.makedirs('temp',exist_ok=True)
+    tempProjPath=os.path.join('temp',projName)
+    if os.path.exists(tempProjPath):
+        shutil.rmtree(tempProjPath)
+    shutil.move(os.path.join('Copy', projName), tempProjPath)
     shutil.move(os.path.join('Copy', f'bak_{projName}'), os.path.join('Copy', projName))
-    # shutil.move('temp',f'Copy/bak_{projName}')
-    shutil.move('temp', os.path.join('Copy', f'bak_{projName}'))
+    shutil.move(tempProjPath, os.path.join('Copy', f'bak_{projName}'))
 
 
     # dir=f"Report/{projName}/{libName}"
@@ -234,6 +236,52 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     save2txt(resultLst, libName, runCommand, os.path.join('Report', f'{projName}.txt'))
 
 
+## Run PCART with an isolated workspace
+## 在隔离工作区中运行PCART
+#
+#  This function keeps old config fields unchanged, creates a RunWorkspace,
+#  runs preprocessing and analysis inside the workspace, then exports reports.
+#  该函数保持旧配置字段不变，创建运行工作区，在工作区内完成预处理和分析，
+#  最后导出用户可见报告。
+#
+#  @param config The config file path or config file name under Configure
+#  @return RunWorkspace object for this execution
+def run(config):
+    repoRoot=getRepoRoot()
+    configPath=resolveConfigFilePath(config,repoRoot)
+
+    #加载配置
+    projPath,runCommand,runPath,libName,currentVersion,targetVersion,currentEnv,targetEnv=loadConfig(configPath)
+    projPath=resolveConfigValuePath(repoRoot,projPath)
+    currentEnv=resolveConfigValuePath(repoRoot,currentEnv)
+    targetEnv=resolveConfigValuePath(repoRoot,targetEnv)
+
+    workspace=createRunWorkspace(
+        repoRoot,
+        projPath,
+        runCommand,
+        runPath,
+        libName,
+        currentVersion,
+        targetVersion,
+        currentEnv,
+        targetEnv,
+    )
+    print(f"Run workspace: {workspace.workspace_root}")
+    print("Code preprocessing...")
+
+    with workspaceCwd(workspace.workspace_root):
+        #首先对代码进行预处理
+        codeProcess(projPath,runCommand,runPath,libName)
+        print("Code preprocess complete")
+
+        #执行主逻辑
+        backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath)
+
+    exportRunReport(workspace)
+    print(f"Report output: {workspace.report_root}")
+    return workspace
+
 
 ## Main function of PCART
 ## PCART主函数
@@ -245,16 +293,7 @@ def main():
     config=sys.argv[2]
     start=time.time()
 
-    #加载配置
-    projPath,runCommand,runPath,libName,currentVersion,targetVersion,currentEnv,targetEnv=loadConfig(f'Configure/{config}')
-    print("Code preprocessing...")
-
-    #首先对代码进行预处理
-    codeProcess(projPath,runCommand,runPath,libName) 
-    print("Code preprocess complete")
-
-    #执行主逻辑 
-    backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath)
+    run(config)
 
     end=time.time()
     print(f"Total run time={int(end-start)}s")
