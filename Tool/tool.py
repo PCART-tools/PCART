@@ -11,6 +11,7 @@ import ast
 import json
 import hashlib
 import platform
+import shlex
 from Path.getPath import Path
 
 
@@ -557,11 +558,143 @@ def loadConfig(configPath):
         if isinstance(dic[key], str):
             dic[key] = dic[key].strip()
     runCommand=dic['runCommand']
-    for prefix in ('python3 ', 'python.exe ', 'python '):
-        if runCommand.startswith(prefix):
-            runCommand=runCommand[len(prefix):].lstrip()
-            break
     return dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']
+
+
+class UnsupportedRunCommand(Exception):
+    """Raised when PCART cannot safely execute a configured run command."""
+
+
+## Check whether command is a Python executable name/path
+## 判断命令是否为Python解释器名称或路径
+#
+#  @param command Command name or executable path
+#  @return True if command points to Python executable
+def isPythonExecutable(command):
+    baseName=os.path.basename(command.replace('\\','/')).lower()
+    if baseName in ('python','python.exe'):
+        return True
+    if re.match(r'^python3(\.\d+)?(\.exe)?$',baseName):
+        return True
+    return False
+
+
+## Check whether command is Windows py launcher
+## 判断命令是否为Windows py启动器
+#
+#  @param command Command name or executable path
+#  @return True if command points to py launcher
+def isPyLauncher(command):
+    baseName=os.path.basename(command.replace('\\','/')).lower()
+    return baseName in ('py','py.exe')
+
+
+## Remove version option after py launcher
+## 去除py启动器后的版本选项
+#
+#  @param tokens Command tokens after py launcher
+#  @return Tokens without version selector
+def stripPyLauncherOption(tokens):
+    if tokens and re.match(r'^-\d(\.\d+)?(-\d+)?$',tokens[0]):
+        return tokens[1:]
+    return tokens
+
+
+## Normalize project run command
+## 归一化被测项目运行命令
+#
+#  只识别Python解释器结构，其余命令在执行阶段从虚拟环境解析
+#
+#  @param runCommand The project run command
+#  @return (normalizedCommand, commandType)
+def normalizeRunCommand(runCommand):
+    tokens=shlex.split(runCommand)
+    if not tokens:
+        return runCommand,'python'
+
+    # 兼容未加引号的Windows Python路径，避免shlex处理反斜杠
+    simpleTokens=runCommand.split(maxsplit=1)
+    if simpleTokens and isPythonExecutable(simpleTokens[0]):
+        rest=simpleTokens[1].lstrip() if len(simpleTokens)>1 else ''
+        return rest,'python'
+    if simpleTokens and isPyLauncher(simpleTokens[0]):
+        rest=simpleTokens[1].lstrip() if len(simpleTokens)>1 else ''
+        restTokens=shlex.split(rest)
+        return shlex.join(stripPyLauncherOption(restTokens)),'python'
+
+    if isPythonExecutable(tokens[0]):
+        return shlex.join(tokens[1:]),'python'
+    if isPyLauncher(tokens[0]):
+        return shlex.join(stripPyLauncherOption(tokens[1:])),'python'
+    if tokens[0]=='-m' or tokens[0].endswith('.py'):
+        return runCommand,'python'
+    return runCommand,'console'
+
+
+## Resolve console script executable from a virtual environment
+## 从虚拟环境中解析console script可执行文件
+#
+#  @param envPath The virtual environment root path
+#  @param commandName Console command name
+#  @return resolvedPath Path of the console executable
+def resolveConsoleExecutable(envPath,commandName):
+    normalizedEnvPath=os.path.abspath(envPath)
+    candidates=[]
+    if platform.system()=='Windows':
+        scriptsPath=os.path.join(normalizedEnvPath,'Scripts')
+        candidates.extend([
+            os.path.join(scriptsPath,commandName),
+            os.path.join(scriptsPath,commandName+'.exe'),
+            os.path.join(scriptsPath,commandName+'.cmd'),
+            os.path.join(scriptsPath,commandName+'.bat'),
+        ])
+    else:
+        candidates.append(os.path.join(normalizedEnvPath,'bin',commandName))
+
+    for candidate in candidates:
+        if os.path.exists(candidate):
+            return candidate
+
+    candidateStr=', '.join(candidates)
+    raise FileNotFoundError(
+        f"Cannot find console command '{commandName}' under virtual "
+        f"environment root: {normalizedEnvPath}. Tried: {candidateStr}"
+    )
+
+
+## Build subprocess argv for project run command
+## 为被测项目运行命令构造subprocess argv
+#
+#  @param runCommand The project run command
+#  @param envPath The virtual environment root path
+#  @return Command argv list for subprocess.run
+def buildRunCommand(runCommand,envPath):
+    normalizedCommand,commandType=normalizeRunCommand(runCommand)
+    if commandType=='python':
+        return [resolvePythonExecutable(envPath)] + shlex.split(normalizedCommand)
+
+    args=shlex.split(normalizedCommand)
+    if not args:
+        raise UnsupportedRunCommand('Empty run command')
+    try:
+        commandPath=resolveConsoleExecutable(envPath,args[0])
+    except FileNotFoundError as e:
+        raise UnsupportedRunCommand(str(e)) from e
+    return [commandPath] + args[1:]
+
+
+## Extract the .py script filename from a run command
+## 从运行命令中提取.py脚本文件名
+#
+#  @param runCommand The project run command
+#  @return The .py filename, or ''
+def getRunFile(runCommand):
+    tokens=shlex.split(runCommand)
+    for token in tokens:
+        candidate=token.split('::',1)[0]
+        if candidate.endswith('.py'):
+            return candidate
+    return ''
 
 
 
