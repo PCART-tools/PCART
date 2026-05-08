@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://github.com/PCART-tools/PCART/wiki">Documentation</a> ·
   <a href="https://github.com/PCART-tools/PCART/wiki/Configuration-Guide">Configuration Guide</a> ·
+  <a href="https://github.com/PCART-tools/PCART/wiki/How-It-Works">How It Works</a> ·
   <a href="https://github.com/PCART-tools/PCART/wiki/Examples">Examples</a> ·
   <a href="https://pcart-tools.github.io/PCART-doxygen/html">API Docs</a>
 </p>
@@ -37,7 +38,7 @@ For environment setup, configuration fields, and platform-specific examples, see
 | currentEnv | Dynamic API signature mapping for current library version | Python 3.x + current library version + requirements.txt + dill |
 | targetEnv | Dynamic API signature mapping and post-repair validation for target library version | Python 3.x + target library version + requirements.txt + dill |
 
-`currentEnv` and `targetEnv` should point to environment root directories. See the [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for details.
+`currentEnv` and `targetEnv` should point to environment root directories (not the Python executable path). PCART auto-detects the interpreter and supports multiple `runCommand` formats (`python`, `python3`, `py -X.Y`, `python -m`, console scripts). See the [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for details.
 
 ## Supported Parameter Change Types
 
@@ -77,7 +78,7 @@ For environment setup, configuration fields, and platform-specific examples, see
 - `Preprocess/preprocess.py` - Code preprocessing
 - `Repair/repair.py` - Compatibility issue repair and validation
 - `Report/` - Repair reports
-- `Script/` - Repair helper scripts (`addValueForAPI.py`, `codeUtils.py`, `dynamicMatch.py`, `verifySingle.py`)
+- `Script/` - Runtime helper scripts (`addValueForAPI.py`, `codeUtils.py`, `dynamicMatch.py`, `recordValue.py`, `verifySingle.py`)
 - `Tool/tool.py` - Utility functions
 - `main.py` - Entry point
 - `extractLibAPI.py` - Library API extraction script
@@ -85,7 +86,8 @@ For environment setup, configuration fields, and platform-specific examples, see
 ## Documentation
 
 - [PCART Wiki](https://github.com/PCART-tools/PCART/wiki) - Tutorials, troubleshooting, and advanced usage
-- [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) - Complete configuration reference
+- [How It Works](https://github.com/PCART-tools/PCART/wiki/How-It-Works) - Pipeline, pkl lifecycle, matching strategy
+- [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) - Complete configuration reference (including runCommand formats)
 - [Examples](https://github.com/PCART-tools/PCART/wiki/Examples) - Example projects and configuration files
 - [Troubleshooting](https://github.com/PCART-tools/PCART/wiki/Troubleshooting) - Common setup and runtime issues
 - [Doxygen API Docs](https://pcart-tools.github.io/PCART-doxygen/html) - Generated code documentation
