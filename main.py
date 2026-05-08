@@ -39,10 +39,12 @@ def backwardTask(args):
     os.makedirs('data', exist_ok=True)
     with open(os.path.join('data', f'{fileName}_callAPIDict.json'), 'w', encoding='utf-8') as fw:
         json.dump(callAPIDict, fw, indent=4, ensure_ascii=False)
+    root=None
+    astError=None
     try: 
         root=getAst(file) #获取当前文件的AST，便于修复使用
-    except:
-        pass
+    except Exception as e:
+        astError=e
     #step2:将源代码文件映射到Copy目录中
     # tempLst=file.split('/')
     normalized_file = file.replace('\\', '/')
@@ -116,22 +118,27 @@ def backwardTask(args):
         if len(repairLst)==0: #若返回修复字典的个数为零，则一定是兼容的
             ansDict[key]['Compatible']='Yes'
         else:
-            apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=callKey) #apiWithValue为空表示添加参数失败
-            fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst,callKey=callKey)
-            if compatibilityLabel=='Compatible':
-                ansDict[key]['Compatible']='Yes'
+            if root is None:
+                ansDict[key]['Compatible']='Unknown'
+                ansDict[key]['Repair <Unknown>']='AST parse failed'
+                errLst.append(f"{callAPI}, AST parse failed in {fileRelativePath}: {astError}\n")
             else:
-                if compatibilityLabel=='Incompatible':
-                    ansDict[key]['Compatible']='No'
+                apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=callKey) #apiWithValue为空表示添加参数失败
+                fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst,callKey=callKey)
+                if compatibilityLabel=='Compatible':
+                    ansDict[key]['Compatible']='Yes'
                 else:
-                    ansDict[key]['Compatible']='Unknown'
+                    if compatibilityLabel=='Incompatible':
+                        ansDict[key]['Compatible']='No'
+                    else:
+                        ansDict[key]['Compatible']='Unknown'
 
-                if repairStatus=='Successful':
-                    ansDict[key]['Repair <Successful>']=f"{fixedAPI}"
-                elif repairStatus=='Failed':
-                    ansDict[key]['Repair <Failed>']=f"{fixedAPI}"
-                else:
-                    ansDict[key]['Repair <Unknown>']=f"{fixedAPI}"
+                    if repairStatus=='Successful':
+                        ansDict[key]['Repair <Successful>']=f"{fixedAPI}"
+                    elif repairStatus=='Failed':
+                        ansDict[key]['Repair <Failed>']=f"{fixedAPI}"
+                    else:
+                        ansDict[key]['Repair <Unknown>']=f"{fixedAPI}"
 
 
         if len(errLst)>0:
