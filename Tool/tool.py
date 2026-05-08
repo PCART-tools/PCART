@@ -561,6 +561,37 @@ def loadConfig(configPath):
     return dic['projPath'],runCommand,dic['runFilePath'],dic['libName'],dic['currentVersion'],dic['targetVersion'],dic['currentEnv'],dic['targetEnv']
 
 
+## Resolve PCART config file path
+## 解析PCART配置文件路径
+#
+#  @param config The config file path or config file name under Configure
+#  @param repoRoot The PCART repository root path
+#  @return Absolute config file path
+def resolveConfigFilePath(config,repoRoot):
+    if os.path.isabs(config):
+        return config
+    if os.path.exists(config):
+        return os.path.abspath(config)
+    return os.path.join(repoRoot,'Configure',config)
+
+
+## Resolve path value loaded from PCART config
+## 解析PCART配置字段中的路径值
+#
+#  @param repoRoot The PCART repository root path
+#  @param path The path value read from config
+#  @return Absolute path for relative values, original empty value otherwise
+def resolveConfigValuePath(repoRoot,path):
+    if not path:
+        return path
+    expanded=os.path.expanduser(path)
+    if os.name=='nt' and expanded.startswith('/') and not expanded.startswith('//'):
+        return expanded
+    if os.path.isabs(expanded):
+        return os.path.abspath(expanded)
+    return os.path.abspath(os.path.join(repoRoot,expanded))
+
+
 class UnsupportedRunCommand(Exception):
     """Raised when PCART cannot safely execute a configured run command."""
 

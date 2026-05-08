@@ -986,6 +986,16 @@ def writeRecordValue(filePath,pklRelPath,useCallsiteName):
         fw.write(content)
 
 
+## Get source script path from PCART repository
+## 获取PCART仓库中的辅助脚本路径
+#
+#  @param scriptName The script file name under Script/
+#  @return Absolute script path
+def scriptPath(scriptName):
+    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                        'Script',scriptName)
+
+
 ## Code processing
 ## 代码预处理
 #
@@ -1045,10 +1055,10 @@ def codeProcess(projPath,runCommand,runPath,libName):
     #去掉项目代码中的冗余信息，仅保存项目代码的结构信息（import,functionDef, classDef）
     saveStructure(f'Dynamic/{projName}',libName) 
     
-    shutil.copy2('Script/addValueForAPI.py',f'Dynamic/{projName}/{prefix}')
-    shutil.copy2('Script/codeUtils.py',f'Dynamic/{projName}/{prefix}')
-    shutil.copy2('Script/dynamicMatch.py',f'Dynamic/{projName}/{prefix}')
-    shutil.copy2('Script/verifySingle.py',f'Dynamic/{projName}/{prefix}')
+    shutil.copy2(scriptPath('addValueForAPI.py'),f'Dynamic/{projName}/{prefix}')
+    shutil.copy2(scriptPath('codeUtils.py'),f'Dynamic/{projName}/{prefix}')
+    shutil.copy2(scriptPath('dynamicMatch.py'),f'Dynamic/{projName}/{prefix}')
+    shutil.copy2(scriptPath('verifySingle.py'),f'Dynamic/{projName}/{prefix}')
     
     #更新脚本中的from ... import ...语句,因为加载pkl的时候需要依赖于项目的结构信息
     modifyFromImport(f'Dynamic/{projName}/{prefix}/addValueForAPI.py',libImportLst)
@@ -1100,11 +1110,11 @@ def codeProcess(projPath,runCommand,runPath,libName):
         # print(prefix)
         handleRunFile(file,runPath,runCommand) 
     # bak项目会在current pkl生成后换回Copy/{projName}，其运行文件也依赖codeUtils
-    shutil.copy2('Script/codeUtils.py',f'Copy/bak_{projName}/{prefix}')
+    shutil.copy2(scriptPath('codeUtils.py'),f'Copy/bak_{projName}/{prefix}')
     
     #处理完项目所有文件后，再给项目添加一个新的文件
     writeRecordValue(f"Copy/{projName}/{prefix}/recordValue.py",pklRelPath,1)
     
-    shutil.copy2('Script/codeUtils.py',f'Copy/{projName}/{runPath}') 
+    shutil.copy2(scriptPath('codeUtils.py'),f'Copy/{projName}/{runPath}')
     if prefix!=runPath:
-        shutil.copy2('Script/codeUtils.py',f'Copy/{projName}/{prefix}')
+        shutil.copy2(scriptPath('codeUtils.py'),f'Copy/{projName}/{prefix}')
