@@ -19,7 +19,7 @@ from Extract.getCall import getCallFunction
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
-from Tool.workspace import createRunWorkspace,exportRunReport,getRepoRoot,workspaceCwd
+from Tool.workspace import createRunWorkspace,exportRunReport,getRepoRoot,getRuntimePaths,workspaceCwd
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
@@ -30,7 +30,10 @@ from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,qu
 #  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: API parameter compatibility issue detection and repair results; fileRelativePath: The detected and repaired project file; invokedAPINum: The number of invoked APIs 
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
-    projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet=args
+    projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths=args
+    copyRoot=runtimePaths['copy_root']
+    dataDir=runtimePaths['data_dir']
+    reportDir=runtimePaths['report_dir']
     # fileName=file.split('/')[-1][0:-3]
     fileName = os.path.basename(file)[:-3]
     
@@ -41,13 +44,11 @@ def backwardTask(args):
     pos=tempLst.index(projName)
     realProjPath='/'.join(tempLst[0:pos+1])
     fileRelativePath='/'.join(tempLst[pos:])
-    # copyFile='./Copy/'+fileRelativePath
-    copyFile = os.path.join('.', 'Copy', *fileRelativePath.split('/'))
+    copyFile = os.path.join(copyRoot, *fileRelativePath.split('/'))
     #step2:先把当前文件中指定的第三方库的API抽取出来
     callAPIDict,_=getCallFunction(file,libName,realProjPath) #key是artifact id，value是结构化调用点记录
-    # with open(f'data/{fileName}_callAPIDict.json','w') as fw:
-    os.makedirs('data', exist_ok=True)
-    with open(os.path.join('data', f'{fileName}_callAPIDict.json'), 'w', encoding='utf-8') as fw:
+    os.makedirs(dataDir, exist_ok=True)
+    with open(os.path.join(dataDir, f'{fileName}_callAPIDict.json'), 'w', encoding='utf-8') as fw:
         json.dump(callAPIDict, fw, indent=4, ensure_ascii=False)
     root=None
     astError=None
@@ -56,8 +57,7 @@ def backwardTask(args):
     except Exception as e:
         astError=e
     invokedAPINum=len(callAPIDict)
-    # errorLog=f"Report/{projName}_fixed_log.txt"
-    errorLog = os.path.join('Report', f'{projName}_fixed_log.txt')
+    errorLog = os.path.join(reportDir, f'{projName}_fixed_log.txt')
     for key,record in callAPIDict.items():
         errLst=[] #记录错误信息
         ansDict[key]={}
@@ -82,8 +82,8 @@ def backwardTask(args):
             currentMatch=matchDict['current']
             targetMatch=matchDict['target']
         else:
-            currentMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,currentVersion,currentEnv,lock,errLst,callKey=callKey)
-            targetMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,targetVersion,targetEnv,lock,errLst,curr=0,callKey=callKey)
+            currentMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,currentVersion,currentEnv,lock,errLst,callKey=callKey,runtimePaths=runtimePaths)
+            targetMatch=mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,targetVersion,targetEnv,lock,errLst,curr=0,callKey=callKey,runtimePaths=runtimePaths)
             with lock:
                 updateSharedDict(callKey,currentMatch,targetMatch,sharedDict)#更新sharedDict
         
@@ -110,8 +110,8 @@ def backwardTask(args):
                 ansDict[key]['Repair <Unknown>']='AST parse failed'
                 errLst.append(f"{callAPI}, AST parse failed in {fileRelativePath}: {astError}\n")
             else:
-                apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=callKey) #apiWithValue为空表示添加参数失败
-                fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst,callKey=callKey)
+                apiWithValue=addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=callKey,runtimePaths=runtimePaths) #apiWithValue为空表示添加参数失败
+                fixedAPI,compatibilityLabel,repairStatus=repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,targetEnv,errLst,callKey=callKey,runtimePaths=runtimePaths)
                 if compatibilityLabel=='Compatible':
                     ansDict[key]['Compatible']='Yes'
                 else:
@@ -154,26 +154,26 @@ def backwardTask(args):
 #  @param targetEnv Target version's virtual environment
 #  @param runCommand The run command of the project
 #  @param runPath The relative path of the run file
-def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath):
+def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace):
+    runtimePaths=getRuntimePaths(workspace)
+    copyRoot=runtimePaths['copy_root']
+    dataDir=runtimePaths['data_dir']
+    tempDir=runtimePaths['temp_dir']
+    reportDir=runtimePaths['report_dir']
     pathObj=Path('DF')
     pathObj.getPath(projPath)
     filePath=[it for it in pathObj.path if it.endswith('py')] #保留项目中的.py文件
     projName=os.path.basename(projPath)
-    errorLog = os.path.join('Report', f'{projName}_fixed_log.txt')
+    errorLog = os.path.join(reportDir, f'{projName}_fixed_log.txt')
     if os.path.exists(errorLog):
         os.remove(errorLog)
     
     #先在起始版本中生成每个API的pkl
-    # pythonPath=f"{currentEnv}/bin/python"
-    # if runPath in runCommand: #针对于python src/run.py这种情况
-    #     command=f'cd Copy/{projName};{pythonPath}{runCommand}'
-    # else: #针对于python run.py,但执行路径位于scr下,此处的runPath也可能为空
-    #     command=f'cd Copy/{projName}/{runPath};{pythonPath}{runCommand}'
     # cwd 自动适配：使用 subprocess cwd 参数替代 shell cd
     if runPath and runPath not in runCommand:
-        cwd = os.path.join('Copy', projName, runPath)
+        cwd = os.path.join(copyRoot, projName, runPath)
     else:
-        cwd = os.path.join('Copy', projName)
+        cwd = os.path.join(copyRoot, projName)
     print('Running the project...')
     cmd=buildRunCommand(runCommand,currentEnv)
     createResult = subprocess.run(
@@ -187,24 +187,20 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     #print(createResult.stdout)
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
-    os.makedirs('temp',exist_ok=True)
-    tempProjPath=os.path.join('temp',projName)
+    os.makedirs(tempDir,exist_ok=True)
+    tempProjPath=os.path.join(tempDir,projName)
     if os.path.exists(tempProjPath):
         shutil.rmtree(tempProjPath)
-    shutil.move(os.path.join('Copy', projName), tempProjPath)
-    shutil.move(os.path.join('Copy', f'bak_{projName}'), os.path.join('Copy', projName))
-    shutil.move(tempProjPath, os.path.join('Copy', f'bak_{projName}'))
+    shutil.move(os.path.join(copyRoot, projName), tempProjPath)
+    shutil.move(os.path.join(copyRoot, f'bak_{projName}'), os.path.join(copyRoot, projName))
+    shutil.move(tempProjPath, os.path.join(copyRoot, f'bak_{projName}'))
 
 
-    # dir=f"Report/{projName}/{libName}"
-    # os.makedirs(dir,exist_ok=True)
     #这里用进程池同时处理多个任务，但对于torch库可能会报错RuntimeError:CUDA out or memory
     #对数据库的读写需要加锁
     coverSet=set()
-    # if os.path.exists('Copy/pkl/coverSet'):
-    coverSet_path = os.path.join('Copy', 'pkl', 'coverSet')
+    coverSet_path = os.path.join(copyRoot, 'pkl', 'coverSet')
     if os.path.exists(coverSet_path):
-        # with open('Copy/pkl/coverSet','r') as fr:
         with open(coverSet_path, 'r', encoding='utf-8') as fr:
             tempLst=fr.readlines()
         for it in tempLst:
@@ -213,13 +209,12 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     manager=Manager()
     lock=manager.Lock() #创建一个共享锁
     sharedDict=manager.dict() #创建一个共享字典
-    tasks=[(projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet) for file in filePath]
+    tasks=[(projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths) for file in filePath]
     pool=Pool(processes=1)
     resultLst=pool.map(backwardTask,tasks)
     pool.close() #关闭进程池，使其不再接受新的任务
     pool.join() #等待进程池中所有的任务执行完，否则主进程可能继续往下执行提前结束，而导致部分任务没有执行完
-    # save2txt(resultLst,libName,runCommand,f"Report/{projName}.txt")
-    save2txt(resultLst, libName, runCommand, os.path.join('Report', f'{projName}.txt'))
+    save2txt(resultLst, libName, runCommand, os.path.join(reportDir, f'{projName}.txt'))
 
 
 ## Run PCART with an isolated workspace
@@ -258,11 +253,11 @@ def run(config):
 
     with workspaceCwd(workspace.workspace_root):
         #首先对代码进行预处理
-        codeProcess(projPath,runCommand,runPath,libName)
+        codeProcess(projPath,runCommand,runPath,libName,workspace=workspace)
         print("Code preprocess complete")
 
         #执行主逻辑
-        backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath)
+        backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace)
 
     exportRunReport(workspace)
     print(f"Report output: {workspace.report_root}")

@@ -627,9 +627,9 @@ def isCompatible(current,target):
 #  @parami errLst Error message logging list
 #  @param callKey Unique callsite artifact id
 #  @return lst[0] The API call string with added parameter values (load from pkl file) 
-def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey):
-    if not callKey:
-        raise ValueError('callKey is required for API value artifacts')
+def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey,*,runtimePaths):
+    copyRoot=runtimePaths['copy_root']
+    dynamicRoot=runtimePaths['dynamic_root']
     pklKey = callKey
     pklName=getFileName(pklKey,'.pkl')
     flag=0
@@ -644,45 +644,30 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
     ]
     pklPath=''
     for candidateName,candidateFlag in pklCandidates:
-        if os.path.exists(f"Copy/pkl/{candidateName}"):
+        candidatePath=os.path.join(copyRoot,'pkl',candidateName)
+        if os.path.exists(candidatePath):
             flag=candidateFlag
-            pklPath=f"../../Copy/pkl/{candidateName}"
+            pklPath=candidatePath
             break
     if not pklPath:
         return ''
     
-    # pklPath=f"../../Copy/pkl/{pklName}"
     #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
     #而文件操作的相对路径就是相对于命令执行的路径
-    if runPath!='' and runPath not in runCommand:
-        normalized_runPath = runPath.replace('\\', '/').strip('/')
-        l=len([segment for segment in normalized_runPath.split('/') if segment])
-        while l>0:
-            pklPath='../'+pklPath
-            l-=1
-    
     # pythonPath=f"{virtualEnv}/bin/python"
     if flag==0:
         pythonPath = resolvePythonExecutable(currentEnv)
     else:
         pythonPath = resolvePythonExecutable(targetEnv)
     
-    # if not os.path.exists(f"Copy/pkl/{pklName}"):
-    #     return ''
-
-    # if runPath!='':
-    #     if runPath not in runCommand:#需要切换到运行文件所在的目录执行命令
-    #         command=f'cd Dynamic/{projName}/{runPath};{pythonPath} addValueForAPI.py  "{pklStr}" "{callStr}"'
-    #     else:
-    #         command=f'cd Dynamic/{projName};{pythonPath} {runPath}/addValueForAPI.py  "{pklStr}" "{callStr}"'
     if runPath and runPath not in runCommand:
-        cwd = os.path.join('Dynamic', projName, runPath)
+        cwd = os.path.join(dynamicRoot, projName, runPath)
         script = 'addValueForAPI.py'
     elif runPath:
-        cwd = os.path.join('Dynamic', projName)
+        cwd = os.path.join(dynamicRoot, projName)
         script = os.path.join(runPath, 'addValueForAPI.py')
     else:
-        cwd = os.path.join('Dynamic', projName)
+        cwd = os.path.join(dynamicRoot, projName)
         script = 'addValueForAPI.py'
     matchResult = subprocess.run(
         [pythonPath, script, pklPath, callAPI, pklKey],

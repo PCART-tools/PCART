@@ -8,6 +8,7 @@
 import sys
 import json
 import inspect
+import os
 import dill
 from codeUtils import getFileName, removeParameter, departAPI2
 
@@ -27,7 +28,7 @@ print("load pkl successfully")
 
 #step2: 动态匹配
 callAPI=sys.argv[2]
-jsonPrefix=sys.argv[3]
+dataDir=sys.argv[3]
 lookupKey=sys.argv[4]
 matchDict={}
 s=''
@@ -85,7 +86,8 @@ except Exception as e:
 #动态匹配若失败，则没有internalPath,和addValue这两个属性的
 fileName=getFileName(lookupKey,'_dynamicMatch.json')
 
-with open('{}/data/{}'.format(jsonPrefix,fileName),'w',encoding='UTF-8') as fw:
+os.makedirs(dataDir,exist_ok=True)
+with open(os.path.join(dataDir,fileName),'w',encoding='UTF-8') as fw:
     json.dump(matchDict,fw,indent=4,ensure_ascii=False)
 
 # print("保存文件成功：{}_dynamicMatch.json".format(callAPI.replace(' ','')))

@@ -183,6 +183,24 @@ def writeMetadata(workspace,metadata):
         json.dump(content,fw,ensure_ascii=False,indent=2)
 
 
+## Return runtime artifact paths for the current execution
+## 返回当前执行使用的运行产物路径
+#
+#  Internal pipeline code should use these paths instead of cwd-relative
+#  Copy/Dynamic/data/Report paths.
+#  @param workspace RunWorkspace object
+#  @return Dict of Copy/Dynamic/data/temp/Report roots
+def getRuntimePaths(workspace):
+    return {
+        'workspace_root': workspace.workspace_root,
+        'copy_root': workspace.copy_root,
+        'dynamic_root': workspace.dynamic_root,
+        'data_dir': workspace.data_dir,
+        'temp_dir': workspace.temp_dir,
+        'report_dir': workspace.internal_report_dir,
+    }
+
+
 ## Temporarily switch current working directory
 ## 临时切换当前工作目录
 #
