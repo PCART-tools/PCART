@@ -42,8 +42,8 @@ class Import(ast.NodeVisitor):
 ## Extract all call type nodes from a project source file
 ## 抽取项目源码中的所有call类型节点
 #
-#  Use DFS algorithm to traverse the call type node from the root node. Each API call is stored in a tuple (API name, parameters, call statement, line no) 
-#  从根节点开始，直接找根节点的孩子，Call存在于Expr和Assign节点中。每个API调用存储为四元组(API名称,参数,调用语句,行号)
+#  Use DFS algorithm to traverse the call type node from the root node. Each API call is stored in a tuple (API name, parameters, call statement, line/column span)
+#  从根节点开始，直接找根节点的孩子，Call存在于Expr和Assign节点中。每个API调用存储调用语句及其行列位置
 class GetFuncCall:
     def __init__(self):
         self._func_call=[] #list中每个元素都是一个tuple
@@ -68,9 +68,18 @@ class GetFuncCall:
             for keyword in node.keywords:
                 argLst.append(ast.unparse(keyword))
             parameters=','.join(argLst)
-            if (callName,parameters,callState,node.lineno) not in self._func_call:
+            callInfo=(
+                callName,
+                parameters,
+                callState,
+                node.lineno,
+                node.col_offset,
+                getattr(node,'end_lineno',None),
+                getattr(node,'end_col_offset',None),
+            )
+            if callInfo not in self._func_call:
                 # print(node.lineno,'<-->',callState)
-                self._func_call.append((callName,parameters,callState,node.lineno)) #四元组：callAPI名，callAPI参数，...
+                self._func_call.append(callInfo)
             else:
                 pass
                 # print(node.lineno,'<-->',callState)

@@ -11,7 +11,7 @@ import shutil
 from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
-from Tool.tool import getAst,get_parameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName, getRunFile
+from Tool.tool import getAst,getParameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName, getRunFile
 
 
 
@@ -172,7 +172,7 @@ def convertLocalVar(filePath,libName):
         #step2:判断列表推导式中是否含有第三方库调用的API
         flag=0
         _,callDict=getCallFunction(filePath,libName)
-        callLst=[callAPI.split('#_')[0] for callAPI in callDict.keys()]
+        callLst=[record['call_text'] for record in callDict.values()]
         flag=0
         for node in ast.walk(root):
             if isinstance(node, ast.Call):
@@ -402,17 +402,20 @@ def extractDecorator(root):
 #
 #  @param callAPI The API call
 #  @param filePath The source file path
-def addDictSingle(callAPI,filePath,callKey=None):
+#  @param callKey Unique callsite artifact id
+def addDictSingle(callAPI,filePath,callKey):
+    if not callKey:
+        raise ValueError('callKey is required for API value instrumentation')
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
     source=''.join(codeLst)
     
     lineno=getImportLine(codeLst)
-    importDict='from recordValue import paraValueDict\n'
+    importDict='from recordValue import paraValueDict\nfrom recordValue import callsiteInfoDict\n'
     codeLst.insert(lineno,importDict)
     
     paraStr=getLastAPIParameter(callAPI) #获取最后一个API的参数
-    parameterLst=get_parameter(paraStr,space=0) #项目参数不去空格
+    parameterLst=getParameter(paraStr,space=0) #项目参数不去空格
     root=getAst(filePath)
     targetLst=findAssignCall(root)
 
@@ -434,7 +437,12 @@ def addDictSingle(callAPI,filePath,callKey=None):
                     firstPart+=it+'.'
             firstPart=firstPart.rstrip('.')
             
-            key=(callKey or callAPI).replace('"','\\"')
+            key=callKey.replace('"','\\"')
+            callsiteInfo={
+                'call_text': callAPI,
+                'format_api': callAPI,
+            }
+            dicString0=f'callsiteInfoDict[{repr(callKey)}]={repr(callsiteInfo)}\n'
             if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
                 lineNo = i + 1
                 receiverExpr=None
@@ -472,6 +480,7 @@ def addDictSingle(callAPI,filePath,callKey=None):
             dicString2=dicString2.rstrip(',')+']\n'
             
             while spaceNum>0:
+                dicString0=' '+dicString0
                 if dicString1:
                     dicString1=' '+dicString1
                 dicString2=' '+dicString2
@@ -486,14 +495,17 @@ def addDictSingle(callAPI,filePath,callKey=None):
                 codeLst.insert(i,dicString2)
                 if dicString1:
                     codeLst.insert(i,dicString1)
+                codeLst.insert(i,dicString0)
             else:
                 if dicString1:
                     dicString1=dicString1.lstrip(' ')#去掉之前添加的空格，重新计算开头的空格数
+                dicString0=dicString0.lstrip(' ')
                 dicString2=dicString2.lstrip(' ') 
                 for j in range(i+1,len(codeLst)):
                     if codeLst[j]!='\n' and '#' not in codeLst[j]:
                         spaceNum=countSpace(codeLst[j])
                         while spaceNum>0:
+                            dicString0=' '+dicString0
                             if dicString1:
                                 dicString1=' '+dicString1
                             dicString2=' '+dicString2
@@ -502,6 +514,7 @@ def addDictSingle(callAPI,filePath,callKey=None):
                         codeLst.insert(j,dicString2)
                         if dicString1:
                             codeLst.insert(j,dicString1)
+                        codeLst.insert(j,dicString0)
                         break
 
             break
@@ -540,13 +553,12 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     # fileName=filePath.split('/')[-1][0:-3]
     fileName = os.path.basename(filePath)[0:-3]
     fileRelativePath=filePath.split(f'{projName}',1)[-1]
-    coverageKey = fileRelativePath.replace('\\', '/').lstrip('/').rsplit('.', 1)[0]
     fileAbsolutePath=projPath+fileRelativePath
     
     lineno=getImportLine(codeLst)
-    importDict='from recordValue import paraValueDict\nfrom recordValue import apiCoveredSet\n'
+    importDict='from recordValue import paraValueDict\nfrom recordValue import apiCoveredSet\nfrom recordValue import callsiteInfoDict\n'
     codeLst.insert(lineno,importDict)
-    _,callDict=getCallFunction(fileAbsolutePath,libName)
+    _,callDict=getCallFunction(fileAbsolutePath,libName,projPath)
 
     targetLst=findAssignCall(root) #用来区分调用者是否来自赋值语句，比如a.f(), tf.f(), or self.f()
  
@@ -563,10 +575,11 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
     preInsertAPI='' #记录上一个插桩的API是哪个
     preInsertAPICount=0 #记录上一个插桩行中出现了几次被插的API
     decoratorLine = list() #记录装饰器出现的行号 -- 2025.5.12
-    for callState,paraStr in callDict.items(): #key是api调用表达式，value是list,保存所有参数
+    for artifactId,record in callDict.items(): #key是调用点artifact id，value是结构化调用点记录
         flag=0 #标记API是否找到了插桩的位置
-        lineno=int(callState.split('#_')[-1]) #这个lineno是原项目中的行数
-        callState=callState.split('#_')[0]
+        lineno=int(record['lineno']) #这个lineno是原项目中的行数
+        callState=record['call_text']
+        paraStr=record['parameters']
         callAPI=callState.replace(' ','')
         if callAPI==preInsertAPI: #判断当前要处理的API与上一个API是否相同
             preInsertAPICount-=1
@@ -585,10 +598,18 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     preInsertAPI=callAPI
                 flag=1
                 spaceNum=countSpace(codeLst[i])
-                #key=callState.replace('"','\\"') #把字符串中的"改成\"
-                key=getFileName(callState,'') # 2025/5/25 Fix inconsistency between callAPI name and the key name 
-                key=key.replace('"','\\"') #把字符串中的"改成\"
-                callSiteKey=f'{key}#_{lineno}'
+                callSiteKey=artifactId
+                callsiteInfo={
+                    'artifact_hash': record.get('artifact_hash',''),
+                    'rel_path': record.get('rel_path',''),
+                    'lineno': record.get('lineno'),
+                    'col_offset': record.get('col_offset'),
+                    'end_lineno': record.get('end_lineno'),
+                    'end_col_offset': record.get('end_col_offset'),
+                    'call_text': record.get('call_text',''),
+                    'format_api': record.get('format_api',''),
+                }
+                dicString0=f'callsiteInfoDict[{repr(callSiteKey)}]={repr(callsiteInfo)}\n'
                 l=departAPI(callState)
                 l2=departAPI2(callState)
                 firstPart=''
@@ -627,7 +648,7 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     dicString1=f'paraValueDict[\"@{callSiteKey}\"]={{}}; paraValueDict[\"@{callSiteKey}\"][\"object\"]={firstPart}; paraValueDict[\"@{callSiteKey}\"][\"expr\"]=\"{initialCallName}\"\n'
                 #再保存API的参数值
                 dicString2=f'paraValueDict[\"{callSiteKey}\"]=['
-                paraLst=get_parameter(paraStr,space=0) #项目参数不去空格2023-12-14
+                paraLst=getParameter(paraStr,space=0) #项目参数不去空格2023-12-14
                 for para in paraLst: 
                     if '=' in para and "'='" not in para and '"="' not in para: #若参数的形式为key=f(x=1),只要确保=的前面不含括号即可
                         pos=para.find('=') #找到第一个=的位置,存在x=(a==b)和a==b形式
@@ -638,9 +659,9 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     dicString2=dicString2+para+','
                 dicString2=dicString2.rstrip(',')+']\n'
                 
-                dicString3=f'apiCoveredSet.add(\"{coverageKey}##{lineno}##{key}\")\n'
-                # print(f"{coverageKey}##{lineno}##{key}")
+                dicString3=f'apiCoveredSet.add(\"{callSiteKey}\")\n'
                 while spaceNum>0:
+                    dicString0=' '+dicString0
                     if dicString1:
                         dicString1=' '+dicString1
                     dicString2=' '+dicString2
@@ -659,20 +680,23 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                     codeLst.insert(i,dicString2)
                     if dicString1:
                         codeLst.insert(i,dicString1)
+                    codeLst.insert(i,dicString0)
                     #记录当前插在了哪一行
                     if dicString1:
-                        insertStartLine=i+3
+                        insertStartLine=i+4
                     else:
-                        insertStartLine=i+2
+                        insertStartLine=i+3
                 else:
                     if dicString1:
                         dicString1=dicString1.lstrip(' ') #去掉之前添加的空格，重新计算开头的空格数
+                    dicString0=dicString0.lstrip(' ')
                     dicString2=dicString2.lstrip(' ') 
                     dicString3=dicString3.lstrip(' ') 
                     for j in range(i+1,len(codeLst)):
                         if codeLst[j]!='\n' and '#' not in codeLst[j]:
                             spaceNum=countSpace(codeLst[j])
                             while spaceNum>0:
+                                dicString0=' '+dicString0
                                 if dicString1:
                                     dicString1=' '+dicString1
                                 dicString2=' '+dicString2
@@ -682,11 +706,12 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
                             codeLst.insert(j,dicString2)
                             if dicString1:
                                 codeLst.insert(j,dicString1)
+                            codeLst.insert(j,dicString0)
                             #记录当前插在了哪一行
                             if dicString1:
-                                insertStartLine=j+3
+                                insertStartLine=j+4
                             else:
-                                insertStartLine=j+2
+                                insertStartLine=j+3
                             break
   
                 break
@@ -849,7 +874,7 @@ def saveStructure(projPath,libName):
     filePath=[it for it in pathObj.path if it.endswith('py')]
     for file in filePath:
         _,callDict=getCallFunction(file,libName)
-        callLst=[callAPI.split('#_')[0] for callAPI in callDict.keys()] #去掉API中的行号信息
+        callLst=[record['call_text'] for record in callDict.values()]
         # with open(file,'r') as fr:
         with open(file, 'r', encoding='UTF-8') as fr:
             code=fr.read()

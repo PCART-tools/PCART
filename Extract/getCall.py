@@ -7,6 +7,7 @@
 
 import ast
 from Extract.extractCall import *
+from Tool.callsite import makeCallsiteRecord
 
 
 
@@ -190,9 +191,10 @@ def modifyWithName(callName, withitemCallName, lineno=None):
 #
 #  @param filePath The .py file path
 #  @param libName The target lib name (e.g., torch) 
-#  @return A dictionary, where the key is the restored API call path + parameters, the value is the original API call + parameters 
-#  @return 返回值是一个字典，key是还原后的API+参数，value是还原前的API+参数
-def getCallFunction(filePath,libName):
+#  @param projPath The project root path
+#  @return Callsite record dictionaries keyed by artifact id
+#  @return 返回以运行产物id为key的调用点记录字典
+def getCallFunction(filePath,libName,projPath=None):
     with open(filePath,'r',encoding='UTF-8') as f:
         codeText=f.read()
         f.seek(0)
@@ -215,16 +217,16 @@ def getCallFunction(filePath,libName):
         # 找出树中所有的Call节点
         call_visitor=GetFuncCall()
         call_visitor.dfsVisit(root_node)
-        all_func_calls=call_visitor.func_call #[(api1,para1,callState, lineno),(api2,para2, callState, lineno),...()]
+        all_func_calls=call_visitor.func_call #[(api1,para1,callState, lineno,col,...),(api2,para2, callState, lineno,col,...),...()]
         
         # 通过赋值语句和import字典来还原每个调用的API
         apiFormatDict={} #保存还原前的API后还原后的API的对应关系
         selfAPIs=[] #保存通过self调用的API
-        for callName,paraStr,callState,lineno in all_func_calls:
+        for callName,paraStr,callState,lineno,colOffset,endLineNo,endColOffset in all_func_calls:
             #print(f"{callName}({paraStr})")
             name_parts=callName.split('.') #按.进行字段拆分
             if 'self' in name_parts[0]:
-                selfAPIs.append((callName,paraStr,callState,lineno))
+                selfAPIs.append((callName,paraStr,callState,lineno,colOffset,endLineNo,endColOffset))
             #     # continue
             
             # #先通过赋值语句进行还原
@@ -297,31 +299,43 @@ def getCallFunction(filePath,libName):
             
 
             #函数名和参数分开放，key和value都是tuple
-            apiFormatDict[(secondModify,paraStr,callState,lineno)]=(callName,paraStr,callState,lineno)
+            apiFormatDict[(secondModify,paraStr,callState,lineno,colOffset,endLineNo,endColOffset)]=(callName,paraStr,callState,lineno,colOffset,endLineNo,endColOffset)
         
         # 对self调用的API进行还原
         if len(selfAPIs)>0:
             selfInfo=getSelfAPI(root_node,md_names,libName)
             if len(selfInfo)>0: 
-                for callName,paraStr,callState,lineno in selfAPIs:
+                for callName,paraStr,callState,lineno,colOffset,endLineNo,endColOffset in selfAPIs:
                     name_parts=callName.split('.')
                     for bases,defLst,callLst in selfInfo:
                         if callName in callLst and name_parts[-1] not in defLst:
                             name=bases[0]+'.'+'.'.join(name_parts[1:])
-                            apiFormatDict[(name,paraStr,callState,lineno)]=(callName,paraStr,callState,lineno)
+                            apiFormatDict[(name,paraStr,callState,lineno,colOffset,endLineNo,endColOffset)]=(callName,paraStr,callState,lineno,colOffset,endLineNo,endColOffset)
 
         #把和指定第三方库相关的callAPI都筛选出来
-        callDict={} #此字典用于之后的匹配和变更分析
-        callDict2={} #此字典用于预处理插桩
+        callsiteRecords={}
+        callsiteParamRecords={}
         for key,value in apiFormatDict.items(): #key是还原后的API，value是还原前的API
             if key[0].split('.')[0]==libName:
-                callDict[f"{value[2]}#_{value[3]}"]=f"{key[0]}({key[1]})" #2023.10.23，确保预处理插桩和在目标版本插桩字典的键都是一样的
-                callDict2[f"{value[2]}#_{value[3]}"]=value[1]
+                formatAPI=f"{key[0]}({key[1]})"
+                record=makeCallsiteRecord(
+                    filePath,
+                    value[2],
+                    formatAPI,
+                    value[1],
+                    value[3],
+                    value[4],
+                    value[5],
+                    value[6],
+                    projPath,
+                )
+                callsiteRecords[record['id']]=record
+                callsiteParamRecords[record['id']]=record
 
         #按API的行号从小到大排序,便于之后的插桩 
-        sortedCallDict=dict(sorted(callDict.items(),key=lambda x:int(x[0].split('#_')[-1])))
-        sortedCallDict2=dict(sorted(callDict2.items(),key=lambda x:int(x[0].split('#_')[-1])))
-        return sortedCallDict,sortedCallDict2 
+        sortedCallsiteRecords=dict(sorted(callsiteRecords.items(),key=lambda x:(x[1]['lineno'],x[1]['col_offset'])))
+        sortedCallsiteParamRecords=dict(sorted(callsiteParamRecords.items(),key=lambda x:(x[1]['lineno'],x[1]['col_offset'])))
+        return sortedCallsiteRecords,sortedCallsiteParamRecords 
     
     except SyntaxError as e:
         print(f"when extract invoked API, parsed {filePath} failed: {e}")

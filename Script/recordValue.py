@@ -9,7 +9,7 @@ import os
 import atexit
 import dill
 import json
-from codeUtils import getFileName
+from codeUtils import getFileName, getArtifactHash, getArtifactDisplayName
 
 
 PCART_PKL_REL_PATH='__PCART_PKL_REL_PATH__'
@@ -17,6 +17,7 @@ PCART_USE_CALLSITE_NAME=__PCART_USE_CALLSITE_NAME__
 
 paraValueDict={}
 apiCoveredSet=set()
+callsiteInfoDict={}
 
 
 ## Save collected runtime values to pkl files
@@ -29,6 +30,7 @@ def savePkls():
             continue
         k='@{}'.format(key)
         receiver=paraValueDict.get(k)
+        callsiteInfo=callsiteInfoDict.get(key,{})
         candidates=[]
         # Receiver may have two fallback forms: runtime object first, expression second
         # 调用者对象可能有两种回退形式：优先运行时对象，其次还原表达式
@@ -41,6 +43,16 @@ def savePkls():
             candidates.append(('',receiver))
         candidateManifest={
             'callsite': key,
+            'artifact': key,
+            'artifactHash': getArtifactHash(key),
+            'debugName': getArtifactDisplayName(key),
+            'source': callsiteInfo.get('rel_path',''),
+            'line': callsiteInfo.get('lineno'),
+            'column': callsiteInfo.get('col_offset'),
+            'endLine': callsiteInfo.get('end_lineno'),
+            'endColumn': callsiteInfo.get('end_col_offset'),
+            'call': callsiteInfo.get('call_text',''),
+            'format_api': callsiteInfo.get('format_api',''),
             'covered': True,
             'candidates': [],
         }

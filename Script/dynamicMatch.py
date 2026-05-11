@@ -9,11 +9,15 @@ import sys
 import json
 import inspect
 import dill
-from codeUtils import getFileName, removeParameter, departAPI, departAPI2
+from codeUtils import getFileName, removeParameter, departAPI2
 
 
 
 #step1: 加载PKL
+if len(sys.argv)<5:
+    print('lookupKey is required',file=sys.stderr)
+    sys.exit(2)
+
 pklPath=sys.argv[1]
 with open(pklPath,'rb') as fr:
     paraValueDict=dill.load(fr)
@@ -24,11 +28,9 @@ print("load pkl successfully")
 #step2: 动态匹配
 callAPI=sys.argv[2]
 jsonPrefix=sys.argv[3]
-lookupKey=sys.argv[4] if len(sys.argv)>4 else callAPI
+lookupKey=sys.argv[4]
 matchDict={}
-tempLst=[]
 s=''
-lst1=departAPI(callAPI) #将API按点进行拆分a(x).b(y).c(z)拆分成a(x), a(x).b(y), a(x).b(y).c(z)
 lst2=departAPI2(callAPI) #拆分成a(x), b(y), c(z)
 
 lastAPI=lst2[-1]
@@ -37,21 +39,13 @@ s=removeParameter(lastAPI,1)
 #给API填上参数的具体值
 for key in paraValueDict.keys():
     #if callAPI.replace(' ','')==key.replace(' ',''):
-    # 2025/5/25 Fix inconsistency between callAPI name and the key name
-    if getFileName(lookupKey,'')==getFileName(key,''): 
+    if lookupKey==key:
         #把函数的上文依赖给填上,比如self.a(x)中的self, a.b(2).c(3)中的a.b(2)
         k='@{}'.format(key)
         firstPart=lst2[0]
         if k in paraValueDict:
             #新增Context Manager对象动态匹配支持 -- 2025/5/20
             receiver = paraValueDict.get(k)
-            # 新版withitem pkl可能保存object/expr候选；旧版pkl仍是单个接收者
-            if isinstance(receiver, dict):
-                if 'object' in receiver:
-                    receiver = receiver['object']
-                elif 'expr' in receiver:
-                    receiver = receiver['expr']
-                paraValueDict[k] = receiver
             if isinstance(receiver,str):
                 s=receiver+'.'+s
             else:

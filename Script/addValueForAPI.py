@@ -7,10 +7,14 @@
 
 import sys
 import dill
-from codeUtils import getFileName, removeParameter, departAPI, departAPI2, get_parameter, getLastAPIParameter
+from codeUtils import removeParameter, departAPI2, getParameter, getLastAPIParameter
 
 
 #首先加载PKL
+if len(sys.argv)<4:
+    print('lookupKey is required',file=sys.stderr)
+    sys.exit(2)
+
 pklPath=sys.argv[1]
 with open(pklPath,'rb') as fr:
     paraValueDict=dill.load(fr)
@@ -18,16 +22,13 @@ print("load pkl successfully")
 
 
 callAPI=sys.argv[2]
-lookupKey=sys.argv[3] if len(sys.argv)>3 else callAPI
-lst1=departAPI(callAPI) #将API按点进行拆分a.b(y).c(z)拆分成a.b(y), a.b(y).c(z)
+lookupKey=sys.argv[3]
 lst2=departAPI2(callAPI) #拆分成a(x), b(y), c(z)
-tempLst=[]
-cnt=0
 s=''
 #给API填上参数的具体值
 for key in paraValueDict.keys():
     #if callAPI.replace(' ','')==key.replace(' ',''):
-    if getFileName(lookupKey,'')==getFileName(key,''): # 2025/5/25 Fix inconsistency between callAPI name and the key name
+    if lookupKey==key:
         # 2025/5/25 将复杂API参数键替换为简单键，例如复杂的引号符号
         newKey = "callKey"  
         if newKey not in paraValueDict:
@@ -35,7 +36,7 @@ for key in paraValueDict.keys():
 
         lastAPI=lst2[-1]
         paraStr=getLastAPIParameter(lastAPI)
-        paraLst=get_parameter(paraStr,space=0)
+        paraLst=getParameter(paraStr,space=0)
         s=removeParameter(lastAPI,1)+'('
 
         #先把API的参数值填上
@@ -58,13 +59,6 @@ for key in paraValueDict.keys():
         firstPart=lst2[0]    
         if k in paraValueDict:
             receiver = paraValueDict.get(k)
-            # 新版withitem pkl可能保存object/expr候选；旧版pkl仍是单个接收者
-            if isinstance(receiver, dict):
-                if 'object' in receiver:
-                    receiver = receiver['object']
-                elif 'expr' in receiver:
-                    receiver = receiver['expr']
-                paraValueDict[k] = receiver
             # 2025/5/25 将复杂API参数键替换为简单键，例如复杂的引号符号
             newK = '@' + newKey 
             if newK not in paraValueDict:

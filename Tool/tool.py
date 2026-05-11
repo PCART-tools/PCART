@@ -15,6 +15,54 @@ import shlex
 from Path.getPath import Path
 
 
+ARTIFACT_HASH_PATTERN=re.compile(r'(?:^|__)([0-9a-f]{64})$')
+
+
+## Return artifact hash from an artifact id
+## 从运行产物id中提取hash
+#
+#  @param artifactId The artifact id
+#  @return artifact hash or empty string
+def getArtifactHash(artifactId):
+    match=ARTIFACT_HASH_PATTERN.search(artifactId)
+    if match:
+        return match.group(1)
+    return ''
+
+
+## Return readable artifact display name
+## 返回可读运行产物展示名
+#
+#  @param artifactId The artifact id
+#  @return display name
+def getArtifactDisplayName(artifactId):
+    artifactHash=getArtifactHash(artifactId)
+    if artifactHash and artifactId.endswith(artifactHash):
+        displayName=artifactId[:-len(artifactHash)].rstrip('_')
+        return displayName or artifactHash
+    return artifactId
+
+
+## Shorten artifact file name while preserving full hash
+## 缩短运行产物文件名并保留完整hash
+#
+#  @param fileName The artifact file stem
+#  @param extension The extension of the file
+#  @return fileName The shortened file name
+def shortenArtifactFileName(fileName,extension):
+    fileName=re.sub(r'[^0-9A-Za-z_.-]+','_',fileName).strip('._')
+    length=255-len(extension) if extension else 255
+    if len(fileName)<=length:
+        return fileName+extension
+    artifactHash=getArtifactHash(fileName)
+    if not artifactHash:
+        return fileName[:length]+extension
+    suffix='__'+artifactHash
+    prefixLength=max(0,length-len(suffix))
+    prefix=fileName[:prefixLength].rstrip('_')
+    return prefix+suffix+extension
+
+
 
 ## Split parameter string into list of separated parameters
 ## 将参数字符串拆分成单个的参数
@@ -27,7 +75,7 @@ from Path.getPath import Path
 #  @param separator The separator, ',' is the default value 
 #  @param space Determine whether to remove the space in the parameter string 
 #  @return parameters List of separater parameters 
-def get_parameter(p_string,separator=',',space=1):
+def getParameter(p_string,separator=',',space=1):
     #库定义的参数去空格，项目中的参数不去空格，防止出问题
     if space: #默认是去空格的
         p_string=p_string.replace(' ','') #去掉参数中的空格
@@ -107,7 +155,6 @@ def get_parameter(p_string,separator=',',space=1):
 
 
     return parameters
-
 
 
 ## Get AST for code 
@@ -403,10 +450,12 @@ def cmp(version):
 ## Normalize file name 
 ## 给文件取名字
 #
-#  @param fileName Typically, the API call string is input as the file name
+#  @param fileName Typically, the API call string or callsite artifact id is input as the file name
 #  @param extension The extension of the file
 #  @return fileName The normalized file name
 def getFileName(fileName,extension):
+    if getArtifactHash(fileName):
+        return shortenArtifactFileName(fileName,extension)
     #step1:先把fileName中的非法字符去除
     fileName=fileName.replace(' ','')
     fileName=fileName.replace('/','')
@@ -524,7 +573,8 @@ def save2txt(lst,libName,runCommand,savePath):
         fw.write(line)
         index=1
         for callAPI,subDict in dic.items():
-            tempStr1=f"Invoked API #{index}: {callAPI.split('#_')[0]}"
+            displayCall=subDict.pop('Invoked API',callAPI)
+            tempStr1=f"Invoked API #{index}: {displayCall}"
             writeLine(width,tempStr1,fw)
             fw.write('|'+' '*(width-2)+'|'+'\n')
             cnt=1
