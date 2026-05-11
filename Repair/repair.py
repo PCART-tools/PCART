@@ -266,11 +266,11 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
 #  @param runCommand The run command of the project
 #  @param callKey Unique callsite artifact id
 #  @return result Dynamic validation result
-def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,callKey):
+def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,callKey,*,runtimePaths):
     if apiWithValue=='':
         return None
-    if not callKey:
-        raise ValueError('callKey is required for validation artifacts')
+    copyRoot=runtimePaths['copy_root']
+    dynamicRoot=runtimePaths['dynamic_root']
     pklName=getFileName(callKey,'.pkl')
     # 验证阶段复用候选pkl顺序，保证修复验证和动态匹配读取的是同一类接收者
     pklCandidates=[
@@ -283,30 +283,25 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,ca
     ]
     pklPath=''
     for candidateName in pklCandidates:
-        if os.path.exists(f"Copy/pkl/{candidateName}"):
-            pklPath=f"../../Copy/pkl/{candidateName}"
+        candidatePath=os.path.join(copyRoot,'pkl',candidateName)
+        if os.path.exists(candidatePath):
+            pklPath=candidatePath
             break
     if not pklPath:
         return None
 
     #当runPath不在runCommand中时，需要切换到运行文件所在的目录执行命令
     #而文件操作的相对路径就是相对于命令执行的路径
-    if runPath!='' and runPath not in runCommand:
-        normalized_runPath = runPath.replace('\\', '/').strip('/')
-        l=len([segment for segment in normalized_runPath.split('/') if segment])
-        while l>0:
-            pklPath='../'+pklPath
-            l-=1
     pythonPath = resolvePythonExecutable(virtualEnv)
 
     if runPath and runPath not in runCommand:
-        cwd = os.path.join('Dynamic', projName, runPath)
+        cwd = os.path.join(dynamicRoot, projName, runPath)
         script = 'verifySingle.py'
     elif runPath:
-        cwd = os.path.join('Dynamic', projName)
+        cwd = os.path.join(dynamicRoot, projName)
         script = os.path.join(runPath, 'verifySingle.py')
     else:
-        cwd = os.path.join('Dynamic', projName)
+        cwd = os.path.join(dynamicRoot, projName)
         script = 'verifySingle.py'
     result = subprocess.run(
         [pythonPath, script, pklPath, apiWithValue],
@@ -373,7 +368,7 @@ def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
 #  @param errLst List of error messages
 #  @param callKey Unique callsite artifact id
 #  @return repairResults 
-def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst,callKey):
+def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst,callKey,*,runtimePaths):
     #静态修复,pkl加载失败，只能进入静态修复
     repairCandidates=[]
     if apiWithValue=='':
@@ -427,7 +422,7 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
         fix(apiWithValue,repairDict,apiRoot,starFlag,twoStarFlag)
         apiWithValueFixed=ast.unparse(apiRoot)
         #1先通过动态运行,判断其是否修复成功
-        result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand,callKey)
+        result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand,callKey,runtimePaths=runtimePaths)
         if result==None:
             if fixedAPI not in repairCandidates:
                 repairCandidates.append(fixedAPI)

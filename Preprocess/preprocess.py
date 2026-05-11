@@ -12,6 +12,7 @@ from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
 from Tool.tool import getAst,getParameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName, getRunFile
+from Tool.workspace import getRuntimePaths
 
 
 
@@ -404,8 +405,6 @@ def extractDecorator(root):
 #  @param filePath The source file path
 #  @param callKey Unique callsite artifact id
 def addDictSingle(callAPI,filePath,callKey):
-    if not callKey:
-        raise ValueError('callKey is required for API value instrumentation')
     with open(filePath,'r',encoding='UTF-8') as fr:
         codeLst=fr.readlines()
     source=''.join(codeLst)
@@ -533,12 +532,13 @@ def addDictSingle(callAPI,filePath,callKey):
 #
 #  @param projPath The project path 
 #  @param projName The project name 
-#  @param filePath The project source file path 
+#  @param filePath The project source file path
+#  @param copyRoot The runtime Copy directory
 #  @param runFileLst The list of run files 
 #  @param libName The lib name  
 #  @param runPath The relative path of the run file 
 #  @param runCommand The run command of the project 
-def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand):
+def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,runCommand):
     with open(filePath,'r',encoding='UTF-8') as fr:
         code=fr.read()
         fr.seek(0) #将文件指针重新定位到文件的开头
@@ -550,10 +550,9 @@ def addDictAll(projPath,projName,filePath,runFileLst,libName,runPath,runCommand)
         return
 
     #处理相关路径
-    # fileName=filePath.split('/')[-1][0:-3]
     fileName = os.path.basename(filePath)[0:-3]
-    fileRelativePath=filePath.split(f'{projName}',1)[-1]
-    fileAbsolutePath=projPath+fileRelativePath
+    fileRelativePath=os.path.relpath(filePath,os.path.join(copyRoot,projName))
+    fileAbsolutePath=os.path.join(projPath,fileRelativePath)
     
     lineno=getImportLine(codeLst)
     importDict='from recordValue import paraValueDict\nfrom recordValue import apiCoveredSet\nfrom recordValue import callsiteInfoDict\n'
@@ -755,7 +754,6 @@ def handleRunFile(file,runPath,runCommand):
     with open(file,'w',encoding='UTF-8') as fw:
         for it in codeLst:
             fw.write(it)
-
 
 def obtainDef(sourcePath):
     with open(sourcePath,'r',encoding='UTF-8') as fr:
@@ -1034,7 +1032,11 @@ def scriptPath(scriptName):
 #  @param runCommand The run command of the project 
 #  @param runPath The relative path of the run file 
 #  @param libName The lib name 
-def codeProcess(projPath,runCommand,runPath,libName):
+def codeProcess(projPath,runCommand,runPath,libName,workspace):
+    runtimePaths=getRuntimePaths(workspace)
+    copyRoot=runtimePaths['copy_root']
+    dynamicRoot=runtimePaths['dynamic_root']
+    dataDir=runtimePaths['data_dir']
     #提取运行的文件
     runFileLst=[]
     runFile=getRunFile(runCommand)
@@ -1053,7 +1055,7 @@ def codeProcess(projPath,runCommand,runPath,libName):
         prefix=runPath
     # projName=projPath.split('/')[-1]
     projName = os.path.basename(projPath)
-    copyProjPath=f"Copy/{projName}"
+    copyProjPath=os.path.join(copyRoot,projName)
     importStatement=''
     for it in runFileLst:
         # it=it.rstrip('.py') #把文件名中的后缀去掉，但遇到display.py会变成displa
@@ -1067,38 +1069,38 @@ def codeProcess(projPath,runCommand,runPath,libName):
 
     #清除Copy和Dynamic中遗留的项目信息，然后把新项目的信息拷贝进去
     # print(projPath)
-    if not os.path.isdir('Copy'):
-        os.mkdir('Copy') 
-    shutil.rmtree('Copy')
-    shutil.copytree(projPath,f'Copy/{projName}',ignore=ignore_sym_links)
-    os.mkdir('Copy/pkl')
-    if not os.path.isdir('Dynamic'):
-        os.mkdir('Dynamic') 
-    shutil.rmtree('Dynamic')
-    shutil.copytree(projPath,f'Dynamic/{projName}',ignore=ignore_sym_links)
+    if os.path.isdir(copyRoot):
+        shutil.rmtree(copyRoot)
+    os.makedirs(os.path.dirname(copyRoot) or '.',exist_ok=True)
+    shutil.copytree(projPath,os.path.join(copyRoot,projName),ignore=ignore_sym_links)
+    os.mkdir(os.path.join(copyRoot,'pkl'))
+    if os.path.isdir(dynamicRoot):
+        shutil.rmtree(dynamicRoot)
+    os.makedirs(os.path.dirname(dynamicRoot) or '.',exist_ok=True)
+    shutil.copytree(projPath,os.path.join(dynamicRoot,projName),ignore=ignore_sym_links)
     
     #去掉项目代码中的冗余信息，仅保存项目代码的结构信息（import,functionDef, classDef）
-    saveStructure(f'Dynamic/{projName}',libName) 
+    saveStructure(os.path.join(dynamicRoot,projName),libName)
     
-    shutil.copy2(scriptPath('addValueForAPI.py'),f'Dynamic/{projName}/{prefix}')
-    shutil.copy2(scriptPath('codeUtils.py'),f'Dynamic/{projName}/{prefix}')
-    shutil.copy2(scriptPath('dynamicMatch.py'),f'Dynamic/{projName}/{prefix}')
-    shutil.copy2(scriptPath('verifySingle.py'),f'Dynamic/{projName}/{prefix}')
+    dynamicScriptDir=os.path.join(dynamicRoot,projName,prefix)
+    shutil.copy2(scriptPath('addValueForAPI.py'),dynamicScriptDir)
+    shutil.copy2(scriptPath('codeUtils.py'),dynamicScriptDir)
+    shutil.copy2(scriptPath('dynamicMatch.py'),dynamicScriptDir)
+    shutil.copy2(scriptPath('verifySingle.py'),dynamicScriptDir)
     
     #更新脚本中的from ... import ...语句,因为加载pkl的时候需要依赖于项目的结构信息
-    modifyFromImport(f'Dynamic/{projName}/{prefix}/addValueForAPI.py',libImportLst)
-    modifyFromImport(f'Dynamic/{projName}/{prefix}/dynamicMatch.py',libImportLst)
-    modifyFromImport(f'Dynamic/{projName}/{prefix}/verifySingle.py',libImportLst)
+    modifyFromImport(os.path.join(dynamicScriptDir,'addValueForAPI.py'),libImportLst)
+    modifyFromImport(os.path.join(dynamicScriptDir,'dynamicMatch.py'),libImportLst)
+    modifyFromImport(os.path.join(dynamicScriptDir,'verifySingle.py'),libImportLst)
     
     #清除data中的数据
-    if not os.path.isdir('data'):
-        os.mkdir('data') 
-    shutil.rmtree('data')
-    os.mkdir('data')
+    if os.path.isdir(dataDir):
+        shutil.rmtree(dataDir)
+    os.makedirs(dataDir)
     
     
     #然后再把Copy中的项目制表符统一转化为空格,目的是为了插入字典的时候计算空格缩进
-    convertTabsToSpaces('Copy')
+    convertTabsToSpaces(copyRoot)
 
     #把代码换行写的合成一行，并添加字典
     pathObj=Path('DF')
@@ -1116,30 +1118,30 @@ def codeProcess(projPath,runCommand,runPath,libName):
         convertLocalVar(file,libName) 
 
 
-    shutil.copytree(f'Copy/{projName}',f'Copy/bak_{projName}')
+    shutil.copytree(os.path.join(copyRoot,projName),os.path.join(copyRoot,f'bak_{projName}'))
 
     # 计算recordValue.py到Copy/pkl的相对路径
     pklDepth=1
     if prefix:
         pklDepth+=len([s for s in prefix.replace('\\','/').strip('/').split('/') if s])
     pklRelPath='/'.join(['..']*pklDepth+['pkl'])
-    writeRecordValue(f"Copy/bak_{projName}/{prefix}/recordValue.py",pklRelPath,0)
+    writeRecordValue(os.path.join(copyRoot,f'bak_{projName}',prefix,'recordValue.py'),pklRelPath,0)
     
     
     for file in filePath:
-        addDictAll(projPath,projName,file,runFileLst,libName,runPath,runCommand)
+        addDictAll(projPath,projName,file,copyRoot,runFileLst,libName,runPath,runCommand)
     
     #再对bak_proj中的运行文件进行插桩
     for file in runFileLst:
-        file=f'Copy/bak_{projName}/{prefix}/'+file
+        file=os.path.join(copyRoot,f'bak_{projName}',prefix,file)
         # print(prefix)
         handleRunFile(file,runPath,runCommand) 
     # bak项目会在current pkl生成后换回Copy/{projName}，其运行文件也依赖codeUtils
-    shutil.copy2(scriptPath('codeUtils.py'),f'Copy/bak_{projName}/{prefix}')
+    shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,f'bak_{projName}',prefix))
     
     #处理完项目所有文件后，再给项目添加一个新的文件
-    writeRecordValue(f"Copy/{projName}/{prefix}/recordValue.py",pklRelPath,1)
+    writeRecordValue(os.path.join(copyRoot,projName,prefix,'recordValue.py'),pklRelPath,1)
     
-    shutil.copy2(scriptPath('codeUtils.py'),f'Copy/{projName}/{runPath}')
+    shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,projName,runPath))
     if prefix!=runPath:
-        shutil.copy2(scriptPath('codeUtils.py'),f'Copy/{projName}/{prefix}')
+        shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,projName,prefix))
