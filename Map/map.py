@@ -11,7 +11,7 @@ import shutil
 import subprocess
 from Map.fuzzyMatch import *
 from Load.loadData import loadLib
-from Tool.tool import removeParameter,getFileName,resolvePythonExecutable,buildRunCommand
+from Tool.tool import removeParameter,getFileName,resolvePythonExecutable,buildRunCommand,getArtifactHash,getArtifactDisplayName
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import addDictSingle
 
@@ -98,6 +98,9 @@ def saveDynamicMatchSnapshot(pklKey,version,curr,dynamicMatchDict,pklFile=None):
         'phase': phase,
         'version': str(version),
         'callKey': pklKey,
+        'artifact': pklKey,
+        'artifactHash': getArtifactHash(pklKey),
+        'debugName': getArtifactDisplayName(pklKey),
     }
     if pklFile is not None:
         snapshotDict['_pcart']['pklFile']=pklFile
@@ -143,11 +146,14 @@ def hasSaveFailedManifest(pklKey):
 #  @param lock The lock flag 
 #  @param errLst Error list
 #  @param curr=1 Current version flag
+#  @param callKey Unique callsite artifact id
 #  @return dynamicMatchDict Mapped API signatures 
-def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1,callKey=None):
+def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1,*,callKey):
     # pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径
     pythonPath = resolvePythonExecutable(virtualEnv)
-    pklKey = callKey or callAPI
+    if not callKey:
+        raise ValueError('callKey is required for dynamic match artifacts')
+    pklKey = callKey
     pklFile=getFileName(pklKey,'.pkl')
     # withitem调用优先尝试运行时对象，其次尝试还原表达式，最后兼容旧版单pkl
     pklCandidateFiles=[pklFile[:-4]+'__object.pkl',pklFile[:-4]+'__expr.pkl',pklFile]
@@ -321,9 +327,12 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
 #  @param lock The lock flag 
 #  @param errLst Error list
 #  @param curr=1 Current version flag
+#  @param callKey Unique callsite artifact id
 #  @return ans Mapped API signatures 
-def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,version,virtualEnv,lock,errLst,curr=1,callKey=None):
-    dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr,callKey)
+def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,version,virtualEnv,lock,errLst,curr=1,*,callKey):
+    if not callKey:
+        raise ValueError('callKey is required for API mapping artifacts')
+    dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr,callKey=callKey)
     ans={}
     ans['format']=formatAPI
     if dynamicMatchDict!=False: #若动态匹配成功,还要对动态匹配的结果进行检查

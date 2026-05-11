@@ -18,7 +18,7 @@ from multiprocessing import Manager
 from Extract.getCall import getCallFunction
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
-from Tool.tool import getAst,save2txt,loadConfig,removeParameter,getFileName,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
+from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
 from Tool.workspace import createRunWorkspace,exportRunReport,getRepoRoot,workspaceCwd
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
@@ -34,8 +34,17 @@ def backwardTask(args):
     # fileName=file.split('/')[-1][0:-3]
     fileName = os.path.basename(file)[:-3]
     
-    #step1:先把当前文件中指定的第三方库的API抽取出来
-    callAPIDict,_=getCallFunction(file,libName) #key是还原前的API，value是还原后的API
+    #step1:将源代码文件映射到Copy目录中
+    # tempLst=file.split('/')
+    normalized_file = file.replace('\\', '/')
+    tempLst = normalized_file.split('/')
+    pos=tempLst.index(projName)
+    realProjPath='/'.join(tempLst[0:pos+1])
+    fileRelativePath='/'.join(tempLst[pos:])
+    # copyFile='./Copy/'+fileRelativePath
+    copyFile = os.path.join('.', 'Copy', *fileRelativePath.split('/'))
+    #step2:先把当前文件中指定的第三方库的API抽取出来
+    callAPIDict,_=getCallFunction(file,libName,realProjPath) #key是artifact id，value是结构化调用点记录
     # with open(f'data/{fileName}_callAPIDict.json','w') as fw:
     os.makedirs('data', exist_ok=True)
     with open(os.path.join('data', f'{fileName}_callAPIDict.json'), 'w', encoding='utf-8') as fw:
@@ -46,43 +55,20 @@ def backwardTask(args):
         root=getAst(file) #获取当前文件的AST，便于修复使用
     except Exception as e:
         astError=e
-    #step2:将源代码文件映射到Copy目录中
-    # tempLst=file.split('/')
-    normalized_file = file.replace('\\', '/')
-    tempLst = normalized_file.split('/')
-    pos=tempLst.index(projName)
-    realProjPath='/'.join(tempLst[0:pos+1])
-    fileRelativePath='/'.join(tempLst[pos:])
-    coverageKey = '/'.join(tempLst[pos+1:]).rsplit('.', 1)[0]
-    # copyFile='./Copy/'+fileRelativePath
-    copyFile = os.path.join('.', 'Copy', *fileRelativePath.split('/'))
     invokedAPINum=len(callAPIDict)
     # errorLog=f"Report/{projName}_fixed_log.txt"
     errorLog = os.path.join('Report', f'{projName}_fixed_log.txt')
-    for key,formatAPI in callAPIDict.items():
+    for key,record in callAPIDict.items():
         errLst=[] #记录错误信息
         ansDict[key]={}
-        callAPI=key.split('#_')[0]
-        lineNum=key.split('#_')[1]
-        # 动态阶段使用调用点key区分同名API，避免不同调用行共享同一个pkl和缓存结果
-        callKey=f"{getFileName(callAPI,'')}#_{lineNum}"
+        callAPI=record['call_text']
+        lineNum=record['lineno']
+        formatAPI=record['format_api']
+        callKey=record['id']
+        ansDict[key]['Invoked API']=callAPI
         ansDict[key]['Location']=f"At Line {lineNum} in {fileRelativePath}"
-        #判断有没有覆盖有两个条件，先看是否有pkl，再看是否在coverSet中
-        # if not os.path.exists(f"Copy/pkl/{pklName}") and f"{fileName}##{lineNum}##{callAPI}".replace(' ','') not in coverSet:
-        #有些API虽然有pkl但实际上是与它同名的其它API的pkl，即它并没有被真正覆盖
-        #所以不能以pkl是否存在来判断其是否被覆盖了
-        # if f"{fileName}##{lineNum}##{callAPI}".replace(' ','') not in coverSet:
-        #     ansDict[key]['Coverage']='No'
-        #     print(f"{fileName}##{lineNum}##{callAPI}".replace(' ',''))
-        #     continue
-        
-        flag=0
-        probe = f"{coverageKey}##{lineNum}##{callAPI}".split('(')[0].replace(' ','')
-        for it in coverSet:
-            if it.replace(' ', '').startswith(probe):
-                flag=1
-                break
-        if flag==0:
+
+        if callKey not in coverSet:
             ansDict[key]['Coverage']='No' 
             continue
         

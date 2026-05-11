@@ -8,7 +8,7 @@
 import os
 import ast
 import subprocess
-from Tool.tool import getAst,getFileName,get_parameter,getLastAPIParameter,resolvePythonExecutable
+from Tool.tool import getAst,getFileName,getParameter,getLastAPIParameter,resolvePythonExecutable
 from API.LibApi import Parameter
 from Change.changeAnalyze import para2Obj
 
@@ -77,7 +77,7 @@ def mirrorAPI(fixedAPI,dic):
     paraObjLst=[] #保存参数对象
     paraStr=paraStr.replace(' ','') #去空格
     if paraStr:
-        lst=get_parameter(paraStr,space=0)
+        lst=getParameter(paraStr,space=0)
     else:
         lst=[]
     for i in range(len(lst)):
@@ -264,11 +264,14 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
 #  @param virtualEnv The virtual environment of the target lib version
 #  @param runPath The relative path of the run file
 #  @param runCommand The run command of the project
+#  @param callKey Unique callsite artifact id
 #  @return result Dynamic validation result
-def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,callKey=None):
+def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,callKey):
     if apiWithValue=='':
         return None
-    pklName=getFileName(callKey or callAPI,'.pkl')
+    if not callKey:
+        raise ValueError('callKey is required for validation artifacts')
+    pklName=getFileName(callKey,'.pkl')
     # 验证阶段复用候选pkl顺序，保证修复验证和动态匹配读取的是同一类接收者
     pklCandidates=[
         'new_'+pklName[:-4]+'__object.pkl',
@@ -368,8 +371,9 @@ def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
 #  @param repairLst  List of repair operation dictionary
 #  @param virtualEnv The virtual environment of the target lib version
 #  @param errLst List of error messages
+#  @param callKey Unique callsite artifact id
 #  @return repairResults 
-def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst,callKey=None):
+def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst,callKey):
     #静态修复,pkl加载失败，只能进入静态修复
     repairCandidates=[]
     if apiWithValue=='':
@@ -457,103 +461,3 @@ def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,v
             return repairCandidates[0],'Incompatible',fixFlag
     else:
         return str(repairCandidates),'Unknown','Unknown'
-
-        
-# def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst):
-#     #静态修复,pkl加载失败，只能进入静态修复
-#     repairCandidates=[]
-#     if apiWithValue=='':
-#         for repairDict,targetPara in repairLst:
-#             starFlag=0 #判断目标版本的参数定义中是否含有*args
-#             twoStarFlag=0 #判断目标版本的参数定义中是否含有*kwargs
-#             if '*args' in targetPara:
-#                 starFlag=1
-#             if '**' in targetPara:
-#                 twoStarFlag=1
-#             apiRoot=getAst(callAPI,1)
-#             fix(callAPI,repairDict,apiRoot,starFlag,twoStarFlag)
-#             fixedAPI=ast.unparse(apiRoot)
-#             if validateByStr(fixedAPI,repairDict,targetPara,starFlag,twoStarFlag):
-#                 if fixedAPI not in repairCandidates:
-#                     repairCandidates.append((fixedAPI,repairDict))
-        
-#         if len(repairCandidates)==0:
-#             return str(repairCandidates), 'Unknown', 'Unknown'
-        
-#         elif len(repairCandidates)==1:
-#             fixedAPI=repairCandidates[0][0]
-#             repairDict=repairCandidates[0][1]
-#             fix(callAPI,repairDict,root,starFlag,twoStarFlag)
-#             if callAPI.replace(' ','').replace('"','').replace("'",'')==fixedAPI.replace(' ','').replace('"','').replace("'",''):
-#                 return fixedAPI,"Compatible","Unknown"
-#             else:
-#                 return fixedAPI,"Incompatible","Unknown"
-        
-#         else:
-#             tempLst=[x[0] for x in repairCandidates]
-#             return str(tempLst),"Unknown", "Unknown"
-
-
-#     #pkl加载成功，但匹配的结果也可能是多个，内置API只能静态匹配
-#     failedLst=[]
-#     for repairDict,targetPara in repairLst:
-#         starFlag=0 #判断目标版本的参数定义中是否含有*args
-#         twoStarFlag=0 #判断目标版本的参数定义中是否含有*kwargs
-#         # 1.先进行静态验证
-#         if '*args' in targetPara:
-#             starFlag=1
-#         if '**' in targetPara:
-#             twoStarFlag=1
-#         apiRoot=getAst(callAPI,1)
-#         fix(callAPI,repairDict,apiRoot,starFlag,twoStarFlag)
-#         fixedAPI=ast.unparse(apiRoot)
-#         if not validateByStr(fixedAPI,repairDict,targetPara,starFlag,twoStarFlag):
-#             continue
-#         elif len(repairLst)==1:
-#             repairCandidates.append((fixedAPI,repairDict))
-
-#         #2. 动态验证
-#         fixFlag='Failed'
-#         apiRoot=getAst(apiWithValue,1)
-#         fix(apiWithValue,repairDict,apiRoot,starFlag,twoStarFlag)
-#         apiWithValueFixed=ast.unparse(apiRoot)
-#         #1先通过动态运行,判断其是否修复成功
-#         result=validateByRun(callAPI,apiWithValueFixed,projName,virtualEnv,runPath,runCommand)
-#         # print(result.stdout,result.stderr)
-#         if result==None:
-#             if (fixedAPI,repairDict) not in repairCandidates:
-#                 repairCandidates.append((fixedAPI,repairDict))
-#             fixFlag='Unknown'
-        
-#         elif result.returncode!=0:
-#             errLst.append(f"{callAPI}, validate error: {result.stderr}\n")
-#             failedLst.append(f"{callAPI}, validate error: {result.stderr}\n")
-#             if 'dill' in result.stderr:
-#                 fixFlag='Unknown'
-#                 if (fixedAPI,repairDict) not in repairCandidates:
-#                     repairCandidates.append((fixedAPI,repairDict))
-#         else:
-#             fixFlag='Successful'
-#             # for k,v in repairDict.items():
-#             #     print(k,v)
-#             # print('\n')
-#             # print(callAPI)
-#             # print(fixedAPI)
-#             if (fixedAPI,repairDict) not in repairCandidates:
-#                 repairCandidates.append((fixedAPI,repairDict))
-#             break
-     
-#     # repairCandidates=list(set(repairCandidates)) 
-#     if len(repairCandidates)==0:
-#         return str(repairCandidates), 'Unknown' , 'Unknown'
-#     elif len(repairCandidates)==1:
-#         fixedAPI=repairCandidates[0][0]
-#         repairDict=repairCandidates[0][1]
-#         fix(callAPI,repairDict,root,starFlag,twoStarFlag)
-#         if callAPI.replace(' ','').replace('"','').replace("'",'')==fixedAPI.replace(' ','').replace('"','').replace("'",''):
-#             return fixedAPI,'Compatible',fixFlag
-#         else:
-#             return fixedAPI,'Incompatible',fixFlag
-#     else:
-#         tempLst=[x[0] for x in repairCandidates]
-#         return str(tempLst),'Unknown','Unknown'

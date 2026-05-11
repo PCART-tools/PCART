@@ -10,7 +10,7 @@ import re
 import copy
 import subprocess
 from API.LibApi import Parameter 
-from Tool.tool import get_parameter,removeParameter,getFileName,resolvePythonExecutable
+from Tool.tool import getParameter,removeParameter,getFileName,resolvePythonExecutable
 
 
 
@@ -106,7 +106,7 @@ def updateErrorLst(errorLog,errorLst):
 #  @return ansDict The query result 
 def querySharedDict(callAPI,sharedDict):
     ansDict={}
-    k=removeParameter(callAPI)
+    k=callAPI
     if k in sharedDict:
         ansDict['current']=sharedDict[k]['current']
         ansDict['target']=sharedDict[k]['target']
@@ -122,7 +122,7 @@ def querySharedDict(callAPI,sharedDict):
 #  @param targetDict The API signature of the target version
 #  @param sharedDict The API mapping dictionary: multiprocessing.manager.dict()
 def updateSharedDict(callAPI,currentDict,targetDict,sharedDict):
-    key=removeParameter(callAPI)
+    key=callAPI
     if key not in sharedDict: #没有就添加
         sharedDict[key]={}
         innerDict=sharedDict[key]
@@ -173,11 +173,11 @@ def isDifferType(oldType,newType):
         if 'Union' in oldType:
             pattern=r'.*?Union\[(.*)\].*?'
             result=re.findall(pattern,oldType)
-            oldLst=get_parameter(result[0])
+            oldLst=getParameter(result[0])
         elif 'Optional' in oldType:
             pattern=r'.*?Optional\[(.*)\].*?'
             result=re.findall(pattern,oldType)
-            oldLst=get_parameter(result[0])
+            oldLst=getParameter(result[0])
         elif '|' in oldType:
             oldLst=oldType.split('|')
         else: #当oldType就是一个具体的类型而不是集合时，比如int
@@ -191,11 +191,11 @@ def isDifferType(oldType,newType):
         if 'Union' in newType:
             pattern=r'.*?Union\[(.*)\].*?'
             result=re.findall(pattern,newType)
-            newLst=get_parameter(result[0])
+            newLst=getParameter(result[0])
         elif 'Optional' in newType:
             pattern=r'.*?Optional\[(.*)\].*?'
             result=re.findall(pattern,newType)
-            newLst=get_parameter(result[0])
+            newLst=getParameter(result[0])
         elif '|' in newType:
             newLst=newType.split('|')
         else:
@@ -227,7 +227,7 @@ def para2Obj(paraStr):
         paraStr=paraStr[1:-1]
     
     if paraStr:
-        lst=get_parameter(paraStr)
+        lst=getParameter(paraStr)
     else:
         lst=[]
     lst=[para for para in lst if para != '/'] # 2026/4/23 当前修复模型只区分args/kwargs，忽略仅位置参数分隔符
@@ -625,10 +625,12 @@ def isCompatible(current,target):
 #  @param currentEnv Virtual environment of the current version
 #  @param targetEnv Virtual environment of the target version
 #  @parami errLst Error message logging list
+#  @param callKey Unique callsite artifact id
 #  @return lst[0] The API call string with added parameter values (load from pkl file) 
-# def addValueForAPI(callAPI,projName,runPath,runCommand,virtualEnv,errLst):
-def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey=None):
-    pklKey = callKey or callAPI
+def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey):
+    if not callKey:
+        raise ValueError('callKey is required for API value artifacts')
+    pklKey = callKey
     pklName=getFileName(pklKey,'.pkl')
     flag=0
     # 参数补值沿用动态匹配的候选顺序，并优先使用目标环境重新生成的pkl

@@ -7,7 +7,7 @@
 
 import copy
 import re
-from Tool.tool import get_parameter
+from Tool.tool import getParameter
 
 
 
@@ -113,7 +113,7 @@ class APIOBJ:
             pString=objP.findall(item) #获取函数参数
             api.parameters_string=''.join(pString) #保存参数整体的字符串
             if len(pString)>0:
-                lst=get_parameter(pString[0]) #拆分参数
+                lst=getParameter(pString[0]) #拆分参数
                 #把self和cls去掉
                 if 'self' in lst:
                     lst.remove('self')
