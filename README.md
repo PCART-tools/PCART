@@ -80,6 +80,8 @@ For environment setup, configuration fields, and platform-specific examples, see
 - `Report/` - Repair reports
 - `Script/` - Runtime helper scripts (`addValueForAPI.py`, `codeUtils.py`, `dynamicMatch.py`, `recordValue.py`, `verifySingle.py`)
 - `Tool/tool.py` - Utility functions
+- `Tool/callsite.py` - Structured callsite identity (`CallsiteIdentity`, `CallsiteRecord`)
+- `Tool/workspace.py` - Isolated run workspace management (`RunWorkspace`)
 - `main.py` - Entry point
 - `extractLibAPI.py` - Library API extraction script
 
