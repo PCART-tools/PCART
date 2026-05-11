@@ -573,7 +573,7 @@ def save2txt(lst,libName,runCommand,savePath):
         fw.write(line)
         index=1
         for callAPI,subDict in dic.items():
-            displayCall=subDict.pop('Invoked API',callAPI.split('#_')[0])
+            displayCall=subDict.pop('Invoked API',callAPI)
             tempStr1=f"Invoked API #{index}: {displayCall}"
             writeLine(width,tempStr1,fw)
             fw.write('|'+' '*(width-2)+'|'+'\n')
