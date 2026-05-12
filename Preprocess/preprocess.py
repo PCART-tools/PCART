@@ -399,6 +399,33 @@ def extractDecorator(root):
     return decoratorLst 
 
 
+## Get decorator block start index
+## 获取装饰器块起始行号
+#
+#  Instrumentation for decorator calls must be inserted before the whole
+#  decorator block to keep Python syntax valid.
+#  装饰器调用插桩必须插入整个装饰器块之前，避免破坏Python语法。
+#
+#  @param codeLst Code list read by f.readlines()
+#  @param index The matched code line index
+#  @return insertIndex The safe instrumentation index
+def getDecoratorInsertIndex(codeLst,index):
+    insertIndex=index
+    if not codeLst[index].lstrip().startswith('@'):
+        return insertIndex
+
+    spaceNum=countSpace(codeLst[index])
+    j=index-1
+    while j>=0:
+        if codeLst[j].lstrip().startswith('@') and countSpace(codeLst[j])==spaceNum:
+            insertIndex=j
+            j-=1
+            continue
+        break
+
+    return insertIndex
+
+
 
 ## Code instrumentation for a single API call within a source file
 ## 源文件单个API调用代码插桩
@@ -425,9 +452,8 @@ def addDictSingle(callAPI,filePath,callKey):
     withitem_visitor.visit(root)
     withitem_call_names = withitem_visitor.get_withitem_call() #dict
 
-    decoratorLine = list() #记录装饰器出现的行号 -- 2025.5.12
     for i in range(len(codeLst)): #每次只会往列表中插入一个元素
-        if callAPI.replace(' ','') in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i]:
+        if callAPI.replace(' ','') in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'callsiteInfoDict' not in codeLst[i]:
             spaceNum=countSpace(codeLst[i])
             dicString1=''
             l=departAPI(callAPI)
@@ -489,14 +515,11 @@ def addDictSingle(callAPI,filePath,callKey):
 
             #插入的时候要考虑是否含有elif,如果有elif要把它插在elif后面
             if 'elif' not in codeLst[i]:
-                #处理两个连续的装饰器@ -- 2025.5.12
-                #不能在两个连续的decorator之间插入桩点
-                if len(decoratorLine) > 1 and decoratorLine[-1] - decoratorLine[-2] == 3 and codeLst[i].replace(' ','')[0]=='@':
-                    i = insertStartLine
-                codeLst.insert(i,dicString2)
+                insertIndex=getDecoratorInsertIndex(codeLst,i)
+                codeLst.insert(insertIndex,dicString2)
                 if dicString1:
-                    codeLst.insert(i,dicString1)
-                codeLst.insert(i,dicString0)
+                    codeLst.insert(insertIndex,dicString1)
+                codeLst.insert(insertIndex,dicString0)
             else:
                 if dicString1:
                     dicString1=dicString1.lstrip(' ')#去掉之前添加的空格，重新计算开头的空格数
@@ -575,7 +598,6 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
     insertStartLine=0 #记录每次插桩的行
     preInsertAPI='' #记录上一个插桩的API是哪个
     preInsertAPICount=0 #记录上一个插桩行中出现了几次被插的API
-    decoratorLine = list() #记录装饰器出现的行号 -- 2025.5.12
     for artifactId,record in callDict.items(): #key是调用点artifact id，value是结构化调用点记录
         flag=0 #标记API是否找到了插桩的位置
         lineno=int(record['lineno']) #这个lineno是原项目中的行数
@@ -589,11 +611,8 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
         
         i=insertStartLine #从第i行开始向后找
         while i<len(codeLst):
-            #API调用在i行代码中，且i行代码不是函数定义语句、插桩语句paraValueDict和运行覆盖检查语句apiCoveredSet
-            if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i]:
-                #记录装饰器出现的行号--2025.5.12
-                if codeLst[i].replace(' ','')[0]=='@':
-                    decoratorLine.append(i)              
+            #API调用在i行代码中，且i行代码不是函数定义语句、插桩语句和运行覆盖检查语句
+            if callAPI in codeLst[i].replace(' ','') and 'def ' not in codeLst[i] and 'paraValueDict' not in codeLst[i] and 'apiCoveredSet' not in codeLst[i] and 'callsiteInfoDict' not in codeLst[i]:
                 if callAPI!=preInsertAPI:#只有当前API不等于上一个被插API时，才需要重新计算preAPICount
                     preInsertAPICount=codeLst[i].replace(' ','').count(callAPI)
                     preInsertAPI=callAPI
@@ -672,21 +691,17 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                 #插入的时候要考虑是否含有elif,如果有elif要把它插在elif后面
                 #不能将字典插入到if和elif之间，所以需要找到elif后的下一个非空行再插入
                 if 'elif' not in codeLst[i]:
-                    #处理两个连续的装饰器@ -- 2025.5.12
-                    #不能在两个连续的decorator之间插入桩点
-                    if len(decoratorLine) > 1 and  codeLst[i].replace(' ','')[0]=='@':
-                        if decoratorLine[-1] - decoratorLine[-2] == 3 or decoratorLine[-1] - decoratorLine[-2] ==4:
-                            i = insertStartLine 
-                    codeLst.insert(i,dicString3)
-                    codeLst.insert(i,dicString2)
+                    insertIndex=getDecoratorInsertIndex(codeLst,i)
+                    codeLst.insert(insertIndex,dicString3)
+                    codeLst.insert(insertIndex,dicString2)
                     if dicString1:
-                        codeLst.insert(i,dicString1)
-                    codeLst.insert(i,dicString0)
+                        codeLst.insert(insertIndex,dicString1)
+                    codeLst.insert(insertIndex,dicString0)
                     #记录当前插在了哪一行
                     if dicString1:
-                        insertStartLine=i+4
+                        insertStartLine=insertIndex+4
                     else:
-                        insertStartLine=i+3
+                        insertStartLine=insertIndex+3
                 else:
                     if dicString1:
                         dicString1=dicString1.lstrip(' ') #去掉之前添加的空格，重新计算开头的空格数
