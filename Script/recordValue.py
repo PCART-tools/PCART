@@ -1,5 +1,5 @@
 ## @file recordValue.py
-## @brief Runtime value recorder used by instrumented project files
+## Runtime value recorder used by instrumented project files
 ## @ingroup script
 ## @page record_value Runtime Value Recording
 ##

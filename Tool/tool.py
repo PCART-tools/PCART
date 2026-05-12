@@ -1,7 +1,14 @@
 ## @package tool
 #  Provide utility functions for processing API calls and source files
 #
-#  More details (TODO)  
+#
+#  Collection of shared utility functions: AST parsing, parameter string
+#  splitting/parsing (getParameter, departAPI, departAPI2), configuration
+#  loading, run command normalization and executable resolution, report
+#  formatting (save2txt), and AST transformation (ConditionalReturnTransformer).
+#  共享工具函数集合：AST解析、参数字符串拆分/解析（getParameter、departAPI、
+#  departAPI2）、配置加载、运行命令归一化和可执行文件解析、报告格式化
+#  （save2txt）、AST转换（ConditionalReturnTransformer）。
 
 
 
@@ -74,7 +81,7 @@ def shortenArtifactFileName(fileName,extension):
 #  @param p_string Parameter string
 #  @param separator The separator, ',' is the default value 
 #  @param space Determine whether to remove the space in the parameter string 
-#  @return parameters List of separater parameters 
+#  @return parameters List of separated parameters
 def getParameter(p_string,separator=',',space=1):
     #库定义的参数去空格，项目中的参数不去空格，防止出问题
     if space: #默认是去空格的
@@ -161,7 +168,7 @@ def getParameter(p_string,separator=',',space=1):
 ## 将代码转化为Ast树
 #
 #  @param filePath The code file path
-#  @strFlag Determine the code from file or API: 0 for file; 1 for API call string
+#  @param strFlag Determine the code from file or API: 0 for file; 1 for API call string
 #  @return root The parsed AST root
 def getAst(filePath,strFlag=0): #若strFlag=1,则表明传进来的是一个api，而不是一个路径
     if strFlag==0:
@@ -174,8 +181,12 @@ def getAst(filePath,strFlag=0): #若strFlag=1,则表明传进来的是一个api�
 
 
 
+## Extract import statements from a source file (currently torch-specific)
+## 从源码文件中提取import语句（目前仅筛选torch相关）
+#
+#  @param filePath The source file path
+#  @return List of matching import statement strings
 def getImportLst(filePath):
-    #把当前文件中和torch相关的import语句以及调用语句筛选出来,之后写入runTask.py文件中 
     importLst=[]            
     with open(filePath,'r',encoding='UTF-8') as f:
         lstR=f.readlines()
@@ -277,7 +288,7 @@ def getLastAPIParameter(apiStr):
 #  还有特殊的调用形式a.b['x'](y)
 #
 #  @param s The API call string
-#  @return ansLst The splited result
+#  @return ansLst The split result
 def departAPI(s):
     ansLst=[]
     stack=''
@@ -324,8 +335,8 @@ def departAPI(s):
 #  比如a.b(x).c(y).d(z)拆成4个API，分别是['a', 'b(x)', 'c(y)', 'd(z)']
 #
 #  @param s The API call string
-#  @param separator The separator simbol: .
-#  @return ansLst The splited result
+#  @param separator The separator symbol: .
+#  @return ansLst The split result
 def departAPI2(s,separator='.'):
     ansLst=[]
     lst=[]
@@ -370,18 +381,25 @@ def departAPI2(s,separator='.'):
 
 
 
+## Check if a match dictionary contains dynamic (string) match results
+## 检查匹配字典是否包含动态（字符串）匹配结果
+#
+#  @param dic The match result dictionary
+#  @return 1 if any value is a string (dynamic match), 0 otherwise (static match or empty)
 def isDynamic(dic):
     lst=list(dic.values())
     for it in lst:
         if isinstance(it,str):
             return 1
-    return 0  #空字典也看作是模糊匹配的字典 
+    return 0  #空字典也看作是模糊匹配的字典
 
 
 
+## Get all version numbers from a library package directory
 ## 给定库的路径，获得该库的所有版本号
 #
-#  /home/zhang/Packages/scikit-learn
+#  @param libPath The library package directory path
+#  @return List of version strings sorted in ascending order
 def getVersionLst(libPath):
     obj=Path('D')
     versionLst=[]
@@ -400,11 +418,16 @@ def getVersionLst(libPath):
 
 
 
-#将版本号格式统一为x.xx.xx.小数部分
-#比如3.10.12与4.2.8，则将4.2.8转化为4.02.08
-#4.5.0rc1转化为(4.05.00).3即40500.01
-#4.5.0rc10转化为(4.05.00).3即40500.10
-#整数部分模拟大版本，小数部分模拟大版本下的小版本，比如rc,a,b
+## Normalize and compare version strings
+## 归一化并比较版本号字符串
+#
+#  Converts version strings like "3.10.12", "4.5.0rc1" into a single float for comparison.
+#  Alpha/beta/rc suffixes are mapped to fractional parts (a < b < rc).
+#  将版本号"3.10.12"、"4.5.0rc1"等转化为浮点数进行比较，
+#  alpha/beta/rc后缀映射为小数部分(a < b < rc)。
+#
+#  @param version The version string to normalize
+#  @return A float representing the normalized version
 def cmp(version):
     index=len(version)
     innerVersion=""
@@ -480,7 +503,7 @@ def getFileName(fileName,extension):
 #
 #  @param width The width of each line of string 
 #  @param s The output string
-#  @param fw File writter 
+#  @param fw File writer
 def writeLine(width,s,fw):
     if len(s)<=width-4:
         tailSpaceNum=width-2-len(s)-1
@@ -642,6 +665,10 @@ def resolveConfigValuePath(repoRoot,path):
     return os.path.abspath(os.path.join(repoRoot,expanded))
 
 
+## Unsupported run command exception
+## 不支持的运行命令异常
+#
+#  Raised when PCART cannot safely execute a configured run command.
 class UnsupportedRunCommand(Exception):
     """Raised when PCART cannot safely execute a configured run command."""
 
@@ -859,6 +886,10 @@ def getSourceCodePath(configPath):
 ## Convert conditional return statement to multi-line if-else structure
 ## 展开单行条件返回语句为多行if-else结构
 class ConditionalReturnTransformer(ast.NodeTransformer):
+    ## Transform single-line conditional return into multi-line if-else structure
+    ## 将单行条件返回语句转换为多行if-else结构
+    #  @param node The Return AST node
+    #  @return The transformed if-else AST node, or the original node
     def visit_Return(self, node):
         #检查return语句是否为单行条件语句（IfExp)
         if isinstance(node, ast.Return) and isinstance(node.value, ast.IfExp):

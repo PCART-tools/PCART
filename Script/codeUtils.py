@@ -1,5 +1,5 @@
 ## @file codeUtils.py 
-## @brief Provides shared utility functions for Script modules
+## Provides shared utility functions for Script modules
 ## @ingroup script
 ## @page code_utils Code Utils
 ##
@@ -56,8 +56,8 @@ def shortenArtifactFileName(fileName,extension):
     prefix=fileName[:prefixLength].rstrip('_')
     return prefix+suffix+extension
 
-## Normalize file name
-## 给文件取名字
+## Normalize and sanitize file name
+## 规范化并清理文件名
 #
 #  @param fileName Typically, the API call string or callsite artifact id is input as the file name
 #  @param extension The extension of the file
@@ -77,7 +77,15 @@ def getFileName(fileName,extension):
     fileName+=extension 
     return fileName
 
-#去掉API中的参数部分
+## Remove parameter(s) from API call string
+## 去掉API中的参数部分
+#
+#  For example, a.b(x,y(2)).c(z=1).d(w=[(1,2)]) --> a.b.c.d
+#  比如a.b(x,y(2)).c(z=1).d(w=[(1,2)])变成a.b.c.d
+#
+#  @param s The API call string
+#  @param flag Determine remove all parameters or the last parameter for the input API call: 0 for all parameters; 1 for the last parameters
+#  @return ans The API call string without parameter(s)
 def removeParameter(s,flag=0): 
     if '->' in s: #若有返回值，则把返回值也去掉
         s=s.split('->')[0] 
@@ -122,8 +130,15 @@ def removeParameter(s,flag=0):
 
 
 #拆分API，比如a.b(x).c(y).d(z)
-#拆成3个API，分别是a.b(x),a.b(x).c(y), a.b(x).c(y).d(z)
-#还有特殊的调用形式a.b['x'](y)
+## Split API call string based on parameter passing
+## 根据参数传递拆分API调用字符串
+#
+#  For example, a.b(x).c(y).d(z) --> ['a.b(x)', 'a.b(x).c(y)', 'a.b(x).c(y).d(z)']
+#  比如a.b(x).c(y).d(z)拆成3个API，分别是['a.b(x)', 'a.b(x).c(y)', 'a.b(x).c(y).d(z)']
+#  还有特殊的调用形式a.b['x'](y)
+#
+#  @param s The API call string
+#  @return ansLst The split result
 def departAPI(s):
     ansLst=[]
     stack=''
@@ -162,6 +177,15 @@ def departAPI(s):
     return ansLst
 
 
+## Split API call string based on separator "."
+## 根据"."拆分API调用字符串
+#
+#  For example, a.b(x).c(y).d(z) --> ['a', 'b(x)', 'c(y)', 'd(z)']
+#  比如a.b(x).c(y).d(z)拆成4个API，分别是['a', 'b(x)', 'c(y)', 'd(z)']
+#
+#  @param s The API call string
+#  @param separator The separator symbol: .
+#  @return ansLst The split result
 def departAPI2(s,separator='.'):
     ansLst=[]
     lst=[]
@@ -169,7 +193,7 @@ def departAPI2(s,separator='.'):
     count_right_min=0 #统计右')'的个数
 
     count_left_middle=0 #统计左'['的个数
-    count_right_middle=0 #统计左']'的个数
+    count_right_middle=0 #统计右']'的个数
     for index,value in enumerate(s):
         #入栈，分两种情况
         if value!=separator:
@@ -210,12 +234,12 @@ def departAPI2(s,separator='.'):
 #
 #  apiName(x,y="<bold>Hello, World!</bold>",z:int,w=(p1,p2={1,(1m,23)}),device: Union[Device, int] = None, abbreviated: bool ={'a','b'}) -> str
 #  默认按逗号进行拆分,也可按'.'进行拆分，比如a.b.c
-#  拆分参数的时候没有考虑到x="hello,wolrd"带冒号的情况，会错误拆成两个
+#  拆分参数的时候没有考虑到x="hello,world"带冒号的情况，会错误拆成两个
 #
 #  @param p_string Parameter string
 #  @param separator The separator, ',' is the default value
 #  @param space Determine whether to remove the space in the parameter string 
-#  @return parameters List of separater parameters
+#  @return parameters List of separated parameters
 def getParameter(p_string,separator=',',space=1):
     #库定义的参数去空格，项目中的参数不去空格，防止出问题
     if space: #默认是去空格的
@@ -298,9 +322,14 @@ def getParameter(p_string,separator=',',space=1):
     return parameters
 
 
-#获取最后一个API参数
-#a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4)
-#获取c的参数1,2,3,4
+## Get parameter(s) of the last API from the API call string
+## 获取最后一个API参数
+#
+#  For example, a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4) --> 1,2,3,4
+#  比如，a(x).b(x=c.d(1),y=b((1,2),5),w).c(1,2,3,4)，获取c的参数1,2,3,4
+#
+#  @param apiStr The API call string
+#  @return ans The parameter(s) of the last API
 def getLastAPIParameter(apiStr):
     ans=''
     i=len(apiStr)-1

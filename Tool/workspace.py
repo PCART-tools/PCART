@@ -1,5 +1,16 @@
 ## @package workspace
 #  Run workspace helpers for isolating PCART execution artifacts
+#
+#  Provides createRunWorkspace() to create isolated run directories under
+#  PCARTRuns/runs/ with unique run_id and command_id, exportRunReport() to
+#  export internal reports to Report/runs/, and workspaceCwd() for temporary
+#  working directory switching. Each workspace contains Copy/, Dynamic/, data/,
+#  temp/, Report/ subdirectories and a metadata.json snapshot.
+#  提供createRunWorkspace()在PCARTRuns/runs/下创建带唯一run_id和command_id的
+#  隔离运行目录，exportRunReport()导出内部报告到Report/runs/，workspaceCwd()
+#  用于临时切换工作目录。每个工作区包含Copy/、Dynamic/、data/、temp/、Report/
+#  子目录和metadata.json快照。
+#
 #  提供PCART运行工作区的创建、编号、元数据记录和报告导出能力
 
 
@@ -12,6 +23,7 @@ from dataclasses import asdict,dataclass
 from datetime import datetime
 
 
+## @class RunWorkspace
 ## Run workspace path object
 ## PCART单次运行的工作区路径对象
 #
@@ -176,6 +188,7 @@ def createRunWorkspace(
 #
 #  @param workspace The RunWorkspace object
 #  @param metadata Additional metadata collected from config
+#  @return None
 def writeMetadata(workspace,metadata):
     content=asdict(workspace)
     content.update(metadata)
@@ -188,6 +201,7 @@ def writeMetadata(workspace,metadata):
 #
 #  Internal pipeline code should use these paths instead of cwd-relative
 #  Copy/Dynamic/data/Report paths.
+#  流水线内部代码应使用这些路径，而非相对于当前工作目录的Copy/Dynamic/data/Report路径。
 #  @param workspace RunWorkspace object
 #  @return Dict of Copy/Dynamic/data/temp/Report roots
 def getRuntimePaths(workspace):
@@ -205,6 +219,8 @@ def getRuntimePaths(workspace):
 ## 临时切换当前工作目录
 #
 #  @param path The working directory used during the context
+#  @return Context manager that restores the previous working directory
+#  @fn workspaceCwd
 @contextmanager
 def workspaceCwd(path):
     previous=os.getcwd()
@@ -219,6 +235,7 @@ def workspaceCwd(path):
 ## 将工作区内部报告导出到用户可见报告目录
 #
 #  @param workspace The RunWorkspace object
+#  @return None
 def exportRunReport(workspace):
     os.makedirs(workspace.report_root, exist_ok=True)
     os.makedirs(os.path.join(workspace.report_root,'patches'),exist_ok=True)
@@ -234,4 +251,3 @@ def exportRunReport(workspace):
             shutil.copytree(source,target)
         else:
             shutil.copy2(source,target)
-

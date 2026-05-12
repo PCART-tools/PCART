@@ -1,7 +1,12 @@
 ## @file main.py 
 #  PCART's main function entry   
 # 
-#  More details (TODO)
+#
+#  Entry point for the full PCART pipeline: preprocess → extract → map →
+#  compatibility analysis → repair → report. Supports multiprocessing for
+#  parallel file processing with shared matching dictionaries.
+#  PCART完整流水线入口：预处理→提取→映射→兼容性分析→修复→报告。
+#  支持多进程并行文件处理，使用共享匹配字典。
 
 
 
@@ -23,11 +28,15 @@ from Tool.workspace import createRunWorkspace,exportRunReport,getRepoRoot,getRun
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
-## One process handles one file 
+## One process handles one file
 ## 一个进程处理一个文件
 #
-#  @param args Input parameters for processing one project file 
-#  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: API parameter compatibility issue detection and repair results; fileRelativePath: The detected and repaired project file; invokedAPINum: The number of invoked APIs 
+#  @param args Input parameters for processing one project file (unpacked tuple of 12 values)
+#  @param args 处理一个项目文件的输入参数（12个值的解包元组）
+#  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: detection and repair results;
+#          fileRelativePath: the file being processed; invokedAPINum: number of invoked APIs
+#  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: 检测和修复结果；
+#          fileRelativePath: 被处理的文件；invokedAPINum: 调用的API数量
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
     projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths=args
@@ -97,7 +106,6 @@ def backwardTask(args):
             ansDict[key]['Compatible']="Unknown"
             if len(errLst)>0:
                 errorMsg = f"Error occurred, please check the {projName}_fixed_log.txt"
-                # print(errorMsg)
                 with lock:
                     updateErrorLst(errorLog,errLst)
             continue
@@ -130,7 +138,6 @@ def backwardTask(args):
 
         if len(errLst)>0:
             errorMsg = f"Error occurred, please check the {projName}_fixed_log.txt"
-            # print(errorMsg)
             with lock:
                 updateErrorLst(errorLog,errLst)
 
@@ -143,17 +150,18 @@ def backwardTask(args):
 
 
 
-## Generate pkl files and perform detection and repair task
+## Generate pkl files and perform detection and repair tasks
 ## 生成项目调用API的pkl文件以及执行检测与修复任务
 #
-#  @param projPath The path to the project
-#  @param libName  The upgraded Python third-party library name
-#  @param currentVersion The upgraded lib's current version
-#  @param currentEnv Current version's virtual environment
-#  @param targetVersion The upgraded lib's target version
-#  @param targetEnv Target version's virtual environment
-#  @param runCommand The run command of the project
-#  @param runPath The relative path of the run file
+#  @param projPath  The path to the project / 项目路径
+#  @param libName   The upgraded Python third-party library name / 升级的第三方库名
+#  @param currentVersion The upgraded lib's current version / 库的当前版本
+#  @param currentEnv Current version's virtual environment / 当前版本的虚拟环境
+#  @param targetVersion The upgraded lib's target version / 库的目标版本
+#  @param targetEnv Target version's virtual environment / 目标版本的虚拟环境
+#  @param runCommand The run command of the project / 项目运行命令
+#  @param runPath   The relative path of the run file / 运行文件的相对路径
+#  @param workspace RunWorkspace object for this execution / 本次执行的运行工作区
 def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace):
     runtimePaths=getRuntimePaths(workspace)
     copyRoot=runtimePaths['copy_root']
@@ -184,7 +192,6 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
         print(createResult.stderr)
         return
     print("Running complete")
-    #print(createResult.stdout)
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
     os.makedirs(tempDir,exist_ok=True)

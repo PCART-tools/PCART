@@ -1,7 +1,15 @@
 ## @package repair 
 #  Repair and validate API parameter compatibility issues   
 #
-#  More details (TODO)
+#
+#  Repairs API parameter compatibility issues at the AST level. Uses a two-stage
+#  validation strategy: static validation (signature check via mirrorAPI) and
+#  dynamic validation (running repaired code in targetEnv via validateByRun).
+#  The fix() function applies repair operations (delete, rename, reorder,
+#  pos↔key conversion) directly on AST nodes.
+#  在AST层面修复API参数兼容性问题。采用两阶段验证策略：静态验证（通过mirrorAPI
+#  进行签名检查）和动态验证（通过validateByRun在targetEnv中运行修复后代码）。
+#  fix()函数直接在AST节点上应用修复操作（删除、重命名、重排序、位置↔关键字转换）。
 
 
 
@@ -17,12 +25,12 @@ from Change.changeAnalyze import para2Obj
 ## Get repair operation dictionary of positional parameter
 ## 获取位置参数的修复操作字典
 #
-#  Here, positonal parameter means that the parameter is passed by position without parameter name
+#  Here, positional parameter means that the parameter is passed by position without parameter name
 #  此处，位置参数指按位置而不带参数名进行传递的参数
 #
 #  @param pos Parameter position
 #  @param dic Repair operation dictionary
-#  @ruturn dic[key] The repair operation    
+#  @return dic[key] The repair operation
 def mapPos(pos,dic):
     for key in dic:
         try:
@@ -41,8 +49,8 @@ def mapPos(pos,dic):
 #  此处，关键字参数指带参数名进行传递的参数
 #
 #  @param name Parameter name
-#  @param dic Repair opeartion dictionary
-#  @ruturn dic[key] The repair operation    
+#  @param dic Repair operation dictionary
+#  @return dic[key] The repair operation
 def mapName(name,dic):
     for key in dic:
         if key[0]==name:
@@ -118,7 +126,7 @@ def mirrorAPI(fixedAPI,dic):
         if nameFlag:
             paraObjLst.append((parameter,1)) #1表示使用时带了参数名
         else:
-            paraObjLst.append((parameter,0)) #1表示使用时没有带参数名
+            paraObjLst.append((parameter,0)) #0表示使用时没有带参数名
     return paraObjLst
 
 
@@ -259,12 +267,13 @@ def fix(callAPI,repairDict,node,starFlag,twoStarFlag):
 ## 动态验证
 # 
 #  @param callAPI The API call
-#  @param apiWithValue The API call with valued added by loading the pkl file
+#  @param apiWithValue The API call with value added by loading the pkl file
 #  @param projName The project name
 #  @param virtualEnv The virtual environment of the target lib version
 #  @param runPath The relative path of the run file
 #  @param runCommand The run command of the project
 #  @param callKey Unique callsite artifact id
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return result Dynamic validation result
 def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,callKey,*,runtimePaths):
     if apiWithValue=='':
@@ -348,18 +357,20 @@ def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
 
 
 
-## Task of repairing parameter compatibility issues 
+## Task of repairing parameter compatibility issues
 ## 参数兼容性问题修复任务
 #
-#  需要判断一下apiWithValue是否为空
-#  修复成功=形式上修复成功+成功运行
-#  是否兼容
-#  问题是修完之后，无法通过返回值来判断，到底是动态修复成功了还是只经过了静态验证,再返回一个标签？
-#  函数返回3个值：修复结果，形式上的兼容性，是否修复成功
+#  Checks whether apiWithValue is available. Repair success = formal fix + successful run.
+#  Returns 3 values: repair result, formal compatibility, and whether the repair succeeded.
+#  Note: after a static-only fix, the return value alone cannot distinguish dynamic success
+#  from static-only validation — an extra label is returned for this purpose.
+#  需要判断一下apiWithValue是否为空。修复成功=形式上修复成功+成功运行。
+#  函数返回3个值：修复结果，形式上的兼容性，是否修复成功。
+#  修完之后无法通过返回值判断是动态修复成功还是只经过了静态验证，因此额外返回标签。
 #
 #  @param root The AST root of the source file
 #  @param callAPI The API call
-#  @param apiWithValue The API call with valued added by loading the pkl file
+#  @param apiWithValue The API call with value added by loading the pkl file
 #  @param projName The project name
 #  @param runPath The relative path of the run file
 #  @param runCommand The run command of the project
@@ -367,6 +378,7 @@ def validateByStr(fixedAPI,repairDict,targetAPIDefinition,starFlag,twoStarFlag):
 #  @param virtualEnv The virtual environment of the target lib version
 #  @param errLst List of error messages
 #  @param callKey Unique callsite artifact id
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return repairResults 
 def repairTask(root,callAPI,apiWithValue,projName,runPath,runCommand,repairLst,virtualEnv,errLst,callKey,*,runtimePaths):
     #静态修复,pkl加载失败，只能进入静态修复

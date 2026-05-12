@@ -1,5 +1,5 @@
 ## @file dynamicMatch.py
-## @brief A dynamic script dynamically maps the signature of a single API call 
+## A dynamic script that maps the signature of a single API call
 ## @ingroup script
 ## @page dynamic_match Dynamic Mapping of API Signature
 ##
@@ -13,8 +13,8 @@ import dill
 from codeUtils import getFileName, removeParameter, departAPI2
 
 
-
-#step1: 加载PKL
+#step1: Load the pkl file containing runtime API call data
+#step1: 加载包含运行时API调用数据的pkl文件
 if len(sys.argv)<5:
     print('lookupKey is required',file=sys.stderr)
     sys.exit(2)
@@ -25,33 +25,36 @@ with open(pklPath,'rb') as fr:
 print("load pkl successfully")
 
 
-
-#step2: 动态匹配
+#step2: Dynamic signature matching
+#step2: 动态签名匹配
 callAPI=sys.argv[2]
 dataDir=sys.argv[3]
 lookupKey=sys.argv[4]
 matchDict={}
 s=''
-lst2=departAPI2(callAPI) #拆分成a(x), b(y), c(z)
+lst2=departAPI2(callAPI) #Split into a(x), b(y), c(z) / 拆分成a(x), b(y), c(z)
 
 lastAPI=lst2[-1]
 s=removeParameter(lastAPI,1)
 
-#给API填上参数的具体值
+# Fill in concrete parameter values for the API call
+# 给API填上参数的具体值
 for key in paraValueDict.keys():
-    #if callAPI.replace(' ','')==key.replace(' ',''):
     if lookupKey==key:
-        #把函数的上文依赖给填上,比如self.a(x)中的self, a.b(2).c(3)中的a.b(2)
+        # Fill in the upstream call dependency (self, chained receiver, withitem, etc.)
+        # 把函数的上文依赖给填上，比如self.a(x)中的self, a.b(2).c(3)中的a.b(2)
         k='@{}'.format(key)
         firstPart=lst2[0]
         if k in paraValueDict:
-            #新增Context Manager对象动态匹配支持 -- 2025/5/20
+            #Context manager object dynamic matching support
+            #上下文管理器对象动态匹配支持
             receiver = paraValueDict.get(k)
             if isinstance(receiver,str):
                 s=receiver+'.'+s
             else:
                 s='paraValueDict.get(k)'+'.'+s
-        else: #比如torch.func(x),还有类似于tornado.web.Application()的形式
+        else: #Top-level imports like torch.func(x), tornado.web.Application()
+            #例如torch.func(x)、tornado.web.Application()等形式
             prefix=''
             for it in lst2:
                 if '(' not in it:
@@ -62,7 +65,6 @@ for key in paraValueDict.keys():
         break
 
 
-# print(s)
 api=s
 err=''
 try:
@@ -81,14 +83,10 @@ except Exception as e:
     matchDict['error']='sigError={}: {}'.format(type(e).__name__,e)
 
 
-
-# print("match:",matchDict['match'])
-#动态匹配若失败，则没有internalPath,和addValue这两个属性的
+# If dynamic matching fails, internalPath and addValue attributes are not available
+# 动态匹配若失败，则没有internalPath和addValue这两个属性
 fileName=getFileName(lookupKey,'_dynamicMatch.json')
 
 os.makedirs(dataDir,exist_ok=True)
 with open(os.path.join(dataDir,fileName),'w',encoding='UTF-8') as fw:
     json.dump(matchDict,fw,indent=4,ensure_ascii=False)
-
-# print("保存文件成功：{}_dynamicMatch.json".format(callAPI.replace(' ','')))
-
