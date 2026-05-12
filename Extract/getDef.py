@@ -1,7 +1,12 @@
 ## @package getDef 
 #  Extract API definitions from lib source code 
 #
-#  More details (TODO)
+#
+#  Extracts API definitions from library source files by parsing AST for class
+#  definitions, function definitions, and __init__.py assignment aliases. Handles
+#  .py/.pyi deduplication and API path shortening via __init__.py imports.
+#  通过解析AST提取库源码中的类定义、函数定义和__init__.py赋值别名。处理.py/.pyi
+#  去重，通过__init__.py导入缩短API路径。
 
 
 
@@ -21,18 +26,23 @@ from Tool.tool import getAst
 class RegexMatch:
     
     ## The constructor
+    ## 构造函数
+    #  @param code_text Source code text to search
+    #  @param pattern Regular expression pattern
     def __init__(self,code_text,pattern):
         self._code_text=code_text
         self._pattern=pattern
         self._result=[]
 
     ## Return the match result
-    #  @param self The object pointer
+    ## 返回匹配结果
+    #  @return List of regex match results
     def get_result(self):
         return self._result
 
-    ## Perform the regular expressions
-    #  @param self The object pointer
+    ## Perform the regular expression match
+    ## 执行正则表达式匹配
+    #  @return 1 if a match is found, otherwise 0
     def regex_match(self):
         obj=re.compile(self._pattern,re.DOTALL)
         lst=obj.findall(self._code_text)
@@ -121,14 +131,12 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
         replaceKey2=''
         replaceVal2=''
         for key,value in obj.importDict.items():
-            # print(key, '-->', value)
             if key[-1]=='*':
                 key=key.rstrip('*')
                 if key in api:
                     replaceKey1=key
                     replaceVal1=''
             elif key in api:
-                # print(key,'-->', value)
                 # if key.split('.')[-1]==api.split('.')[-1]: #key的最后一个字段要和api的最后一个字段相同
                 replaceKey2=key
                 replaceVal2=value
@@ -196,7 +204,7 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
         para=f"({call})"
         lst.append(f"{prefix}.{className}.__call__{para}")
     else: #若类中不含init,new,call,就将类的继承作为类的参数
-        pattern=f"class {className}(\(.*?):" 
+        pattern=fr"class {re.escape(className)}(\(.*?):"
         codeText=ast.unparse(root)
         R=RegexMatch(codeText,pattern)
         flag=R.regex_match()
@@ -289,7 +297,6 @@ def getDefFunction(args):
         prefix=def2format.prefix #前缀，包名.文件名
         relativePath=def2format.relativePath #相对路径，只从包名开始
         fileDict={file:relativePath}
-        # print(fileDict)
         #对于每个file，首先判断一下他是.py文件还是.pyi文件
         if file[-1]=='y' and file not in fileVisitLst:
             fileVisitLst.append(file)

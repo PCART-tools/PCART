@@ -1,7 +1,15 @@
 ## @package preprocess 
 #  Preprocess project source files for preparing API parameter compatibility issue detection and repair   
 #
-#  More details (TODO)
+#
+#  Prepares project source files for analysis: flattens control flow (list/dict
+#  comprehensions, conditional returns), normalizes formatting (tabs→spaces,
+#  single-line calls), and injects runtime instrumentation (recordValue.py)
+#  around every target-library API call to capture receiver objects and parameter
+#  values at runtime. Also manages Copy/ and Dynamic/ project copies.
+#  准备项目源文件用于分析：展平控制流（列表/字典推导式、条件返回）、格式化归一化
+#  （tabs→空格、多行调用合并为单行），并在每个目标库API调用周围注入运行时插桩
+#  （recordValue.py）以捕获接收者对象和参数值。同时管理Copy/和Dynamic/项目副本。
 
 
 
@@ -76,7 +84,6 @@ def expandConditionalReturn(filePath):
         root=getAst(filePath)
         transformer = ConditionalReturnTransformer()
         new_root = transformer.visit(root)
-        #print(ast.unparse(new_root)) 
         #重写回文件
         with open(filePath,'w',encoding='UTF-8') as fw:
             newCode=ast.unparse(root)
@@ -94,7 +101,7 @@ def expandConditionalReturn(filePath):
 #
 #
 #  @param root The AST root of the line of code
-#  @param ansLst List of coverted local variable(s) in list comprehension
+#  @param ansLst List of converted local variable(s) in list comprehension
 def getListVar(root,ansLst):
     for node in ast.iter_child_nodes(root):
         if isinstance(node,ast.ListComp):
@@ -121,7 +128,7 @@ def getListVar(root,ansLst):
 #  比如{k:v for k,v in {'a': 1, 'b': 2, 'c': 3}.items()}转换后为k, v=[(k, v) for (k, v) in {'a': 1, 'b': 2, 'c': 3}.items()][0] 
 #
 #  @param root The AST root of the line of code
-#  @param ansLst List of coverted local variable(s) in dictionary comprehension
+#  @param ansLst List of converted local variable(s) in dictionary comprehension
 def getDictVar(root,ansLst):
     for node in ast.iter_child_nodes(root):
         if isinstance(node,ast.DictComp):
@@ -155,7 +162,6 @@ def convertLocalVar(filePath,libName):
         try:
             root=ast.parse(s,filename='<unknown>',mode='exec')
         except Exception as e:
-            # print(f"converLocalVar: ast.parse error，{e}")
             continue
         
         #step1:判断代码语句中是否含有列表推导式或字典推导式
@@ -210,8 +216,6 @@ def convertLocalVar(filePath,libName):
                     spaceNum=0 #用完之后就置为0
             
                 s=tryStr+it+exceptStr+passStr
-                # print(filePath)
-                # print(s)
                 temp=temp+s
             temp+=codeLst[i]
             codeLst[i]=temp
@@ -236,8 +240,6 @@ def convertLocalVar(filePath,libName):
                     spaceNum=0 #用完之后就置为0
             
                 s=tryStr+it+exceptStr+passStr
-                # print(filePath)
-                # print(s)
                 temp=temp+s
             temp+=codeLst[i]
             codeLst[i]=temp
@@ -353,7 +355,7 @@ def countSpace(s):
 ## Determine the instrumentation line for import statements
 ## 确定import语句插桩行
 #  
-#  Default line is 0. Avoid instrumenting import statements before __future__ statements) or between comments 
+#  Default line is 0. Avoid instrumenting import statements before __future__ statements or between comments
 #  默认行为0，避免在__future__前或注释块中插入import语句
 #
 #  @param codeLst Code list read by f.readlines()
@@ -668,7 +670,7 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                     spaceNum-=1
 
                 #插入的时候要考虑是否含有elif,如果有elif要把它插在elif后面
-                #因为不能以相同的所以把字典插在if和elif之间
+                #不能将字典插入到if和elif之间，所以需要找到elif后的下一个非空行再插入
                 if 'elif' not in codeLst[i]:
                     #处理两个连续的装饰器@ -- 2025.5.12
                     #不能在两个连续的decorator之间插入桩点
@@ -718,13 +720,9 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
             i+=1
         
         if flag==0:
+            # Debug aid: log uninstrumentable callsites for diagnosis
+            # 调试辅助：记录无法插桩的调用点以便诊断
             print(f"{fileName}#{lineno}-->{callState}\n")
-            # with open('66666666666.py','a') as fw:
-            with open('66666666666.py', 'a', encoding='UTF-8') as fw:
-                fw.write('\n'+fileName+'='*100+'\n')
-                fw.write(f"{fileName}#{lineno}--->{callState}\n")
-                for it in codeLst[insertStartLine:]:
-                    fw.write(it)
 
     if codeLst[0]=='pass\n':
         codeLst=codeLst[1:]
@@ -737,8 +735,11 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
 ## Code instrumentation for project run file
 ## 项目运行文件代码插桩
 #
-#  该函数用于动态匹配时候的时候对单个API进行插桩，除了要插桩当前文件
-#  还要对运行文件进行插桩,所以提前把bak_Proj中的运行文件处理好
+#  Used during dynamic matching for single-API re-instrumentation. In addition to
+#  the current file, the run file is also instrumented so that bak_Proj run files
+#  are prepared in advance.
+#  该函数用于动态匹配时对单个API进行插桩，除了要插桩当前文件
+#  还要对运行文件进行插桩，所以提前把bak_Proj中的运行文件处理好。
 #
 #  @param file The run file
 #  @param runPath The relative path of the run file 
@@ -755,6 +756,10 @@ def handleRunFile(file,runPath,runCommand):
         for it in codeLst:
             fw.write(it)
 
+## Extract class and function definitions from a source file
+## 从源文件中提取类和函数定义
+#
+#  @param sourcePath The source file path
 def obtainDef(sourcePath):
     with open(sourcePath,'r',encoding='UTF-8') as fr:
         code=fr.read()
@@ -782,7 +787,6 @@ def modifyFromImport(filePath,importStatement):
         codeLst=fr.readlines()
 
     s='\n'.join(importStatement)+'\n'
-    # print(s)
     codeLst.insert(0,s)
     # with open(filePath,'w') as fw:
     with open(filePath, 'w', encoding='UTF-8') as fw:
@@ -1022,16 +1026,22 @@ def scriptPath(scriptName):
 ## Code processing
 ## 代码预处理
 #
-#  #代码预处理目的：
-#  1.修改一些动态运行的脚本
-#  2.将用户代码的tab键用四个空格替换（因为不同编译器的tab键对应的空格数可能不同），再把换行写的语句集中到一行，目的是为了便于插桩处理
-#  3.插入一些头文件
+#  Preprocessing objectives:
+#  1. Modify dynamic runtime scripts for the target project
+#  2. Convert tabs to spaces and merge multi-line statements for instrumentation
+#  3. Inject necessary import headers
+#  代码预处理目的：
+#  1. 修改一些动态运行的脚本
+#  2. 将用户代码的tab键用四个空格替换，再把换行写的语句集中到一行，便于插桩处理
+#  3. 插入一些头文件
 #  runCommand可能是 src/run.py --config json
 #
 #  @param projPath The project path
 #  @param runCommand The run command of the project 
 #  @param runPath The relative path of the run file 
 #  @param libName The lib name 
+#  @param workspace RunWorkspace object for this execution
+#  @return None
 def codeProcess(projPath,runCommand,runPath,libName,workspace):
     runtimePaths=getRuntimePaths(workspace)
     copyRoot=runtimePaths['copy_root']
@@ -1068,7 +1078,6 @@ def codeProcess(projPath,runCommand,runPath,libName,workspace):
     libImportLst.append(importStatement) 
 
     #清除Copy和Dynamic中遗留的项目信息，然后把新项目的信息拷贝进去
-    # print(projPath)
     if os.path.isdir(copyRoot):
         shutil.rmtree(copyRoot)
     os.makedirs(os.path.dirname(copyRoot) or '.',exist_ok=True)
@@ -1134,7 +1143,6 @@ def codeProcess(projPath,runCommand,runPath,libName,workspace):
     #再对bak_proj中的运行文件进行插桩
     for file in runFileLst:
         file=os.path.join(copyRoot,f'bak_{projName}',prefix,file)
-        # print(prefix)
         handleRunFile(file,runPath,runCommand) 
     # bak项目会在current pkl生成后换回Copy/{projName}，其运行文件也依赖codeUtils
     shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,f'bak_{projName}',prefix))

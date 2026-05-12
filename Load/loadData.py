@@ -1,7 +1,12 @@
 ## @package loadData
 #  Provide utility functions for loading and processing lib APIs 
 #
-#  More details (TODO) 
+#
+#  Loads pre-extracted library API definitions from LibAPIExtraction/ for static
+#  signature matching. Provides lib2json() to consolidate per-version API
+#  definitions into a single JSON file.
+#  从LibAPIExtraction/加载预提取的库API定义用于静态签名匹配。提供lib2json()
+#  将按版本的API定义合并为单个JSON文件。
 
 
 
@@ -18,9 +23,9 @@ from Tool.tool import cmp
 ## 把之前抽取出来的库API加载到字典中，在项目API与库API匹配的时候需要用到
 #
 #  @param libName The upgraded lib name
-#  @version version The lib's version
+#  @param version The lib's version
 #  @return tempLst The APIs' definitions
-#  @return assignDict The assign dict stores the alias of APIs
+#  @return assignDict The assign dict that stores the aliases of APIs
 #  @return libAPIins The built-in APIs' definitions 
 def loadLib(libName,version):
     # 使用源码位置定位仓库根目录，避免切换运行工作区后找不到LibAPIExtraction
@@ -56,7 +61,7 @@ def loadLib(libName,version):
             elif item[0]=='\n':
                 pyiFlag=0
 
-    #再单独对Asssign字典进行处理
+    #再单独对Assign字典进行处理
     #a1:r1，a2:a1防止值也是别名,最后a2:r1
     for k,v in assignDict.items():
         #判断值是否也可能是别名,即key
@@ -69,6 +74,12 @@ def loadLib(libName,version):
 
 
 
+## Get all overloaded API strings for a given API name
+## 获取给定API名称的所有重载API字符串
+#
+#  @param libApiObjLst List of API objects
+#  @param libApiName The API name to search for
+#  @return List of full API strings matching the given name
 def func(libApiObjLst,libApiName):
     lst=[]
     for it in libApiObjLst:
@@ -78,10 +89,16 @@ def func(libApiObjLst,libApiName):
 
 
 
-## 这个应该和loadlib合并到一起
+## Parse API list from a library extraction file
+## 从库API提取文件中解析API列表
+#
+#  这个应该和loadlib合并到一起
+#
+#  @param filePath Path to the extracted API definition file
+#  @return (version, apiLst) Tuple of version string and list of API strings
 def getAPILst(filePath):
     # pattern_v='.*?Torch(.*).txt'
-    pattern_v='\d+\.(?:\d+\.)*\d+'
+    pattern_v=r'\d+\.(?:\d+\.)*\d+'
     obj_v=re.compile(pattern_v)
     version=obj_v.findall(filePath)[0]
     # f=open(filePath,'r')
@@ -101,8 +118,14 @@ def getAPILst(filePath):
 
 
 
+## Traverse all library API versions and consolidate into a JSON file
 ## 遍历所有版本的库API，将其整理成一个json格式的文件
-## {APIName: {'1.1.0': [LibAPI1,LibAPI2,...]}, {...}, {...}}
+#
+#  The output JSON is keyed by API name, with each value being a list of
+#  per-version dictionaries: {APIName: [{'1.1.0': [LibAPI1,...]}, ...]}
+#
+#  @param sourceFilePath Directory containing per-version API extraction files
+#  @param saveFilePath Path where the consolidated JSON file is saved
 def lib2json(sourceFilePath,saveFilePath):
     pathObj=Path('F') #只获取当前目录下的一级子文件
     pathObj.getPath(sourceFilePath)

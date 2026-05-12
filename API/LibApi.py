@@ -1,7 +1,12 @@
 ## @package LibApi 
 #  Provide some class definitions for API objects
 #
-#  More details (TODO)
+#
+#  Defines Parameter (single API parameter), Api (full API signature), and
+#  APIOBJ (container for converting string API definitions into Api objects).
+#  These classes are used throughout the pipeline for compatibility analysis.
+#  定义Parameter（单个API参数）、Api（完整API签名）、APIOBJ（将字符串API定义
+#  转换为Api对象的容器）。这些类用于整个流水线的兼容性分析。
 
 
 
@@ -48,51 +53,95 @@ class Parameter():
 
     ## Return the hash value of the parameter
     ## 返回参数哈希值
+    #  @return Hash value of the parameter name
     def __hash__(self):
         return hash(self.fullItem)
    
     ## Determine whether two parameter objects are equal
     ## 判断两个参数对象是否相等 
+    #  @param other The parameter object to compare
+    #  @return True if the parameter names are equal
     def __eq__(self,other):
         return self.fullItem==other.fullItem
    
     ## Return the string representation of the parameter
     ## 返回参数的字符串表示形式 
+    #  @return Original parameter string
     def __repr__(self):
         return self.fullItem
 
 
 
-#暂时只考虑同名Api的变更情况
+## API class for storing a single API definition
+## API类，用于存储单个API的定义
+#
+#  Currently only considers changes to APIs with the same name.
+#  暂时只考虑同名Api的变更情况
 class Api:
+    ## Initialize the API fields
+    ## 初始化API字段
     def __init__(self):
-        self.full_item="" #full_item=APIName+parameters
+        ## The full API string including name and parameters
+        ## API完整字符串，包含名称和参数
+        self.full_item=""
+        ## The API name without parameters
+        ## API名称（不含参数）
         self.name=""
-        self.parameters=[] #参数的个数,其中每个元素都是一个参数对象
-        self.parameters_string="" #将api的所有参数整体保存为字符串
+        ## List of Parameter objects
+        ## 参数对象列表
+        self.parameters=[]
+        ## All parameters stored as a single string
+        ## 所有参数保存为单个字符串
+        self.parameters_string=""
+        ## The return type annotation (if any)
+        ## 返回值类型注释（如有）
         self.rType=""
-        self.version="" #库版本
-    
+        ## The library version
+        ## 库版本
+        self.version=""
+
+    ## Return the hash value based on the parameters string
+    ## 基于参数字符串返回哈希值
+    #  @return Hash value of the API parameter string
     def __hash__(self):
         return hash(self.parameters_string)
 
+    ## Determine equality based on the parameters string
+    ## 基于参数字符串判断两个API是否相同
+    #
+    #  list去重时，也会根据这个值的来去重
+    #  @param other The API object to compare
+    #  @return True if both API objects have the same parameter string
     def __eq__(self,other):
-        #利用API中的参数字符串来判断两个API是否相同
-        #list去重时，也会根据这个值的来去重
         return self.parameters_string==other.parameters_string
 
-    #控制打印信息，当打印一个类的时候，不会打印object，而是打印指定的字符串，即self.full_item
+    ## Return the full API string as the representation
+    ## 返回完整API字符串作为对象表示形式
+    #
+    #  When printing an instance, prints the full API string instead of the default object representation.
+    #  当打印一个类的时候，不会打印object，而是打印指定的字符串，即self.full_item
+    #  @return Full API string
     def __repr__(self):
-        return self.full_item 
+        return self.full_item
 
 
 
+## API list container for converting string definitions to API objects
+## API列表容器，将字符串形式的API定义转换为API对象
 class APIOBJ:
+    ## Initialize the API object list
+    ## 初始化API对象列表
     def __init__(self):
         self.objLst=[]
 
+    ## Convert API string definitions to API objects
+    ## 将API字符串定义转换为API对象
+    #
+    #  @param version The library version
+    #  @param APIStringLst List of API definition strings
+    #  @return None. Parsed Api objects are appended to self.objLst
     def toAPIObj(self,version,APIStringLst):
-        patternP='.*?\((.*)\)' #匹配函数参数
+        patternP=r'.*?\((.*)\)' #匹配函数参数
         objP=re.compile(patternP)
         Lst=copy.copy(APIStringLst)
         for item in Lst:

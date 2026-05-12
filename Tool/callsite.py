@@ -1,7 +1,14 @@
 ## @package callsite
 #  Provide structured callsite identity helpers
 #
-#  More details (TODO)
+#
+#  Defines CallsiteIdentity (structured source-location metadata) and
+#  CallsiteRecord (artifact_id + format_api + parameters). The artifactId()
+#  method produces a stable, readable SHA256-based key used for pkl naming,
+#  manifest tracking, and shared dictionary lookups throughout the pipeline.
+#  定义CallsiteIdentity（结构化源码位置元数据）和CallsiteRecord
+#  （artifact_id + format_api + parameters）。artifactId()方法生成稳定可读的
+#  SHA256-based键，用于pkl命名、manifest跟踪和共享字典查找。
 
 import hashlib
 import json
@@ -11,6 +18,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 
+## @class CallsiteIdentity
 ## Callsite identity class
 ## 调用点身份类
 #
@@ -84,6 +92,7 @@ class CallsiteIdentity:
         return f'{rel_slug}__L{self.lineno}C{self.col_offset}__{call_slug}__{self.artifactHash()}'
 
 
+## @class CallsiteRecord
 ## Callsite record class
 ## 调用点记录类
 #
@@ -110,6 +119,7 @@ class CallsiteRecord:
 
     ## Convert callsite record to dictionary
     ## 将调用点记录转换为字典
+    #  @return dict representation of the callsite record
     def toDict(self):
         return {
             'id': self.artifact_id,

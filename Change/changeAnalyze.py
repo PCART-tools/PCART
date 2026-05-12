@@ -1,7 +1,12 @@
 ## @package changeAnalyze 
 #  Analyze API parameter changes and compatibility 
 #
-#  More details (TODO)
+#
+#  Compares API signatures between library versions to detect 10 parameter change
+#  types (addition, removal, renaming, reordering, type change, pos↔key conversion).
+#  Core functions: isCompatible(), findDiffer(), addValueForAPI().
+#  比较库版本间API签名，检测10种参数变更类型（新增、删除、重命名、重排序、
+#  类型变更、位置↔关键字转换）。核心函数：isCompatible()、findDiffer()、addValueForAPI()。
 
 
 
@@ -43,7 +48,10 @@ class Update():
 
         ## New default value of the parameter
         ## 参数新默认值
-        #  TODO: Unimplemented
+        #
+        #  Detection and repair of default value changes are not yet implemented.
+        #  The field is reserved for future use.
+        #  默认值变更的检测和修复尚未实现。此字段保留供将来使用。
         self.value=''
 
         ## Flag (1) of parameter deletion 
@@ -71,14 +79,13 @@ class Update():
     ## Return the string representation of the parameter update
     ## 返回参数变更的字符串表示形式 
     def __repr__(self):
-        # s=f"name:{self.name}, "
         s=''
         if self.pos:
             s+=f"posChange:{self.pos}, "
         if self.type:
             s+=f"typeChange:{self.type}, "
         if self.dele:
-            s+=f"delte:{self.dele}, "
+            s+=f"delete:{self.dele}, "
         if self.add:
             s+=f"add:{self.add}, "
         s=s.rstrip(', ')
@@ -90,8 +97,8 @@ class Update():
 ## 保存错误信息
 #  @param errorLog Log file  
 #  @param errorLst The error messages 
+#  @return None
 def updateErrorLst(errorLog,errorLst):
-    # with open(errorLog,'a') as fw:
     with open(errorLog, 'a', encoding='utf-8') as fw:
         for it in errorLst:
             fw.write(it)
@@ -121,6 +128,7 @@ def querySharedDict(callAPI,sharedDict):
 #  @param currentDict The API signature of the current version
 #  @param targetDict The API signature of the target version
 #  @param sharedDict The API mapping dictionary: multiprocessing.manager.dict()
+#  @return None
 def updateSharedDict(callAPI,currentDict,targetDict,sharedDict):
     key=callAPI
     if key not in sharedDict: #没有就添加
@@ -204,7 +212,6 @@ def isDifferType(oldType,newType):
         for it in newLst:
             newTypeSet.add(it.replace(' ',''))
 
-        # print(oldTypeSet,'-->', newTypeSet)
         #这里oldTypeSet>0是因为避免空集是任意集合的子集的情况
         if len(oldTypeSet)>0 and oldTypeSet.issubset(newTypeSet):
             return False
@@ -538,8 +545,8 @@ def analyzeCompatibility(oldPara,newPara):
 
 
 
-## Detemine the compatibility of APIs from current and target versions
-## 判断起始版本和目标版本API的兼容性 
+## Determine the compatibility of APIs from current and target versions
+## 判断起始版本和目标版本API的兼容性
 #
 #  兼容返回空列表，不兼容返回则返回需要修复的字典，可能会有多个
 #
@@ -598,8 +605,6 @@ def isCompatible(current,target):
                     compatibleFlag=0
                     for targetOvPara in targetOvLst: 
                         if analyzeCompatibility(currentOvPara,targetOvPara):
-                            # print(currentSameAPI,currentOvPara)
-                            # print(targetSameAPI,targetOvPara)
                             compatibleFlag=1
                             break
                     
@@ -624,8 +629,9 @@ def isCompatible(current,target):
 #  @param runCommand The run command of the project 
 #  @param currentEnv Virtual environment of the current version
 #  @param targetEnv Virtual environment of the target version
-#  @parami errLst Error message logging list
+#  @param errLst Error message logging list
 #  @param callKey Unique callsite artifact id
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return lst[0] The API call string with added parameter values (load from pkl file) 
 def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errLst,callKey,*,runtimePaths):
     copyRoot=runtimePaths['copy_root']
@@ -673,8 +679,6 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
         [pythonPath, script, pklPath, callAPI, pklKey],
         cwd=cwd, capture_output=True, text=True, encoding='utf-8'
     )
-    # print(command)
-    # print(':',matchResult.stdout)
     if matchResult.returncode!=0:
         errLst.append(f"{callAPI}, addValueError: {matchResult.stderr}\n")
         return ''

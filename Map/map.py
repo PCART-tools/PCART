@@ -1,7 +1,15 @@
 ## @package map 
 #  Dynamic mapping and static mapping of API parameter definitions   
 #
-#  More details (TODO)
+#
+#  Core mapping module: dynamicMatch() reconstructs API callables from runtime
+#  pkl data and uses inspect.signature() to extract signatures; fuzzymatch()
+#  provides static fallback via fuzzy name matching. mapAPI() orchestrates the
+#  two-tier strategy and manages pkl regeneration, manifest tracking, and result
+#  snapshots.
+#  核心映射模块：dynamicMatch()从运行时pkl数据重建API可调用对象并使用
+#  inspect.signature()提取签名；fuzzymatch()通过模糊名称匹配提供静态回退。
+#  mapAPI()编排两级策略，管理pkl重新生成、manifest跟踪和结果快照。
 
 
 
@@ -17,10 +25,10 @@ from Preprocess.preprocess import addDictSingle
 
 
 
-## Check the last name in an API call is an alias or not
+## Check whether the last name in an API call is an alias
 ## 判断一个callAPI最后一个名字是否为库中的别名
 #
-#  @param callApi The called API to be check
+#  @param callApi The called API to be checked
 #  @param assignDict The assign dict stores the alias of APIs
 #  @return realName The real name of the called API or None
 def isAlias(callApi,assignDict):
@@ -84,7 +92,8 @@ def fuzzymatch(formatAPI,libName,version,builtinFlag): #callAPIDict是传入传�
 #  @param curr Current version flag, 1 for current and 0 for target
 #  @param dynamicMatchDict Dynamic match result loaded from dynamicMatch.py
 #  @param pklFile The pkl candidate file used by this dynamic match
-#
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
+#  @return None
 def saveDynamicMatchSnapshot(pklKey,version,curr,dynamicMatchDict,pklFile=None,*,runtimePaths):
     if not isinstance(dynamicMatchDict,dict):
         return
@@ -115,6 +124,7 @@ def saveDynamicMatchSnapshot(pklKey,version,curr,dynamicMatchDict,pklFile=None,*
 ## 检查调用点候选清单是否记录了pkl保存失败
 #
 #  @param pklKey The callsite key used to locate the manifest
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return result Whether any candidate was covered but failed to save
 def hasSaveFailedManifest(pklKey,*,runtimePaths):
     copyRoot=runtimePaths['copy_root']
@@ -149,6 +159,7 @@ def hasSaveFailedManifest(pklKey,*,runtimePaths):
 #  @param errLst Error list
 #  @param curr=1 Current version flag
 #  @param callKey Unique callsite artifact id
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return dynamicMatchDict Mapped API signatures 
 def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr=1,*,callKey,runtimePaths):
     # pythonPath=f"{virtualEnv}/bin/python" #先指定python解释器的路径
@@ -208,11 +219,6 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
     stderr = lastResult.stderr
     matchResult = lastResult
 
-    # print(f"{callAPI}{version}")
-    # print(matchResult.stdout,matchResult.stderr)
-    # print('\n')
-    # print(command)
-    # print(f"{pklFile}-->{matchResult.stdout}")
     if matchResult.returncode!=0:
         if curr:
             errLst.append(f"{callAPI}, Failed to load pkl in current version{version}: {matchResult.stderr}\n") 
@@ -307,6 +313,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
 #  @param callAPI The called API
 #  @param runCommand The run command of the project
 #  @param runPath The relative path of the run file
+#  @param formatAPI The restored API string used for static matching
 #  @param projName Project name
 #  @param libName The lib's name
 #  @param copyFile project's copied file
@@ -316,6 +323,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
 #  @param errLst Error list
 #  @param curr=1 Current version flag
 #  @param callKey Unique callsite artifact id
+#  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return ans Mapped API signatures 
 def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,version,virtualEnv,lock,errLst,curr=1,*,callKey,runtimePaths):
     dynamicMatchDict=dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv,lock,errLst,curr,callKey=callKey,runtimePaths=runtimePaths)

@@ -1,7 +1,12 @@
 ## @package getPath 
 #  Provide the class definition for obtaining source files and directories from a project/lib 
 #
-#  More details (TODO)
+#
+#  Provides the Path class for traversing project and library directories to
+#  collect source files. Supports three modes: D (first-level subdirectories),
+#  F (first-level files), DF (all files and subdirectories recursively).
+#  提供Path类遍历项目和库目录以收集源文件。支持三种模式：D（一级子目录）、
+#  F（一级文件）、DF（递归所有文件和子目录）。
 
 
 
@@ -16,29 +21,42 @@ import copy
 #  provide functionalities for obtaining the paths of source files and directories  
 #  提供源码和文件夹路径获取功能
 class Path:
+    ## Initialize the Path object with a traversal mode
+    ## 使用遍历模式初始化Path对象
+    #
+    #  @param mode Path traversal mode:
+    #   - 'D'  Get first-level subdirectories only    只获取根目录下的一级子目录
+    #   - 'F'  Get first-level files only             只获取根目录下的一级子文件
+    #   - 'DF' Get all files and subdirectories       获取根目录下所有的子目录和文件
     def __init__(self,mode):
-        #mode='D' 表示只获取根目录下的一级子目录
-        #mode='F' 表示只获取根目录下的一级子文件
-        #mode='DF'表示获取根目录下所有的子目录和文件
         self._mode=mode
         self._filePath=[]
         self._dirPath=[]
         self._requirements=[] #同一个项目中可能有多个requirements,来自第三方库，如aepx
 
+    ## Return collected paths (deep copy to avoid mutation)
+    ## 返回收集到的路径（深拷贝以避免被修改）
+    #
+    #  @return List of file paths (for F/DF modes) or directory paths (for D mode)
+    #  @fn path
     @property
     def path(self):
-        if self._mode=='D': #D表示只获得一级子目录
+        if self._mode=='D':
             return copy.deepcopy(self._dirPath)
         else:
-            return copy.deepcopy(self._filePath) #DF表示获得所有的子目录和文件
+            return copy.deepcopy(self._filePath)
 
-
-    #当需要重复使用一个对象时，清空它之前保存的数据
+    ## Clear previously collected path data for reuse
+    ## 清空之前收集的路径数据以便复用
     def clc(self):
         self._dirPath.clear()
         self._filePath.clear()
 
-
+    ## Traverse the root directory and collect file and directory paths
+    ## 遍历根目录，收集文件和目录路径
+    #
+    #  @param rootDir The root directory to traverse
+    #  @return Path to the first requirements.txt found, or None
     def getPath(self,rootDir):
         for root, dirs, files in os.walk(rootDir, followlinks=True):
             files=[f for f in files if f[0]!='.']  # 过滤掉以.开头的隐藏文件
