@@ -110,3 +110,7 @@ If you use PCART in your work, please cite:
   doi={10.1109/TSE.2025.3646150}
 }
 ```
+
+## License
+
+PCART is licensed under the GNU Affero General Public License v3.0. See [LICENSE](./LICENSE) for details.
