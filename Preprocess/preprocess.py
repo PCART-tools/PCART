@@ -464,12 +464,14 @@ def addDictSingle(callAPI,filePath,callKey):
                     firstPart+=it+'.'
             firstPart=firstPart.rstrip('.')
             
-            key=callKey.replace('"','\\"')
             callsiteInfo={
                 'call_text': callAPI,
                 'format_api': callAPI,
             }
-            dicString0=f'callsiteInfoDict[{repr(callKey)}]={repr(callsiteInfo)}\n'
+            displayCall=callAPI.replace('\n',' ')
+            dicStringComment=f'# PCART callsite: {displayCall}\n'
+            dicStringKey=f'__pcart_runtime_callsite_key__={repr(callKey)}\n'
+            dicString0=f'callsiteInfoDict[__pcart_runtime_callsite_key__]={repr(callsiteInfo)}\n'
             if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
                 lineNo = i + 1
                 receiverExpr=None
@@ -480,11 +482,11 @@ def addDictSingle(callAPI,filePath,callKey):
                     receiverExpr=getSelfReceiverExpr(root,lineNo,methodName)
                 if receiverExpr:
                     receiverExpr=receiverExpr.replace('\\','\\\\').replace('"','\\"')
-                    dicString1=f'paraValueDict[\"@{key}\"]={{}}; paraValueDict[\"@{key}\"][\"object\"]={firstPart}; paraValueDict[\"@{key}\"][\"expr\"]=\"{receiverExpr}\"\n'
+                    dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={{}}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"object\"]={firstPart}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"expr\"]=\"{receiverExpr}\"\n'
                 else:
-                    dicString1=f'paraValueDict[\"@{key}\"]={firstPart}\n'
+                    dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={firstPart}\n'
             elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
-                dicString1=f'paraValueDict[\"@{key}\"]={l[-2]}\n'
+                dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={l[-2]}\n'
 
             #判断API是否为withitem中的别名调用 -- 2025/5/19 
             if firstPart and firstPart.split('.')[0] in withitem_call_names:
@@ -492,10 +494,10 @@ def addDictSingle(callAPI,filePath,callKey):
                 initialCallName = modifyWithName(firstPart, withitem_call_names, lineNo).rstrip('.')
                 # withitem接收者同时保存运行时对象和还原表达式，动态阶段按可用候选依次尝试
                 initialCallName=initialCallName.replace('\\','\\\\').replace('"','\\"')
-                dicString1=f'paraValueDict[\"@{key}\"]={{}}; paraValueDict[\"@{key}\"][\"object\"]={firstPart}; paraValueDict[\"@{key}\"][\"expr\"]=\"{initialCallName}\"\n'
+                dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={{}}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"object\"]={firstPart}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"expr\"]=\"{initialCallName}\"\n'
             
             #再保存API的参数值 
-            dicString2=f'paraValueDict[\"{key}\"]'+'=['
+            dicString2='paraValueDict[__pcart_runtime_callsite_key__]=['
             for para in parameterLst: #
                 if '=' in para and "'='" not in para and '"="' not in para: #若参数的形式为key=f(x=1),只要确保=的前面不含括号即可
                     pos=para.find('=') #找到第一个=的位置
@@ -507,6 +509,8 @@ def addDictSingle(callAPI,filePath,callKey):
             dicString2=dicString2.rstrip(',')+']\n'
             
             while spaceNum>0:
+                dicStringComment=' '+dicStringComment
+                dicStringKey=' '+dicStringKey
                 dicString0=' '+dicString0
                 if dicString1:
                     dicString1=' '+dicString1
@@ -520,15 +524,21 @@ def addDictSingle(callAPI,filePath,callKey):
                 if dicString1:
                     codeLst.insert(insertIndex,dicString1)
                 codeLst.insert(insertIndex,dicString0)
+                codeLst.insert(insertIndex,dicStringKey)
+                codeLst.insert(insertIndex,dicStringComment)
             else:
                 if dicString1:
                     dicString1=dicString1.lstrip(' ')#去掉之前添加的空格，重新计算开头的空格数
+                dicStringComment=dicStringComment.lstrip(' ')
+                dicStringKey=dicStringKey.lstrip(' ')
                 dicString0=dicString0.lstrip(' ')
                 dicString2=dicString2.lstrip(' ') 
                 for j in range(i+1,len(codeLst)):
                     if codeLst[j]!='\n' and '#' not in codeLst[j]:
                         spaceNum=countSpace(codeLst[j])
                         while spaceNum>0:
+                            dicStringComment=' '+dicStringComment
+                            dicStringKey=' '+dicStringKey
                             dicString0=' '+dicString0
                             if dicString1:
                                 dicString1=' '+dicString1
@@ -539,6 +549,8 @@ def addDictSingle(callAPI,filePath,callKey):
                         if dicString1:
                             codeLst.insert(j,dicString1)
                         codeLst.insert(j,dicString0)
+                        codeLst.insert(j,dicStringKey)
+                        codeLst.insert(j,dicStringComment)
                         break
 
             break
@@ -633,7 +645,14 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                     'call_text': record.get('call_text',''),
                     'format_api': record.get('format_api',''),
                 }
-                dicString0=f'callsiteInfoDict[{repr(callSiteKey)}]={repr(callsiteInfo)}\n'
+                displayPath=record.get('rel_path','')
+                displayLine=record.get('lineno')
+                displayColumn=record.get('col_offset')
+                displayCall=str(record.get('call_text','')).replace('\n',' ')
+                displayPrefix=f'{displayPath}:{displayLine}:{displayColumn} ' if displayPath else ''
+                dicStringComment=f'# PCART callsite: {displayPrefix}{displayCall}\n'
+                dicStringKey=f'__pcart_runtime_callsite_key__={repr(callSiteKey)}\n'
+                dicString0=f'callsiteInfoDict[__pcart_runtime_callsite_key__]={repr(callsiteInfo)}\n'
                 l=departAPI(callState)
                 l2=departAPI2(callState)
                 firstPart=''
@@ -657,11 +676,11 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                         receiverExpr=getSelfReceiverExpr(root,lineno,methodName)
                     if receiverExpr:
                         receiverExpr=receiverExpr.replace('\\','\\\\').replace('"','\\"')
-                        dicString1=f'paraValueDict[\"@{callSiteKey}\"]={{}}; paraValueDict[\"@{callSiteKey}\"][\"object\"]={firstPart}; paraValueDict[\"@{callSiteKey}\"][\"expr\"]=\"{receiverExpr}\"\n'
+                        dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={{}}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"object\"]={firstPart}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"expr\"]=\"{receiverExpr}\"\n'
                     else:
-                        dicString1=f'paraValueDict[\"@{callSiteKey}\"]={firstPart}\n'
+                        dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={firstPart}\n'
                 elif len(l)>1: #df.a(x).b(y), np.max(...), torch.nn.Sequential(...)
-                    dicString1=f'paraValueDict[\"@{callSiteKey}\"]={l[-2]}\n'
+                    dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={l[-2]}\n'
                
                 #判断API是否为withitem中的别名调用 -- 2025/5/19 
                 if firstPart and firstPart.split('.')[0] in withitem_call_names:
@@ -669,9 +688,9 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                     initialCallName = initialCallName.rstrip('.')
                     # withitem接收者同时保存运行时对象和还原表达式，非withitem调用仍保持原有单值保存
                     initialCallName=initialCallName.replace('\\','\\\\').replace('"','\\"')
-                    dicString1=f'paraValueDict[\"@{callSiteKey}\"]={{}}; paraValueDict[\"@{callSiteKey}\"][\"object\"]={firstPart}; paraValueDict[\"@{callSiteKey}\"][\"expr\"]=\"{initialCallName}\"\n'
+                    dicString1=f'paraValueDict[\"@\"+__pcart_runtime_callsite_key__]={{}}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"object\"]={firstPart}; paraValueDict[\"@\"+__pcart_runtime_callsite_key__][\"expr\"]=\"{initialCallName}\"\n'
                 #再保存API的参数值
-                dicString2=f'paraValueDict[\"{callSiteKey}\"]=['
+                dicString2='paraValueDict[__pcart_runtime_callsite_key__]=['
                 paraLst=getParameter(paraStr,space=0) #项目参数不去空格2023-12-14
                 for para in paraLst: 
                     if '=' in para and "'='" not in para and '"="' not in para: #若参数的形式为key=f(x=1),只要确保=的前面不含括号即可
@@ -683,8 +702,10 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                     dicString2=dicString2+para+','
                 dicString2=dicString2.rstrip(',')+']\n'
                 
-                dicString3=f'apiCoveredSet.add(\"{callSiteKey}\")\n'
+                dicString3='apiCoveredSet.add(__pcart_runtime_callsite_key__)\n'
                 while spaceNum>0:
+                    dicStringComment=' '+dicStringComment
+                    dicStringKey=' '+dicStringKey
                     dicString0=' '+dicString0
                     if dicString1:
                         dicString1=' '+dicString1
@@ -701,14 +722,18 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                     if dicString1:
                         codeLst.insert(insertIndex,dicString1)
                     codeLst.insert(insertIndex,dicString0)
+                    codeLst.insert(insertIndex,dicStringKey)
+                    codeLst.insert(insertIndex,dicStringComment)
                     #记录当前插在了哪一行
                     if dicString1:
-                        insertStartLine=insertIndex+4
+                        insertStartLine=insertIndex+6
                     else:
-                        insertStartLine=insertIndex+3
+                        insertStartLine=insertIndex+5
                 else:
                     if dicString1:
                         dicString1=dicString1.lstrip(' ') #去掉之前添加的空格，重新计算开头的空格数
+                    dicStringComment=dicStringComment.lstrip(' ')
+                    dicStringKey=dicStringKey.lstrip(' ')
                     dicString0=dicString0.lstrip(' ')
                     dicString2=dicString2.lstrip(' ') 
                     dicString3=dicString3.lstrip(' ') 
@@ -716,6 +741,8 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                         if codeLst[j]!='\n' and '#' not in codeLst[j]:
                             spaceNum=countSpace(codeLst[j])
                             while spaceNum>0:
+                                dicStringComment=' '+dicStringComment
+                                dicStringKey=' '+dicStringKey
                                 dicString0=' '+dicString0
                                 if dicString1:
                                     dicString1=' '+dicString1
@@ -727,11 +754,13 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                             if dicString1:
                                 codeLst.insert(j,dicString1)
                             codeLst.insert(j,dicString0)
+                            codeLst.insert(j,dicStringKey)
+                            codeLst.insert(j,dicStringComment)
                             #记录当前插在了哪一行
                             if dicString1:
-                                insertStartLine=j+4
+                                insertStartLine=j+6
                             else:
-                                insertStartLine=j+3
+                                insertStartLine=j+5
                             break
   
                 break
