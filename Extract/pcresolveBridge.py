@@ -1,4 +1,4 @@
-## @package pcresolve_bridge
+## @package pcresolveBridge
 #  Bridge PCResolve analysis results into PCART CallsiteRecord format
 #
 #

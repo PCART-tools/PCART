@@ -562,8 +562,9 @@ def addDictSingle(callAPI,filePath,callKey):
 #  @param runFileLst The list of run files 
 #  @param libName The lib name  
 #  @param runPath The relative path of the run file 
-#  @param runCommand The run command of the project 
-def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,runCommand):
+#  @param runCommand The run command of the project
+#  @param pcresolveLookup Optional pre-built PCResolve lookup table
+def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,runCommand,pcresolveLookup=None):
     with open(filePath,'r',encoding='UTF-8') as fr:
         code=fr.read()
         fr.seek(0) #将文件指针重新定位到文件的开头
@@ -582,7 +583,10 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
     lineno=getImportLine(codeLst)
     importDict='from recordValue import paraValueDict\nfrom recordValue import apiCoveredSet\nfrom recordValue import callsiteInfoDict\n'
     codeLst.insert(lineno,importDict)
-    _,callDict=getCallFunction(fileAbsolutePath,libName,projPath)
+    if pcresolveLookup is None:
+        _,callDict=getCallFunction(fileAbsolutePath,libName,projPath)
+    else:
+        _,callDict=getCallFunction(fileAbsolutePath,libName,projPath,pcresolveLookup=pcresolveLookup)
 
     targetLst=findAssignCall(root) #用来区分调用者是否来自赋值语句，比如a.f(), tf.f(), or self.f()
  
@@ -1056,8 +1060,9 @@ def scriptPath(scriptName):
 #  @param runPath The relative path of the run file 
 #  @param libName The lib name 
 #  @param workspace RunWorkspace object for this execution
+#  @param pcresolveLookup Optional pre-built PCResolve lookup table shared with analysis
 #  @return None
-def codeProcess(projPath,runCommand,runPath,libName,workspace):
+def codeProcess(projPath,runCommand,runPath,libName,workspace,pcresolveLookup=None):
     runtimePaths=getRuntimePaths(workspace)
     copyRoot=runtimePaths['copy_root']
     dynamicRoot=runtimePaths['dynamic_root']
@@ -1153,7 +1158,10 @@ def codeProcess(projPath,runCommand,runPath,libName,workspace):
     
     
     for file in filePath:
-        addDictAll(projPath,projName,file,copyRoot,runFileLst,libName,runPath,runCommand)
+        if pcresolveLookup is None:
+            addDictAll(projPath,projName,file,copyRoot,runFileLst,libName,runPath,runCommand)
+        else:
+            addDictAll(projPath,projName,file,copyRoot,runFileLst,libName,runPath,runCommand,pcresolveLookup=pcresolveLookup)
     
     #再对bak_proj中的运行文件进行插桩
     for file in runFileLst:

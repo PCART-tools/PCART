@@ -95,8 +95,16 @@ def savePkls():
             candidateManifest['candidates'].append(candidateInfo)
         with open(os.path.join(pklDir,manifestName),'w',encoding='utf-8') as fw:
             json.dump(candidateManifest,fw,indent=4,ensure_ascii=False)
-    with open(os.path.join(pklDir,'coverSet'),'w',encoding='utf-8') as fw:
-        for it in apiCoveredSet:
+    coverSetPath=os.path.join(pklDir,'coverSet')
+    coveredSet=set(apiCoveredSet)
+    if os.path.exists(coverSetPath):
+        with open(coverSetPath,'r',encoding='utf-8') as fr:
+            for line in fr:
+                item=line.rstrip('\n').replace(' ','')
+                if item:
+                    coveredSet.add(item)
+    with open(coverSetPath,'w',encoding='utf-8') as fw:
+        for it in coveredSet:
             fw.write(it+'\n')
 
 
