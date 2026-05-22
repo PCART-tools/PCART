@@ -16,6 +16,12 @@
 
 <br>
 
+## News
+
+- **2026-05-22** — Experimental [PCResolve](https://github.com/PCART-tools/PCResolve) integration: cross-file symbol-tracing replaces single-file string-matching for API call identification. Opt-in via `pcresolve>=1.0.3`; falls back to existing extraction when not installed.
+
+<br>
+
 ## What is PCART?
 
 PCART is an automated tool designed to detect and repair Python API parameter compatibility issues. It is the first to achieve a fully automated process (end-to-end) that includes `API extraction`, `code instrumentation`, `mapping`, `compatibility analysis`, and `repair and validation`. PCART specializes in addressing API compatibility issues arising from parameter `addition`, `removal`, `renaming`, `reordering`, and the `conversion of positional parameters to keyword parameters`.

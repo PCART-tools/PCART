@@ -194,11 +194,21 @@ def modifyWithName(callName, withitemCallName, lineno=None):
 ## 每次传进来一个.py文件，抽取所有的调用API
 #
 #  @param filePath The .py file path
-#  @param libName The target lib name (e.g., torch) 
+#  @param libName The target lib name (e.g., torch)
 #  @param projPath The project root path
+#  @param pcresolveLookup Optional pre-built PCResolve lookup table:
+#         {filePath: {callId: CallsiteRecord_dict, ...}, ...}.
+#         When provided and filePath is present, returns the pre-computed
+#         records directly instead of re-extracting.
 #  @return Callsite record dictionaries keyed by artifact id
 #  @return 返回以运行产物id为key的调用点记录字典
-def getCallFunction(filePath,libName,projPath=None):
+def getCallFunction(filePath,libName,projPath=None,pcresolveLookup=None):
+    # If PCResolve lookup is available for this file, use it directly
+    # 若PCResolve查找表中有此文件，直接使用预计算结果
+    if pcresolveLookup is not None and filePath in pcresolveLookup:
+        records = pcresolveLookup[filePath]
+        return records, records
+
     with open(filePath,'r',encoding='UTF-8') as f:
         codeText=f.read()
         f.seek(0)

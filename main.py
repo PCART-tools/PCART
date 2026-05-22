@@ -21,6 +21,7 @@ from Map.map import mapAPI
 from multiprocessing import Pool
 from multiprocessing import Manager
 from Extract.getCall import getCallFunction
+from Extract.pcresolve_bridge import buildCallsiteLookup
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
@@ -39,7 +40,7 @@ from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,qu
 #          fileRelativePath: 被处理的文件；invokedAPINum: 调用的API数量
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
-    projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths=args
+    projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths,pcresolveLookup=args
     copyRoot=runtimePaths['copy_root']
     dataDir=runtimePaths['data_dir']
     reportDir=runtimePaths['report_dir']
@@ -55,7 +56,7 @@ def backwardTask(args):
     fileRelativePath='/'.join(tempLst[pos:])
     copyFile = os.path.join(copyRoot, *fileRelativePath.split('/'))
     #step2:先把当前文件中指定的第三方库的API抽取出来
-    callAPIDict,_=getCallFunction(file,libName,realProjPath) #key是artifact id，value是结构化调用点记录
+    callAPIDict,_=getCallFunction(file,libName,realProjPath,pcresolveLookup=pcresolveLookup) #key是artifact id，value是结构化调用点记录
     os.makedirs(dataDir, exist_ok=True)
     with open(os.path.join(dataDir, f'{fileName}_callAPIDict.json'), 'w', encoding='utf-8') as fw:
         json.dump(callAPIDict, fw, indent=4, ensure_ascii=False)
@@ -203,6 +204,9 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     shutil.move(tempProjPath, os.path.join(copyRoot, f'bak_{projName}'))
 
 
+    #用PCResolve进行全项目API调用识别，结果在所有任务间复用
+    pcresolveLookup=buildCallsiteLookup(projPath,libName)
+
     #这里用进程池同时处理多个任务，但对于torch库可能会报错RuntimeError:CUDA out or memory
     #对数据库的读写需要加锁
     coverSet=set()
@@ -212,11 +216,11 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
             tempLst=fr.readlines()
         for it in tempLst:
             it=it.rstrip('\n').replace(' ','')
-            coverSet.add(it)  
+            coverSet.add(it)
     manager=Manager()
     lock=manager.Lock() #创建一个共享锁
     sharedDict=manager.dict() #创建一个共享字典
-    tasks=[(projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths) for file in filePath]
+    tasks=[(projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths,pcresolveLookup) for file in filePath]
     pool=Pool(processes=1)
     resultLst=pool.map(backwardTask,tasks)
     pool.close() #关闭进程池，使其不再接受新的任务
