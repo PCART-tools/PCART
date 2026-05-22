@@ -21,7 +21,7 @@ from Map.map import mapAPI
 from multiprocessing import Pool
 from multiprocessing import Manager
 from Extract.getCall import getCallFunction
-from Extract.pcresolve_bridge import buildCallsiteLookup
+from Extract.pcresolveBridge import buildCallsiteLookup
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
@@ -40,7 +40,11 @@ from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,qu
 #          fileRelativePath: 被处理的文件；invokedAPINum: 调用的API数量
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
-    projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths,pcresolveLookup=args
+    if len(args)==13:
+        projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths=args
+        pcresolveLookup=None
+    else:
+        projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths,pcresolveLookup=args
     copyRoot=runtimePaths['copy_root']
     dataDir=runtimePaths['data_dir']
     reportDir=runtimePaths['report_dir']
@@ -163,7 +167,8 @@ def backwardTask(args):
 #  @param runCommand The run command of the project / 项目运行命令
 #  @param runPath   The relative path of the run file / 运行文件的相对路径
 #  @param workspace RunWorkspace object for this execution / 本次执行的运行工作区
-def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace):
+#  @param pcresolveLookup Optional pre-built PCResolve lookup table shared with preprocessing
+def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace,pcresolveLookup=None):
     runtimePaths=getRuntimePaths(workspace)
     copyRoot=runtimePaths['copy_root']
     dataDir=runtimePaths['data_dir']
@@ -205,7 +210,8 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
 
 
     #用PCResolve进行全项目API调用识别，结果在所有任务间复用
-    pcresolveLookup=buildCallsiteLookup(projPath,libName)
+    if pcresolveLookup is None:
+        pcresolveLookup=buildCallsiteLookup(projPath,libName)
 
     #这里用进程池同时处理多个任务，但对于torch库可能会报错RuntimeError:CUDA out or memory
     #对数据库的读写需要加锁
@@ -262,13 +268,15 @@ def run(config):
     print(f"Run workspace: {workspace.workspace_root}")
     print("Code preprocessing...")
 
+    pcresolveLookup=buildCallsiteLookup(projPath,libName)
+
     with workspaceCwd(workspace.workspace_root):
         #首先对代码进行预处理
-        codeProcess(projPath,runCommand,runPath,libName,workspace=workspace)
+        codeProcess(projPath,runCommand,runPath,libName,workspace=workspace,pcresolveLookup=pcresolveLookup)
         print("Code preprocess complete")
 
         #执行主逻辑
-        backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace)
+        backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace,pcresolveLookup=pcresolveLookup)
 
     exportRunReport(workspace)
     print(f"Report output: {workspace.report_root}")
