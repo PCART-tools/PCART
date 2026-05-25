@@ -102,7 +102,7 @@ Only `currentEnv` and `targetEnv` are configuration fields. They should point to
 
 ## Citation
 
-If you use PCART in your work, please cite:
+If PCART supports your research or development work, please cite the following publication:
 
 ```bibtex
 @article{PCART_TSE2025,
