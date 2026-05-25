@@ -36,15 +36,15 @@ python main.py -cfg your_config.json
 
 For environment setup, configuration fields, and platform-specific examples, see the [Quick Start](https://github.com/PCART-tools/PCART/wiki/Quick-Start) and [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide).
 
-## Three-Environment Architecture
+## Runtime Environments
 
-| Environment | Purpose | Requirements |
-|-------------|---------|--------------|
-| PCART | Runs the PCART tool itself | Python 3.9 + dill |
-| currentEnv | Dynamic API signature mapping for current library version | Python 3.x + current library version + requirements.txt + dill |
-| targetEnv | Dynamic API signature mapping and post-repair validation for target library version | Python 3.x + target library version + requirements.txt + dill |
+| Environment | Role | Requirements |
+|-------------|------|--------------|
+| Tool environment | Runs PCART itself | Python 3.9 + dill |
+| currentEnv | Runs the project with the current library version for API mapping and baseline checks | Python 3.x + current library version + project requirements + dill |
+| targetEnv | Runs the project with the target library version for API mapping and repair validation | Python 3.x + target library version + project requirements + dill |
 
-`currentEnv` and `targetEnv` should point to environment root directories (not the Python executable path). PCART auto-detects the interpreter and supports multiple `runCommand` formats (`python`, `python3`, `py -X.Y`, `python -m`, console scripts). See the [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for details.
+Only `currentEnv` and `targetEnv` are configuration fields. They should point to environment root directories (not the Python executable path). The tool environment is the Python environment used to run `main.py`. PCART auto-detects the interpreter and supports multiple `runCommand` formats (`python`, `python3`, `py -X.Y`, `python -m`, console scripts). See the [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for details.
 
 ## Supported Parameter Change Types
 
