@@ -18,87 +18,25 @@
 
 ## News
 
-- **2026-05-22** — Experimental [PCResolve](https://github.com/PCART-tools/PCResolve) integration: cross-file symbol-tracing replaces single-file string-matching for API call identification. Opt-in via `pcresolve>=1.0.3`; falls back to existing extraction when not installed.
+- **2026-05-22** - Experimental [PCResolve](https://github.com/PCART-tools/PCResolve) integration: cross-file symbol-tracing replaces single-file string-matching for API call identification. Opt-in via `pcresolve>=1.0.3`; falls back to existing extraction when not installed.
 
 <br>
 
 ## What is PCART?
 
-PCART is an automated tool designed to detect and repair Python API parameter compatibility issues. It is the first to achieve a fully automated process (end-to-end) that includes `API extraction`, `code instrumentation`, `mapping`, `compatibility analysis`, and `repair and validation`. PCART specializes in addressing API compatibility issues arising from parameter `addition`, `removal`, `renaming`, `reordering`, and the `conversion of positional parameters to keyword parameters`.
+PCART is an automated tool for detecting and repairing Python API parameter compatibility issues caused by library upgrades.
+
+It supports common parameter compatibility changes, including addition, deletion, renaming, reordering, replacement, positional/keyword conversion, and partial type-change analysis. Default-value changes are not currently implemented.
 
 ## Quick Start
-
-Create the required environments and configuration file, then run:
 
 ```bash
 python main.py -cfg your_config.json
 ```
 
-For environment setup, configuration fields, and platform-specific examples, see the [Quick Start](https://github.com/PCART-tools/PCART/wiki/Quick-Start) and [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide).
+PCART uses one tool environment and two configured project environments: `currentEnv` and `targetEnv`.
 
-## Runtime Environments
-
-| Environment | Role | Requirements |
-|-------------|------|--------------|
-| Tool environment | Runs PCART itself | Python 3.9 + dill |
-| currentEnv | Runs the project with the current library version for API mapping and baseline checks | Python 3.x + current library version + project requirements + dill |
-| targetEnv | Runs the project with the target library version for API mapping and repair validation | Python 3.x + target library version + project requirements + dill |
-
-Only `currentEnv` and `targetEnv` are configuration fields. They should point to environment root directories (not the Python executable path). The tool environment is the Python environment used to run `main.py`. PCART auto-detects the interpreter and supports multiple `runCommand` formats (`python`, `python3`, `py -X.Y`, `python -m`, console scripts). See the [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for details.
-
-## Supported Parameter Change Types
-
-| Dictionary Key | Type Name | Description | Support |
-|----------------|-----------|-------------|---------|
-| `delete` | Deletion | Parameter removed | ✅ Full |
-| `typeChange` | Type Change | Parameter type altered | ⚠️ Partial |
-| `rename` | Renaming | Parameter name changed | ✅ Full |
-| `posChange` | Position Change | Parameter position altered | ✅ Full |
-| `replace` | Replacement | Parameter replaced at same position | ✅ Full |
-| `pos2key` | Positional to Keyword | Positional-only changed to keyword-only | ✅ Full |
-| `addPos` | Add Positional | New positional parameter added | ✅ Full |
-| `addKey` | Add Keyword | New keyword parameter added | ✅ Full |
-| `key2pos` | Keyword to Positional | Keyword changed to positional | ✅ Full |
-| `value` | Default Value Change | Parameter default value changed | ❌ Not implemented |
-
-**Total: 10 parameter change types**
-
-> ⚠️ **Note**: `typeChange` only checks if the old type is identical to or a subset of the new type for complex annotations (Union/Optional/|).
-
-## Evaluation
-
-- [PCBench](https://github.com/PCART-tools/PCBench) - Benchmark for Python API Parameter Compatibility Issues
-- [PCART Evaluation Results](https://github.com/PCART-tools/PCART-evaluation)
-
-## Project Structure
-
-- `API/LibApi.py` - Library API handling
-- `Change/changeAnalyze.py` - API compatibility analysis (`isCompatible`, `addValueForAPI`)
-- `Configure/` - Configuration files
-- `Example/` - Example projects for testing PCART
-- `Extract/` - API extraction (`getCall.py`, `getDef.py`, `extractCall.py`, `extractDef.py`)
-- `LibAPIExtraction/` - Pre-extracted library API definitions
-- `Load/loadData.py` - Data loading
-- `Map/` - API mapping (`map.py`, `fuzzyMatch.py`)
-- `Path/getPath.py` - Path handling
-- `Preprocess/preprocess.py` - Code preprocessing
-- `Repair/repair.py` - Compatibility issue repair and validation
-- `Report/` - Repair reports
-- `Script/` - Runtime helper scripts (`addValueForAPI.py`, `codeUtils.py`, `dynamicMatch.py`, `recordValue.py`, `verifySingle.py`)
-- `Tool/tool.py` - Utility functions
-- `Tool/callsite.py` - Structured callsite identity (`CallsiteIdentity`, `CallsiteRecord`)
-- `Tool/workspace.py` - Isolated run workspace management (`RunWorkspace`)
-- `main.py` - Entry point
-- `extractLibAPI.py` - Library API extraction script
-
-## Documentation
-
-- [PCART Wiki](https://github.com/PCART-tools/PCART/wiki) - Tutorials, troubleshooting, and advanced usage
-- [How It Works](https://github.com/PCART-tools/PCART/wiki/How-It-Works) - Pipeline, pkl lifecycle, matching strategy
-- [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) - Complete configuration reference (including runCommand formats)
-- [Examples](https://github.com/PCART-tools/PCART/wiki/Examples) - Example projects and configuration files
-- [Troubleshooting](https://github.com/PCART-tools/PCART/wiki/Troubleshooting) - Common setup and runtime issues
-- [Doxygen API Docs](https://pcart-tools.github.io/PCART-doxygen/html) - Generated code documentation
+See the [Quick Start](https://github.com/PCART-tools/PCART/wiki/Quick-Start) and [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for setup details.
 
 ## Citation
 
