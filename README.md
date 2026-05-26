@@ -11,7 +11,8 @@
   <a href="https://github.com/PCART-tools/PCART/wiki/Configuration-Guide">Configuration Guide</a> ·
   <a href="https://github.com/PCART-tools/PCART/wiki/How-It-Works">How It Works</a> ·
   <a href="https://github.com/PCART-tools/PCART/wiki/Examples">Examples</a> ·
-  <a href="https://pcart-tools.github.io/PCART-doxygen/html">API Docs</a>
+  <a href="https://pcart-tools.github.io/PCART-doxygen/html">API Docs</a> ·
+  <a href="https://github.com/PCART-tools/PCBench">PCBench</a>
 </p>
 
 <br>
