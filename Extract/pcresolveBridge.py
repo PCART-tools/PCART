@@ -4,12 +4,28 @@
 #
 #  Converts PCResolve's cross-file ProjectAnalysis output into PCART's
 #  CallsiteRecord dictionaries, matching the return format of
-#  Extract/getCall.getCallFunction(). Supports libName filtering, caching
-#  by (projPath, libName), and graceful degradation when PCResolve is not
-#  installed.
+#  Extract/getCall.getCallFunction(). Supports libName filtering,
+#  two-layer caching (raw analysis + per-lib lookup), and graceful
+#  degradation when PCResolve is not installed.
 #  将PCResolve的跨文件ProjectAnalysis结果转换为PCART的CallsiteRecord字典，
 #  匹配Extract/getCall.getCallFunction()的返回格式。支持libName过滤、
-#  按(projPath, libName)缓存，以及PCResolve未安装时的静默降级。
+#  双层缓存（原始分析+按库查找），以及PCResolve未安装时的静默降级。
+
+import os
+
+try:
+    from pcresolve import analyze_project as _pcresolveAnalyze
+except ImportError:
+    _pcresolveAnalyze = None
+
+_analysisCache = {}
+_lookupCache = {}
+
+
+
+def _normPath(path):
+    """Normalize a filesystem path for stable cache keys."""
+    return os.path.normcase(os.path.abspath(os.path.normpath(path)))
 
 
 
@@ -38,8 +54,9 @@ _lookupCache = {}
 #  @return Dict of {filePath: {callId: CallsiteRecord_dict}}.
 #          Empty dict when PCResolve is unavailable or no calls match.
 def buildCallsiteLookup(projPath, libName):
-    global _lookupCache
-    cacheKey = (projPath, libName)
+    global _analysisCache, _lookupCache
+    normPath = _normPath(projPath)
+    cacheKey = (normPath, libName)
     if cacheKey in _lookupCache:
         return _lookupCache[cacheKey]
 
@@ -47,22 +64,42 @@ def buildCallsiteLookup(projPath, libName):
         _lookupCache[cacheKey] = {}
         return _lookupCache[cacheKey]
 
-    try:
-        result = _pcresolveAnalyze(projPath, scope_model="v2")
-    except Exception:
+    # Two-layer cache: raw analysis (projPath) → filtered lookup (projPath, libName)
+    # 双层缓存：原始分析（projPath）→ 过滤查找（projPath, libName）
+    if normPath in _analysisCache:
+        result = _analysisCache[normPath]
+    else:
+        try:
+            result = _pcresolveAnalyze(projPath, scope_model="v2")
+        except Exception:
+            _analysisCache[normPath] = None
+            _lookupCache[cacheKey] = {}
+            return _lookupCache[cacheKey]
+        _analysisCache[normPath] = result
+
+    if result is None:
         _lookupCache[cacheKey] = {}
         return _lookupCache[cacheKey]
 
+    # Seed empty entries for every file PCResolve analyzed, so that
+    # "0 target calls" is distinguishable from "not analyzed" in
+    # getCallFunction — avoids falling back to the old extractor for
+    # files that PCResolve already determined have no target library calls.
+    # 为所有已分析的文件初始化空记录，"0调用"与"未分析"可由getCallFunction
+    # 区分——避免对PCResolve已判无目标库调用的文件回退到旧提取器。
     lookup = {}
+    for fileResult in result.files:
+        lookup[_normPath(fileResult.file_path)] = {}
+
     for call in result.all_api_calls:
         if not _matchesLibname(call, libName):
             continue
 
         record = _convertApiCall(call, projPath)
-        filePath = call.file_path
-        if filePath not in lookup:
-            lookup[filePath] = {}
-        lookup[filePath][record['id']] = record
+        key = _normPath(call.file_path)
+        if key not in lookup:
+            lookup[key] = {}
+        lookup[key][record['id']] = record
 
     # Sort by source position within each file, matching getCallFunction ordering
     # 在每个文件内按源码位置排序，与getCallFunction排序一致
@@ -86,7 +123,8 @@ def buildCallsiteLookup(projPath, libName):
 #  供测试使用。调用_resetCache()后，下一次调用buildCallsiteLookup()
 #  将重新运行analyze_project()，而不是返回缓存结果。
 def _resetCache():
-    global _lookupCache
+    global _analysisCache, _lookupCache
+    _analysisCache = {}
     _lookupCache = {}
 
 
@@ -130,48 +168,21 @@ def _convertApiCall(callObj, projPath):
 ## Check whether an ApiCall belongs to the target library
 ## 判断一个ApiCall是否属于目标库
 #
-#  Matching is performed in four tiers:
+#  Uses only stable attribution fields:
 #    1. Exact match on top_library (PCResolve's top-level origin)
-#    2. Prefix match on resolved_func (handles submodules)
-#    3. Prefix match on func_name (fallback for unresolved calls)
-#    4. decorated_by match (decorator evidence, e.g. @app.route)
-#  Local/python/unknown definitions are excluded unless decorated_by
-#  provides evidence they belong to the target library.
-#  匹配分为四级：
+#    2. decorated_by match (decorator evidence, e.g. @app.route)
+#  resolved_func / func_name are reserved for format_api display and
+#  must not gate library membership — those fields are interpretive
+#  and can pull non-target calls back in.
+#  仅使用稳定归属字段：
 #    1. top_library精确匹配（PCResolve的顶层来源）
-#    2. resolved_func前缀匹配（处理子模块情况）
-#    3. func_name前缀匹配（未解析调用的回退）
-#    4. decorated_by匹配（装饰器证据）
-#  local/python/unknown定义默认排除，除非decorated_by提供属于目标库的证据。
+#    2. decorated_by匹配（装饰器证据）
+#  resolved_func / func_name仅用于format_api展示，不判断库归属——
+#  这些字段是解释性的，可能把非目标库调用重新纳入。
 #
 #  @param callObj pcresolve.ApiCall object
 #  @param libName Target library name (e.g. "polars")
 #  @return True if the call matches the target library
 def _matchesLibname(callObj, libName):
     deco = getattr(callObj, 'decorated_by', []) or []
-
-    # Exclude local/python/unknown unless decorated_by provides evidence
-    # 排除local/python/unknown，除非decorated_by提供证据
-    if callObj.top_library in ('local', 'python', 'unknown'):
-        return libName in deco
-
-    # Exact match on top-level origin
-    # 顶层来源精确匹配
-    if callObj.top_library == libName:
-        return True
-
-    # Match by resolved function prefix
-    # 按解析后函数名前缀匹配
-    if callObj.resolved_func:
-        if callObj.resolved_func == libName or callObj.resolved_func.startswith(libName + '.'):
-            return True
-
-    # Fallback: match by original function name prefix
-    # 回退：按原始函数名前缀匹配
-    if callObj.func_name:
-        if callObj.func_name == libName or callObj.func_name.startswith(libName + '.'):
-            return True
-
-    # Decorator evidence match
-    # 装饰器证据匹配
-    return libName in deco
+    return callObj.top_library == libName or libName in deco

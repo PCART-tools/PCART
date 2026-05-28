@@ -205,9 +205,12 @@ def modifyWithName(callName, withitemCallName, lineno=None):
 def getCallFunction(filePath,libName,projPath=None,pcresolveLookup=None):
     # If PCResolve lookup is available for this file, use it directly
     # 若PCResolve查找表中有此文件，直接使用预计算结果
-    if pcresolveLookup is not None and filePath in pcresolveLookup:
-        records = pcresolveLookup[filePath]
-        return records, records
+    if pcresolveLookup is not None:
+        import os
+        key = os.path.normcase(os.path.abspath(os.path.normpath(filePath)))
+        if key in pcresolveLookup:
+            records = pcresolveLookup[key]
+            return records, records
 
     with open(filePath,'r',encoding='UTF-8') as f:
         codeText=f.read()
