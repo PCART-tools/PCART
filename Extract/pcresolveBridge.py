@@ -48,7 +48,7 @@ def buildCallsiteLookup(projPath, libName):
         return _lookupCache[cacheKey]
 
     try:
-        result = _pcresolveAnalyze(projPath)
+        result = _pcresolveAnalyze(projPath, scope_model="v2")
     except Exception:
         _lookupCache[cacheKey] = {}
         return _lookupCache[cacheKey]
@@ -130,25 +130,30 @@ def _convertApiCall(callObj, projPath):
 ## Check whether an ApiCall belongs to the target library
 ## 判断一个ApiCall是否属于目标库
 #
-#  Matching is performed in three tiers:
+#  Matching is performed in four tiers:
 #    1. Exact match on top_library (PCResolve's top-level origin)
 #    2. Prefix match on resolved_func (handles submodules)
 #    3. Prefix match on func_name (fallback for unresolved calls)
-#  Local definitions and Python builtins are always excluded.
-#  匹配分为三级：
+#    4. decorated_by match (decorator evidence, e.g. @app.route)
+#  Local/python/unknown definitions are excluded unless decorated_by
+#  provides evidence they belong to the target library.
+#  匹配分为四级：
 #    1. top_library精确匹配（PCResolve的顶层来源）
 #    2. resolved_func前缀匹配（处理子模块情况）
 #    3. func_name前缀匹配（未解析调用的回退）
-#  本地定义和Python内置始终被排除。
+#    4. decorated_by匹配（装饰器证据）
+#  local/python/unknown定义默认排除，除非decorated_by提供属于目标库的证据。
 #
 #  @param callObj pcresolve.ApiCall object
 #  @param libName Target library name (e.g. "polars")
 #  @return True if the call matches the target library
 def _matchesLibname(callObj, libName):
-    # Exclude local definitions and Python builtins
-    # 排除本地定义和Python内置
-    if callObj.top_library in ('local', 'python'):
-        return False
+    deco = getattr(callObj, 'decorated_by', []) or []
+
+    # Exclude local/python/unknown unless decorated_by provides evidence
+    # 排除local/python/unknown，除非decorated_by提供证据
+    if callObj.top_library in ('local', 'python', 'unknown'):
+        return libName in deco
 
     # Exact match on top-level origin
     # 顶层来源精确匹配
@@ -167,4 +172,6 @@ def _matchesLibname(callObj, libName):
         if callObj.func_name == libName or callObj.func_name.startswith(libName + '.'):
             return True
 
-    return False
+    # Decorator evidence match
+    # 装饰器证据匹配
+    return libName in deco

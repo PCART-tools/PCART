@@ -19,7 +19,7 @@
 
 ## News
 
-- **2026-05-22** - Experimental [PCResolve](https://github.com/PCART-tools/PCResolve) integration: cross-file symbol-tracing replaces single-file string-matching for API call identification. Opt-in via `pcresolve>=1.0.3`; falls back to existing extraction when not installed.
+- **2026-05-22** - Experimental [PCResolve](https://github.com/PCART-tools/PCResolve) integration: cross-file symbol-tracing replaces single-file string-matching for API call identification. Opt-in via `pcresolve>=1.0.4`; falls back to existing extraction when not installed.
 
 <br>
 
