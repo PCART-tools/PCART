@@ -29,12 +29,12 @@ def _normPath(path):
 
 
 
-try:
-    from pcresolve import analyze_project as _pcresolveAnalyze
-except ImportError:
-    _pcresolveAnalyze = None
+def _normProjectPath(path, projPath):
+    """Resolve a project file path (relative or absolute) to a normalized key."""
+    if not os.path.isabs(path):
+        path = os.path.join(projPath, path)
+    return _normPath(path)
 
-_lookupCache = {}
 
 
 
@@ -89,14 +89,14 @@ def buildCallsiteLookup(projPath, libName):
     # 区分——避免对PCResolve已判无目标库调用的文件回退到旧提取器。
     lookup = {}
     for fileResult in result.files:
-        lookup[_normPath(fileResult.file_path)] = {}
+        lookup[_normProjectPath(fileResult.file_path, projPath)] = {}
 
     for call in result.all_api_calls:
         if not _matchesLibname(call, libName):
             continue
 
         record = _convertApiCall(call, projPath)
-        key = _normPath(call.file_path)
+        key = _normProjectPath(call.file_path, projPath)
         if key not in lookup:
             lookup[key] = {}
         lookup[key][record['id']] = record
