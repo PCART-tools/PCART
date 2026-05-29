@@ -11,8 +11,6 @@
 #  匹配Extract/getCall.getCallFunction()的返回格式。支持libName过滤、
 #  双层缓存（原始分析+按库查找），以及PCResolve未安装时的静默降级。
 
-import os
-
 try:
     from pcresolve import analyze_project as _pcresolveAnalyze
 except ImportError:
@@ -20,20 +18,6 @@ except ImportError:
 
 _analysisCache = {}
 _lookupCache = {}
-
-
-
-def _normPath(path):
-    """Normalize a filesystem path for stable cache keys."""
-    return os.path.normcase(os.path.abspath(os.path.normpath(path)))
-
-
-
-def _normProjectPath(path, projPath):
-    """Resolve a project file path (relative or absolute) to a normalized key."""
-    if not os.path.isabs(path):
-        path = os.path.join(projPath, path)
-    return _normPath(path)
 
 
 
@@ -55,8 +39,7 @@ def _normProjectPath(path, projPath):
 #          Empty dict when PCResolve is unavailable or no calls match.
 def buildCallsiteLookup(projPath, libName):
     global _analysisCache, _lookupCache
-    normPath = _normPath(projPath)
-    cacheKey = (normPath, libName)
+    cacheKey = (projPath, libName)
     if cacheKey in _lookupCache:
         return _lookupCache[cacheKey]
 
@@ -66,16 +49,16 @@ def buildCallsiteLookup(projPath, libName):
 
     # Two-layer cache: raw analysis (projPath) → filtered lookup (projPath, libName)
     # 双层缓存：原始分析（projPath）→ 过滤查找（projPath, libName）
-    if normPath in _analysisCache:
-        result = _analysisCache[normPath]
+    if projPath in _analysisCache:
+        result = _analysisCache[projPath]
     else:
         try:
             result = _pcresolveAnalyze(projPath, scope_model="v2")
         except Exception:
-            _analysisCache[normPath] = None
+            _analysisCache[projPath] = None
             _lookupCache[cacheKey] = {}
             return _lookupCache[cacheKey]
-        _analysisCache[normPath] = result
+        _analysisCache[projPath] = result
 
     if result is None:
         _lookupCache[cacheKey] = {}
@@ -89,14 +72,14 @@ def buildCallsiteLookup(projPath, libName):
     # 区分——避免对PCResolve已判无目标库调用的文件回退到旧提取器。
     lookup = {}
     for fileResult in result.files:
-        lookup[_normProjectPath(fileResult.file_path, projPath)] = {}
+        lookup[fileResult.file_path] = {}
 
     for call in result.all_api_calls:
         if not _matchesLibname(call, libName):
             continue
 
         record = _convertApiCall(call, projPath)
-        key = _normProjectPath(call.file_path, projPath)
+        key = call.file_path
         if key not in lookup:
             lookup[key] = {}
         lookup[key][record['id']] = record
