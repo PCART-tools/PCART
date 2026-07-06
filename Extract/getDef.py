@@ -100,7 +100,8 @@ def getAssign(root_node):
 #
 #  @param lst An API path. Initially, lst is the fully qualified API name. 
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
-def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的API路径
+#  @param importCache Cache of __init__.py import mappings, keyed by (init path, current level).
+def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保存修正之后的API路径
     absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
     relativePath=[v for v in fileDict.values()][0] #pkg/file.py
     norm_relative=relativePath.replace('\\','/')
@@ -114,23 +115,26 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
     initPath=f"{absolutePath}/__init__.py"
     api=lst[0]
     if os.path.exists(initPath): #判断当前目录中是否有__init__.py
-        try:
-            root=getAst(initPath)
-        except Exception as e:
-            print(f"shortenPath --> ast.parse failed: {e}")
-            return
-        parts=norm_relative.split('/')
-        if parts[-1] in ('__init__.py','__init__'):
-            currentLevel=parts[-2] if len(parts)>=2 else parts[-1]
+        currentLevel=relativePath.replace('\\','/').split('/')[-1]
+        cacheKey=(initPath,currentLevel)
+        if importCache is not None and cacheKey in importCache:
+            importDict=importCache[cacheKey]
         else:
-            currentLevel=parts[-1].replace('.py','')
-        obj=FromImport(currentLevel)
-        obj.visit(root)
+            try:
+                root=getAst(initPath)
+            except Exception as e:
+                print(f"shortenPath --> ast.parse failed: {e}")
+                return
+            obj=FromImport(currentLevel)
+            obj.visit(root)
+            importDict=obj.importDict
+            if importCache is not None:
+                importCache[cacheKey]=importDict
         replaceKey1=''
         replaceVal1=''
         replaceKey2=''
         replaceVal2=''
-        for key,value in obj.importDict.items():
+        for key,value in importDict.items():
             if key[-1]=='*':
                 key=key.rstrip('*')
                 if key in api:
@@ -145,7 +149,7 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
         elif replaceKey1:
             api=api.replace(replaceKey1,replaceVal1)
     lst[0]=api 
-    shortenPath(lst,{absolutePath:relativePath})
+    shortenPath(lst,{absolutePath:relativePath},importCache)
 
 
 
@@ -157,7 +161,8 @@ def shortenPath(lst,fileDict): #lst是传入传出参数，保存修正之后的
 #  @param prefix The fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
-def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
+#  @param importCache Cache of __init__.py import mappings used to shorten API paths.
+def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None): #lst是传入传出参数
     className=root.name
     flagInit=0
     flagNew=0
@@ -189,7 +194,7 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
                 lst.append(f"{prefix}.{className}.{funcName}({arg}){ret}")
                 #尝试缩短API路径
                 apiPath=[f"{prefix}.{className}.{funcName}"]
-                shortenPath(apiPath,fileDict)
+                shortenPath(apiPath,fileDict,importCache)
 
                 if apiPath[0]!=f"{prefix}.{className}.{funcName}":
                     lst.append(f"{apiPath[0]}({arg}){ret}")
@@ -217,7 +222,7 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
     
     #尝试缩短API路径
     apiPath=[f"{prefix}.{className}"]
-    shortenPath(apiPath,fileDict)
+    shortenPath(apiPath,fileDict,importCache)
     if apiPath[0]!=f"{prefix}.{className}":
         lst.append(f"{apiPath[0]}{para}")
         
@@ -225,7 +230,7 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
     prefix+=f".{className}" #更新前缀
     for n in ast.iter_child_nodes(root):
         if isinstance(n,ast.ClassDef):
-            getClass(lst,n,prefix,fileDict,pyiFlag)
+            getClass(lst,n,prefix,fileDict,pyiFlag,importCache)
 
 
 
@@ -237,7 +242,8 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0): #lst是传入传出参数
 #  @param prefix The fully qualified name of a source file. For example, the prefix for lib/a/b/c.py is lib.a.b.c.
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
-def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文件名
+#  @param importCache Cache of __init__.py import mappings used to shorten API paths.
+def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None): #这里的prefix只到文件名
     try:
         rootNode=ast.parse(codeText,filename='<unknown>',mode='exec')
     except Exception as e:
@@ -246,7 +252,7 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文�
         return
     for node in ast.iter_child_nodes(rootNode):
         if isinstance(node, ast.ClassDef): #抽取类内API
-            getClass(libApi,node,prefix,fileDict,pyiFlag)
+            getClass(libApi,node,prefix,fileDict,pyiFlag,importCache)
 
         #if isinstance(node,ast.FunctionDef): #再抽取类外的API
         # Add the support of extracting AsyncFunctionDef type node -- 2025/5/19
@@ -264,7 +270,7 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0): #这里的prefix只到文�
             
             #尝试缩短API路径
             lst=[f"{prefix}.{funcName}"]
-            shortenPath(lst,fileDict)
+            shortenPath(lst,fileDict,importCache)
             if lst[0]!=f"{prefix}.{funcName}":
                 libApi.append(f"{lst[0]}({arg}){ret}")
 
@@ -289,6 +295,7 @@ def getDefFunction(args):
     
     
     fileVisitLst=[]
+    importCache={}
     for file in filePath:
         pyLst=[] #保存每个.py文件中的API
         pyiLst=[] #保存每个.pyi文件中的API
@@ -307,7 +314,7 @@ def getDefFunction(args):
                 try:
                     with open(file+'i','r',encoding='UTF-8') as fr:
                         code_text=fr.read()
-                    task(code_text,pyiLst,prefix,fileDict, 1) #抽取.pyi中的API
+                    task(code_text,pyiLst,prefix,fileDict, 1, importCache) #抽取.pyi中的API
                     pyiFlag=1
                     fileVisitLst.append(file+'i')
                 except FileNotFoundError:
@@ -329,7 +336,7 @@ def getDefFunction(args):
             for key,val in assignDict.items():
                 f.write(f'A:{prefix}.{key}->{val}\n')
             #抽取.py中的Definition Node
-            task(code_text,pyLst,prefix,fileDict)
+            task(code_text,pyLst,prefix,fileDict,0,importCache)
             pyLst.sort()
             for it in pyLst:
                 f.write(f"{it}\n")
@@ -358,7 +365,7 @@ def getDefFunction(args):
                 try:
                     with open(file.rstrip('i'),'r',encoding='UTF-8') as fr:
                         code_text=fr.read()
-                    task(code_text,pyLst,prefix,fileDict) #抽取.py中的API
+                    task(code_text,pyLst,prefix,fileDict,0,importCache) #抽取.py中的API
                     fileVisitLst.append(file.rstrip('i'))
                     root_node=ast.parse(code_text,filename='<unknown>',mode='exec')
                     assignDict=getAssign(root_node)
@@ -374,7 +381,7 @@ def getDefFunction(args):
                 
             with open(file,'r',encoding='UTF-8') as fr:
                 code_text=fr.read()
-            task(code_text,pyiLst,prefix,fileDict,1) #抽取.pyi中的API
+            task(code_text,pyiLst,prefix,fileDict,1,importCache) #抽取.pyi中的API
             removeLst=[]
             pyiLst.sort()
             for it1 in pyiLst:
