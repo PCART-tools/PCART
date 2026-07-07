@@ -276,6 +276,42 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None): #这里�
 
 
 
+## Return a public alias line for source-root API lines
+## 为源码根路径API行生成公开路径别名
+#
+#  @param line A lib API output line
+#  @param sourceRoot The source package root name, e.g., tensorflow_core
+#  @param publicRoot The public package root name, e.g., tensorflow
+def getPublicAliasLine(line,sourceRoot,publicRoot):
+    if not sourceRoot or not publicRoot:
+        return None
+    sourcePrefix=sourceRoot+'.'
+    publicPrefix=publicRoot+'.'
+    assignSourcePrefix='A:'+sourcePrefix
+    assignPublicPrefix='A:'+publicPrefix
+    if line.startswith(sourcePrefix):
+        return publicPrefix+line[len(sourcePrefix):]
+    if line.startswith(assignSourcePrefix):
+        return assignPublicPrefix+line[len(assignSourcePrefix):]
+    return None
+
+
+
+## Write one lib API line and its public alias if needed
+## 写出一行库API，并按需写出公开路径别名
+#
+#  @param fw Output file object
+#  @param line A lib API output line
+#  @param sourceRoot The source package root name
+#  @param publicRoot The public package root name
+def writeApiLine(fw,line,sourceRoot='',publicRoot=''):
+    fw.write(f"{line}\n")
+    aliasLine=getPublicAliasLine(line,sourceRoot,publicRoot)
+    if aliasLine and aliasLine!=line:
+        fw.write(f"{aliasLine}\n")
+
+
+
 ## Extract all lib API definitions from a specified version
 ## 抽取给定版本的库API定义
 #
@@ -296,6 +332,11 @@ def getDefFunction(args):
     
     fileVisitLst=[]
     importCache={}
+    publicAliasSource=''
+    publicAliasTarget=''
+    if libName=="tensorflow" and os.path.basename(os.path.normpath(libPath))=="tensorflow_core":
+        publicAliasSource="tensorflow_core"
+        publicAliasTarget="tensorflow"
     for file in filePath:
         pyLst=[] #保存每个.py文件中的API
         pyiLst=[] #保存每个.pyi文件中的API
@@ -334,12 +375,12 @@ def getDefFunction(args):
             assignDict=getAssign(root_node) #抽取.py中的所有Assign Node
             f.write('\n'+'-' * 40 + f"{file}" + '-' * 40+'\n')
             for key,val in assignDict.items():
-                f.write(f'A:{prefix}.{key}->{val}\n')
+                writeApiLine(f,f'A:{prefix}.{key}->{val}',publicAliasSource,publicAliasTarget)
             #抽取.py中的Definition Node
             task(code_text,pyLst,prefix,fileDict,0,importCache)
             pyLst.sort()
             for it in pyLst:
-                f.write(f"{it}\n")
+                writeApiLine(f,it,publicAliasSource,publicAliasTarget)
             f.write('\n') 
             
             if pyiFlag:
@@ -356,7 +397,7 @@ def getDefFunction(args):
                 pyiLst.sort()
                 f.write('\n'+'-' * 40 + f"{file}"+'i' + '-' * 40+'\n')
                 for it in pyiLst:
-                    f.write(f"{it}\n")
+                    writeApiLine(f,it,publicAliasSource,publicAliasTarget)
                 f.write('\n')
 
         elif file[-1]=='i' and file not in fileVisitLst:
@@ -371,10 +412,10 @@ def getDefFunction(args):
                     assignDict=getAssign(root_node)
                     f.write('\n'+'-' * 40 + f"{file.rstrip('i')}" + '-' * 40+'\n')
                     for key,value in assignDict.items():
-                        f.write(f'A:{prefix}.{key}->{value}\n')
+                        writeApiLine(f,f'A:{prefix}.{key}->{value}',publicAliasSource,publicAliasTarget)
                     pyLst.sort()
                     for it in pyLst:
-                        f.write(f'{it}\n')
+                        writeApiLine(f,it,publicAliasSource,publicAliasTarget)
                     f.write('\n')
                 except FileNotFoundError:
                     pass
@@ -394,7 +435,7 @@ def getDefFunction(args):
                     
             f.write('\n'+'-' * 40 + f"{file}" + '-' * 40+'\n')
             for it in pyiLst:
-                f.write(f'{it}\n')
+                writeApiLine(f,it,publicAliasSource,publicAliasTarget)
             f.write('\n')
 
     f.close()

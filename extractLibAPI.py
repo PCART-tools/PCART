@@ -9,7 +9,7 @@
 
 
 
-import os
+import json
 import sys
 from Extract.getDef import getDefFunction
 from Tool.tool import getSourceCodePath
@@ -20,9 +20,9 @@ from Tool.tool import getSourceCodePath
 ## 抽取给定库版本的API定义
 #
 #  @param version A specific library version
+#  @param libName The configured public library name
 #  @param sourceCodePath The source code path of the library
-def getLibAPI(version, sourceCodePath):
-    libName=os.path.basename(sourceCodePath)
+def getLibAPI(version, libName, sourceCodePath):
     getDefFunction((libName, version, sourceCodePath))
 
 
@@ -37,15 +37,17 @@ def main():
     config=sys.argv[2]
 
     #加载配置
+    with open(f"Configure/{config}",'r',encoding='UTF-8') as fr:
+        libName=json.load(fr)['libName']
     currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath = getSourceCodePath(config)
    
     #抽取起始版本API定义
     print(currentVersion, currentSourceCodePath)
-    getLibAPI(currentVersion, currentSourceCodePath)
+    getLibAPI(currentVersion, libName, currentSourceCodePath)
     
     #抽取目标版本API定义 
     print(targetVersion, targetSourceCodePath)
-    getLibAPI(targetVersion, targetSourceCodePath) 
+    getLibAPI(targetVersion, libName, targetSourceCodePath)
 
 if __name__=='__main__':
     main()
