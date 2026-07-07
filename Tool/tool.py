@@ -828,6 +828,26 @@ def findPythonDir(basePath):
     )
 
 
+## Resolve the source package directory for a library in a virtual environment
+## 从虚拟环境中解析库源码目录
+#
+#  @param envPath The virtual environment root path
+#  @param libName The configured public library name
+#  @return sourceCodePath Library source code path
+def resolveLibSourceCodePath(envPath,libName):
+    if platform.system() == 'Windows':
+        sitePackages=os.path.join(envPath, "Lib", "site-packages")
+    else:
+        sitePackages=os.path.join(findPythonDir(os.path.join(envPath, "lib")), "site-packages")
+
+    if libName=="tensorflow":
+        tensorflowCore=os.path.join(sitePackages, "tensorflow_core")
+        if os.path.isdir(tensorflowCore):
+            return tensorflowCore
+
+    return os.path.join(sitePackages, libName)
+
+
 ## Resolve Python executable from a virtual environment root
 ## 从虚拟环境根目录解析 Python 解释器路径
 #
@@ -872,12 +892,8 @@ def getSourceCodePath(configPath):
     currentEnvPath=dic['currentEnv']
     targetEnvPath=dic['targetEnv']
     
-    if platform.system() == 'Windows':
-        currentSourceCodePath=os.path.join(currentEnvPath, "Lib", "site-packages", libName)
-        targetSourceCodePath=os.path.join(targetEnvPath, "Lib", "site-packages", libName)
-    else:
-        currentSourceCodePath=os.path.join(findPythonDir(os.path.join(currentEnvPath, "lib")), "site-packages", libName)
-        targetSourceCodePath=os.path.join(findPythonDir(os.path.join(targetEnvPath, "lib")), "site-packages", libName) 
+    currentSourceCodePath=resolveLibSourceCodePath(currentEnvPath, libName)
+    targetSourceCodePath=resolveLibSourceCodePath(targetEnvPath, libName)
 
     return currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath
 
