@@ -19,6 +19,8 @@
 
 ## News
 
+- **2026-07-24** - Released [PCART v1.4](https://github.com/PCART-tools/PCART/releases/tag/v1.4), featuring isolated run workspaces, structured callsite identities, more flexible and safer cross-platform execution of Python scripts, modules, and tools such as `pytest`, and optional experimental PCResolve integration.
+
 - **2026-05-22** - Experimental [PCResolve](https://github.com/PCART-tools/PCResolve) integration: cross-file symbol-tracing replaces single-file string-matching for API call identification. Opt-in via `pcresolve>=1.0.4`; falls back to existing extraction when not installed.
 
 <br>
