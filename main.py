@@ -32,12 +32,9 @@ from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,qu
 ## One process handles one file
 ## 一个进程处理一个文件
 #
-#  @param args Input parameters for processing one project file (unpacked tuple of 12 values)
-#  @param args 处理一个项目文件的输入参数（12个值的解包元组）
+#  @param args Input parameters for processing one project file (13 values normally, 14 values with a PCResolve lookup)
 #  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: detection and repair results;
 #          fileRelativePath: the file being processed; invokedAPINum: number of invoked APIs
-#  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: 检测和修复结果；
-#          fileRelativePath: 被处理的文件；invokedAPINum: 调用的API数量
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
     if len(args)==13:

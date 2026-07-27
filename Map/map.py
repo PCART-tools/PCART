@@ -157,7 +157,7 @@ def hasSaveFailedManifest(pklKey,*,runtimePaths):
 #  @param virtualEnv The lib's virtual environment
 #  @param lock The lock flag 
 #  @param errLst Error list
-#  @param curr=1 Current version flag
+#  @param curr Current version flag, default is 1
 #  @param callKey Unique callsite artifact id
 #  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return dynamicMatchDict Mapped API signatures 
@@ -321,7 +321,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
 #  @param virtualEnv The lib's virtual environment
 #  @param lock The lock flag 
 #  @param errLst Error list
-#  @param curr=1 Current version flag
+#  @param curr Current version flag, default is 1
 #  @param callKey Unique callsite artifact id
 #  @param runtimePaths Runtime artifact paths for the current PCART workspace
 #  @return ans Mapped API signatures 

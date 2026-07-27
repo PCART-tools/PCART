@@ -855,7 +855,7 @@ def modifyFromImport(filePath,importStatement):
 #  仅保留1，2，3行代码
 #  Case 2:
 #  1. app = Flask(__name__)
-#  2. @app.route("/")
+#  2. \@app.route("/")
 #  保留 app = Flask(__name__)以解决NameError 
 #
 #  @param astNode The AST node
