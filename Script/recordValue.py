@@ -23,7 +23,7 @@ callsiteInfoDict={}
 ## Save collected runtime values to pkl files
 ## 将收集到的运行时值保存到pkl文件
 def savePkls():
-    pklDir=os.path.join(os.path.dirname(os.path.abspath(__file__)),PCART_PKL_REL_PATH)
+    pklDir=os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),PCART_PKL_REL_PATH))
     os.makedirs(pklDir,exist_ok=True)
     for key, value in paraValueDict.items():
         if '@' in key:
