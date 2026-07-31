@@ -251,3 +251,30 @@ def exportRunReport(workspace):
             shutil.copytree(source,target)
         else:
             shutil.copy2(source,target)
+
+
+## Remove one completed PCART run workspace
+## 删除一次已完成的PCART运行工作区
+#
+#  Only a direct child of <repo>/PCARTRuns/runs can be removed.
+#  只允许删除<repo>/PCARTRuns/runs的直接子目录。
+#
+#  @param workspace RunWorkspace object for this execution
+#  @return None
+def cleanupRunWorkspace(workspace):
+    runsRoot=os.path.realpath(
+        os.path.join(workspace.repo_root,'PCARTRuns','runs')
+    )
+    runRoot=os.path.realpath(workspace.run_root)
+    normalizedRunsRoot=os.path.normcase(os.path.normpath(runsRoot))
+    normalizedParent=os.path.normcase(
+        os.path.normpath(os.path.dirname(runRoot))
+    )
+
+    if normalizedParent!=normalizedRunsRoot:
+        raise ValueError(
+            f'Refuse to remove workspace outside PCARTRuns/runs: {runRoot}'
+        )
+
+    if os.path.isdir(runRoot):
+        shutil.rmtree(runRoot)

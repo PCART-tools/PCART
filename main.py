@@ -10,8 +10,8 @@
 
 
 
+import argparse
 import os
-import sys
 import json
 import time
 import shutil
@@ -25,7 +25,7 @@ from Extract.pcresolveBridge import buildCallsiteLookup
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
-from Tool.workspace import createRunWorkspace,exportRunReport,getRepoRoot,getRuntimePaths,workspaceCwd
+from Tool.workspace import cleanupRunWorkspace,createRunWorkspace,exportRunReport,getRepoRoot,getRuntimePaths,workspaceCwd
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
@@ -193,7 +193,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     if createResult.returncode!=0:
         print(f'Failure to generate PKL in current version')
         print(createResult.stderr)
-        return
+        return False
     print("Running complete")
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
@@ -229,6 +229,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     pool.close() #关闭进程池，使其不再接受新的任务
     pool.join() #等待进程池中所有的任务执行完，否则主进程可能继续往下执行提前结束，而导致部分任务没有执行完
     save2txt(resultLst, libName, runCommand, os.path.join(reportDir, f'{projName}.txt'))
+    return True
 
 
 ## Run PCART with an isolated workspace
@@ -240,8 +241,9 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
 #  最后导出用户可见报告。
 #
 #  @param config The config file path or config file name under Configure
+#  @param cleanWorkspace Whether to remove a successful run workspace
 #  @return RunWorkspace object for this execution
-def run(config):
+def run(config,cleanWorkspace=False):
     repoRoot=getRepoRoot()
     configPath=resolveConfigFilePath(config,repoRoot)
 
@@ -273,24 +275,38 @@ def run(config):
         print("Code preprocess complete")
 
         #执行主逻辑
-        backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace,pcresolveLookup=pcresolveLookup)
+        succeeded=backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace,pcresolveLookup=pcresolveLookup)
 
     exportRunReport(workspace)
     print(f"Report output: {workspace.report_root}")
+    if cleanWorkspace and succeeded:
+        cleanupRunWorkspace(workspace)
+        print(f"Run workspace removed: {workspace.run_root}")
     return workspace
 
 
 ## Main function of PCART
 ## PCART主函数
 def main():
-    if len(sys.argv) < 3:
-       print("Usage: python main.py -cfg config.json")
-       sys.exit(1)
+    parser=argparse.ArgumentParser(
+        description='Python API compatibility analysis and repair tool'
+    )
+    parser.add_argument(
+        '-cfg',
+        dest='config',
+        required=True,
+        help='Configuration file path or file name under Configure',
+    )
+    parser.add_argument(
+        '--clean-workspace',
+        action='store_true',
+        help='Remove the run workspace after successful report export',
+    )
+    args=parser.parse_args()
 
-    config=sys.argv[2]
     start=time.time()
 
-    run(config)
+    run(args.config,cleanWorkspace=args.clean_workspace)
 
     end=time.time()
     print(f"Total run time={int(end-start)}s")
