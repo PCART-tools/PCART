@@ -37,7 +37,15 @@ It supports common parameter compatibility changes, including addition, deletion
 python main.py -cfg your_config.json
 ```
 
-PCART uses one tool environment and two configured project environments: `currentEnv` and `targetEnv`.
+PCART keeps run workspaces in `PCARTRuns/runs/` by default. For repeated runs on large projects, use `--clean-workspace` to prevent excessive disk usage:
+
+```bash
+python main.py -cfg your_config.json --clean-workspace
+```
+
+Successful workspaces are removed only after reports are exported. Failed workspaces and all outputs under `Report/runs/` are retained.
+
+Each run uses one tool environment and two configured project environments: `currentEnv` and `targetEnv`.
 
 See the [Quick Start](https://github.com/PCART-tools/PCART/wiki/Quick-Start) and [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for setup details.
 
