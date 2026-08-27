@@ -270,11 +270,14 @@ def findAssignCall(root):
 #
 #  @param root The AST root of the source code
 #  @param source The original source code
-#  @param aliasName The first name of the receiver alias
+#  @param receiverName The complete receiver name
 #  @param lineno The line number of the call site
 #  @return expr The scoped assignment expression or None
-def getAssignReceiverExpr(root,source,aliasName,lineno):
+def getAssignReceiverExpr(root,source,receiverName,lineno):
+    aliasName=receiverName.split('.')[0]
+    receiverSuffix=receiverName[len(aliasName):]
     expr=None
+    exprNode=None
     bestLine=-1
 
     scopeBodies=[root.body]
@@ -306,7 +309,45 @@ def getAssignReceiverExpr(root,source,aliasName,lineno):
                     sourceExpr=ast.get_source_segment(source,value)
                     if sourceExpr:
                         expr=sourceExpr.strip()
+                        exprNode=value
                         bestLine=stmt.lineno
+
+    if exprNode is None:
+        return None
+
+    localNames=set()
+    for body in scopeBodies:
+        for stmt in body:
+            if not hasattr(stmt,'lineno') or stmt.lineno>=lineno:
+                continue
+            targets=[]
+            if isinstance(stmt,ast.Assign):
+                targets=stmt.targets
+            elif isinstance(stmt,(ast.AnnAssign,ast.AugAssign)):
+                targets=[stmt.target]
+            for target in targets:
+                for node in ast.walk(target):
+                    if isinstance(node,ast.Name):
+                        localNames.add(node.id)
+
+    for node in ast.walk(root):
+        if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)):
+            start=node.lineno
+            end=getattr(node,'end_lineno',start)
+            if start<lineno<=end:
+                for arg in node.args.posonlyargs+node.args.args+node.args.kwonlyargs:
+                    localNames.add(arg.arg)
+                if node.args.vararg:
+                    localNames.add(node.args.vararg.arg)
+                if node.args.kwarg:
+                    localNames.add(node.args.kwarg.arg)
+
+    loadedNames={node.id for node in ast.walk(exprNode) if isinstance(node,ast.Name) and isinstance(node.ctx,ast.Load)}
+    if loadedNames & localNames:
+        return None
+
+    if receiverSuffix:
+        return f'({expr}){receiverSuffix}'
     return expr
 
 
@@ -476,7 +517,7 @@ def addDictSingle(callAPI,filePath,callKey):
                 lineNo = i + 1
                 receiverExpr=None
                 if firstPart.split('.')[0] in targetLst:
-                    receiverExpr=getAssignReceiverExpr(root,source,firstPart.split('.')[0],lineNo)
+                    receiverExpr=getAssignReceiverExpr(root,source,firstPart,lineNo)
                 elif firstPart.split('.')[0]=='self':
                     methodName=callAPI.split('(')[0].split('.')[-1]
                     receiverExpr=getSelfReceiverExpr(root,lineNo,methodName)
@@ -670,7 +711,7 @@ def addDictAll(projPath,projName,filePath,copyRoot,runFileLst,libName,runPath,ru
                 if firstPart and (firstPart.split('.')[0] in targetLst or firstPart.split('.')[0]=='self') and len(l)==1:
                     receiverExpr=None
                     if firstPart.split('.')[0] in targetLst:
-                        receiverExpr=getAssignReceiverExpr(root,code,firstPart.split('.')[0],lineno)
+                        receiverExpr=getAssignReceiverExpr(root,code,firstPart,lineno)
                     elif firstPart.split('.')[0]=='self':
                         methodName=callState.split('(')[0].split('.')[-1]
                         receiverExpr=getSelfReceiverExpr(root,lineno,methodName)
