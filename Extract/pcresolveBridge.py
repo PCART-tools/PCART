@@ -53,7 +53,7 @@ def buildCallsiteLookup(projPath, libName):
         result = _analysisCache[projPath]
     else:
         try:
-            result = _pcresolveAnalyze(projPath, scope_model="v2")
+            result = _pcresolveAnalyze(projPath)
         except Exception:
             _analysisCache[projPath] = None
             _lookupCache[cacheKey] = {}
