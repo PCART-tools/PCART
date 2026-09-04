@@ -17,7 +17,7 @@ import time
 import shutil
 import subprocess
 from Path.getPath import *
-from Map.map import mapAPI
+from Map.map import mapAPI,fuzzymatch
 from multiprocessing import Pool
 from multiprocessing import Manager
 from Extract.getCall import getCallFunction
@@ -103,7 +103,36 @@ def backwardTask(args):
         ansDict[key][f"Definition @{targetVersion} <{targetMatch['matchMethod']}>"]=str(targetMatch['match'])
         
         #step4:变更分析,若不兼容则返回需要修复的操作
-        repairLst=isCompatible(currentMatch,targetMatch) #repairLst中每个元素都是tuple
+        currentMethod=currentMatch.get('matchMethod')
+        targetMethod=targetMatch.get('matchMethod')
+        if {currentMethod,targetMethod}=={'dynamic','static'}:
+            if currentMethod=='dynamic':
+                dynamicMatchInfo=currentMatch
+                staticMatchInfo=targetMatch
+                dynamicVersion=currentVersion
+                dynamicIsCurrent=True
+            else:
+                dynamicMatchInfo=targetMatch
+                staticMatchInfo=currentMatch
+                dynamicVersion=targetVersion
+                dynamicIsCurrent=False
+
+            dynamicStaticMatch=fuzzymatch(formatAPI,libName,dynamicVersion,0)
+            staticCandidates=staticMatchInfo.get('match',{})
+            qualifiedName=dynamicMatchInfo.get('qualifiedName')
+
+            if isinstance(qualifiedName,str) and isinstance(dynamicStaticMatch,dict) and isinstance(staticCandidates,dict) \
+                    and qualifiedName in dynamicStaticMatch and qualifiedName in staticCandidates:
+                dynamicStaticCompare={'match':{qualifiedName:list(dynamicStaticMatch[qualifiedName])}}
+                staticCompare={'match':{qualifiedName:list(staticCandidates[qualifiedName])}}
+                if dynamicIsCurrent:
+                    repairLst=isCompatible(dynamicStaticCompare,staticCompare)
+                else:
+                    repairLst=isCompatible(staticCompare,dynamicStaticCompare)
+            else:
+                repairLst=None
+        else:
+            repairLst=isCompatible(currentMatch,targetMatch) #repairLst中每个元素都是tuple
         if repairLst==None:
             ansDict[key]['Compatible']="Unknown"
             if len(errLst)>0:

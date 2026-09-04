@@ -68,23 +68,32 @@ for key in paraValueDict.keys():
 api=s
 err=''
 try:
-    result=str(inspect.signature(eval(api)))
+    callableObj=eval(api)
+    result=str(inspect.signature(callableObj))
     matchDict['match']=result
     matchDict['error']=''
     try:
-        internalPath=inspect.getfile(eval(api))
+        realCallable=inspect.unwrap(callableObj)
+        moduleName=getattr(realCallable,'__module__',None)
+        qualifiedName=getattr(realCallable,'__qualname__',None)
+        if isinstance(moduleName,str) and isinstance(qualifiedName,str):
+            matchDict['qualifiedName']='{}.{}'.format(moduleName,qualifiedName)
+    except Exception:
+        pass
+    try:
+        internalPath=inspect.getfile(callableObj)
         internalPath = internalPath.replace('\\', '/')
         internalPath=internalPath.split('site-packages/')[-1].replace('.py','').replace('/','.')
         matchDict['internalPath']=internalPath
-    except:
+    except Exception:
         pass
 except Exception as e:
     matchDict['match']='nullptr'
     matchDict['error']='sigError={}: {}'.format(type(e).__name__,e)
 
 
-# If dynamic matching fails, internalPath and addValue attributes are not available
-# 动态匹配若失败，则没有internalPath和addValue这两个属性
+# If dynamic matching fails, internalPath, qualifiedName and addValue attributes are not available
+# 动态匹配若失败，则没有internalPath、qualifiedName和addValue这三个属性
 fileName=getFileName(lookupKey,'_dynamicMatch.json')
 
 os.makedirs(dataDir,exist_ok=True)
