@@ -336,6 +336,8 @@ def mapAPI(callAPI,runCommand,runPath,formatAPI,projName,libName,copyFile,versio
             ans['internalPath']=dynamicMatchDict['internalPath']
         else:
             ans['internalPath']=formatAPI 
+        if 'qualifiedName' in dynamicMatchDict:
+            ans['qualifiedName']=dynamicMatchDict['qualifiedName']
     
         if 'builtin' in dynamicMatchDict['error']: #这里的内置不一定是库的内置，有可能是python内置,如何区分?
             ans['match']=fuzzymatch(formatAPI,libName,version,1) #目前只发现pytorch中把内置记录到了.pyi中
