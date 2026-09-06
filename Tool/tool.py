@@ -505,21 +505,11 @@ def getFileName(fileName,extension):
 #  @param s The output string
 #  @param fw File writer
 def writeLine(width,s,fw):
-    if len(s)<=width-4:
-        tailSpaceNum=width-2-len(s)-1
-        fw.write('| '+s+' '*tailSpaceNum+'|'+'\n')
-    else:
-        s1=s[0:width-4]
-        s1='| '+s1+' |'+'\n'
-        fw.write(s1)
-        s2=s[width-4:]
-        if len(s2)<=width-4:
-            tailSpaceNum=width-2-len(s2)-1
-            s2='| '+s2+' '*tailSpaceNum+'|'+'\n'
-            fw.write(s2)
-            return
-        else:
-            writeLine(width,s2,fw) #递归拆分
+    contentWidth=width-4
+    for start in range(0,max(len(s),1),contentWidth):
+        content=s[start:start+contentWidth]
+        tailSpaceNum=width-2-len(content)-1
+        fw.write('| '+content+' '*tailSpaceNum+'|'+'\n')
 
 
 
