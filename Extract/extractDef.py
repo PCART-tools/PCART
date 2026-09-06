@@ -45,6 +45,16 @@ class FunctionDefVisitor(ast.NodeVisitor):
 #
 #  Inherits from ast.NodeVisitor 
 class FromImport(ast.NodeVisitor):
+    #跳过函数和类作用域，避免将局部导入当作包级别名
+    def visit_FunctionDef(self, node):
+        pass
+
+    def visit_AsyncFunctionDef(self, node):
+        pass
+
+    def visit_ClassDef(self, node):
+        pass
+
     ## Initialize the from-import visitor for a given package level
     ## 初始化from-import遍历器，传入当前包层级
     #  @param currentLevel The current package level name
