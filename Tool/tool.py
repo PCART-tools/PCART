@@ -22,16 +22,14 @@ import shlex
 from Path.getPath import Path
 
 
-ARTIFACT_HASH_PATTERN=re.compile(r'(?:^|__)([0-9a-f]{64})$')
-
-
 ## Return artifact hash from an artifact id
 ## 从运行产物id中提取hash
 #
 #  @param artifactId The artifact id
 #  @return artifact hash or empty string
 def getArtifactHash(artifactId):
-    match=ARTIFACT_HASH_PATTERN.search(artifactId)
+    hashPattern=re.compile(r'(?:^|__)([0-9a-f]{64})$')
+    match=hashPattern.search(artifactId)
     if match:
         return match.group(1)
     return ''
