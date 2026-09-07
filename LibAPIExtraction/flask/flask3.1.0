@@ -78,6 +78,7 @@ A:flask.blueprints.self.cli->AppGroup()
 A:flask.blueprints.max_age->self.get_send_file_max_age(filename)
 A:flask.blueprints.path->os.path.join(self.root_path, resource)
 flask.Blueprint(self,name:str,import_name:str,static_folder:str|os.PathLike[str]|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike[str]|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict[str,t.Any]|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
+flask.Blueprint.__init__(self,name:str,import_name:str,static_folder:str|os.PathLike[str]|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike[str]|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict[str,t.Any]|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
 flask.Blueprint.get_send_file_max_age(self,filename:str|None)->int | None
 flask.Blueprint.open_resource(self,resource:str,mode:str='rb',encoding:str|None='utf-8')->t.IO[t.AnyStr]
 flask.Blueprint.send_static_file(self,filename:str)->Response
@@ -121,6 +122,7 @@ A:flask.app.len_rv->len(rv)
 A:flask.app.ctx->self.request_context(environ)
 A:flask.app.builder->EnvironBuilder(self, *args, **kwargs)
 flask.Flask(self,import_name:str,static_url_path:str|None=None,static_folder:str|os.PathLike[str]|None='static',static_host:str|None=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:str|os.PathLike[str]|None='templates',instance_path:str|None=None,instance_relative_config:bool=False,root_path:str|None=None)
+flask.Flask.__init__(self,import_name:str,static_url_path:str|None=None,static_folder:str|os.PathLike[str]|None='static',static_host:str|None=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:str|os.PathLike[str]|None='templates',instance_path:str|None=None,instance_relative_config:bool=False,root_path:str|None=None)
 flask.Flask.app_context(self)->AppContext
 flask.Flask.async_to_sync(self,func:t.Callable[...,t.Coroutine[t.Any,t.Any,t.Any]])->t.Callable[..., t.Any]
 flask.Flask.create_jinja_environment(self)->Environment
@@ -351,6 +353,7 @@ A:flask.config.d->types.ModuleType('config')
 A:flask.config.obj->load(f)
 A:flask.config.self[key]->getattr(obj, key)
 flask.Config(self,root_path:str|os.PathLike[str],defaults:dict[str,t.Any]|None=None)
+flask.Config.__init__(self,root_path:str|os.PathLike[str],defaults:dict[str,t.Any]|None=None)
 flask.Config.__repr__(self)->str
 flask.Config.from_envvar(self,variable_name:str,silent:bool=False)->bool
 flask.Config.from_file(self,filename:str|os.PathLike[str],load:t.Callable[[t.IO[t.Any]],t.Mapping[str,t.Any]],silent:bool=False,text:bool=True)->bool
@@ -359,9 +362,6 @@ flask.Config.from_object(self,obj:object|str)->None
 flask.Config.from_prefixed_env(self,prefix:str='FLASK',*,loads:t.Callable[[str],t.Any]=json.loads)->bool
 flask.Config.from_pyfile(self,filename:str|os.PathLike[str],silent:bool=False)->bool
 flask.Config.get_namespace(self,namespace:str,lowercase:bool=True,trim_namespace:bool=True)->dict[str, t.Any]
-flask.ConfigAttribute(self,name:str,get_converter:t.Callable[[t.Any],T]|None=None)
-flask.ConfigAttribute.__get__(self,obj:App|None,owner:type[App]|None=None)->T | te.Self
-flask.ConfigAttribute.__set__(self,obj:App,value:t.Any)->None
 flask.config.Config(self,root_path:str|os.PathLike[str],defaults:dict[str,t.Any]|None=None)
 flask.config.Config.__init__(self,root_path:str|os.PathLike[str],defaults:dict[str,t.Any]|None=None)
 flask.config.Config.__repr__(self)->str
@@ -625,30 +625,6 @@ A:flask.sansio.blueprints.bp_options->bp_options.copy().copy()
 A:flask.sansio.blueprints.bp_url_prefix->bp_options.copy().copy().get('url_prefix')
 A:flask.sansio.blueprints.bp_subdomain->bp_options.copy().copy().get('subdomain')
 A:flask.sansio.blueprints.value->defaultdict(dict, {code: {exc_class: func for (exc_class, func) in code_values.items()} for (code, code_values) in value.items()})
-flask.sansio.Blueprint(self,name:str,import_name:str,static_folder:str|os.PathLike[str]|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike[str]|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict[str,t.Any]|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
-flask.sansio.Blueprint._check_setup_finished(self,f_name:str)->None
-flask.sansio.Blueprint._merge_blueprint_funcs(self,app:App,name:str)->None
-flask.sansio.Blueprint.add_app_template_filter(self,f:ft.TemplateFilterCallable,name:str|None=None)->None
-flask.sansio.Blueprint.add_app_template_global(self,f:ft.TemplateGlobalCallable,name:str|None=None)->None
-flask.sansio.Blueprint.add_app_template_test(self,f:ft.TemplateTestCallable,name:str|None=None)->None
-flask.sansio.Blueprint.add_url_rule(self,rule:str,endpoint:str|None=None,view_func:ft.RouteCallable|None=None,provide_automatic_options:bool|None=None,**options:t.Any)->None
-flask.sansio.Blueprint.after_app_request(self,f:T_after_request)->T_after_request
-flask.sansio.Blueprint.app_context_processor(self,f:T_template_context_processor)->T_template_context_processor
-flask.sansio.Blueprint.app_errorhandler(self,code:type[Exception]|int)->t.Callable[[T_error_handler], T_error_handler]
-flask.sansio.Blueprint.app_template_filter(self,name:str|None=None)->t.Callable[[T_template_filter], T_template_filter]
-flask.sansio.Blueprint.app_template_global(self,name:str|None=None)->t.Callable[[T_template_global], T_template_global]
-flask.sansio.Blueprint.app_template_test(self,name:str|None=None)->t.Callable[[T_template_test], T_template_test]
-flask.sansio.Blueprint.app_url_defaults(self,f:T_url_defaults)->T_url_defaults
-flask.sansio.Blueprint.app_url_value_preprocessor(self,f:T_url_value_preprocessor)->T_url_value_preprocessor
-flask.sansio.Blueprint.before_app_request(self,f:T_before_request)->T_before_request
-flask.sansio.Blueprint.make_setup_state(self,app:App,options:dict[str,t.Any],first_registration:bool=False)->BlueprintSetupState
-flask.sansio.Blueprint.record(self,func:DeferredSetupFunction)->None
-flask.sansio.Blueprint.record_once(self,func:DeferredSetupFunction)->None
-flask.sansio.Blueprint.register(self,app:App,options:dict[str,t.Any])->None
-flask.sansio.Blueprint.register_blueprint(self,blueprint:Blueprint,**options:t.Any)->None
-flask.sansio.Blueprint.teardown_app_request(self,f:T_teardown)->T_teardown
-flask.sansio.BlueprintSetupState(self,blueprint:Blueprint,app:App,options:t.Any,first_registration:bool)
-flask.sansio.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:str|None=None,view_func:ft.RouteCallable|None=None,**options:t.Any)->None
 flask.sansio.blueprints.Blueprint(self,name:str,import_name:str,static_folder:str|os.PathLike[str]|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike[str]|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict[str,t.Any]|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
 flask.sansio.blueprints.Blueprint.__init__(self,name:str,import_name:str,static_folder:str|os.PathLike[str]|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike[str]|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict[str,t.Any]|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
 flask.sansio.blueprints.Blueprint._check_setup_finished(self,f_name:str)->None

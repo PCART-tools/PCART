@@ -86,22 +86,54 @@ A:mysql.opentelemetry.metrics._internal.instrument._unit_regex->re_compile('[\\x
 A:mysql.opentelemetry.metrics._internal.instrument.InstrumentT->TypeVar('InstrumentT', bound='Instrument')
 A:mysql.opentelemetry.metrics._internal.instrument.self._real_instrument->self._create_real_instrument(meter)
 mysql.opentelemetry.metrics.Asynchronous(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.Asynchronous.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
 mysql.opentelemetry.metrics.CallbackOptions
+mysql.opentelemetry.metrics.Counter(Synchronous)
+mysql.opentelemetry.metrics.Counter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.metrics.Histogram(Synchronous)
+mysql.opentelemetry.metrics.Histogram.record(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics.Instrument(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.Instrument.__init__(self,name:str,unit:str='',description:str='')
 mysql.opentelemetry.metrics.Instrument._check_name_unit_description(name:str,unit:str,description:str)->Dict[str, Optional[str]]
+mysql.opentelemetry.metrics.NoOpCounter(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpCounter.__init__(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.metrics.NoOpHistogram(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpHistogram.__init__(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpHistogram.record(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.metrics.NoOpObservableCounter(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpObservableCounter.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpObservableGauge(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpObservableGauge.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpObservableUpDownCounter(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpObservableUpDownCounter.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpUpDownCounter(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpUpDownCounter.__init__(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics.NoOpUpDownCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.metrics.ObservableCounter(Asynchronous)
+mysql.opentelemetry.metrics.ObservableGauge(Asynchronous)
+mysql.opentelemetry.metrics.ObservableUpDownCounter(Asynchronous)
 mysql.opentelemetry.metrics.Synchronous(Instrument)
+mysql.opentelemetry.metrics.UpDownCounter(Synchronous)
+mysql.opentelemetry.metrics.UpDownCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics._internal.Counter(Synchronous)
 mysql.opentelemetry.metrics._internal.Counter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics._internal.Histogram(Synchronous)
 mysql.opentelemetry.metrics._internal.Histogram.record(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics._internal.NoOpCounter(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics._internal.NoOpCounter.__init__(self,name:str,unit:str='',description:str='')
 mysql.opentelemetry.metrics._internal.NoOpCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics._internal.NoOpHistogram(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics._internal.NoOpHistogram.__init__(self,name:str,unit:str='',description:str='')
 mysql.opentelemetry.metrics._internal.NoOpHistogram.record(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics._internal.NoOpObservableCounter(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics._internal.NoOpObservableCounter.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
 mysql.opentelemetry.metrics._internal.NoOpObservableGauge(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics._internal.NoOpObservableGauge.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
 mysql.opentelemetry.metrics._internal.NoOpObservableUpDownCounter(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
+mysql.opentelemetry.metrics._internal.NoOpObservableUpDownCounter.__init__(self,name:str,callbacks:Optional[Sequence[CallbackT]]=None,unit:str='',description:str='')
 mysql.opentelemetry.metrics._internal.NoOpUpDownCounter(self,name:str,unit:str='',description:str='')
+mysql.opentelemetry.metrics._internal.NoOpUpDownCounter.__init__(self,name:str,unit:str='',description:str='')
 mysql.opentelemetry.metrics._internal.NoOpUpDownCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 mysql.opentelemetry.metrics._internal.ObservableCounter(Asynchronous)
 mysql.opentelemetry.metrics._internal.ObservableGauge(Asynchronous)
@@ -175,11 +207,21 @@ mysql.opentelemetry.metrics._internal.instrument._ProxyObservableUpDownCounter._
 mysql.opentelemetry.metrics._internal.instrument._ProxyUpDownCounter(_ProxyInstrument[UpDownCounter],UpDownCounter)
 mysql.opentelemetry.metrics._internal.instrument._ProxyUpDownCounter._create_real_instrument(self,meter:'metrics.Meter')->UpDownCounter
 mysql.opentelemetry.metrics._internal.instrument._ProxyUpDownCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.sdk.metrics._internal.APICounter(Synchronous)
+mysql.opentelemetry.sdk.metrics._internal.APICounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.sdk.metrics._internal.APIHistogram(Synchronous)
+mysql.opentelemetry.sdk.metrics._internal.APIHistogram.record(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
+mysql.opentelemetry.sdk.metrics._internal.APIObservableCounter(Asynchronous)
+mysql.opentelemetry.sdk.metrics._internal.APIObservableGauge(Asynchronous)
+mysql.opentelemetry.sdk.metrics._internal.APIObservableUpDownCounter(Asynchronous)
+mysql.opentelemetry.sdk.metrics._internal.APIUpDownCounter(Synchronous)
+mysql.opentelemetry.sdk.metrics._internal.APIUpDownCounter.add(self,amount:Union[int,float],attributes:Optional[Attributes]=None)->None
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/metrics/_internal/observation.py----------------------------------------
 mysql.opentelemetry.metrics.Observation(self,value:Union[int,float],attributes:Attributes=None)
 mysql.opentelemetry.metrics.Observation.__eq__(self,other:object)->bool
+mysql.opentelemetry.metrics.Observation.__init__(self,value:Union[int,float],attributes:Attributes=None)
 mysql.opentelemetry.metrics.Observation.__repr__(self)->str
 mysql.opentelemetry.metrics.Observation.attributes(self)->Attributes
 mysql.opentelemetry.metrics.Observation.value(self)->Union[float, int]
@@ -211,6 +253,10 @@ mysql.opentelemetry.context.__init__.set_value(key:str,value:'object',context:ty
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/context/context.py----------------------------------------
+mysql.opentelemetry.baggage.Context(typing.Dict[str,object])
+mysql.opentelemetry.baggage.Context.__setitem__(self,key:str,value:object)->None
+mysql.opentelemetry.baggage.propagation.Context(typing.Dict[str,object])
+mysql.opentelemetry.baggage.propagation.Context.__setitem__(self,key:str,value:object)->None
 mysql.opentelemetry.context.Context(typing.Dict[str,object])
 mysql.opentelemetry.context.Context.__setitem__(self,key:str,value:object)->None
 mysql.opentelemetry.context._RuntimeContext(ABC)
@@ -223,14 +269,18 @@ mysql.opentelemetry.context.context._RuntimeContext(ABC)
 mysql.opentelemetry.context.context._RuntimeContext.attach(self,context:Context)->object
 mysql.opentelemetry.context.context._RuntimeContext.detach(self,token:object)->None
 mysql.opentelemetry.context.context._RuntimeContext.get_current(self)->Context
+mysql.opentelemetry.propagate.Context(typing.Dict[str,object])
+mysql.opentelemetry.propagate.Context.__setitem__(self,key:str,value:object)->None
+mysql.opentelemetry.sdk.trace.export.Context(typing.Dict[str,object])
+mysql.opentelemetry.sdk.trace.export.Context.__setitem__(self,key:str,value:object)->None
+mysql.opentelemetry.trace.Context(typing.Dict[str,object])
+mysql.opentelemetry.trace.Context.__setitem__(self,key:str,value:object)->None
+mysql.opentelemetry.trace.propagation.Context(typing.Dict[str,object])
+mysql.opentelemetry.trace.propagation.Context.__setitem__(self,key:str,value:object)->None
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/context/contextvars_context.py----------------------------------------
 A:mysql.opentelemetry.context.contextvars_context.self._current_context->ContextVar(self._CONTEXT_KEY, default=Context())
-mysql.opentelemetry.context.contextvars_ContextVarsRuntimeContext(self)
-mysql.opentelemetry.context.contextvars_ContextVarsRuntimeContext.attach(self,context:Context)->object
-mysql.opentelemetry.context.contextvars_ContextVarsRuntimeContext.detach(self,token:object)->None
-mysql.opentelemetry.context.contextvars_ContextVarsRuntimeContext.get_current(self)->Context
 mysql.opentelemetry.context.contextvars_context.ContextVarsRuntimeContext(self)
 mysql.opentelemetry.context.contextvars_context.ContextVarsRuntimeContext.__init__(self)
 mysql.opentelemetry.context.contextvars_context.ContextVarsRuntimeContext.attach(self,context:Context)->object
@@ -682,6 +732,7 @@ mysql.opentelemetry.sdk.metrics._internal.MeasurementConsumer.collect(self,metri
 mysql.opentelemetry.sdk.metrics._internal.MeasurementConsumer.consume_measurement(self,measurement:Measurement)->None
 mysql.opentelemetry.sdk.metrics._internal.MeasurementConsumer.register_asynchronous_instrument(self,instrument:'mysql.opentelemetry.sdk.metrics._internal.instrument_Asynchronous')
 mysql.opentelemetry.sdk.metrics._internal.SynchronousMeasurementConsumer(self,sdk_config:'mysql.opentelemetry.sdk.metrics._internal.SdkConfiguration')
+mysql.opentelemetry.sdk.metrics._internal.SynchronousMeasurementConsumer.__init__(self,sdk_config:'mysql.opentelemetry.sdk.metrics._internal.SdkConfiguration')
 mysql.opentelemetry.sdk.metrics._internal.SynchronousMeasurementConsumer.collect(self,metric_reader:'mysql.opentelemetry.sdk.metrics.MetricReader',timeout_millis:float=10000)->Iterable[Metric]
 mysql.opentelemetry.sdk.metrics._internal.SynchronousMeasurementConsumer.consume_measurement(self,measurement:Measurement)->None
 mysql.opentelemetry.sdk.metrics._internal.SynchronousMeasurementConsumer.register_asynchronous_instrument(self,instrument:'mysql.opentelemetry.sdk.metrics._internal.instrument._Asynchronous')->None
@@ -702,11 +753,16 @@ A:mysql.opentelemetry.sdk.metrics._internal.view._default_aggregation->DefaultAg
 mysql.opentelemetry.sdk.metrics._internal.view.View(self,instrument_type:Optional[Type[Instrument]]=None,instrument_name:Optional[str]=None,meter_name:Optional[str]=None,meter_version:Optional[str]=None,meter_schema_url:Optional[str]=None,name:Optional[str]=None,description:Optional[str]=None,attribute_keys:Optional[Set[str]]=None,aggregation:Optional[Aggregation]=None)
 mysql.opentelemetry.sdk.metrics._internal.view.View.__init__(self,instrument_type:Optional[Type[Instrument]]=None,instrument_name:Optional[str]=None,meter_name:Optional[str]=None,meter_version:Optional[str]=None,meter_schema_url:Optional[str]=None,name:Optional[str]=None,description:Optional[str]=None,attribute_keys:Optional[Set[str]]=None,aggregation:Optional[Aggregation]=None)
 mysql.opentelemetry.sdk.metrics._internal.view.View._match(self,instrument:Instrument)->bool
+mysql.opentelemetry.sdk.metrics.view.View(self,instrument_type:Optional[Type[Instrument]]=None,instrument_name:Optional[str]=None,meter_name:Optional[str]=None,meter_version:Optional[str]=None,meter_schema_url:Optional[str]=None,name:Optional[str]=None,description:Optional[str]=None,attribute_keys:Optional[Set[str]]=None,aggregation:Optional[Aggregation]=None)
+mysql.opentelemetry.sdk.metrics.view.View.__init__(self,instrument_type:Optional[Type[Instrument]]=None,instrument_name:Optional[str]=None,meter_name:Optional[str]=None,meter_version:Optional[str]=None,meter_schema_url:Optional[str]=None,name:Optional[str]=None,description:Optional[str]=None,attribute_keys:Optional[Set[str]]=None,aggregation:Optional[Aggregation]=None)
+mysql.opentelemetry.sdk.metrics.view.View._match(self,instrument:Instrument)->bool
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/metrics/_internal/exceptions.py----------------------------------------
+mysql.opentelemetry.sdk.metrics.MetricsTimeoutError(Exception)
 mysql.opentelemetry.sdk.metrics._internal.MetricsTimeoutError(Exception)
 mysql.opentelemetry.sdk.metrics._internal.exceptions.MetricsTimeoutError(Exception)
+mysql.opentelemetry.sdk.metrics._internal.export.MetricsTimeoutError(Exception)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/metrics/_internal/instrument.py----------------------------------------
@@ -714,13 +770,19 @@ A:mysql.opentelemetry.sdk.metrics._internal.instrument._logger->getLogger(__name
 A:mysql.opentelemetry.sdk.metrics._internal.instrument.result->self._check_name_unit_description(name, unit, description)
 A:mysql.opentelemetry.sdk.metrics._internal.instrument.self.name->name.lower()
 mysql.opentelemetry.sdk.metrics.Counter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics.Counter.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics.Counter.add(self,amount:Union[int,float],attributes:Dict[str,str]=None)
 mysql.opentelemetry.sdk.metrics.Histogram(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics.Histogram.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics.Histogram.record(self,amount:Union[int,float],attributes:Dict[str,str]=None)
 mysql.opentelemetry.sdk.metrics.ObservableCounter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics.ObservableCounter.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics.ObservableGauge(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics.ObservableGauge.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics.ObservableUpDownCounter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics.ObservableUpDownCounter.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics.UpDownCounter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics.UpDownCounter.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics.UpDownCounter.add(self,amount:Union[int,float],attributes:Dict[str,str]=None)
 mysql.opentelemetry.sdk.metrics._internal._Counter(Counter)
 mysql.opentelemetry.sdk.metrics._internal._Histogram(Histogram)
@@ -728,6 +790,27 @@ mysql.opentelemetry.sdk.metrics._internal._ObservableCounter(ObservableCounter)
 mysql.opentelemetry.sdk.metrics._internal._ObservableGauge(ObservableGauge)
 mysql.opentelemetry.sdk.metrics._internal._ObservableUpDownCounter(ObservableUpDownCounter)
 mysql.opentelemetry.sdk.metrics._internal._UpDownCounter(UpDownCounter)
+mysql.opentelemetry.sdk.metrics._internal.export.Counter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.Counter.__new__(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.Counter.add(self,amount:Union[int,float],attributes:Dict[str,str]=None)
+mysql.opentelemetry.sdk.metrics._internal.export.Histogram(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.Histogram.__new__(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.Histogram.record(self,amount:Union[int,float],attributes:Dict[str,str]=None)
+mysql.opentelemetry.sdk.metrics._internal.export.ObservableCounter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.ObservableCounter.__new__(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.ObservableGauge(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.ObservableGauge.__new__(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.ObservableUpDownCounter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.ObservableUpDownCounter.__new__(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.UpDownCounter(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.UpDownCounter.__new__(cls,*args,**kwargs)
+mysql.opentelemetry.sdk.metrics._internal.export.UpDownCounter.add(self,amount:Union[int,float],attributes:Dict[str,str]=None)
+mysql.opentelemetry.sdk.metrics._internal.export._Counter(Counter)
+mysql.opentelemetry.sdk.metrics._internal.export._Histogram(Histogram)
+mysql.opentelemetry.sdk.metrics._internal.export._ObservableCounter(ObservableCounter)
+mysql.opentelemetry.sdk.metrics._internal.export._ObservableGauge(ObservableGauge)
+mysql.opentelemetry.sdk.metrics._internal.export._ObservableUpDownCounter(ObservableUpDownCounter)
+mysql.opentelemetry.sdk.metrics._internal.export._UpDownCounter(UpDownCounter)
 mysql.opentelemetry.sdk.metrics._internal.instrument.Counter(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics._internal.instrument.Counter.__new__(cls,*args,**kwargs)
 mysql.opentelemetry.sdk.metrics._internal.instrument.Counter.add(self,amount:Union[int,float],attributes:Dict[str,str]=None)
@@ -825,6 +908,26 @@ mysql.opentelemetry.sdk.metrics._internal.aggregation._SumAggregation(self,attri
 mysql.opentelemetry.sdk.metrics._internal.aggregation._SumAggregation.__init__(self,attributes:Attributes,instrument_is_monotonic:bool,instrument_temporality:AggregationTemporality,start_time_unix_nano:int)
 mysql.opentelemetry.sdk.metrics._internal.aggregation._SumAggregation.aggregate(self,measurement:Measurement)->None
 mysql.opentelemetry.sdk.metrics._internal.aggregation._SumAggregation.collect(self,aggregation_temporality:AggregationTemporality,collection_start_nano:int)->Optional[NumberDataPoint]
+mysql.opentelemetry.sdk.metrics._internal.export.AggregationTemporality(IntEnum)
+mysql.opentelemetry.sdk.metrics._internal.export.DefaultAggregation(Aggregation)
+mysql.opentelemetry.sdk.metrics._internal.export.DefaultAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.export.AggregationTemporality(IntEnum)
+mysql.opentelemetry.sdk.metrics.view.Aggregation(ABC)
+mysql.opentelemetry.sdk.metrics.view.Aggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.view.DefaultAggregation(Aggregation)
+mysql.opentelemetry.sdk.metrics.view.DefaultAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.view.DropAggregation(Aggregation)
+mysql.opentelemetry.sdk.metrics.view.DropAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.view.ExplicitBucketHistogramAggregation(self,boundaries:Sequence[float]=(0.0,5.0,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0,2500.0,5000.0,7500.0,10000.0),record_min_max:bool=True)
+mysql.opentelemetry.sdk.metrics.view.ExplicitBucketHistogramAggregation.__init__(self,boundaries:Sequence[float]=(0.0,5.0,10.0,25.0,50.0,75.0,100.0,250.0,500.0,750.0,1000.0,2500.0,5000.0,7500.0,10000.0),record_min_max:bool=True)
+mysql.opentelemetry.sdk.metrics.view.ExplicitBucketHistogramAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.view.ExponentialBucketHistogramAggregation(self,max_size:int=160)
+mysql.opentelemetry.sdk.metrics.view.ExponentialBucketHistogramAggregation.__init__(self,max_size:int=160)
+mysql.opentelemetry.sdk.metrics.view.ExponentialBucketHistogramAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.view.LastValueAggregation(Aggregation)
+mysql.opentelemetry.sdk.metrics.view.LastValueAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
+mysql.opentelemetry.sdk.metrics.view.SumAggregation(Aggregation)
+mysql.opentelemetry.sdk.metrics.view.SumAggregation._create_aggregation(self,instrument:Instrument,attributes:Attributes,start_time_unix_nano:int)->_Aggregation
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/metrics/_internal/measurement.py----------------------------------------
@@ -832,6 +935,8 @@ mysql.opentelemetry.sdk.metrics._internal.measurement.Measurement
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/metrics/_internal/point.py----------------------------------------
+mysql.opentelemetry.sdk.metrics._internal.export.MetricsData
+mysql.opentelemetry.sdk.metrics._internal.export.MetricsData.to_json(self,indent=4)->str
 mysql.opentelemetry.sdk.metrics._internal.point.Buckets
 mysql.opentelemetry.sdk.metrics._internal.point.ExponentialHistogram
 mysql.opentelemetry.sdk.metrics._internal.point.ExponentialHistogramDataPoint
@@ -854,6 +959,28 @@ mysql.opentelemetry.sdk.metrics._internal.point.ScopeMetrics
 mysql.opentelemetry.sdk.metrics._internal.point.ScopeMetrics.to_json(self,indent=4)->str
 mysql.opentelemetry.sdk.metrics._internal.point.Sum
 mysql.opentelemetry.sdk.metrics._internal.point.Sum.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.Buckets
+mysql.opentelemetry.sdk.metrics.export.ExponentialHistogram
+mysql.opentelemetry.sdk.metrics.export.ExponentialHistogramDataPoint
+mysql.opentelemetry.sdk.metrics.export.ExponentialHistogramDataPoint.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.Gauge
+mysql.opentelemetry.sdk.metrics.export.Gauge.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.Histogram
+mysql.opentelemetry.sdk.metrics.export.Histogram.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.HistogramDataPoint
+mysql.opentelemetry.sdk.metrics.export.HistogramDataPoint.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.Metric
+mysql.opentelemetry.sdk.metrics.export.Metric.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.MetricsData
+mysql.opentelemetry.sdk.metrics.export.MetricsData.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.NumberDataPoint
+mysql.opentelemetry.sdk.metrics.export.NumberDataPoint.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.ResourceMetrics
+mysql.opentelemetry.sdk.metrics.export.ResourceMetrics.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.ScopeMetrics
+mysql.opentelemetry.sdk.metrics.export.ScopeMetrics.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics.export.Sum
+mysql.opentelemetry.sdk.metrics.export.Sum.to_json(self,indent=4)->str
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/metrics/_internal/_view_instrument_match.py----------------------------------------
@@ -1170,6 +1297,12 @@ mysql.opentelemetry.sdk._logs._internal.export.in_memory_log_exporter.InMemoryLo
 mysql.opentelemetry.sdk._logs._internal.export.in_memory_log_exporter.InMemoryLogExporter.export(self,batch:typing.Sequence[LogData])->LogExportResult
 mysql.opentelemetry.sdk._logs._internal.export.in_memory_log_exporter.InMemoryLogExporter.get_finished_logs(self)->typing.Tuple[LogData, ...]
 mysql.opentelemetry.sdk._logs._internal.export.in_memory_log_exporter.InMemoryLogExporter.shutdown(self)->None
+mysql.opentelemetry.sdk._logs.export.InMemoryLogExporter(self)
+mysql.opentelemetry.sdk._logs.export.InMemoryLogExporter.__init__(self)
+mysql.opentelemetry.sdk._logs.export.InMemoryLogExporter.clear(self)->None
+mysql.opentelemetry.sdk._logs.export.InMemoryLogExporter.export(self,batch:typing.Sequence[LogData])->LogExportResult
+mysql.opentelemetry.sdk._logs.export.InMemoryLogExporter.get_finished_logs(self)->typing.Tuple[LogData, ...]
+mysql.opentelemetry.sdk._logs.export.InMemoryLogExporter.shutdown(self)->None
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/_logs/export/__init__.py----------------------------------------
@@ -1386,6 +1519,9 @@ A:mysql.opentelemetry.sdk.trace.sampling.DEFAULT_ON->ParentBased(ALWAYS_ON)
 A:mysql.opentelemetry.sdk.trace.sampling.root->TraceIdRatioBased(rate=rate)
 A:mysql.opentelemetry.sdk.trace.sampling.trace_sampler->os.getenv(OTEL_TRACES_SAMPLER, 'parentbased_always_on').lower()
 A:mysql.opentelemetry.sdk.trace.sampling.rate->float(os.getenv(OTEL_TRACES_SAMPLER_ARG))
+mysql.opentelemetry.sdk._configuration.Sampler(abc.ABC)
+mysql.opentelemetry.sdk._configuration.Sampler.get_description(self)->str
+mysql.opentelemetry.sdk._configuration.Sampler.should_sample(self,parent_context:Optional['Context'],trace_id:int,name:str,kind:SpanKind=None,attributes:Attributes=None,links:Sequence['Link']=None,trace_state:'TraceState'=None)->'SamplingResult'
 mysql.opentelemetry.sdk.trace.sampling.Decision(enum.Enum)
 mysql.opentelemetry.sdk.trace.sampling.Decision.is_recording(self)
 mysql.opentelemetry.sdk.trace.sampling.Decision.is_sampled(self)
@@ -1425,6 +1561,9 @@ mysql.opentelemetry.sdk.trace.sampling._get_parent_trace_state(parent_context)->
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/trace/id_generator.py----------------------------------------
+mysql.opentelemetry.sdk._configuration.IdGenerator(abc.ABC)
+mysql.opentelemetry.sdk._configuration.IdGenerator.generate_span_id(self)->int
+mysql.opentelemetry.sdk._configuration.IdGenerator.generate_trace_id(self)->int
 mysql.opentelemetry.sdk.trace.IdGenerator(abc.ABC)
 mysql.opentelemetry.sdk.trace.IdGenerator.generate_span_id(self)->int
 mysql.opentelemetry.sdk.trace.IdGenerator.generate_trace_id(self)->int
@@ -1542,6 +1681,45 @@ mysql.opentelemetry.sdk.util.__init__.ns_to_iso_str(nanoseconds)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/sdk/util/instrumentation.py----------------------------------------
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.__eq__(self,value:object)->bool
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.__hash__(self)->int
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.__init__(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.__lt__(self,value:object)->bool
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.__repr__(self)->str
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.name(self)->str
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.schema_url(self)->Optional[str]
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk._logs._internal.InstrumentationScope.version(self)->Optional[str]
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.__eq__(self,value:object)->bool
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.__hash__(self)->int
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.__init__(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.__lt__(self,value:object)->bool
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.__repr__(self)->str
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.name(self)->str
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.schema_url(self)->Optional[str]
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.metrics._internal.InstrumentationScope.version(self)->Optional[str]
+mysql.opentelemetry.sdk.trace.InstrumentationInfo(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.__eq__(self,value)
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.__hash__(self)
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.__init__(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.__lt__(self,value)
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.__repr__(self)
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.name(self)->str
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.schema_url(self)->Optional[str]
+mysql.opentelemetry.sdk.trace.InstrumentationInfo.version(self)->Optional[str]
+mysql.opentelemetry.sdk.trace.InstrumentationScope(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk.trace.InstrumentationScope.__eq__(self,value:object)->bool
+mysql.opentelemetry.sdk.trace.InstrumentationScope.__hash__(self)->int
+mysql.opentelemetry.sdk.trace.InstrumentationScope.__init__(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
+mysql.opentelemetry.sdk.trace.InstrumentationScope.__lt__(self,value:object)->bool
+mysql.opentelemetry.sdk.trace.InstrumentationScope.__repr__(self)->str
+mysql.opentelemetry.sdk.trace.InstrumentationScope.name(self)->str
+mysql.opentelemetry.sdk.trace.InstrumentationScope.schema_url(self)->Optional[str]
+mysql.opentelemetry.sdk.trace.InstrumentationScope.to_json(self,indent=4)->str
+mysql.opentelemetry.sdk.trace.InstrumentationScope.version(self)->Optional[str]
 mysql.opentelemetry.sdk.util.instrumentation.InstrumentationInfo(self,name:str,version:Optional[str]=None,schema_url:Optional[str]=None)
 mysql.opentelemetry.sdk.util.instrumentation.InstrumentationInfo.__eq__(self,value)
 mysql.opentelemetry.sdk.util.instrumentation.InstrumentationInfo.__hash__(self)
@@ -1622,7 +1800,28 @@ A:mysql.opentelemetry.trace.span.match->re.compile(f'({_KEY_FORMAT})(=)({_VALUE_
 A:mysql.opentelemetry.trace.span.DEFAULT_TRACE_STATE->TraceState.get_default()
 A:mysql.opentelemetry.trace.span.INVALID_SPAN_CONTEXT->SpanContext(trace_id=INVALID_TRACE_ID, span_id=INVALID_SPAN_ID, is_remote=False, trace_flags=DEFAULT_TRACE_OPTIONS, trace_state=DEFAULT_TRACE_STATE)
 A:mysql.opentelemetry.trace.span.INVALID_SPAN->NonRecordingSpan(INVALID_SPAN_CONTEXT)
+mysql.opentelemetry._logs._internal.TraceFlags(int)
+mysql.opentelemetry._logs._internal.TraceFlags.get_default(cls)->'TraceFlags'
+mysql.opentelemetry._logs._internal.TraceFlags.sampled(self)->bool
+mysql.opentelemetry.sdk._logs._internal.TraceFlags(int)
+mysql.opentelemetry.sdk._logs._internal.TraceFlags.get_default(cls)->'TraceFlags'
+mysql.opentelemetry.sdk._logs._internal.TraceFlags.sampled(self)->bool
+mysql.opentelemetry.sdk._logs._internal.format_span_id(span_id:int)->str
+mysql.opentelemetry.sdk._logs._internal.format_trace_id(trace_id:int)->str
+mysql.opentelemetry.sdk.trace.SpanContext(cls,trace_id:int,span_id:int,is_remote:bool,trace_flags:typing.Optional['TraceFlags']=DEFAULT_TRACE_OPTIONS,trace_state:typing.Optional['TraceState']=DEFAULT_TRACE_STATE)
+mysql.opentelemetry.sdk.trace.SpanContext.__delattr__(self,*args:str)->None
+mysql.opentelemetry.sdk.trace.SpanContext.__getnewargs__(self)->typing.Tuple[int, int, bool, 'TraceFlags', 'TraceState']
+mysql.opentelemetry.sdk.trace.SpanContext.__new__(cls,trace_id:int,span_id:int,is_remote:bool,trace_flags:typing.Optional['TraceFlags']=DEFAULT_TRACE_OPTIONS,trace_state:typing.Optional['TraceState']=DEFAULT_TRACE_STATE)
+mysql.opentelemetry.sdk.trace.SpanContext.__repr__(self)->str
+mysql.opentelemetry.sdk.trace.SpanContext.__setattr__(self,*args:str)->None
+mysql.opentelemetry.sdk.trace.SpanContext.is_remote(self)->bool
+mysql.opentelemetry.sdk.trace.SpanContext.is_valid(self)->bool
+mysql.opentelemetry.sdk.trace.SpanContext.span_id(self)->int
+mysql.opentelemetry.sdk.trace.SpanContext.trace_flags(self)->'TraceFlags'
+mysql.opentelemetry.sdk.trace.SpanContext.trace_id(self)->int
+mysql.opentelemetry.sdk.trace.SpanContext.trace_state(self)->'TraceState'
 mysql.opentelemetry.trace.NonRecordingSpan(self,context:'SpanContext')
+mysql.opentelemetry.trace.NonRecordingSpan.__init__(self,context:'SpanContext')
 mysql.opentelemetry.trace.NonRecordingSpan.__repr__(self)->str
 mysql.opentelemetry.trace.NonRecordingSpan.add_event(self,name:str,attributes:types.Attributes=None,timestamp:typing.Optional[int]=None)->None
 mysql.opentelemetry.trace.NonRecordingSpan.end(self,end_time:typing.Optional[int]=None)->None
@@ -1648,6 +1847,7 @@ mysql.opentelemetry.trace.Span.update_name(self,name:str)->None
 mysql.opentelemetry.trace.SpanContext(cls,trace_id:int,span_id:int,is_remote:bool,trace_flags:typing.Optional['TraceFlags']=DEFAULT_TRACE_OPTIONS,trace_state:typing.Optional['TraceState']=DEFAULT_TRACE_STATE)
 mysql.opentelemetry.trace.SpanContext.__delattr__(self,*args:str)->None
 mysql.opentelemetry.trace.SpanContext.__getnewargs__(self)->typing.Tuple[int, int, bool, 'TraceFlags', 'TraceState']
+mysql.opentelemetry.trace.SpanContext.__new__(cls,trace_id:int,span_id:int,is_remote:bool,trace_flags:typing.Optional['TraceFlags']=DEFAULT_TRACE_OPTIONS,trace_state:typing.Optional['TraceState']=DEFAULT_TRACE_STATE)
 mysql.opentelemetry.trace.SpanContext.__repr__(self)->str
 mysql.opentelemetry.trace.SpanContext.__setattr__(self,*args:str)->None
 mysql.opentelemetry.trace.SpanContext.is_remote(self)->bool
@@ -1662,6 +1862,7 @@ mysql.opentelemetry.trace.TraceFlags.sampled(self)->bool
 mysql.opentelemetry.trace.TraceState(self,entries:typing.Optional[typing.Sequence[typing.Tuple[str,str]]]=None)
 mysql.opentelemetry.trace.TraceState.__contains__(self,item:object)->bool
 mysql.opentelemetry.trace.TraceState.__getitem__(self,key:str)->str
+mysql.opentelemetry.trace.TraceState.__init__(self,entries:typing.Optional[typing.Sequence[typing.Tuple[str,str]]]=None)
 mysql.opentelemetry.trace.TraceState.__iter__(self)->typing.Iterator[str]
 mysql.opentelemetry.trace.TraceState.__len__(self)->int
 mysql.opentelemetry.trace.TraceState.__repr__(self)->str
@@ -1676,6 +1877,18 @@ mysql.opentelemetry.trace.TraceState.update(self,key:str,value:str)->'TraceState
 mysql.opentelemetry.trace.TraceState.values(self)->typing.ValuesView[str]
 mysql.opentelemetry.trace.format_span_id(span_id:int)->str
 mysql.opentelemetry.trace.format_trace_id(trace_id:int)->str
+mysql.opentelemetry.trace.propagation.Span(abc.ABC)
+mysql.opentelemetry.trace.propagation.Span.__enter__(self)->'Span'
+mysql.opentelemetry.trace.propagation.Span.__exit__(self,exc_type:typing.Optional[typing.Type[BaseException]],exc_val:typing.Optional[BaseException],exc_tb:typing.Optional[python_types.TracebackType])->None
+mysql.opentelemetry.trace.propagation.Span.add_event(self,name:str,attributes:types.Attributes=None,timestamp:typing.Optional[int]=None)->None
+mysql.opentelemetry.trace.propagation.Span.end(self,end_time:typing.Optional[int]=None)->None
+mysql.opentelemetry.trace.propagation.Span.get_span_context(self)->'SpanContext'
+mysql.opentelemetry.trace.propagation.Span.is_recording(self)->bool
+mysql.opentelemetry.trace.propagation.Span.record_exception(self,exception:Exception,attributes:types.Attributes=None,timestamp:typing.Optional[int]=None,escaped:bool=False)->None
+mysql.opentelemetry.trace.propagation.Span.set_attribute(self,key:str,value:types.AttributeValue)->None
+mysql.opentelemetry.trace.propagation.Span.set_attributes(self,attributes:typing.Dict[str,types.AttributeValue])->None
+mysql.opentelemetry.trace.propagation.Span.set_status(self,status:typing.Union[Status,StatusCode],description:typing.Optional[str]=None)->None
+mysql.opentelemetry.trace.propagation.Span.update_name(self,name:str)->None
 mysql.opentelemetry.trace.span.NonRecordingSpan(self,context:'SpanContext')
 mysql.opentelemetry.trace.span.NonRecordingSpan.__init__(self,context:'SpanContext')
 mysql.opentelemetry.trace.span.NonRecordingSpan.__repr__(self)->str
@@ -1738,7 +1951,15 @@ mysql.opentelemetry.trace.span.format_trace_id(trace_id:int)->str
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/trace/status.py----------------------------------------
 A:mysql.opentelemetry.trace.status.logger->logging.getLogger(__name__)
+mysql.opentelemetry.sdk.trace.Status(self,status_code:StatusCode=StatusCode.UNSET,description:typing.Optional[str]=None)
+mysql.opentelemetry.sdk.trace.Status.__init__(self,status_code:StatusCode=StatusCode.UNSET,description:typing.Optional[str]=None)
+mysql.opentelemetry.sdk.trace.Status.description(self)->typing.Optional[str]
+mysql.opentelemetry.sdk.trace.Status.is_ok(self)->bool
+mysql.opentelemetry.sdk.trace.Status.is_unset(self)->bool
+mysql.opentelemetry.sdk.trace.Status.status_code(self)->StatusCode
+mysql.opentelemetry.sdk.trace.StatusCode(enum.Enum)
 mysql.opentelemetry.trace.Status(self,status_code:StatusCode=StatusCode.UNSET,description:typing.Optional[str]=None)
+mysql.opentelemetry.trace.Status.__init__(self,status_code:StatusCode=StatusCode.UNSET,description:typing.Optional[str]=None)
 mysql.opentelemetry.trace.Status.description(self)->typing.Optional[str]
 mysql.opentelemetry.trace.Status.is_ok(self)->bool
 mysql.opentelemetry.trace.Status.is_unset(self)->bool
@@ -1808,6 +2029,9 @@ A:mysql.opentelemetry.util._importlib_metadata.(path_to_otel, _)->os.path.split(
 A:mysql.opentelemetry.util._providers.Provider->TypeVar('Provider', 'TracerProvider', 'MeterProvider')
 A:mysql.opentelemetry.util._providers.logger->getLogger(__name__)
 A:mysql.opentelemetry.util._providers.provider_name->cast(str, environ.get(provider_environment_variable, f'default_{provider}'))
+mysql.opentelemetry._logs._internal._load_provider(provider_environment_variable:str,provider:str)->Provider
+mysql.opentelemetry.metrics._internal._load_provider(provider_environment_variable:str,provider:str)->Provider
+mysql.opentelemetry.trace._load_provider(provider_environment_variable:str,provider:str)->Provider
 mysql.opentelemetry.util._providers._load_provider(provider_environment_variable:str,provider:str)->Provider
 
 
@@ -1828,6 +2052,27 @@ mysql.opentelemetry.util.re.parse_headers(s:str)->Mapping[str, str]
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/opentelemetry/util/_once.py----------------------------------------
 A:mysql.opentelemetry.util._once.self._lock->Lock()
+mysql.opentelemetry._logs._internal.Once(self)
+mysql.opentelemetry._logs._internal.Once.__init__(self)
+mysql.opentelemetry._logs._internal.Once.do_once(self,func:Callable[[],None])->bool
+mysql.opentelemetry.metrics._internal.Once(self)
+mysql.opentelemetry.metrics._internal.Once.__init__(self)
+mysql.opentelemetry.metrics._internal.Once.do_once(self,func:Callable[[],None])->bool
+mysql.opentelemetry.sdk._logs._internal.export.Once(self)
+mysql.opentelemetry.sdk._logs._internal.export.Once.__init__(self)
+mysql.opentelemetry.sdk._logs._internal.export.Once.do_once(self,func:Callable[[],None])->bool
+mysql.opentelemetry.sdk.metrics._internal.Once(self)
+mysql.opentelemetry.sdk.metrics._internal.Once.__init__(self)
+mysql.opentelemetry.sdk.metrics._internal.Once.do_once(self,func:Callable[[],None])->bool
+mysql.opentelemetry.sdk.metrics._internal.export.Once(self)
+mysql.opentelemetry.sdk.metrics._internal.export.Once.__init__(self)
+mysql.opentelemetry.sdk.metrics._internal.export.Once.do_once(self,func:Callable[[],None])->bool
+mysql.opentelemetry.sdk.trace.export.Once(self)
+mysql.opentelemetry.sdk.trace.export.Once.__init__(self)
+mysql.opentelemetry.sdk.trace.export.Once.do_once(self,func:Callable[[],None])->bool
+mysql.opentelemetry.trace.Once(self)
+mysql.opentelemetry.trace.Once.__init__(self)
+mysql.opentelemetry.trace.Once.do_once(self,func:Callable[[],None])->bool
 mysql.opentelemetry.util._once.Once(self)
 mysql.opentelemetry.util._once.Once.__init__(self)
 mysql.opentelemetry.util._once.Once.do_once(self,func:Callable[[],None])->bool
@@ -2291,6 +2536,7 @@ A:mysql.connector.connection_cext.res->self._cmysql.reset_connection()
 A:mysql.connector.connection_cext.stat->self._cmysql.stat()
 A:mysql.connector.connection_cext.cur->self.cursor()
 mysql.connector.CMySQLConnection(self,**kwargs:Any)
+mysql.connector.CMySQLConnection.__init__(self,**kwargs:Any)
 mysql.connector.CMySQLConnection._add_default_conn_attrs(self)->None
 mysql.connector.CMySQLConnection._do_handshake(self)->None
 mysql.connector.CMySQLConnection._open_connection(self)->None
@@ -2411,6 +2657,7 @@ A:mysql.connector.errors.sqlstate->sqlstate.decode('utf8').decode('utf8')
 mysql.connector.DataError(DatabaseError)
 mysql.connector.DatabaseError(Error)
 mysql.connector.Error(self,msg:Optional[str]=None,errno:Optional[int]=None,values:Optional[Tuple[Union[int,str],...]]=None,sqlstate:Optional[str]=None)
+mysql.connector.Error.__init__(self,msg:Optional[str]=None,errno:Optional[int]=None,values:Optional[Tuple[Union[int,str],...]]=None,sqlstate:Optional[str]=None)
 mysql.connector.Error.__str__(self)->str
 mysql.connector.IntegrityError(DatabaseError)
 mysql.connector.InterfaceError(Error)
@@ -2437,6 +2684,8 @@ mysql.connector.errors.Warning(Exception)
 mysql.connector.errors.custom_error_exception(error:Optional[Union[int,Dict[int,Optional[ErrorClassTypes]]]]=None,exception:Optional[ErrorClassTypes]=None)->Mapping[int, Optional[ErrorClassTypes]]
 mysql.connector.errors.get_exception(packet:bytes)->ErrorTypes
 mysql.connector.errors.get_mysql_exception(errno:int,msg:Optional[str]=None,sqlstate:Optional[str]=None,warning:Optional[bool]=False)->ErrorTypes
+mysql.connector.plugins.NotSupportedError(DatabaseError)
+mysql.connector.plugins.ProgrammingError(DatabaseError)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql8.2.0/lib/python3.9/site-packages/mysql/connector/types.py----------------------------------------
@@ -2447,6 +2696,7 @@ A:mysql.connector.constants.(charset, collation)->self.get_info(name)
 A:mysql.connector.constants.info->self.get_default_collation(charset)
 A:mysql.connector.constants._->self.get_default_collation(charset)
 mysql.connector.CharacterSet(self)
+mysql.connector.CharacterSet.__init__(self)
 mysql.connector.CharacterSet.get_charset_info(self,charset:Optional[Union[int,str]]=None,collation:Optional[str]=None)->Tuple[int, str, str]
 mysql.connector.CharacterSet.get_default_collation(self,charset:Union[int,str])->Tuple[str, str, int]
 mysql.connector.CharacterSet.get_desc(self,name:int)->str
@@ -2462,8 +2712,6 @@ mysql.connector.FieldType.get_number_types(cls)->List[int]
 mysql.connector.FieldType.get_string_types(cls)->List[int]
 mysql.connector.FieldType.get_timestamp_types(cls)->List[int]
 mysql.connector.RefreshOption(_Constants,metaclass=RefreshOptionMeta)
-mysql.connector.RefreshOptionMeta(ABCMeta)
-mysql.connector.RefreshOptionMeta.SLAVE(self)->int
 mysql.connector.constants.CharacterSet(self)
 mysql.connector.constants.CharacterSet.__init__(self)
 mysql.connector.constants.CharacterSet.get_charset_info(self,charset:Optional[Union[int,str]]=None,collation:Optional[str]=None)->Tuple[int, str, str]
@@ -2715,6 +2963,7 @@ A:mysql.connector.connection.columns[i]->self._protocol.parse_column(self._socke
 A:mysql.connector.connection.parameters->list(parameters)
 A:mysql.connector.connection.execute_packet->self._protocol.make_stmt_execute(statement_id, data, tuple(parameters), flags, long_data_used, self.charset, converter_str_fallback=self._converter_str_fallback)
 mysql.connector.MySQLConnection(self,**kwargs:Any)
+mysql.connector.MySQLConnection.__init__(self,**kwargs:Any)
 mysql.connector.MySQLConnection._add_default_conn_attrs(self)->None
 mysql.connector.MySQLConnection._do_auth(self,username:Optional[str]=None,password:Optional[str]=None,database:Optional[str]=None,client_flags:int=0,charset:int=45,ssl_options:Optional[Dict[str,Optional[Union[str,bool,List[str]]]]]=None,conn_attrs:Optional[ConnAttrsType]=None)->bool
 mysql.connector.MySQLConnection._do_handshake(self)->None

@@ -223,6 +223,7 @@ A:aiohttp.streams.self._waiter->self._loop.create_future()
 A:aiohttp.streams.(data, size)->self._buffer.popleft()
 aiohttp.DataQueue(self,loop:asyncio.AbstractEventLoop)
 aiohttp.DataQueue.__aiter__(self)->AsyncStreamIterator[_T]
+aiohttp.DataQueue.__init__(self,loop:asyncio.AbstractEventLoop)
 aiohttp.DataQueue.__len__(self)->int
 aiohttp.DataQueue.at_eof(self)->bool
 aiohttp.DataQueue.exception(self)->Optional[BaseException]
@@ -233,9 +234,11 @@ aiohttp.DataQueue.read(self)->_T
 aiohttp.DataQueue.set_exception(self,exc:BaseException)->None
 aiohttp.EofStream(Exception)
 aiohttp.FlowControlDataQueue(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,loop:asyncio.AbstractEventLoop)
+aiohttp.FlowControlDataQueue.__init__(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,loop:asyncio.AbstractEventLoop)
 aiohttp.FlowControlDataQueue.feed_data(self,data:_T,size:int=0)->None
 aiohttp.FlowControlDataQueue.read(self)->_T
 aiohttp.StreamReader(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,timer:Optional[BaseTimerContext]=None,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.StreamReader.__init__(self,protocol:BaseProtocol,*,limit:int=DEFAULT_LIMIT,timer:Optional[BaseTimerContext]=None,loop:Optional[asyncio.AbstractEventLoop]=None)
 aiohttp.StreamReader.__repr__(self)->str
 aiohttp.StreamReader._read_nowait(self,n:int)->bytes
 aiohttp.StreamReader._read_nowait_chunk(self,n:int)->bytes
@@ -440,6 +443,7 @@ aiohttp.BadContentDispositionParam(RuntimeWarning)
 aiohttp.BodyPartReader(self,boundary:bytes,headers:Mapping[str,Optional[str]],content:StreamReader)
 aiohttp.BodyPartReader.__aiter__(self)->'BodyPartReader'
 aiohttp.BodyPartReader.__anext__(self)->Any
+aiohttp.BodyPartReader.__init__(self,boundary:bytes,headers:Mapping[str,Optional[str]],content:StreamReader)
 aiohttp.BodyPartReader._decode_content(self,data:bytes)->bytes
 aiohttp.BodyPartReader._decode_content_transfer(self,data:bytes)->bytes
 aiohttp.BodyPartReader._read_chunk_from_length(self,size:int)->bytes
@@ -457,11 +461,10 @@ aiohttp.BodyPartReader.read_chunk(self,size:int=chunk_size)->bytes
 aiohttp.BodyPartReader.readline(self)->bytes
 aiohttp.BodyPartReader.release(self)->None
 aiohttp.BodyPartReader.text(self,*,encoding:Optional[str]=None)->str
-aiohttp.BodyPartReaderPayload(self,value:BodyPartReader,*args:Any,**kwargs:Any)
-aiohttp.BodyPartReaderPayload.write(self,writer:Any)->None
 aiohttp.MultipartReader(self,headers:Mapping[str,str],content:StreamReader)
 aiohttp.MultipartReader.__aiter__(self)->'MultipartReader'
 aiohttp.MultipartReader.__anext__(self)->Any
+aiohttp.MultipartReader.__init__(self,headers:Mapping[str,str],content:StreamReader)
 aiohttp.MultipartReader._get_boundary(self)->str
 aiohttp.MultipartReader._get_part_reader(self,headers:'CIMultiDictProxy[str]')->Any
 aiohttp.MultipartReader._maybe_release_last_part(self)->None
@@ -477,6 +480,7 @@ aiohttp.MultipartReader.release(self)->None
 aiohttp.MultipartWriter(self,subtype:str='mixed',boundary:Optional[str]=None)
 aiohttp.MultipartWriter.__enter__(self)->'MultipartWriter'
 aiohttp.MultipartWriter.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+aiohttp.MultipartWriter.__init__(self,subtype:str='mixed',boundary:Optional[str]=None)
 aiohttp.MultipartWriter.__iter__(self)->Iterator[_Part]
 aiohttp.MultipartWriter.__len__(self)->int
 aiohttp.MultipartWriter._boundary_value(self)->str
@@ -574,6 +578,7 @@ aiohttp.payload_streamer._stream_wrapper.__init__(self,coro:Callable[...,Awaitab
 aiohttp.payload_streamer.streamer(self,coro:Callable[...,Awaitable[None]])
 aiohttp.payload_streamer.streamer.__init__(self,coro:Callable[...,Awaitable[None]])
 aiohttp.streamer(self,coro:Callable[...,Awaitable[None]])
+aiohttp.streamer.__init__(self,coro:Callable[...,Awaitable[None]])
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/aiohttp3.5.2/lib/python3.9/site-packages/aiohttp/hdrs.py----------------------------------------
@@ -757,6 +762,7 @@ A:aiohttp.helpers.content_length->self._headers.get(hdrs.CONTENT_LENGTH)
 A:aiohttp.helpers.self._maps->tuple(maps)
 A:aiohttp.helpers.content->', '.join(map(repr, self._maps))
 aiohttp.BasicAuth(cls,login:str,password:str='',encoding:str='latin1')
+aiohttp.BasicAuth.__new__(cls,login:str,password:str='',encoding:str='latin1')
 aiohttp.BasicAuth.decode(cls,auth_header:str,encoding:str='latin1')->'BasicAuth'
 aiohttp.BasicAuth.encode(self)->str
 aiohttp.BasicAuth.from_url(cls,url:URL,*,encoding:str='latin1')->Optional['BasicAuth']
@@ -764,6 +770,7 @@ aiohttp.ChainMapProxy(self,maps:Iterable[Mapping[str,Any]])
 aiohttp.ChainMapProxy.__bool__(self)->bool
 aiohttp.ChainMapProxy.__contains__(self,key:object)->bool
 aiohttp.ChainMapProxy.__getitem__(self,key:str)->Any
+aiohttp.ChainMapProxy.__init__(self,maps:Iterable[Mapping[str,Any]])
 aiohttp.ChainMapProxy.__init_subclass__(cls)->None
 aiohttp.ChainMapProxy.__iter__(self)->Iterator[str]
 aiohttp.ChainMapProxy.__len__(self)->int
@@ -932,6 +939,7 @@ aiohttp.ClientSession.__aexit__(self,exc_type:Optional[Type[BaseException]],exc_
 aiohttp.ClientSession.__del__(self,_warnings:Any=warnings)->None
 aiohttp.ClientSession.__enter__(self)->None
 aiohttp.ClientSession.__exit__(self,exc_type:Optional[Type[BaseException]],exc_val:Optional[BaseException],exc_tb:Optional[TracebackType])->None
+aiohttp.ClientSession.__init__(self,*,connector:Optional[BaseConnector]=None,loop:Optional[asyncio.AbstractEventLoop]=None,cookies:Optional[LooseCookies]=None,headers:Optional[LooseHeaders]=None,skip_auto_headers:Optional[Iterable[str]]=None,auth:Optional[BasicAuth]=None,json_serialize:JSONEncoder=json.dumps,request_class:Type[ClientRequest]=ClientRequest,response_class:Type[ClientResponse]=ClientResponse,ws_response_class:Type[ClientWebSocketResponse]=ClientWebSocketResponse,version:HttpVersion=http.HttpVersion11,cookie_jar:Optional[AbstractCookieJar]=None,connector_owner:bool=True,raise_for_status:bool=False,read_timeout:Union[float,object]=sentinel,conn_timeout:Optional[float]=None,timeout:Union[object,ClientTimeout]=sentinel,auto_decompress:bool=True,trust_env:bool=False,requote_redirect_url:bool=True,trace_configs:Optional[List[TraceConfig]]=None)
 aiohttp.ClientSession.__init_subclass__(cls:Type['ClientSession'])->None
 aiohttp.ClientSession._prepare_headers(self,headers:Optional[LooseHeaders])->'CIMultiDict[str]'
 aiohttp.ClientSession._request(self,method:str,str_or_url:StrOrURL,*,params:Optional[Mapping[str,str]]=None,data:Any=None,json:Any=None,cookies:Optional[LooseCookies]=None,headers:LooseHeaders=None,skip_auto_headers:Optional[Iterable[str]]=None,auth:Optional[BasicAuth]=None,allow_redirects:bool=True,max_redirects:int=10,compress:Optional[str]=None,chunked:Optional[bool]=None,expect100:bool=False,raise_for_status:Optional[bool]=None,read_until_eof:bool=True,proxy:Optional[StrOrURL]=None,proxy_auth:Optional[BasicAuth]=None,timeout:Union[ClientTimeout,object]=sentinel,verify_ssl:Optional[bool]=None,fingerprint:Optional[bytes]=None,ssl_context:Optional[SSLContext]=None,ssl:Optional[Union[SSLContext,bool,Fingerprint]]=None,proxy_headers:Optional[LooseHeaders]=None,trace_request_ctx:Optional[SimpleNamespace]=None)->ClientResponse
@@ -1147,6 +1155,7 @@ A:aiohttp.cookiejar.month_match->cls.DATE_MONTH_RE.match(token)
 A:aiohttp.cookiejar.year_match->cls.DATE_YEAR_RE.match(token)
 A:aiohttp.cookiejar.year->int(year_match.group())
 aiohttp.CookieJar(self,*,unsafe:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.CookieJar.__init__(self,*,unsafe:bool=False,loop:Optional[asyncio.AbstractEventLoop]=None)
 aiohttp.CookieJar.__iter__(self)->'Iterator[Morsel[str]]'
 aiohttp.CookieJar.__len__(self)->int
 aiohttp.CookieJar._do_expiration(self)->None
@@ -1160,6 +1169,7 @@ aiohttp.CookieJar.load(self,file_path:PathLike)->None
 aiohttp.CookieJar.save(self,file_path:PathLike)->None
 aiohttp.CookieJar.update_cookies(self,cookies:LooseCookies,response_url:URL=URL())->None
 aiohttp.DummyCookieJar(self,*,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.DummyCookieJar.__init__(self,*,loop:Optional[asyncio.AbstractEventLoop]=None)
 aiohttp.DummyCookieJar.__iter__(self)->'Iterator[Morsel[str]]'
 aiohttp.DummyCookieJar.__len__(self)->int
 aiohttp.DummyCookieJar.clear(self)->None
@@ -1273,6 +1283,7 @@ A:aiohttp.worker.ctx->ssl.SSLContext(cfg.ssl_version)
 aiohttp.GunicornUVLoopWebWorker(GunicornWebWorker)
 aiohttp.GunicornUVLoopWebWorker.init_process(self)->None
 aiohttp.GunicornWebWorker(self,*args:Any,**kw:Any)
+aiohttp.GunicornWebWorker.__init__(self,*args:Any,**kw:Any)
 aiohttp.GunicornWebWorker._create_ssl_context(cfg:Any)->'SSLContext'
 aiohttp.GunicornWebWorker._get_valid_log_format(self,source_format:str)->str
 aiohttp.GunicornWebWorker._notify_waiter_done(self,waiter:'asyncio.Future[bool]'=None)->None
@@ -1514,6 +1525,7 @@ A:aiohttp.tracing.response->attr.ib(type=ClientResponse)
 A:aiohttp.tracing.exception->attr.ib(type=BaseException)
 A:aiohttp.tracing.host->attr.ib(type=str)
 aiohttp.TraceConfig(self,trace_config_ctx_factory:Type[SimpleNamespace]=SimpleNamespace)
+aiohttp.TraceConfig.__init__(self,trace_config_ctx_factory:Type[SimpleNamespace]=SimpleNamespace)
 aiohttp.TraceConfig.freeze(self)->None
 aiohttp.TraceConfig.on_connection_create_end(self)->_Signal
 aiohttp.TraceConfig.on_connection_create_start(self)->_Signal
@@ -1865,6 +1877,7 @@ A:aiohttp.formdata.rec->list(fields).pop(0)
 A:aiohttp.formdata.k->guess_filename(rec, 'unknown')
 A:aiohttp.formdata.part->payload.get_payload(value, headers=headers, encoding=self._charset)
 aiohttp.FormData(self,fields:Iterable[Any]=(),quote_fields:bool=True,charset:Optional[str]=None)
+aiohttp.FormData.__init__(self,fields:Iterable[Any]=(),quote_fields:bool=True,charset:Optional[str]=None)
 aiohttp.FormData._gen_form_data(self)->multipart.MultipartWriter
 aiohttp.FormData._gen_form_urlencoded(self)->payload.BytesPayload
 aiohttp.FormData.add_field(self,name:str,value:Any,*,content_type:Optional[str]=None,filename:Optional[str]=None,content_transfer_encoding:Optional[str]=None)->None
@@ -2150,10 +2163,12 @@ aiohttp.test_utils.unused_port()->int
 A:aiohttp.resolver.self._loop->get_running_loop(loop)
 A:aiohttp.resolver.self._resolver->aiodns.DNSResolver(*args, loop=loop, **kwargs)
 aiohttp.AsyncResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None,*args:Any,**kwargs:Any)
+aiohttp.AsyncResolver.__init__(self,loop:Optional[asyncio.AbstractEventLoop]=None,*args:Any,**kwargs:Any)
 aiohttp.AsyncResolver._resolve_with_query(self,host:str,port:int=0,family:int=socket.AF_INET)->List[Dict[str, Any]]
 aiohttp.AsyncResolver.close(self)->None
 aiohttp.AsyncResolver.resolve(self,host:str,port:int=0,family:int=socket.AF_INET)->List[Dict[str, Any]]
 aiohttp.ThreadedResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None)
+aiohttp.ThreadedResolver.__init__(self,loop:Optional[asyncio.AbstractEventLoop]=None)
 aiohttp.ThreadedResolver.close(self)->None
 aiohttp.ThreadedResolver.resolve(self,host:str,port:int=0,family:int=socket.AF_INET)->List[Dict[str, Any]]
 aiohttp.resolver.AsyncResolver(self,loop:Optional[asyncio.AbstractEventLoop]=None,*args:Any,**kwargs:Any)
@@ -2361,6 +2376,7 @@ aiohttp.web_fileresponse.SendfileStreamWriter.write_eof(self,chunk:bytes=b'')->N
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/aiohttp3.5.2/lib/python3.9/site-packages/aiohttp/signals.py----------------------------------------
 aiohttp.Signal(self,owner)
+aiohttp.Signal.__init__(self,owner)
 aiohttp.Signal.__repr__(self)
 aiohttp.Signal.send(self,*args,**kwargs)
 aiohttp.signals.Signal(self,owner)
@@ -2418,17 +2434,22 @@ A:aiohttp.payload.end->self._value.seek(0, os.SEEK_END)
 A:aiohttp.payload.self._iter->value.__aiter__()
 A:aiohttp.payload.PAYLOAD_REGISTRY->PayloadRegistry()
 aiohttp.AsyncIterablePayload(self,value:_AsyncIterable,*args:Any,**kwargs:Any)
+aiohttp.AsyncIterablePayload.__init__(self,value:_AsyncIterable,*args:Any,**kwargs:Any)
 aiohttp.AsyncIterablePayload.write(self,writer:AbstractStreamWriter)->None
 aiohttp.BufferedReaderPayload(IOBasePayload)
 aiohttp.BufferedReaderPayload.size(self)->Optional[int]
 aiohttp.BytesIOPayload(IOBasePayload)
 aiohttp.BytesIOPayload.size(self)->int
 aiohttp.BytesPayload(self,value:ByteString,*args:Any,**kwargs:Any)
+aiohttp.BytesPayload.__init__(self,value:ByteString,*args:Any,**kwargs:Any)
 aiohttp.BytesPayload.write(self,writer:AbstractStreamWriter)->None
 aiohttp.IOBasePayload(self,value:IO[Any],disposition:str='attachment',*args:Any,**kwargs:Any)
+aiohttp.IOBasePayload.__init__(self,value:IO[Any],disposition:str='attachment',*args:Any,**kwargs:Any)
 aiohttp.IOBasePayload.write(self,writer:AbstractStreamWriter)->None
 aiohttp.JsonPayload(self,value:Any,encoding:str='utf-8',content_type:str='application/json',dumps:JSONEncoder=json.dumps,*args:Any,**kwargs:Any)
+aiohttp.JsonPayload.__init__(self,value:Any,encoding:str='utf-8',content_type:str='application/json',dumps:JSONEncoder=json.dumps,*args:Any,**kwargs:Any)
 aiohttp.Payload(self,value:Any,headers:Optional[Union[_CIMultiDict,Dict[str,str],Iterable[Tuple[str,str]]]]=None,content_type:Optional[str]=sentinel,filename:Optional[str]=None,encoding:Optional[str]=None,**kwargs:Any)
+aiohttp.Payload.__init__(self,value:Any,headers:Optional[Union[_CIMultiDict,Dict[str,str],Iterable[Tuple[str,str]]]]=None,content_type:Optional[str]=sentinel,filename:Optional[str]=None,encoding:Optional[str]=None,**kwargs:Any)
 aiohttp.Payload._binary_headers(self)->bytes
 aiohttp.Payload.content_type(self)->str
 aiohttp.Payload.encoding(self)->Optional[str]
@@ -2437,12 +2458,12 @@ aiohttp.Payload.headers(self)->_CIMultiDict
 aiohttp.Payload.set_content_disposition(self,disptype:str,quote_fields:bool=True,**params:Any)->None
 aiohttp.Payload.size(self)->Optional[int]
 aiohttp.Payload.write(self,writer:AbstractStreamWriter)->None
-aiohttp.PayloadRegistry(self)
-aiohttp.PayloadRegistry.get(self,data:Any,*args:Any,_CHAIN:Any=chain,**kwargs:Any)->'Payload'
-aiohttp.PayloadRegistry.register(self,factory:Type['Payload'],type:Any,*,order:Order=Order.normal)->None
 aiohttp.StringIOPayload(self,value:IO[str],*args:Any,**kwargs:Any)
+aiohttp.StringIOPayload.__init__(self,value:IO[str],*args:Any,**kwargs:Any)
 aiohttp.StringPayload(self,value:Text,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
+aiohttp.StringPayload.__init__(self,value:Text,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
 aiohttp.TextIOPayload(self,value:TextIO,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
+aiohttp.TextIOPayload.__init__(self,value:TextIO,*args:Any,encoding:Optional[str]=None,content_type:Optional[str]=None,**kwargs:Any)
 aiohttp.TextIOPayload.size(self)->Optional[int]
 aiohttp.TextIOPayload.write(self,writer:AbstractStreamWriter)->None
 aiohttp.get_payload(data:Any,*args:Any,**kwargs:Any)->'Payload'
@@ -2492,6 +2513,7 @@ aiohttp.payload.payload_type(self,type:Any,*,order:Order=Order.normal)
 aiohttp.payload.payload_type.__init__(self,type:Any,*,order:Order=Order.normal)
 aiohttp.payload.register_payload(factory:Type['Payload'],type:Any,*,order:Order=Order.normal)->None
 aiohttp.payload_type(self,type:Any,*,order:Order=Order.normal)
+aiohttp.payload_type.__init__(self,type:Any,*,order:Order=Order.normal)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/aiohttp3.5.2/lib/python3.9/site-packages/aiohttp/locks.py----------------------------------------

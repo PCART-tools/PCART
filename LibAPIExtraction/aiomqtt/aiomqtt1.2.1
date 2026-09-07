@@ -30,6 +30,7 @@ A:aiomqtt.client.fileno->sock.fileno()
 aiomqtt.Client(self,hostname:str,port:int=1883,*,username:str|None=None,password:str|None=None,logger:logging.Logger|None=None,client_id:str|None=None,tls_context:ssl.SSLContext|None=None,tls_params:TLSParameters|None=None,tls_insecure:bool|None=None,proxy:ProxySettings|None=None,protocol:ProtocolVersion|None=None,will:Will|None=None,clean_session:bool|None=None,transport:str='tcp',timeout:float|None=None,keepalive:int=60,bind_address:str='',bind_port:int=0,clean_start:int=mqtt.MQTT_CLEAN_START_FIRST_ONLY,properties:Properties|None=None,message_retry_set:int=20,socket_options:Iterable[SocketOption]|None=None,max_concurrent_outgoing_calls:int|None=None,websocket_path:str|None=None,websocket_headers:WebSocketHeaders|None=None,max_inflight_messages:int|None=None,max_queued_messages:int|None=None)
 aiomqtt.Client.__aenter__(self)->Client
 aiomqtt.Client.__aexit__(self,exc_type:type[BaseException]|None,exc:BaseException|None,tb:TracebackType|None)->None
+aiomqtt.Client.__init__(self,hostname:str,port:int=1883,*,username:str|None=None,password:str|None=None,logger:logging.Logger|None=None,client_id:str|None=None,tls_context:ssl.SSLContext|None=None,tls_params:TLSParameters|None=None,tls_insecure:bool|None=None,proxy:ProxySettings|None=None,protocol:ProtocolVersion|None=None,will:Will|None=None,clean_session:bool|None=None,transport:str='tcp',timeout:float|None=None,keepalive:int=60,bind_address:str='',bind_port:int=0,clean_start:int=mqtt.MQTT_CLEAN_START_FIRST_ONLY,properties:Properties|None=None,message_retry_set:int=20,socket_options:Iterable[SocketOption]|None=None,max_concurrent_outgoing_calls:int|None=None,websocket_path:str|None=None,websocket_headers:WebSocketHeaders|None=None,max_inflight_messages:int|None=None,max_queued_messages:int|None=None)
 aiomqtt.Client._callback_and_generator(self,*,queue_class:type[asyncio.Queue[Message]]=asyncio.Queue,queue_maxsize:int=0)->tuple[Callable[[Message], None], AsyncGenerator[Message, None]]
 aiomqtt.Client._deprecated_callback_and_generator(self,*,log_context:str,queue_maxsize:int=0)->tuple[Callable[[mqtt.Client, Any, mqtt.MQTTMessage], None], AsyncGenerator[mqtt.MQTTMessage, None]]
 aiomqtt.Client._early_out_on_disconnected(self)->bool
@@ -57,10 +58,12 @@ aiomqtt.Client.subscribe(self,/,topic:SubscribeTopic,qos:int=0,options:mqtt.Subs
 aiomqtt.Client.unfiltered_messages(self,*,queue_maxsize:int=0)->AsyncGenerator[AsyncGenerator[mqtt.MQTTMessage, None], None]
 aiomqtt.Client.unsubscribe(self,/,topic:str|list[str],properties:Properties|None=None,*args:Any,timeout:float|None=None,**kwargs:Any)->None
 aiomqtt.Message(self,topic:TopicLike,payload:PayloadType,qos:int,retain:bool,mid:int,properties:Properties|None)
+aiomqtt.Message.__init__(self,topic:TopicLike,payload:PayloadType,qos:int,retain:bool,mid:int,properties:Properties|None)
 aiomqtt.Message.__lt__(self,other:Message)->bool
 aiomqtt.Message._from_paho_message(cls,message:mqtt.MQTTMessage)->Message
 aiomqtt.ProtocolVersion(IntEnum)
 aiomqtt.ProxySettings(self,*,proxy_type:int,proxy_addr:str,proxy_rdns:bool|None=True,proxy_username:str|None=None,proxy_password:str|None=None)
+aiomqtt.ProxySettings.__init__(self,*,proxy_type:int,proxy_addr:str,proxy_rdns:bool|None=True,proxy_username:str|None=None,proxy_password:str|None=None)
 aiomqtt.TLSParameters
 aiomqtt.Topic(Wildcard)
 aiomqtt.Topic.__post_init__(self)->None
@@ -124,6 +127,7 @@ A:aiomqtt.types.T->TypeVar('T')
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/aiomqtt1.2.1/lib/python3.9/site-packages/aiomqtt/error.py----------------------------------------
 aiomqtt.MqttCodeError(self,rc:int|mqtt.ReasonCodes|None,*args:Any)
+aiomqtt.MqttCodeError.__init__(self,rc:int|mqtt.ReasonCodes|None,*args:Any)
 aiomqtt.MqttCodeError.__str__(self)->str
 aiomqtt.MqttError(Exception)
 aiomqtt.error.MqttCodeError(self,rc:int|mqtt.ReasonCodes|None,*args:Any)

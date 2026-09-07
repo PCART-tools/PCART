@@ -1559,7 +1559,6 @@ jax.experimental.jax2tf.jax2tf._pjit(*args:TfVal,jaxpr:core.ClosedJaxpr,in_shard
 jax.experimental.jax2tf.jax2tf._pjit_sharding_constraint(arg:TfVal,*,sharding:sharding.NamedSharding,resource_env:maps.ResourceEnv,_in_avals:Sequence[core.ShapedArray],_out_aval:core.ShapedArray,**kwargs)->TfVal
 jax.experimental.jax2tf.jax2tf._population_count(x)
 jax.experimental.jax2tf.jax2tf._pow(x:TfVal,y:TfVal,*,_in_avals,_out_aval)->TfVal
-jax.experimental.jax2tf.jax2tf._precision__config_module_proto(precision:Optional[tuple[PrecisionType,PrecisionType]])
 jax.experimental.jax2tf.jax2tf._precision_config_proto(precision:Optional[tuple[PrecisionType,PrecisionType]])
 jax.experimental.jax2tf.jax2tf._qr(operand,full_matrices)
 jax.experimental.jax2tf.jax2tf._random_bits_impl(keys:TfVal,*,bit_width,shape,_in_avals,_out_aval)
@@ -3112,6 +3111,7 @@ A:jax.experimental.sparse.bcsr.obj->object.__new__(cls)
 A:jax.experimental.sparse.bcsr.(batch_shape, sparse_shape, dense_shape)->split_list(shape, [n_batch, n_sparse])
 A:jax.experimental.sparse.bcsr.coo_indices->_bcsr_to_bcoo(self.indices, self.indptr, shape=self.shape)
 jax.experimental.sparse.BCSR(self,args:tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
+jax.experimental.sparse.BCSR.__init__(self,args:tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.BCSR.__repr__(self)
 jax.experimental.sparse.BCSR._empty(cls,shape,*,dtype=None,index_dtype='int32',n_dense=0,n_batch=0,nse=0)
 jax.experimental.sparse.BCSR._sparse_shape(self)
@@ -3124,7 +3124,6 @@ jax.experimental.sparse.BCSR.todense(self)
 jax.experimental.sparse.BCSR.transpose(self,*args,**kwargs)
 jax.experimental.sparse.BCSR.tree_flatten(self)
 jax.experimental.sparse.BCSR.tree_unflatten(cls,aux_data,children)
-jax.experimental.sparse.BCSRProperties(NamedTuple)
 jax.experimental.sparse.bcsr.BCSR(self,args:tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.bcsr.BCSR.__init__(self,args:tuple[Array,Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.bcsr.BCSR.__repr__(self)
@@ -3226,6 +3225,7 @@ A:jax.experimental.sparse.csr.csr_matmat_p->jax._src.core.Primitive('csr_matmat'
 A:jax.experimental.sparse.csr._csr_matmat_lowering->jax.interpreters.mlir.lower_fun(_csr_matmat_impl, multiple_results=False)
 A:jax.experimental.sparse.csr.B->jax.numpy.asarray(B)
 jax.experimental.sparse.CSC(self,args,*,shape)
+jax.experimental.sparse.CSC.__init__(self,args,*,shape)
 jax.experimental.sparse.CSC.__matmul__(self,other)
 jax.experimental.sparse.CSC._empty(cls,shape,*,dtype=None,index_dtype='int32')
 jax.experimental.sparse.CSC._eye(cls,N,M,k,*,dtype=None,index_dtype='int32')
@@ -3235,6 +3235,7 @@ jax.experimental.sparse.CSC.transpose(self,axes=None)
 jax.experimental.sparse.CSC.tree_flatten(self)
 jax.experimental.sparse.CSC.tree_unflatten(cls,aux_data,children)
 jax.experimental.sparse.CSR(self,args,*,shape)
+jax.experimental.sparse.CSR.__init__(self,args,*,shape)
 jax.experimental.sparse.CSR.__matmul__(self,other)
 jax.experimental.sparse.CSR._empty(cls,shape,*,dtype=None,index_dtype='int32')
 jax.experimental.sparse.CSR._eye(cls,N,M,k,*,dtype=None,index_dtype='int32')
@@ -3337,6 +3338,7 @@ A:jax.experimental.sparse.coo.coo_matmat_p->jax._src.core.Primitive('coo_matmat'
 A:jax.experimental.sparse.coo.B->jax.numpy.asarray(B)
 A:jax.experimental.sparse.coo._coo_matmat_lowering->jax.interpreters.mlir.lower_fun(_coo_matmat_impl, multiple_results=False)
 jax.experimental.sparse.COO(self,args:tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
+jax.experimental.sparse.COO.__init__(self,args:tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
 jax.experimental.sparse.COO.__matmul__(self,other:ArrayLike)->Array
 jax.experimental.sparse.COO._empty(cls,shape:Sequence[int],*,dtype:DTypeLike|None=None,index_dtype:DTypeLike='int32')->COO
 jax.experimental.sparse.COO._eye(cls,N:int,M:int,k:int,*,dtype:DTypeLike|None=None,index_dtype:DTypeLike='int32')->COO
@@ -3346,7 +3348,6 @@ jax.experimental.sparse.COO.todense(self)->Array
 jax.experimental.sparse.COO.transpose(self,axes:tuple[int,...]|None=None)->COO
 jax.experimental.sparse.COO.tree_flatten(self)->tuple[tuple[Array, Array, Array], dict[str, Any]]
 jax.experimental.sparse.COO.tree_unflatten(cls,aux_data,children)
-jax.experimental.sparse.COOInfo(NamedTuple)
 jax.experimental.sparse.coo.COO(self,args:tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
 jax.experimental.sparse.coo.COO.__init__(self,args:tuple[Array,Array,Array],*,shape:Shape,rows_sorted:bool=False,cols_sorted:bool=False)
 jax.experimental.sparse.coo.COO.__matmul__(self,other:ArrayLike)->Array
@@ -3635,6 +3636,7 @@ A:jax.experimental.sparse.bcoo.mat_T->bcoo_transpose(self, permutation=perm)
 A:jax.experimental.sparse.bcoo.shape_T->tuple((self.shape[i] for i in perm))
 A:jax.experimental.sparse.bcoo.obj->object.__new__(cls)
 jax.experimental.sparse.BCOO(self,args:tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
+jax.experimental.sparse.BCOO.__init__(self,args:tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.BCOO.__repr__(self)
 jax.experimental.sparse.BCOO._empty(cls,shape:Shape,*,dtype:DTypeLike|None=None,index_dtype:DTypeLike='int32',n_dense:int=0,n_batch:int=0,nse:int=0)->BCOO
 jax.experimental.sparse.BCOO._eye(cls,N:int,M:int,k:int,*,dtype:DTypeLike|None=None,index_dtype:DTypeLike='int32',n_batch:int=0,n_dense:int=0)->BCOO
@@ -3650,7 +3652,6 @@ jax.experimental.sparse.BCOO.transpose(self,axes:Sequence[int]|None=None)->BCOO
 jax.experimental.sparse.BCOO.tree_flatten(self)
 jax.experimental.sparse.BCOO.tree_unflatten(cls,aux_data,children)
 jax.experimental.sparse.BCOO.update_layout(self,*,n_batch:int|None=None,n_dense:int|None=None,on_inefficient:str='error')->BCOO
-jax.experimental.sparse.BCOOProperties(NamedTuple)
 jax.experimental.sparse.bcoo.BCOO(self,args:tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.bcoo.BCOO.__init__(self,args:tuple[Array,Array],*,shape:Sequence[int],indices_sorted:bool=False,unique_indices:bool=False)
 jax.experimental.sparse.bcoo.BCOO.__repr__(self)
@@ -3874,6 +3875,7 @@ jax.experimental.sparse.JAXSparse(self,args:tuple[Array,...],*,shape:Sequence[in
 jax.experimental.sparse.JAXSparse.T(self)
 jax.experimental.sparse.JAXSparse.__add__(self,other)
 jax.experimental.sparse.JAXSparse.__getitem__(self,item)
+jax.experimental.sparse.JAXSparse.__init__(self,args:tuple[Array,...],*,shape:Sequence[int])
 jax.experimental.sparse.JAXSparse.__len__(self)
 jax.experimental.sparse.JAXSparse.__matmul__(self,other)
 jax.experimental.sparse.JAXSparse.__mul__(self,other)
@@ -4081,13 +4083,11 @@ A:jax.experimental.sparse.transform.sparrs->arrays_to_spvalues(spenv, arrs)
 A:jax.experimental.sparse.transform.jvp->lift_jvp(num_consts, jvp_jaxpr_thunk)
 A:jax.experimental.sparse.transform.outvals->jax.custom_derivatives.custom_jvp_call_p.bind(fun, jvp, *invals, **params)
 jax.experimental.sparse.SparseTracer(self,trace:core.Trace,*,spvalue)
+jax.experimental.sparse.SparseTracer.__init__(self,trace:core.Trace,*,spvalue)
 jax.experimental.sparse.SparseTracer.aval(self)
 jax.experimental.sparse.SparseTracer.full_lower(self)
 jax.experimental.sparse.SparseTracer.spenv(self)
 jax.experimental.sparse.sparsify(f,use_tracer=False)
-jax.experimental.sparse.sparsify_fun(wrapped_fun,args:list[ArrayOrSparse])
-jax.experimental.sparse.sparsify_raw(f)
-jax.experimental.sparse.sparsify_subtrace(main,spvalues,*bufs)
 jax.experimental.sparse.transform.SparseTrace(core.Trace)
 jax.experimental.sparse.transform.SparseTrace.lift(self,val:core.Tracer)
 jax.experimental.sparse.transform.SparseTrace.process_call(self,call_primitive,f:lu.WrappedFun,tracers,params)
@@ -5318,6 +5318,7 @@ jax._src.ad_checkpoint.save_from_both_policies(policy_1,policy_2)
 jax._src.ad_checkpoint.save_only_these_names(*names_which_can_be_saved)
 jax._src.ad_checkpoint.saved_residuals(f,*args,**kwargs)->list[tuple[core.AbstractValue, str]]
 jax._src.ad_checkpoint.transpose_jaxpr(jaxpr:core.ClosedJaxpr,in_linear:Union[bool,Sequence[bool]],out_zeros:Union[bool,Sequence[bool]],reduce_axes:Sequence[core.AxisName])->tuple[core.ClosedJaxpr, list[bool]]
+jax.checkpoint(fun:Callable,*,concrete:bool=False,prevent_cse:bool=True,static_argnums:Union[int,tuple[int,...]]=(),policy:Optional[Callable[...,bool]]=None)->Callable
 jax.remat(fun:Callable,*,concrete:bool=False,prevent_cse:bool=True,static_argnums:Union[int,tuple[int,...]]=(),policy:Optional[Callable[...,bool]]=None)->Callable
 
 
@@ -5354,6 +5355,7 @@ jax._src.tpu_custom_call._tpu_custom_call_abstract_eval(*_,out_avals,**__)
 jax._src.tpu_custom_call._tpu_custom_call_lowering(ctx:mlir.LoweringRuleContext,*in_nodes,config:CustomCallBackendConfig,kernel_name:str|None,kernel_regeneration_metadata:bytes|None,out_avals:Any)->...
 jax._src.tpu_custom_call.as_tpu_kernel(module:ir.Module,out_type:Any,*,cost_estimate:CostEstimate|None=None,backend:str|xla_client.Client='tpu',device_type:str|None=None,kernel_name:str|None=None,kernel_regeneration_metadata:bytes|None=None)->Callable[..., Any]
 jax._src.tpu_custom_call.dump_mlir(module:ir.Module,msg:str)
+jax.experimental.mosaic.as_tpu_kernel(module:ir.Module,out_type:Any,*,cost_estimate:CostEstimate|None=None,backend:str|xla_client.Client='tpu',device_type:str|None=None,kernel_name:str|None=None,kernel_regeneration_metadata:bytes|None=None)->Callable[..., Any]
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/stages.py----------------------------------------
@@ -5671,6 +5673,7 @@ jax._src.pjit.post_infer_params(fun,infer_params_fn,static_argnums,static_argnam
 jax._src.pjit.pre_infer_params(fun,in_shardings,out_shardings,donate_argnums,donate_argnames,static_argnums,static_argnames,device,backend,abstracted_axes)
 jax._src.pjit.to_gspmd_sharding(s:XLACompatibleSharding,ndim:int,device_or_backend_set:bool=False)->GSPMDSharding
 jax._src.pjit.with_sharding_constraint(x,shardings)
+jax.lax.with_sharding_constraint(x,shardings)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/basearray.py----------------------------------------
@@ -5678,6 +5681,8 @@ jax.Array(abc.ABC)
 jax.Array.at(self)
 jax._src.basearray.Array(abc.ABC)
 jax._src.basearray.Array.at(self)
+jax.numpy.ndarray(abc.ABC)
+jax.numpy.ndarray.at(self)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/basearray.pyi----------------------------------------
@@ -5689,6 +5694,7 @@ jax.Array.__array__(self)->np.ndarray
 jax.Array.__bool__(self)->bool
 jax.Array.__complex__(self)->complex
 jax.Array.__divmod__(self,other)->Array
+jax.Array.__dlpack__(self)->Any
 jax.Array.__eq__(self,other)->Array
 jax.Array.__float__(self)->float
 jax.Array.__floordiv__(self,other)->Array
@@ -5696,6 +5702,7 @@ jax.Array.__ge__(self,other)->Array
 jax.Array.__getitem__(self,key)->Array
 jax.Array.__gt__(self,other)->Array
 jax.Array.__index__(self)->int
+jax.Array.__init__(self,shape,dtype=None,buffer=None,offset=0,strides=None,order=None)
 jax.Array.__int__(self)->int
 jax.Array.__invert__(self)->Array
 jax.Array.__iter__(self)->Any
@@ -5783,6 +5790,7 @@ jax.Array.reshape(self,*args,order='C')->Array
 jax.Array.round(self,decimals=0,out=None)->Array
 jax.Array.searchsorted(self,v,side='left',sorter=None)->Array
 jax.Array.shape(self)->tuple[int, ...]
+jax.Array.sharding(self)->Sharding
 jax.Array.size(self)->int
 jax.Array.sort(self,axis:Optional[int]=-1,kind='quicksort',order=None)->Array
 jax.Array.squeeze(self,axis:Optional[Union[int,Sequence[int]]]=None)->Array
@@ -5933,6 +5941,127 @@ jax._src.basearray._IndexUpdateRef.mul(self,values:Any,indices_are_sorted:bool=F
 jax._src.basearray._IndexUpdateRef.multiply(self,values:Any,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[str]=None)->Array
 jax._src.basearray._IndexUpdateRef.power(self,values:Any,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[str]=None)->Array
 jax._src.basearray._IndexUpdateRef.set(self,values:Any,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[str]=None,fill_value:Optional[ArrayLike]=None)->Array
+jax.numpy.ndarray.T(self)->Array
+jax.numpy.ndarray.__abs__(self)->Array
+jax.numpy.ndarray.__add__(self,other)->Array
+jax.numpy.ndarray.__and__(self,other)->Array
+jax.numpy.ndarray.__array__(self)->np.ndarray
+jax.numpy.ndarray.__bool__(self)->bool
+jax.numpy.ndarray.__complex__(self)->complex
+jax.numpy.ndarray.__divmod__(self,other)->Array
+jax.numpy.ndarray.__dlpack__(self)->Any
+jax.numpy.ndarray.__eq__(self,other)->Array
+jax.numpy.ndarray.__float__(self)->float
+jax.numpy.ndarray.__floordiv__(self,other)->Array
+jax.numpy.ndarray.__ge__(self,other)->Array
+jax.numpy.ndarray.__getitem__(self,key)->Array
+jax.numpy.ndarray.__gt__(self,other)->Array
+jax.numpy.ndarray.__index__(self)->int
+jax.numpy.ndarray.__init__(self,shape,dtype=None,buffer=None,offset=0,strides=None,order=None)
+jax.numpy.ndarray.__int__(self)->int
+jax.numpy.ndarray.__invert__(self)->Array
+jax.numpy.ndarray.__iter__(self)->Any
+jax.numpy.ndarray.__le__(self,other)->Array
+jax.numpy.ndarray.__len__(self)->int
+jax.numpy.ndarray.__lshift__(self,other)->Array
+jax.numpy.ndarray.__lt__(self,other)->Array
+jax.numpy.ndarray.__matmul__(self,other)->Array
+jax.numpy.ndarray.__mod__(self,other)->Array
+jax.numpy.ndarray.__mul__(self,other)->Array
+jax.numpy.ndarray.__ne__(self,other)->Array
+jax.numpy.ndarray.__neg__(self)->Array
+jax.numpy.ndarray.__or__(self,other)->Array
+jax.numpy.ndarray.__pos__(self)->Array
+jax.numpy.ndarray.__pow__(self,other)->Array
+jax.numpy.ndarray.__radd__(self,other)->Array
+jax.numpy.ndarray.__rand__(self,other)->Array
+jax.numpy.ndarray.__rdivmod__(self,other)->Array
+jax.numpy.ndarray.__reversed__(self)->Any
+jax.numpy.ndarray.__rfloordiv__(self,other)->Array
+jax.numpy.ndarray.__rlshift__(self,other)->Array
+jax.numpy.ndarray.__rmatmul__(self,other)->Array
+jax.numpy.ndarray.__rmod__(self,other)->Array
+jax.numpy.ndarray.__rmul__(self,other)->Array
+jax.numpy.ndarray.__ror__(self,other)->Array
+jax.numpy.ndarray.__round__(self,ndigits=None)->Array
+jax.numpy.ndarray.__rpow__(self,other)->Array
+jax.numpy.ndarray.__rrshift__(self,other)->Array
+jax.numpy.ndarray.__rshift__(self,other)->Array
+jax.numpy.ndarray.__rsub__(self,other)->Array
+jax.numpy.ndarray.__rtruediv__(self,other)->Array
+jax.numpy.ndarray.__rxor__(self,other)->Array
+jax.numpy.ndarray.__setitem__(self,key,value)->None
+jax.numpy.ndarray.__sub__(self,other)->Array
+jax.numpy.ndarray.__truediv__(self,other)->Array
+jax.numpy.ndarray.__xor__(self,other)->Array
+jax.numpy.ndarray.addressable_data(self,index:int)->Array
+jax.numpy.ndarray.addressable_shards(self)->Sequence[Shard]
+jax.numpy.ndarray.all(self,axis:Optional[Union[int,Sequence[int]]]=None,out=None,keepdims=None)->Array
+jax.numpy.ndarray.any(self,axis:Optional[Union[int,Sequence[int]]]=None,out=None,keepdims=None)->Array
+jax.numpy.ndarray.argmax(self,axis:Optional[int]=None,out=None,keepdims=None)->Array
+jax.numpy.ndarray.argmin(self,axis:Optional[int]=None,out=None,keepdims=None)->Array
+jax.numpy.ndarray.argpartition(self,kth,axis=-1,kind='introselect',order=None)->Array
+jax.numpy.ndarray.argsort(self,axis:Optional[int]=-1,kind='quicksort',order=None)->Array
+jax.numpy.ndarray.astype(self,dtype)->Array
+jax.numpy.ndarray.block_until_ready(self)->Array
+jax.numpy.ndarray.choose(self,choices,out=None,mode='raise')->Array
+jax.numpy.ndarray.clip(self,min=None,max=None,out=None)->Array
+jax.numpy.ndarray.compress(self,condition,axis:Optional[int]=None,out=None)->Array
+jax.numpy.ndarray.conj(self)->Array
+jax.numpy.ndarray.conjugate(self)->Array
+jax.numpy.ndarray.copy(self)->Array
+jax.numpy.ndarray.copy_to_host_async(self)->None
+jax.numpy.ndarray.cumprod(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None)->Array
+jax.numpy.ndarray.cumsum(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None)->Array
+jax.numpy.ndarray.delete(self)->None
+jax.numpy.ndarray.device(self)->Device
+jax.numpy.ndarray.device_buffers(self)->Any
+jax.numpy.ndarray.devices(self)->set[Device]
+jax.numpy.ndarray.diagonal(self,offset=0,axis1:int=0,axis2:int=1)->Array
+jax.numpy.ndarray.dot(self,b,*,precision=None)->Array
+jax.numpy.ndarray.dtype(self)->np.dtype
+jax.numpy.ndarray.flatten(self)->Array
+jax.numpy.ndarray.global_shards(self)->Sequence[Shard]
+jax.numpy.ndarray.imag(self)->Array
+jax.numpy.ndarray.is_deleted(self)->bool
+jax.numpy.ndarray.is_fully_addressable(self)->bool
+jax.numpy.ndarray.is_fully_replicated(self)->bool
+jax.numpy.ndarray.item(self,*args)->Any
+jax.numpy.ndarray.itemsize(self)->int
+jax.numpy.ndarray.mT(self)->Array
+jax.numpy.ndarray.max(self,axis:Optional[Union[int,Sequence[int]]]=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.numpy.ndarray.mean(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None,keepdims=False,*,where=None)->Array
+jax.numpy.ndarray.min(self,axis:Optional[Union[int,Sequence[int]]]=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.numpy.ndarray.nbytes(self)->int
+jax.numpy.ndarray.ndim(self)->int
+jax.numpy.ndarray.nonzero(self,*,size=None,fill_value=None)->Array
+jax.numpy.ndarray.on_device_size_in_bytes(self)->int
+jax.numpy.ndarray.prod(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.numpy.ndarray.ptp(self,axis:Optional[Union[int,Sequence[int]]]=None,out=None,keepdims=False)->Array
+jax.numpy.ndarray.ravel(self,order='C')->Array
+jax.numpy.ndarray.real(self)->Array
+jax.numpy.ndarray.repeat(self,repeats,axis:Optional[int]=None,*,total_repeat_length=None)->Array
+jax.numpy.ndarray.reshape(self,*args,order='C')->Array
+jax.numpy.ndarray.round(self,decimals=0,out=None)->Array
+jax.numpy.ndarray.searchsorted(self,v,side='left',sorter=None)->Array
+jax.numpy.ndarray.shape(self)->tuple[int, ...]
+jax.numpy.ndarray.sharding(self)->Sharding
+jax.numpy.ndarray.size(self)->int
+jax.numpy.ndarray.sort(self,axis:Optional[int]=-1,kind='quicksort',order=None)->Array
+jax.numpy.ndarray.squeeze(self,axis:Optional[Union[int,Sequence[int]]]=None)->Array
+jax.numpy.ndarray.std(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None,ddof=0,keepdims=False,*,where=None)->Array
+jax.numpy.ndarray.sum(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None,keepdims=None,initial=None,where=None)->Array
+jax.numpy.ndarray.swapaxes(self,axis1:int,axis2:int)->Array
+jax.numpy.ndarray.take(self,indices,axis:Optional[int]=None,out=None,mode=None)->Array
+jax.numpy.ndarray.tobytes(self,order='C')->bytes
+jax.numpy.ndarray.tolist(self)->list[Any]
+jax.numpy.ndarray.trace(self,offset=0,axis1:int=0,axis2:int=1,dtype=None,out=None)->Array
+jax.numpy.ndarray.traceback(self)->Traceback
+jax.numpy.ndarray.transpose(self,*args)->Array
+jax.numpy.ndarray.unsafe_buffer_pointer(self)->int
+jax.numpy.ndarray.var(self,axis:Optional[Union[int,Sequence[int]]]=None,dtype=None,out=None,ddof=0,keepdims=False,*,where=None)->Array
+jax.numpy.ndarray.view(self,dtype=None,type=None)->Array
+jax.numpy.ndarray.weak_type(self)->bool
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/api_util.py----------------------------------------
@@ -7158,6 +7287,7 @@ A:jax._src.api.(wrapped_fun, out_tree)->flatten_fun(lu.wrap_init(fun), in_tree)
 jax.ShapeDtypeStruct(self,shape,dtype,named_shape=None,sharding=None)
 jax.ShapeDtypeStruct.__eq__(self,other)
 jax.ShapeDtypeStruct.__hash__(self)
+jax.ShapeDtypeStruct.__init__(self,shape,dtype,named_shape=None,sharding=None)
 jax.ShapeDtypeStruct.__len__(self)
 jax.ShapeDtypeStruct.__repr__(self)
 jax._src.api.PmapCallInfo(NamedTuple)
@@ -7787,61 +7917,6 @@ A:jax._src.config.transfer_guard_device_to_device->Config().define_enum_state(na
 A:jax._src.config.transfer_guard_device_to_host->Config().define_enum_state(name='jax_transfer_guard_device_to_host', enum_values=['allow', 'log', 'disallow', 'log_explicit', 'disallow_explicit'], default=None, help='Select the transfer guard level for device-to-host transfers. Default is "allow".', update_global_hook=lambda val: _update_transfer_guard(transfer_guard_lib.global_state(), 'device_to_host', val), update_thread_local_hook=lambda val: _update_transfer_guard(transfer_guard_lib.thread_local_state(), 'device_to_host', val))
 A:jax._src.config._transfer_guard->Config().define_enum_state(name='jax_transfer_guard', enum_values=['allow', 'log', 'disallow', 'log_explicit', 'disallow_explicit'], default=None, help='Select the transfer guard level for all transfers. This option is set-only; the transfer guard level for a specific direction should be read using the per-transfer direction option. Default is "allow".', update_global_hook=_update_all_transfer_guard_global)
 A:jax._src.config.module_names->module_names_str.split(',')
-jax._src._config_module.Config(self)
-jax._src._config_module.Config.DEFINE_bool(self,name,default,*args,**kwargs)->FlagHolder[bool]
-jax._src._config_module.Config.DEFINE_enum(self,name,default,*args,**kwargs)->FlagHolder[str]
-jax._src._config_module.Config.DEFINE_float(self,name,default,*args,**kwargs)->FlagHolder[float]
-jax._src._config_module.Config.DEFINE_integer(self,name,default,*args,**kwargs)->FlagHolder[int]
-jax._src._config_module.Config.DEFINE_string(self,name,default,*args,**kwargs)->FlagHolder[str]
-jax._src._config_module.Config._config_module_with_absl(self)
-jax._src._config_module.Config._read(self,name)
-jax._src._config_module.Config._trace_context(self)
-jax._src._config_module.Config.add_option(self,name,default,opt_type,meta_args,meta_kwargs,update_hook:Optional[Callable[[Any],None]]=None)
-jax._src._config_module.Config.check_exists(self,name)
-jax._src._config_module.Config.complete_absl__config_module(self,absl_flags)
-jax._src._config_module.Config.define_bool_state(self,name:str,default:bool,help:str,*,update_global_hook:Optional[Callable[[bool],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[bool]],None]]=None,upgrade:bool=False,extra_description:str='')
-jax._src._config_module.Config.define_enum_state(self,name:str,enum_values:list[str],default:Optional[str],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
-jax._src._config_module.Config.define_float_state(self,name:str,default:Optional[float],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
-jax._src._config_module.Config.define_int_state(self,name:str,default:Optional[int],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
-jax._src._config_module.Config.define_string_or_object_state(self,name:str,default:Any,help:str,update_global_hook:Optional[Callable[[Any],None]]=None,update_thread_local_hook:Optional[Callable[[Any],None]]=None,validate_new_val_hook:Optional[Callable[[Any],None]]=None)
-jax._src._config_module.Config.define_string_state(self,name:str,default:Optional[str],help:str,update_global_hook:Optional[Callable[[str],None]]=None,update_thread_local_hook:Optional[Callable[[Optional[str]],None]]=None)
-jax._src._config_module.Config.parse_flags_with_absl(self)
-jax._src._config_module.Config.read(self,name)
-jax._src._config_module.Config.update(self,name,val)
-jax._src._config_module.DEFINE_bool(name,default,*args,**kwargs)
-jax._src._config_module.DEFINE_enum(name,default,*args,**kwargs)
-jax._src._config_module.DEFINE_float(name,default,*args,**kwargs)
-jax._src._config_module.DEFINE_integer(name,default,*args,**kwargs)
-jax._src._config_module.DEFINE_string(name,default,*args,**kwargs)
-jax._src._config_module.FlagHolder(self,flags:NameSpace,name:str)
-jax._src._config_module.FlagHolder.value(self)->_T
-jax._src._config_module.NameSpace(self,getter,setter)
-jax._src._config_module.NameSpace.__getattr__(self,name)
-jax._src._config_module.NameSpace.__setattr__(self,name,val)
-jax._src._config_module.NoDefault
-jax._src._config_module._GlobalExtraJitContext(NamedTuple)
-jax._src._config_module._StateContextManager(self,name,help,update_thread_local_hook,validate_new_val_hook:Optional[Callable[[Any],None]]=None,extra_description:str='',default_value:Any=no_default)
-jax._src._config_module._StateContextManager._add_hooks(self,update_global_hook,update_thread_local_hook)
-jax._src._config_module._ThreadLocalExtraJitContext(NamedTuple)
-jax._src._config_module._ThreadLocalStateCache(self)
-jax._src._config_module._Unset
-jax._src._config_module._update_all_transfer_guard_global(val)
-jax._src._config_module._update_default_device_global(val)
-jax._src._config_module._update_default_device_thread_local(val)
-jax._src._config_module._update_disable_jit_global(val)
-jax._src._config_module._update_disable_jit_thread_local(val)
-jax._src._config_module._update_global_jit_state(**kw)
-jax._src._config_module._update_jax_memories_global(val)
-jax._src._config_module._update_jax_memories_thread_local(val)
-jax._src._config_module._update_transfer_guard(state,key,val)
-jax._src._config_module._update_x64_global(val)
-jax._src._config_module._update_x64_thread_local(val)
-jax._src._config_module._validate_default_device(val)
-jax._src._config_module.bool_env(varname:str,default:bool)->bool
-jax._src._config_module.explicit_device_get_scope()->Iterator[None]
-jax._src._config_module.explicit_device_put_scope()->Iterator[None]
-jax._src._config_module.int_env(varname:str,default:int)->int
-jax._src._config_module.update_thread_local_jit_state(**kw)
 jax._src.config.Config(self)
 jax._src.config.Config.DEFINE_bool(self,name,default,*args,**kwargs)->FlagHolder[bool]
 jax._src.config.Config.DEFINE_enum(self,name,default,*args,**kwargs)->FlagHolder[str]
@@ -7955,6 +8030,12 @@ A:jax._src.tree_util.ty->type(prefix_tree)
 A:jax._src.tree_util.prefix_tree_meta_str->str(prefix_tree_meta)
 A:jax._src.tree_util.full_tree_meta_str->str(full_tree_meta)
 A:jax._src.tree_util.metadata_diff->textwrap.indent('\n'.join(difflib.ndiff(prefix_tree_meta_str.splitlines(), full_tree_meta_str.splitlines())), prefix='    ')
+jax._deprecated_tree_flatten(tree:Any,is_leaf:Callable[[Any],bool]|None=None)->tuple[list[Leaf], PyTreeDef]
+jax._deprecated_tree_leaves(tree:Any,is_leaf:Callable[[Any],bool]|None=None)->list[Leaf]
+jax._deprecated_tree_structure(tree:Any,is_leaf:None|Callable[[Any],bool]=None)->PyTreeDef
+jax._deprecated_tree_transpose(outer_treedef:PyTreeDef,inner_treedef:PyTreeDef,pytree_to_transpose:Any)->Any
+jax._deprecated_tree_unflatten(treedef:PyTreeDef,leaves:Iterable[Leaf])->Any
+jax._deprecated_treedef_is_leaf(treedef:PyTreeDef)->bool
 jax._src.tree_util.AttributeKeyPathEntry(_DeprecatedKeyPathEntry)
 jax._src.tree_util.AttributeKeyPathEntry.__str__(self)
 jax._src.tree_util.AttributeKeyPathEntry.pprint(self)->str
@@ -8014,6 +8095,13 @@ jax._src.tree_util.treedef_children(treedef:PyTreeDef)->list[PyTreeDef]
 jax._src.tree_util.treedef_is_leaf(treedef:PyTreeDef)->bool
 jax._src.tree_util.treedef_is_strict_leaf(treedef:PyTreeDef)->bool
 jax._src.tree_util.treedef_tuple(treedefs:Iterable[PyTreeDef])->PyTreeDef
+jax.tree_flatten(tree:Any,is_leaf:Callable[[Any],bool]|None=None)->tuple[list[Leaf], PyTreeDef]
+jax.tree_leaves(tree:Any,is_leaf:Callable[[Any],bool]|None=None)->list[Leaf]
+jax.tree_map(f:Callable[...,Any],tree:Any,*rest:Any,is_leaf:Callable[[Any],bool]|None=None)->Any
+jax.tree_structure(tree:Any,is_leaf:None|Callable[[Any],bool]=None)->PyTreeDef
+jax.tree_transpose(outer_treedef:PyTreeDef,inner_treedef:PyTreeDef,pytree_to_transpose:Any)->Any
+jax.tree_unflatten(treedef:PyTreeDef,leaves:Iterable[Leaf])->Any
+jax.treedef_is_leaf(treedef:PyTreeDef)->bool
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/effects.py----------------------------------------
@@ -8205,6 +8293,7 @@ A:jax._src.array.candidates->defaultdict(list)
 A:jax._src.array.arr_indices->tuple(x.sharding.devices_indices_map(x.shape).values())
 A:jax._src.array.x_indices->x.sharding.addressable_devices_indices_map(x.shape).values()
 jax.Shard(self,device:Device,sharding:Sharding,global_shape:Shape,data:None|ArrayImpl|PRNGKeyArrayImpl=None)
+jax.Shard.__init__(self,device:Device,sharding:Sharding,global_shape:Shape,data:None|ArrayImpl|PRNGKeyArrayImpl=None)
 jax.Shard.__repr__(self)
 jax.Shard.data(self)
 jax.Shard.device(self)
@@ -8641,7 +8730,6 @@ A:jax._src.cache_key.num_actual_options->len([x for x in dir(compile_options_obj
 A:jax._src.cache_key.actual_options->len([x for x in dir(executable_obj) if not x.startswith('_')])
 A:jax._src.cache_key.xla_flags_env_var->os.getenv('XLA_FLAGS')
 jax._src.cache_key._canonicalize_ir(m_original:ir.Module)->bytes
-jax._src.cache_key._hash_accelerator__config_module(hash_obj,accelerators:np.ndarray)
 jax._src.cache_key._hash_accelerator_config(hash_obj,accelerators:np.ndarray)
 jax._src.cache_key._hash_bool(hash_obj,bool_var)
 jax._src.cache_key._hash_bool_list(hash_obj,bool_list)
@@ -9289,7 +9377,6 @@ A:jax._src.xla_bridge.process_index->get_backend(backend).process_index()
 jax._src.xla_bridge.BackendRegistration
 jax._src.xla_bridge._clear_backends()->None
 jax._src.xla_bridge._get_backend_uncached(platform:Union[None,str,xla_client.Client]=None)->xla_client.Client
-jax._src.xla_bridge._get_pjrt_plugin__config_module(json_path:str)->tuple[str, Optional[Mapping[str, Union[str, int, list[int], float]]]]
 jax._src.xla_bridge._get_pjrt_plugin_config(json_path:str)->tuple[str, Optional[Mapping[str, Union[str, int, list[int], float]]]]
 jax._src.xla_bridge._get_pjrt_plugin_names_and_library_paths(plugins_from_env:str)->dict[str, str]
 jax._src.xla_bridge._init_backend(platform:str)->xla_client.Client
@@ -9540,6 +9627,15 @@ jax._src.custom_derivatives.process_env_traces(primitive,level:int,jvp_was_run:b
 jax._src.custom_derivatives.process_env_traces_fwd(level:int,out_trees,*args)
 jax._src.custom_derivatives.unreachable(*args,out_avals=None,exc_type=TypeError,message='unreachable')
 jax._src.custom_derivatives.unreachable_impl(*_,out_avals,exc_type,message)
+jax.closure_convert(fun:Callable,*example_args)->tuple[Callable, list[Any]]
+jax.custom_gradient(fun)
+jax.custom_jvp(self,fun:Callable[...,ReturnValue],nondiff_argnums:tuple[int,...]=())
+jax.custom_jvp.__init__(self,fun:Callable[...,ReturnValue],nondiff_argnums:tuple[int,...]=())
+jax.custom_jvp.defjvp(self,jvp:Callable[...,tuple[ReturnValue,ReturnValue]],symbolic_zeros:bool=False)->Callable[..., tuple[ReturnValue, ReturnValue]]
+jax.custom_jvp.defjvps(self,*jvps:Optional[Callable[...,ReturnValue]])
+jax.custom_vjp(self,fun:Callable[...,ReturnValue],nondiff_argnums:tuple[int,...]=())
+jax.custom_vjp.__init__(self,fun:Callable[...,ReturnValue],nondiff_argnums:tuple[int,...]=())
+jax.custom_vjp.defvjp(self,fwd:Callable[...,tuple[ReturnValue,Any]],bwd:Callable[...,tuple[Any,...]],symbolic_zeros:bool=False)->None
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/callback.py----------------------------------------
@@ -9584,6 +9680,7 @@ jax._src.callback.pure_callback_impl(*args,result_avals,callback:Callable[...,An
 jax._src.callback.pure_callback_jvp_rule(*args,**kwargs)
 jax._src.callback.pure_callback_lowering(ctx,*args,callback,sharding:SingleDeviceSharding|None,**params)
 jax._src.callback.pure_callback_transpose_rule(*args,**kwargs)
+jax.experimental.io_callback(callback:Callable[...,Any],result_shape_dtypes:Any,*args:Any,sharding:SingleDeviceSharding|None=None,ordered:bool=False,**kwargs:Any)
 jax.pure_callback(callback:Callable[...,Any],result_shape_dtypes:Any,*args:Any,sharding:SingleDeviceSharding|None=None,vectorized:bool=False,**kwargs:Any)
 
 
@@ -10148,6 +10245,10 @@ jax._src.image.scale._scale_and_translate(x,output_shape:core.Shape,spatial_dims
 jax._src.image.scale.compute_weight_mat(input_size:core.DimSize,output_size:core.DimSize,scale,translation,kernel:Callable,antialias:bool)
 jax._src.image.scale.resize(image,shape:core.Shape,method:Union[str,ResizeMethod],antialias:bool=True,precision=lax.Precision.HIGHEST)
 jax._src.image.scale.scale_and_translate(image,shape:core.Shape,spatial_dims:Sequence[int],scale,translation,method:Union[str,ResizeMethod],antialias:bool=True,precision=lax.Precision.HIGHEST)
+jax.image.ResizeMethod(enum.Enum)
+jax.image.ResizeMethod.from_string(s:str)
+jax.image.resize(image,shape:core.Shape,method:Union[str,ResizeMethod],antialias:bool=True,precision=lax.Precision.HIGHEST)
+jax.image.scale_and_translate(image,shape:core.Shape,spatial_dims:Sequence[int],scale,translation,method:Union[str,ResizeMethod],antialias:bool=True,precision=lax.Precision.HIGHEST)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/clusters/__init__.py----------------------------------------
@@ -11044,6 +11145,23 @@ jax._src.scipy.stats.kde.gaussian_kde.resample(self,key,shape=())
 jax._src.scipy.stats.kde.gaussian_kde.set_bandwidth(self,bw_method=None)
 jax._src.scipy.stats.kde.gaussian_kde.tree_flatten(self)
 jax._src.scipy.stats.kde.gaussian_kde.tree_unflatten(cls,aux_data,children)
+jax.scipy.stats.gaussian_kde(self,dataset,bw_method=None,weights=None)
+jax.scipy.stats.gaussian_kde.__init__(self,dataset,bw_method=None,weights=None)
+jax.scipy.stats.gaussian_kde._reshape_points(self,points)
+jax.scipy.stats.gaussian_kde._setattr(self,name,value)
+jax.scipy.stats.gaussian_kde.d(self)
+jax.scipy.stats.gaussian_kde.evaluate(self,points)
+jax.scipy.stats.gaussian_kde.integrate_box(self,low_bounds,high_bounds,maxpts=None)
+jax.scipy.stats.gaussian_kde.integrate_box_1d(self,low,high)
+jax.scipy.stats.gaussian_kde.integrate_gaussian(self,mean,cov)
+jax.scipy.stats.gaussian_kde.integrate_kde(self,other)
+jax.scipy.stats.gaussian_kde.logpdf(self,x)
+jax.scipy.stats.gaussian_kde.n(self)
+jax.scipy.stats.gaussian_kde.pdf(self,x)
+jax.scipy.stats.gaussian_kde.resample(self,key,shape=())
+jax.scipy.stats.gaussian_kde.set_bandwidth(self,bw_method=None)
+jax.scipy.stats.gaussian_kde.tree_flatten(self)
+jax.scipy.stats.gaussian_kde.tree_unflatten(cls,aux_data,children)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/scipy/stats/bernoulli.py----------------------------------------
@@ -11114,6 +11232,8 @@ A:jax._src.scipy.stats._core.obs->jax.numpy.insert(arr[1:] != arr[:-1], 0, True)
 jax._src.scipy.stats._core.invert_permutation(i:Array)->Array
 jax._src.scipy.stats._core.mode(a:ArrayLike,axis:Optional[int]=0,nan_policy:str='propagate',keepdims:bool=False)->ModeResult
 jax._src.scipy.stats._core.rankdata(a:ArrayLike,method:str='average',*,axis:Optional[int]=None,nan_policy:str='propagate')->Array
+jax.scipy.stats.mode(a:ArrayLike,axis:Optional[int]=0,nan_policy:str='propagate',keepdims:bool=False)->ModeResult
+jax.scipy.stats.rankdata(a:ArrayLike,method:str='average',*,axis:Optional[int]=None,nan_policy:str='propagate')->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/scipy/stats/vonmises.py----------------------------------------
@@ -11368,6 +11488,8 @@ jax._src.scipy.optimize._lbfgs._update_history_vectors(history,new)
 A:jax._src.scipy.optimize.minimize.results->_minimize_lbfgs(fun_with_args, x0, **options)
 jax._src.scipy.optimize.minimize.OptimizeResults(NamedTuple)
 jax._src.scipy.optimize.minimize.minimize(fun:Callable,x0:jax.Array,args:tuple=(),*,method:str,tol:Optional[float]=None,options:Optional[Mapping[str,Any]]=None)->OptimizeResults
+jax.scipy.optimize.OptimizeResults(NamedTuple)
+jax.scipy.optimize.minimize(fun:Callable,x0:jax.Array,args:tuple=(),*,method:str,tol:Optional[float]=None,options:Optional[Mapping[str,Any]]=None)->OptimizeResults
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/scipy/interpolate/__init__.py----------------------------------------
@@ -11433,6 +11555,13 @@ jax._src.numpy.setops.setdiff1d(ar1:ArrayLike,ar2:ArrayLike,assume_unique:bool=F
 jax._src.numpy.setops.setxor1d(ar1:ArrayLike,ar2:ArrayLike,assume_unique:bool=False)->Array
 jax._src.numpy.setops.union1d(ar1:ArrayLike,ar2:ArrayLike,*,size:Optional[int]=None,fill_value:Optional[ArrayLike]=None)->Array
 jax._src.numpy.setops.unique(ar:ArrayLike,return_index:bool=False,return_inverse:bool=False,return_counts:bool=False,axis:Optional[int]=None,*,size:Optional[int]=None,fill_value:Optional[ArrayLike]=None)
+jax.numpy._deprecated_in1d(ar1:ArrayLike,ar2:ArrayLike,assume_unique:bool=False,invert:bool=False)->Array
+jax.numpy.intersect1d(ar1:ArrayLike,ar2:ArrayLike,assume_unique:bool=False,return_indices:bool=False)->Union[Array, tuple[Array, Array, Array]]
+jax.numpy.isin(element:ArrayLike,test_elements:ArrayLike,assume_unique:bool=False,invert:bool=False)->Array
+jax.numpy.setdiff1d(ar1:ArrayLike,ar2:ArrayLike,assume_unique:bool=False,*,size:Optional[int]=None,fill_value:Optional[ArrayLike]=None)->Array
+jax.numpy.setxor1d(ar1:ArrayLike,ar2:ArrayLike,assume_unique:bool=False)->Array
+jax.numpy.union1d(ar1:ArrayLike,ar2:ArrayLike,*,size:Optional[int]=None,fill_value:Optional[ArrayLike]=None)->Array
+jax.numpy.unique(ar:ArrayLike,return_index:bool=False,return_inverse:bool=False,return_counts:bool=False,axis:Optional[int]=None,*,size:Optional[int]=None,fill_value:Optional[ArrayLike]=None)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/fft.py----------------------------------------
@@ -11514,6 +11643,16 @@ jax._src.numpy.polynomial.polymul(a1:ArrayLike,a2:ArrayLike,*,trim_leading_zeros
 jax._src.numpy.polynomial.polysub(a1:Array,a2:Array)->Array
 jax._src.numpy.polynomial.polyval(p:Array,x:Array,*,unroll:int=16)->Array
 jax._src.numpy.polynomial.roots(p:ArrayLike,*,strip_zeros:bool=True)->Array
+jax.numpy.poly(seq_of_zeros:Array)->Array
+jax.numpy.polyadd(a1:Array,a2:Array)->Array
+jax.numpy.polyder(p:Array,m:int=1)->Array
+jax.numpy.polydiv(u:ArrayLike,v:ArrayLike,*,trim_leading_zeros:bool=False)->tuple[Array, Array]
+jax.numpy.polyfit(x:Array,y:Array,deg:int,rcond:Optional[float]=None,full:bool=False,w:Optional[Array]=None,cov:bool=False)->Union[Array, tuple[Array, ...]]
+jax.numpy.polyint(p:Array,m:int=1,k:Optional[int]=None)->Array
+jax.numpy.polymul(a1:ArrayLike,a2:ArrayLike,*,trim_leading_zeros:bool=False)->Array
+jax.numpy.polysub(a1:Array,a2:Array)->Array
+jax.numpy.polyval(p:Array,x:Array,*,unroll:int=16)->Array
+jax.numpy.roots(p:ArrayLike,*,strip_zeros:bool=True)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/ufuncs.py----------------------------------------
@@ -11665,6 +11804,40 @@ jax._src.numpy.ufuncs.signbit(x:ArrayLike,/)->Array
 jax._src.numpy.ufuncs.sinc(x:ArrayLike,/)->Array
 jax._src.numpy.ufuncs.square(x:ArrayLike,/)->Array
 jax._src.numpy.ufuncs.true_divide(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.absolute(x:ArrayLike,/)->Array
+jax.numpy.arccosh(x:ArrayLike,/)->Array
+jax.numpy.conjugate(x:ArrayLike,/)->Array
+jax.numpy.copysign(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.deg2rad(x:ArrayLike,/)->Array
+jax.numpy.divmod(x1:ArrayLike,x2:ArrayLike,/)->tuple[Array, Array]
+jax.numpy.exp2(x:ArrayLike,/)->Array
+jax.numpy.floor_divide(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.fmod(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.frexp(x:ArrayLike,/)->tuple[Array, Array]
+jax.numpy.heaviside(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.hypot(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.imag(val:ArrayLike,/)->Array
+jax.numpy.isfinite(x:ArrayLike,/)->Array
+jax.numpy.isinf(x:ArrayLike,/)->Array
+jax.numpy.isnan(x:ArrayLike,/)->Array
+jax.numpy.ldexp(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.log10(x:ArrayLike,/)->Array
+jax.numpy.log2(x:ArrayLike,/)->Array
+jax.numpy.logaddexp(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.logaddexp2(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.modf(x:ArrayLike,/,out=None)->tuple[Array, Array]
+jax.numpy.power(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.rad2deg(x:ArrayLike,/)->Array
+jax.numpy.real(val:ArrayLike,/)->Array
+jax.numpy.reciprocal(x:ArrayLike,/)->Array
+jax.numpy.remainder(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.right_shift(x1:ArrayLike,x2:ArrayLike,/)->Array
+jax.numpy.rint(x:ArrayLike,/)->Array
+jax.numpy.sign(x:ArrayLike,/)->Array
+jax.numpy.signbit(x:ArrayLike,/)->Array
+jax.numpy.sinc(x:ArrayLike,/)->Array
+jax.numpy.square(x:ArrayLike,/)->Array
+jax.numpy.true_divide(x1:ArrayLike,x2:ArrayLike,/)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/linalg.py----------------------------------------
@@ -11826,6 +11999,7 @@ jax._src.numpy.array_methods._unimplemented_setitem(self,i,x)
 jax._src.numpy.array_methods._unstack(x:Array)->list[Array]
 jax._src.numpy.array_methods._view(arr:Array,dtype:DTypeLike=None,type:None=None)->Array
 jax._src.numpy.array_methods.register_jax_array_methods()
+jax.numpy.register_jax_array_methods()
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/util.py----------------------------------------
@@ -11935,6 +12109,21 @@ jax._src.numpy.ufunc_api.ufunc.at(self,a,indices,b=None,/,*,inplace=True)
 jax._src.numpy.ufunc_api.ufunc.outer(self,A,B,/,**kwargs)
 jax._src.numpy.ufunc_api.ufunc.reduce(self,a,axis=0,dtype=None,out=None,keepdims=False,initial=None,where=None)
 jax._src.numpy.ufunc_api.ufunc.reduceat(self,a,indices,axis=0,dtype=None,out=None)
+jax.numpy.frompyfunc(func,/,nin,nout,*,identity=None)
+jax.numpy.ufunc(self,func,/,nin,nout,*,name=None,nargs=None,identity=None)
+jax.numpy.ufunc.__eq__(self,other)
+jax.numpy.ufunc.__hash__(self)
+jax.numpy.ufunc.__init__(self,func,/,nin,nout,*,name=None,nargs=None,identity=None)
+jax.numpy.ufunc.__repr__(self)
+jax.numpy.ufunc._accumulate_via_scan(self,arr,axis=0,dtype=None)
+jax.numpy.ufunc._at_via_scan(self,a,indices,*args)
+jax.numpy.ufunc._reduce_via_scan(self,arr,axis=0,dtype=None,keepdims=False,initial=None,where=None)
+jax.numpy.ufunc._reduceat_via_scan(self,a,indices,axis=0,dtype=None)
+jax.numpy.ufunc.accumulate(self,a,axis=0,dtype=None,out=None)
+jax.numpy.ufunc.at(self,a,indices,b=None,/,*,inplace=True)
+jax.numpy.ufunc.outer(self,A,B,/,**kwargs)
+jax.numpy.ufunc.reduce(self,a,axis=0,dtype=None,out=None,keepdims=False,initial=None,where=None)
+jax.numpy.ufunc.reduceat(self,a,indices,axis=0,dtype=None,out=None)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/reductions.py----------------------------------------
@@ -12049,6 +12238,31 @@ jax._src.numpy.reductions.quantile(a:ArrayLike,q:ArrayLike,axis:Optional[Union[i
 jax._src.numpy.reductions.std(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,ddof:int=0,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
 jax._src.numpy.reductions.sum(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None,promote_integers:bool=True)->Array
 jax._src.numpy.reductions.var(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,ddof:int=0,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
+jax.numpy.all(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
+jax.numpy.any(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
+jax.numpy.average(a:ArrayLike,axis:Axis=None,weights:Optional[ArrayLike]=None,returned:bool=False,keepdims:bool=False)->Union[Array, tuple[Array, Array]]
+jax.numpy.count_nonzero(a:ArrayLike,axis:Axis=None,keepdims:bool=False)->Array
+jax.numpy.max(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None)->Array
+jax.numpy.mean(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
+jax.numpy.median(a:ArrayLike,axis:Optional[Union[int,tuple[int,...]]]=None,out:None=None,overwrite_input:bool=False,keepdims:bool=False)->Array
+jax.numpy.min(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nanmax(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nanmean(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nanmedian(a:ArrayLike,axis:Optional[Union[int,tuple[int,...]]]=None,out:None=None,overwrite_input:bool=False,keepdims:bool=False)->Array
+jax.numpy.nanmin(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nanpercentile(a:ArrayLike,q:ArrayLike,axis:Optional[Union[int,tuple[int,...]]]=None,out:None=None,overwrite_input:bool=False,method:str='linear',keepdims:bool=False,interpolation:None=None)->Array
+jax.numpy.nanprod(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nanquantile(a:ArrayLike,q:ArrayLike,axis:Optional[Union[int,tuple[int,...]]]=None,out:None=None,overwrite_input:bool=False,method:str='linear',keepdims:bool=False,interpolation:None=None)->Array
+jax.numpy.nanstd(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,ddof:int=0,keepdims:bool=False,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nansum(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None)->Array
+jax.numpy.nanvar(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,ddof:int=0,keepdims:bool=False,where:Optional[ArrayLike]=None)->Array
+jax.numpy.percentile(a:ArrayLike,q:ArrayLike,axis:Optional[Union[int,tuple[int,...]]]=None,out:None=None,overwrite_input:bool=False,method:str='linear',keepdims:bool=False,interpolation:None=None)->Array
+jax.numpy.prod(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None,promote_integers:bool=True)->Array
+jax.numpy.ptp(a:ArrayLike,axis:Axis=None,out:None=None,keepdims:bool=False)->Array
+jax.numpy.quantile(a:ArrayLike,q:ArrayLike,axis:Optional[Union[int,tuple[int,...]]]=None,out:None=None,overwrite_input:bool=False,method:str='linear',keepdims:bool=False,interpolation:None=None)->Array
+jax.numpy.std(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,ddof:int=0,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
+jax.numpy.sum(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,keepdims:bool=False,initial:Optional[ArrayLike]=None,where:Optional[ArrayLike]=None,promote_integers:bool=True)->Array
+jax.numpy.var(a:ArrayLike,axis:Axis=None,dtype:DTypeLike=None,out:None=None,ddof:int=0,keepdims:bool=False,*,where:Optional[ArrayLike]=None)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/lax_numpy.py----------------------------------------
@@ -12632,6 +12846,167 @@ jax._src.numpy.lax_numpy.vstack(tup:np.ndarray|Array|Sequence[ArrayLike],dtype:D
 jax._src.numpy.lax_numpy.where(condition:ArrayLike,x:ArrayLike|None=None,y:ArrayLike|None=None,*,size:int|None=None,fill_value:None|ArrayLike|tuple[ArrayLike,...]=None)->Array | tuple[Array, ...]
 jax._src.numpy.lax_numpy.zeros(shape:Any,dtype:DTypeLike|None=None)->Array
 jax._src.numpy.lax_numpy.zeros_like(a:ArrayLike|DuckTypedArray,dtype:DTypeLike|None=None,shape:Any=None)->Array
+jax.numpy._deprecated_trapz(y:ArrayLike,x:ArrayLike|None=None,dx:ArrayLike=1.0,axis:int=-1)->Array
+jax.numpy.allclose(a:ArrayLike,b:ArrayLike,rtol:ArrayLike=1e-05,atol:ArrayLike=1e-08,equal_nan:bool=False)->Array
+jax.numpy.angle(z:ArrayLike,deg:bool=False)->Array
+jax.numpy.append(arr:ArrayLike,values:ArrayLike,axis:int|None=None)->Array
+jax.numpy.apply_along_axis(func1d:Callable,axis:int,arr:ArrayLike,*args,**kwargs)->Array
+jax.numpy.apply_over_axes(func:Callable[[ArrayLike,int],Array],a:ArrayLike,axes:Sequence[int])->Array
+jax.numpy.arange(start:DimSize,stop:Optional[DimSize]=None,step:DimSize|None=None,dtype:DTypeLike|None=None)->Array
+jax.numpy.argmax(a:ArrayLike,axis:int|None=None,out:None=None,keepdims:bool|None=None)->Array
+jax.numpy.argmin(a:ArrayLike,axis:int|None=None,out:None=None,keepdims:bool|None=None)->Array
+jax.numpy.argpartition(a:ArrayLike,kth:int,axis:int=-1)->Array
+jax.numpy.argsort(a:ArrayLike,axis:int|None=-1,kind:str='stable',order:None=None)->Array
+jax.numpy.argwhere(a:ArrayLike,*,size:int|None=None,fill_value:ArrayLike|None=None)->Array
+jax.numpy.array(object:Any,dtype:DTypeLike|None=None,copy:bool=True,order:str|None='K',ndmin:int=0)->Array
+jax.numpy.array_equal(a1:ArrayLike,a2:ArrayLike,equal_nan:bool=False)->Array
+jax.numpy.array_equiv(a1:ArrayLike,a2:ArrayLike)->Array
+jax.numpy.array_split(ary:ArrayLike,indices_or_sections:int|Sequence[int]|ArrayLike,axis:int=0)->list[Array]
+jax.numpy.asarray(a:Any,dtype:DTypeLike|None=None,order:str|None=None)->Array
+jax.numpy.atleast_1d(*arys:ArrayLike)->Array | list[Array]
+jax.numpy.atleast_2d(*arys:ArrayLike)->Array | list[Array]
+jax.numpy.atleast_3d(*arys:ArrayLike)->Array | list[Array]
+jax.numpy.bartlett(M:int)->Array
+jax.numpy.bincount(x:ArrayLike,weights:ArrayLike|None=None,minlength:int=0,*,length:int|None=None)->Array
+jax.numpy.blackman(M:int)->Array
+jax.numpy.block(arrays:ArrayLike|list[ArrayLike])->Array
+jax.numpy.broadcast_arrays(*args:ArrayLike)->list[Array]
+jax.numpy.broadcast_shapes(*shapes)
+jax.numpy.broadcast_to(array:ArrayLike,shape:Shape)->Array
+jax.numpy.choose(a:ArrayLike,choices:Sequence[ArrayLike],out:None=None,mode:str='raise')->Array
+jax.numpy.clip(a:ArrayLike,a_min:ArrayLike|None=None,a_max:ArrayLike|None=None,out:None=None)->Array
+jax.numpy.column_stack(tup:np.ndarray|Array|Sequence[ArrayLike])->Array
+jax.numpy.compress(condition:ArrayLike,a:ArrayLike,axis:int|None=None,out:None=None)->Array
+jax.numpy.concatenate(arrays:np.ndarray|Array|Sequence[ArrayLike],axis:int|None=0,dtype:DTypeLike|None=None)->Array
+jax.numpy.convolve(a:ArrayLike,v:ArrayLike,mode:str='full',*,precision:PrecisionLike=None,preferred_element_type:dtype|None=None)->Array
+jax.numpy.copy(a:ArrayLike,order:str|None=None)->Array
+jax.numpy.corrcoef(x:ArrayLike,y:ArrayLike|None=None,rowvar:bool=True)->Array
+jax.numpy.correlate(a:ArrayLike,v:ArrayLike,mode:str='valid',*,precision:PrecisionLike=None,preferred_element_type:dtype|None=None)->Array
+jax.numpy.cov(m:ArrayLike,y:ArrayLike|None=None,rowvar:bool=True,bias:bool=False,ddof:int|None=None,fweights:ArrayLike|None=None,aweights:ArrayLike|None=None)->Array
+jax.numpy.cross(a,b,axisa:int=-1,axisb:int=-1,axisc:int=-1,axis:int|None=None)
+jax.numpy.delete(arr:ArrayLike,obj:ArrayLike|slice,axis:int|None=None,*,assume_unique_indices:bool=False)->Array
+jax.numpy.diag(v:ArrayLike,k:int=0)->Array
+jax.numpy.diag_indices(n:int,ndim:int=2)->tuple[Array, ...]
+jax.numpy.diag_indices_from(arr:ArrayLike)->tuple[Array, ...]
+jax.numpy.diagflat(v:ArrayLike,k:int=0)->Array
+jax.numpy.diagonal(a:ArrayLike,offset:int=0,axis1:int=0,axis2:int=1)->Array
+jax.numpy.diff(a:ArrayLike,n:int=1,axis:int=-1,prepend:ArrayLike|None=None,append:ArrayLike|None=None)->Array
+jax.numpy.digitize(x:ArrayLike,bins:ArrayLike,right:bool=False)->Array
+jax.numpy.dot(a:ArrayLike,b:ArrayLike,*,precision:PrecisionLike=None,preferred_element_type:DTypeLike|None=None)->Array
+jax.numpy.dstack(tup:np.ndarray|Array|Sequence[ArrayLike],dtype:DTypeLike|None=None)->Array
+jax.numpy.ediff1d(ary:ArrayLike,to_end:ArrayLike|None=None,to_begin:ArrayLike|None=None)->Array
+jax.numpy.einsum(subscripts,/,*operands,out:None=None,optimize:str='optimal',precision:PrecisionLike=None,preferred_element_type:DTypeLike|None=None,_use_xeinsum:bool=False,_dot_general:Callable[...,Array]=lax.dot_general)->Array
+jax.numpy.einsum_path(subscripts,*operands,optimize='greedy')
+jax.numpy.empty(shape:Any,dtype:DTypeLike|None=None)->Array
+jax.numpy.empty_like(prototype:ArrayLike|DuckTypedArray,dtype:DTypeLike|None=None,shape:Any=None)->Array
+jax.numpy.expand_dims(a:ArrayLike,axis:int|Sequence[int])->Array
+jax.numpy.extract(condition:ArrayLike,arr:ArrayLike)->Array
+jax.numpy.eye(N:DimSize,M:DimSize|None=None,k:int=0,dtype:DTypeLike|None=None)->Array
+jax.numpy.fix(x:ArrayLike,out:None=None)->Array
+jax.numpy.flatnonzero(a:ArrayLike,*,size:int|None=None,fill_value:None|ArrayLike|tuple[ArrayLike]=None)->Array
+jax.numpy.flip(m:ArrayLike,axis:int|Sequence[int]|None=None)->Array
+jax.numpy.fliplr(m:ArrayLike)->Array
+jax.numpy.flipud(m:ArrayLike)->Array
+jax.numpy.fmax(x1:ArrayLike,x2:ArrayLike)->Array
+jax.numpy.fmin(x1:ArrayLike,x2:ArrayLike)->Array
+jax.numpy.from_dlpack(x:Any)->Array
+jax.numpy.frombuffer(buffer:bytes|Any,dtype:DTypeLike=float,count:int=-1,offset:int=0)->Array
+jax.numpy.fromfile(*args,**kwargs)
+jax.numpy.fromfunction(function:Callable[...,Array],shape:Any,*,dtype:DTypeLike=float,**kwargs)->Array
+jax.numpy.fromiter(*args,**kwargs)
+jax.numpy.fromstring(string:str,dtype:DTypeLike=float,count:int=-1,*,sep:str)->Array
+jax.numpy.full(shape:Any,fill_value:ArrayLike,dtype:DTypeLike|None=None)->Array
+jax.numpy.full_like(a:ArrayLike|DuckTypedArray,fill_value:ArrayLike,dtype:DTypeLike|None=None,shape:Any=None)->Array
+jax.numpy.gcd(x1:ArrayLike,x2:ArrayLike)->Array
+jax.numpy.geomspace(start:ArrayLike,stop:ArrayLike,num:int=50,endpoint:bool=True,dtype:DTypeLike|None=None,axis:int=0)->Array
+jax.numpy.gradient(f:ArrayLike,*varargs:ArrayLike,axis:int|tuple[int,...]|None=None,edge_order:int|None=None)->Array | list[Array]
+jax.numpy.hamming(M:int)->Array
+jax.numpy.hanning(M:int)->Array
+jax.numpy.histogram(a:ArrayLike,bins:ArrayLike=10,range:Sequence[ArrayLike]|None=None,weights:ArrayLike|None=None,density:bool|None=None)->tuple[Array, Array]
+jax.numpy.histogram2d(x:ArrayLike,y:ArrayLike,bins:ArrayLike|list[ArrayLike]=10,range:Sequence[None|Array|Sequence[ArrayLike]]|None=None,weights:ArrayLike|None=None,density:bool|None=None)->tuple[Array, Array, Array]
+jax.numpy.histogram_bin_edges(a:ArrayLike,bins:ArrayLike=10,range:None|Array|Sequence[ArrayLike]=None,weights:ArrayLike|None=None)->Array
+jax.numpy.histogramdd(sample:ArrayLike,bins:ArrayLike|list[ArrayLike]=10,range:Sequence[None|Array|Sequence[ArrayLike]]|None=None,weights:ArrayLike|None=None,density:bool|None=None)->tuple[Array, list[Array]]
+jax.numpy.hstack(tup:np.ndarray|Array|Sequence[ArrayLike],dtype:DTypeLike|None=None)->Array
+jax.numpy.i0(x:ArrayLike)->Array
+jax.numpy.identity(n:DimSize,dtype:DTypeLike|None=None)->Array
+jax.numpy.indices(dimensions:Sequence[int],dtype:DTypeLike=int32,sparse:bool=False)->Array | tuple[Array, ...]
+jax.numpy.inner(a:ArrayLike,b:ArrayLike,*,precision:PrecisionLike=None,preferred_element_type:DType|None=None)->Array
+jax.numpy.insert(arr:ArrayLike,obj:ArrayLike|slice,values:ArrayLike,axis:int|None=None)->Array
+jax.numpy.interp(x:ArrayLike,xp:ArrayLike,fp:ArrayLike,left:ArrayLike|str|None=None,right:ArrayLike|str|None=None,period:ArrayLike|None=None)->Array
+jax.numpy.isclose(a:ArrayLike,b:ArrayLike,rtol:ArrayLike=1e-05,atol:ArrayLike=1e-08,equal_nan:bool=False)->Array
+jax.numpy.iscomplex(x:ArrayLike)->Array
+jax.numpy.iscomplexobj(x:Any)->bool
+jax.numpy.isreal(x:ArrayLike)->Array
+jax.numpy.isrealobj(x:Any)->bool
+jax.numpy.isscalar(element:Any)->bool
+jax.numpy.issubdtype(arg1:DTypeLike,arg2:DTypeLike)->bool
+jax.numpy.ix_(*args:ArrayLike)->tuple[Array, ...]
+jax.numpy.kaiser(M:int,beta:ArrayLike)->Array
+jax.numpy.kron(a:ArrayLike,b:ArrayLike)->Array
+jax.numpy.lcm(x1:ArrayLike,x2:ArrayLike)->Array
+jax.numpy.lexsort(keys:Sequence[ArrayLike],axis:int=-1)->Array
+jax.numpy.linspace(start:ArrayLike,stop:ArrayLike,num:int=50,endpoint:bool=True,retstep:bool=False,dtype:DTypeLike|None=None,axis:int=0)->Array | tuple[Array, Array]
+jax.numpy.load(*args:Any,**kwargs:Any)->Array
+jax.numpy.logspace(start:ArrayLike,stop:ArrayLike,num:int=50,endpoint:bool=True,base:ArrayLike=10.0,dtype:DTypeLike|None=None,axis:int=0)->Array
+jax.numpy.matmul(a:ArrayLike,b:ArrayLike,*,precision:PrecisionLike=None,preferred_element_type:DTypeLike|None=None)->Array
+jax.numpy.matrix_transpose(x:ArrayLike,/)->Array
+jax.numpy.meshgrid(*xi:ArrayLike,copy:bool=True,sparse:bool=False,indexing:str='xy')->list[Array]
+jax.numpy.moveaxis(a:ArrayLike,source:int|Sequence[int],destination:int|Sequence[int])->Array
+jax.numpy.nan_to_num(x:ArrayLike,copy:bool=True,nan:ArrayLike=0.0,posinf:ArrayLike|None=None,neginf:ArrayLike|None=None)->Array
+jax.numpy.nanargmax(a:ArrayLike,axis:int|None=None,out:None=None,keepdims:bool|None=None)->Array
+jax.numpy.nanargmin(a:ArrayLike,axis:int|None=None,out:None=None,keepdims:bool|None=None)->Array
+jax.numpy.nonzero(a:ArrayLike,*,size:int|None=None,fill_value:None|ArrayLike|tuple[ArrayLike,...]=None)->tuple[Array, ...]
+jax.numpy.ones(shape:Any,dtype:DTypeLike|None=None)->Array
+jax.numpy.ones_like(a:ArrayLike|DuckTypedArray,dtype:DTypeLike|None=None,shape:Any=None)->Array
+jax.numpy.outer(a:ArrayLike,b:ArrayLike,out:None=None)->Array
+jax.numpy.packbits(a:ArrayLike,axis:int|None=None,bitorder:str='big')->Array
+jax.numpy.pad(array:ArrayLike,pad_width:PadValueLike[int|Array|np.ndarray],mode:str|Callable[...,Any]='constant',**kwargs)->Array
+jax.numpy.partition(a:ArrayLike,kth:int,axis:int=-1)->Array
+jax.numpy.piecewise(x:ArrayLike,condlist:Array|Sequence[ArrayLike],funclist:list[ArrayLike|Callable[...,Array]],*args,**kw)->Array
+jax.numpy.place(arr:ArrayLike,mask:ArrayLike,vals:ArrayLike,*,inplace:bool=True)->Array
+jax.numpy.put(a:ArrayLike,ind:ArrayLike,v:ArrayLike,mode:str|None=None,*,inplace:bool=True)->Array
+jax.numpy.ravel(a:ArrayLike,order:str='C')->Array
+jax.numpy.ravel_multi_index(multi_index:tuple[ArrayLike,...],dims:tuple[int,...],mode:str='raise',order:str='C')->Array
+jax.numpy.repeat(a:ArrayLike,repeats:ArrayLike,axis:int|None=None,*,total_repeat_length:int|None=None)->Array
+jax.numpy.reshape(a:ArrayLike,newshape:DimSize|Shape,order:str='C')->Array
+jax.numpy.resize(a:ArrayLike,new_shape:Shape)->Array
+jax.numpy.result_type(*args:Any)->DType
+jax.numpy.roll(a:ArrayLike,shift:ArrayLike|Sequence[int],axis:int|Sequence[int]|None=None)->Array
+jax.numpy.rollaxis(a:ArrayLike,axis:int,start:int=0)->Array
+jax.numpy.rot90(m:ArrayLike,k:int=1,axes:tuple[int,int]=(0,1))->Array
+jax.numpy.round(a:ArrayLike,decimals:int=0,out:None=None)->Array
+jax.numpy.searchsorted(a:ArrayLike,v:ArrayLike,side:str='left',sorter:None=None,*,method:str='scan')->Array
+jax.numpy.select(condlist:Sequence[ArrayLike],choicelist:Sequence[ArrayLike],default:ArrayLike=0)->Array
+jax.numpy.sort(a:ArrayLike,axis:int|None=-1,kind:str='quicksort',order:None=None)->Array
+jax.numpy.sort_complex(a:ArrayLike)->Array
+jax.numpy.split(ary:ArrayLike,indices_or_sections:int|Sequence[int]|ArrayLike,axis:int=0)->list[Array]
+jax.numpy.squeeze(a:ArrayLike,axis:int|tuple[int,...]|None=None)->Array
+jax.numpy.stack(arrays:np.ndarray|Array|Sequence[ArrayLike],axis:int=0,out:None=None,dtype:DTypeLike|None=None)->Array
+jax.numpy.swapaxes(a:ArrayLike,axis1:int,axis2:int)->Array
+jax.numpy.take(a:ArrayLike,indices:ArrayLike,axis:int|None=None,out:None=None,mode:str|None=None,unique_indices:bool=False,indices_are_sorted:bool=False,fill_value:ArrayLike|None=None)->Array
+jax.numpy.take_along_axis(arr:ArrayLike,indices:ArrayLike,axis:int|None,mode:str|lax.GatherScatterMode|None=None)->Array
+jax.numpy.tensordot(a:ArrayLike,b:ArrayLike,axes:int|Sequence[int]|Sequence[Sequence[int]]=2,*,precision:PrecisionLike=None,preferred_element_type:DTypeLike|None=None)->Array
+jax.numpy.tile(A:ArrayLike,reps:DimSize|Sequence[DimSize])->Array
+jax.numpy.trace(a:ArrayLike,offset:int=0,axis1:int=0,axis2:int=1,dtype:DTypeLike|None=None,out:None=None)->Array
+jax.numpy.transpose(a:ArrayLike,axes:Sequence[int]|None=None)->Array
+jax.numpy.tri(N:int,M:int|None=None,k:int=0,dtype:DTypeLike=None)->Array
+jax.numpy.tril(m:ArrayLike,k:int=0)->Array
+jax.numpy.tril_indices(n:int,k:int=0,m:int|None=None)->tuple[Array, Array]
+jax.numpy.tril_indices_from(arr:ArrayLike,k:int=0)->tuple[Array, Array]
+jax.numpy.trim_zeros(filt,trim='fb')
+jax.numpy.triu(m:ArrayLike,k:int=0)->Array
+jax.numpy.triu_indices(n:int,k:int=0,m:int|None=None)->tuple[Array, Array]
+jax.numpy.triu_indices_from(arr:ArrayLike,k:int=0)->tuple[Array, Array]
+jax.numpy.trunc(x:ArrayLike)->Array
+jax.numpy.unpackbits(a:ArrayLike,axis:int|None=None,count:int|None=None,bitorder:str='big')->Array
+jax.numpy.unravel_index(indices:ArrayLike,shape:Shape)->tuple[Array, ...]
+jax.numpy.unwrap(p:ArrayLike,discont:ArrayLike|None=None,axis:int=-1,period:ArrayLike=2*pi)->Array
+jax.numpy.vander(x:ArrayLike,N:int|None=None,increasing:bool=False)->Array
+jax.numpy.vdot(a:ArrayLike,b:ArrayLike,*,precision:PrecisionLike=None,preferred_element_type:DTypeLike|None=None)->Array
+jax.numpy.vstack(tup:np.ndarray|Array|Sequence[ArrayLike],dtype:DTypeLike|None=None)->Array
+jax.numpy.where(condition:ArrayLike,x:ArrayLike|None=None,y:ArrayLike|None=None,*,size:int|None=None,fill_value:None|ArrayLike|tuple[ArrayLike,...]=None)->Array | tuple[Array, ...]
+jax.numpy.zeros(shape:Any,dtype:DTypeLike|None=None)->Array
+jax.numpy.zeros_like(a:ArrayLike|DuckTypedArray,dtype:DTypeLike|None=None,shape:Any=None)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/vectorize.py----------------------------------------
@@ -12660,6 +13035,7 @@ jax._src.numpy.vectorize._parse_gufunc_signature(signature:str)->tuple[list[Core
 jax._src.numpy.vectorize._parse_input_dimensions(args:tuple[NDArray,...],input_core_dims:list[CoreDims],error_context:str='')->tuple[tuple[int, ...], dict[str, int]]
 jax._src.numpy.vectorize._update_dim_sizes(dim_sizes:dict[str,int],shape:tuple[int,...],core_dims:CoreDims,error_context:str='',*,is_input:bool)
 jax._src.numpy.vectorize.vectorize(pyfunc,*,excluded=frozenset(),signature=None)
+jax.numpy.vectorize(pyfunc,*,excluded=frozenset(),signature=None)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/numpy/index_tricks.py----------------------------------------
@@ -12946,6 +13322,9 @@ jax._src.pallas.core._preprocess_grid(grid:Grid|int|None)->Grid
 jax._src.pallas.core._tile_ref(ref:state.AbstractRef,block_shape:tuple[int,...]|None)->state.AbstractRef
 jax._src.pallas.core.current_grid_env()->tuple[GridEnv, ...] | None
 jax._src.pallas.core.grid_env(env:tuple[tuple[Any,int],...])->Iterator[None]
+jax.experimental.pallas.BlockSpec(self,index_map:Callable[...,Any]|None=None,block_shape:tuple[int|None,...]|None=None,memory_space:Any=None)
+jax.experimental.pallas.BlockSpec.__init__(self,index_map:Callable[...,Any]|None=None,block_shape:tuple[int|None,...]|None=None,memory_space:Any=None)
+jax.experimental.pallas.BlockSpec.compute_index(self,*args)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/pallas/utils.py----------------------------------------
@@ -12956,6 +13335,10 @@ jax._src.pallas.utils.next_power_of_2(x:int)->int
 jax._src.pallas.utils.pattern_match_scan_to_fori_loop(jaxpr:jax_core.Jaxpr,num_consts:int,num_carry:int)->tuple[jax_core.Jaxpr, bool]
 jax._src.pallas.utils.strides_from_shape(shape:Tuple[int,...])->Tuple[int, ...]
 jax._src.pallas.utils.when(condition)
+jax.experimental.pallas.cdiv(a:int,b:int)->int
+jax.experimental.pallas.next_power_of_2(x:int)->int
+jax.experimental.pallas.strides_from_shape(shape:Tuple[int,...])->Tuple[int, ...]
+jax.experimental.pallas.when(condition)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/pallas/indexing.py----------------------------------------
@@ -12981,6 +13364,8 @@ jax._src.pallas.indexing._broadcast_to_abstract_eval(aval,*,shape)
 jax._src.pallas.indexing._broadcast_to_impl(a,*,shape)
 jax._src.pallas.indexing.broadcast_to(a:jax.Array,shape:Tuple[int,...])->jax.Array
 jax._src.pallas.indexing.dslice(start:int|jax.Array|None,size:int|None=None)->slice | Slice
+jax.experimental.pallas.broadcast_to(a:jax.Array,shape:Tuple[int,...])->jax.Array
+jax.experimental.pallas.dslice(start:int|jax.Array|None,size:int|None=None)->slice | Slice
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/pallas/pallas_call.py----------------------------------------
@@ -13053,6 +13438,7 @@ jax._src.pallas.pallas_call._pallas_call_impl(*args,jaxpr,name,out_shapes,which_
 jax._src.pallas.pallas_call._pallas_call_jvp_rule(primals,tangents,*,jaxpr,name,which_linear,input_output_aliases:Tuple[Tuple[int,int],...],in_shapes,out_shapes,grid_mapping,debug,interpret,**compiler_params:Any)
 jax._src.pallas.pallas_call._trace_to_jaxpr(fun:Callable,grid_spec:GridSpec,flat_in_avals,flat_out_avals,in_tree,out_tree)
 jax._src.pallas.pallas_call.pallas_call(f:Callable[...,None],out_shape:Any,*,grid_spec:GridSpec|None=None,debug:bool=False,grid:Grid|None=None,in_specs:Sequence[BlockSpec|NoBlockSpec]|NoBlockSpec=no_block_spec,out_specs:BlockSpec|NoBlockSpec|Sequence[BlockSpec|NoBlockSpec]=no_block_spec,input_output_aliases:Dict[int,int]={},interpret:bool=False,name:str|None=None,**compiler_params:Any)
+jax.experimental.pallas.pallas_call(f:Callable[...,None],out_shape:Any,*,grid_spec:GridSpec|None=None,debug:bool=False,grid:Grid|None=None,in_specs:Sequence[BlockSpec|NoBlockSpec]|NoBlockSpec=no_block_spec,out_specs:BlockSpec|NoBlockSpec|Sequence[BlockSpec|NoBlockSpec]=no_block_spec,input_output_aliases:Dict[int,int]={},interpret:bool=False,name:str|None=None,**compiler_params:Any)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/pallas/primitives.py----------------------------------------
@@ -13126,6 +13512,14 @@ jax._src.pallas.primitives.program_id(axis)
 jax._src.pallas.primitives.program_id_bind(*,axis:int)
 jax._src.pallas.primitives.store(x_ref,idx,val,*,mask=None,eviction_policy='')->None
 jax._src.pallas.primitives.swap(x_ref,idx,val,*,mask=None,eviction_policy='')->Any
+jax.experimental.pallas.atomic_cas(ref,cmp,val)
+jax.experimental.pallas.dot(a,b,trans_a:bool=False,trans_b:bool=False,allow_tf32:bool|None=None,precision=None)
+jax.experimental.pallas.load(x_ref,idx,*,mask=None,other=None,cache_modifier='',eviction_policy='',volatile=False)
+jax.experimental.pallas.max_contiguous(x,values)
+jax.experimental.pallas.multiple_of(x,values)
+jax.experimental.pallas.program_id(axis)
+jax.experimental.pallas.store(x_ref,idx,val,*,mask=None,eviction_policy='')->None
+jax.experimental.pallas.swap(x_ref,idx,val,*,mask=None,eviction_policy='')->Any
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/pallas/triton/lowering.py----------------------------------------
@@ -13549,10 +13943,12 @@ A:jax._src.pallas.mosaic.core.jaxpr_scalar_ref_avals->jax._src.tree_util.tree_un
 A:jax._src.pallas.mosaic.core.jaxpr_in_ref_avals->jax._src.tree_util.tree_unflatten(in_avals_tree, in_ref_avals)
 A:jax._src.pallas.mosaic.core.jaxpr_out_avals->jax._src.tree_util.tree_unflatten(out_tree, out_ref_avals)
 jax._src.pallas.mosaic.PrefetchScalarGridSpec(self,num_scalar_prefetch:int,grid:Grid|None=None,in_specs:BlockSpec|Sequence[BlockSpec|NoBlockSpec]|NoBlockSpec=no_block_spec,out_specs:BlockSpec|Sequence[BlockSpec|NoBlockSpec]|NoBlockSpec=no_block_spec)
+jax._src.pallas.mosaic.PrefetchScalarGridSpec.__init__(self,num_scalar_prefetch:int,grid:Grid|None=None,in_specs:BlockSpec|Sequence[BlockSpec|NoBlockSpec]|NoBlockSpec=no_block_spec,out_specs:BlockSpec|Sequence[BlockSpec|NoBlockSpec]|NoBlockSpec=no_block_spec)
 jax._src.pallas.mosaic.PrefetchScalarGridSpec.get_grid_mapping(self,in_avals,in_tree,out_avals,out_tree)->tuple[tuple[jax_core.AbstractValue, ...], GridMapping]
 jax._src.pallas.mosaic.SemaphoreType(enum.Enum)
 jax._src.pallas.mosaic.SemaphoreType.get_aval(self)->AbstractSemaphore
 jax._src.pallas.mosaic.TPUMemorySpace(self,shape:tuple[int,...],dtype:jnp.dtype)
+jax._src.pallas.mosaic.TPUMemorySpace.__call__(self,shape:tuple[int,...],dtype:jnp.dtype)
 jax._src.pallas.mosaic.TPUMemorySpace.__str__(self)->str
 jax._src.pallas.mosaic.core.AbstractMemoryRef(self,inner_aval:jax_core.AbstractValue,memory_space:TPUMemorySpace)
 jax._src.pallas.mosaic.core.AbstractMemoryRef.__eq__(self,other)
@@ -13685,6 +14081,11 @@ jax._src.third_party.scipy.interpolate.RegularGridInterpolator._evaluate_linear(
 jax._src.third_party.scipy.interpolate.RegularGridInterpolator._evaluate_nearest(self,indices,norm_distances)
 jax._src.third_party.scipy.interpolate.RegularGridInterpolator._find_indices(self,xi)
 jax._src.third_party.scipy.interpolate._ndim_coords_from_arrays(points,ndim=None)
+jax.scipy.interpolate.RegularGridInterpolator(self,points,values,method='linear',bounds_error=False,fill_value=nan)
+jax.scipy.interpolate.RegularGridInterpolator.__init__(self,points,values,method='linear',bounds_error=False,fill_value=nan)
+jax.scipy.interpolate.RegularGridInterpolator._evaluate_linear(self,indices,norm_distances)
+jax.scipy.interpolate.RegularGridInterpolator._evaluate_nearest(self,indices,norm_distances)
+jax.scipy.interpolate.RegularGridInterpolator._find_indices(self,xi)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/third_party/scipy/betaln.py----------------------------------------
@@ -13774,6 +14175,27 @@ jax._src.nn.functions.soft_sign(x:Array)->Array
 jax._src.nn.functions.softmax(x:Array,axis:Optional[Union[int,tuple[int,...]]]=-1,where:Optional[Array]=None,initial:Optional[Array]=None)->Array
 jax._src.nn.functions.softplus(x:Array)->Array
 jax._src.nn.functions.standardize(x:Array,axis:Optional[Union[int,tuple[int,...]]]=-1,mean:Optional[Array]=None,variance:Optional[Array]=None,epsilon:Array=1e-05,where:Optional[Array]=None)->Array
+jax.nn.celu(x:Array,alpha:Array=1.0)->Array
+jax.nn.elu(x:Array,alpha:Array=1.0)->Array
+jax.nn.gelu(x:Array,approximate:bool=True)->Array
+jax.nn.glu(x:Array,axis:int=-1)->Array
+jax.nn.hard_sigmoid(x:Array)->Array
+jax.nn.hard_silu(x:Array)->Array
+jax.nn.hard_tanh(x:Array)->Array
+jax.nn.leaky_relu(x:Array,negative_slope:Array=0.01)->Array
+jax.nn.log_sigmoid(x:Array)->Array
+jax.nn.log_softmax(x:Array,axis:Optional[Union[int,tuple[int,...]]]=-1,where:Optional[Array]=None,initial:Optional[Array]=None)->Array
+jax.nn.normalize(x:Array,axis:Optional[Union[int,tuple[int,...]]]=-1,mean:Optional[Array]=None,variance:Optional[Array]=None,epsilon:Array=1e-05,where:Optional[Array]=None)->Array
+jax.nn.one_hot(x:Array,num_classes:int,*,dtype:Any=jnp.float_,axis:Union[int,AxisName]=-1)->Array
+jax.nn.relu(x:Array)->Array
+jax.nn.relu6(x:Array)->Array
+jax.nn.selu(x:Array)->Array
+jax.nn.sigmoid(x:Array)->Array
+jax.nn.silu(x:Array)->Array
+jax.nn.soft_sign(x:Array)->Array
+jax.nn.softmax(x:Array,axis:Optional[Union[int,tuple[int,...]]]=-1,where:Optional[Array]=None,initial:Optional[Array]=None)->Array
+jax.nn.softplus(x:Array)->Array
+jax.nn.standardize(x:Array,axis:Optional[Union[int,tuple[int,...]]]=-1,mean:Optional[Array]=None,variance:Optional[Array]=None,epsilon:Array=1e-05,where:Optional[Array]=None)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/nn/initializers.py----------------------------------------
@@ -13842,6 +14264,10 @@ jax._src.ops.scatter.segment_max(data:Array,segment_ids:Array,num_segments:Optio
 jax._src.ops.scatter.segment_min(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
 jax._src.ops.scatter.segment_prod(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
 jax._src.ops.scatter.segment_sum(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
+jax.ops.segment_max(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
+jax.ops.segment_min(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
+jax.ops.segment_prod(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
+jax.ops.segment_sum(data:Array,segment_ids:Array,num_segments:Optional[int]=None,indices_are_sorted:bool=False,unique_indices:bool=False,bucket_size:Optional[int]=None,mode:Optional[lax.GatherScatterMode]=None)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/ops/special.py----------------------------------------
@@ -13946,70 +14372,6 @@ A:jax._src.interpreters.ad.n->sum(primal_counts)
 A:jax._src.interpreters.ad.primal_groups->split_list(primals, primal_counts[:-1])
 A:jax._src.interpreters.ad.tangent_groups->split_list(tangents, tangent_counts[:-1])
 A:jax._src.interpreters.ad.(res, _)->split_list(invals, [num_res])
-jax._src.ad.CustomJVPException(self)
-jax._src.ad.CustomVJPException(self)
-jax._src.ad.JVPTrace(Trace)
-jax._src.ad.JVPTrace.join(self,xt,yt)
-jax._src.ad.JVPTrace.lift(self,val)
-jax._src.ad.JVPTrace.post_process_call(self,call_primitive,out_tracers,params)
-jax._src.ad.JVPTrace.post_process_custom_jvp_call(self,out_tracers,_)
-jax._src.ad.JVPTrace.post_process_custom_vjp_call(self,out_tracers,_)
-jax._src.ad.JVPTrace.process_call(self,call_primitive,f,tracers,params)
-jax._src.ad.JVPTrace.process_custom_jvp_call(self,_,__,f_jvp,tracers,*,symbolic_zeros)
-jax._src.ad.JVPTrace.process_custom_vjp_call(self,_,__,fwd,bwd,tracers,out_trees,symbolic_zeros)
-jax._src.ad.JVPTrace.process_primitive(self,primitive,tracers,params)
-jax._src.ad.JVPTrace.pure(self,val)
-jax._src.ad.JVPTrace.sublift(self,val)
-jax._src.ad.JVPTracer(self,trace,primal,tangent)
-jax._src.ad.JVPTracer.aval(self)
-jax._src.ad.JVPTracer.full_lower(self)
-jax._src.ad.UndefinedPrimal(self,aval)
-jax._src.ad.UndefinedPrimal.__repr__(self)
-jax._src.ad._closed_call_transpose(params,jaxpr,args,ct,cts_in_avals,reduce_axes)
-jax._src.ad._custom_lin_transpose(cts_out,*invals,num_res,bwd,out_avals,symbolic_zeros)
-jax._src.ad._interleave(xs,ys)
-jax._src.ad._jvp_jaxpr(jaxpr,nonzeros,instantiate)
-jax._src.ad._perm(primal_counts,tangent_counts,lst)
-jax._src.ad._primal_tangent_shapes_match(primal,tangent)
-jax._src.ad.add_tangents(x,y)
-jax._src.ad.backward_pass(jaxpr:core.Jaxpr,reduce_axes,transform_stack,consts,primals_in,cotangents_in)
-jax._src.ad.bilinear_transpose(lhs_rule,rhs_rule,cotangent,x,y,**kwargs)
-jax._src.ad.call_transpose(primitive,params,call_jaxpr,args,ct,_,reduce_axes)
-jax._src.ad.closed_backward_pass(jaxpr:core.ClosedJaxpr,reduce_axes,transform_stack,primals_in,cotangents_in)
-jax._src.ad.defbilinear(prim,lhs_rule,rhs_rule)
-jax._src.ad.defjvp(primitive,*jvprules)
-jax._src.ad.defjvp2(primitive,*jvprules)
-jax._src.ad.defjvp_zero(primitive)
-jax._src.ad.deflinear(primitive,transpose_rule)
-jax._src.ad.deflinear2(primitive,transpose_rule)
-jax._src.ad.f_jvp_traceable(nonzeros,*primals_and_nztangents)
-jax._src.ad.get_primitive_transpose(p)
-jax._src.ad.identity(x)
-jax._src.ad.instantiate_zeros(tangent)
-jax._src.ad.instantiate_zeros_aval(aval,tangent)
-jax._src.ad.is_undefined_primal(x)
-jax._src.ad.jvp(fun:lu.WrappedFun,has_aux=False,instantiate=True,transform_stack=True)->Any
-jax._src.ad.jvp_jaxpr(jaxpr:core.ClosedJaxpr,nonzeros:Sequence[bool],instantiate:Union[bool,Sequence[bool]])->tuple[core.ClosedJaxpr, list[bool]]
-jax._src.ad.jvp_subtrace(main,primals,tangents)
-jax._src.ad.jvp_subtrace_aux(main,primals,tangents)
-jax._src.ad.jvpfun(instantiate,transform_stack,primals,tangents)
-jax._src.ad.linear_jvp(primitive,primals,tangents,**params)
-jax._src.ad.linear_transpose(transpose_rule,cotangent,*args,**kwargs)
-jax._src.ad.linear_transpose2(transpose_rule,cotangent,*args,**kwargs)
-jax._src.ad.linearize(traceable,*primals,**kwargs)
-jax._src.ad.map_transpose(primitive,params,call_jaxpr,args,ct,_,reduce_axes)
-jax._src.ad.nonzero_outputs(*args,**kwargs)
-jax._src.ad.nonzero_tangent_outputs(*args,**kwargs)
-jax._src.ad.raise_custom_vjp_error_on_jvp(*_,**__)
-jax._src.ad.rearrange_binders(jaxpr:core.ClosedJaxpr,primals_in,tangents_in,primals_out,tangents_out)
-jax._src.ad.recast_to_float0(primal,tangent)
-jax._src.ad.replace_float0s(primal,tangent)
-jax._src.ad.standard_jvp(jvprules,primitive,primals,tangents,**params)
-jax._src.ad.standard_jvp2(jvprules,primitive,primals,tangents,**params)
-jax._src.ad.traceable(in_tree,*primals_and_tangents)
-jax._src.ad.unpair_pval(pval)
-jax._src.ad.vjp(traceable,primals,has_aux=False,reduce_axes=())
-jax._src.ad.zero_jvp(primitive,primals,tangents,**params)
 jax._src.interpreters.ad.CustomJVPException(self)
 jax._src.interpreters.ad.CustomJVPException.__init__(self)
 jax._src.interpreters.ad.CustomVJPException(self)
@@ -14178,93 +14540,6 @@ A:jax._src.interpreters.batching.broadcast_dims->tuple(np.delete(np.arange(len(s
 A:jax._src.interpreters.batching.x->moveaxis(x, bdx, bdy)
 A:jax._src.interpreters.batching._->jax._src.core.get_aval(x)
 A:jax._src.interpreters.batching.y->broadcast(y, x.shape[bdx], bdx)
-jax._src.batching.BatchTrace(self,*args,axis_name,spmd_axis_name=None)
-jax._src.batching.BatchTrace.get_axis_primitive_batcher(self,primitive,frame)
-jax._src.batching.BatchTrace.get_frame(self,vals,dims)->core.AxisEnvFrame
-jax._src.batching.BatchTrace.get_primitive_batcher(self,primitive,frame)
-jax._src.batching.BatchTrace.lift(self,val)
-jax._src.batching.BatchTrace.post_process_call(self,call_primitive,out_tracers,params)
-jax._src.batching.BatchTrace.post_process_custom_jvp_call(self,out_tracers,jvp_was_run)
-jax._src.batching.BatchTrace.post_process_custom_vjp_call(self,out_tracers,_)
-jax._src.batching.BatchTrace.post_process_custom_vjp_call_fwd(self,out_tracers,out_trees)
-jax._src.batching.BatchTrace.post_process_map(self,call_primitive,out_tracers,params)
-jax._src.batching.BatchTrace.process_call(self,call_primitive,f,tracers,params)
-jax._src.batching.BatchTrace.process_custom_jvp_call(self,prim,fun,jvp,tracers,*,symbolic_zeros)
-jax._src.batching.BatchTrace.process_custom_vjp_call(self,prim,fun,fwd,bwd,tracers,*,out_trees,symbolic_zeros)
-jax._src.batching.BatchTrace.process_map(self,map_primitive,f:lu.WrappedFun,tracers,params)
-jax._src.batching.BatchTrace.process_primitive(self,primitive,tracers,params)
-jax._src.batching.BatchTrace.pure(self,val)
-jax._src.batching.BatchTrace.sublift(self,val)
-jax._src.batching.BatchTracer(self,trace,val,batch_dim:NotMapped|int|RaggedAxis,source_info:source_info_util.SourceInfo|None=None)
-jax._src.batching.BatchTracer._contents(self)
-jax._src.batching.BatchTracer._origin_msg(self)
-jax._src.batching.BatchTracer.aval(self)
-jax._src.batching.BatchTracer.full_lower(self)
-jax._src.batching.BatchTracer.get_referent(self)
-jax._src.batching.IndexedAxisSize
-jax._src.batching.IndexedAxisSize.__repr__(self)->str
-jax._src.batching.Jumble
-jax._src.batching.JumbleAxis
-jax._src.batching.JumbleTy
-jax._src.batching.JumbleTy.__repr__(self)->str
-jax._src.batching.RaggedAxis
-jax._src.batching.RaggedAxis.move_stacked_axis(self:RaggedAxis,dst:int)->RaggedAxis
-jax._src.batching.RaggedAxis.size(self)
-jax._src.batching.ZeroIfMapped
-jax._src.batching._batch_jaxpr(closed_jaxpr,axis_size,in_batched,instantiate,axis_name,spmd_axis_name,main_type)
-jax._src.batching._batch_jaxpr2(closed_jaxpr:core.ClosedJaxpr,axis_size:core.AxisSize,in_axes:tuple[int|NotMapped|RaggedAxis,...],axis_name:AxisName,spmd_axis_name:AxisName,main_type:type[BatchTrace])->tuple[core.ClosedJaxpr, tuple[int | NotMapped, ...]]
-jax._src.batching._batch_jaxpr_axes(closed_jaxpr,axis_size,in_axes,out_axes_dest,axis_name,spmd_axis_name,main_type)
-jax._src.batching._batch_jaxpr_outer(axis_name,spmd_axis_name,axis_size,in_dims,main_type,*in_vals)
-jax._src.batching._batch_outer(axis_name,axis_size,in_dims,main_type,spmd_axis_name,*in_vals)
-jax._src.batching._handle_scalar_broadcasting(nd,x,d)
-jax._src.batching._jumble_flatten(jumble)
-jax._src.batching._jumble_result(axis_size,stacked_axis,ragged_axes,x)
-jax._src.batching._jumble_unflatten(aval,x)
-jax._src.batching._locate_value(key,in_vals,out_vals)
-jax._src.batching._main_trace_for_axis_names(main_trace:core.MainTrace,axis_name:Iterable[AxisName])->bool
-jax._src.batching._mask_one_ragged_axis(operand:Array,ident,axis_spec:RaggedAxis)->Array
-jax._src.batching._match_axes_and_sum(axis_size,axis_name,out_dims_thunk,out_dim_dests,*in_vals)
-jax._src.batching._match_axes_jaxpr(axis_size,out_axes_dest,out_axes,main,in_axes,*in_vals)
-jax._src.batching._matchaxis_symbolic_zeros(axis_name,sz,name,src,dst,x,sum_match=False)
-jax._src.batching._merge_bdims(x,y)
-jax._src.batching._sorted_ragged_axis(stacked_axis,ragged_axes)
-jax._src.batching.add_batched(batched_args,batch_dims)
-jax._src.batching.batch(fun:lu.WrappedFun,axis_name:AxisName,axis_size,in_dims,out_dim_dests,main_type:type[BatchTrace]=BatchTrace,spmd_axis_name:tuple[AxisName,...]|None=None)->lu.WrappedFun
-jax._src.batching.batch_custom_jvp_subtrace(main,in_dims,*in_vals)
-jax._src.batching.batch_custom_vjp_bwd(bwd,axis_name,axis_size,in_dims,out_dim_dests,main_type,spmd_axis_name)
-jax._src.batching.batch_jaxpr(closed_jaxpr,axis_size,in_batched,instantiate,axis_name,spmd_axis_name,main_type)
-jax._src.batching.batch_jaxpr2(closed_jaxpr:core.ClosedJaxpr,axis_size:core.AxisSize,in_axes:tuple[int|NotMapped|RaggedAxis,...],axis_name:AxisName,spmd_axis_name:AxisName,main_type:type[BatchTrace])->tuple[core.ClosedJaxpr, tuple[int | NotMapped | RaggedAxis, ...]]
-jax._src.batching.batch_jaxpr_axes(closed_jaxpr,axis_size,in_axes,out_axes_dest,axis_name,spmd_axis_name,main_type)
-jax._src.batching.batch_subtrace(main,in_dims,*in_vals)
-jax._src.batching.bdim_as_shape(bdim:int|RaggedAxis,data_shape:core.Shape)->core.Shape
-jax._src.batching.bdim_at_front(x,bdim,size)
-jax._src.batching.broadcast(x,sz,axis)
-jax._src.batching.broadcast_batcher(prim,args,dims,**params)
-jax._src.batching.defbroadcasting(prim)
-jax._src.batching.defreducer(prim,ident)
-jax._src.batching.defvectorized(prim)
-jax._src.batching.flatten_fun_for_vmap(in_tree,*args_flat)
-jax._src.batching.from_elt(trace:BatchTrace,axis_size:AxisSize,x:Elt,spec:MapSpec)->Vmappable
-jax._src.batching.handle_ragged(in_avals:list[core.AbstractValue],dim:RaggedAxis,aval:core.ShapedArray)->tuple[int, core.ShapedArray]
-jax._src.batching.indirectify_ragged_axes(dims)
-jax._src.batching.indirectify_ragged_axes_against_inputs_outputs(dims,in_vals,out_vals)
-jax._src.batching.is_vmappable(x:Any)->bool
-jax._src.batching.make_batch_axis(ndim:int,stacked_axis:int,ragged_axes:list[tuple[int,Array]])->int | RaggedAxis
-jax._src.batching.make_iota(axis_size:AxisSize)->Array
-jax._src.batching.mask_ragged_axes(operand:Array,ident,axis_spec:RaggedAxis)->Array
-jax._src.batching.matchaxis(axis_name,sz,src,dst,x,sum_match=False)
-jax._src.batching.move_stacked_axis(operand,bdim,dst)
-jax._src.batching.reducer_batcher(prim,ident,batched_args,batch_dims,axes,**params)
-jax._src.batching.register_vmappable(data_type:type,spec_type:type,axis_size_type:type,to_elt:Callable,from_elt:Callable,make_iota:Callable|None)
-jax._src.batching.resolve_ragged_axes(vals,dims)
-jax._src.batching.resolve_ragged_axes_against_inputs_outputs(in_vals,out_vals,dims)
-jax._src.batching.shape_as_bdim(stacked_axis:int,data_shape:core.Shape)->int | RaggedAxis
-jax._src.batching.to_elt(trace:Trace,get_idx:GetIdx,x:Vmappable,spec:MapSpec)->Elt
-jax._src.batching.transpose_ragged_axes(dim:RaggedAxis,perm:tuple[int,...])->RaggedAxis
-jax._src.batching.unregister_vmappable(data_type:type)->None
-jax._src.batching.vectorized_batcher(prim,batched_args,batch_dims,**params)
-jax._src.batching.vtile(f_flat:lu.WrappedFun,in_axes_flat:tuple[int|None,...],out_axes_flat:tuple[int|None,...],tile_size:int|None,axis_name:AxisName,main_type:type[BatchTrace]=BatchTrace)
-jax._src.batching.zeros_like_batched(batched_args,batch_dims)
 jax._src.interpreters.batching.BatchTrace(self,*args,axis_name,spmd_axis_name=None)
 jax._src.interpreters.batching.BatchTrace.__init__(self,*args,axis_name,spmd_axis_name=None)
 jax._src.interpreters.batching.BatchTrace.get_axis_primitive_batcher(self,primitive,frame)
@@ -14406,27 +14681,6 @@ jax._src.interpreters.xla.register_translation(prim:core.Primitive,rule:Translat
 jax._src.interpreters.xla.sharding_to_proto(sharding:SpatialSharding)
 jax._src.interpreters.xla.tuple_sharding_proto(elems)
 jax._src.interpreters.xla.xla_destructure(c,ans)
-jax._src.xla.TranslationContext
-jax._src.xla.TranslationContext.replace(self,**kw)
-jax._src.xla._BackendSpecificTranslationsAdapter(defaultdict)
-jax._src.xla._BackendSpecificTranslationsAdapter.__missing__(self,key)
-jax._src.xla._TranslationRuleAdapter(self,translations,wrap_fn:Callable[[core.Primitive,Callable],TranslationRule])
-jax._src.xla._TranslationRuleAdapter.__setitem__(self,key:core.Primitive,value:Callable)
-jax._src.xla._canonicalize_masked_array_dtype(x)
-jax._src.xla._canonicalize_ndarray_dtype(x)
-jax._src.xla._canonicalize_python_scalar_dtype(typ,x)
-jax._src.xla._make_abstract_python_scalar(typ,val)
-jax._src.xla._make_array_shape(aval:ShapedArray)->Sequence[xc.Shape]
-jax._src.xla._wrap_old_translation(prim:core.Primitive,f:Callable)->TranslationRule
-jax._src.xla.abstractify(x)->Any
-jax._src.xla.aval_to_xla_shapes(aval:core.AbstractValue)->Sequence[xc.Shape]
-jax._src.xla.canonicalize_dtype(x)
-jax._src.xla.identity(x)
-jax._src.xla.parameter(builder,num,shape,name=None,replicated=None)
-jax._src.xla.primitive_subcomputation(platform:str,axis_env:'AxisEnv',prim:core.Primitive,avals_in:Sequence[core.AbstractValue],avals_out:Sequence[core.AbstractValue],**params)
-jax._src.xla.register_initial_style_primitive(prim:core.Primitive)
-jax._src.xla.register_translation(prim:core.Primitive,rule:TranslationRule,*,platform:Optional[str]=None)->None
-jax._src.xla.xla_destructure(c,ans)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/interpreters/pxla.py----------------------------------------
@@ -14800,150 +15054,6 @@ jax._src.interpreters.pxla.vtile_manual(manual_axes:frozenset[sharding_impls.Mes
 jax._src.interpreters.pxla.xla_call_jvp_update_params(params,nz_tangents)
 jax._src.interpreters.pxla.xla_pmap_impl(fun:lu.WrappedFun,*args,**params)
 jax._src.interpreters.pxla.xla_pmap_impl_lazy(fun:lu.WrappedFun,*args,backend:str|None,axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Sequence[Any]|None,name:str,in_axes:Sequence[int|None],out_axes_thunk:Callable[[],Sequence[int|None]],donated_invars:Sequence[bool],is_explicit_global_axis_size:bool)->Callable
-jax._src.pxla.DeviceAssignmentMismatch
-jax._src.pxla.DeviceAssignmentMismatch._dev_ids_plat_str(self)
-jax._src.pxla.DeviceAssignmentMismatch._maybe_api_name(self,api_name)->str
-jax._src.pxla.DeviceAssignmentMismatch._str(self,api_name)
-jax._src.pxla.DeviceAssignmentMismatch.device_ids(self)->Sequence[int]
-jax._src.pxla.DeviceAssignmentMismatch.m_type_str(self,api_name)
-jax._src.pxla.DeviceAssignmentMismatch.platform(self)->str
-jax._src.pxla.DeviceAssignmentMismatch.source_info_str(self)
-jax._src.pxla.DeviceAssignmentMismatchError(Exception)
-jax._src.pxla.EmapInfo(NamedTuple)
-jax._src.pxla.ExecuteReplicated(self,xla_executable,name,backend,in_handler:InputsHandler,out_handler:ResultsHandler,unordered_effects:list[core.Effect],ordered_effects:list[core.Effect],keepalive:Any,has_host_callbacks:bool,kept_var_idx:set[int])
-jax._src.pxla.ExecuteReplicated._add_tokens_to_inputs(self,input_bufs)
-jax._src.pxla.ExecuteReplicated._handle_token_bufs(self,token_bufs,sharded_token)
-jax._src.pxla.InputsHandler(self,local_devices,in_shardings,input_indices)
-jax._src.pxla.InputsHandler.__str__(self)
-jax._src.pxla.MapTrace(self,*args,emap_info)
-jax._src.pxla.MapTrace.process_axis_index(self,frame)
-jax._src.pxla.MapTrace.process_call(self,call_primitive,fun,tracers,params)
-jax._src.pxla.MapTrace.process_custom_jvp_call(self,prim,fun,jvp,tracers,*,symbolic_zeros)
-jax._src.pxla.MapTrace.process_custom_vjp_call(self,primitive,fun,fwd,bwd,tracers,out_trees,symbolic_zeros)
-jax._src.pxla.MapTrace.process_map(self,map_primitive,fun,tracers,params)
-jax._src.pxla.MapTrace.process_primitive(self,primitive,tracers,params)
-jax._src.pxla.MapTrace.pure(self,val)
-jax._src.pxla.MapTrace.sublift(self,tracer)
-jax._src.pxla.MapTracer(self,trace:MapTrace,val,shard_axes:dict[core.AxisName,int])
-jax._src.pxla.MapTracer.__str__(self)
-jax._src.pxla.MapTracer.aval(self)
-jax._src.pxla.MapTracer.full_lower(self)
-jax._src.pxla.MeshComputation(self,name:str,hlo:ir.Module|None,donated_invars:Sequence[bool],**compile_args)
-jax._src.pxla.MeshComputation.compile(self,compiler_options=None)->MeshExecutable
-jax._src.pxla.MeshComputation.cost_analysis(self)->dict[str, float]
-jax._src.pxla.MeshComputation.stablehlo(self)->ir.Module
-jax._src.pxla.MeshExecutable(self,xla_executable,build_unsafe_call,in_avals,in_shardings,out_shardings,auto_spmd_lowering,kept_var_idx,jaxpr_debug_info=None,unloaded_executable=None)
-jax._src.pxla.MeshExecutable.call(self,*args)
-jax._src.pxla.MeshExecutable.create_cpp_call(self,no_kwargs,in_tree,out_tree)
-jax._src.pxla.MeshExecutable.create_cpp_call_for_apply_primitive(self,out_tree)
-jax._src.pxla.MeshExecutable.unsafe_call(self)->Callable[..., Any]
-jax._src.pxla.MeshExecutable.xla_extension_executable(self)
-jax._src.pxla.MeshExecutableFastpathData(NamedTuple)
-jax._src.pxla.MismatchType(enum.Enum)
-jax._src.pxla.MismatchType.__str__(self)
-jax._src.pxla.ParallelCallableInfo
-jax._src.pxla.ParallelCallableInfo.local_devices(self)
-jax._src.pxla.ParallelCallableInfo.out_axes(self)
-jax._src.pxla.PmapComputation(self,hlo:ir.Module,**compile_args)
-jax._src.pxla.PmapComputation.compile(self,compiler_options=None)->PmapExecutable
-jax._src.pxla.PmapComputation.stablehlo(self)->ir.Module
-jax._src.pxla.PmapExecutable(self,xla_executable,build_unsafe_call,fingerprint,in_avals,jaxpr_debug_info,unloaded_executable)
-jax._src.pxla.PmapExecutable.call(self,*args)
-jax._src.pxla.PmapExecutable.unsafe_call(self)->Callable[..., Any]
-jax._src.pxla.PmapExecutable.xla_extension_executable(self)
-jax._src.pxla.ReplicaInfo(NamedTuple)
-jax._src.pxla.ResultsHandler(self,handlers,out_shardings,out_avals)
-jax._src.pxla.SPMDBatchTrace(batching.BatchTrace)
-jax._src.pxla.SPMDBatchTrace.get_axis_primitive_batcher(self,primitive,frame)
-jax._src.pxla.SemanticallyEqualShardings
-jax._src.pxla.SemanticallyEqualShardings.__eq__(self,other)
-jax._src.pxla.SemanticallyEqualShardings.__hash__(self)
-jax._src.pxla.ShardInfo(NamedTuple)
-jax._src.pxla.TileManual
-jax._src.pxla.TileVectorize
-jax._src.pxla.UnloadedMeshExecutable
-jax._src.pxla.UnloadedMeshExecutable.build_unsafe_call(self)
-jax._src.pxla.UnloadedMeshExecutable.from_hlo(name:str,hlo:ir.Module,global_in_avals:Sequence[ShapedArray],global_out_avals:Sequence[ShapedArray],in_shardings:Sequence[sharding_impls.XLACompatibleSharding|AUTO],out_shardings:Sequence[sharding_impls.XLACompatibleSharding|AUTO|UnspecifiedValue],spmd_lowering:bool,tuple_args:bool,auto_spmd_lowering:bool,unordered_effects:list[core.Effect],ordered_effects:list[core.Effect],host_callbacks:list[Any],keepalive:Any,kept_var_idx:set[int],backend:xb.XlaBackend,device_assignment:_DeviceAssignment|Sequence[xc.Device],committed:bool,pmap_nreps:int=1,jaxpr_debug_info:core.JaxprDebugInfo|None=None,shape_poly_state:mlir.ShapePolyLoweringState|None=None,all_default_mem_kind:bool=True,compiler_options=None)->MeshExecutable
-jax._src.pxla.UnloadedMeshExecutable.load(self)->MeshExecutable
-jax._src.pxla.UnloadedPmapExecutable
-jax._src.pxla.UnloadedPmapExecutable.build_execute_fun(self)
-jax._src.pxla.UnloadedPmapExecutable.from_hlo(hlo:ir.Module,pci:ParallelCallableInfo,replicas:ReplicaInfo,shards:ShardInfo,tuple_args:bool,unordered_effects:list[core.Effect],ordered_effects:list[core.Effect],host_callbacks:list[Any],keepalive:Any,jaxpr_debug_info:core.JaxprDebugInfo,compiler_options=None)
-jax._src.pxla.UnloadedPmapExecutable.load(self)->PmapExecutable
-jax._src.pxla.WeakRefList(list)
-jax._src.pxla._axis_groups(mesh_spec,mesh_axes)
-jax._src.pxla._axis_read(axis_env,axis_name)
-jax._src.pxla._cached_compilation(computation,name,mesh,spmd_lowering,tuple_args,auto_spmd_lowering,_allow_propagation_to_outputs,host_callbacks,backend,da,pmap_nreps,compiler_options_keys,compiler_options_values)
-jax._src.pxla._cached_lowering_to_hlo(closed_jaxpr,api_name,fun_name,backend,semantic_in_shardings,semantic_out_shardings,da_object,lowering_platform,donated_invars,name_stack,all_default_mem_kind,override_lowering_rules)
-jax._src.pxla._cast_to_shaped_array(aval:core.AbstractValue)->ShapedArray
-jax._src.pxla._compile_replicated_mesh_executable_from_hlo(computation,name,global_in_avals,global_out_avals,semantics_in_shardings,semantics_out_shardings,auto_spmd_lowering,compile_options,host_callbacks,has_unordered_effects,ordered_effects,kept_var_idx,backend,da,committed,pmap_nreps,jaxpr_debug_info)
-jax._src.pxla._compile_replicated_pmap_executable_from_hlo(hlo:ir.Module,pci,input_indices,in_shardings,handle_outs,compile_options,host_callbacks,has_unordered_effects,ordered_effects,jaxpr_debug_info)
-jax._src.pxla._create_da_object(device_assignment:tuple[xc.Device,...])->_DeviceAssignment
-jax._src.pxla._emap_impl(fun:lu.WrappedFun,*args,backend:str|None,axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Sequence[Any]|None,name:str,in_axes:Sequence[int|None],out_axes_thunk:Callable[[],Sequence[int|None]],donated_invars:Sequence[bool],is_explicit_global_axis_size:bool)
-jax._src.pxla._extend_axis_env(env:sharding_impls.AxisEnv,name,size:int)
-jax._src.pxla._full_to_shard_abstract_eval(x,axes,mesh,**_)
-jax._src.pxla._full_to_shard_lowering(ctx,x,*,axes:ArrayMapping,mesh:Mesh,manual_axes:frozenset[sharding_impls.MeshAxisName])
-jax._src.pxla._get_and_check_device_assignment(shardings:Iterable[ShardingInfo],devices:Sequence[xc.Device]|None)->tuple[xc.Client, tuple[xc.Device, ...]]
-jax._src.pxla._get_default_device()->xc.Device
-jax._src.pxla._get_input_indices(avals:Sequence[ShapedArray],shardings:Sequence[sharding_impls.XLACompatibleSharding],da_object:_DeviceAssignment|Sequence[xc.Device])->Sequence[tuple[Index | None, ...]]
-jax._src.pxla._get_metadata_jit_pmap(local_devices,num_in_shardings,num_out_shardings)
-jax._src.pxla._get_replicated_slices(num_addressable_devices:int,ndim:int|None)
-jax._src.pxla._hlo_shard(aval,axis_env,xs,in_axis)
-jax._src.pxla._hlo_unshard(ctx:mlir.LoweringRuleContext,aval,axis_env,out_axis,xs,platform)
-jax._src.pxla._map_schedule(idx:tuple[int|None,...])->tuple[int | None, ...]
-jax._src.pxla._masked_array_error(x,devices,indices,sharding)
-jax._src.pxla._moveaxis(ndim:int,shard_axes:dict[core.AxisName,int],src:int,dst:int)->dict[core.AxisName, int]
-jax._src.pxla._multi_pmap(f:Callable,info:EmapInfo,names:list[core.AxisName],all_axes:list[tuple[int|None,...]])->tuple[Callable, dict[core.AxisName, int]]
-jax._src.pxla._pmap_axis_subst(params,subst,traverse)
-jax._src.pxla._pmap_dce_rule(used_outputs,eqn)
-jax._src.pxla._pmap_lowering(ctx,*in_nodes,axis_name,axis_size,global_axis_size,devices,name,call_jaxpr,backend=None,in_axes,out_axes,donated_invars,is_explicit_global_axis_size)
-jax._src.pxla._pmap_partial_eval_custom_params_updater(unks_in,inst_in,kept_outs_known,kept_outs_staged,num_res,params_known,params_staged)
-jax._src.pxla._pmap_partial_eval_custom_res_maker(params_known,aval)
-jax._src.pxla._sanitize_mesh_jaxpr(jaxpr)
-jax._src.pxla._shard_abstract_array(size,axis:int,x)
-jax._src.pxla._shard_array(x,devices,indices,sharding)
-jax._src.pxla._shard_darray(x,devices,indices,sharding)
-jax._src.pxla._shard_to_full_abstract_eval(x,axes,mesh,**_)
-jax._src.pxla._shard_to_full_lowering(ctx:mlir.LoweringRuleContext,x,*,axes:ArrayMapping,mesh:Mesh,manual_axes:frozenset[sharding_impls.MeshAxisName])
-jax._src.pxla._shard_token(x,devices,indices,sharding)
-jax._src.pxla._trace_to_jaxpr_and_dce(fun_or_jaxpr,global_in_avals,api_name,fun_name,keep_unused,donated_invars,auto_spmd_lowering)
-jax._src.pxla._unravel_index_hlo(axis_env)
-jax._src.pxla._xla_call_partial_eval_update_params(params:core.ParamDict,kept_inputs:Sequence[bool],num_new_inputs:int)->core.ParamDict
-jax._src.pxla._xla_call_transpose_update_params(params,undef_primals,nonzero_cts)
-jax._src.pxla.axis_groups(axis_env:sharding_impls.AxisEnv,name)->tuple[tuple[int, ...]]
-jax._src.pxla.batched_device_put(aval:core.ShapedArray,sharding:jax.sharding.Sharding,xs:Sequence[Any],devices:Sequence[jax.Device],committed:bool=True)
-jax._src.pxla.cache_wrap(fn)
-jax._src.pxla.check_arg_avals_for_call(ref_avals,arg_avals,jaxpr_debug_info:core.JaxprDebugInfo|None=None)
-jax._src.pxla.check_if_any_auto(shardings:Iterable[sharding_impls.XLACompatibleSharding|AUTO|UnspecifiedValue])->bool
-jax._src.pxla.device_put(x,devices:Sequence[xc.ArrayImpl],replicate:bool=False)->list[xc.ArrayImpl]
-jax._src.pxla.find_replicas(jaxpr:core.Jaxpr,axis_size:int,global_axis_size:int)->ReplicaInfo
-jax._src.pxla.get_array_mapping(pspec:PartitionSpec)->ArrayMappingOrAutoOrUnspecified
-jax._src.pxla.global_aval_to_result_handler(aval:core.AbstractValue,out_sharding,committed:bool,is_out_sharding_from_xla:bool)->Callable[[Sequence[xc.ArrayImpl]], Any]
-jax._src.pxla.global_avals_to_results_handler(global_out_avals:Sequence[ShapedArray],shardings:Sequence[sharding_impls.XLACompatibleSharding],committed:bool,are_out_shardings_from_xla:Sequence[bool])->ResultsHandler
-jax._src.pxla.identity(x)
-jax._src.pxla.jaxpr_transfer_mem_kinds(jaxpr:core.Jaxpr)->Iterator[sharding_impls.TransferToMemoryKind]
-jax._src.pxla.local_aval_to_result_handler(aval:core.AbstractValue,sharding:sharding_impls.XLACompatibleSharding,indices:tuple[Index,...]|None)->Callable[[list[xc.ArrayImpl]], Any]
-jax._src.pxla.local_avals_to_results_handler(unmapped_local_out_avals:Sequence[ShapedArray],local_shardings:Sequence[sharding_impls.XLACompatibleSharding])->ResultsHandler
-jax._src.pxla.lower_mesh_computation(fun_or_jaxpr:lu.WrappedFun|core.ClosedJaxpr,api_name:str,fun_name:str,mesh:Mesh,in_shardings:Sequence[sharding_impls.NamedSharding|AUTO],out_shardings:Sequence[sharding_impls.NamedSharding|AUTO|UnspecifiedValue],donated_invars:Sequence[bool],spmd_lowering:bool,global_in_avals:Sequence[core.ShapedArray],tiling_method:TilingMethod|None,lowering_platform:str|None)->MeshComputation
-jax._src.pxla.lower_parallel_callable(fun:lu.WrappedFun,backend_name:str|None,axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Sequence[xc.Device]|None,name:str,in_axes:Iterable[int|None],out_axes_thunk:Callable[[],Sequence[int|None]],donated_invars:Sequence[bool],is_explicit_global_axis_size:bool,avals:Sequence[core.AbstractValue],*,lowering_platform:str|None)
-jax._src.pxla.manual_proto(aval:core.ShapedArray,manual_axes_set:frozenset[sharding_impls.MeshAxisName],mesh:Mesh)
-jax._src.pxla.maybe_extend_axis_env(*args,**kwargs)
-jax._src.pxla.mesh_global_to_local(mesh,axes:ArrayMapping,aval)
-jax._src.pxla.mesh_local_to_global(mesh,axes:ArrayMapping,aval)
-jax._src.pxla.parallel_callable(fun:lu.WrappedFun,backend_name:str|None,axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Sequence[Any]|None,name:str,in_axes:Sequence[int|None],out_axes_thunk:Callable[[],Sequence[int|None]],donated_invars:Sequence[bool],is_explicit_global_axis_size:bool,*avals)
-jax._src.pxla.prune_unused_inputs(jaxpr:core.Jaxpr)->tuple[core.Jaxpr, set[int], set[int]]
-jax._src.pxla.reflatten_outputs_for_dispatch(out_tree,out_flat)
-jax._src.pxla.resource_typecheck(jaxpr,resource_env,axis_resources,what_jaxpr_thunk)
-jax._src.pxla.shard_arg(arg,devices,arg_indices,sharding,canonicalize=True)
-jax._src.pxla.shard_args(devices:Sequence[xb.xla_client.Device],indices:Sequence[Sequence[Index]],shardings:Sequence[sharding_impls.XLACompatibleSharding],args)->Sequence[jax.Array]
-jax._src.pxla.shard_aval(size,axis:int,aval)
-jax._src.pxla.stage_parallel_callable(pci:ParallelCallableInfo,fun:lu.WrappedFun)->tuple[core.Jaxpr, list[Any], ReplicaInfo, ShardInfo]
-jax._src.pxla.tile_aval_nd(axis_sizes,in_axes:ArrayMapping,aval)
-jax._src.pxla.untile_aval_nd(axis_sizes,out_axes:ArrayMapping,aval)
-jax._src.pxla.vtile_by_mesh(fun:lu.WrappedFun,mesh:Mesh,in_axes:Sequence[ArrayMapping],out_axes:Sequence[ArrayMapping])
-jax._src.pxla.vtile_manual(manual_axes:frozenset[sharding_impls.MeshAxisName],mesh:Mesh,in_axes:Sequence[ArrayMapping],out_axes:Sequence[ArrayMapping],*args)
-jax._src.pxla.xla_call_jvp_update_params(params,nz_tangents)
-jax._src.pxla.xla_pmap_impl(fun:lu.WrappedFun,*args,**params)
-jax._src.pxla.xla_pmap_impl_lazy(fun:lu.WrappedFun,*args,backend:str|None,axis_name:core.AxisName,axis_size:int,global_axis_size:int,devices:Sequence[Any]|None,name:str,in_axes:Sequence[int|None],out_axes_thunk:Callable[[],Sequence[int|None]],donated_invars:Sequence[bool],is_explicit_global_axis_size:bool)->Callable
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/interpreters/partial_eval.py----------------------------------------
@@ -15318,157 +15428,6 @@ jax._src.interpreters.partial_eval.trace_to_subjaxpr_nounits_dyn(main:core.MainT
 jax._src.interpreters.partial_eval.trace_to_subjaxpr_nounits_fwd(main:core.MainTrace,instantiate:bool|Sequence[bool],in_pvals:Sequence[PartialVal])
 jax._src.interpreters.partial_eval.tracers_to_jaxpr(in_tracers:Sequence[JaxprTracer],out_tracers:Sequence[JaxprTracer])->tuple[Jaxpr, tuple[Any, ...], tuple[Any, ...]]
 jax._src.interpreters.partial_eval.trivial_ctx(_)
-jax._src.partial_eval.BoundedAxisSize(NamedTuple)
-jax._src.partial_eval.DebugInfo(NamedTuple)
-jax._src.partial_eval.DynamicJaxprTrace(core.Trace)
-jax._src.partial_eval.DynamicJaxprTrace._lift_tracers_in_aval(self,aval)
-jax._src.partial_eval.DynamicJaxprTrace._new_const(self,aval,c)
-jax._src.partial_eval.DynamicJaxprTrace.default_process_primitive(self,primitive,tracers,params)
-jax._src.partial_eval.DynamicJaxprTrace.frame(self)
-jax._src.partial_eval.DynamicJaxprTrace.getvar(self,tracer)
-jax._src.partial_eval.DynamicJaxprTrace.instantiate_const(self,val)
-jax._src.partial_eval.DynamicJaxprTrace.makevar(self,tracer)
-jax._src.partial_eval.DynamicJaxprTrace.new_arg(self,aval)
-jax._src.partial_eval.DynamicJaxprTrace.new_const(self,c)
-jax._src.partial_eval.DynamicJaxprTrace.post_process_call(self,call_primitive,out_tracers,params)
-jax._src.partial_eval.DynamicJaxprTrace.post_process_custom_jvp_call(self,out_tracers,_)
-jax._src.partial_eval.DynamicJaxprTrace.post_process_custom_vjp_call(self,out_tracers,_)
-jax._src.partial_eval.DynamicJaxprTrace.post_process_map(self,map_primitive,out_tracers,params)
-jax._src.partial_eval.DynamicJaxprTrace.process_call(self,call_primitive,f,explicit_tracers,params)
-jax._src.partial_eval.DynamicJaxprTrace.process_custom_jvp_call(self,prim,fun,jvp,tracers,*,symbolic_zeros)
-jax._src.partial_eval.DynamicJaxprTrace.process_custom_vjp_call(self,prim,fun,fwd,bwd,tracers,out_trees,symbolic_zeros)
-jax._src.partial_eval.DynamicJaxprTrace.process_map(self,map_primitive,f,tracers,params)
-jax._src.partial_eval.DynamicJaxprTrace.process_primitive(self,primitive,tracers,params)
-jax._src.partial_eval.DynamicJaxprTrace.sublift(self,t)
-jax._src.partial_eval.DynamicJaxprTracer(self,trace,aval,line_info=None)
-jax._src.partial_eval.DynamicJaxprTracer._assert_live(self)->None
-jax._src.partial_eval.DynamicJaxprTracer._contents(self)
-jax._src.partial_eval.DynamicJaxprTracer._origin_msg(self)
-jax._src.partial_eval.DynamicJaxprTracer.full_lower(self)
-jax._src.partial_eval.DynamicJaxprTracer.get_referent(self)
-jax._src.partial_eval.JaxprEqnRecipe(NamedTuple)
-jax._src.partial_eval.JaxprStackFrame(self)
-jax._src.partial_eval.JaxprStackFrame.add_eqn(self,eqn:core.JaxprEqn)
-jax._src.partial_eval.JaxprStackFrame.find_progenitors(self,tracer)
-jax._src.partial_eval.JaxprStackFrame.newvar(self,aval)
-jax._src.partial_eval.JaxprStackFrame.to_jaxpr(self,out_tracers:Sequence[Tracer])->tuple[Jaxpr, list[Any]]
-jax._src.partial_eval.JaxprStackFrame.to_jaxpr2(self,out_tracers)
-jax._src.partial_eval.JaxprTrace(self,*args,name_stack:source_info_util.NameStack)
-jax._src.partial_eval.JaxprTrace._current_truncated_name_stack(self)
-jax._src.partial_eval.JaxprTrace.default_process_primitive(self,primitive,tracers,params)
-jax._src.partial_eval.JaxprTrace.instantiate_const(self,tracer:JaxprTracer)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.instantiate_const_abstracted(self,tracer)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.lift(self,val:Tracer)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.new_arg(self,pval:PartialVal)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.new_const(self,val)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.new_instantiated_const(self,val)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.new_instantiated_literal(self,val)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.post_process_call(self,primitive,out_tracers,params)
-jax._src.partial_eval.JaxprTrace.post_process_custom_jvp_call(self,out_tracers,_)
-jax._src.partial_eval.JaxprTrace.post_process_custom_vjp_call(self,out_tracers,_)
-jax._src.partial_eval.JaxprTrace.post_process_map(self,primitive,out_tracers,params)
-jax._src.partial_eval.JaxprTrace.process_call(self,primitive,f,tracers,params)
-jax._src.partial_eval.JaxprTrace.process_custom_jvp_call(self,prim,fun,jvp,tracers,*,symbolic_zeros)
-jax._src.partial_eval.JaxprTrace.process_custom_vjp_call(self,prim,f,fwd,bwd,tracers,out_trees,symbolic_zeros)
-jax._src.partial_eval.JaxprTrace.process_map(self,primitive,f:lu.WrappedFun,tracers,params)
-jax._src.partial_eval.JaxprTrace.process_primitive(self,primitive,tracers,params)
-jax._src.partial_eval.JaxprTrace.pure(self,val:Any)->JaxprTracer
-jax._src.partial_eval.JaxprTrace.sublift(self,val:JaxprTracer)->JaxprTracer
-jax._src.partial_eval.JaxprTracer(self,trace:JaxprTrace,pval:PartialVal,recipe:JaxprTracerRecipe|None)
-jax._src.partial_eval.JaxprTracer.__repr__(self)
-jax._src.partial_eval.JaxprTracer.aval(self)->AbstractValue
-jax._src.partial_eval.JaxprTracer.full_lower(self)
-jax._src.partial_eval.JaxprTracer.get_referent(self)
-jax._src.partial_eval.JaxprTracer.is_known(self)
-jax._src.partial_eval.JaxprTracer.parents(self)->Sequence[JaxprTracer]
-jax._src.partial_eval.Offloadable(NamedTuple)
-jax._src.partial_eval.PartialVal(cls,xs:tuple[AbstractValue|None,core.Value])
-jax._src.partial_eval.PartialVal.get_aval(self)->AbstractValue
-jax._src.partial_eval.PartialVal.get_known(self)->core.Value | None
-jax._src.partial_eval.PartialVal.is_known(self)->bool
-jax._src.partial_eval.PartialVal.known(cls,const:core.Value)->PartialVal
-jax._src.partial_eval.PartialVal.unknown(cls,aval:AbstractValue)->PartialVal
-jax._src.partial_eval.RecomputeType
-jax._src.partial_eval.SaveableType
-jax._src.partial_eval.TracerAsName(self,tracer)
-jax._src.partial_eval.TracerAsName.__eq__(self,other)
-jax._src.partial_eval.TracerAsName.__hash__(self)
-jax._src.partial_eval._add_implicit_outputs(jaxpr:Jaxpr)->tuple[Jaxpr, OutputType]
-jax._src.partial_eval._arg_type(idxs:dict[AbstractedAxisName,DBIdx],x:Any,spec:dict[int,AbstractedAxisName])->AbstractValue
-jax._src.partial_eval._canonicalize_specs(ndims:Sequence[int],specs:Sequence[AbstractedAxesSpec]|None)->list[dict[int, AbstractedAxisName]]
-jax._src.partial_eval._closed_call_param_updater(params,_,__)
-jax._src.partial_eval._collect_implicit(args:Sequence[Any],specs:list[dict[int,AbstractedAxisName]])->tuple[dict[AbstractedAxisName, DBIdx], list[AbstractValue]]
-jax._src.partial_eval._complete_specs(args:Sequence[Any],partial_specs:list[dict[int,AbstractedAxisName]])->list[dict[int, AbstractedAxisName]]
-jax._src.partial_eval._const_folding_and_forwarding(jaxpr:Jaxpr,constvals:Sequence[Any])->tuple[Jaxpr, tuple[Any, ...]]
-jax._src.partial_eval._dce_jaxpr(jaxpr:Jaxpr,used_outputs:tuple[bool,...],instantiate:tuple[bool,...])->tuple[Jaxpr, list[bool]]
-jax._src.partial_eval._default_dce_rule(used_outs:list[bool],eqn:JaxprEqn)->tuple[list[bool], JaxprEqn]
-jax._src.partial_eval._default_res_aval_updater(params:dict[str,Any],aval:AbstractValue)->AbstractValue
-jax._src.partial_eval._eval_jaxpr_padded(jaxpr:Jaxpr,consts:list[Const],*args:DynamicJaxprTracer)->list[Const | DynamicJaxprTracer]
-jax._src.partial_eval._extract_implicit_args(trace:DynamicJaxprTrace,in_type:Sequence[tuple[AbstractValue,bool]],explicit_tracers:Sequence[DynamicJaxprTracer])->Sequence[DynamicJaxprTracer]
-jax._src.partial_eval._inline_literals(jaxpr:Jaxpr,constvals:Sequence[Any])->tuple[Jaxpr, list[Any]]
-jax._src.partial_eval._input_type_to_tracers(new_arg:Callable[[AbstractValue],Tracer],in_avals:Sequence[AbstractValue])->Sequence[Tracer]
-jax._src.partial_eval._interleave_fun(every_others,*args,**kwargs)
-jax._src.partial_eval._is_bint_axis_size(d:int|core.DArray|core.Var)->bool
-jax._src.partial_eval._jaxpr_forwarding(jaxpr:Jaxpr)->list[int | None]
-jax._src.partial_eval._jvp_jaxpr_zeros(in_zeros,zero_avals,*primal_tangent_avals)
-jax._src.partial_eval._memoize(fn)
-jax._src.partial_eval._move_binders_to_front(closed_jaxpr:ClosedJaxpr,to_move:tuple[bool,...])->ClosedJaxpr
-jax._src.partial_eval._move_to_front(lst:Sequence,to_move:Sequence[bool])->Sequence
-jax._src.partial_eval._partial_eval_jaxpr_custom_cached(jaxpr:Jaxpr,in_unknowns:tuple[bool,...],in_inst:tuple[bool,...],ensure_out_unknowns:tuple[bool,...],ensure_out_inst:tuple[bool,...],saveable:Callable[...,RematCases_])->tuple[Jaxpr, Jaxpr, list[bool], list[bool], int, int]
-jax._src.partial_eval._partial_eval_jaxpr_nounits(jaxpr,in_unknowns,instantiate)
-jax._src.partial_eval._spec_to_dict(spec:AbstractedAxesSpec)->dict[int, AbstractedAxisName]
-jax._src.partial_eval._substitute_axis_sizes(env:dict,aval:AbstractValue)->AbstractValue
-jax._src.partial_eval._substitute_vars_in_type(consts:dict[Var,Literal],env:dict[Var,Var],a:AbstractValue)->AbstractValue
-jax._src.partial_eval._trace_to_subjaxpr_nounits(main,instantiate,in_pvals)
-jax._src.partial_eval._trivial_padding_rule(prim,_,__,*args,**params)
-jax._src.partial_eval._trivial_padding_rule_multi(prim,_,__,*args,**params)
-jax._src.partial_eval.abstract_eval_fun(fun,*avals,debug_info=None,**params)
-jax._src.partial_eval.arg_info_all(dbg:DebugInfo)->list[tuple[str, KeyPath]] | None
-jax._src.partial_eval.call_padding_rule(prim,in_avals,out_avals,*args,call_jaxpr,**params)
-jax._src.partial_eval.call_partial_eval_custom_rule(jaxpr_param_name:str,params_updater:ParamsUpdater,saveable:Callable[...,RematCases_],unks_in:list[bool],inst_in:list[bool],eqn:JaxprEqn,*,res_aval:ResAvalUpdater=_default_res_aval_updater,ctx:Callable[[core.ParamDict],AbstractContextManager[None]]=trivial_ctx)->tuple[JaxprEqn, JaxprEqn, Sequence[bool], Sequence[bool], list[Var]]
-jax._src.partial_eval.close_jaxpr(jaxpr:Jaxpr)->ClosedJaxpr
-jax._src.partial_eval.closed_call_partial_eval_custom_rule(jaxpr_param_name:str,params_updater:ParamsUpdater,saveable:Callable[...,RematCases_],unks_in:list[bool],inst_in:list[bool],eqn:JaxprEqn,*,res_aval:ResAvalUpdater=_default_res_aval_updater)->tuple[JaxprEqn, JaxprEqn, Sequence[bool], Sequence[bool], list[Var]]
-jax._src.partial_eval.convert_constvars_jaxpr(jaxpr:Jaxpr)->Jaxpr
-jax._src.partial_eval.convert_envvars_to_constvars(jaxpr:Jaxpr,num_env_vars:int)->Jaxpr
-jax._src.partial_eval.convert_invars_to_constvars(jaxpr:Jaxpr,n:int)->Jaxpr
-jax._src.partial_eval.dce_jaxpr(jaxpr:Jaxpr,used_outputs:Sequence[bool],instantiate:bool|Sequence[bool]=False)->tuple[Jaxpr, list[bool]]
-jax._src.partial_eval.dce_jaxpr_call_rule(used_outputs:list[bool],eqn:JaxprEqn)->tuple[list[bool], JaxprEqn | None]
-jax._src.partial_eval.dce_jaxpr_closed_call_rule(used_outputs:list[bool],eqn:JaxprEqn)->tuple[list[bool], JaxprEqn]
-jax._src.partial_eval.dce_jaxpr_consts(jaxpr:Jaxpr,used_outputs:Sequence[bool],instantiate:bool|Sequence[bool]=False)->tuple[Jaxpr, list[bool], list[bool]]
-jax._src.partial_eval.def_trivial_padding(prim:Primitive)->None
-jax._src.partial_eval.ensure_enum(case:bool|RematCases)->RematCases
-jax._src.partial_eval.extend_jaxpr_stack(main,frame)
-jax._src.partial_eval.identity(x)
-jax._src.partial_eval.infer_lambda_input_type(axes_specs:Sequence[AbstractedAxesSpec]|None,args:Sequence[Any])->InputType
-jax._src.partial_eval.instantiate_const_at(trace:JaxprTrace,instantiate:bool,tracer)
-jax._src.partial_eval.make_jaxpr_effects(constvars,invars,outvars,eqns)->effects.Effects
-jax._src.partial_eval.move_binders_to_back(closed_jaxpr:ClosedJaxpr,to_move:Sequence[bool])->ClosedJaxpr
-jax._src.partial_eval.move_binders_to_front(closed_jaxpr:ClosedJaxpr,to_move:Sequence[bool])->ClosedJaxpr
-jax._src.partial_eval.new_eqn_recipe(in_tracers:Sequence[JaxprTracer],out_tracers:Sequence[JaxprTracer],primitive:Primitive,params:dict[str,Any],effects:core.Effects,source_info:source_info_util.SourceInfo)->JaxprEqnRecipe
-jax._src.partial_eval.pad_jaxpr(jaxpr:Jaxpr,consts:Sequence[Const])->tuple[Jaxpr, list[Const]]
-jax._src.partial_eval.partial_eval_jaxpr_custom(jaxpr:Jaxpr,in_unknowns:Sequence[bool],in_inst:bool|Sequence[bool],ensure_out_unknowns:bool|Sequence[bool],ensure_out_inst:bool|Sequence[bool],saveable:Callable[...,RematCases_])->tuple[Jaxpr, Jaxpr, list[bool], list[bool], int]
-jax._src.partial_eval.partial_eval_jaxpr_custom_rule_not_implemented(name:str,saveable:Callable[...,RematCases_],unks_in:Sequence[bool],inst_in:Sequence[bool],eqn:JaxprEqn)->PartialEvalCustomResult
-jax._src.partial_eval.partial_eval_jaxpr_nounits(jaxpr:ClosedJaxpr,unknowns:Sequence[bool],instantiate:bool|Sequence[bool])->tuple[ClosedJaxpr, ClosedJaxpr, list[bool], list[AbstractValue]]
-jax._src.partial_eval.partial_eval_jaxpr_stateful(jaxpr:Jaxpr,in_unknowns:Sequence[bool],in_inst:bool|Sequence[bool],ensure_out_unknowns:bool|Sequence[bool],ensure_out_inst:bool|Sequence[bool],saveable:Callable[...,RematCases_])->tuple[Jaxpr, Jaxpr, list[bool], list[bool], int, int]
-jax._src.partial_eval.partial_eval_wrapper_nounits(in_knowns:Sequence[bool],in_avals:Sequence[AbstractValue],*in_consts:Any)
-jax._src.partial_eval.partition_pvals(pvals:list[PartialVal])->tuple[list[bool], list[AbstractValue], list[Any]]
-jax._src.partial_eval.recipe_to_eqn(getvar:Callable[[JaxprTracer],Atom],recipe:JaxprEqnRecipe)->core.JaxprEqn
-jax._src.partial_eval.result_info(dbg:DebugInfo)->list[KeyPath] | None
-jax._src.partial_eval.sig_info(dbg:DebugInfo)->inspect.BoundArguments | None
-jax._src.partial_eval.trace_to_jaxpr(fun:lu.WrappedFun,pvals:Sequence[PartialVal],instantiate:bool|Sequence[bool]=False)->tuple[Jaxpr, list[PartialVal], list[core.Value]]
-jax._src.partial_eval.trace_to_jaxpr_dynamic(fun:lu.WrappedFun,in_avals:Sequence[AbstractValue],debug_info:DebugInfo|None=None,*,keep_inputs:list[bool]|None=None)->tuple[Jaxpr, list[AbstractValue], list[Any]]
-jax._src.partial_eval.trace_to_jaxpr_dynamic2(fun:lu.WrappedFun,debug_info:DebugInfo|None=None)->tuple[Jaxpr, OutputType, list[Any]]
-jax._src.partial_eval.trace_to_jaxpr_final(fun:lu.WrappedFun,in_avals:Sequence[AbstractValue],debug_info:DebugInfo|None=None,keep_inputs:Sequence[bool]|None=None)->tuple[Jaxpr, list[AbstractValue], list[Any]]
-jax._src.partial_eval.trace_to_jaxpr_final2(fun:lu.WrappedFun,debug_info:DebugInfo|None=None)->tuple[Jaxpr, OutputType, list[Any]]
-jax._src.partial_eval.trace_to_jaxpr_nounits(fun:lu.WrappedFun,pvals:Sequence[PartialVal],instantiate:bool|Sequence[bool]=False)->tuple[Jaxpr, list[PartialVal], list[core.Value]]
-jax._src.partial_eval.trace_to_subjaxpr(main:core.MainTrace,instantiate:bool|Sequence[bool],pvals:Sequence[PartialVal])
-jax._src.partial_eval.trace_to_subjaxpr_dynamic(fun:lu.WrappedFun,main:core.MainTrace,in_avals:Sequence[AbstractValue],*,keep_inputs:Sequence[bool]|None=None,debug_info:DebugInfo|None=None)->tuple[Jaxpr, list[AbstractValue], list[Any]]
-jax._src.partial_eval.trace_to_subjaxpr_dynamic2(fun:lu.WrappedFun,main:core.MainTrace,debug_info:DebugInfo|None=None)->tuple[Jaxpr, OutputType, list[Any]]
-jax._src.partial_eval.trace_to_subjaxpr_nounits(main:core.MainTrace,instantiate:bool|Sequence[bool],in_pvals:Sequence[PartialVal])
-jax._src.partial_eval.trace_to_subjaxpr_nounits_dyn(main:core.MainTrace,in_knowns:Sequence[bool],in_type:InputType,instantiate:bool|Sequence[bool],*in_consts:Any)
-jax._src.partial_eval.trace_to_subjaxpr_nounits_fwd(main:core.MainTrace,instantiate:bool|Sequence[bool],in_pvals:Sequence[PartialVal])
-jax._src.partial_eval.tracers_to_jaxpr(in_tracers:Sequence[JaxprTracer],out_tracers:Sequence[JaxprTracer])->tuple[Jaxpr, tuple[Any, ...], tuple[Any, ...]]
-jax._src.partial_eval.trivial_ctx(_)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/interpreters/mlir.py----------------------------------------
@@ -15769,110 +15728,6 @@ jax._src.interpreters.mlir.wrap_with_memory_kind(x:ir.Value,memory_kind:str,aval
 jax._src.interpreters.mlir.xla_computation_to_mlir_module(xla_computation:xc.XlaComputation)->ir.Module
 jax._src.interpreters.mlir.xla_fallback_lowering(prim:core.Primitive)
 jax._src.interpreters.mlir.zeros_like_lowering(ctx,x)
-jax._src.mlir.ConstantHandler(self,val:Any)
-jax._src.mlir.LoweringResult(NamedTuple)
-jax._src.mlir.LoweringRuleContext
-jax._src.mlir.LoweringRuleContext.replace(self,**kw)
-jax._src.mlir.LoweringRuleContext.set_tokens_out(self,tokens_out:TokenSet)
-jax._src.mlir.ModuleContext(self,backend_or_name:str|xb.XlaBackend|None,platform:str,axis_context:AxisContext,name_stack:source_info_util.NameStack,keepalives:list[Any],channel_iterator:Iterator[int],host_callbacks:list[Any],context:ir.Context|None=None,module:ir.Module|None=None,ip:ir.InsertionPoint|None=None,symbol_table:ir.SymbolTable|None=None,cached_primitive_lowerings:None|dict[Any,func_dialect.FuncOp]=None,cached_call_jaxpr_lowerings:None|dict[Any,func_dialect.FuncOp]=None,override_lowering_rules:None|tuple[tuple[core.Primitive,LoweringRule]]=None,shape_poly_state=None)
-jax._src.mlir.ModuleContext.add_host_callback(self,host_callback:Any)->None
-jax._src.mlir.ModuleContext.add_keepalive(self,keepalive:Any)->None
-jax._src.mlir.ModuleContext.axis_env(self)->sharding_impls.AxisEnv
-jax._src.mlir.ModuleContext.backend(self)->xb.XlaBackend
-jax._src.mlir.ModuleContext.replace(self,**kw)
-jax._src.mlir.ShapePolyLoweringState(self,dim_vars:tuple[str,...],lowering_platforms:tuple[str,...])
-jax._src.mlir.ShapePolyLoweringState.has_platform_index_argument(self)
-jax._src.mlir.TokenSet(self,*args,**kwargs)
-jax._src.mlir.TokenSet.__len__(self)
-jax._src.mlir.TokenSet.create(cls,effects:Sequence[core.Effect])->TokenSet
-jax._src.mlir.TokenSet.effects(self)->set[core.Effect]
-jax._src.mlir.TokenSet.get(self,effect:core.Effect)->Token
-jax._src.mlir.TokenSet.items(self)->Sequence[tuple[core.Effect, Token]]
-jax._src.mlir.TokenSet.subset(self,effects:Sequence[core.Effect])->TokenSet
-jax._src.mlir.TokenSet.update_tokens(self,tokens:TokenSet)->TokenSet
-jax._src.mlir._array_ir_types(aval:core.ShapedArray|core.DShapedArray)->Sequence[ir.Type]
-jax._src.mlir._aval_to_default_layouts(aval)
-jax._src.mlir._call_lowering(fn_name,stack_name,call_jaxpr,backend,ctx,avals_in,avals_out,tokens_in,*args,dim_var_values:Sequence[ir.Value],arg_names=None,result_names=None)
-jax._src.mlir._dtype_to_xla_type_string(dtype:np.dtype)->str
-jax._src.mlir._dynamic_array_ir_types(aval:core.ShapedArray)->Sequence[ir.Type]
-jax._src.mlir._emit_lowering_rule_as_fun(lowering_rule,ctx:LoweringRuleContext)->func_dialect.FuncOp
-jax._src.mlir._emit_tpu_python_callback(backend:xb.XlaBackend,ctx:LoweringRuleContext,callback,token:Any|None,operands:Sequence[ir.Value],operand_avals:Sequence[core.ShapedArray],operand_shapes:Sequence[xc.Shape],result_avals:Sequence[core.ShapedArray],result_shapes:Sequence[xc.Shape],*,sharding:xc.OpSharding|None=None)->tuple[Sequence[ir.Value], Any, Any]
-jax._src.mlir._get_mem_kind(s:Optional[XLACompatibleSharding])->Optional[str]
-jax._src.mlir._ir_consts(consts)
-jax._src.mlir._layout_to_mlir_layout(minor_to_major:Sequence[int]|None)
-jax._src.mlir._lower_jaxpr_to_fun_cached(ctx,fn_name,call_jaxpr,effects,arg_names=None,result_names=None)
-jax._src.mlir._masked_array_constant_handler(*args,**kwargs)
-jax._src.mlir._minmax_hlo(op,cmp,x,y)
-jax._src.mlir._ndarray_constant_handler(val:np.ndarray)->Sequence[ir.Value]
-jax._src.mlir._python_scalar_handler(dtype,val)
-jax._src.mlir._set_up_aliases(avals_in,avals_out,donated_args,arg_memory_kinds,result_memory_kinds)
-jax._src.mlir._source_info_to_location(primitive:core.Primitive,params:dict,source_info:source_info_util.SourceInfo,name_stack:source_info_util.NameStack)->ir.Location
-jax._src.mlir._token_constant_handler(val)
-jax._src.mlir._traceback_to_location(tb:xc.Traceback)->ir.Location
-jax._src.mlir._unwrap_singleton_ir_values(x)
-jax._src.mlir._wrap_with_spmd_op(name:str,ctx:LoweringRuleContext,x:ir.Value,aval_out:core.AbstractValue,sharding_proto:xc.OpSharding,unspecified_dims:set[int]|None=None)
-jax._src.mlir.add_jaxvals_lowering(ctx,x,y)
-jax._src.mlir.aval_to_ir_type(aval:core.AbstractValue)->ir.Type
-jax._src.mlir.aval_to_ir_types(aval:core.AbstractValue)->Sequence[ir.Type]
-jax._src.mlir.broadcast_in_dim(ctx:LoweringRuleContext,op,aval_out:core.AbstractValue,*,broadcast_dimensions)->ir.Value
-jax._src.mlir.build_xla_computation_helper(closed_jaxpr:core.ClosedJaxpr,*,name:str,platform:str,backend_or_name:str,axis_context:AxisContext)->xc.XlaComputation
-jax._src.mlir.cache_lowering(f)
-jax._src.mlir.check_backend_matches(inner_backend,outer_backend)
-jax._src.mlir.compare_hlo(x,y,direction:str,comparison_type:str|None=None)
-jax._src.mlir.convert_hlo(ctx:LoweringRuleContext,x,aval_in,aval_out)
-jax._src.mlir.core_call_lowering(ctx,*args,name,backend=None,call_jaxpr)
-jax._src.mlir.create_token()->Token
-jax._src.mlir.custom_call(call_target_name:str,*,result_types:Sequence[ir.Type],operands:Sequence[ir.Value],backend_config:str|bytes|dict[str,ir.Attribute]='',has_side_effect:bool=False,result_shapes:Sequence[ir.Value]|None=None,called_computations:Sequence[str]=(),api_version:int=2,operand_output_aliases:dict[int,int]|None=None,operand_layouts:Sequence[Sequence[int]]|None=None,result_layouts:Sequence[Sequence[int]]|None=None,extra_attributes:dict[str,ir.Attribute]|None=None)->ir.Operation
-jax._src.mlir.delegate_lowering(ctx,lowering_fun,*args,**ctx_override_kwargs)
-jax._src.mlir.dense_bool_elements(xs:Sequence[bool])->ir.DenseElementsAttr
-jax._src.mlir.dense_int_elements(xs)->ir.DenseIntElementsAttr
-jax._src.mlir.dtype_to_ir_type(dtype:core.bint|np.dtype|np.generic)->ir.Type
-jax._src.mlir.dummy_token()->Sequence[ir.Value]
-jax._src.mlir.dummy_token_type()->Sequence[ir.Type]
-jax._src.mlir.dynamic_slice(ctx:LoweringRuleContext,aval_out,x,*,start_indices)->ir.Value
-jax._src.mlir.dynamic_update_slice(ctx:LoweringRuleContext,aval_out,x,update,*,start_indices)->ir.Value
-jax._src.mlir.emit_python_callback(ctx:LoweringRuleContext,callback,token:Any|None,operands:Sequence[ir.Value],operand_avals:Sequence[core.ShapedArray],result_avals:Sequence[core.ShapedArray],has_side_effect:bool,*,sharding:xc.OpSharding|None=None,operand_layouts:Sequence[Sequence[int]|None]|None=None,result_layouts:Sequence[Sequence[int]|None]|None=None)->tuple[Sequence[ir.Value], Any, Any]
-jax._src.mlir.eval_dynamic_shape(ctx:LoweringRuleContext,shape:core.Shape)->tuple[int | Value, ...]
-jax._src.mlir.eval_dynamic_shape_as_ivals(ctx:LoweringRuleContext,shape:core.Shape)->tuple[int | Value, ...]
-jax._src.mlir.eval_dynamic_shape_as_tensor(ctx:LoweringRuleContext,shape:core.Shape)->Value
-jax._src.mlir.eval_dynamic_shape_as_vals(ctx:LoweringRuleContext,shape:core.Shape)->tuple[Value, ...]
-jax._src.mlir.flatten_lowering_ir_args(xs:Sequence[ir.Value|Sequence[ir.Value]])->Sequence[Sequence[ir.Value]]
-jax._src.mlir.full_like_aval(ctx:LoweringRuleContext,value,aval:core.ShapedArray)->ir.Value
-jax._src.mlir.get_canonical_source_file(frame:source_info_util.Frame)->str
-jax._src.mlir.get_compute_type(memory_kind:str)->str
-jax._src.mlir.get_constant_handler(type_:type)->ConstantHandler
-jax._src.mlir.i32_attr(i)
-jax._src.mlir.i64_attr(i)
-jax._src.mlir.iota(ctx:LoweringRuleContext,aval_out,*,dimension:int)
-jax._src.mlir.ir_constant(val:Any)->ir.Value
-jax._src.mlir.ir_constants(val:Any)->Sequence[ir.Value]
-jax._src.mlir.is_empty_shape(s:core.Shape)->bool
-jax._src.mlir.jaxpr_subcomp(ctx:ModuleContext,jaxpr:core.Jaxpr,tokens:TokenSet,consts:Sequence[Sequence[ir.Value]],*args:Sequence[ir.Value],dim_var_values:Sequence[ir.Value])->tuple[Sequence[Sequence[ir.Value]], TokenSet]
-jax._src.mlir.lower_fun(fun:Callable,multiple_results:bool=True)->Callable
-jax._src.mlir.lower_jaxpr_to_fun(ctx:ModuleContext,name:str,jaxpr:core.ClosedJaxpr,effects:Sequence[core.Effect],*,create_tokens:bool=False,public:bool=False,replace_tokens_with_dummy:bool=False,replicated_args:Sequence[bool]|None=None,arg_shardings:Sequence[xc.HloSharding|None]|None=None,result_shardings:Sequence[xc.HloSharding|None]|None=None,use_sharding_annotations:bool=True,input_output_aliases:Sequence[int|None]|None=None,num_output_tokens:int=0,api_name:str='jit',arg_names:Sequence[str|None]|None=None,result_names:Sequence[str|None]|None=None,arg_memory_kinds:Sequence[str|None]|None=None,result_memory_kinds:Sequence[str|None]|None=None)->func_dialect.FuncOp
-jax._src.mlir.lower_jaxpr_to_module(module_name:str,jaxpr:core.ClosedJaxpr,ordered_effects:list[core.Effect],backend_or_name:str|xb.XlaBackend|None,platform:str|tuple[str,...],axis_context:AxisContext,name_stack:source_info_util.NameStack,donated_args:Sequence[bool],replicated_args:Sequence[bool]|None=None,arg_shardings:Sequence[XLACompatibleSharding|None]|None=None,result_shardings:Sequence[XLACompatibleSharding|None]|None=None,arg_names:Sequence[str|None]|None=None,result_names:Sequence[str|None]|None=None,num_replicas:int=1,num_partitions:int=1,all_default_mem_kind:bool=True,override_lowering_rules:None|tuple[tuple[core.Primitive,LoweringRule]]=None)->LoweringResult
-jax._src.mlir.make_ir_context()->ir.Context
-jax._src.mlir.merge_mlir_modules(dst_module:ir.Module,sym_name:str,src_module:ir.Module)->str
-jax._src.mlir.module_to_bytecode(module:ir.Module)->bytes
-jax._src.mlir.module_to_string(module:ir.Module)->str
-jax._src.mlir.multi_broadcast_in_dim(ctx:LoweringRuleContext,ops:Sequence[ir.Value],ops_avals:Sequence[core.AbstractValue],out_shape:core.Shape)->Sequence[ir.Value]
-jax._src.mlir.pad(ctx:LoweringRuleContext,aval_out,x,padding_value,padding_low,padding_high,padding_interior)->ir.Value
-jax._src.mlir.receive_from_host(channel:int,token:hlo.TokenType,out_aval:core.ShapedArray,name:str,*,sharding:xc.OpSharding|None=None)->ir.Value
-jax._src.mlir.reduce_window(ctx:LoweringRuleContext,*,reducer_name:str,reducer_body:Callable[[ir.Block],Sequence[ir.Value]],operands:Sequence[ir.Value],init_values:Sequence[ir.Value],init_values_avals:Sequence[core.AbstractValue],out_avals:Sequence[core.AbstractValue],window_dimensions,window_strides,padding,base_dilation,window_dilation)
-jax._src.mlir.refine_polymorphic_shapes(module:ir.Module)->ir.Module
-jax._src.mlir.register_constant_handler(type_:type,handler_fun:ConstantHandler)
-jax._src.mlir.register_lowering(prim:core.Primitive,rule:LoweringRule,platform:str|None=None)
-jax._src.mlir.reshape(ctx:LoweringRuleContext,op,aval_out:core.AbstractValue)->ir.Value
-jax._src.mlir.send_to_host(channel:int,token:hlo.TokenType,operand:Any,aval:core.ShapedArray,name:str,*,sharding:xc.OpSharding|None=None)->ir.Value
-jax._src.mlir.shape_tensor(sizes:Sequence[int|ir.RankedTensorType])->ir.RankedTensorType
-jax._src.mlir.sharded_aval(aval:core.AbstractValue,sharding:XLACompatibleSharding|None)->core.AbstractValue
-jax._src.mlir.slice_op(ctx:LoweringRuleContext,x,aval_out,*,start_indices,limit_indices,strides)->ir.Value
-jax._src.mlir.token_type()->Sequence[ir.Type]
-jax._src.mlir.wrap_singleton_ir_values(x:ir.Value|Sequence[ir.Value])->Sequence[ir.Value]
-jax._src.mlir.wrap_with_memory_kind(x:ir.Value,memory_kind:str,aval_out:core.AbstractValue,is_input:bool=False)->ir.Value
-jax._src.mlir.xla_computation_to_mlir_module(xla_computation:xc.XlaComputation)->ir.Module
-jax._src.mlir.xla_fallback_lowering(prim:core.Primitive)
-jax._src.mlir.zeros_like_lowering(ctx,x)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/state/__init__.py----------------------------------------
@@ -16052,6 +15907,7 @@ A:jax._src.state.types.size->property(lambda self: math.prod(self.shape))
 jax._src.state.AbstractRef(self,inner_aval:core.AbstractValue)
 jax._src.state.AbstractRef.__eq__(self,other)
 jax._src.state.AbstractRef.__hash__(self)
+jax._src.state.AbstractRef.__init__(self,inner_aval:core.AbstractValue)
 jax._src.state.AbstractRef.__repr__(self)->str
 jax._src.state.AbstractRef._getitem(self,tracer,idx)->Array
 jax._src.state.AbstractRef._setitem(self,tracer,idx,value)->None
@@ -16211,6 +16067,8 @@ jax._src.lax.ann._comparator_builder_mlir(ctx,op_type,is_max_k)
 jax._src.lax.ann._get_init_val_literal(op_type,is_max_k)
 jax._src.lax.ann.approx_max_k(operand:Array,k:int,reduction_dimension:int=-1,recall_target:float=0.95,reduction_input_size_override:int=-1,aggregate_to_topk:bool=True)->tuple[Array, Array]
 jax._src.lax.ann.approx_min_k(operand:Array,k:int,reduction_dimension:int=-1,recall_target:float=0.95,reduction_input_size_override:int=-1,aggregate_to_topk:bool=True)->tuple[Array, Array]
+jax.lax.approx_max_k(operand:Array,k:int,reduction_dimension:int=-1,recall_target:float=0.95,reduction_input_size_override:int=-1,aggregate_to_topk:bool=True)->tuple[Array, Array]
+jax.lax.approx_min_k(operand:Array,k:int,reduction_dimension:int=-1,recall_target:float=0.95,reduction_input_size_override:int=-1,aggregate_to_topk:bool=True)->tuple[Array, Array]
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/fft.py----------------------------------------
@@ -16250,6 +16108,7 @@ jax._src.lax.fft._rfft_transpose(t,fft_lengths)
 jax._src.lax.fft._str_to_fft_type(s:str)->xla_client.FftType
 jax._src.lax.fft.fft(x,fft_type:Union[xla_client.FftType,str],fft_lengths:Sequence[int])
 jax._src.lax.fft.fft_abstract_eval(x,fft_type,fft_lengths)
+jax.lax.fft(x,fft_type:Union[xla_client.FftType,str],fft_lengths:Sequence[int])
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/utils.py----------------------------------------
@@ -16349,6 +16208,16 @@ jax._src.lax.convolution.conv_shape_tuple(lhs_shape,rhs_shape,strides,pads,batch
 jax._src.lax.convolution.conv_transpose(lhs:Array,rhs:Array,strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:ConvGeneralDilatedDimensionNumbers=None,transpose_kernel:bool=False,precision:lax.PrecisionLike=None,preferred_element_type:Optional[DType]=None)->Array
 jax._src.lax.convolution.conv_transpose_shape_tuple(lhs_shape,rhs_shape,window_strides,padding,dimension_numbers)
 jax._src.lax.convolution.conv_with_general_padding(lhs:Array,rhs:Array,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],lhs_dilation:Optional[Sequence[int]],rhs_dilation:Optional[Sequence[int]],precision:lax.PrecisionLike=None,preferred_element_type:Optional[DType]=None)->Array
+jax.lax.ConvDimensionNumbers(NamedTuple)
+jax.lax.conv(lhs:Array,rhs:Array,window_strides:Sequence[int],padding:str,precision:lax.PrecisionLike=None,preferred_element_type:Optional[DType]=None)->Array
+jax.lax.conv_dimension_numbers(lhs_shape,rhs_shape,dimension_numbers)->ConvDimensionNumbers
+jax.lax.conv_general_dilated(lhs:Array,rhs:Array,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],lhs_dilation:Optional[Sequence[int]]=None,rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:ConvGeneralDilatedDimensionNumbers=None,feature_group_count:int=1,batch_group_count:int=1,precision:lax.PrecisionLike=None,preferred_element_type:Optional[DType]=None)->Array
+jax.lax.conv_general_permutations(dimension_numbers)
+jax.lax.conv_general_shape_tuple(lhs_shape,rhs_shape,window_strides,padding,dimension_numbers)
+jax.lax.conv_shape_tuple(lhs_shape,rhs_shape,strides,pads,batch_group_count=1)
+jax.lax.conv_transpose(lhs:Array,rhs:Array,strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:ConvGeneralDilatedDimensionNumbers=None,transpose_kernel:bool=False,precision:lax.PrecisionLike=None,preferred_element_type:Optional[DType]=None)->Array
+jax.lax.conv_transpose_shape_tuple(lhs_shape,rhs_shape,window_strides,padding,dimension_numbers)
+jax.lax.conv_with_general_padding(lhs:Array,rhs:Array,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],lhs_dilation:Optional[Sequence[int]],rhs_dilation:Optional[Sequence[int]],precision:lax.PrecisionLike=None,preferred_element_type:Optional[DType]=None)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/special.py----------------------------------------
@@ -16474,6 +16343,20 @@ jax._src.lax.special.random_gamma_grad(a:ArrayLike,x:ArrayLike)->Array
 jax._src.lax.special.random_gamma_grad_impl(a,x,*,dtype)
 jax._src.lax.special.regularized_incomplete_beta_impl(a,b,x,*,dtype)
 jax._src.lax.special.zeta(x:ArrayLike,q:ArrayLike)->Array
+jax.lax.bessel_i0e(x:ArrayLike)->Array
+jax.lax.bessel_i1e(x:ArrayLike)->Array
+jax.lax.betainc(a:ArrayLike,b:ArrayLike,x:ArrayLike)->Array
+jax.lax.digamma(x:ArrayLike)->Array
+jax.lax.erf(x:ArrayLike)->Array
+jax.lax.erf_inv(x:ArrayLike)->Array
+jax.lax.erfc(x:ArrayLike)->Array
+jax.lax.igamma(a:ArrayLike,x:ArrayLike)->Array
+jax.lax.igamma_grad_a(a:ArrayLike,x:ArrayLike)->Array
+jax.lax.igammac(a:ArrayLike,x:ArrayLike)->Array
+jax.lax.lgamma(x:ArrayLike)->Array
+jax.lax.polygamma(m:ArrayLike,x:ArrayLike)->Array
+jax.lax.random_gamma_grad(a:ArrayLike,x:ArrayLike)->Array
+jax.lax.zeta(x:ArrayLike,q:ArrayLike)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/linalg.py----------------------------------------
@@ -16951,6 +16834,19 @@ jax._src.lax.parallel.psum_bind(*args,axes,axis_index_groups)
 jax._src.lax.parallel.psum_scatter(x,axis_name,*,scatter_dimension=0,axis_index_groups=None,tiled=False)
 jax._src.lax.parallel.pswapaxes(x,axis_name,axis,*,axis_index_groups=None)
 jax._src.lax.parallel.xeinsum(spec:str,*operands)
+jax.lax.all_gather(x,axis_name,*,axis_index_groups=None,axis=0,tiled=False)
+jax.lax.all_to_all(x,axis_name,split_axis,concat_axis,*,axis_index_groups=None,tiled=False)
+jax.lax.axis_index(axis_name)
+jax.lax.pdot(x,y,axis_name,pos_contract=((),()),pos_batch=((),()),precision=None)
+jax.lax.pmax(x,axis_name,*,axis_index_groups=None)
+jax.lax.pmean(x,axis_name,*,axis_index_groups=None)
+jax.lax.pmin(x,axis_name,*,axis_index_groups=None)
+jax.lax.ppermute(x,axis_name,perm)
+jax.lax.pshuffle(x,axis_name,perm)
+jax.lax.psum(x,axis_name,*,axis_index_groups=None)
+jax.lax.psum_scatter(x,axis_name,*,scatter_dimension=0,axis_index_groups=None,tiled=False)
+jax.lax.pswapaxes(x,axis_name,axis,*,axis_index_groups=None)
+jax.lax.xeinsum(spec:str,*operands)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/windowed_reductions.py----------------------------------------
@@ -17050,6 +16946,8 @@ jax._src.lax.windowed_reductions._select_and_scatter_lower(ctx,operand,source,in
 jax._src.lax.windowed_reductions._select_and_scatter_shape_rule(operand,source,init_value,*,select_jaxpr,select_consts,scatter_jaxpr,scatter_consts,window_dimensions,window_strides,padding)
 jax._src.lax.windowed_reductions.reduce_window(operand,init_value,computation:Callable,window_dimensions:core.Shape,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
 jax._src.lax.windowed_reductions.reduce_window_shape_tuple(operand_shape,window_dimensions,window_strides,padding,base_dilation=None,window_dilation=None)
+jax.lax.reduce_window(operand,init_value,computation:Callable,window_dimensions:core.Shape,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
+jax.lax.reduce_window_shape_tuple(operand_shape,window_dimensions,window_strides,padding,base_dilation=None,window_dilation=None)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/slicing.py----------------------------------------
@@ -17257,6 +17155,27 @@ jax._src.lax.slicing.scatter_min(operand:ArrayLike,scatter_indices:ArrayLike,upd
 jax._src.lax.slicing.scatter_mul(operand:ArrayLike,scatter_indices:ArrayLike,updates:ArrayLike,dimension_numbers:ScatterDimensionNumbers,*,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
 jax._src.lax.slicing.slice(operand:ArrayLike,start_indices:Sequence[int],limit_indices:Sequence[int],strides:Optional[Sequence[int]]=None)->Array
 jax._src.lax.slicing.slice_in_dim(operand:Union[Array,np.ndarray],start_index:Optional[int],limit_index:Optional[int],stride:int=1,axis:int=0)->Array
+jax.lax.GatherDimensionNumbers(NamedTuple)
+jax.lax.GatherScatterMode(enum.Enum)
+jax.lax.GatherScatterMode.from_any(s:Optional[Union[str,'GatherScatterMode']])
+jax.lax.ScatterDimensionNumbers(NamedTuple)
+jax.lax.dynamic_index_in_dim(operand:Union[Array,np.ndarray],index:Union[int,Array],axis:int=0,keepdims:bool=True)->Array
+jax.lax.dynamic_slice(operand:Union[Array,np.ndarray],start_indices:Union[Union[Array,np.ndarray],Sequence[ArrayLike]],slice_sizes:Shape)->Array
+jax.lax.dynamic_slice_in_dim(operand:Union[Array,np.ndarray],start_index:ArrayLike,slice_size:int,axis:int=0)->Array
+jax.lax.dynamic_update_index_in_dim(operand:Union[Array,np.ndarray],update:ArrayLike,index:ArrayLike,axis:int)->Array
+jax.lax.dynamic_update_slice(operand:Union[Array,np.ndarray],update:ArrayLike,start_indices:Union[Array,Sequence[ArrayLike]])->Array
+jax.lax.dynamic_update_slice_in_dim(operand:Union[Array,np.ndarray],update:ArrayLike,start_index:ArrayLike,axis:int)->Array
+jax.lax.gather(operand:ArrayLike,start_indices:ArrayLike,dimension_numbers:GatherDimensionNumbers,slice_sizes:Shape,*,unique_indices:bool=False,indices_are_sorted:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None,fill_value=None)->Array
+jax.lax.index_in_dim(operand:Union[Array,np.ndarray],index:int,axis:int=0,keepdims:bool=True)->Array
+jax.lax.index_take(src:Array,idxs:Array,axes:Sequence[int])->Array
+jax.lax.scatter(operand:ArrayLike,scatter_indices:ArrayLike,updates:ArrayLike,dimension_numbers:ScatterDimensionNumbers,*,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
+jax.lax.scatter_add(operand:ArrayLike,scatter_indices:ArrayLike,updates:ArrayLike,dimension_numbers:ScatterDimensionNumbers,*,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
+jax.lax.scatter_apply(operand:Array,scatter_indices:Array,func:Callable[[Array],Array],dimension_numbers:ScatterDimensionNumbers,*,update_shape:Shape=(),indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
+jax.lax.scatter_max(operand:ArrayLike,scatter_indices:ArrayLike,updates:ArrayLike,dimension_numbers:ScatterDimensionNumbers,*,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
+jax.lax.scatter_min(operand:ArrayLike,scatter_indices:ArrayLike,updates:ArrayLike,dimension_numbers:ScatterDimensionNumbers,*,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
+jax.lax.scatter_mul(operand:ArrayLike,scatter_indices:ArrayLike,updates:ArrayLike,dimension_numbers:ScatterDimensionNumbers,*,indices_are_sorted:bool=False,unique_indices:bool=False,mode:Optional[Union[str,GatherScatterMode]]=None)->Array
+jax.lax.slice(operand:ArrayLike,start_indices:Sequence[int],limit_indices:Sequence[int],strides:Optional[Sequence[int]]=None)->Array
+jax.lax.slice_in_dim(operand:Union[Array,np.ndarray],start_index:Optional[int],limit_index:Optional[int],stride:int=1,axis:int=0)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/qdwh.py----------------------------------------
@@ -17329,6 +17248,8 @@ A:jax._src.lax.other.(lhs_spec, rhs_spec, out_spec)->jax._src.lax.convolution.co
 A:jax._src.lax.other.lhs_b_dims->sorted(lhs_b_dims)
 jax._src.lax.other.conv_general_dilated_local(lhs:jax.typing.ArrayLike,rhs:jax.typing.ArrayLike,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],filter_shape:Sequence[int],lhs_dilation:Optional[Sequence[int]]=None,rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:Optional[convolution.ConvGeneralDilatedDimensionNumbers]=None,precision:lax.PrecisionLike=None)->jax.Array
 jax._src.lax.other.conv_general_dilated_patches(lhs:jax.typing.ArrayLike,filter_shape:Sequence[int],window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],lhs_dilation:Optional[Sequence[int]]=None,rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:Optional[convolution.ConvGeneralDilatedDimensionNumbers]=None,precision:Optional[lax.PrecisionType]=None,preferred_element_type:Optional[DType]=None)->jax.Array
+jax.lax.conv_general_dilated_local(lhs:jax.typing.ArrayLike,rhs:jax.typing.ArrayLike,window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],filter_shape:Sequence[int],lhs_dilation:Optional[Sequence[int]]=None,rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:Optional[convolution.ConvGeneralDilatedDimensionNumbers]=None,precision:lax.PrecisionLike=None)->jax.Array
+jax.lax.conv_general_dilated_patches(lhs:jax.typing.ArrayLike,filter_shape:Sequence[int],window_strides:Sequence[int],padding:Union[str,Sequence[tuple[int,int]]],lhs_dilation:Optional[Sequence[int]]=None,rhs_dilation:Optional[Sequence[int]]=None,dimension_numbers:Optional[convolution.ConvGeneralDilatedDimensionNumbers]=None,precision:Optional[lax.PrecisionType]=None,preferred_element_type:Optional[DType]=None)->jax.Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/stack.py----------------------------------------
@@ -18116,6 +18037,115 @@ jax._src.lax.lax.unop(result_dtype,accepted_dtypes,name)
 jax._src.lax.lax.unop_dtype_rule(result_dtype,accepted_dtypes,name,aval,**kwargs)
 jax._src.lax.lax.zeros_like_array(x:ArrayLike)->Array
 jax._src.lax.lax.zeros_like_shaped_array(aval:ShapedArray)->Array
+jax.lax.Precision(self,arg0)
+jax.lax.Precision.__init__(self,arg0)
+jax.lax.Precision.__str__(self)->str
+jax.lax.RoundingMethod(enum.IntEnum)
+jax.lax.abs(x:ArrayLike)->Array
+jax.lax.acos(x:ArrayLike)->Array
+jax.lax.acosh(x:ArrayLike)->Array
+jax.lax.add(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.after_all(*operands)
+jax.lax.argmax(operand:ArrayLike,axis:int,index_dtype:DTypeLike)->Array
+jax.lax.argmin(operand:ArrayLike,axis:int,index_dtype:DTypeLike)->Array
+jax.lax.asin(x:ArrayLike)->Array
+jax.lax.asinh(x:ArrayLike)->Array
+jax.lax.atan(x:ArrayLike)->Array
+jax.lax.atan2(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.atanh(x:ArrayLike)->Array
+jax.lax.batch_matmul(lhs:Array,rhs:Array,precision:PrecisionLike=None)->Array
+jax.lax.bitcast_convert_type(operand:ArrayLike,new_dtype:DTypeLike)->Array
+jax.lax.bitwise_and(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.bitwise_not(x:ArrayLike)->Array
+jax.lax.bitwise_or(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.bitwise_xor(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.broadcast(operand:ArrayLike,sizes:Sequence[int])->Array
+jax.lax.broadcast_in_dim(operand:ArrayLike,shape:Shape,broadcast_dimensions:Sequence[int])->Array
+jax.lax.broadcast_shapes(*shapes)
+jax.lax.broadcast_to_rank(x:Array,rank:int)->Array
+jax.lax.broadcasted_iota(dtype:DTypeLike,shape:Shape,dimension:int)->Array
+jax.lax.cbrt(x:ArrayLike)->Array
+jax.lax.ceil(x:ArrayLike)->Array
+jax.lax.clamp(min:ArrayLike,x:ArrayLike,max:ArrayLike)->Array
+jax.lax.clz(x:ArrayLike)->Array
+jax.lax.collapse(operand:Array,start_dimension:int,stop_dimension:Optional[int]=None)->Array
+jax.lax.complex(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.concatenate(operands:Union[Array,Sequence[ArrayLike]],dimension:int)->Array
+jax.lax.conj(x:ArrayLike)->Array
+jax.lax.convert_element_type(operand:ArrayLike,new_dtype:DTypeLike)->Array
+jax.lax.cos(x:ArrayLike)->Array
+jax.lax.cosh(x:ArrayLike)->Array
+jax.lax.create_token(_=None)
+jax.lax.div(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.dot(lhs:Array,rhs:Array,precision:PrecisionLike=None,preferred_element_type:Optional[DTypeLike]=None)->Array
+jax.lax.dot_general(lhs:ArrayLike,rhs:ArrayLike,dimension_numbers:DotDimensionNumbers,precision:PrecisionLike=None,preferred_element_type:Optional[DTypeLike]=None)->Array
+jax.lax.eq(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.exp(x:ArrayLike)->Array
+jax.lax.exp2(x:ArrayLike)->Array
+jax.lax.expand_dims(array:ArrayLike,dimensions:Sequence[int])->Array
+jax.lax.expm1(x:ArrayLike)->Array
+jax.lax.floor(x:ArrayLike)->Array
+jax.lax.full(shape:Shape,fill_value:ArrayLike,dtype:Optional[DTypeLike]=None)->Array
+jax.lax.full_like(x:Union[ArrayLike,DuckTypedArray],fill_value:ArrayLike,dtype:Optional[DTypeLike]=None,shape:Optional[Shape]=None)->Array
+jax.lax.ge(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.gt(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.imag(x:ArrayLike)->Array
+jax.lax.infeed(token,shape=None,partitions=None)
+jax.lax.integer_pow(x:ArrayLike,y:int)->Array
+jax.lax.iota(dtype:DTypeLike,size:int)->Array
+jax.lax.is_finite(x:ArrayLike)->Array
+jax.lax.le(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.log(x:ArrayLike)->Array
+jax.lax.log1p(x:ArrayLike)->Array
+jax.lax.logistic(x:ArrayLike)->Array
+jax.lax.lt(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.max(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.min(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.mul(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.naryop(result_dtype,accepted_dtypes,name,allow_extended_dtype=False,require_same_dtypes=False)
+jax.lax.naryop_dtype_rule(result_dtype,accepted_dtypes,name,*avals,require_same=True,allow_extended_dtype=False,**kwargs)
+jax.lax.ne(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.neg(x:ArrayLike)->Array
+jax.lax.nextafter(x1:ArrayLike,x2:ArrayLike)->Array
+jax.lax.outfeed(token,xs,partitions=None)
+jax.lax.pad(operand:ArrayLike,padding_value:ArrayLike,padding_config:Sequence[tuple[int,int,int]])->Array
+jax.lax.padtype_to_pads(in_shape,window_shape,window_strides,padding)
+jax.lax.population_count(x:ArrayLike)->Array
+jax.lax.pow(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.real(x:ArrayLike)->Array
+jax.lax.reciprocal(x:ArrayLike)->Array
+jax.lax.reduce(operands:Any,init_values:Any,computation:Callable[[Any,Any],Any],dimensions:Sequence[int])->Any
+jax.lax.reduce_precision(operand:Union[float,ArrayLike],exponent_bits:int,mantissa_bits:int)->Array
+jax.lax.rem(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.reshape(operand:ArrayLike,new_sizes:Shape,dimensions:Optional[Sequence[int]]=None)->Array
+jax.lax.rev(operand:ArrayLike,dimensions:Sequence[int])->Array
+jax.lax.rng_bit_generator(key,shape,dtype=np.uint32,algorithm=RandomAlgorithm.RNG_DEFAULT)
+jax.lax.rng_uniform(a,b,shape)
+jax.lax.round(x:ArrayLike,rounding_method:RoundingMethod=RoundingMethod.AWAY_FROM_ZERO)->Array
+jax.lax.rsqrt(x:ArrayLike)->Array
+jax.lax.select(pred:ArrayLike,on_true:ArrayLike,on_false:ArrayLike)->Array
+jax.lax.select_n(which:ArrayLike,*cases:ArrayLike)->Array
+jax.lax.shift_left(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.shift_right_arithmetic(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.shift_right_logical(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.sign(x:ArrayLike)->Array
+jax.lax.sin(x:ArrayLike)->Array
+jax.lax.sinh(x:ArrayLike)->Array
+jax.lax.sort(operand:Union[Array,Sequence[Array]],dimension:int=-1,is_stable:bool=True,num_keys:int=1)->Union[Array, tuple[Array, ...]]
+jax.lax.sort_key_val(keys:Array,values:ArrayLike,dimension:int=-1,is_stable:bool=True)->tuple[Array, Array]
+jax.lax.sqrt(x:ArrayLike)->Array
+jax.lax.square(x:ArrayLike)->Array
+jax.lax.squeeze(array:ArrayLike,dimensions:Sequence[int])->Array
+jax.lax.stop_gradient(x:T)->T
+jax.lax.sub(x:ArrayLike,y:ArrayLike)->Array
+jax.lax.tan(x:ArrayLike)->Array
+jax.lax.tanh(x:ArrayLike)->Array
+jax.lax.tie_in(x:Any,y:T)->T
+jax.lax.top_k(operand:ArrayLike,k:int)->tuple[Array, Array]
+jax.lax.transpose(operand:ArrayLike,permutation:Sequence[int]|np.ndarray)->Array
+jax.lax.unop(result_dtype,accepted_dtypes,name)
+jax.lax.unop_dtype_rule(result_dtype,accepted_dtypes,name,aval,**kwargs)
+jax.lax.zeros_like_array(x:ArrayLike)->Array
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/control_flow/__init__.py----------------------------------------
@@ -18407,9 +18437,6 @@ A:jax._src.lax.control_flow.loops.ad.primitive_jvps[cumprod_p]->partial(_cumulat
 A:jax._src.lax.control_flow.loops.ad.primitive_jvps[cummin_p]->partial(_cumulative_jvp_rule, combine_fn=lax.min)
 A:jax._src.lax.control_flow.loops.ad.primitive_jvps[cummax_p]->partial(_cumulative_jvp_rule, combine_fn=lax.max)
 jax._src.lax.control_flow._scan_impl(*args,reverse,length,num_consts,num_carry,jaxpr,linear,unroll)
-jax._src.lax.control_flow._scan_impl_block_unrolled(*args,reverse,length,num_consts,num_carry,linear,block_length,f_impl,x_avals,y_avals)
-jax._src.lax.control_flow._scan_impl_loop(*args,reverse,length,num_consts,num_carry,linear,f_impl,x_avals,y_avals)
-jax._src.lax.control_flow._scan_impl_unrolled(*args,reverse,length,num_consts,num_carry,linear,f_impl,x_avals,y_avals)
 jax._src.lax.control_flow.associative_scan(fn:Callable,elems,reverse:bool=False,axis:int=0)
 jax._src.lax.control_flow.cumlogsumexp(operand:Array,axis:int=0,reverse:bool=False)->Array
 jax._src.lax.control_flow.cummax(operand:Array,axis:int=0,reverse:bool=False)->Array
@@ -18487,6 +18514,17 @@ jax._src.lax.control_flow.map(f,xs)
 jax._src.lax.control_flow.scan(f:Callable[[Carry,X],tuple[Carry,Y]],init:Carry,xs:X,length:Optional[int]=None,reverse:bool=False,unroll:int=1)->tuple[Carry, Y]
 jax._src.lax.control_flow.scan_bind(*args,**params)
 jax._src.lax.control_flow.while_loop(cond_fun:Callable[[T],BooleanNumeric],body_fun:Callable[[T],T],init_val:T)->T
+jax.lax.associative_scan(fn:Callable,elems,reverse:bool=False,axis:int=0)
+jax.lax.cumlogsumexp(operand:Array,axis:int=0,reverse:bool=False)->Array
+jax.lax.cummax(operand:Array,axis:int=0,reverse:bool=False)->Array
+jax.lax.cummin(operand:Array,axis:int=0,reverse:bool=False)->Array
+jax.lax.cumprod(operand:Array,axis:int=0,reverse:bool=False)->Array
+jax.lax.cumsum(operand:Array,axis:int=0,reverse:bool=False)->Array
+jax.lax.fori_loop(lower,upper,body_fun,init_val)
+jax.lax.map(f,xs)
+jax.lax.scan(f:Callable[[Carry,X],tuple[Carry,Y]],init:Carry,xs:X,length:Optional[int]=None,reverse:bool=False,unroll:int=1)->tuple[Carry, Y]
+jax.lax.scan_bind(*args,**params)
+jax.lax.while_loop(cond_fun:Callable[[T],BooleanNumeric],body_fun:Callable[[T],T],init_val:T)->T
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/control_flow/for_loop.py----------------------------------------
@@ -18727,7 +18765,6 @@ A:jax._src.lax.control_flow.conditionals.out_vals->jax._src.core.AxisPrimitive('
 A:jax._src.lax.control_flow.conditionals.(out_vals, out_ref_vals)->jax._src.util.split_list(out_vals, [len(out_avals)])
 A:jax._src.lax.control_flow.conditionals.ref_val_iter->iter(out_ref_vals)
 jax._src.lax.control_flow.cond(*args,**kwargs)
-jax._src.lax.control_flow.cond_bind(*args,branches,linear)
 jax._src.lax.control_flow.conditionals._bcast_select(pred,on_true,on_false)
 jax._src.lax.control_flow.conditionals._bcast_select_n(pred,*cases)
 jax._src.lax.control_flow.conditionals._cond(pred,true_fun:Callable,false_fun:Callable,*operands,operand=_no_operand_sentinel,linear=None)
@@ -18753,6 +18790,8 @@ jax._src.lax.control_flow.conditionals.cond(*args,**kwargs)
 jax._src.lax.control_flow.conditionals.cond_bind(*args,branches,linear)
 jax._src.lax.control_flow.conditionals.switch(index,branches:Sequence[Callable],*operands,operand=_no_operand_sentinel)
 jax._src.lax.control_flow.switch(index,branches:Sequence[Callable],*operands,operand=_no_operand_sentinel)
+jax.lax.cond(*args,**kwargs)
+jax.lax.switch(index,branches:Sequence[Callable],*operands,operand=_no_operand_sentinel)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/control_flow/solves.py----------------------------------------
@@ -18844,6 +18883,8 @@ jax._src.lax.control_flow.solves._tangent_linear_map(func,params,params_dot,*x)
 jax._src.lax.control_flow.solves._transpose_one_output(linear_fun,primals)
 jax._src.lax.control_flow.solves.custom_linear_solve(matvec,b,solve,transpose_solve=None,symmetric=False,has_aux=False)
 jax._src.lax.control_flow.solves.custom_root(f,initial_guess,solve,tangent_solve,has_aux=False)
+jax.lax.custom_linear_solve(matvec,b,solve,transpose_solve=None,symmetric=False,has_aux=False)
+jax.lax.custom_root(f,initial_guess,solve,tangent_solve,has_aux=False)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.4.16/lib/python3.9/site-packages/jax/_src/lax/control_flow/common.py----------------------------------------

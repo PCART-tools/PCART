@@ -109,6 +109,7 @@ A:flask.blueprints.bp_options->bp_options.copy().copy()
 A:flask.blueprints.bp_url_prefix->bp_options.copy().copy().get('url_prefix')
 A:flask.blueprints.bp_subdomain->bp_options.copy().copy().get('subdomain')
 flask.Blueprint(self,name:str,import_name:str,static_folder:str|os.PathLike|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
+flask.Blueprint.__init__(self,name:str,import_name:str,static_folder:str|os.PathLike|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
 flask.Blueprint._check_setup_finished(self,f_name:str)->None
 flask.Blueprint.add_app_template_filter(self,f:ft.TemplateFilterCallable,name:str|None=None)->None
 flask.Blueprint.add_app_template_global(self,f:ft.TemplateGlobalCallable,name:str|None=None)->None
@@ -129,8 +130,6 @@ flask.Blueprint.record_once(self,func:t.Callable)->None
 flask.Blueprint.register(self,app:Flask,options:dict)->None
 flask.Blueprint.register_blueprint(self,blueprint:Blueprint,**options:t.Any)->None
 flask.Blueprint.teardown_app_request(self,f:T_teardown)->T_teardown
-flask.BlueprintSetupState(self,blueprint:Blueprint,app:Flask,options:t.Any,first_registration:bool)
-flask.BlueprintSetupState.add_url_rule(self,rule:str,endpoint:str|None=None,view_func:t.Callable|None=None,**options:t.Any)->None
 flask.blueprints.Blueprint(self,name:str,import_name:str,static_folder:str|os.PathLike|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
 flask.blueprints.Blueprint.__init__(self,name:str,import_name:str,static_folder:str|os.PathLike|None=None,static_url_path:str|None=None,template_folder:str|os.PathLike|None=None,url_prefix:str|None=None,subdomain:str|None=None,url_defaults:dict|None=None,root_path:str|None=None,cli_group:str|None=_sentinel)
 flask.blueprints.Blueprint._check_setup_finished(self,f_name:str)->None
@@ -204,6 +203,7 @@ A:flask.app.len_rv->len(rv)
 A:flask.app.ctx->self.request_context(environ)
 A:flask.app.builder->EnvironBuilder(self, *args, **kwargs)
 flask.Flask(self,import_name:str,static_url_path:str|None=None,static_folder:str|os.PathLike|None='static',static_host:str|None=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:str|os.PathLike|None='templates',instance_path:str|None=None,instance_relative_config:bool=False,root_path:str|None=None)
+flask.Flask.__init__(self,import_name:str,static_url_path:str|None=None,static_folder:str|os.PathLike|None='static',static_host:str|None=None,host_matching:bool=False,subdomain_matching:bool=False,template_folder:str|os.PathLike|None='templates',instance_path:str|None=None,instance_relative_config:bool=False,root_path:str|None=None)
 flask.Flask._check_setup_finished(self,f_name:str)->None
 flask.Flask._find_error_handler(self,e:Exception)->ft.ErrorHandlerCallable | None
 flask.Flask.add_template_filter(self,f:ft.TemplateFilterCallable,name:str|None=None)->None
@@ -248,6 +248,7 @@ flask.Flask.redirect(self,location:str,code:int=302)->BaseResponse
 flask.Flask.register_blueprint(self,blueprint:Blueprint,**options:t.Any)->None
 flask.Flask.request_context(self,environ:dict)->RequestContext
 flask.Flask.run(self,host:str|None=None,port:int|None=None,debug:bool|None=None,load_dotenv:bool=True,**options:t.Any)->None
+flask.Flask.select_jinja_autoescape(self,filename:str)->bool
 flask.Flask.shell_context_processor(self,f:T_shell_context_processor)->T_shell_context_processor
 flask.Flask.should_ignore_error(self,error:BaseException|None)->bool
 flask.Flask.teardown_appcontext(self,f:T_teardown)->T_teardown
@@ -548,6 +549,7 @@ A:flask.config.obj->load(f)
 A:flask.config.self[key]->getattr(obj, key)
 A:flask.config.key->key.lower().lower()
 flask.Config(self,root_path:str,defaults:dict|None=None)
+flask.Config.__init__(self,root_path:str,defaults:dict|None=None)
 flask.Config.__repr__(self)->str
 flask.Config.from_envvar(self,variable_name:str,silent:bool=False)->bool
 flask.Config.from_file(self,filename:str,load:t.Callable[[t.IO[t.Any]],t.Mapping],silent:bool=False,text:bool=True)->bool
@@ -556,9 +558,6 @@ flask.Config.from_object(self,obj:object|str)->None
 flask.Config.from_prefixed_env(self,prefix:str='FLASK',*,loads:t.Callable[[str],t.Any]=json.loads)->bool
 flask.Config.from_pyfile(self,filename:str,silent:bool=False)->bool
 flask.Config.get_namespace(self,namespace:str,lowercase:bool=True,trim_namespace:bool=True)->dict[str, t.Any]
-flask.ConfigAttribute(self,name:str,get_converter:t.Callable|None=None)
-flask.ConfigAttribute.__get__(self,obj:t.Any,owner:t.Any=None)->t.Any
-flask.ConfigAttribute.__set__(self,obj:t.Any,value:t.Any)->None
 flask.config.Config(self,root_path:str,defaults:dict|None=None)
 flask.config.Config.__init__(self,root_path:str,defaults:dict|None=None)
 flask.config.Config.__repr__(self)->str

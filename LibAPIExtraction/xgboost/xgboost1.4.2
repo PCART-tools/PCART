@@ -267,6 +267,7 @@ xgboost.Booster.__deepcopy__(self,_)
 xgboost.Booster.__del__(self)
 xgboost.Booster.__getitem__(self,val)
 xgboost.Booster.__getstate__(self)
+xgboost.Booster.__init__(self,params=None,cache=(),model_file=None)
 xgboost.Booster.__setstate__(self,state)
 xgboost.Booster._configure_metrics(self,params:Union[Dict,List])->Union[Dict, List]
 xgboost.Booster._get_feature_info(self,field:str)
@@ -302,6 +303,7 @@ xgboost.Booster.trees_to_dataframe(self,fmap='')
 xgboost.Booster.update(self,dtrain,iteration,fobj=None)
 xgboost.DMatrix(self,data,label=None,*,weight=None,base_margin=None,missing:Optional[float]=None,silent=False,feature_names=None,feature_types=None,nthread:Optional[int]=None,group=None,qid=None,label_lower_bound=None,label_upper_bound=None,feature_weights=None,enable_categorical:bool=False)
 xgboost.DMatrix.__del__(self)
+xgboost.DMatrix.__init__(self,data,label=None,*,weight=None,base_margin=None,missing:Optional[float]=None,silent=False,feature_names=None,feature_types=None,nthread:Optional[int]=None,group=None,qid=None,label_lower_bound=None,label_upper_bound=None,feature_weights=None,enable_categorical:bool=False)
 xgboost.DMatrix.feature_names(self)->List[str]
 xgboost.DMatrix.feature_names(self,feature_names:Optional[Union[List[str],str]])->None
 xgboost.DMatrix.feature_types(self)->Optional[List[str]]
@@ -324,6 +326,7 @@ xgboost.DMatrix.set_uint_info(self,field,data)
 xgboost.DMatrix.set_weight(self,weight)
 xgboost.DMatrix.slice(self,rindex:Union[List[int],np.ndarray],allow_groups:bool=False)->'DMatrix'
 xgboost.DeviceQuantileDMatrix(self,data,label=None,*,weight=None,base_margin=None,missing=None,silent=False,feature_names=None,feature_types=None,nthread:Optional[int]=None,max_bin:int=256,group=None,qid=None,label_lower_bound=None,label_upper_bound=None,feature_weights=None,enable_categorical:bool=False)
+xgboost.DeviceQuantileDMatrix.__init__(self,data,label=None,*,weight=None,base_margin=None,missing=None,silent=False,feature_names=None,feature_types=None,nthread:Optional[int]=None,max_bin:int=256,group=None,qid=None,label_lower_bound=None,label_upper_bound=None,feature_weights=None,enable_categorical:bool=False)
 xgboost.DeviceQuantileDMatrix._init(self,data,feature_names,feature_types,**meta)
 xgboost.core.Booster(self,params=None,cache=(),model_file=None)
 xgboost.core.Booster.__copy__(self)
@@ -542,11 +545,13 @@ A:xgboost.sklearn.fit.__doc__->XGBModel.fit.__doc__.replace('Fit gradient boosti
 A:xgboost.sklearn.class_probs->super().predict(X=X, output_margin=self.objective == 'multi:softmax', ntree_limit=ntree_limit, validate_features=validate_features, base_margin=base_margin, iteration_range=iteration_range)
 A:xgboost.sklearn.column_indexes->numpy.repeat(0, class_probs.shape[0])
 xgboost.XGBClassifier(self,*,objective='binary:logistic',use_label_encoder=True,**kwargs)
+xgboost.XGBClassifier.__init__(self,*,objective='binary:logistic',use_label_encoder=True,**kwargs)
 xgboost.XGBClassifier.evals_result(self)
 xgboost.XGBClassifier.fit(self,X,y,*,sample_weight=None,base_margin=None,eval_set=None,eval_metric=None,early_stopping_rounds=None,verbose=True,xgb_model=None,sample_weight_eval_set=None,base_margin_eval_set=None,feature_weights=None,callbacks=None)
 xgboost.XGBClassifier.predict(self,X,output_margin=False,ntree_limit=None,validate_features=True,base_margin=None,iteration_range:Optional[Tuple[int,int]]=None)
 xgboost.XGBClassifier.predict_proba(self,X,ntree_limit=None,validate_features=False,base_margin=None,iteration_range:Optional[Tuple[int,int]]=None)->np.ndarray
 xgboost.XGBModel(self,max_depth=None,learning_rate=None,n_estimators=100,verbosity=None,objective=None,booster=None,tree_method=None,n_jobs=None,gamma=None,min_child_weight=None,max_delta_step=None,subsample=None,colsample_bytree=None,colsample_bylevel=None,colsample_bynode=None,reg_alpha=None,reg_lambda=None,scale_pos_weight=None,base_score=None,random_state=None,missing=np.nan,num_parallel_tree=None,monotone_constraints=None,interaction_constraints=None,importance_type='gain',gpu_id=None,validate_parameters=None,**kwargs)
+xgboost.XGBModel.__init__(self,max_depth=None,learning_rate=None,n_estimators=100,verbosity=None,objective=None,booster=None,tree_method=None,n_jobs=None,gamma=None,min_child_weight=None,max_delta_step=None,subsample=None,colsample_bytree=None,colsample_bylevel=None,colsample_bynode=None,reg_alpha=None,reg_lambda=None,scale_pos_weight=None,base_score=None,random_state=None,missing=np.nan,num_parallel_tree=None,monotone_constraints=None,interaction_constraints=None,importance_type='gain',gpu_id=None,validate_parameters=None,**kwargs)
 xgboost.XGBModel._can_use_inplace_predict(self)->bool
 xgboost.XGBModel._configure_fit(self,booster:Optional[Union[Booster,'XGBModel']],eval_metric:Optional[Union[Callable,str,List[str]]],params:Dict[str,Any])->Tuple[Booster, Optional[Metric], Dict[str, Any]]
 xgboost.XGBModel._early_stopping_attr(self,attr:str)->Union[float, int]
@@ -573,15 +578,18 @@ xgboost.XGBModel.predict(self,X,output_margin=False,ntree_limit=None,validate_fe
 xgboost.XGBModel.save_model(self,fname:str)
 xgboost.XGBModel.set_params(self,**params)
 xgboost.XGBRFClassifier(self,*,learning_rate=1,subsample=0.8,colsample_bynode=0.8,reg_lambda=1e-05,use_label_encoder=True,**kwargs)
+xgboost.XGBRFClassifier.__init__(self,*,learning_rate=1,subsample=0.8,colsample_bynode=0.8,reg_lambda=1e-05,use_label_encoder=True,**kwargs)
 xgboost.XGBRFClassifier.get_num_boosting_rounds(self)
 xgboost.XGBRFClassifier.get_xgb_params(self)
 xgboost.XGBRFRegressor(self,*,learning_rate=1,subsample=0.8,colsample_bynode=0.8,reg_lambda=1e-05,**kwargs)
+xgboost.XGBRFRegressor.__init__(self,*,learning_rate=1,subsample=0.8,colsample_bynode=0.8,reg_lambda=1e-05,**kwargs)
 xgboost.XGBRFRegressor.get_num_boosting_rounds(self)
 xgboost.XGBRFRegressor.get_xgb_params(self)
 xgboost.XGBRanker(self,*,objective='rank:pairwise',**kwargs)
+xgboost.XGBRanker.__init__(self,*,objective='rank:pairwise',**kwargs)
 xgboost.XGBRanker.fit(self,X,y,*,group=None,qid=None,sample_weight=None,base_margin=None,eval_set=None,eval_group=None,eval_qid=None,eval_metric=None,early_stopping_rounds=None,verbose=False,xgb_model:Optional[Union[Booster,str,XGBModel]]=None,sample_weight_eval_set=None,base_margin_eval_set=None,feature_weights=None,callbacks=None)->'XGBRanker'
-xgboost.XGBRankerMixIn
 xgboost.XGBRegressor(self,*,objective='reg:squarederror',**kwargs)
+xgboost.XGBRegressor.__init__(self,*,objective='reg:squarederror',**kwargs)
 xgboost.sklearn.XGBClassifier(self,*,objective='binary:logistic',use_label_encoder=True,**kwargs)
 xgboost.sklearn.XGBClassifier.__init__(self,*,objective='binary:logistic',use_label_encoder=True,**kwargs)
 xgboost.sklearn.XGBClassifier.evals_result(self)
@@ -770,6 +778,7 @@ A:xgboost.tracker.self.end_time->time.time()
 A:xgboost.tracker.self.thread->Thread(target=run, args=())
 xgboost.RabitTracker(self,hostIP,nslave,port=9091,port_end=9999)
 xgboost.RabitTracker.__del__(self)
+xgboost.RabitTracker.__init__(self,hostIP,nslave,port=9091,port_end=9999)
 xgboost.RabitTracker.accept_slaves(self,nslave)
 xgboost.RabitTracker.alive(self)
 xgboost.RabitTracker.find_share_ring(self,tree_map,parent_map,r)
