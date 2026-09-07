@@ -113,6 +113,7 @@ A:click.core.extra_str->';'.join(extra)
 A:click.core.default->self.get_default(ctx)
 A:click.core.var->self.name.upper()
 click.Argument(self,param_decls:t.Sequence[str],required:t.Optional[bool]=None,**attrs:t.Any)
+click.Argument.__init__(self,param_decls:t.Sequence[str],required:t.Optional[bool]=None,**attrs:t.Any)
 click.Argument._parse_decls(self,decls:t.Sequence[str],expose_value:bool)->t.Tuple[t.Optional[str], t.List[str], t.List[str]]
 click.Argument.add_to_parser(self,parser:OptionParser,ctx:Context)->None
 click.Argument.get_error_hint(self,ctx:Context)->str
@@ -120,6 +121,7 @@ click.Argument.get_usage_pieces(self,ctx:Context)->t.List[str]
 click.Argument.human_readable_name(self)->str
 click.Argument.make_metavar(self)->str
 click.BaseCommand(self,name:t.Optional[str],context_settings:t.Optional[t.Dict[str,t.Any]]=None)
+click.BaseCommand.__init__(self,name:t.Optional[str],context_settings:t.Optional[t.Dict[str,t.Any]]=None)
 click.BaseCommand.__repr__(self)->str
 click.BaseCommand._main_shell_completion(self,ctx_args:t.Dict[str,t.Any],prog_name:str,complete_var:t.Optional[str]=None)->None
 click.BaseCommand.get_help(self,ctx:Context)->str
@@ -131,6 +133,7 @@ click.BaseCommand.parse_args(self,ctx:Context,args:t.List[str])->t.List[str]
 click.BaseCommand.shell_complete(self,ctx:Context,incomplete:str)->t.List['CompletionItem']
 click.BaseCommand.to_info_dict(self,ctx:Context)->t.Dict[str, t.Any]
 click.Command(self,name:t.Optional[str],context_settings:t.Optional[t.Dict[str,t.Any]]=None,callback:t.Optional[t.Callable[...,t.Any]]=None,params:t.Optional[t.List['Parameter']]=None,help:t.Optional[str]=None,epilog:t.Optional[str]=None,short_help:t.Optional[str]=None,options_metavar:t.Optional[str]='[OPTIONS]',add_help_option:bool=True,no_args_is_help:bool=False,hidden:bool=False,deprecated:bool=False)
+click.Command.__init__(self,name:t.Optional[str],context_settings:t.Optional[t.Dict[str,t.Any]]=None,callback:t.Optional[t.Callable[...,t.Any]]=None,params:t.Optional[t.List['Parameter']]=None,help:t.Optional[str]=None,epilog:t.Optional[str]=None,short_help:t.Optional[str]=None,options_metavar:t.Optional[str]='[OPTIONS]',add_help_option:bool=True,no_args_is_help:bool=False,hidden:bool=False,deprecated:bool=False)
 click.Command.collect_usage_pieces(self,ctx:Context)->t.List[str]
 click.Command.format_epilog(self,ctx:Context,formatter:HelpFormatter)->None
 click.Command.format_help(self,ctx:Context,formatter:HelpFormatter)->None
@@ -149,12 +152,14 @@ click.Command.parse_args(self,ctx:Context,args:t.List[str])->t.List[str]
 click.Command.shell_complete(self,ctx:Context,incomplete:str)->t.List['CompletionItem']
 click.Command.to_info_dict(self,ctx:Context)->t.Dict[str, t.Any]
 click.CommandCollection(self,name:t.Optional[str]=None,sources:t.Optional[t.List[MultiCommand]]=None,**attrs:t.Any)
+click.CommandCollection.__init__(self,name:t.Optional[str]=None,sources:t.Optional[t.List[MultiCommand]]=None,**attrs:t.Any)
 click.CommandCollection.add_source(self,multi_cmd:MultiCommand)->None
 click.CommandCollection.get_command(self,ctx:Context,cmd_name:str)->t.Optional[Command]
 click.CommandCollection.list_commands(self,ctx:Context)->t.List[str]
 click.Context(self,command:'Command',parent:t.Optional['Context']=None,info_name:t.Optional[str]=None,obj:t.Optional[t.Any]=None,auto_envvar_prefix:t.Optional[str]=None,default_map:t.Optional[t.Dict[str,t.Any]]=None,terminal_width:t.Optional[int]=None,max_content_width:t.Optional[int]=None,resilient_parsing:bool=False,allow_extra_args:t.Optional[bool]=None,allow_interspersed_args:t.Optional[bool]=None,ignore_unknown_options:t.Optional[bool]=None,help_option_names:t.Optional[t.List[str]]=None,token_normalize_func:t.Optional[t.Callable[[str],str]]=None,color:t.Optional[bool]=None,show_default:t.Optional[bool]=None)
 click.Context.__enter__(self)->'Context'
 click.Context.__exit__(self,exc_type,exc_value,tb)
+click.Context.__init__(self,command:'Command',parent:t.Optional['Context']=None,info_name:t.Optional[str]=None,obj:t.Optional[t.Any]=None,auto_envvar_prefix:t.Optional[str]=None,default_map:t.Optional[t.Dict[str,t.Any]]=None,terminal_width:t.Optional[int]=None,max_content_width:t.Optional[int]=None,resilient_parsing:bool=False,allow_extra_args:t.Optional[bool]=None,allow_interspersed_args:t.Optional[bool]=None,ignore_unknown_options:t.Optional[bool]=None,help_option_names:t.Optional[t.List[str]]=None,token_normalize_func:t.Optional[t.Callable[[str],str]]=None,color:t.Optional[bool]=None,show_default:t.Optional[bool]=None)
 click.Context._make_sub_context(self,command:'Command')->'Context'
 click.Context.abort(self)->'te.NoReturn'
 click.Context.call_on_close(self,f:t.Callable[...,t.Any])->t.Callable[..., t.Any]
@@ -178,12 +183,14 @@ click.Context.set_parameter_source(self,name:str,source:ParameterSource)->None
 click.Context.to_info_dict(self)->t.Dict[str, t.Any]
 click.Context.with_resource(self,context_manager:t.ContextManager[V])->V
 click.Group(self,name:t.Optional[str]=None,commands:t.Optional[t.Union[t.Dict[str,Command],t.Sequence[Command]]]=None,**attrs:t.Any)
+click.Group.__init__(self,name:t.Optional[str]=None,commands:t.Optional[t.Union[t.Dict[str,Command],t.Sequence[Command]]]=None,**attrs:t.Any)
 click.Group.add_command(self,cmd:Command,name:t.Optional[str]=None)->None
 click.Group.command(self,*args:t.Any,**kwargs:t.Any)->t.Callable[[t.Callable[..., t.Any]], Command]
 click.Group.get_command(self,ctx:Context,cmd_name:str)->t.Optional[Command]
 click.Group.group(self,*args:t.Any,**kwargs:t.Any)->t.Callable[[t.Callable[..., t.Any]], 'Group']
 click.Group.list_commands(self,ctx:Context)->t.List[str]
 click.MultiCommand(self,name:t.Optional[str]=None,invoke_without_command:bool=False,no_args_is_help:t.Optional[bool]=None,subcommand_metavar:t.Optional[str]=None,chain:bool=False,result_callback:t.Optional[t.Callable[...,t.Any]]=None,**attrs:t.Any)
+click.MultiCommand.__init__(self,name:t.Optional[str]=None,invoke_without_command:bool=False,no_args_is_help:t.Optional[bool]=None,subcommand_metavar:t.Optional[str]=None,chain:bool=False,result_callback:t.Optional[t.Callable[...,t.Any]]=None,**attrs:t.Any)
 click.MultiCommand.collect_usage_pieces(self,ctx:Context)->t.List[str]
 click.MultiCommand.format_commands(self,ctx:Context,formatter:HelpFormatter)->None
 click.MultiCommand.format_options(self,ctx:Context,formatter:HelpFormatter)->None
@@ -197,6 +204,7 @@ click.MultiCommand.resultcallback(self,replace:bool=False)->t.Callable[[F], F]
 click.MultiCommand.shell_complete(self,ctx:Context,incomplete:str)->t.List['CompletionItem']
 click.MultiCommand.to_info_dict(self,ctx:Context)->t.Dict[str, t.Any]
 click.Option(self,param_decls:t.Optional[t.Sequence[str]]=None,show_default:bool=False,prompt:t.Union[bool,str]=False,confirmation_prompt:t.Union[bool,str]=False,prompt_required:bool=True,hide_input:bool=False,is_flag:t.Optional[bool]=None,flag_value:t.Optional[t.Any]=None,multiple:bool=False,count:bool=False,allow_from_autoenv:bool=True,type:t.Optional[t.Union[types.ParamType,t.Any]]=None,help:t.Optional[str]=None,hidden:bool=False,show_choices:bool=True,show_envvar:bool=False,**attrs:t.Any)
+click.Option.__init__(self,param_decls:t.Optional[t.Sequence[str]]=None,show_default:bool=False,prompt:t.Union[bool,str]=False,confirmation_prompt:t.Union[bool,str]=False,prompt_required:bool=True,hide_input:bool=False,is_flag:t.Optional[bool]=None,flag_value:t.Optional[t.Any]=None,multiple:bool=False,count:bool=False,allow_from_autoenv:bool=True,type:t.Optional[t.Union[types.ParamType,t.Any]]=None,help:t.Optional[str]=None,hidden:bool=False,show_choices:bool=True,show_envvar:bool=False,**attrs:t.Any)
 click.Option._parse_decls(self,decls:t.Sequence[str],expose_value:bool)->t.Tuple[t.Optional[str], t.List[str], t.List[str]]
 click.Option.add_to_parser(self,parser:OptionParser,ctx:Context)->None
 click.Option.consume_value(self,ctx:Context,opts:t.Mapping[str,'Parameter'])->t.Tuple[t.Any, ParameterSource]
@@ -207,6 +215,7 @@ click.Option.resolve_envvar_value(self,ctx:Context)->t.Optional[str]
 click.Option.to_info_dict(self)->t.Dict[str, t.Any]
 click.Option.value_from_envvar(self,ctx:Context)->t.Optional[t.Any]
 click.Parameter(self,param_decls:t.Optional[t.Sequence[str]]=None,type:t.Optional[t.Union[types.ParamType,t.Any]]=None,required:bool=False,default:t.Optional[t.Union[t.Any,t.Callable[[],t.Any]]]=None,callback:t.Optional[t.Callable[[Context,'Parameter',t.Any],t.Any]]=None,nargs:t.Optional[int]=None,multiple:bool=False,metavar:t.Optional[str]=None,expose_value:bool=True,is_eager:bool=False,envvar:t.Optional[t.Union[str,t.Sequence[str]]]=None,shell_complete:t.Optional[t.Callable[[Context,'Parameter',str],t.Union[t.List['CompletionItem'],t.List[str]]]]=None,autocompletion:t.Optional[t.Callable[[Context,t.List[str],str],t.List[t.Union[t.Tuple[str,str],str]]]]=None)
+click.Parameter.__init__(self,param_decls:t.Optional[t.Sequence[str]]=None,type:t.Optional[t.Union[types.ParamType,t.Any]]=None,required:bool=False,default:t.Optional[t.Union[t.Any,t.Callable[[],t.Any]]]=None,callback:t.Optional[t.Callable[[Context,'Parameter',t.Any],t.Any]]=None,nargs:t.Optional[int]=None,multiple:bool=False,metavar:t.Optional[str]=None,expose_value:bool=True,is_eager:bool=False,envvar:t.Optional[t.Union[str,t.Sequence[str]]]=None,shell_complete:t.Optional[t.Callable[[Context,'Parameter',str],t.Union[t.List['CompletionItem'],t.List[str]]]]=None,autocompletion:t.Optional[t.Callable[[Context,t.List[str],str],t.List[t.Union[t.Tuple[str,str],str]]]]=None)
 click.Parameter.__repr__(self)->str
 click.Parameter._parse_decls(self,decls:t.Sequence[str],expose_value:bool)->t.Tuple[t.Optional[str], t.List[str], t.List[str]]
 click.Parameter.add_to_parser(self,parser:OptionParser,ctx:Context)->None
@@ -225,7 +234,6 @@ click.Parameter.to_info_dict(self)->t.Dict[str, t.Any]
 click.Parameter.type_cast_value(self,ctx:Context,value:t.Any)->t.Any
 click.Parameter.value_from_envvar(self,ctx:Context)->t.Optional[t.Any]
 click.Parameter.value_is_missing(self,value:t.Any)->bool
-click.ParameterSource(enum.Enum)
 click.core.Argument(self,param_decls:t.Sequence[str],required:t.Optional[bool]=None,**attrs:t.Any)
 click.core.Argument.__init__(self,param_decls:t.Sequence[str],required:t.Optional[bool]=None,**attrs:t.Any)
 click.core.Argument._parse_decls(self,decls:t.Sequence[str],expose_value:bool)->t.Tuple[t.Optional[str], t.List[str], t.List[str]]
@@ -432,20 +440,27 @@ A:click.exceptions.self.ui_filename->os.fsdecode(filename)
 click.Abort(RuntimeError)
 click.BadArgumentUsage(UsageError)
 click.BadOptionUsage(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
+click.BadOptionUsage.__init__(self,option_name:str,message:str,ctx:t.Optional['Context']=None)
 click.BadParameter(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
+click.BadParameter.__init__(self,message:str,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None)
 click.BadParameter.format_message(self)->str
 click.ClickException(self,message:str)
+click.ClickException.__init__(self,message:str)
 click.ClickException.__str__(self)->str
 click.ClickException.format_message(self)->str
 click.ClickException.show(self,file:t.Optional[t.IO]=None)->None
 click.FileError(self,filename:str,hint:t.Optional[str]=None)
+click.FileError.__init__(self,filename:str,hint:t.Optional[str]=None)
 click.FileError.format_message(self)->str
 click.MissingParameter(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
+click.MissingParameter.__init__(self,message:t.Optional[str]=None,ctx:t.Optional['Context']=None,param:t.Optional['Parameter']=None,param_hint:t.Optional[str]=None,param_type:t.Optional[str]=None)
 click.MissingParameter.__str__(self)->str
 click.MissingParameter.format_message(self)->str
 click.NoSuchOption(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
+click.NoSuchOption.__init__(self,option_name:str,message:t.Optional[str]=None,possibilities:t.Optional[t.Sequence[str]]=None,ctx:t.Optional['Context']=None)
 click.NoSuchOption.format_message(self)->str
 click.UsageError(self,message:str,ctx:t.Optional['Context']=None)
+click.UsageError.__init__(self,message:str,ctx:t.Optional['Context']=None)
 click.UsageError.show(self,file:t.Optional[t.IO]=None)->None
 click.exceptions.Abort(RuntimeError)
 click.exceptions.BadArgumentUsage(UsageError)
@@ -765,6 +780,7 @@ A:click.types.FLOAT->FloatParamType()
 A:click.types.BOOL->BoolParamType()
 A:click.types.UUID->UUIDParameterType()
 click.Choice(self,choices:t.Sequence[str],case_sensitive:bool=True)
+click.Choice.__init__(self,choices:t.Sequence[str],case_sensitive:bool=True)
 click.Choice.__repr__(self)->str
 click.Choice.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.Choice.get_metavar(self,param:'Parameter')->str
@@ -772,21 +788,25 @@ click.Choice.get_missing_message(self,param:'Parameter')->str
 click.Choice.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
 click.Choice.to_info_dict(self)->t.Dict[str, t.Any]
 click.DateTime(self,formats:t.Optional[t.Sequence[str]]=None)
+click.DateTime.__init__(self,formats:t.Optional[t.Sequence[str]]=None)
 click.DateTime.__repr__(self)->str
 click.DateTime._try_to_convert_date(self,value:t.Any,format:str)->t.Optional[datetime]
 click.DateTime.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.DateTime.get_metavar(self,param:'Parameter')->str
 click.DateTime.to_info_dict(self)->t.Dict[str, t.Any]
 click.File(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
+click.File.__init__(self,mode:str='r',encoding:t.Optional[str]=None,errors:t.Optional[str]='strict',lazy:t.Optional[bool]=None,atomic:bool=False)
 click.File.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.File.resolve_lazy_flag(self,value:t.Any)->bool
 click.File.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
 click.File.to_info_dict(self)->t.Dict[str, t.Any]
 click.FloatRange(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
+click.FloatRange.__init__(self,min:t.Optional[float]=None,max:t.Optional[float]=None,min_open:bool=False,max_open:bool=False,clamp:bool=False)
 click.FloatRange._clamp(self,bound:float,dir:'te.Literal[1,-1]',open:bool)->float
 click.IntRange(_NumberRangeBase,IntParamType)
 click.IntRange._clamp(self,bound:int,dir:'te.Literal[1,-1]',open:bool)->int
 click.ParamType(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
+click.ParamType.__call__(self,value:t.Any,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)
 click.ParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.ParamType.fail(self,message:str,param:t.Optional['Parameter']=None,ctx:t.Optional['Context']=None)->'t.NoReturn'
 click.ParamType.get_metavar(self,param:'Parameter')->t.Optional[str]
@@ -795,18 +815,17 @@ click.ParamType.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:s
 click.ParamType.split_envvar_value(self,rv:str)->t.Sequence[str]
 click.ParamType.to_info_dict(self)->t.Dict[str, t.Any]
 click.Path(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
+click.Path.__init__(self,exists:bool=False,file_okay:bool=True,dir_okay:bool=True,writable:bool=False,readable:bool=True,resolve_path:bool=False,allow_dash:bool=False,path_type:t.Optional[t.Type]=None)
 click.Path.coerce_path_result(self,rv:t.Any)->t.Any
 click.Path.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.Path.shell_complete(self,ctx:'Context',param:'Parameter',incomplete:str)->t.List['CompletionItem']
 click.Path.to_info_dict(self)->t.Dict[str, t.Any]
 click.Tuple(self,types:t.Sequence[t.Union[t.Type,ParamType]])
+click.Tuple.__init__(self,types:t.Sequence[t.Union[t.Type,ParamType]])
 click.Tuple.arity(self)->int
 click.Tuple.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.Tuple.name(self)->str
 click.Tuple.to_info_dict(self)->t.Dict[str, t.Any]
-click.UUIDParameterType(ParamType)
-click.UUIDParameterType.__repr__(self)->str
-click.UUIDParameterType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
 click.types.BoolParamType(ParamType)
 click.types.BoolParamType.__repr__(self)->str
 click.types.BoolParamType.convert(self,value:t.Any,param:t.Optional['Parameter'],ctx:t.Optional['Context'])->t.Any
@@ -901,6 +920,7 @@ A:click.formatting.text_width->max(self.width - first_col - 2, 10)
 A:click.formatting.wrapped_text->wrap_text(second, text_width, preserve_paragraphs=True)
 A:click.formatting.lines->wrap_text(second, text_width, preserve_paragraphs=True).splitlines()
 click.HelpFormatter(self,indent_increment:int=2,width:t.Optional[int]=None,max_width:t.Optional[int]=None)
+click.HelpFormatter.__init__(self,indent_increment:int=2,width:t.Optional[int]=None,max_width:t.Optional[int]=None)
 click.HelpFormatter.dedent(self)->None
 click.HelpFormatter.getvalue(self)->str
 click.HelpFormatter.indent(self)->None
@@ -1004,6 +1024,7 @@ A:click.parser.opt->normalize_opt(f'{prefix}{ch}', self.ctx)
 A:click.parser.(long_opt, explicit_value)->ParsingState(args).rargs.pop(0).split('=', 1)
 A:click.parser.norm_long_opt->normalize_opt(long_opt, self.ctx)
 click.OptionParser(self,ctx:t.Optional['Context']=None)
+click.OptionParser.__init__(self,ctx:t.Optional['Context']=None)
 click.OptionParser._get_value_from_state(self,option_name:str,option:Option,state:ParsingState)->t.Any
 click.OptionParser._match_long_opt(self,opt:str,explicit_value:t.Optional[str],state:ParsingState)->None
 click.OptionParser._match_short_opt(self,arg:str,state:ParsingState)->None

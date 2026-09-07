@@ -134,22 +134,113 @@ def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保�
         replaceVal1=''
         replaceKey2=''
         replaceVal2=''
+        packagePrefix=relativePath.replace('\\','/').replace('/','.')+'.'
         for key,value in importDict.items():
             if key[-1]=='*':
-                key=key.rstrip('*')
-                if key in api:
+                key=packagePrefix+key[:-1]
+                if api.startswith(key):
                     replaceKey1=key
-                    replaceVal1=''
-            elif key in api:
-                # if key.split('.')[-1]==api.split('.')[-1]: #key的最后一个字段要和api的最后一个字段相同
-                replaceKey2=key
-                replaceVal2=value
+                    replaceVal1=packagePrefix
+            else:
+                key=packagePrefix+key
+                #只替换当前包下完整的导出路径，避免匹配同名前缀或其他模块
+                if api==key or api.startswith(key+'.'):
+                    replaceKey2=key
+                    replaceVal2=packagePrefix+value
         if replaceKey2: #优先使用第二种替换方式
-            api=api.replace(replaceKey2,replaceVal2)
+            api=replaceVal2+api[len(replaceKey2):]
         elif replaceKey1:
-            api=api.replace(replaceKey1,replaceVal1)
+            api=replaceVal1+api[len(replaceKey1):]
     lst[0]=api 
     shortenPath(lst,{absolutePath:relativePath},importCache)
+
+
+
+## Build the re-export mapping of library API definitions
+## 构建库API定义的重导出映射
+#
+#  Scan module-level FromImport nodes in all __init__.py files and map source
+#  definition paths to their package export paths.
+#  扫描所有__init__.py中的模块级FromImport节点，建立源码定义路径到包导出路径的映射。
+#
+#  @param filePath All Python source files under the library package
+#  @return A dictionary mapping source definition paths to package export paths
+def getExportMap(filePath):
+    exportMap={}
+    for file in filePath:
+        #只处理包初始化文件，函数内部导入和普通源码文件不属于包重导出
+        if os.path.basename(file)!='__init__.py':
+            continue
+
+        #根据__init__.py路径得到当前导出包名
+        def2format=Def2format()
+        def2format.toFormat(file)
+        package=def2format.prefix.rsplit('.__init__',1)[0]
+        packageParts=package.split('.')
+        try:
+            root=getAst(file)
+        except Exception as e:
+            print(f"getExportMap --> ast.parse failed: {e}")
+            continue
+
+        #只访问模块顶层节点，避免把函数或类中的局部导入识别为包导出
+        for node in root.body:
+            if not isinstance(node,ast.ImportFrom):
+                continue
+
+            #将绝对导入和相对导入统一还原为完整源码路径
+            if node.level==0:
+                module=node.module or ''
+            else:
+                parentCount=node.level-1
+                if parentCount>len(packageParts):
+                    continue
+                moduleParts=packageParts[:len(packageParts)-parentCount]
+                if node.module:
+                    moduleParts.extend(node.module.split('.'))
+                module='.'.join(moduleParts)
+
+            for name in node.names:
+                #星号导入无法静态确定具体导出对象，暂不处理
+                if name.name=='*':
+                    continue
+                sourcePath='.'.join(it for it in (module,name.name) if it)
+                publicPath=f"{package}.{name.asname or name.name}"
+                if sourcePath and sourcePath!=publicPath:
+                    exportMap.setdefault(sourcePath,set()).add(publicPath)
+    return exportMap
+
+
+
+## Get all available paths of a library API definition
+## 获取库API定义的所有可用路径
+#
+#  Preserve the original path, reuse shortenPath for parent package aliases,
+#  and expand transitive package re-exports on demand.
+#  保留原始路径，复用shortenPath处理父包别名，并按需展开多级包重导出路径。
+#
+#  @param apiPath The original fully qualified API path
+#  @param fileDict The absolute and relative paths of the source file
+#  @param importCache Cache of __init__.py import mappings used by shortenPath
+#  @param exportMap Reverse mapping from definition paths to package export paths
+#  @return A list containing the original path and all resolved alias paths
+def getApiPaths(apiPath,fileDict,importCache=None,exportMap=None):
+    paths=[apiPath]
+    #保留现有父目录__init__.py路径缩短结果
+    shortenedPath=[apiPath]
+    shortenPath(shortenedPath,fileDict,importCache)
+    if shortenedPath[0] not in paths:
+        paths.append(shortenedPath[0])
+
+    #按需展开多级重导出，paths同时记录已访问路径以防止循环
+    index=0
+    while index<len(paths):
+        currentPath=paths[index]
+        for publicPath in sorted((exportMap or {}).get(currentPath,set())):
+            if publicPath not in paths:
+                paths.append(publicPath)
+        index+=1
+    return paths
 
 
 
@@ -162,8 +253,12 @@ def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保�
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 #  @param importCache Cache of __init__.py import mappings used to shorten API paths.
-def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None): #lst是传入传出参数
+#  @param exportMap Reverse mapping from definition paths to package re-export paths.
+def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None, exportMap=None): #lst是传入传出参数
     className=root.name
+    classPath=f"{prefix}.{className}"
+    #类的导出路径同样适用于其构造方法和普通方法
+    classPaths=getApiPaths(classPath,fileDict,importCache,exportMap)
     flagInit=0
     flagNew=0
     flagCall=0
@@ -191,24 +286,26 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None): #lst是传�
                 call=arg
                 flagCall=1
             else:
-                lst.append(f"{prefix}.{className}.{funcName}({arg}){ret}")
-                #尝试缩短API路径
-                apiPath=[f"{prefix}.{className}.{funcName}"]
-                shortenPath(apiPath,fileDict,importCache)
-
-                if apiPath[0]!=f"{prefix}.{className}.{funcName}":
-                    lst.append(f"{apiPath[0]}({arg}){ret}")
+                methodPath=f"{classPath}.{funcName}"
+                methodPaths=getApiPaths(methodPath,fileDict,importCache,exportMap)
+                for currentClassPath in classPaths:
+                    publicMethodPath=f"{currentClassPath}.{funcName}"
+                    if publicMethodPath not in methodPaths:
+                        methodPaths.append(publicMethodPath)
+                for currentMethodPath in methodPaths:
+                    lst.append(f"{currentMethodPath}({arg}){ret}")
      
     if flagInit==1:
         para=f"({init})"
-        lst.append(f"{prefix}.{className}.__init__{para}")
+        specialMethod='__init__'
     elif flagNew==1:#若class中不含init,再看是否有new
         para=f"({new})"
-        lst.append(f"{prefix}.{className}.__new__{para}")
+        specialMethod='__new__'
     elif flagCall==1:
         para=f"({call})"
-        lst.append(f"{prefix}.{className}.__call__{para}")
+        specialMethod='__call__'
     else: #若类中不含init,new,call,就将类的继承作为类的参数
+        specialMethod=''
         pattern=fr"class {re.escape(className)}(\(.*?):"
         codeText=ast.unparse(root)
         R=RegexMatch(codeText,pattern)
@@ -218,19 +315,16 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None): #lst是传�
         else:
             args=['']
         para=args[0]
-    lst.append(f"{prefix}.{className}{para}")
-    
-    #尝试缩短API路径
-    apiPath=[f"{prefix}.{className}"]
-    shortenPath(apiPath,fileDict,importCache)
-    if apiPath[0]!=f"{prefix}.{className}":
-        lst.append(f"{apiPath[0]}{para}")
+    for currentClassPath in classPaths:
+        if specialMethod:
+            lst.append(f"{currentClassPath}.{specialMethod}{para}")
+        lst.append(f"{currentClassPath}{para}")
         
     #然后再判断当前类节点下是否还有嵌套类，有的话就往下递归
     prefix+=f".{className}" #更新前缀
     for n in ast.iter_child_nodes(root):
         if isinstance(n,ast.ClassDef):
-            getClass(lst,n,prefix,fileDict,pyiFlag,importCache)
+            getClass(lst,n,prefix,fileDict,pyiFlag,importCache,exportMap)
 
 
 
@@ -243,7 +337,8 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None): #lst是传�
 #  @param fileDict A file with a dictionary format {absolute path of the file: relative path of the file}. The relative path begins with the lib name, separated by "/", e.g., lib/a/b/c.py 
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 #  @param importCache Cache of __init__.py import mappings used to shorten API paths.
-def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None): #这里的prefix只到文件名
+#  @param exportMap Reverse mapping from definition paths to package re-export paths.
+def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None, exportMap=None): #这里的prefix只到文件名
     try:
         rootNode=ast.parse(codeText,filename='<unknown>',mode='exec')
     except Exception as e:
@@ -252,7 +347,7 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None): #这里�
         return
     for node in ast.iter_child_nodes(rootNode):
         if isinstance(node, ast.ClassDef): #抽取类内API
-            getClass(libApi,node,prefix,fileDict,pyiFlag,importCache)
+            getClass(libApi,node,prefix,fileDict,pyiFlag,importCache,exportMap)
 
         #if isinstance(node,ast.FunctionDef): #再抽取类外的API
         # Add the support of extracting AsyncFunctionDef type node -- 2025/5/19
@@ -266,13 +361,9 @@ def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None): #这里�
                 ret='->'+ast.unparse(node.returns)
             except:
                 ret=''
-            libApi.append(f"{prefix}.{funcName}({arg}){ret}")
-            
-            #尝试缩短API路径
-            lst=[f"{prefix}.{funcName}"]
-            shortenPath(lst,fileDict,importCache)
-            if lst[0]!=f"{prefix}.{funcName}":
-                libApi.append(f"{lst[0]}({arg}){ret}")
+            apiPath=f"{prefix}.{funcName}"
+            for currentPath in getApiPaths(apiPath,fileDict,importCache,exportMap):
+                libApi.append(f"{currentPath}({arg}){ret}")
 
 
 
@@ -332,6 +423,8 @@ def getDefFunction(args):
     
     fileVisitLst=[]
     importCache={}
+    #在逐文件抽取定义前统一构建重导出映射，避免对每个API重复扫描
+    exportMap=getExportMap(filePath)
     publicAliasSource=''
     publicAliasTarget=''
     if libName=="tensorflow" and os.path.basename(os.path.normpath(libPath))=="tensorflow_core":
@@ -355,7 +448,7 @@ def getDefFunction(args):
                 try:
                     with open(file+'i','r',encoding='UTF-8') as fr:
                         code_text=fr.read()
-                    task(code_text,pyiLst,prefix,fileDict, 1, importCache) #抽取.pyi中的API
+                    task(code_text,pyiLst,prefix,fileDict, 1, importCache,exportMap) #抽取.pyi中的API
                     pyiFlag=1
                     fileVisitLst.append(file+'i')
                 except FileNotFoundError:
@@ -377,8 +470,8 @@ def getDefFunction(args):
             for key,val in assignDict.items():
                 writeApiLine(f,f'A:{prefix}.{key}->{val}',publicAliasSource,publicAliasTarget)
             #抽取.py中的Definition Node
-            task(code_text,pyLst,prefix,fileDict,0,importCache)
-            pyLst.sort()
+            task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap)
+            pyLst=sorted(set(pyLst)) #按完整定义去重，保留不同签名
             for it in pyLst:
                 writeApiLine(f,it,publicAliasSource,publicAliasTarget)
             f.write('\n') 
@@ -394,7 +487,7 @@ def getDefFunction(args):
                     pyiLst.remove(it)
                 
                 #此时.pyi中保存的都是内置的API注释 
-                pyiLst.sort()
+                pyiLst=sorted(set(pyiLst))
                 f.write('\n'+'-' * 40 + f"{file}"+'i' + '-' * 40+'\n')
                 for it in pyiLst:
                     writeApiLine(f,it,publicAliasSource,publicAliasTarget)
@@ -406,14 +499,14 @@ def getDefFunction(args):
                 try:
                     with open(file.rstrip('i'),'r',encoding='UTF-8') as fr:
                         code_text=fr.read()
-                    task(code_text,pyLst,prefix,fileDict,0,importCache) #抽取.py中的API
+                    task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap) #抽取.py中的API
                     fileVisitLst.append(file.rstrip('i'))
                     root_node=ast.parse(code_text,filename='<unknown>',mode='exec')
                     assignDict=getAssign(root_node)
                     f.write('\n'+'-' * 40 + f"{file.rstrip('i')}" + '-' * 40+'\n')
                     for key,value in assignDict.items():
                         writeApiLine(f,f'A:{prefix}.{key}->{value}',publicAliasSource,publicAliasTarget)
-                    pyLst.sort()
+                    pyLst=sorted(set(pyLst))
                     for it in pyLst:
                         writeApiLine(f,it,publicAliasSource,publicAliasTarget)
                     f.write('\n')
@@ -422,9 +515,9 @@ def getDefFunction(args):
                 
             with open(file,'r',encoding='UTF-8') as fr:
                 code_text=fr.read()
-            task(code_text,pyiLst,prefix,fileDict,1,importCache) #抽取.pyi中的API
+            task(code_text,pyiLst,prefix,fileDict,1,importCache,exportMap) #抽取.pyi中的API
             removeLst=[]
-            pyiLst.sort()
+            pyiLst=sorted(set(pyiLst))
             for it1 in pyiLst:
                 for it2 in pyLst:
                     if it2.split('(')[0]==it1.split('(')[0]:

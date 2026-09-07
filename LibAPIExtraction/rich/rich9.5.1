@@ -493,6 +493,7 @@ A:rich.console.console->Console()
 rich.Console(self,*,color_system:Optional[Literal['auto','standard','256','truecolor','windows']]='auto',force_terminal:bool=None,force_jupyter:bool=None,soft_wrap:bool=False,theme:Theme=None,stderr:bool=False,file:IO[str]=None,width:int=None,height:int=None,style:StyleType=None,tab_size:int=8,record:bool=False,markup:bool=True,emoji:bool=True,highlight:bool=True,log_time:bool=True,log_path:bool=True,log_time_format:str='[%X]',highlighter:Optional['HighlighterType']=ReprHighlighter(),legacy_windows:bool=None,safe_box:bool=True,get_datetime:Callable[[],datetime]=None,get_time:Callable[[],float]=None,_environ:Dict[str,str]=None)
 rich.Console.__enter__(self)->'Console'
 rich.Console.__exit__(self,exc_type,exc_value,traceback)->None
+rich.Console.__init__(self,*,color_system:Optional[Literal['auto','standard','256','truecolor','windows']]='auto',force_terminal:bool=None,force_jupyter:bool=None,soft_wrap:bool=False,theme:Theme=None,stderr:bool=False,file:IO[str]=None,width:int=None,height:int=None,style:StyleType=None,tab_size:int=8,record:bool=False,markup:bool=True,emoji:bool=True,highlight:bool=True,log_time:bool=True,log_path:bool=True,log_time_format:str='[%X]',highlighter:Optional['HighlighterType']=ReprHighlighter(),legacy_windows:bool=None,safe_box:bool=True,get_datetime:Callable[[],datetime]=None,get_time:Callable[[],float]=None,_environ:Dict[str,str]=None)
 rich.Console.__repr__(self)->str
 rich.Console._buffer(self)->List[Segment]
 rich.Console._buffer_index(self)->int
@@ -542,13 +543,6 @@ rich.Console.size(self)->ConsoleDimensions
 rich.Console.status(self,status:RenderableType,spinner:str='dots',spinner_style:str='status.spinner',speed:float=1.0,refresh_per_second:float=12.5)->'Status'
 rich.Console.use_theme(self,theme:Theme,*,inherit:bool=True)->ThemeContext
 rich.Console.width(self)->int
-rich.ConsoleDimensions(NamedTuple)
-rich.ConsoleOptions
-rich.ConsoleOptions.ascii_only(self)->bool
-rich.ConsoleOptions.update(self,width:int=None,min_width:int=None,max_width:int=None,justify:JustifyMethod=None,overflow:OverflowMethod=None,no_wrap:bool=None,highlight:bool=None)->'ConsoleOptions'
-rich.ConsoleRenderable(Protocol)
-rich.ConsoleRenderable.__rich_console__(self,console:'Console',options:'ConsoleOptions')->'RenderResult'
-rich.ConsoleThreadLocals(threading.local)
 rich.console.Capture(self,console:'Console')
 rich.console.Capture.__enter__(self)->'Capture'
 rich.console.Capture.__exit__(self,exc_type,exc_val,exc_tb)->None
@@ -782,11 +776,6 @@ A:rich._inspect.docs->getdoc(value)
 A:rich._inspect.inspect->Inspect({}, docs=True, methods=True, dunder=True)
 A:rich._inspect.t->Text('Hello, World')
 A:rich._inspect.f->Foo()
-rich.Inspect(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
-rich.Inspect.__rich__(self)->Panel
-rich.Inspect._get_signature(self,name:str,obj:Any)->Text
-rich.Inspect._make_title(self,obj:Any)->Text
-rich.Inspect._render(self)->Iterable[RenderableType]
 rich._inspect.Inspect(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
 rich._inspect.Inspect.__init__(self,obj:Any,*,title:TextType=None,help:bool=False,methods:bool=False,docs:bool=True,private:bool=False,dunder:bool=False,sort:bool=True,all:bool=True)
 rich._inspect.Inspect.__rich__(self)->Panel

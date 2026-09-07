@@ -603,6 +603,7 @@ A:jax.api.primal_fun->custom_transforms(primal_fun)
 jax.ShapeDtypeStruct(self,shape,dtype)
 jax.ShapeDtypeStruct.__eq__(self,other)
 jax.ShapeDtypeStruct.__hash__(self)
+jax.ShapeDtypeStruct.__init__(self,shape,dtype)
 jax.ShapeDtypeStruct.__len__(self)
 jax.ShapeDtypeStruct.__repr__(self)
 jax.api.CustomTransformsFunction(self,fun,prim)
@@ -681,7 +682,6 @@ jax.defvjp(fun,*vjprules)
 jax.defvjp_all(fun,custom_vjp)
 jax.device_get(x)
 jax.device_put(x,device:Optional[xc.Device]=None)
-jax.device_put_sharded(x:Sequence[Any],devices:Sequence[xc.Device])
 jax.disable_jit()
 jax.eval_shape(fun:Callable,*args,**kwargs)
 jax.grad(fun:Callable,argnums:Union[int,Sequence[int]]=0,has_aux:bool=False,holomorphic:bool=False,allow_int:bool=False)->Callable
@@ -3371,7 +3371,6 @@ jax.scipy.optimize._line_search.line_search(f,xk,pk,old_fval=None,old_old_fval=N
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.2.2/lib/python3.6/site-packages/jax/lib/__init__.py----------------------------------------
 A:jax.lib.__init__.version->tuple((int(x) for x in jaxlib_version.__version__.split('.')))
-jax.lib.__init__._check_jaxlib_jaxlib_version()
 jax.lib.__init__._check_jaxlib_version()
 
 
@@ -4408,6 +4407,7 @@ jax.numpy.nanquantile(a,q,axis=None,out=None,overwrite_input=False,interpolation
 jax.numpy.nanstd(a,axis=None,dtype=None,out=None,ddof=0,keepdims=False)
 jax.numpy.nanvar(a,axis=None,dtype=None,out=None,ddof=0,keepdims=False)
 jax.numpy.ndarray(shape,dtype=None,buffer=None,offset=0,strides=None,order=None)
+jax.numpy.ndarray.__init__(shape,dtype=None,buffer=None,offset=0,strides=None,order=None)
 jax.numpy.nonzero(a)
 jax.numpy.ones(shape,dtype=None)
 jax.numpy.ones_like(a,dtype=None)
@@ -5139,6 +5139,34 @@ jax.interpreters.xla.set_up_aliases(c,xla_args,out_tuple,donated_args,tuple_args
 jax.interpreters.xla.xla_destructure(c,ans)
 jax.interpreters.xla.xla_primitive_callable(prim,*arg_specs:Tuple[core.AbstractValue,Optional[Device]],**params)
 jax.interpreters.xla.zeros_like_translation_rule(c,x)
+jax.numpy.DeviceArray(self,aval:core.ShapedArray,device:Optional[Device],lazy_expr:lazy.LazyExpr,device_buffer:PyLocalBuffer)
+jax.numpy.DeviceArray.__array__(self,dtype=None,context=None)
+jax.numpy.DeviceArray.__complex__(self)
+jax.numpy.DeviceArray.__cuda_array_interface__(self)
+jax.numpy.DeviceArray.__eq__(self,other)
+jax.numpy.DeviceArray.__float__(self)
+jax.numpy.DeviceArray.__format__(self,format_spec)
+jax.numpy.DeviceArray.__getitem__(self,i)
+jax.numpy.DeviceArray.__hash__(self)
+jax.numpy.DeviceArray.__init__(self,aval:core.ShapedArray,device:Optional[Device],lazy_expr:lazy.LazyExpr,device_buffer:PyLocalBuffer)
+jax.numpy.DeviceArray.__int__(self)
+jax.numpy.DeviceArray.__iter__(self)
+jax.numpy.DeviceArray.__len__(self)
+jax.numpy.DeviceArray.__repr__(self)
+jax.numpy.DeviceArray.__reversed__(self)
+jax.numpy.DeviceArray._check_if_deleted(self)
+jax.numpy.DeviceArray._value(self)
+jax.numpy.DeviceArray.block_until_ready(self)
+jax.numpy.DeviceArray.copy(self)
+jax.numpy.DeviceArray.copy_to_host_async(self)
+jax.numpy.DeviceArray.delete(self)
+jax.numpy.DeviceArray.dtype(self)
+jax.numpy.DeviceArray.item(self)
+jax.numpy.DeviceArray.ndim(self)
+jax.numpy.DeviceArray.shape(self)
+jax.numpy.DeviceArray.size(self)
+jax.numpy.DeviceArray.tobytes(self,order='C')
+jax.numpy.DeviceArray.tolist(self)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/jax0.2.2/lib/python3.6/site-packages/jax/interpreters/invertible_ad.py----------------------------------------
@@ -6038,7 +6066,6 @@ A:jax.lax.lax_control_flow.unused_const_vars->tuple((tuple((newvar(aval) for ava
 A:jax.lax.lax_control_flow.closed_jaxprs->_map(type_and_const_convert_jaxpr, jaxprs, all_out_pvals)
 jax.lax.associative_scan(fn,elems,reverse=False)
 jax.lax.cond(*args,**kwargs)
-jax.lax.cond_bind(*args,branches,linear)
 jax.lax.custom_linear_solve(matvec,b,solve,transpose_solve=None,symmetric=False)
 jax.lax.custom_root(f,initial_guess,solve,tangent_solve)
 jax.lax.fori_loop(lower,upper,body_fun,init_val)
@@ -6272,7 +6299,6 @@ jax.lax.pmin(x,axis_name,*,axis_index_groups=None)
 jax.lax.ppermute(x,axis_name,perm)
 jax.lax.pshuffle(x,axis_name,perm)
 jax.lax.psum(x,axis_name,*,axis_index_groups=None)
-jax.lax.psum_bind(*args,axis_name,axis_index_groups)
 jax.lax.pswapaxes(x,axis_name,axis)
 
 
@@ -6289,11 +6315,6 @@ A:jax.lax.lax_fft.mask->lax.concatenate([full(1.0, shape=(1,)), full(2.0, shape=
 A:jax.lax.lax_fft.result->fft(t, fft_type, fft_lengths)
 A:jax.lax.lax_fft.fft_p->Primitive('fft')
 jax.lax.fft(x,fft_type,fft_lengths)
-jax.lax.fft_abstract_eval(x,fft_type,fft_lengths)
-jax.lax.fft_batching_rule(batched_args,batch_dims,fft_type,fft_lengths)
-jax.lax.fft_impl(x,fft_type,fft_lengths)
-jax.lax.fft_translation_rule(c,x,fft_type,fft_lengths)
-jax.lax.fft_transpose_rule(t,fft_type,fft_lengths)
 jax.lax.lax_fft._irfft_transpose(t,fft_lengths)
 jax.lax.lax_fft._naive_rfft(x,fft_lengths)
 jax.lax.lax_fft._promote_to_complex(arg)
@@ -6754,34 +6775,17 @@ jax.lax._const(example,val)
 jax.lax._delta(dtype:DType,shape:Shape,axes:Sequence[int])->Array
 jax.lax._eq_meet(a,b)
 jax.lax._eye(dtype:DType,shape:Shape,offset:int)->Array
-jax.lax._float_to_int_for_sort(x)
 jax.lax._reduce_and(operand:Array,axes:Sequence[int])->Array
 jax.lax._reduce_max(operand:Array,axes:Sequence[int])->Array
 jax.lax._reduce_min(operand:Array,axes:Sequence[int])->Array
 jax.lax._reduce_or(operand:Array,axes:Sequence[int])->Array
 jax.lax._reduce_sum(operand:Array,axes:Sequence[int])->Array
-jax.lax._reduce_sum_shape_rule(operand,*,axes)
-jax.lax._reduce_sum_translation_rule(c,operand,*,axes)
-jax.lax._reduce_sum_transpose_rule(cotangent,operand,*,axes)
 jax.lax._reduce_window_max(operand:Array,window_dimensions:Shape,window_strides:Sequence[int],padding:Sequence[Tuple[int,int]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
 jax.lax._reduce_window_min(operand:Array,window_dimensions:Shape,window_strides:Sequence[int],padding:Sequence[Tuple[int,int]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
 jax.lax._reduce_window_prod(operand:Array,window_dimensions:Shape,window_strides:Sequence[int],padding:Sequence[Tuple[int,int]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
 jax.lax._reduce_window_sum(operand:Array,window_dimensions:Shape,window_strides:Sequence[int],padding:Sequence[Tuple[int,int]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
-jax.lax._reduce_window_sum_shape_rule(operand,*,window_dimensions,window_strides,padding,base_dilation,window_dilation)
-jax.lax._reduce_window_sum_translation_rule(c,operand,*,window_dimensions,window_strides,padding,base_dilation,window_dilation)
-jax.lax._reduce_window_sum_transpose_rule(cotangent,operand,*,window_dimensions,window_strides,padding,base_dilation,window_dilation)
 jax.lax._select_and_gather_add(tangents:Array,operand:Array,select_prim:core.Primitive,window_dimensions:Shape,window_strides:Sequence[int],padding:Sequence[Tuple[int,int]],base_dilation:Sequence[int],window_dilation:Sequence[int])->Array
-jax.lax._select_and_gather_add_batching_rule(batched_args,batch_dims,*,select_prim,window_dimensions,window_strides,padding,base_dilation,window_dilation)
-jax.lax._select_and_gather_add_jvp(primals,tangents,*,select_prim,window_dimensions,window_strides,padding,base_dilation,window_dilation)
-jax.lax._select_and_gather_add_shape_rule(tangents,operand,*,select_prim,window_dimensions,window_strides,padding,base_dilation,window_dilation)
-jax.lax._select_and_gather_add_translation(c,tangents,operand,*,select_prim,window_dimensions,window_strides,padding,base_dilation,window_dilation,max_bits=64)
-jax.lax._select_and_gather_add_transpose(t,tangents,operand,*,select_prim,window_dimensions,window_strides,padding,base_dilation,window_dilation)
 jax.lax._select_and_scatter_add(source:Array,operand:Array,select_prim:core.Primitive,window_dimensions:Shape,window_strides:Sequence[int],padding:Sequence[Tuple[int,int]])->Array
-jax.lax._select_and_scatter_add_batch_rule(batched_args,batch_dims,*,select_prim,window_dimensions,window_strides,padding)
-jax.lax._select_and_scatter_add_jvp(primals,tangents,*,select_prim,window_dimensions,window_strides,padding)
-jax.lax._select_and_scatter_add_shape_rule(source,operand,*,select_prim,window_dimensions,window_strides,padding)
-jax.lax._select_and_scatter_add_translation(c,source,operand,*,select_prim,window_dimensions,window_strides,padding)
-jax.lax._select_and_scatter_add_transpose(t,source,operand,*,select_prim,window_dimensions,window_strides,padding)
 jax.lax._tri(dtype:DType,shape:Shape,offset:int)->Array
 jax.lax._upcast_fp16_for_computation(f)
 jax.lax.abs(x:Array)->Array
@@ -6800,8 +6804,6 @@ jax.lax.batch_matmul(lhs:Array,rhs:Array,precision:Optional[PrecisionType]=None)
 jax.lax.bessel_i0e(x:Array)->Array
 jax.lax.bessel_i1e(x:Array)->Array
 jax.lax.betainc(a:Array,b:Array,x:Array)->Array
-jax.lax.betainc_grad_not_implemented(g,a,b,x)
-jax.lax.betainc_gradx(g,a,b,x)
 jax.lax.bitcast_convert_type(operand:Array,new_dtype:DType)->Array
 jax.lax.bitwise_and(x:Array,y:Array)->Array
 jax.lax.bitwise_not(x:Array)->Array
@@ -6860,11 +6862,7 @@ jax.lax.ge(x:Array,y:Array)->Array
 jax.lax.gt(x:Array,y:Array)->Array
 jax.lax.igamma(a:Array,x:Array)->Array
 jax.lax.igamma_grad_a(a:Array,x:Array)->Array
-jax.lax.igamma_grada(g,a,x)
-jax.lax.igamma_gradx(g,a,x)
 jax.lax.igammac(a:Array,x:Array)->Array
-jax.lax.igammac_grada(g,a,x)
-jax.lax.igammac_gradx(g,a,x)
 jax.lax.imag(x:Array)->Array
 jax.lax.index_in_dim(operand:Array,index:int,axis:int=0,keepdims:bool=True)->Array
 jax.lax.index_take(src:Array,idxs:Array,axes:Sequence[int])->Array
@@ -7298,7 +7296,6 @@ jax.lax.reduce(operand:Array,init_value:Array,computation:Callable,dimensions:Se
 jax.lax.reduce_window(operand:Array,init_value:Array,computation:Callable,window_dimensions:Shape,window_strides:Sequence[int],padding:Union[str,Sequence[Tuple[int,int]]],base_dilation:Optional[Sequence[int]]=None,window_dilation:Optional[Sequence[int]]=None)->Array
 jax.lax.reduce_window_shape_tuple(operand_shape,window_dimensions,window_strides,padding,base_dilation=None,window_dilation=None)
 jax.lax.rem(x:Array,y:Array)->Array
-jax.lax.remaining(original,*removed_lists)
 jax.lax.reshape(operand:Array,new_sizes:Shape,dimensions:Optional[Sequence[int]]=None)->Array
 jax.lax.rev(operand:Array,dimensions:Sequence[int])->Array
 jax.lax.rng_uniform(a,b,shape)

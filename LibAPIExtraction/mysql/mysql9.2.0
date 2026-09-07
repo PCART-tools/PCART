@@ -499,6 +499,7 @@ A:mysql.connector.connection_cext.res->self._cmysql.reset_connection()
 A:mysql.connector.connection_cext.stat->self._cmysql.stat()
 A:mysql.connector.connection_cext.cur->self.cursor()
 mysql.connector.CMySQLConnection(self,**kwargs:Any)
+mysql.connector.CMySQLConnection.__init__(self,**kwargs:Any)
 mysql.connector.CMySQLConnection._add_default_conn_attrs(self)->None
 mysql.connector.CMySQLConnection._do_handshake(self)->None
 mysql.connector.CMySQLConnection._open_connection(self)->None
@@ -627,6 +628,7 @@ A:mysql.connector.errors.sqlstate->sqlstate.decode('utf8').decode('utf8')
 mysql.connector.DataError(DatabaseError)
 mysql.connector.DatabaseError(Error)
 mysql.connector.Error(self,msg:Optional[str]=None,errno:Optional[int]=None,values:Optional[Tuple[Union[int,str],...]]=None,sqlstate:Optional[str]=None)
+mysql.connector.Error.__init__(self,msg:Optional[str]=None,errno:Optional[int]=None,values:Optional[Tuple[Union[int,str],...]]=None,sqlstate:Optional[str]=None)
 mysql.connector.Error.__str__(self)->str
 mysql.connector.IntegrityError(DatabaseError)
 mysql.connector.InterfaceError(Error)
@@ -636,6 +638,13 @@ mysql.connector.OperationalError(DatabaseError)
 mysql.connector.PoolError(Error)
 mysql.connector.ProgrammingError(DatabaseError)
 mysql.connector.Warning(Exception)
+mysql.connector.aio.Error(self,msg:Optional[str]=None,errno:Optional[int]=None,values:Optional[Tuple[Union[int,str],...]]=None,sqlstate:Optional[str]=None)
+mysql.connector.aio.Error.__init__(self,msg:Optional[str]=None,errno:Optional[int]=None,values:Optional[Tuple[Union[int,str],...]]=None,sqlstate:Optional[str]=None)
+mysql.connector.aio.Error.__str__(self)->str
+mysql.connector.aio.InterfaceError(Error)
+mysql.connector.aio.ProgrammingError(DatabaseError)
+mysql.connector.aio.plugins.NotSupportedError(DatabaseError)
+mysql.connector.aio.plugins.ProgrammingError(DatabaseError)
 mysql.connector.custom_error_exception(error:Optional[Union[int,Dict[int,Optional[ErrorClassTypes]]]]=None,exception:Optional[ErrorClassTypes]=None)->Mapping[int, Optional[ErrorClassTypes]]
 mysql.connector.errors.ConnectionTimeoutError(Error)
 mysql.connector.errors.DataError(DatabaseError)
@@ -658,6 +667,8 @@ mysql.connector.errors.WriteTimeoutError.__init__(self,msg:Optional[str]=None,er
 mysql.connector.errors.custom_error_exception(error:Optional[Union[int,Dict[int,Optional[ErrorClassTypes]]]]=None,exception:Optional[ErrorClassTypes]=None)->Mapping[int, Optional[ErrorClassTypes]]
 mysql.connector.errors.get_exception(packet:bytes)->ErrorTypes
 mysql.connector.errors.get_mysql_exception(errno:int,msg:Optional[str]=None,sqlstate:Optional[str]=None,warning:Optional[bool]=False)->ErrorTypes
+mysql.connector.plugins.NotSupportedError(DatabaseError)
+mysql.connector.plugins.ProgrammingError(DatabaseError)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/mysql9.2.0/lib/python3.9/site-packages/mysql/connector/_decorating.py----------------------------------------
@@ -673,6 +684,7 @@ A:mysql.connector.constants.(charset, collation)->self.get_info(name)
 A:mysql.connector.constants.info->self.get_default_collation(charset)
 A:mysql.connector.constants._->self.get_default_collation(charset)
 mysql.connector.CharacterSet(self)
+mysql.connector.CharacterSet.__init__(self)
 mysql.connector.CharacterSet.get_charset_info(self,charset:Optional[Union[int,str]]=None,collation:Optional[str]=None)->Tuple[int, str, str]
 mysql.connector.CharacterSet.get_default_collation(self,charset:Union[int,str])->Tuple[str, str, int]
 mysql.connector.CharacterSet.get_desc(self,name:int)->str
@@ -688,8 +700,6 @@ mysql.connector.FieldType.get_number_types(cls)->List[int]
 mysql.connector.FieldType.get_string_types(cls)->List[int]
 mysql.connector.FieldType.get_timestamp_types(cls)->List[int]
 mysql.connector.RefreshOption(_Constants,metaclass=RefreshOptionMeta)
-mysql.connector.RefreshOptionMeta(ABCMeta)
-mysql.connector.RefreshOptionMeta.SLAVE(self)->int
 mysql.connector.constants.CharacterSet(self)
 mysql.connector.constants.CharacterSet.__init__(self)
 mysql.connector.constants.CharacterSet.get_charset_info(self,charset:Optional[Union[int,str]]=None,collation:Optional[str]=None)->Tuple[int, str, str]
@@ -930,6 +940,7 @@ A:mysql.connector.connection.columns[i]->self._protocol.parse_column(self._socke
 A:mysql.connector.connection.parameters->list(parameters)
 A:mysql.connector.connection.execute_packet->self._protocol.make_stmt_execute(statement_id, data, tuple(parameters), flags, long_data_used, self.charset, converter_str_fallback=self._converter_str_fallback)
 mysql.connector.MySQLConnection(self,**kwargs:Any)
+mysql.connector.MySQLConnection.__init__(self,**kwargs:Any)
 mysql.connector.MySQLConnection._add_default_conn_attrs(self)->None
 mysql.connector.MySQLConnection._do_auth(self,username:Optional[str]=None,password:Optional[str]=None,database:Optional[str]=None,client_flags:int=0,ssl_options:Optional[Dict[str,Optional[Union[str,bool,List[str]]]]]=None,conn_attrs:Optional[Dict[str,str]]=None)->bool
 mysql.connector.MySQLConnection._do_handshake(self)->None
@@ -1698,6 +1709,7 @@ A:mysql.connector.aio.abstracts.self.converter->convclass(self._charset.name, se
 mysql.connector.aio.MySQLConnectionAbstract(self,*,user:Optional[str]=None,password:str='',host:str='127.0.0.1',port:int=3306,database:Optional[str]=None,password1:str='',password2:str='',password3:str='',charset:str='',collation:str='',auth_plugin:Optional[str]=None,client_flags:Optional[int]=None,compress:bool=False,consume_results:bool=False,autocommit:bool=False,time_zone:Optional[str]=None,conn_attrs:Dict[str,str]={},sql_mode:Optional[str]=None,init_command:Optional[str]=None,get_warnings:bool=False,raise_on_warnings:bool=False,buffered:bool=False,raw:bool=False,kerberos_auth_mode:Optional[str]=None,krb_service_principal:Optional[str]=None,openid_token_file:Optional[str]=None,webauthn_callback:Optional[Union[str,Callable[[str],None]]]=None,allow_local_infile:bool=DEFAULT_CONFIGURATION['allow_local_infile'],allow_local_infile_in_path:Optional[str]=DEFAULT_CONFIGURATION['allow_local_infile_in_path'],converter_class:Optional[MySQLConverter]=None,converter_str_fallback:bool=False,connection_timeout:int=DEFAULT_CONFIGURATION['connect_timeout'],read_timeout:Optional[int]=DEFAULT_CONFIGURATION['read_timeout'],write_timeout:Optional[int]=DEFAULT_CONFIGURATION['write_timeout'],unix_socket:Optional[str]=None,use_unicode:Optional[bool]=True,ssl_ca:Optional[str]=None,ssl_cert:Optional[str]=None,ssl_key:Optional[str]=None,ssl_verify_cert:Optional[bool]=False,ssl_verify_identity:Optional[bool]=False,ssl_disabled:Optional[bool]=DEFAULT_CONFIGURATION['ssl_disabled'],tls_versions:Optional[List[str]]=None,tls_ciphersuites:Optional[List[str]]=None,loop:Optional[asyncio.AbstractEventLoop]=None)
 mysql.connector.aio.MySQLConnectionAbstract.__aenter__(self)->MySQLConnectionAbstract
 mysql.connector.aio.MySQLConnectionAbstract.__aexit__(self,exc_type:Optional[Type[BaseException]]=None,exc_value:Optional[BaseException]=None,traceback:Optional[TracebackType]=None)->None
+mysql.connector.aio.MySQLConnectionAbstract.__init__(self,*,user:Optional[str]=None,password:str='',host:str='127.0.0.1',port:int=3306,database:Optional[str]=None,password1:str='',password2:str='',password3:str='',charset:str='',collation:str='',auth_plugin:Optional[str]=None,client_flags:Optional[int]=None,compress:bool=False,consume_results:bool=False,autocommit:bool=False,time_zone:Optional[str]=None,conn_attrs:Dict[str,str]={},sql_mode:Optional[str]=None,init_command:Optional[str]=None,get_warnings:bool=False,raise_on_warnings:bool=False,buffered:bool=False,raw:bool=False,kerberos_auth_mode:Optional[str]=None,krb_service_principal:Optional[str]=None,openid_token_file:Optional[str]=None,webauthn_callback:Optional[Union[str,Callable[[str],None]]]=None,allow_local_infile:bool=DEFAULT_CONFIGURATION['allow_local_infile'],allow_local_infile_in_path:Optional[str]=DEFAULT_CONFIGURATION['allow_local_infile_in_path'],converter_class:Optional[MySQLConverter]=None,converter_str_fallback:bool=False,connection_timeout:int=DEFAULT_CONFIGURATION['connect_timeout'],read_timeout:Optional[int]=DEFAULT_CONFIGURATION['read_timeout'],write_timeout:Optional[int]=DEFAULT_CONFIGURATION['write_timeout'],unix_socket:Optional[str]=None,use_unicode:Optional[bool]=True,ssl_ca:Optional[str]=None,ssl_cert:Optional[str]=None,ssl_key:Optional[str]=None,ssl_verify_cert:Optional[bool]=False,ssl_verify_identity:Optional[bool]=False,ssl_disabled:Optional[bool]=DEFAULT_CONFIGURATION['ssl_disabled'],tls_versions:Optional[List[str]]=None,tls_ciphersuites:Optional[List[str]]=None,loop:Optional[asyncio.AbstractEventLoop]=None)
 mysql.connector.aio.MySQLConnectionAbstract._add_default_conn_attrs(self)->None
 mysql.connector.aio.MySQLConnectionAbstract._charset(self)->Charset
 mysql.connector.aio.MySQLConnectionAbstract._charset(self,value:Charset)->None

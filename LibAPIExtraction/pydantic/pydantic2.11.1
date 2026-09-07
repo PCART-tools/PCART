@@ -73,11 +73,13 @@ A:pydantic.validators.__getattr__->getattr_migration(__name__)
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/pydantic2.11.1/lib/python3.9/site-packages/pydantic/annotated_handlers.py----------------------------------------
 pydantic.GetCoreSchemaHandler(self,source_type:Any,/)
+pydantic.GetCoreSchemaHandler.__call__(self,source_type:Any,/)
 pydantic.GetCoreSchemaHandler._get_types_namespace(self)->NamespacesTuple
 pydantic.GetCoreSchemaHandler.field_name(self)->str | None
 pydantic.GetCoreSchemaHandler.generate_schema(self,source_type:Any,/)->core_schema.CoreSchema
 pydantic.GetCoreSchemaHandler.resolve_ref_schema(self,maybe_ref_schema:core_schema.CoreSchema,/)->core_schema.CoreSchema
 pydantic.GetJsonSchemaHandler(self,core_schema:CoreSchemaOrField,/)
+pydantic.GetJsonSchemaHandler.__call__(self,core_schema:CoreSchemaOrField,/)
 pydantic.GetJsonSchemaHandler.resolve_ref_schema(self,maybe_ref_json_schema:JsonSchemaValue,/)->JsonSchemaValue
 pydantic.annotated_handlers.GetCoreSchemaHandler(self,source_type:Any,/)
 pydantic.annotated_handlers.GetCoreSchemaHandler.__call__(self,source_type:Any,/)
@@ -317,6 +319,7 @@ pydantic.RootModel.__copy__(self)->Self
 pydantic.RootModel.__deepcopy__(self,memo:dict[int,Any]|None=None)->Self
 pydantic.RootModel.__eq__(self,other:Any)->bool
 pydantic.RootModel.__getstate__(self)->dict[Any, Any]
+pydantic.RootModel.__init__(self,/,root:RootModelRootType=PydanticUndefined,**data)
 pydantic.RootModel.__init_subclass__(cls,**kwargs)
 pydantic.RootModel.__repr_args__(self)->_repr.ReprArgs
 pydantic.RootModel.__setstate__(self,state:dict[Any,Any])->None
@@ -366,6 +369,7 @@ pydantic.NameEmail(self,name:str,email:str)
 pydantic.NameEmail.__eq__(self,other:Any)->bool
 pydantic.NameEmail.__get_pydantic_core_schema__(cls,_source:type[Any],_handler:GetCoreSchemaHandler)->core_schema.CoreSchema
 pydantic.NameEmail.__get_pydantic_json_schema__(cls,core_schema:core_schema.CoreSchema,handler:_schema_generation_shared.GetJsonSchemaHandler)->JsonSchemaValue
+pydantic.NameEmail.__init__(self,name:str,email:str)
 pydantic.NameEmail.__str__(self)->str
 pydantic.NameEmail._validate(cls,input_value:Self|str,/)->Self
 pydantic.NatsDsn(_BaseMultiHostUrl)
@@ -386,6 +390,7 @@ pydantic._BaseMultiHostUrl.__eq__(self,other:Any)->bool
 pydantic._BaseMultiHostUrl.__get_pydantic_core_schema__(cls,source:type[_BaseMultiHostUrl],handler:GetCoreSchemaHandler)->core_schema.CoreSchema
 pydantic._BaseMultiHostUrl.__get_pydantic_json_schema__(cls,core_schema:core_schema.CoreSchema,handler:_schema_generation_shared.GetJsonSchemaHandler)->JsonSchemaValue
 pydantic._BaseMultiHostUrl.__hash__(self)->int
+pydantic._BaseMultiHostUrl.__init__(self,url:str|_CoreMultiHostUrl|_BaseMultiHostUrl)
 pydantic._BaseMultiHostUrl.__len__(self)->int
 pydantic._BaseMultiHostUrl.__repr__(self)->str
 pydantic._BaseMultiHostUrl.__str__(self)->str
@@ -407,6 +412,7 @@ pydantic._BaseUrl.__get_pydantic_core_schema__(cls,source:type[_BaseUrl],handler
 pydantic._BaseUrl.__get_pydantic_json_schema__(cls,core_schema:core_schema.CoreSchema,handler:_schema_generation_shared.GetJsonSchemaHandler)->JsonSchemaValue
 pydantic._BaseUrl.__gt__(self,other:Any)->bool
 pydantic._BaseUrl.__hash__(self)->int
+pydantic._BaseUrl.__init__(self,url:str|_CoreUrl|_BaseUrl)
 pydantic._BaseUrl.__le__(self,other:Any)->bool
 pydantic._BaseUrl.__len__(self)->int
 pydantic._BaseUrl.__lt__(self,other:Any)->bool
@@ -552,6 +558,7 @@ A:pydantic.type_adapter.ns_resolver->_internal._namespace_utils.NsResolver(names
 A:pydantic.type_adapter.schema_generator_instance->schema_generator(by_alias=by_alias, ref_template=ref_template)
 A:pydantic.type_adapter.(json_schemas_map, definitions)->schema_generator(by_alias=by_alias, ref_template=ref_template).generate_definitions(inputs_)
 pydantic.TypeAdapter(self,type:Any,*,config:ConfigDict|None=None,_parent_depth:int=2,module:str|None=None)
+pydantic.TypeAdapter.__init__(self,type:Any,*,config:ConfigDict|None=None,_parent_depth:int=2,module:str|None=None)
 pydantic.TypeAdapter.__repr__(self)->str
 pydantic.TypeAdapter._defer_build(self)->bool
 pydantic.TypeAdapter._fetch_parent_frame(self)->FrameType | None
@@ -656,6 +663,7 @@ pydantic.BeforeValidator
 pydantic.BeforeValidator.__get_pydantic_core_schema__(self,source_type:Any,handler:GetCoreSchemaHandler)->core_schema.CoreSchema
 pydantic.BeforeValidator._from_decorator(cls,decorator:_decorators.Decorator[_decorators.FieldValidatorDecoratorInfo])->Self
 pydantic.ModelWrapValidatorHandler(self,value:Any,outer_location:str|int|None=None,/)
+pydantic.ModelWrapValidatorHandler.__call__(self,value:Any,outer_location:str|int|None=None,/)
 pydantic.PlainValidator
 pydantic.PlainValidator.__get_pydantic_core_schema__(self,source_type:Any,handler:GetCoreSchemaHandler)->core_schema.CoreSchema
 pydantic.PlainValidator._from_decorator(cls,decorator:_decorators.Decorator[_decorators.FieldValidatorDecoratorInfo])->Self
@@ -707,11 +715,13 @@ A:pydantic.aliases.alias->self._generate_alias('alias', (str,), field_name)
 A:pydantic.aliases.validation_alias->self._generate_alias('validation_alias', (str, AliasChoices, AliasPath), field_name)
 A:pydantic.aliases.serialization_alias->self._generate_alias('serialization_alias', (str,), field_name)
 pydantic.AliasChoices(self,first_choice:str|AliasPath,*choices:str|AliasPath)
+pydantic.AliasChoices.__init__(self,first_choice:str|AliasPath,*choices:str|AliasPath)
 pydantic.AliasChoices.convert_to_aliases(self)->list[list[str | int]]
 pydantic.AliasGenerator
 pydantic.AliasGenerator._generate_alias(self,alias_kind:Literal['alias','validation_alias','serialization_alias'],allowed_types:tuple[type[str]|type[AliasPath]|type[AliasChoices],...],field_name:str)->str | AliasPath | AliasChoices | None
 pydantic.AliasGenerator.generate_aliases(self,field_name:str)->tuple[str | None, str | AliasPath | AliasChoices | None, str | None]
 pydantic.AliasPath(self,first_arg:str,*args:str|int)
+pydantic.AliasPath.__init__(self,first_arg:str,*args:str|int)
 pydantic.AliasPath.convert_to_aliases(self)->list[str | int]
 pydantic.AliasPath.search_dict_for_path(self,d:dict)->Any
 pydantic.aliases.AliasChoices(self,first_choice:str|AliasPath,*choices:str|AliasPath)
@@ -757,12 +767,18 @@ A:pydantic.generics.__getattr__->getattr_migration(__name__)
 A:pydantic.errors.name->re.search(".*'(.+?)'", str(name_error)).group(1)
 A:pydantic.errors.__getattr__->getattr_migration(__name__)
 pydantic.PydanticErrorMixin(self,message:str,*,code:PydanticErrorCodes|None)
+pydantic.PydanticErrorMixin.__init__(self,message:str,*,code:PydanticErrorCodes|None)
 pydantic.PydanticErrorMixin.__str__(self)->str
 pydantic.PydanticForbiddenQualifier(self,qualifier:Qualifier,annotation:Any)
+pydantic.PydanticForbiddenQualifier.__init__(self,qualifier:Qualifier,annotation:Any)
 pydantic.PydanticImportError(self,message:str)
+pydantic.PydanticImportError.__init__(self,message:str)
 pydantic.PydanticInvalidForJsonSchema(self,message:str)
+pydantic.PydanticInvalidForJsonSchema.__init__(self,message:str)
 pydantic.PydanticSchemaGenerationError(self,message:str)
+pydantic.PydanticSchemaGenerationError.__init__(self,message:str)
 pydantic.PydanticUndefinedAnnotation(self,name:str,message:str)
+pydantic.PydanticUndefinedAnnotation.__init__(self,name:str,message:str)
 pydantic.PydanticUndefinedAnnotation.from_name_error(cls,name_error:NameError)->Self
 pydantic.PydanticUserError(PydanticErrorMixin,TypeError)
 pydantic.errors.PydanticErrorMixin(self,message:str,*,code:PydanticErrorCodes|None)
@@ -864,6 +880,7 @@ pydantic.PaymentCardBrand(str,Enum)
 pydantic.PaymentCardBrand.__str__(self)->str
 pydantic.PaymentCardNumber(self,card_number:str)
 pydantic.PaymentCardNumber.__get_pydantic_core_schema__(cls,source:type[Any],handler:GetCoreSchemaHandler)->core_schema.CoreSchema
+pydantic.PaymentCardNumber.__init__(self,card_number:str)
 pydantic.PaymentCardNumber.masked(self)->str
 pydantic.PaymentCardNumber.validate(cls,input_value:str,/,_:core_schema.ValidationInfo)->PaymentCardNumber
 pydantic.PaymentCardNumber.validate_brand(card_number:str)->PaymentCardBrand
@@ -895,6 +912,7 @@ pydantic._OnErrorOmit.__get_pydantic_core_schema__(cls,source_type:Any,handler:G
 pydantic._SecretBase(self,secret_value:SecretType)
 pydantic._SecretBase.__eq__(self,other:Any)->bool
 pydantic._SecretBase.__hash__(self)->int
+pydantic._SecretBase.__init__(self,secret_value:SecretType)
 pydantic._SecretBase.__repr__(self)->str
 pydantic._SecretBase.__str__(self)->str
 pydantic._SecretBase._display(self)->str | bytes
@@ -1029,13 +1047,20 @@ A:pydantic.json.__getattr__->getattr_migration(__name__)
 ----------------------------------------/dataset/nuaa/anaconda3/envs/pydantic2.11.1/lib/python3.9/site-packages/pydantic/warnings.py----------------------------------------
 A:pydantic.warnings.self.message->message.rstrip('.')
 pydantic.PydanticDeprecatedSince20(self,message:str,*args:object)
+pydantic.PydanticDeprecatedSince20.__init__(self,message:str,*args:object)
 pydantic.PydanticDeprecatedSince210(self,message:str,*args:object)
+pydantic.PydanticDeprecatedSince210.__init__(self,message:str,*args:object)
 pydantic.PydanticDeprecatedSince211(self,message:str,*args:object)
+pydantic.PydanticDeprecatedSince211.__init__(self,message:str,*args:object)
 pydantic.PydanticDeprecatedSince26(self,message:str,*args:object)
+pydantic.PydanticDeprecatedSince26.__init__(self,message:str,*args:object)
 pydantic.PydanticDeprecatedSince29(self,message:str,*args:object)
+pydantic.PydanticDeprecatedSince29.__init__(self,message:str,*args:object)
 pydantic.PydanticDeprecationWarning(self,message:str,*args:object,since:tuple[int,int],expected_removal:tuple[int,int]|None=None)
+pydantic.PydanticDeprecationWarning.__init__(self,message:str,*args:object,since:tuple[int,int],expected_removal:tuple[int,int]|None=None)
 pydantic.PydanticDeprecationWarning.__str__(self)->str
 pydantic.PydanticExperimentalWarning(Warning)
+pydantic.experimental.PydanticExperimentalWarning(Warning)
 pydantic.warnings.GenericBeforeBaseModelWarning(Warning)
 pydantic.warnings.PydanticDeprecatedSince20(self,message:str,*args:object)
 pydantic.warnings.PydanticDeprecatedSince20.__init__(self,message:str,*args:object)
@@ -1108,20 +1133,6 @@ A:pydantic.fields.description->inspect.cleandoc(unwrapped.__doc__)
 A:pydantic.fields.f->_internal._decorators.ensure_property(f)
 A:pydantic.fields.dec_info->ComputedFieldInfo(f, return_type, alias, alias_priority, title, field_title_generator, description, deprecated, examples, json_schema_extra, repr_)
 pydantic.Field(default:Any=PydanticUndefined,*,default_factory:Callable[[],Any]|Callable[[dict[str,Any]],Any]|None=_Unset,alias:str|None=_Unset,alias_priority:int|None=_Unset,validation_alias:str|AliasPath|AliasChoices|None=_Unset,serialization_alias:str|None=_Unset,title:str|None=_Unset,field_title_generator:Callable[[str,FieldInfo],str]|None=_Unset,description:str|None=_Unset,examples:list[Any]|None=_Unset,exclude:bool|None=_Unset,discriminator:str|types.Discriminator|None=_Unset,deprecated:Deprecated|str|bool|None=_Unset,json_schema_extra:JsonDict|Callable[[JsonDict],None]|None=_Unset,frozen:bool|None=_Unset,validate_default:bool|None=_Unset,repr:bool=_Unset,init:bool|None=_Unset,init_var:bool|None=_Unset,kw_only:bool|None=_Unset,pattern:str|typing.Pattern[str]|None=_Unset,strict:bool|None=_Unset,coerce_numbers_to_str:bool|None=_Unset,gt:annotated_types.SupportsGt|None=_Unset,ge:annotated_types.SupportsGe|None=_Unset,lt:annotated_types.SupportsLt|None=_Unset,le:annotated_types.SupportsLe|None=_Unset,multiple_of:float|None=_Unset,allow_inf_nan:bool|None=_Unset,max_digits:int|None=_Unset,decimal_places:int|None=_Unset,min_length:int|None=_Unset,max_length:int|None=_Unset,union_mode:Literal['smart','left_to_right']=_Unset,fail_fast:bool|None=_Unset,**extra:Unpack[_EmptyKwargs])->Any
-pydantic.FieldInfo(self,**kwargs:Unpack[_FieldInfoInputs])
-pydantic.FieldInfo.__repr_args__(self)->ReprArgs
-pydantic.FieldInfo._collect_metadata(kwargs:dict[str,Any])->list[Any]
-pydantic.FieldInfo._from_dataclass_field(dc_field:DataclassField[Any])->FieldInfo
-pydantic.FieldInfo.apply_typevars_map(self,typevars_map:Mapping[TypeVar,Any]|None,globalns:GlobalsNamespace|None=None,localns:MappingNamespace|None=None)->None
-pydantic.FieldInfo.default_factory_takes_validated_data(self)->bool | None
-pydantic.FieldInfo.deprecation_message(self)->str | None
-pydantic.FieldInfo.from_annotated_attribute(annotation:type[Any],default:Any,*,_source:AnnotationSource=AnnotationSource.ANY)->FieldInfo
-pydantic.FieldInfo.from_annotation(annotation:type[Any],*,_source:AnnotationSource=AnnotationSource.ANY)->FieldInfo
-pydantic.FieldInfo.from_field(default:Any=PydanticUndefined,**kwargs:Unpack[_FromFieldInfoInputs])->FieldInfo
-pydantic.FieldInfo.get_default(self,*,call_default_factory:bool=False,validated_data:dict[str,Any]|None=None)->Any
-pydantic.FieldInfo.is_required(self)->bool
-pydantic.FieldInfo.merge_field_infos(*field_infos:FieldInfo,**overrides:Any)->FieldInfo
-pydantic.FieldInfo.rebuild_annotation(self)->Any
 pydantic.PrivateAttr(default:Any=PydanticUndefined,*,default_factory:Callable[[],Any]|None=None,init:Literal[False]=False)->Any
 pydantic.computed_field(func:PropertyT|None=None,/,*,alias:str|None=None,alias_priority:int|None=None,title:str|None=None,field_title_generator:typing.Callable[[str,ComputedFieldInfo],str]|None=None,description:str|None=None,deprecated:Deprecated|str|bool|None=None,examples:list[Any]|None=None,json_schema_extra:JsonDict|typing.Callable[[JsonDict],None]|None=None,repr:bool|None=None,return_type:Any=PydanticUndefined)->PropertyT | typing.Callable[[PropertyT], PropertyT]
 pydantic.fields.ComputedFieldInfo
@@ -1340,6 +1351,7 @@ pydantic.BaseModel.__fields_set__(self)->set[str]
 pydantic.BaseModel.__get_pydantic_core_schema__(cls,source:type[BaseModel],handler:GetCoreSchemaHandler,/)->CoreSchema
 pydantic.BaseModel.__get_pydantic_json_schema__(cls,core_schema:CoreSchema,handler:GetJsonSchemaHandler,/)->JsonSchemaValue
 pydantic.BaseModel.__getstate__(self)->dict[Any, Any]
+pydantic.BaseModel.__init__(self,/,**data:Any)
 pydantic.BaseModel.__iter__(self)->TupleGenerator
 pydantic.BaseModel.__pydantic_init_subclass__(cls,**kwargs:Any)->None
 pydantic.BaseModel.__repr__(self)->str
@@ -2610,6 +2622,7 @@ pydantic.v1.BaseSettings.Config(BaseConfig)
 pydantic.v1.BaseSettings.Config.customise_sources(cls,init_settings:SettingsSourceCallable,env_settings:SettingsSourceCallable,file_secret_settings:SettingsSourceCallable)->Tuple[SettingsSourceCallable, ...]
 pydantic.v1.BaseSettings.Config.parse_env_var(cls,field_name:str,raw_val:str)->Any
 pydantic.v1.BaseSettings.Config.prepare_field(cls,field:ModelField)->None
+pydantic.v1.BaseSettings.__init__(__pydantic_self__,_env_file:Optional[DotenvType]=env_file_sentinel,_env_file_encoding:Optional[str]=None,_env_nested_delimiter:Optional[str]=None,_secrets_dir:Optional[StrPath]=None,**values:Any)
 pydantic.v1.BaseSettings._build_values(self,init_kwargs:Dict[str,Any],_env_file:Optional[DotenvType]=None,_env_file_encoding:Optional[str]=None,_env_nested_delimiter:Optional[str]=None,_secrets_dir:Optional[StrPath]=None)->Dict[str, Any]
 pydantic.v1.env_settings.BaseSettings(__pydantic_self__,_env_file:Optional[DotenvType]=env_file_sentinel,_env_file_encoding:Optional[str]=None,_env_nested_delimiter:Optional[str]=None,_secrets_dir:Optional[StrPath]=None,**values:Any)
 pydantic.v1.env_settings.BaseSettings.Config(BaseConfig)
@@ -2803,6 +2816,7 @@ pydantic.v1.AmqpDsn(AnyUrl)
 pydantic.v1.AnyHttpUrl(AnyUrl)
 pydantic.v1.AnyUrl(self,url:str,*,scheme:str,user:Optional[str]=None,password:Optional[str]=None,host:Optional[str]=None,tld:Optional[str]=None,host_type:str='domain',port:Optional[str]=None,path:Optional[str]=None,query:Optional[str]=None,fragment:Optional[str]=None)
 pydantic.v1.AnyUrl.__get_validators__(cls)->'CallableGenerator'
+pydantic.v1.AnyUrl.__init__(self,url:str,*,scheme:str,user:Optional[str]=None,password:Optional[str]=None,host:Optional[str]=None,tld:Optional[str]=None,host_type:str='domain',port:Optional[str]=None,path:Optional[str]=None,query:Optional[str]=None,fragment:Optional[str]=None)
 pydantic.v1.AnyUrl.__modify_schema__(cls,field_schema:Dict[str,Any])->None
 pydantic.v1.AnyUrl.__repr__(self)->str
 pydantic.v1.AnyUrl._build_url(cls,m:Match[str],url:str,parts:'Parts')->'AnyUrl'
@@ -2839,12 +2853,14 @@ pydantic.v1.KafkaDsn.get_default_parts(parts:'Parts')->'Parts'
 pydantic.v1.MongoDsn(AnyUrl)
 pydantic.v1.MongoDsn.get_default_parts(parts:'Parts')->'Parts'
 pydantic.v1.MultiHostDsn(self,*args:Any,hosts:Optional[List['HostParts']]=None,**kwargs:Any)
+pydantic.v1.MultiHostDsn.__init__(self,*args:Any,hosts:Optional[List['HostParts']]=None,**kwargs:Any)
 pydantic.v1.MultiHostDsn._build_url(cls,m:Match[str],url:str,parts:'Parts')->'MultiHostDsn'
 pydantic.v1.MultiHostDsn._match_url(url:str)->Optional[Match[str]]
 pydantic.v1.MultiHostDsn.validate_parts(cls,parts:'Parts',validate_port:bool=True)->'Parts'
 pydantic.v1.NameEmail(self,name:str,email:str)
 pydantic.v1.NameEmail.__eq__(self,other:Any)->bool
 pydantic.v1.NameEmail.__get_validators__(cls)->'CallableGenerator'
+pydantic.v1.NameEmail.__init__(self,name:str,email:str)
 pydantic.v1.NameEmail.__modify_schema__(cls,field_schema:Dict[str,Any])->None
 pydantic.v1.NameEmail.__str__(self)->str
 pydantic.v1.NameEmail.validate(cls,value:Any)->'NameEmail'
@@ -3281,8 +3297,11 @@ pydantic.v1._hypothesis_plugin.resolves(typ:Union[type,pydantic.types.Constraine
 ----------------------------------------/dataset/nuaa/anaconda3/envs/pydantic2.11.1/lib/python3.9/site-packages/pydantic/v1/errors.py----------------------------------------
 A:pydantic.v1.errors.permitted->', '.join((repr(v.value) for v in self.enum_values))
 pydantic.v1.AnyStrMaxLengthError(self,*,limit_value:int)
+pydantic.v1.AnyStrMaxLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.AnyStrMinLengthError(self,*,limit_value:int)
+pydantic.v1.AnyStrMinLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.ArbitraryTypeError(self,*,expected_arbitrary_type:Type[Any])
+pydantic.v1.ArbitraryTypeError.__init__(self,*,expected_arbitrary_type:Type[Any])
 pydantic.v1.BoolError(PydanticTypeError)
 pydantic.v1.BytesError(PydanticTypeError)
 pydantic.v1.CallableError(PydanticTypeError)
@@ -3297,8 +3316,11 @@ pydantic.v1.DateTimeError(PydanticValueError)
 pydantic.v1.DecimalError(PydanticTypeError)
 pydantic.v1.DecimalIsNotFiniteError(PydanticValueError)
 pydantic.v1.DecimalMaxDigitsError(self,*,max_digits:int)
+pydantic.v1.DecimalMaxDigitsError.__init__(self,*,max_digits:int)
 pydantic.v1.DecimalMaxPlacesError(self,*,decimal_places:int)
+pydantic.v1.DecimalMaxPlacesError.__init__(self,*,decimal_places:int)
 pydantic.v1.DecimalWholeDigitsError(self,*,whole_digits:int)
+pydantic.v1.DecimalWholeDigitsError.__init__(self,*,whole_digits:int)
 pydantic.v1.DequeError(PydanticTypeError)
 pydantic.v1.DictError(PydanticTypeError)
 pydantic.v1.DurationError(PydanticValueError)
@@ -3310,7 +3332,9 @@ pydantic.v1.ExtraError(PydanticValueError)
 pydantic.v1.FloatError(PydanticTypeError)
 pydantic.v1.FrozenSetError(PydanticTypeError)
 pydantic.v1.FrozenSetMaxLengthError(self,*,limit_value:int)
+pydantic.v1.FrozenSetMaxLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.FrozenSetMinLengthError(self,*,limit_value:int)
+pydantic.v1.FrozenSetMinLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.HashableError(PydanticTypeError)
 pydantic.v1.IPv4AddressError(PydanticValueError)
 pydantic.v1.IPv4InterfaceError(PydanticValueError)
@@ -3326,13 +3350,16 @@ pydantic.v1.IntegerError(PydanticTypeError)
 pydantic.v1.InvalidByteSize(PydanticValueError)
 pydantic.v1.InvalidByteSizeUnit(PydanticValueError)
 pydantic.v1.InvalidDiscriminator(self,*,discriminator_key:str,discriminator_value:Any,allowed_values:Sequence[Any])
+pydantic.v1.InvalidDiscriminator.__init__(self,*,discriminator_key:str,discriminator_value:Any,allowed_values:Sequence[Any])
 pydantic.v1.InvalidLengthForBrand(PydanticValueError)
 pydantic.v1.IterableError(PydanticTypeError)
 pydantic.v1.JsonError(PydanticValueError)
 pydantic.v1.JsonTypeError(PydanticTypeError)
 pydantic.v1.ListError(PydanticTypeError)
 pydantic.v1.ListMaxLengthError(self,*,limit_value:int)
+pydantic.v1.ListMaxLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.ListMinLengthError(self,*,limit_value:int)
+pydantic.v1.ListMinLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.ListUniqueItemsError(PydanticValueError)
 pydantic.v1.LuhnValidationError(PydanticValueError)
 pydantic.v1.MissingDiscriminator(PydanticValueError)
@@ -3347,6 +3374,7 @@ pydantic.v1.NumberNotGtError(_NumberBoundError)
 pydantic.v1.NumberNotLeError(_NumberBoundError)
 pydantic.v1.NumberNotLtError(_NumberBoundError)
 pydantic.v1.NumberNotMultipleError(self,*,multiple_of:Union[int,float,Decimal])
+pydantic.v1.NumberNotMultipleError.__init__(self,*,multiple_of:Union[int,float,Decimal])
 pydantic.v1.PathError(PydanticTypeError)
 pydantic.v1.PathNotADirectoryError(_PathValueError)
 pydantic.v1.PathNotAFileError(_PathValueError)
@@ -3354,6 +3382,7 @@ pydantic.v1.PathNotExistsError(_PathValueError)
 pydantic.v1.PatternError(PydanticValueError)
 pydantic.v1.PyObjectError(PydanticTypeError)
 pydantic.v1.PydanticErrorMixin(self,**ctx:Any)
+pydantic.v1.PydanticErrorMixin.__init__(self,**ctx:Any)
 pydantic.v1.PydanticErrorMixin.__reduce__(self)->Tuple[Callable[..., 'PydanticErrorMixin'], Tuple[Type['PydanticErrorMixin'], 'DictStrAny']]
 pydantic.v1.PydanticErrorMixin.__str__(self)->str
 pydantic.v1.PydanticTypeError(PydanticErrorMixin,TypeError)
@@ -3361,16 +3390,22 @@ pydantic.v1.PydanticValueError(PydanticErrorMixin,ValueError)
 pydantic.v1.SequenceError(PydanticTypeError)
 pydantic.v1.SetError(PydanticTypeError)
 pydantic.v1.SetMaxLengthError(self,*,limit_value:int)
+pydantic.v1.SetMaxLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.SetMinLengthError(self,*,limit_value:int)
+pydantic.v1.SetMinLengthError.__init__(self,*,limit_value:int)
 pydantic.v1.StrError(PydanticTypeError)
 pydantic.v1.StrRegexError(self,*,pattern:str)
+pydantic.v1.StrRegexError.__init__(self,*,pattern:str)
 pydantic.v1.StrictBoolError(PydanticValueError)
 pydantic.v1.SubclassError(self,*,expected_class:Type[Any])
+pydantic.v1.SubclassError.__init__(self,*,expected_class:Type[Any])
 pydantic.v1.TimeError(PydanticValueError)
 pydantic.v1.TupleError(PydanticTypeError)
 pydantic.v1.TupleLengthError(self,*,actual_length:int,expected_length:int)
+pydantic.v1.TupleLengthError.__init__(self,*,actual_length:int,expected_length:int)
 pydantic.v1.UUIDError(PydanticTypeError)
 pydantic.v1.UUIDVersionError(self,*,required_version:int)
+pydantic.v1.UUIDVersionError.__init__(self,*,required_version:int)
 pydantic.v1.UrlError(PydanticValueError)
 pydantic.v1.UrlExtraError(UrlError)
 pydantic.v1.UrlHostError(UrlError)
@@ -3378,11 +3413,14 @@ pydantic.v1.UrlHostTldError(UrlError)
 pydantic.v1.UrlPortError(UrlError)
 pydantic.v1.UrlSchemeError(UrlError)
 pydantic.v1.UrlSchemePermittedError(self,allowed_schemes:Set[str])
+pydantic.v1.UrlSchemePermittedError.__init__(self,allowed_schemes:Set[str])
 pydantic.v1.UrlUserInfoError(UrlError)
 pydantic.v1.WrongConstantError(PydanticValueError)
 pydantic.v1.WrongConstantError.__str__(self)->str
 pydantic.v1._NumberBoundError(self,*,limit_value:Union[int,float,Decimal])
+pydantic.v1._NumberBoundError.__init__(self,*,limit_value:Union[int,float,Decimal])
 pydantic.v1._PathValueError(self,*,path:Path)
+pydantic.v1._PathValueError.__init__(self,*,path:Path)
 pydantic.v1.cls_kwargs(cls:Type['PydanticErrorMixin'],ctx:'DictStrAny')->'PydanticErrorMixin'
 pydantic.v1.errors.AnyStrMaxLengthError(self,*,limit_value:int)
 pydantic.v1.errors.AnyStrMaxLengthError.__init__(self,*,limit_value:int)
@@ -3562,6 +3600,7 @@ pydantic.v1.ConstrainedList.__modify_schema__(cls,field_schema:Dict[str,Any])->N
 pydantic.v1.ConstrainedList.list_length_validator(cls,v:'Optional[List[T]]')->'Optional[List[T]]'
 pydantic.v1.ConstrainedList.unique_items_validator(cls,v:'Optional[List[T]]')->'Optional[List[T]]'
 pydantic.v1.ConstrainedNumberMeta(cls,name:str,bases:Any,dct:Dict[str,Any])
+pydantic.v1.ConstrainedNumberMeta.__new__(cls,name:str,bases:Any,dct:Dict[str,Any])
 pydantic.v1.ConstrainedSet(set)
 pydantic.v1.ConstrainedSet.__get_validators__(cls)->'CallableGenerator'
 pydantic.v1.ConstrainedSet.__modify_schema__(cls,field_schema:Dict[str,Any])->None
@@ -3578,6 +3617,7 @@ pydantic.v1.PaymentCardBrand(str,Enum)
 pydantic.v1.PaymentCardBrand.__str__(self)->str
 pydantic.v1.PaymentCardNumber(self,card_number:str)
 pydantic.v1.PaymentCardNumber.__get_validators__(cls)->'CallableGenerator'
+pydantic.v1.PaymentCardNumber.__init__(self,card_number:str)
 pydantic.v1.PaymentCardNumber._get_brand(card_number:str)->PaymentCardBrand
 pydantic.v1.PaymentCardNumber.masked(self)->str
 pydantic.v1.PaymentCardNumber.validate_digits(cls,card_number:str)->str
@@ -3585,6 +3625,7 @@ pydantic.v1.PaymentCardNumber.validate_length_for_brand(cls,card_number:'Payment
 pydantic.v1.PaymentCardNumber.validate_luhn_check_digit(cls,card_number:str)->str
 pydantic.v1.SecretBytes(self,value:bytes)
 pydantic.v1.SecretBytes.__get_validators__(cls)->'CallableGenerator'
+pydantic.v1.SecretBytes.__init__(self,value:bytes)
 pydantic.v1.SecretBytes.__len__(self)->int
 pydantic.v1.SecretBytes.__modify_schema__(cls,field_schema:Dict[str,Any])->None
 pydantic.v1.SecretBytes.__repr__(self)->str
@@ -3598,6 +3639,7 @@ pydantic.v1.SecretField.__str__(self)->str
 pydantic.v1.SecretField.get_secret_value(self)->Any
 pydantic.v1.SecretStr(self,value:str)
 pydantic.v1.SecretStr.__get_validators__(cls)->'CallableGenerator'
+pydantic.v1.SecretStr.__init__(self,value:str)
 pydantic.v1.SecretStr.__len__(self)->int
 pydantic.v1.SecretStr.__modify_schema__(cls,field_schema:Dict[str,Any])->None
 pydantic.v1.SecretStr.__repr__(self)->str
@@ -3797,11 +3839,6 @@ A:pydantic.v1.fields.discriminator_value->getattr(v, self.discriminator_key)
 A:pydantic.v1.fields.v->validator(cls, v, values, self, self.model_config)
 A:pydantic.v1.fields.t->SHAPE_NAME_LOOKUP[self.shape].format(t)
 pydantic.v1.Field(default:Any=Undefined,*,default_factory:Optional[NoArgAnyCallable]=None,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,exclude:Optional[Union['AbstractSetIntStr','MappingIntStrAny',Any]]=None,include:Optional[Union['AbstractSetIntStr','MappingIntStrAny',Any]]=None,const:Optional[bool]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,multiple_of:Optional[float]=None,allow_inf_nan:Optional[bool]=None,max_digits:Optional[int]=None,decimal_places:Optional[int]=None,min_items:Optional[int]=None,max_items:Optional[int]=None,unique_items:Optional[bool]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,allow_mutation:bool=True,regex:Optional[str]=None,discriminator:Optional[str]=None,repr:bool=True,**extra:Any)->Any
-pydantic.v1.FieldInfo(self,default:Any=Undefined,**kwargs:Any)
-pydantic.v1.FieldInfo.__repr_args__(self)->'ReprArgs'
-pydantic.v1.FieldInfo._validate(self)->None
-pydantic.v1.FieldInfo.get_constraints(self)->Set[str]
-pydantic.v1.FieldInfo.update_from_config(self,from_config:Dict[str,Any])->None
 pydantic.v1.PrivateAttr(default:Any=Undefined,*,default_factory:Optional[NoArgAnyCallable]=None)->Any
 pydantic.v1.fields.DeferredType
 pydantic.v1.fields.Field(default:Any=Undefined,*,default_factory:Optional[NoArgAnyCallable]=None,alias:Optional[str]=None,title:Optional[str]=None,description:Optional[str]=None,exclude:Optional[Union['AbstractSetIntStr','MappingIntStrAny',Any]]=None,include:Optional[Union['AbstractSetIntStr','MappingIntStrAny',Any]]=None,const:Optional[bool]=None,gt:Optional[float]=None,ge:Optional[float]=None,lt:Optional[float]=None,le:Optional[float]=None,multiple_of:Optional[float]=None,allow_inf_nan:Optional[bool]=None,max_digits:Optional[int]=None,decimal_places:Optional[int]=None,min_items:Optional[int]=None,max_items:Optional[int]=None,unique_items:Optional[bool]=None,min_length:Optional[int]=None,max_length:Optional[int]=None,allow_mutation:bool=True,regex:Optional[str]=None,discriminator:Optional[str]=None,repr:bool=True,**extra:Any)->Any
@@ -3859,6 +3896,7 @@ A:pydantic.v1.error_wrappers.type_->get_exc_type(exc.__class__)
 A:pydantic.v1.error_wrappers.msg->str(exc)
 A:pydantic.v1.error_wrappers.r->_get_exc_type(cls)
 pydantic.v1.ValidationError(self,errors:Sequence[ErrorList],model:'ModelOrDc')
+pydantic.v1.ValidationError.__init__(self,errors:Sequence[ErrorList],model:'ModelOrDc')
 pydantic.v1.ValidationError.__repr_args__(self)->'ReprArgs'
 pydantic.v1.ValidationError.__str__(self)->str
 pydantic.v1.ValidationError.errors(self)->List['ErrorDict']
@@ -4079,6 +4117,7 @@ pydantic.v1.BaseModel(__pydantic_self__,**data:Any)
 pydantic.v1.BaseModel.__eq__(self,other:Any)->bool
 pydantic.v1.BaseModel.__get_validators__(cls)->'CallableGenerator'
 pydantic.v1.BaseModel.__getstate__(self)->'DictAny'
+pydantic.v1.BaseModel.__init__(__pydantic_self__,**data:Any)
 pydantic.v1.BaseModel.__iter__(self)->'TupleGenerator'
 pydantic.v1.BaseModel.__repr_args__(self)->'ReprArgs'
 pydantic.v1.BaseModel.__setattr__(self,name,value)
@@ -4105,6 +4144,7 @@ pydantic.v1.BaseModel.update_forward_refs(cls,**localns:Any)->None
 pydantic.v1.BaseModel.validate(cls:Type['Model'],value:Any)->'Model'
 pydantic.v1.ModelMetaclass(mcs,name,bases,namespace,**kwargs)
 pydantic.v1.ModelMetaclass.__instancecheck__(self,instance:Any)->bool
+pydantic.v1.ModelMetaclass.__new__(mcs,name,bases,namespace,**kwargs)
 pydantic.v1.create_model(__model_name:str,*,__config__:Optional[Type[BaseConfig]]=None,__base__:Union[None,Type['Model'],Tuple[Type['Model'],...]]=None,__module__:str=__name__,__validators__:Dict[str,'AnyClassMethod']=None,__cls_kwargs__:Dict[str,Any]=None,__slots__:Optional[Tuple[str,...]]=None,**field_definitions:Any)->Type['Model']
 pydantic.v1.generate_hash_function(frozen:bool)->Optional[Callable[[Any], int]]
 pydantic.v1.main.BaseModel(__pydantic_self__,**data:Any)
