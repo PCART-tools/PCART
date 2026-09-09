@@ -117,20 +117,23 @@ def backwardTask(args):
                 dynamicVersion=targetVersion
                 dynamicIsCurrent=False
 
-            dynamicStaticMatch=fuzzymatch(formatAPI,libName,dynamicVersion,0)
             staticCandidates=staticMatchInfo.get('match',{})
-            qualifiedName=dynamicMatchInfo.get('qualifiedName')
-
-            if isinstance(qualifiedName,str) and isinstance(dynamicStaticMatch,dict) and isinstance(staticCandidates,dict) \
-                    and qualifiedName in dynamicStaticMatch and qualifiedName in staticCandidates:
-                dynamicStaticCompare={'match':{qualifiedName:list(dynamicStaticMatch[qualifiedName])}}
-                staticCompare={'match':{qualifiedName:list(staticCandidates[qualifiedName])}}
-                if dynamicIsCurrent:
-                    repairLst=isCompatible(dynamicStaticCompare,staticCompare)
-                else:
-                    repairLst=isCompatible(staticCompare,dynamicStaticCompare)
+            #静态侧完整路径精确命中时直接比较参数，不要求公开路径等于内部路径
+            if isinstance(staticCandidates,dict) and len(staticCandidates)==1 and formatAPI in staticCandidates:
+                repairLst=isCompatible(currentMatch,targetMatch)
             else:
-                repairLst=None
+                dynamicStaticMatch=fuzzymatch(formatAPI,libName,dynamicVersion,0)
+                qualifiedName=dynamicMatchInfo.get('qualifiedName')
+                if isinstance(qualifiedName,str) and isinstance(dynamicStaticMatch,dict) and isinstance(staticCandidates,dict) \
+                        and qualifiedName in dynamicStaticMatch and qualifiedName in staticCandidates:
+                    dynamicStaticCompare={'match':{qualifiedName:list(dynamicStaticMatch[qualifiedName])}}
+                    staticCompare={'match':{qualifiedName:list(staticCandidates[qualifiedName])}}
+                    if dynamicIsCurrent:
+                        repairLst=isCompatible(dynamicStaticCompare,staticCompare)
+                    else:
+                        repairLst=isCompatible(staticCompare,dynamicStaticCompare)
+                else:
+                    repairLst=None
         else:
             repairLst=isCompatible(currentMatch,targetMatch) #repairLst中每个元素都是tuple
         if repairLst==None:
