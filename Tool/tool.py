@@ -869,16 +869,20 @@ def resolvePythonExecutable(envPath):
 #
 #  f"/dataset/zhang/anaconda3/envs/3d/lib/{pythonxx.xx}/" + f"site-packages/{torch}"
 #  
-#  @param configPath PCART's configuration file
+#  @param configPath PCART configuration path or file name under Configure
+#  @param repoRoot Optional PCART repository root used to resolve relative paths
 #  @return (currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath) Tuple of current version, target version, virtual environment paths of current version and target version
-def getSourceCodePath(configPath):
-    with open(f"Configure/{configPath}",'r',encoding='UTF-8') as fr:
+def getSourceCodePath(configPath,repoRoot=None):
+    if repoRoot is None:
+        repoRoot=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    resolvedConfigPath=resolveConfigFilePath(configPath,repoRoot)
+    with open(resolvedConfigPath,'r',encoding='UTF-8') as fr:
         dic=json.load(fr)
     libName=dic['libName']
     currentVersion=dic['currentVersion']
     targetVersion=dic['targetVersion']
-    currentEnvPath=dic['currentEnv']
-    targetEnvPath=dic['targetEnv']
+    currentEnvPath=resolveConfigValuePath(repoRoot,dic['currentEnv'])
+    targetEnvPath=resolveConfigValuePath(repoRoot,dic['targetEnv'])
     
     currentSourceCodePath=resolveLibSourceCodePath(currentEnvPath, libName)
     targetSourceCodePath=resolveLibSourceCodePath(targetEnvPath, libName)
