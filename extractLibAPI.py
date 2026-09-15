@@ -12,7 +12,8 @@
 import json
 import sys
 from Extract.getDef import getDefFunction
-from Tool.tool import getSourceCodePath
+from Tool.tool import getSourceCodePath,resolveConfigFilePath
+from Tool.workspace import getRepoRoot
 
 
 
@@ -35,11 +36,13 @@ def main():
         sys.exit(1)
  
     config=sys.argv[2]
+    repoRoot=getRepoRoot()
+    configPath=resolveConfigFilePath(config,repoRoot)
 
     #加载配置
-    with open(f"Configure/{config}",'r',encoding='UTF-8') as fr:
+    with open(configPath,'r',encoding='UTF-8') as fr:
         libName=json.load(fr)['libName']
-    currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath = getSourceCodePath(config)
+    currentVersion, targetVersion, currentSourceCodePath, targetSourceCodePath = getSourceCodePath(configPath,repoRoot)
    
     #抽取起始版本API定义
     print(currentVersion, currentSourceCodePath)
