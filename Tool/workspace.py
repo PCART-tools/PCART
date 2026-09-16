@@ -109,6 +109,7 @@ def _nextRunId(runsRoot,projectSlug,timestamp):
 #  @param targetEnv The virtual environment for target library version
 #  @param commandId The command id under this run, default cmd-001
 #  @param timestamp Optional timestamp, mainly used by tests
+#  @param writePatch Whether patch output is enabled, recorded in metadata
 #  @return RunWorkspace object
 def createRunWorkspace(
     repoRoot,
@@ -122,6 +123,7 @@ def createRunWorkspace(
     targetEnv,
     commandId='cmd-001',
     timestamp=None,
+    writePatch=False,
 ):
     repoRoot=os.path.abspath(repoRoot)
     timestamp=timestamp or datetime.now().strftime('%Y%m%d-%H%M%S')
@@ -178,6 +180,7 @@ def createRunWorkspace(
             'target_version': targetVersion,
             'current_env': currentEnv,
             'target_env': targetEnv,
+            'write_patch': writePatch,
         },
     )
     return workspace

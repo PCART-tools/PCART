@@ -24,6 +24,7 @@ from Extract.getCall import getCallFunction
 from Extract.pcresolveBridge import buildCallsiteLookup
 from Preprocess.preprocess import codeProcess
 from Repair.repair import repairTask,validateByRun
+from Repair.patch import makePatchEdit,writeRepairArtifacts
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
 from Tool.workspace import cleanupRunWorkspace,createRunWorkspace,exportRunReport,getRepoRoot,getRuntimePaths,workspaceCwd
 from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
@@ -33,10 +34,12 @@ from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,qu
 ## 一个进程处理一个文件
 #
 #  @param args Input parameters for processing one project file (13 values normally, 14 values with a PCResolve lookup)
-#  @return (ansDict,fileRelativePath,invokedAPINum) ansDict: detection and repair results;
-#          fileRelativePath: the file being processed; invokedAPINum: number of invoked APIs
+#  @return (ansDict,fileRelativePath,invokedAPINum,patchEdits) ansDict: detection and repair results;
+#          fileRelativePath: the file being processed; invokedAPINum: number of invoked APIs;
+#          patchEdits: independent source edits for optional patch output
 def backwardTask(args):
     ansDict={} #保存每个文件处理的情况
+    patchEdits=[]
     if len(args)==13:
         projName,libName,file,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,lock,sharedDict,coverSet,runtimePaths=args
         pcresolveLookup=None
@@ -168,6 +171,11 @@ def backwardTask(args):
                         ansDict[key]['Repair <Failed>']=f"{fixedAPI}"
                     else:
                         ansDict[key]['Repair <Unknown>']=f"{fixedAPI}"
+                    if compatibilityLabel=='Incompatible':
+                        patchStatus=repairStatus if repairStatus in ('Successful','Failed') else 'Unknown'
+                        edit=makePatchEdit(record,fixedAPI,patchStatus)
+                        if edit is not None:
+                            patchEdits.append(edit)
 
 
         if len(errLst)>0:
@@ -180,7 +188,7 @@ def backwardTask(args):
     # with open(f"{file.rsplit('/',1)[0]}/new_{fileName}.py",'w') as fw:
     #     repairCode=ast.unparse(root)
     #     fw.write(repairCode+'\n') 
-    return ansDict,fileRelativePath,invokedAPINum
+    return ansDict,fileRelativePath,invokedAPINum,patchEdits
 
 
 
@@ -197,7 +205,8 @@ def backwardTask(args):
 #  @param runPath   The relative path of the run file / 运行文件的相对路径
 #  @param workspace RunWorkspace object for this execution / 本次执行的运行工作区
 #  @param pcresolveLookup Optional pre-built PCResolve lookup table shared with preprocessing
-def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace,pcresolveLookup=None):
+#  @param writePatch Whether to generate patches and a repaired project copy
+def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace,pcresolveLookup=None,writePatch=False):
     runtimePaths=getRuntimePaths(workspace)
     copyRoot=runtimePaths['copy_root']
     dataDir=runtimePaths['data_dir']
@@ -261,6 +270,11 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     pool.close() #关闭进程池，使其不再接受新的任务
     pool.join() #等待进程池中所有的任务执行完，否则主进程可能继续往下执行提前结束，而导致部分任务没有执行完
     save2txt(resultLst, libName, runCommand, os.path.join(reportDir, f'{projName}.txt'))
+    if writePatch:
+        patchEdits=[edit for result in resultLst for edit in result[3]]
+        errLst=writeRepairArtifacts(projPath,projName,patchEdits,reportDir)
+        if errLst:
+            updateErrorLst(errorLog,errLst)
     return True
 
 
@@ -274,8 +288,9 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
 #
 #  @param config The config file path or config file name under Configure
 #  @param cleanWorkspace Whether to remove a successful run workspace
+#  @param writePatch Whether to generate patches and a repaired project copy
 #  @return RunWorkspace object for this execution
-def run(config,cleanWorkspace=False):
+def run(config,cleanWorkspace=False,writePatch=False):
     repoRoot=getRepoRoot()
     configPath=resolveConfigFilePath(config,repoRoot)
 
@@ -295,6 +310,7 @@ def run(config,cleanWorkspace=False):
         targetVersion,
         currentEnv,
         targetEnv,
+        writePatch=writePatch,
     )
     print(f"Run workspace: {workspace.workspace_root}")
     print("Code preprocessing...")
@@ -307,7 +323,7 @@ def run(config,cleanWorkspace=False):
         print("Code preprocess complete")
 
         #执行主逻辑
-        succeeded=backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace,pcresolveLookup=pcresolveLookup)
+        succeeded=backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,runCommand,runPath,workspace=workspace,pcresolveLookup=pcresolveLookup,writePatch=writePatch)
 
     exportRunReport(workspace)
     print(f"Report output: {workspace.report_root}")
@@ -334,11 +350,17 @@ def main():
         action='store_true',
         help='Remove the run workspace after successful report export',
     )
+    parser.add_argument(
+        '--write-patch',
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help='Generate repair patches and a Successful-only project copy (default: disabled)',
+    )
     args=parser.parse_args()
 
     start=time.time()
 
-    run(args.config,cleanWorkspace=args.clean_workspace)
+    run(args.config,cleanWorkspace=args.clean_workspace,writePatch=args.write_patch)
 
     end=time.time()
     print(f"Total run time={int(end-start)}s")
