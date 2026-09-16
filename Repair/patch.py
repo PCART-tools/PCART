@@ -22,6 +22,9 @@ import tokenize
 ## Collect one unambiguous repair result with its original source span
 ## 收集唯一修复表达式及其原始源码范围
 #
+#  @param record Structured callsite record with original call text and source span
+#  @param fixedAPI Fixed API call expression returned by repairTask
+#  @param repairStatus Repair status: Successful, Unknown, or Failed
 #  @return An edit dictionary, or None for ambiguous/empty/unchanged results
 def makePatchEdit(record,fixedAPI,repairStatus):
     if not isinstance(fixedAPI,str) or repairStatus not in ('Successful','Unknown','Failed'):
@@ -49,6 +52,8 @@ def makePatchEdit(record,fixedAPI,repairStatus):
 #
 #  Unsafe edits are skipped and logged; a syntax-invalid file is not emitted.
 #  不安全的修复跳过并记录日志，合并后语法无效的文件不输出。
+#  @param sourceBytes Original UTF-8 source file bytes, optionally with BOM
+#  @param edits List of edit dictionaries for this source file
 #  @return (modifiedBytes,errorList)
 def applyEdits(sourceBytes,edits):
     errLst=[]
@@ -125,6 +130,10 @@ def applyEdits(sourceBytes,edits):
 #
 #  Every category is compared with the original project, not another category.
 #  各类别均与原项目比较，不在其他类别补丁上叠加。
+#  @param projPath Original project root path
+#  @param projName Project directory name used in fixed_project output
+#  @param edits List of collected edit dictionaries from all project files
+#  @param reportDir Internal report directory for the current run command
 #  @return Error messages to append to the existing repair log
 def writeRepairArtifacts(projPath,projName,edits,reportDir):
     errLst=[]
