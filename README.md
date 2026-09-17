@@ -37,9 +37,17 @@ It supports common parameter compatibility changes, including addition, deletion
 python main.py -cfg your_config.json
 ```
 
+```bash
+# Optionally generate repair patches and a repaired project copy
+python main.py -cfg your_config.json --write-patch
+```
+
+Patch output is disabled by default. With `--write-patch`, PCART exports repair patches and a project copy containing only Successful repairs to `Report/runs/{run_id}/{command_id}/`. The original project remains unchanged.
+
 PCART keeps run workspaces in `PCARTRuns/runs/` by default. For repeated runs on large projects, use `--clean-workspace` to prevent excessive disk usage:
 
 ```bash
+# Optionally remove a successful run workspace after report export
 python main.py -cfg your_config.json --clean-workspace
 ```
 
