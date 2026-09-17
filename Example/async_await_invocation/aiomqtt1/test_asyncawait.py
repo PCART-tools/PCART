@@ -6,8 +6,8 @@ async def mqtt_example():
         await client.publish("temperature", payload="25.3")
         async with client.messages() as messages:
             await client.subscribe("temperature")
-            async for message in messages:
-                return message.payload
+            return None
+
 
 # run
 data = asyncio.run(mqtt_example())
