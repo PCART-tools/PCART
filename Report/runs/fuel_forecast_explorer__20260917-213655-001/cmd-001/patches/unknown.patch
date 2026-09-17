@@ -1,0 +1,11 @@
+--- a/data_cleaning.py	
++++ b/data_cleaning.py	
+@@ -39,7 +39,7 @@
+ df["price"] = df.price.replace(-1, 9999)  # revert back for "no fuel" to 9999
+ df["price"] = np.where(df.price < 600, np.NaN, df.price)
+ df = df.dropna()
+-df.info(verbose=True, null_counts=True)
++df.info(verbose=True)
+ # %%
+ # remove closed sites
+ closed_sites = pd.read_csv("./data/aggregated/sites_closed.csv", sep=";")
