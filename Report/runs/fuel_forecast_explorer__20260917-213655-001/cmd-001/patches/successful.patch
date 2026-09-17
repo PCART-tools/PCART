@@ -1,0 +1,26 @@
+--- a/data_cleaning.py	
++++ b/data_cleaning.py	
+@@ -5,7 +5,7 @@
+ # %%
+ # Load data
+ df = pd.read_csv("./data/aggregated/prices_all.csv.gz", compression="gzip")
+-df.info(verbose=True, null_counts=True)
++df.info(verbose=True)
+ 
+ 
+ # %%
+@@ -13,12 +13,12 @@
+ 
+ # Brand
+ df["site_brand"].fillna(value="Unknown", inplace=True)
+-df.info(verbose=True, null_counts=True)
++df.info(verbose=True)
+ # %%
+ # Data types
+ df["siteid"] = df["siteid"].astype(str)
+ df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y%m%d %H:%M")
+-df.info(verbose=True, null_counts=True)
++df.info(verbose=True)
+ # %%
+ # Corr names
+ df["site_brand"] = (

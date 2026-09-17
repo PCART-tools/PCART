@@ -1,0 +1,15 @@
+--- a/run.py	
++++ b/run.py	
+@@ -257,11 +257,7 @@
+     bounds = []
+     for idx in range(0, len(f.lb) ):
+         bounds.append( ( float(f.lb[idx]), float(f.ub[idx])) )
+-    res = scipy.optimize.dual_annealing(f, 
+-                                        bounds=bounds, 
+-                                        maxfun=args.iters,
+-                                        local_search_options={'method':'L-BFGS-B','options':{'maxfun': args.iters}}
+-                                        )
++    res = scipy.optimize.dual_annealing(f, bounds=bounds, maxfun=args.iters, minimizer_kwargs={'method': 'L-BFGS-B', 'options': {'maxfun': args.iters}})
+     print('best y:',res.fun)
+     
+ elif args.method == 'de':
