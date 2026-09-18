@@ -14,20 +14,19 @@ import argparse
 import os
 import json
 import time
-import shutil
 import subprocess
 from Path.getPath import *
-from Map.map import mapAPI,fuzzymatch
+from Map.map import mapAPI
 from multiprocessing import Pool
 from multiprocessing import Manager
 from Extract.getCall import getCallFunction
 from Extract.pcresolveBridge import buildCallsiteLookup
-from Preprocess.preprocess import codeProcess
+from Preprocess.preprocess import codeProcess,restoreProjectCopy
 from Repair.repair import repairTask,validateByRun
 from Repair.patch import makePatchEdit,writeRepairArtifacts
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
 from Tool.workspace import cleanupRunWorkspace,createRunWorkspace,exportRunReport,getRepoRoot,getRuntimePaths,workspaceCwd
-from Change.changeAnalyze import isCompatible,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
+from Change.changeAnalyze import analyzeMatchCompatibility,addValueForAPI,updateSharedDict,querySharedDict,updateErrorLst
 
 
 ## One process handles one file
@@ -106,39 +105,7 @@ def backwardTask(args):
         ansDict[key][f"Definition @{targetVersion} <{targetMatch['matchMethod']}>"]=str(targetMatch['match'])
         
         #step4:变更分析,若不兼容则返回需要修复的操作
-        currentMethod=currentMatch.get('matchMethod')
-        targetMethod=targetMatch.get('matchMethod')
-        if {currentMethod,targetMethod}=={'dynamic','static'}:
-            if currentMethod=='dynamic':
-                dynamicMatchInfo=currentMatch
-                staticMatchInfo=targetMatch
-                dynamicVersion=currentVersion
-                dynamicIsCurrent=True
-            else:
-                dynamicMatchInfo=targetMatch
-                staticMatchInfo=currentMatch
-                dynamicVersion=targetVersion
-                dynamicIsCurrent=False
-
-            staticCandidates=staticMatchInfo.get('match',{})
-            #静态侧完整路径精确命中时直接比较参数，不要求公开路径等于内部路径
-            if isinstance(staticCandidates,dict) and len(staticCandidates)==1 and formatAPI in staticCandidates:
-                repairLst=isCompatible(currentMatch,targetMatch)
-            else:
-                dynamicStaticMatch=fuzzymatch(formatAPI,libName,dynamicVersion,0)
-                qualifiedName=dynamicMatchInfo.get('qualifiedName')
-                if isinstance(qualifiedName,str) and isinstance(dynamicStaticMatch,dict) and isinstance(staticCandidates,dict) \
-                        and qualifiedName in dynamicStaticMatch and qualifiedName in staticCandidates:
-                    dynamicStaticCompare={'match':{qualifiedName:list(dynamicStaticMatch[qualifiedName])}}
-                    staticCompare={'match':{qualifiedName:list(staticCandidates[qualifiedName])}}
-                    if dynamicIsCurrent:
-                        repairLst=isCompatible(dynamicStaticCompare,staticCompare)
-                    else:
-                        repairLst=isCompatible(staticCompare,dynamicStaticCompare)
-                else:
-                    repairLst=None
-        else:
-            repairLst=isCompatible(currentMatch,targetMatch) #repairLst中每个元素都是tuple
+        repairLst=analyzeMatchCompatibility(currentMatch,targetMatch,formatAPI=formatAPI,libName=libName,currentVersion=currentVersion,targetVersion=targetVersion) #repairLst中每个元素都是tuple
         if repairLst==None:
             ansDict[key]['Compatible']="Unknown"
             if len(errLst)>0:
@@ -238,13 +205,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     print("Running complete")
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
-    os.makedirs(tempDir,exist_ok=True)
-    tempProjPath=os.path.join(tempDir,projName)
-    if os.path.exists(tempProjPath):
-        shutil.rmtree(tempProjPath)
-    shutil.move(os.path.join(copyRoot, projName), tempProjPath)
-    shutil.move(os.path.join(copyRoot, f'bak_{projName}'), os.path.join(copyRoot, projName))
-    shutil.move(tempProjPath, os.path.join(copyRoot, f'bak_{projName}'))
+    restoreProjectCopy(projName,copyRoot,tempDir)
 
 
     #用PCResolve进行全项目API调用识别，结果在所有任务间复用

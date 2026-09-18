@@ -15,6 +15,7 @@ import re
 import copy
 import subprocess
 from API.LibApi import Parameter 
+from Map.map import fuzzymatch
 from Tool.tool import getParameter,removeParameter,getFileName,resolvePythonExecutable
 
 
@@ -618,6 +619,51 @@ def isCompatible(current,target):
     else:
         return tempLst2
      
+
+
+## Analyze compatibility after selecting comparable matching results
+## 选择可比较的匹配结果，再分析版本间兼容性
+#
+#  @param current Original matching result from the current version
+#  @param target Original matching result from the target version
+#  @param formatAPI Resolved call path with parameters removed
+#  @param libName Library name used for static matching
+#  @param currentVersion Current library version
+#  @param targetVersion Target library version
+#  @return None if unknown, [] if compatible, or repair candidates
+def analyzeMatchCompatibility(current,target,*,formatAPI,libName,currentVersion,targetVersion):
+    currentMethod=current.get('matchMethod')
+    targetMethod=target.get('matchMethod')
+    if {currentMethod,targetMethod}=={'dynamic','static'}:
+        if currentMethod=='dynamic':
+            dynamicMatchInfo=current
+            staticMatchInfo=target
+            dynamicVersion=currentVersion
+            dynamicIsCurrent=True
+        else:
+            dynamicMatchInfo=target
+            staticMatchInfo=current
+            dynamicVersion=targetVersion
+            dynamicIsCurrent=False
+
+        staticCandidates=staticMatchInfo.get('match',{})
+        #静态侧完整路径精确命中时直接比较参数，不要求公开路径等于内部路径
+        if isinstance(staticCandidates,dict) and len(staticCandidates)==1 and formatAPI in staticCandidates:
+            return isCompatible(current,target)
+
+        dynamicStaticMatch=fuzzymatch(formatAPI,libName,dynamicVersion,0)
+        qualifiedName=dynamicMatchInfo.get('qualifiedName')
+        if isinstance(qualifiedName,str) and isinstance(dynamicStaticMatch,dict) and isinstance(staticCandidates,dict) \
+                and qualifiedName in dynamicStaticMatch and qualifiedName in staticCandidates:
+            dynamicStaticCompare={'match':{qualifiedName:list(dynamicStaticMatch[qualifiedName])}}
+            staticCompare={'match':{qualifiedName:list(staticCandidates[qualifiedName])}}
+            if dynamicIsCurrent:
+                return isCompatible(dynamicStaticCompare,staticCompare)
+            return isCompatible(staticCompare,dynamicStaticCompare)
+        return None
+
+    return isCompatible(current,target)
+
 
 
 ## Add values stored by pkl file for API parameters 
