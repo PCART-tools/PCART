@@ -14,7 +14,6 @@ import argparse
 import os
 import json
 import time
-import shutil
 import subprocess
 from Path.getPath import *
 from Map.map import mapAPI
@@ -22,7 +21,7 @@ from multiprocessing import Pool
 from multiprocessing import Manager
 from Extract.getCall import getCallFunction
 from Extract.pcresolveBridge import buildCallsiteLookup
-from Preprocess.preprocess import codeProcess
+from Preprocess.preprocess import codeProcess,restoreProjectCopy
 from Repair.repair import repairTask,validateByRun
 from Repair.patch import makePatchEdit,writeRepairArtifacts
 from Tool.tool import getAst,save2txt,loadConfig,removeParameter,buildRunCommand,resolveConfigFilePath,resolveConfigValuePath
@@ -206,13 +205,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
     print("Running complete")
      
     #生成pkl成功后，将项目恢复成原样，便于之后对其中某个API单独插桩
-    os.makedirs(tempDir,exist_ok=True)
-    tempProjPath=os.path.join(tempDir,projName)
-    if os.path.exists(tempProjPath):
-        shutil.rmtree(tempProjPath)
-    shutil.move(os.path.join(copyRoot, projName), tempProjPath)
-    shutil.move(os.path.join(copyRoot, f'bak_{projName}'), os.path.join(copyRoot, projName))
-    shutil.move(tempProjPath, os.path.join(copyRoot, f'bak_{projName}'))
+    restoreProjectCopy(projName,copyRoot,tempDir)
 
 
     #用PCResolve进行全项目API调用识别，结果在所有任务间复用

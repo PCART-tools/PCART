@@ -1112,6 +1112,23 @@ def scriptPath(scriptName):
                         'Script',scriptName)
 
 
+## Restore the project copy prepared for single-API instrumentation
+## 恢复用于单个API插桩的项目副本
+#
+#  @param projName The project name
+#  @param copyRoot The Copy root directory for this run
+#  @param tempDir The temporary directory for this run
+#  @return None
+def restoreProjectCopy(projName,copyRoot,tempDir):
+    os.makedirs(tempDir,exist_ok=True)
+    tempProjPath=os.path.join(tempDir,projName)
+    if os.path.exists(tempProjPath):
+        shutil.rmtree(tempProjPath)
+    shutil.move(os.path.join(copyRoot, projName), tempProjPath)
+    shutil.move(os.path.join(copyRoot, f'bak_{projName}'), os.path.join(copyRoot, projName))
+    shutil.move(tempProjPath, os.path.join(copyRoot, f'bak_{projName}'))
+
+
 ## Code processing
 ## 代码预处理
 #
