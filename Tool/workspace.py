@@ -154,20 +154,7 @@ def createRunWorkspace(
     ):
         os.makedirs(path,exist_ok=True)
 
-    workspace=RunWorkspace(
-        repo_root=repoRoot,
-        run_id=runId,
-        command_id=commandId,
-        run_root=runRoot,
-        workspace_root=workspaceRoot,
-        copy_root=copyRoot,
-        dynamic_root=dynamicRoot,
-        data_dir=dataDir,
-        temp_dir=tempDir,
-        internal_report_dir=internalReportDir,
-        report_root=reportRoot,
-        metadata_path=metadataPath,
-    )
+    workspace=RunWorkspace(repo_root=repoRoot,run_id=runId,command_id=commandId,run_root=runRoot,workspace_root=workspaceRoot,copy_root=copyRoot,dynamic_root=dynamicRoot,data_dir=dataDir,temp_dir=tempDir,internal_report_dir=internalReportDir,report_root=reportRoot,metadata_path=metadataPath)
     writeMetadata(
         workspace,
         {
@@ -265,19 +252,13 @@ def exportRunReport(workspace):
 #  @param workspace RunWorkspace object for this execution
 #  @return None
 def cleanupRunWorkspace(workspace):
-    runsRoot=os.path.realpath(
-        os.path.join(workspace.repo_root,'PCARTRuns','runs')
-    )
+    runsRoot=os.path.realpath(os.path.join(workspace.repo_root,'PCARTRuns','runs'))
     runRoot=os.path.realpath(workspace.run_root)
     normalizedRunsRoot=os.path.normcase(os.path.normpath(runsRoot))
-    normalizedParent=os.path.normcase(
-        os.path.normpath(os.path.dirname(runRoot))
-    )
+    normalizedParent=os.path.normcase(os.path.normpath(os.path.dirname(runRoot)))
 
     if normalizedParent!=normalizedRunsRoot:
-        raise ValueError(
-            f'Refuse to remove workspace outside PCARTRuns/runs: {runRoot}'
-        )
+        raise ValueError(f'Refuse to remove workspace outside PCARTRuns/runs: {runRoot}')
 
     if os.path.isdir(runRoot):
         shutil.rmtree(runRoot)

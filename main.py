@@ -195,9 +195,7 @@ def backward(projPath,libName,currentVersion,currentEnv,targetVersion,targetEnv,
         cwd = os.path.join(copyRoot, projName)
     print('Running the project...')
     cmd=buildRunCommand(runCommand,currentEnv)
-    createResult = subprocess.run(
-        cmd, cwd=cwd, capture_output=True, text=True, encoding='utf-8'
-    )
+    createResult = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, encoding='utf-8')
     if createResult.returncode!=0:
         print(f'Failure to generate PKL in current version')
         print(createResult.stderr)
@@ -261,18 +259,7 @@ def run(config,cleanWorkspace=False,writePatch=False):
     currentEnv=resolveConfigValuePath(repoRoot,currentEnv)
     targetEnv=resolveConfigValuePath(repoRoot,targetEnv)
 
-    workspace=createRunWorkspace(
-        repoRoot,
-        projPath,
-        runCommand,
-        runPath,
-        libName,
-        currentVersion,
-        targetVersion,
-        currentEnv,
-        targetEnv,
-        writePatch=writePatch,
-    )
+    workspace=createRunWorkspace(repoRoot,projPath,runCommand,runPath,libName,currentVersion,targetVersion,currentEnv,targetEnv,writePatch=writePatch)
     print(f"Run workspace: {workspace.workspace_root}")
     print("Code preprocessing...")
 
@@ -297,26 +284,10 @@ def run(config,cleanWorkspace=False,writePatch=False):
 ## Main function of PCART
 ## PCART主函数
 def main():
-    parser=argparse.ArgumentParser(
-        description='Python API compatibility analysis and repair tool'
-    )
-    parser.add_argument(
-        '-cfg',
-        dest='config',
-        required=True,
-        help='Configuration file path or file name under Configure',
-    )
-    parser.add_argument(
-        '--clean-workspace',
-        action='store_true',
-        help='Remove the run workspace after successful report export',
-    )
-    parser.add_argument(
-        '--write-patch',
-        action=argparse.BooleanOptionalAction,
-        default=False,
-        help='Generate repair patches and a Successful-only project copy (default: disabled)',
-    )
+    parser=argparse.ArgumentParser(description='Python API compatibility analysis and repair tool')
+    parser.add_argument('-cfg',dest='config',required=True,help='Configuration file path or file name under Configure')
+    parser.add_argument('--clean-workspace',action='store_true',help='Remove the run workspace after successful report export')
+    parser.add_argument('--write-patch',action=argparse.BooleanOptionalAction,default=False,help='Generate repair patches and a Successful-only project copy (default: disabled)')
     args=parser.parse_args()
 
     start=time.time()

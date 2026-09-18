@@ -312,10 +312,7 @@ def validateByRun(callAPI,apiWithValue,projName,virtualEnv,runPath,runCommand,ca
     else:
         cwd = os.path.join(dynamicRoot, projName)
         script = 'verifySingle.py'
-    result = subprocess.run(
-        [pythonPath, script, pklPath, apiWithValue],
-        cwd=cwd, capture_output=True, text=True, encoding='utf-8'
-    )
+    result = subprocess.run([pythonPath, script, pklPath, apiWithValue],cwd=cwd, capture_output=True, text=True, encoding='utf-8')
     return result
 
 

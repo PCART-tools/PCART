@@ -87,10 +87,7 @@ def buildCallsiteLookup(projPath, libName):
     # Sort by source position within each file, matching getCallFunction ordering
     # 在每个文件内按源码位置排序，与getCallFunction排序一致
     for filePath in lookup:
-        lookup[filePath] = dict(sorted(
-            lookup[filePath].items(),
-            key=lambda kv: (kv[1]['lineno'], kv[1]['col_offset']),
-        ))
+        lookup[filePath] = dict(sorted(lookup[filePath].items(),key=lambda kv: (kv[1]['lineno'], kv[1]['col_offset'])))
 
     _lookupCache[cacheKey] = lookup
     return lookup
@@ -134,17 +131,7 @@ def _convertApiCall(callObj, projPath):
 
     resolved = callObj.resolved_func or callObj.func_name or ''
 
-    return makeCallsiteRecord(
-        file_path=callObj.file_path,
-        call_text=callObj.expression,
-        format_api=f"{resolved}({callObj.parameters})" if resolved else callObj.expression,
-        parameters=callObj.parameters,
-        lineno=callObj.lineno,
-        col_offset=callObj.col_offset,
-        end_lineno=callObj.end_lineno or None,
-        end_col_offset=callObj.end_col_offset or None,
-        proj_path=projPath,
-    )
+    return makeCallsiteRecord(file_path=callObj.file_path,call_text=callObj.expression,format_api=f"{resolved}({callObj.parameters})" if resolved else callObj.expression,parameters=callObj.parameters,lineno=callObj.lineno,col_offset=callObj.col_offset,end_lineno=callObj.end_lineno or None,end_col_offset=callObj.end_col_offset or None,proj_path=projPath)
 
 
 

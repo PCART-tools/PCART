@@ -721,10 +721,7 @@ def addValueForAPI(callAPI,projName,runPath,runCommand,currentEnv,targetEnv,errL
     else:
         cwd = os.path.join(dynamicRoot, projName)
         script = 'addValueForAPI.py'
-    matchResult = subprocess.run(
-        [pythonPath, script, pklPath, callAPI, pklKey],
-        cwd=cwd, capture_output=True, text=True, encoding='utf-8'
-    )
+    matchResult = subprocess.run([pythonPath, script, pklPath, callAPI, pklKey],cwd=cwd, capture_output=True, text=True, encoding='utf-8')
     if matchResult.returncode!=0:
         errLst.append(f"{callAPI}, addValueError: {matchResult.stderr}\n")
         return ''

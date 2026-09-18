@@ -191,10 +191,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
         for candidatePklFile in existingPklFiles:
             # 某个候选返回nullptr时继续尝试下一个候选，避免可inspect调用被提前判为static
             pkl_arg = os.path.join(copyRoot, 'pkl', candidatePklFile)
-            matchResult = subprocess.run(
-                [pythonPath, dynamic_script, pkl_arg, callAPI, dataDir, pklKey],
-                cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
-            )
+            matchResult = subprocess.run([pythonPath, dynamic_script, pkl_arg, callAPI, dataDir, pklKey],cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8')
             lastResult = matchResult
             if matchResult.returncode == 0:
                 fileName=getFileName(pklKey,'_dynamicMatch.json')
@@ -239,9 +236,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                     copy_cwd = os.path.join(copyRoot, projName)
                 # generateResult=subprocess.run(command,shell=True,executable='/bin/bash',stderr=subprocess.PIPE,text=True)
                 cmd=buildRunCommand(runCommand,virtualEnv)
-                generateResult = subprocess.run(
-                    cmd, cwd=copy_cwd, capture_output=True, text=True, encoding='utf-8'
-                )
+                generateResult = subprocess.run(cmd, cwd=copy_cwd, capture_output=True, text=True, encoding='utf-8')
                 if generateResult.returncode==0:
                     # target环境重生成时保留object/expr候选顺序，避免退回混合老格式pkl
                     regeneratedCandidates=[
@@ -270,10 +265,7 @@ def dynamicMatch(callAPI,runCommand,runPath,projName,copyFile,version,virtualEnv
                     return False
                 for regeneratedPklFile in regeneratedPklFiles:
                     pkl_arg = os.path.join(copyRoot, 'pkl', regeneratedPklFile)
-                    matchResult = subprocess.run(
-                        [pythonPath, dynamic_script, pkl_arg, callAPI, dataDir, pklKey],
-                        cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8'
-                    )
+                    matchResult = subprocess.run([pythonPath, dynamic_script, pkl_arg, callAPI, dataDir, pklKey],cwd=dynamic_cwd, capture_output=True, text=True, encoding='utf-8')
                     if matchResult.returncode!=0:
                         continue
                     fileName=getFileName(pklKey,'_dynamicMatch.json')

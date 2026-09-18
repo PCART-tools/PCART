@@ -752,10 +752,7 @@ def resolveConsoleExecutable(envPath,commandName):
             return candidate
 
     candidateStr=', '.join(candidates)
-    raise FileNotFoundError(
-        f"Cannot find console command '{commandName}' under virtual "
-        f"environment root: {normalizedEnvPath}. Tried: {candidateStr}"
-    )
+    raise FileNotFoundError(f"Cannot find console command '{commandName}' under virtual " f"environment root: {normalizedEnvPath}. Tried: {candidateStr}")
 
 
 ## Build subprocess argv for project run command
@@ -801,9 +798,7 @@ def getRunFile(runCommand):
 #  @return full_path The path of Python interpreter
 def findPythonDir(basePath):
     if not os.path.exists(basePath):
-        raise FileNotFoundError(
-            f"Cannot find Python directory: {basePath} does not exist"
-        )
+        raise FileNotFoundError(f"Cannot find Python directory: {basePath} does not exist")
     
     for entry in os.listdir(basePath):
         full_path = os.path.join(basePath, entry)
@@ -811,9 +806,7 @@ def findPythonDir(basePath):
             if entry.startswith("python"):
                 return full_path
     
-    raise FileNotFoundError(
-        f"Cannot find Python directory under {basePath}/pythonxx.xx"
-    )
+    raise FileNotFoundError(f"Cannot find Python directory under {basePath}/pythonxx.xx")
 
 
 ## Resolve the source package directory for a library in a virtual environment
@@ -858,10 +851,7 @@ def resolvePythonExecutable(envPath):
             return candidate
 
     candidate_str = ', '.join(candidates)
-    raise FileNotFoundError(
-        f"Cannot find Python executable under virtual environment root: "
-        f"{normalizedEnvPath}. Tried: {candidate_str}"
-    )
+    raise FileNotFoundError(f"Cannot find Python executable under virtual environment root: " f"{normalizedEnvPath}. Tried: {candidate_str}")
 
 
 ## Get source code path of the lib 
@@ -902,10 +892,6 @@ class ConditionalReturnTransformer(ast.NodeTransformer):
         #检查return语句是否为单行条件语句（IfExp)
         if isinstance(node, ast.Return) and isinstance(node.value, ast.IfExp):
             ifExp = node.value
-            newIf = ast.If(
-                           test=ifExp.test,
-                           body=[ast.Return(value=ifExp.body)],
-                           orelse=[ast.Return(value=ifExp.orelse)]
-                          )
+            newIf = ast.If(test=ifExp.test,body=[ast.Return(value=ifExp.body)],orelse=[ast.Return(value=ifExp.orelse)])
             return newIf
         return node

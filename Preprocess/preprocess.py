@@ -1092,8 +1092,7 @@ def convertTabsToSpaces(directory):
 #  @param pklRelPath The relative path from recordValue.py to Copy/pkl
 #  @param useCallsiteName Whether to save pkl with callsite filename
 def writeRecordValue(filePath,pklRelPath,useCallsiteName):
-    scriptPath=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                            'Script','recordValue.py')
+    scriptPath=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'Script','recordValue.py')
     with open(scriptPath,'r',encoding='UTF-8') as fr:
         content=fr.read()
     content=content.replace("'__PCART_PKL_REL_PATH__'",repr(pklRelPath))
@@ -1108,8 +1107,7 @@ def writeRecordValue(filePath,pklRelPath,useCallsiteName):
 #  @param scriptName The script file name under Script/
 #  @return Absolute script path
 def scriptPath(scriptName):
-    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                        'Script',scriptName)
+    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'Script',scriptName)
 
 
 ## Restore the project copy prepared for single-API instrumentation

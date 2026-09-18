@@ -185,11 +185,7 @@ def writeRepairArtifacts(projPath,projName,edits,reportDir):
                 if modifiedBytes==originalBytes:
                     continue
                 #保留diff内容行的原始换行；无末尾换行时添加git补丁标记
-                diff=difflib.unified_diff(
-                    originalBytes.decode('utf-8').splitlines(keepends=True),
-                    modifiedBytes.decode('utf-8').splitlines(keepends=True),
-                    fromfile=f'a/{relativePath}\t',tofile=f'b/{relativePath}\t',
-                )
+                diff=difflib.unified_diff(originalBytes.decode('utf-8').splitlines(keepends=True),modifiedBytes.decode('utf-8').splitlines(keepends=True),fromfile=f'a/{relativePath}\t',tofile=f'b/{relativePath}\t')
                 patch=[]
                 for line in diff:
                     patch.append(line if line.endswith('\n') else line+'\n\\ No newline at end of file\n')

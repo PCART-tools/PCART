@@ -285,17 +285,7 @@ def getCallFunction(filePath,libName,projPath=None,pcresolveLookup=None):
         for key,value in apiFormatDict.items(): #key是还原后的API，value是还原前的API
             if key[0].split('.')[0]==libName:
                 formatAPI=f"{key[0]}({key[1]})"
-                record=makeCallsiteRecord(
-                    filePath,
-                    value[2],
-                    formatAPI,
-                    value[1],
-                    value[3],
-                    value[4],
-                    value[5],
-                    value[6],
-                    projPath,
-                )
+                record=makeCallsiteRecord(filePath,value[2],formatAPI,value[1],value[3],value[4],value[5],value[6],projPath)
                 callsiteRecords[record['id']]=record
                 callsiteParamRecords[record['id']]=record
 

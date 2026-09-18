@@ -70,11 +70,7 @@ class CallsiteIdentity:
     ## Return stable artifact hash for a callsite
     ## 返回调用点稳定运行产物hash
     def artifactHash(self):
-        payload = json.dumps(
-            self.artifactPayload(),
-            sort_keys=True,
-            separators=(',', ':'),
-        ).encode('utf-8')
+        payload = json.dumps(self.artifactPayload(),sort_keys=True,separators=(',', ':')).encode('utf-8')
         return hashlib.sha256(payload).hexdigest()
 
     ## Return stable readable artifact id for a callsite
@@ -188,19 +184,6 @@ def makeCallsiteRecord(
     end_col_offset=None,
     proj_path=None,
 ):
-    identity = CallsiteIdentity(
-        rel_path=normalizeRelPath(file_path, proj_path),
-        lineno=int(lineno),
-        col_offset=int(col_offset),
-        end_lineno=end_lineno,
-        end_col_offset=end_col_offset,
-        call_text=call_text,
-        normalized_call=normalizeCallText(call_text),
-    )
-    record = CallsiteRecord(
-        identity=identity,
-        artifact_id=identity.artifactId(),
-        format_api=format_api,
-        parameters=parameters,
-    )
+    identity = CallsiteIdentity(rel_path=normalizeRelPath(file_path, proj_path),lineno=int(lineno),col_offset=int(col_offset),end_lineno=end_lineno,end_col_offset=end_col_offset,call_text=call_text,normalized_call=normalizeCallText(call_text))
+    record = CallsiteRecord(identity=identity,artifact_id=identity.artifactId(),format_api=format_api,parameters=parameters)
     return record.toDict()
