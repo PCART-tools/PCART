@@ -151,10 +151,6 @@ def backwardTask(args):
                 updateErrorLst(errorLog,errLst)
 
 
-    #将修改操作更新到代码源文件
-    # with open(f"{file.rsplit('/',1)[0]}/new_{fileName}.py",'w') as fw:
-    #     repairCode=ast.unparse(root)
-    #     fw.write(repairCode+'\n') 
     return ansDict,fileRelativePath,invokedAPINum,patchEdits
 
 
