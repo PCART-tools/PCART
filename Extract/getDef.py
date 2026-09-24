@@ -11,61 +11,184 @@
 
 
 import ast
+import io
 import os
 import re
 import tokenize
 from Path.getPath import *
 from Extract.extractDef import *
 from Extract.extractCall import *
-from Tool.tool import getAst
 
 
-## Parse library source containing legacy keyword names in imports or attributes
-## 解析导入路径或属性中含有旧版本关键字名称的库源码
+## Parse library source with supported legacy syntax in the Python 3.9 runtime
+## 在Python 3.9环境中解析含有受支持旧语法的库源码
 #  @param source Library source code
 #  @param filename Source filename for syntax errors
 #  @return Parsed AST with the original names restored
 def parseLibrarySource(source,filename='<unknown>'):
-    try:
-        return ast.parse(source,filename=filename,mode='exec')
-    except SyntaxError as originalError:
-        error=originalError
-        replacements={}
-        while True:
-            lines=source.splitlines(keepends=True)
-            if not error.lineno or not error.offset or error.lineno>len(lines):
-                raise error
-            line=lines[error.lineno-1]
-            offset=error.offset-1
-            match=re.match(r'\w+',line[offset:])
-            prefix=line[:offset]
-            if (not match or match.group() not in ('async','await') or
-                    not (prefix.rstrip().endswith('.') or
-                         re.fullmatch(r'\s*(?:from\s+[\w.]+\s+)?import\s+',prefix))):
-                raise error
-            placeholder=f'__pcart_keyword_{len(replacements)}__'
-            while placeholder in source:
-                placeholder+='_'
-            replacements[placeholder]=match.group()
-            lines[error.lineno-1]=line[:offset]+placeholder+line[offset+len(match.group()):]
-            source=''.join(lines)
+    replacements={}
+    docstrings=[]
+    python2Tried=False
+    while True:
+        try:
             try:
-                root=ast.parse(source,filename=filename,mode='exec')
-                break
-            except SyntaxError as nextError:
-                error=nextError
-        # Restore original names so extracted API paths are not changed.
-        for node in ast.walk(root):
-            if isinstance(node,ast.ImportFrom) and node.module:
-                for placeholder,original in replacements.items():
-                    node.module=node.module.replace(placeholder,original)
-            elif isinstance(node,ast.Attribute):
-                for placeholder,original in replacements.items():
-                    node.attr=node.attr.replace(placeholder,original)
-            elif isinstance(node,ast.alias):
-                for placeholder,original in replacements.items():
-                    node.name=node.name.replace(placeholder,original)
+                # Use the memory source for error positions instead of the disk file.
+                # 按内存源码定位语法错误，避免Python 3.9回读磁盘原文。
+                root=ast.parse(source,filename='<unknown>',mode='exec')
+            except SyntaxError:
+                # Use the old grammar to preserve async/await identifiers.
+                # 使用旧语法保留async/await名称，不替换真正的关键字。
+                root=ast.parse(source,filename='<unknown>',mode='exec',feature_version=(3,6))
+            break
+        except SyntaxError as error:
+            error.filename=filename
+            lines=io.StringIO(source).readlines()
+            try:
+                tokens=list(tokenize.generate_tokens(io.StringIO(source).readline))
+            except (tokenize.TokenError,IndentationError):
+                raise error
+
+            if error.lineno and error.offset and error.lineno<=len(lines):
+                line=lines[error.lineno-1]
+                offset=error.offset-1
+                token=next((it for it in tokens if it.type==tokenize.NAME and
+                            it.start==(error.lineno,offset)),None)
+                if token and token.string in ('True','False'):
+                    placeholder=f'__pcart_keyword_{len(replacements)}__'
+                    while placeholder in source:
+                        placeholder+='_'
+                    replacements[placeholder]=token.string
+                    lines[error.lineno-1]=line[:offset]+placeholder+line[token.end[1]:]
+                    source=''.join(lines)
+                    continue
+
+            if isinstance(error,TabError):
+                # Expand code indentation using Python 2's eight-column rule.
+                # 按Python 2的八列规则展开代码缩进，保留多行字符串内容。
+                stringRows={row for token in tokens if token.type==tokenize.STRING
+                            for row in range(token.start[0]+1,token.end[0]+1)}
+                for row,line in enumerate(lines,1):
+                    if row not in stringRows:
+                        prefix=re.match(r'[ \t]*',line).group()
+                        lines[row-1]=prefix.expandtabs(8)+line[len(prefix):]
+                converted=''.join(lines)
+                if converted!=source:
+                    source=converted
+                    continue
+
+            if 'unicodeescape' in error.msg:
+                # Plain Python 2 docstrings leave Unicode-only escapes literal.
+                # 仅处理Python 2普通文档字符串中的Unicode专用转义。
+                statement=[]
+                for token in tokens:
+                    if token.type in (tokenize.NL,tokenize.COMMENT,tokenize.INDENT,tokenize.DEDENT):
+                        continue
+                    if token.type==tokenize.NEWLINE or token.string==';':
+                        if statement[:3]==['from','__future__','import'] and 'unicode_literals' in statement:
+                            raise error
+                        statement=[]
+                    else:
+                        statement.append(token.string)
+                for i,token in enumerate(tokens):
+                    if (token.type!=tokenize.STRING or not token.string.startswith(('"',"'")) or
+                            not token.start[0]<=error.lineno<=token.end[0]):
+                        continue
+                    previous=i-1
+                    while previous>=0 and tokens[previous].type in (tokenize.NL,tokenize.COMMENT):
+                        previous-=1
+                    following=i+1
+                    while following<len(tokens) and tokens[following].type in (tokenize.NL,tokenize.COMMENT):
+                        following+=1
+                    if ((previous>=0 and tokens[previous].type not in (tokenize.NEWLINE,tokenize.INDENT) and
+                         tokens[previous].string!=':') or following>=len(tokens) or
+                            tokens[following].type not in (tokenize.NEWLINE,tokenize.ENDMARKER)):
+                        continue
+                    converted=re.sub(r'(\\+)([uUN])',
+                                     lambda it: it[1]+('\\' if len(it[1])%2 else '')+it[2],token.string)
+                    if converted==token.string:
+                        continue
+                    startRow,startColumn=token.start
+                    endRow,endColumn=token.end
+                    source=(''.join(lines[:startRow-1])+lines[startRow-1][:startColumn]+
+                            converted+lines[endRow-1][endColumn:]+''.join(lines[endRow:]))
+                    docstrings.append((startRow,converted,error))
+                    break
+                else:
+                    raise error
+                continue
+
+            if error.msg=='Generator expression must be parenthesized' and error.lineno:
+                brackets=[]
+                for i,token in enumerate(tokens):
+                    if token.type==tokenize.NAME and token.string=='for' and brackets:
+                        brackets[-1][1]=True
+                    if token.type!=tokenize.OP:
+                        continue
+                    if token.string in '([{':
+                        brackets.append([token.string,False,token.start[0]])
+                    elif token.string in ')]}':
+                        if brackets:
+                            brackets.pop()
+                    elif (token.string==',' and brackets and brackets[-1][:2]==['(',True] and
+                          brackets[-1][2]<=error.lineno<=token.start[0]):
+                        nextToken=i+1
+                        while nextToken<len(tokens) and tokens[nextToken].type in (tokenize.NL,tokenize.COMMENT):
+                            nextToken+=1
+                        if nextToken<len(tokens) and tokens[nextToken].string==')':
+                            row,column=token.start
+                            lines[row-1]=lines[row-1][:column]+lines[row-1][column+1:]
+                            source=''.join(lines)
+                            break
+                else:
+                    raise error
+                continue
+
+            # Only run the three syntax fixers needed by old library sources.
+            # 仅使用旧库源码所需的三种Python 2语法转换。
+            python2Pattern=r'(?m)^\s*(?:print\s+(?!\()|exec\s+(?!\()|except\s+[^:\n]+,\s*\w+\s*:)'
+            if not python2Tried and re.search(python2Pattern,source):
+                python2Tried=True
+                try:
+                    from lib2to3.refactor import RefactoringTool
+                    fixers=['lib2to3.fixes.fix_print','lib2to3.fixes.fix_except','lib2to3.fixes.fix_exec']
+                    text=source if source.endswith('\n') else source+'\n'
+                    converted=str(RefactoringTool(fixers).refactor_string(text,filename))
+                except Exception:
+                    raise error
+                if converted!=source:
+                    source=converted
+                    continue
+            raise error
+
+    # Check that every repaired string is a real module, class or function docstring.
+    # 确认修复的字符串确实是模块、类或函数的文档字符串。
+    positions=set()
+    for node in ast.walk(root) if docstrings else ():
+        if isinstance(node,(ast.Module,ast.ClassDef,ast.FunctionDef,ast.AsyncFunctionDef)) and node.body:
+            first=node.body[0]
+            if isinstance(first,ast.Expr) and isinstance(first.value,ast.Constant) and isinstance(first.value.value,str):
+                positions.add((first.value.lineno,ast.get_source_segment(source,first.value)))
+    for row,text,error in docstrings:
+        if (row,text) not in positions:
+            raise error
+
+    if not replacements:
         return root
+
+    # Restore original names so extracted API paths and signatures are unchanged.
+    for node in ast.walk(root):
+        for field,value in ast.iter_fields(node):
+            if isinstance(value,str):
+                for placeholder,original in replacements.items():
+                    value=value.replace(placeholder,original)
+                setattr(node,field,value)
+            elif isinstance(value,list):
+                for i,item in enumerate(value):
+                    if isinstance(item,str):
+                        for placeholder,original in replacements.items():
+                            item=item.replace(placeholder,original)
+                        value[i]=item
+    return root
 
 
 
@@ -115,18 +238,30 @@ class RegexMatch:
 ## 通过AST获取.py文件的Assign语句
 #
 #  @param root_node The ast node of the .py file
-def getAssign(root_node):
+#  @param filePath Source filename for diagnostics
+def getAssign(root_node,filePath=None):
     #找出树中所有的模块名
     import_visitor=Import()
     try:
-        import_visitor.visit(root_node)
+        # Preserve NodeVisitor's depth-first order without recursive calls.
+        nodes=[root_node]
+        while nodes:
+            node=nodes.pop()
+            if isinstance(node,(ast.Import,ast.ImportFrom)):
+                import_visitor.visit(node)
+            nodes.extend(reversed(list(ast.iter_child_nodes(node))))
     except Exception as e:
-        print(f"import visit failed: {e}")
+        print(f"{filePath or '<unknown>'} import visit failed: {e}")
     md_names=import_visitor.get_md_name() #dict
 
     #找出所有的Assign节点
     assign_visitor=AssignVisitor()
-    assign_visitor.visit(root_node)
+    nodes=[root_node]
+    while nodes:
+        node=nodes.pop()
+        if isinstance(node,ast.Assign):
+            assign_visitor.visit(node)
+        nodes.extend(reversed(list(ast.iter_child_nodes(node))))
     target_call=assign_visitor.get_target_call()
     
     for key,val in target_call.items():
@@ -171,14 +306,8 @@ def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保�
             importDict=importCache[cacheKey]
         else:
             try:
-                root=getAst(initPath)
-            except SyntaxError:
-                try:
-                    with tokenize.open(initPath) as f:
-                        root=parseLibrarySource(f.read(),initPath)
-                except Exception as e:
-                    print(f"shortenPath --> ast.parse failed: {e}")
-                    return
+                with tokenize.open(initPath) as f:
+                    root=parseLibrarySource(f.read(),initPath)
             except Exception as e:
                 print(f"shortenPath --> ast.parse failed: {e}")
                 return
@@ -523,7 +652,7 @@ def getDefFunction(args):
             except Exception as e:
                 print(f'{file} ast.parse failed: {e}')
                 continue
-            assignDict=getAssign(root_node) #抽取.py中的所有Assign Node
+            assignDict=getAssign(root_node,file) #抽取.py中的所有Assign Node
             f.write('\n'+'-' * 40 + f"{file}" + '-' * 40+'\n')
             for key,val in assignDict.items():
                 writeApiLine(f,f'A:{prefix}.{key}->{val}',publicAliasSource,publicAliasTarget)
@@ -560,7 +689,7 @@ def getDefFunction(args):
                     task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap) #抽取.py中的API
                     fileVisitLst.append(file.rstrip('i'))
                     root_node=parseLibrarySource(code_text,file.rstrip('i'))
-                    assignDict=getAssign(root_node)
+                    assignDict=getAssign(root_node,file.rstrip('i'))
                     f.write('\n'+'-' * 40 + f"{file.rstrip('i')}" + '-' * 40+'\n')
                     for key,value in assignDict.items():
                         writeApiLine(f,f'A:{prefix}.{key}->{value}',publicAliasSource,publicAliasTarget)
