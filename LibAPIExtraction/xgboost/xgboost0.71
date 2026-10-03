@@ -860,6 +860,16 @@ A:xgboost.rabit.guide.lazy_allreduce.a->rabit.allreduce(a, rabit.SUM)
 xgboost.rabit.guide.lazy_allreduce.prepare(a)
 
 
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost0.71/lib/python3.6/site-packages/xgboost/rabit/guide/basic.py----------------------------------------
+A:xgboost.rabit.guide.basic.rank->rabit.get_rank()
+A:xgboost.rabit.guide.basic.a->rabit.allreduce(a, rabit.SUM)
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost0.71/lib/python3.6/site-packages/xgboost/rabit/guide/broadcast.py----------------------------------------
+A:xgboost.rabit.guide.broadcast.rank->rabit.get_rank()
+A:xgboost.rabit.guide.broadcast.s->rabit.broadcast(s, 0)
+
+
 ----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost0.71/lib/python3.6/site-packages/xgboost/rabit/doc/conf.py----------------------------------------
 A:xgboost.rabit.doc.conf.curr_path->os.path.dirname(os.path.abspath(os.path.expanduser(__file__)))
 A:xgboost.rabit.doc.conf.libpath->os.path.join(curr_path, '../wrapper/')
@@ -878,6 +888,14 @@ A:xgboost.rabit.test.speed_runner.parser->argparse.ArgumentParser(description='T
 A:xgboost.rabit.test.speed_runner.args->argparse.ArgumentParser(description='TODO').parse_args()
 A:xgboost.rabit.test.speed_runner.host_file->os.path.join(args.host_dir, 'hosts%d' % machine)
 xgboost.rabit.test.speed_runner.main()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost0.71/lib/python3.6/site-packages/xgboost/rabit/test/local_recover.py----------------------------------------
+A:xgboost.rabit.test.local_recover.rank->rabit.get_rank()
+A:xgboost.rabit.test.local_recover.(version, model, local)->rabit.load_checkpoint(True)
+A:xgboost.rabit.test.local_recover.model->numpy.zeros(n)
+A:xgboost.rabit.test.local_recover.local->numpy.ones(n)
+A:xgboost.rabit.test.local_recover.res->rabit.allreduce(data + model + local, rabit.SUM)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/xgboost0.71/lib/python3.6/site-packages/xgboost/dmlc-core/tracker/dmlc_tracker/opts.py----------------------------------------
