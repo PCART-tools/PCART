@@ -950,6 +950,24 @@ gensim.models.lsi_worker.Worker.reset(self)
 gensim.models.lsi_worker.main()
 
 
+----------------------------------------/dataset/nuaa/anaconda3/envs/gensim0.10.3/lib/python3.6/site-packages/gensim/models/tst.py----------------------------------------
+A:gensim.models.tst.l->m.state.get_lambda()
+A:gensim.models.tst.ordering->range(len(l2))
+A:gensim.models.tst.dist->max_dist(l1, l2[ordering])
+A:gensim.models.tst.closest->sorted([(hellinger(v1, l2[i]), i) for i in xrange(len(l2))])
+A:gensim.models.tst.(best_dist, matched)->greedy_ordering(l1, l2)
+A:gensim.models.tst.topics->zip(get_topics(m1, auto_order), get_topics(m2, matched))
+gensim.models.tst.best_ordering(l1,l2)
+gensim.models.tst.find_closest(l1,l2)
+gensim.models.tst.find_closest_vec(v1,l2)
+gensim.models.tst.format(m1,m2)
+gensim.models.tst.format2(m1,m2)
+gensim.models.tst.get_dist(m)
+gensim.models.tst.get_topics(m,ordering)
+gensim.models.tst.greedy_ordering(l1,l2)
+gensim.models.tst.max_dist(l1,l2)
+
+
 ----------------------------------------/dataset/nuaa/anaconda3/envs/gensim0.10.3/lib/python3.6/site-packages/gensim/models/rpmodel.py----------------------------------------
 A:gensim.models.rpmodel.logger->logging.getLogger('gensim.models.rpmodel')
 A:gensim.models.rpmodel.self.id2word->gensim.utils.dict_from_corpus(corpus)
@@ -1085,6 +1103,25 @@ gensim.models.lda_worker.Worker.processjob(self,job)
 gensim.models.lda_worker.Worker.requestjob(self)
 gensim.models.lda_worker.Worker.reset(self,state)
 gensim.models.lda_worker.main()
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/gensim0.10.3/lib/python3.6/site-packages/gensim/models/saul.py----------------------------------------
+A:gensim.models.saul.documents->pickle.load(open('gooddreads.pkl', 'rb'))
+A:gensim.models.saul.ratings->pickle.load(open('gooddreads_rating.pkl', 'rb'))
+A:gensim.models.saul.stoplist->nltk.corpus.stopwords.words('english')
+A:gensim.models.saul.all_tokens->sum(texts, [])
+A:gensim.models.saul.tokens_once->set((word for word in set(all_tokens) if all_tokens.count(word) == 1))
+A:gensim.models.saul.dictionary->gensim.corpora.Dictionary(texts)
+A:gensim.models.saul.tfidf->gensim.models.TfidfModel(corpus)
+A:gensim.models.saul.lsi->gensim.models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=nm, power_iters=4)
+A:gensim.models.saul.index->gensim.similarities.MatrixSimilarity(corpus_lsi)
+A:gensim.models.saul.SimMatrix->numpy.array(simmatrix).reshape(-1, len(simmatrix))
+A:gensim.models.saul.doc_processed->preprocessing_stop(document, stoplist)
+A:gensim.models.saul.vec_bow->gensim.corpora.Dictionary(texts).doc2bow(doc_processed)
+A:gensim.models.saul.sims->sorted(enumerate(sims), key=lambda item: -item[1])
+gensim.models.saul.MSim(document)
+gensim.models.saul.QSim(document)
+gensim.models.saul.preprocessing_stop(document,stoplist)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/gensim0.10.3/lib/python3.6/site-packages/gensim/models/doc2vec.py----------------------------------------
@@ -1564,6 +1601,11 @@ gensim.models.dtmmodel.DtmModel.print_topics(self,topics=10,times=5,topn=10)
 gensim.models.dtmmodel.DtmModel.show_topic(self,topicid,time,topn=50)
 gensim.models.dtmmodel.DtmModel.show_topics(self,topics=10,times=5,topn=10,log=False,formatted=True)
 gensim.models.dtmmodel.DtmModel.train(self,corpus,time_slices,mode='fit',model='fixed')
+
+
+----------------------------------------/dataset/nuaa/anaconda3/envs/gensim0.10.3/lib/python3.6/site-packages/gensim/models/test.py----------------------------------------
+A:gensim.models.test.sentences->list(itertools.islice(word2vec.Text8Corpus('/Users/kofola/workspace/word2vec/text8'), 100))
+A:gensim.models.test.model->word2vec.Word2Vec(sentences[:1], size=10, min_count=0)
 
 
 ----------------------------------------/dataset/nuaa/anaconda3/envs/gensim0.10.3/lib/python3.6/site-packages/gensim/models/logentropy_model.py----------------------------------------
