@@ -247,6 +247,8 @@ def getAssign(root_node,filePath=None):
         nodes=[root_node]
         while nodes:
             node=nodes.pop()
+            if isinstance(node,ast.expr):
+                continue
             if isinstance(node,(ast.Import,ast.ImportFrom)):
                 import_visitor.visit(node)
             nodes.extend(reversed(list(ast.iter_child_nodes(node))))
@@ -259,6 +261,8 @@ def getAssign(root_node,filePath=None):
     nodes=[root_node]
     while nodes:
         node=nodes.pop()
+        if isinstance(node,ast.expr):
+            continue
         if isinstance(node,ast.Assign):
             assign_visitor.visit(node)
         nodes.extend(reversed(list(ast.iter_child_nodes(node))))
@@ -525,13 +529,15 @@ def getClass(lst,root,prefix,fileDict, pyiFlag=0, importCache=None, exportMap=No
 #  @param pyiFlag A flag denotes whether the Python source file is .pyi file.
 #  @param importCache Cache of __init__.py import mappings used to shorten API paths.
 #  @param exportMap Reverse mapping from definition paths to package re-export paths.
-def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None, exportMap=None): #这里的prefix只到文件名
-    try:
-        rootNode=parseLibrarySource(codeText,list(fileDict.keys())[0])
-    except Exception as e:
-        file = list(fileDict.keys())[0]
-        print(f"{file} ast.parse falied: {e}")
-        return
+#  @param rootNode Optional parsed AST shared with assignment extraction.
+def task(codeText,libApi,prefix,fileDict, pyiFlag=0, importCache=None, exportMap=None, rootNode=None): #这里的prefix只到文件名
+    if rootNode is None:
+        try:
+            rootNode=parseLibrarySource(codeText,list(fileDict.keys())[0])
+        except Exception as e:
+            file = list(fileDict.keys())[0]
+            print(f"{file} ast.parse falied: {e}")
+            return
     for node in ast.iter_child_nodes(rootNode):
         if isinstance(node, ast.ClassDef): #抽取类内API
             getClass(libApi,node,prefix,fileDict,pyiFlag,importCache,exportMap)
@@ -657,7 +663,7 @@ def getDefFunction(args):
             for key,val in assignDict.items():
                 writeApiLine(f,f'A:{prefix}.{key}->{val}',publicAliasSource,publicAliasTarget)
             #抽取.py中的Definition Node
-            task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap)
+            task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap,rootNode=root_node)
             pyLst=sorted(set(pyLst)) #按完整定义去重，保留不同签名
             for it in pyLst:
                 writeApiLine(f,it,publicAliasSource,publicAliasTarget)
@@ -686,9 +692,9 @@ def getDefFunction(args):
                 try:
                     with tokenize.open(file.rstrip('i')) as fr:
                         code_text=fr.read()
-                    task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap) #抽取.py中的API
-                    fileVisitLst.append(file.rstrip('i'))
                     root_node=parseLibrarySource(code_text,file.rstrip('i'))
+                    task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap,rootNode=root_node) #抽取.py中的API
+                    fileVisitLst.append(file.rstrip('i'))
                     assignDict=getAssign(root_node,file.rstrip('i'))
                     f.write('\n'+'-' * 40 + f"{file.rstrip('i')}" + '-' * 40+'\n')
                     for key,value in assignDict.items():
