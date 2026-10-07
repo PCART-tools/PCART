@@ -200,10 +200,10 @@ class RegexMatch:
     
     ## The constructor
     ## 构造函数
-    #  @param code_text Source code text to search
+    #  @param codeText Source code text to search
     #  @param pattern Regular expression pattern
-    def __init__(self,code_text,pattern):
-        self._code_text=code_text
+    def __init__(self,codeText,pattern):
+        self._codeText=codeText
         self._pattern=pattern
         self._result=[]
 
@@ -218,7 +218,7 @@ class RegexMatch:
     #  @return 1 if a match is found, otherwise 0
     def regex_match(self):
         obj=re.compile(self._pattern,re.DOTALL)
-        lst=obj.findall(self._code_text)
+        lst=obj.findall(self._codeText)
         if len(lst)>0:
             #对找到的所有参数字符串进行处理
             for index in range(0,len(lst)):
@@ -237,48 +237,48 @@ class RegexMatch:
 ## Extract all assign node from a .py file's AST
 ## 通过AST获取.py文件的Assign语句
 #
-#  @param root_node The ast node of the .py file
+#  @param rootNode The ast node of the .py file
 #  @param filePath Source filename for diagnostics
-def getAssign(root_node,filePath=None):
+def getAssign(rootNode,filePath=None):
     #找出树中所有的模块名
-    import_visitor=Import()
+    importVisitor=Import()
     try:
         # Preserve NodeVisitor's depth-first order without recursive calls.
-        nodes=[root_node]
+        nodes=[rootNode]
         while nodes:
             node=nodes.pop()
             if isinstance(node,ast.expr):
                 continue
             if isinstance(node,(ast.Import,ast.ImportFrom)):
-                import_visitor.visit(node)
+                importVisitor.visit(node)
             nodes.extend(reversed(list(ast.iter_child_nodes(node))))
     except Exception as e:
         print(f"{filePath or '<unknown>'} import visit failed: {e}")
-    md_names=import_visitor.get_md_name() #dict
+    mdNames=importVisitor.get_md_name() #dict
 
     #找出所有的Assign节点
-    assign_visitor=AssignVisitor()
-    nodes=[root_node]
+    assignVisitor=AssignVisitor()
+    nodes=[rootNode]
     while nodes:
         node=nodes.pop()
         if isinstance(node,ast.expr):
             continue
         if isinstance(node,ast.Assign):
-            assign_visitor.visit(node)
+            assignVisitor.visit(node)
         nodes.extend(reversed(list(ast.iter_child_nodes(node))))
-    target_call=assign_visitor.get_target_call()
+    targetCall=assignVisitor.get_target_call()
     
-    for key,val in target_call.items():
-        name_parts=val.split('.')
-        if name_parts[0] in target_call:
-            target_call[key]=target_call[name_parts[0]]+'.'+'.'.join(name_parts[1:])
+    for key,val in targetCall.items():
+        nameParts=val.split('.')
+        if nameParts[0] in targetCall:
+            targetCall[key]=targetCall[nameParts[0]]+'.'+'.'.join(nameParts[1:])
     
-    for key,val in target_call.items():
-        name_parts=val.split('.')
-        if name_parts[0] in md_names:
-            target_call[key]=(md_names[name_parts[0]]+'.'+'.'.join(name_parts[1:])).rstrip('.')
+    for key,val in targetCall.items():
+        nameParts=val.split('.')
+        if nameParts[0] in mdNames:
+            targetCall[key]=(mdNames[nameParts[0]]+'.'+'.'.join(nameParts[1:])).rstrip('.')
     
-    return target_call
+    return targetCall
 
 
 
@@ -293,13 +293,13 @@ def getAssign(root_node,filePath=None):
 def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保存修正之后的API路径
     absolutePath=[k for k in fileDict.keys()][0] #/home/zhang/pkg/file.py
     relativePath=[v for v in fileDict.values()][0] #pkg/file.py
-    norm_relative=relativePath.replace('\\','/')
-    norm_absolute=absolutePath.replace('\\','/')
-    pos1=norm_relative.rfind('/')
+    normRelative=relativePath.replace('\\','/')
+    normAbsolute=absolutePath.replace('\\','/')
+    pos1=normRelative.rfind('/')
     if pos1==-1:
         return
     relativePath=relativePath[0:pos1] #更新relativatePath
-    pos2=norm_absolute.rfind('/')
+    pos2=normAbsolute.rfind('/')
     absolutePath=absolutePath[0:pos2] #更新absolutePath,使其和relativatePath保持一致
     initPath=f"{absolutePath}/__init__.py"
     api=lst[0]
@@ -661,8 +661,8 @@ def getDefFunction(args):
             if file+'i' not in fileVisitLst: #判断.pyi之前是否访问过
                 try:
                     with tokenize.open(file+'i') as fr:
-                        code_text=fr.read()
-                    task(code_text,pyiLst,prefix,fileDict, 1, importCache,exportMap) #抽取.pyi中的API
+                        codeText=fr.read()
+                    task(codeText,pyiLst,prefix,fileDict, 1, importCache,exportMap) #抽取.pyi中的API
                     pyiFlag=1
                     fileVisitLst.append(file+'i')
                 except FileNotFoundError:
@@ -670,21 +670,21 @@ def getDefFunction(args):
         
             with tokenize.open(file) as fr:
                 try:
-                    code_text=fr.read()
+                    codeText=fr.read()
                 except Exception as e:
                     print(f"{file} read failed: {e}")
                     continue
             try:
-                root_node=parseLibrarySource(code_text,file)
+                rootNode=parseLibrarySource(codeText,file)
             except Exception as e:
                 print(f'{file} ast.parse failed: {e}')
                 continue
-            assignDict=getAssign(root_node,file) #抽取.py中的所有Assign Node
+            assignDict=getAssign(rootNode,file) #抽取.py中的所有Assign Node
             f.write('\n'+'-' * 40 + f"{file}" + '-' * 40+'\n')
             for key,val in assignDict.items():
                 writeApiLine(f,f'A:{prefix}.{key}->{val}',publicAliasSource,publicAliasTarget)
             #抽取.py中的Definition Node
-            task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap,rootNode=root_node)
+            task(codeText,pyLst,prefix,fileDict,0,importCache,exportMap,rootNode=rootNode)
             pyLst=sorted(set(pyLst)) #按完整定义去重，保留不同签名
             for it in pyLst:
                 writeApiLine(f,it,publicAliasSource,publicAliasTarget)
@@ -712,11 +712,11 @@ def getDefFunction(args):
             if file.rstrip('i') not in fileVisitLst:
                 try:
                     with tokenize.open(file.rstrip('i')) as fr:
-                        code_text=fr.read()
-                    root_node=parseLibrarySource(code_text,file.rstrip('i'))
-                    task(code_text,pyLst,prefix,fileDict,0,importCache,exportMap,rootNode=root_node) #抽取.py中的API
+                        codeText=fr.read()
+                    rootNode=parseLibrarySource(codeText,file.rstrip('i'))
+                    task(codeText,pyLst,prefix,fileDict,0,importCache,exportMap,rootNode=rootNode) #抽取.py中的API
                     fileVisitLst.append(file.rstrip('i'))
-                    assignDict=getAssign(root_node,file.rstrip('i'))
+                    assignDict=getAssign(rootNode,file.rstrip('i'))
                     f.write('\n'+'-' * 40 + f"{file.rstrip('i')}" + '-' * 40+'\n')
                     for key,value in assignDict.items():
                         writeApiLine(f,f'A:{prefix}.{key}->{value}',publicAliasSource,publicAliasTarget)
@@ -728,8 +728,8 @@ def getDefFunction(args):
                     pass
                 
             with tokenize.open(file) as fr:
-                code_text=fr.read()
-            task(code_text,pyiLst,prefix,fileDict,1,importCache,exportMap) #抽取.pyi中的API
+                codeText=fr.read()
+            task(codeText,pyiLst,prefix,fileDict,1,importCache,exportMap) #抽取.pyi中的API
             removeLst=[]
             pyiLst=sorted(set(pyiLst))
             for it1 in pyiLst:
