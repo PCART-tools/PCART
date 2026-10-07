@@ -303,9 +303,9 @@ def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保�
     absolutePath=absolutePath[0:pos2] #更新absolutePath,使其和relativatePath保持一致
     initPath=f"{absolutePath}/__init__.py"
     api=lst[0]
-    if os.path.exists(initPath): #判断当前目录中是否有__init__.py
-        currentLevel=relativePath.replace('\\','/').split('/')[-1]
-        cacheKey=(initPath,currentLevel)
+    currentLevel=relativePath.replace('\\','/').split('/')[-1]
+    cacheKey=(initPath,currentLevel)
+    if (importCache is not None and cacheKey in importCache) or os.path.exists(initPath): #优先使用已缓存的导入映射
         if importCache is not None and cacheKey in importCache:
             importDict=importCache[cacheKey]
         else:
@@ -325,7 +325,28 @@ def shortenPath(lst,fileDict,importCache=None): #lst是传入传出参数，保�
         replaceKey2=''
         replaceVal2=''
         packagePrefix=relativePath.replace('\\','/').replace('/','.')+'.'
-        for key,value in importDict.items():
+        #按API路径前缀查找导入映射，避免遍历所有无关导入
+        explicitKeys=set()
+        wildcardKeys=set()
+        if api.startswith(packagePrefix):
+            candidatePath=api[len(packagePrefix):]
+            if '*' in importDict:
+                wildcardKeys.add('*')
+            while candidatePath:
+                if candidatePath in importDict:
+                    explicitKeys.add(candidatePath)
+                candidatePath,separator,_=candidatePath.rpartition('.')
+                if not separator:
+                    break
+                wildcardKey=candidatePath+'.*'
+                if wildcardKey in importDict:
+                    wildcardKeys.add(wildcardKey)
+        matchingKeys=explicitKeys or wildcardKeys
+        if len(matchingKeys)>1:
+            #多个匹配时，保留导入字典中最后出现的匹配
+            matchingKeys={next(key for key in reversed(importDict) if key in matchingKeys)}
+        for key in matchingKeys:
+            value=importDict[key]
             if key[-1]=='*':
                 key=packagePrefix+key[:-1]
                 if api.startswith(key):
