@@ -55,6 +55,12 @@ Successful workspaces are removed only after reports are exported. Failed worksp
 
 Each run uses one tool environment and two configured project environments: `currentEnv` and `targetEnv`.
 
+PCART includes pre-extracted library API definitions in `LibAPIExtraction` for static mapping. If definitions for either configured library version are missing, run the following from the PCART repository root before running PCART to extract both versions from `currentEnv` and `targetEnv`:
+
+```bash
+python extractLibAPI.py -cfg your_config.json
+```
+
 See the [Quick Start](https://github.com/PCART-tools/PCART/wiki/Quick-Start) and [Configuration Guide](https://github.com/PCART-tools/PCART/wiki/Configuration-Guide) for setup details.
 
 ## Citation
