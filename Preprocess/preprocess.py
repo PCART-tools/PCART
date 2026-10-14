@@ -20,6 +20,7 @@ from Path.getPath import *
 from Extract.getCall import getCallFunction, modifyWithName
 from Extract.extractCall import WithVisitor
 from Tool.tool import getAst,getParameter,getLastAPIParameter,departAPI,departAPI2,ConditionalReturnTransformer, getFileName, getRunFile
+from Tool import codeUtils
 from Tool.workspace import getRuntimePaths
 
 
@@ -1198,7 +1199,7 @@ def codeProcess(projPath,runCommand,runPath,libName,workspace,pcresolveLookup=No
     
     dynamicScriptDir=os.path.join(dynamicRoot,projName,prefix)
     shutil.copy2(scriptPath('addValueForAPI.py'),dynamicScriptDir)
-    shutil.copy2(scriptPath('codeUtils.py'),dynamicScriptDir)
+    shutil.copy2(codeUtils.__file__,dynamicScriptDir)
     shutil.copy2(scriptPath('dynamicMatch.py'),dynamicScriptDir)
     shutil.copy2(scriptPath('verifySingle.py'),dynamicScriptDir)
     
@@ -1253,11 +1254,11 @@ def codeProcess(projPath,runCommand,runPath,libName,workspace,pcresolveLookup=No
         file=os.path.join(copyRoot,f'bak_{projName}',prefix,file)
         handleRunFile(file,runPath,runCommand) 
     # bak项目会在current pkl生成后换回Copy/{projName}，其运行文件也依赖codeUtils
-    shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,f'bak_{projName}',prefix))
+    shutil.copy2(codeUtils.__file__,os.path.join(copyRoot,f'bak_{projName}',prefix))
     
     #处理完项目所有文件后，再给项目添加一个新的文件
     writeRecordValue(os.path.join(copyRoot,projName,prefix,'recordValue.py'),pklRelPath,1)
     
-    shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,projName,runPath))
+    shutil.copy2(codeUtils.__file__,os.path.join(copyRoot,projName,runPath))
     if prefix!=runPath:
-        shutil.copy2(scriptPath('codeUtils.py'),os.path.join(copyRoot,projName,prefix))
+        shutil.copy2(codeUtils.__file__,os.path.join(copyRoot,projName,prefix))
