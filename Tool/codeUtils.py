@@ -1,9 +1,10 @@
-## @file codeUtils.py 
-## Provides shared utility functions for Script modules
-## @ingroup script
-## @page code_utils Code Utils
-##
-## Used by Preprocess/preprocess.py, dynamicMatch.py, addValueForAPI.py
+## @package codeUtils
+#  Provide utility functions for API strings, parameters and artifact file names
+#
+#
+#  Provides API string splitting, parameter extraction, artifact hash extraction
+#  and file name normalization.
+#  提供API字符串拆分、参数提取、运行产物hash提取和文件名规范化的工具函数。
 
 import hashlib
 import re
