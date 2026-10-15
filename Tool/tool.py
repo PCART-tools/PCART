@@ -20,10 +20,7 @@ import platform
 import shlex
 import tokenize
 from Path.getPath import Path
-from Tool.codeUtils import (
-    getArtifactHash,getArtifactDisplayName,shortenArtifactFileName,getFileName,
-    getParameter,removeParameter,getLastAPIParameter,departAPI,departAPI2
-)
+from Tool.codeUtils import getArtifactHash, getArtifactDisplayName, shortenArtifactFileName, getFileName, getParameter, removeParameter, getLastAPIParameter, departAPI, departAPI2
 
 
 
