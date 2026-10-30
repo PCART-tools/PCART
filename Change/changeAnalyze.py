@@ -299,8 +299,9 @@ def para2Obj(paraStr):
 #
 #  @param oldPara The old parameter from current version
 #  @param newPara The new parameter from target version
+#  @param includeValue Whether to include default value changes in the result (disabled by default)
 #  @return ansDict The dictionary of parameter changes for each parameter 
-def findDiffer(oldPara,newPara):
+def findDiffer(oldPara,newPara,*,includeValue=False):
     oldPos,oldKey=para2Obj(oldPara) 
     newPos,newKey=para2Obj(newPara)
     oldPosParaNum=len(oldPos)
@@ -317,6 +318,8 @@ def findDiffer(oldPara,newPara):
                 ty=isDifferType(oldPara.type,newPara.type)
                 if ty: 
                     up.type=ty
+                if oldPara.value!=newPara.value:
+                    up.value={'old':oldPara.value,'new':newPara.value}
                 sameFlag=1
                 oldPos.remove(oldPara)
                 newPos.remove(newPara)
@@ -333,6 +336,8 @@ def findDiffer(oldPara,newPara):
                 ty=isDifferType(oldPara.type,newPara.type)
                 if ty:
                     up.type=ty
+                if oldPara.value!=newPara.value:
+                    up.value={'old':oldPara.value,'new':newPara.value}
                 sameFlag=1
                 oldKey.remove(oldPara)
                 newKey.remove(newPara)
@@ -352,6 +357,8 @@ def findDiffer(oldPara,newPara):
                 ty=isDifferType(oldPara.type,newPara.type)
                 if ty:
                     up.type=ty
+                if oldPara.value!=newPara.value:
+                    up.value={'old':oldPara.value,'new':newPara.value}
                 sameFlag=1
                 oldPos.remove(oldPara)
                 newKey.remove(newPara)
@@ -371,6 +378,8 @@ def findDiffer(oldPara,newPara):
                 ty=isDifferType(oldPara.type, newPara.type)
                 if ty:
                     up.type=ty
+                if oldPara.value!=newPara.value:
+                    up.value={'old':oldPara.value,'new':newPara.value}
                 sameFlag=1
                 oldKey.remove(oldPara)
                 newPos.remove(newPara)
@@ -392,6 +401,8 @@ def findDiffer(oldPara,newPara):
                 ty=isDifferType(oldPara.type,newPara.type)
                 if ty:
                     up.type=ty
+                if oldPara.value!=newPara.value:
+                    up.value={'old':oldPara.value,'new':newPara.value}
                 sameFlag=1
                 oldPos.remove(oldPara)
                 newPos.remove(newPara)
@@ -412,6 +423,8 @@ def findDiffer(oldPara,newPara):
                 sameFlag=1
                 up=Update()
                 up.rename=newPara.name
+                if oldPara.value!=newPara.value:
+                    up.value={'old':oldPara.value,'new':newPara.value}
                 oldKey.remove(oldPara)
                 newKey.remove(newPara)
                 break
@@ -470,9 +483,11 @@ def findDiffer(oldPara,newPara):
             updateDict[key]['addPos']=value.addPos
         if value.addKey:
             updateDict[key]['addKey']=value.addKey
-
         if value.key2pos:
             updateDict[key]['key2pos']=value.key2pos
+        # 仅在显式开启时记录默认值变更。
+        if includeValue and value.value:
+            updateDict[key]['value']=value.value
     
     #对字典按照参数的位置进行排序
     ansDict=dict(sorted(updateDict.items(), key=lambda it: it[0][1])) #it[0]代表字典的键，it[0][1]代表键中的第二个元素,即位置
